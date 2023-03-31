@@ -1,7 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-require_once(__DIR__ . '/../config/config.php');
+require_once(__DIR__ . '/../autoload.php');
+use App\Core\App;
 
-use App\Config;
-
-print_r(Config::all());
+$app = new App();
