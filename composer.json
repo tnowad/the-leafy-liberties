@@ -1,0 +1,10 @@
+{
+  "name": "sgu/bookstore",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Sgu\\Bookstore\\": "src/"
+    }
+  },
+  "require": {}
+}

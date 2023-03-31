@@ -36,9 +36,8 @@ services:
     container_name: bookstore-php
     working_dir: /var/www
     volumes:
-      - ./php:/var/www
-      - ./php/logs:/var/www/logs
-    command: php -S 0.0.0.0:80 -t public
+      - .:/var/www
+    command: php -S 0.0.0.0:80 -t src/public
     links:
       - database
     environment:
@@ -52,7 +51,7 @@ services:
     container_name: bookstore-composer
     image: composer:2.5.4
     volumes:
-      - ./php:/var/www
+      - .:/var/www
     working_dir: /var/www
     user: "1000:1000"
     entrypoint: ["/usr/bin/composer"]
