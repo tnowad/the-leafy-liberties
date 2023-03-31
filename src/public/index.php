@@ -1,5 +1,7 @@
 <?php
-// show errors
 ini_set('display_errors', 1);
+require_once(__DIR__ . '/../config/config.php');
 
-echo "init";
+use App\Config;
+
+print_r(Config::all());
