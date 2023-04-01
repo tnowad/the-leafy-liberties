@@ -96,19 +96,9 @@ class App
 
   private function notFound()
   {
-    self::view([
-      'view' => 'errors/404',
-      'layout' => [
-        'header' => 'layouts/default/header',
-      ],
-    ], [
-        'url' => $_SERVER['REQUEST_URI'],
-        'method' => $_SERVER['REQUEST_METHOD'],
-      ]);
+    self::view(['view' => 'errors/404', 'layout' => ['header' => 'layouts/default/header']], ['url' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']]);
   }
-
-
-  public static function view($view, $data = [])
+  public static function view(array $view, array $data = [])
   {
     $viewName = $view['view'] ?? 'pages/index';
     $layout = $view['layout'] ?? null;
@@ -139,7 +129,7 @@ class App
       }
 
       $layoutData = ['content' => $viewContent];
-      $layoutContent = self::render($layoutHeaderPath, $layoutData) . $viewContent . self::render($layoutFooterPath, $layoutData);
+      $layoutContent = self::render($layoutHeaderPath, array_merge($data, $layoutData)) . $viewContent . self::render($layoutFooterPath, array_merge($data, $layoutData));
 
       echo $layoutContent;
     } else {
@@ -152,8 +142,7 @@ class App
     extract($data);
     ob_start();
     require $path;
-    $content = ob_get_contents();
-    ob_end_clean();
-    return $content;
+    return ob_get_clean();
   }
+
 }
