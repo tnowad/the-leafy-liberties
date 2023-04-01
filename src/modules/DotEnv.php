@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace Modules;
 
-class Config
+class DotEnv
 {
   private static $config = [];
   public static function get($key)
@@ -38,8 +38,13 @@ class Config
       if (empty($line)) {
         continue;
       }
-      $line = explode('=', $line);
+      // trim by " " or "="
+      $line = preg_split('/\s+|=/', $line);
+      $line = array_filter($line);
       $key = trim($line[0]);
+      if (!isset($line[1])) {
+        $line[1] = '';
+      }
       $value = trim($line[1]);
       self::set($key, $value);
     }

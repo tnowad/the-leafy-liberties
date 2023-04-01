@@ -40,11 +40,6 @@ services:
     command: php -S 0.0.0.0:80 -t src/public
     links:
       - database
-    environment:
-      MYSQL_HOST: database
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin123
-      MYSQL_DATABASE: bookstore
     networks:
       - bookstore-network
   composer:
