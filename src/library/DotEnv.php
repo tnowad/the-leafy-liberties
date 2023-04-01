@@ -7,9 +7,7 @@ class DotEnv
   private static $config = [];
   public static function get($key)
   {
-    if (empty(self::$config)) {
-      self::load();
-    }
+    self::load();
     if (isset(self::$config[$key])) {
       return self::$config[$key];
     }
