@@ -2,6 +2,7 @@
 
 namespace Library;
 
+use Exception;
 use Library\Database;
 use Library\DotEnv;
 
@@ -28,7 +29,6 @@ class App
     $this->initDotEnv();
     $this->initDatabase();
     $this->initRoutes();
-    $this->handleRequest();
   }
 
   private function initDotEnv()
@@ -77,26 +77,45 @@ class App
     ];
   }
 
-  private function handleRequest()
+
+  public function handleRequest()
   {
-    $requestMethod = $_SERVER['REQUEST_METHOD'];
+    $appPath = DotEnv::get('APP_PATH');
     $requestUri = $_SERVER['REQUEST_URI'];
-    $requestUri = explode('?', $requestUri)[0];
+    $requestUri = str_replace($appPath, '/', $requestUri);
     $requestUri = rtrim($requestUri, '/');
-    if (array_key_exists($requestUri, self::$routes[$requestMethod])) {
-      $controllerAction = explode('@', self::$routes[$requestMethod][$requestUri]);
-      $controllerName = 'App\\Controllers\\' . $controllerAction[0];
-      $actionName = $controllerAction[1];
+    $requestUri = $requestUri == '' ? '/' : $requestUri;
+    $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+    try {
+      if (!isset(self::$routes[$requestMethod][$requestUri])) {
+        throw new Exception('Route not found');
+      }
+
+      $route = self::$routes[$requestMethod][$requestUri];
+      $routeParts = explode('@', $route);
+      $controllerName = 'Controllers\\' . $routeParts[0];
+      $actionName = $routeParts[1];
+
+      if (!class_exists($controllerName)) {
+        throw new Exception('Controller not found');
+      }
+
       $controller = new $controllerName();
+      if (!method_exists($controller, $actionName)) {
+        throw new Exception('Action not found');
+      }
+
       $controller->$actionName();
-    } else {
-      $this->notFound();
+
+    } catch (Exception $e) {
+      $this->notFound($e->getMessage());
     }
   }
 
-  private function notFound()
+  private function notFound(string $message = 'Page not found')
   {
-    self::view(['view' => 'errors/404', 'layout' => ['header' => 'layouts/default/header']], ['url' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']]);
+    self::view(['view' => 'errors/404', 'layout' => ['header' => 'layouts/default/header']], ['message' => $message]);
   }
   public static function view(array $view, array $data = [])
   {
