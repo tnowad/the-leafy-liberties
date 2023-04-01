@@ -86,7 +86,6 @@ class App
     $requestUri = rtrim($requestUri, '/');
     $requestUri = $requestUri == '' ? '/' : $requestUri;
     $requestMethod = $_SERVER['REQUEST_METHOD'];
-
     try {
       if (!isset(self::$routes[$requestMethod][$requestUri])) {
         throw new Exception('Route not found');
