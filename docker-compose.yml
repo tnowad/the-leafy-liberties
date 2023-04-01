@@ -6,64 +6,34 @@ services:
     user:
       "1000:1000"
     environment:
-      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bookstore
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin123
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    logging:
-      driver: none
-    networks:
-      - bookstore-network
+    ports:
+      - "3306:3306"
   phpmyadmin:
     container_name: bookstore-phpmyadmin
     image: phpmyadmin:5.2.1-apache
-    environment:
-      PMA_HOST: database
-      PMA_USER: admin
-      PMA_PASSWORD: admin123
+    ports:
+      - "8080:80"
     links:
       - database
-    logging:
-      driver: none
-    networks:
-      - bookstore-network
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
   php:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: bookstore-php
     working_dir: /var/www
+    links:
+      - database
     volumes:
       - .:/var/www
     command: php -S 0.0.0.0:80 -t src/public
-    links:
-      - database
-    networks:
-      - bookstore-network
-  composer:
-    container_name: bookstore-composer
-    image: composer:2.5.4
-    volumes:
-      - .:/var/www
-    working_dir: /var/www
-    user: "1000:1000"
-    entrypoint: ["/usr/bin/composer"]
-    networks:
-      - bookstore-network
-  nginx:
-    container_name: bookstore-nginx
-    image: nginx:1.23.3
     ports:
-      - 80:80
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    links:
-      - php
-      - phpmyadmin
-    networks:
-      - bookstore-network
-networks:
-  bookstore-network:
-    driver: bridge
+      - "80:80"

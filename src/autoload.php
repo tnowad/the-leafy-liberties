@@ -1,20 +1,20 @@
 <?php
+function generatePermutations($arr, &$result, $index)
+{
+  if ($index === count($arr)) {
+    $result[] = $arr;
+    return;
+  }
+
+  $copy1 = $arr;
+  $copy1[$index] = strtolower($arr[$index]);
+  generatePermutations($copy1, $result, $index + 1);
+
+  $copy2 = $arr;
+  generatePermutations($copy2, $result, $index + 1);
+}
 function lowercasePermutations($arr)
 {
-  function generatePermutations($arr, &$result, $index)
-  {
-    if ($index === count($arr)) {
-      $result[] = $arr;
-      return;
-    }
-
-    $copy1 = $arr;
-    $copy1[$index] = strtolower($arr[$index]);
-    generatePermutations($copy1, $result, $index + 1);
-
-    $copy2 = $arr;
-    generatePermutations($copy2, $result, $index + 1);
-  }
 
   $result = [];
   generatePermutations($arr, $result, 0);
