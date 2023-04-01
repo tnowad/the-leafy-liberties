@@ -16,9 +16,8 @@
 <body>
 
   <?php include 'views/layouts/default/header.php' ?>
-  <?php include 'views/pages/productDetail.php' ?>
+  <?php include 'views/pages/home.php' ?>
   <?php include 'views/layouts/default/footer.php' ?>
-
 </body>
 
 <script>
@@ -52,11 +51,11 @@
           'mdpopular-books': 'repeat(3, minmax(0,400px))',
             'smpopular-books': 'repeat(2, 285px)',
               'mobilepopular-books': 'repeat(2, 240px)',
-
                 'auto' : 'auto auto',
       },
     },
   },
 </script>
+<script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 
 </html>
