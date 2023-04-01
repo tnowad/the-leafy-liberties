@@ -102,7 +102,8 @@ class App
         'header' => 'layouts/default/header',
       ],
     ], [
-        'title' => '404 Not Found',
+        'url' => $_SERVER['REQUEST_URI'],
+        'method' => $_SERVER['REQUEST_METHOD'],
       ]);
   }
 
@@ -112,30 +113,24 @@ class App
     $viewName = $view['view'] ?? 'pages/index';
     $layout = $view['layout'] ?? null;
 
-    // Convert view name to file path
     $viewPath = str_replace('/', DIRECTORY_SEPARATOR, $viewName);
     $viewPath = __DIR__ . '/../views/' . $viewPath . '.php';
 
-    // Check if view file exists
     if (!file_exists($viewPath)) {
       die('View not found');
     }
 
-    // Render view content
     $viewContent = self::render($viewPath, $data);
 
-    // Check if layout is specified
     if ($layout) {
       $layoutHeader = $layout['header'] ?? 'layouts/default/header';
       $layoutFooter = $layout['footer'] ?? 'layouts/default/footer';
 
-      // Convert layout names to file paths
       $layoutHeaderPath = str_replace('/', DIRECTORY_SEPARATOR, $layoutHeader);
       $layoutHeaderPath = __DIR__ . '/../views/' . $layoutHeaderPath . '.php';
       $layoutFooterPath = str_replace('/', DIRECTORY_SEPARATOR, $layoutFooter);
       $layoutFooterPath = __DIR__ . '/../views/' . $layoutFooterPath . '.php';
 
-      // Check if layout header and footer files exist
       if (!file_exists($layoutHeaderPath)) {
         die('Layout header not found');
       }
@@ -143,13 +138,11 @@ class App
         die('Layout footer not found');
       }
 
-      // Render layout content
       $layoutData = ['content' => $viewContent];
       $layoutContent = self::render($layoutHeaderPath, $layoutData) . $viewContent . self::render($layoutFooterPath, $layoutData);
 
       echo $layoutContent;
     } else {
-      // No layout, just render view content
       echo $viewContent;
     }
   }
