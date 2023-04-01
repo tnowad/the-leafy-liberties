@@ -27,7 +27,7 @@ class DotEnv
     self::$config[$key] = $value;
   }
 
-  private static function load()
+  public static function load()
   {
     $env = file_get_contents(__DIR__ . '/../../.env');
     $env = explode("\n", $env);
