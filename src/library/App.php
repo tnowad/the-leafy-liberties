@@ -10,8 +10,6 @@ class App
   private static $instance = null;
   private static $routes = [];
 
-  private static $views = [];
-
   private function __construct()
   {
     $this->init();
@@ -30,7 +28,6 @@ class App
     $this->initDotEnv();
     $this->initDatabase();
     $this->initRoutes();
-    $this->initViews();
     $this->handleRequest();
   }
 
@@ -99,63 +96,71 @@ class App
 
   private function notFound()
   {
-    echo '404 Not Found';
+    self::view([
+      'view' => 'errors/404',
+      'layout' => [
+        'header' => 'layouts/default/header',
+      ],
+    ], [
+        'title' => '404 Not Found',
+      ]);
   }
 
-  private function initViews()
-  {
-    self::$views = [
-      'layouts' => [
-        'default' => [
-          'header' => 'layouts/default/header',
-          'footer' => 'layouts/default/footer',
-        ],
-        'dashboard' => [
-          'header' => 'layouts/dashboard/header',
-          'footer' => 'layouts/dashboard/footer',
-        ],
-      ],
-      'pages' => [
-        'home' => [
-          'layout' => 'layouts/default',
-          'view' => 'pages/index',
-        ],
-        'about' => [
-          'layout' => 'layouts/default',
-          'view' => 'pages/about',
-        ],
-        'contact' => [
-          'layout' => 'layouts/default',
-          'view' => 'pages/contact',
-        ],
-        'login' => [
-          'layout' => 'layouts/default',
-          'view' => 'pages/login',
-        ],
-        'register' => [
-          'layout' => 'layouts/default',
-          'view' => 'pages/register',
-        ],
-        'dashboard' => [
-          'layout' => 'layouts/dashboard',
-          'view' => 'pages/dashboard/index',
-        ],
-        'profile' => [
-          'layout' => 'layouts/dashboard',
-          'view' => 'pages/dashboard/profile',
-        ],
-      ],
-    ];
-  }
 
   public static function view($view, $data = [])
   {
-    $view = explode('.', $view);
-    $view = self::$views[$view[0]][$view[1]];
-    $layout = self::$views[$view['layout']];
-    $view = $view['view'];
-    require_once __DIR__ . '/../views/' . $layout['header'] . '.php';
-    require_once __DIR__ . '/../views/' . $view . '.php';
-    require_once __DIR__ . '/../views/' . $layout['footer'] . '.php';
+    $viewName = $view['view'] ?? 'pages/index';
+    $layout = $view['layout'] ?? null;
+
+    // Convert view name to file path
+    $viewPath = str_replace('/', DIRECTORY_SEPARATOR, $viewName);
+    $viewPath = __DIR__ . '/../views/' . $viewPath . '.php';
+
+    // Check if view file exists
+    if (!file_exists($viewPath)) {
+      die('View not found');
+    }
+
+    // Render view content
+    $viewContent = self::render($viewPath, $data);
+
+    // Check if layout is specified
+    if ($layout) {
+      $layoutHeader = $layout['header'] ?? 'layouts/default/header';
+      $layoutFooter = $layout['footer'] ?? 'layouts/default/footer';
+
+      // Convert layout names to file paths
+      $layoutHeaderPath = str_replace('/', DIRECTORY_SEPARATOR, $layoutHeader);
+      $layoutHeaderPath = __DIR__ . '/../views/' . $layoutHeaderPath . '.php';
+      $layoutFooterPath = str_replace('/', DIRECTORY_SEPARATOR, $layoutFooter);
+      $layoutFooterPath = __DIR__ . '/../views/' . $layoutFooterPath . '.php';
+
+      // Check if layout header and footer files exist
+      if (!file_exists($layoutHeaderPath)) {
+        die('Layout header not found');
+      }
+      if (!file_exists($layoutFooterPath)) {
+        die('Layout footer not found');
+      }
+
+      // Render layout content
+      $layoutData = ['content' => $viewContent];
+      $layoutContent = self::render($layoutHeaderPath, $layoutData) . $viewContent . self::render($layoutFooterPath, $layoutData);
+
+      echo $layoutContent;
+    } else {
+      // No layout, just render view content
+      echo $viewContent;
+    }
+  }
+
+  private static function render($path, $data = [])
+  {
+    extract($data);
+    ob_start();
+    require $path;
+    $content = ob_get_contents();
+    ob_end_clean();
+    return $content;
   }
 }
