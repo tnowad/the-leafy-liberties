@@ -2,8 +2,7 @@
   <div className="mt-10 min-h-screen box-border w-full px-10 mobile:px-5">
     <div className="flex justify-between">
       <h1 className="text-xl font-bold">Customer</h1>
-      <button className="w-5 h-5 text-2xl " onClick={()=> setIsFormVisible(!isFormVisible)}
-        >
+      <button className="w-5 h-5 text-2xl ">
         +
       </button>
     </div>
@@ -128,6 +127,7 @@
             >
             Cancel
           </button>
+
         </form>
       </div>
     </div>
