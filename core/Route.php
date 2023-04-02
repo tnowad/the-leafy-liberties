@@ -19,7 +19,7 @@ class Route
       $pattern = self::prepareRoutePattern($route);
       if (preg_match($pattern, $requestUri, $matches)) {
         $matchedRoute = true;
-        echo $matches;
+        print_r($matches);
         self::executeAction($action, $matches);
         break;
       }
