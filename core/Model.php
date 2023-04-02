@@ -8,23 +8,18 @@ abstract class Model
 {
   protected string $table = '';
 
-  /**
-   * columns is an array of column names in the table contains in $table property of the model class
-   * it will connect to the database and get the columns of the table and store it in this property to be used later
-   */
-  protected $columns = null;
+  protected $columns = [];
+
+  protected $data = [];
 
   public function __construct()
   {
     if ($this->table === '') {
       throw new Exception('Table name is not defined in the model class');
     }
-    if ($this->columns === null) {
+    if (empty($this->columns)) {
       $this->columns = $this->getColumns();
     }
-    echo '<pre>';
-    print_r($this->columns);
-    echo '</pre>';
   }
 
   public function getColumns()
@@ -40,18 +35,35 @@ abstract class Model
     return $columns;
   }
 
-  public function createTable($columns = [])
+  public function __get($name)
   {
-    $sql = "CREATE TABLE $this->table (";
-    // key - value pair
-    foreach ($columns as $column => $type) {
-      $sql .= "$column $type,";
+    if (in_array($name, $this->columns)) {
+      return $this->data[$name];
     }
-    // remove the last comma
-    $sql = rtrim($sql, ',');
-    $sql .= ")";
-    echo $sql;
+    return null;
+  }
+
+  public function __set($name, $value)
+  {
+    if (in_array($name, $this->columns)) {
+      $this->data[$name] = $value;
+    }
+  }
+
+  public function save()
+  {
+    $columns = [];
+    $values = [];
+    foreach ($this->data as $key => $value) {
+      $columns[] = $key;
+      $values[] = $value;
+    }
+    $columns = implode(',', $columns);
+    $values = implode(',', $values);
+    $sql = "INSERT INTO $this->table ($columns) VALUES ($values)";
     $stmt = Database::getInstance()->getConnection()->prepare($sql);
     $stmt->execute();
+    return $stmt->affected_rows;
   }
+
 }
