@@ -34,7 +34,7 @@ class Database
     return self::$connection;
   }
 
-  public function execute($sql, $params = [])
+  public static function execute($sql, $params = [])
   {
     $stmt = self::$connection->prepare($sql);
     if (count($params) > 0) {

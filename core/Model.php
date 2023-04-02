@@ -2,99 +2,56 @@
 namespace Core;
 
 use Core\Database;
+use Exception;
 
-class Model
+abstract class Model
 {
-  protected $table;
-  protected $db;
+  protected string $table = '';
+
+  /**
+   * columns is an array of column names in the table contains in $table property of the model class
+   * it will connect to the database and get the columns of the table and store it in this property to be used later
+   */
+  protected $columns = null;
+
   public function __construct()
   {
-    $this->db = Database::getInstance()->getConnection();
+    if ($this->table === '') {
+      throw new Exception('Table name is not defined in the model class');
+    }
+    if ($this->columns === null) {
+      $this->columns = $this->getColumns();
+    }
+    echo '<pre>';
+    print_r($this->columns);
+    echo '</pre>';
   }
 
-
-  public function all()
+  public function getColumns()
   {
-    $sql = "SELECT * FROM $this->table";
-    $result = $this->db->query($sql);
-
-    if (!$result) {
-      die('Error executing query: ' . $this->db->error);
-    }
-
-    $rows = [];
+    $sql = "SHOW COLUMNS FROM $this->table";
+    $stmt = Database::getInstance()->getConnection()->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $columns = [];
     while ($row = $result->fetch_assoc()) {
-      $rows[] = $row;
+      $columns[] = $row['Field'];
     }
-
-    return $rows;
+    return $columns;
   }
 
-  public function find($id)
+  public function createTable($columns = [])
   {
-    $sql = "SELECT * FROM $this->table WHERE id=$id";
-    $result = $this->db->query($sql);
-
-    if (!$result) {
-      die('Error executing query: ' . $this->db->error);
+    $sql = "CREATE TABLE $this->table (";
+    // key - value pair
+    foreach ($columns as $column => $type) {
+      $sql .= "$column $type,";
     }
-
-    $row = $result->fetch_assoc();
-
-    return $row;
-  }
-
-  public function create($data)
-  {
-    $columns = implode(',', array_keys($data));
-    $values = "'" . implode("','", array_values($data)) . "'";
-
-    $sql = "INSERT INTO $this->table ($columns) VALUES ($values)";
-    $result = $this->db->query($sql);
-
-    if (!$result) {
-      die('Error executing query: ' . $this->db->error);
-    }
-
-    return $this->db->insert_id;
-  }
-
-  public function update($id, $data)
-  {
-    $set = '';
-    foreach ($data as $column => $value) {
-      $set .= "$column='$value',";
-    }
-    $set = rtrim($set, ',');
-
-    $sql = "UPDATE $this->table SET $set WHERE id=$id";
-    $result = $this->db->query($sql);
-
-    if (!$result) {
-      die('Error executing query: ' . $this->db->error);
-    }
-
-    return $this->db->affected_rows;
-  }
-
-  public function delete($id)
-  {
-    $sql = "DELETE FROM $this->table WHERE id=$id";
-    $result = $this->db->query($sql);
-
-    if (!$result) {
-      die('Error executing query: ' . $this->db->error);
-    }
-
-    return $this->db->affected_rows;
-  }
-
-  public function where($column, $operator, $value)
-  {
-  }
-
-  public function __destruct()
-  {
-    $this->db->close();
+    // remove the last comma
+    $sql = rtrim($sql, ',');
+    $sql .= ")";
+    echo $sql;
+    $stmt = Database::getInstance()->getConnection()->prepare($sql);
+    $stmt->execute();
   }
 }

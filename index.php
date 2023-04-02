@@ -20,10 +20,9 @@ if (file_exists('./vendor/autoload.php')) {
 require_once './autoload.php';
 
 use Core\App;
+use App\Models\User;
 
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
+$user = new User();
 
 $app = App::getInstance();
 
