@@ -1,5 +1,5 @@
 <?php
-namespace Library;
+namespace Core;
 
 use Exception;
 

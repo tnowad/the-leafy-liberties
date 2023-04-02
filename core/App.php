@@ -28,7 +28,6 @@ class App
   {
     $this->initDotEnv();
     $this->initDatabase();
-    $this->initRoutes();
   }
 
   private function initDotEnv()
@@ -38,17 +37,10 @@ class App
 
   private function initDatabase()
   {
-    $database = Database::getInstance();
-    if (!$database->getConnection()) {
+    if (Database::getInstance()->getConnection() === null) {
       die('Database connection failed');
     }
   }
-
-  private function initRoutes()
-  {
-
-  }
-
 
   public function handleRequest()
   {

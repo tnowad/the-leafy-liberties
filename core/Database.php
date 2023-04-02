@@ -1,7 +1,7 @@
 <?php
-namespace Library;
+namespace Core;
 
-use Library\DotEnv;
+use Utils\DotEnv;
 use mysqli;
 
 class Database
