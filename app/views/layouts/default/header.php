@@ -1,7 +1,7 @@
 <header class="flex justify-center w-full sticky top-0 bg-white z-10 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="mt-5 h-24 container flex justify-between items-center">
     <a class="w-48" href="/the-leafy-liberties/src">
-      <img src="../asset/img/Logo.png" alt="logo" />
+      <img src="../assets/img/Logo.png" alt="logo" />
     </a>
     <div class="hidden sm:block w-full max-w-[140px]">
       <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
