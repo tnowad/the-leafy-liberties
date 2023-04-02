@@ -1,10 +1,10 @@
 <div class="w-full bg-white flex justify-center">
     <!-- //? information  -->
     <div class="container">
-        <div class=" mt-5 md:mt-20 flex flex-col md:flex-row border border-b-2 border-green-300 box-border w-full">
+        <div class=" mt-5 md:mt-20 flex flex-col md:flex-row border border-b-2 border-gray-300 box-border w-full">
             <div class="w-3/4 flex md:flex-col flex-row justify-around md:justify-start md:w-1/4">
                 <div class="flex flex-col justify-center items-center">
-                    <img src={avatar} class="w-3/6" alt="avatar" />
+                    <img src="./views/assets/img/avatar.png" class="w-3/6" alt="avatar" />
                     <h1 class="mt-5 text-xl w-8/12 lg:w-5/12 inline-block  lg:text-center">
                         Hoàng Gia Bảo
                     </h1>
