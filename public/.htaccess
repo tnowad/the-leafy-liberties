@@ -10,9 +10,6 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Serve files directly from the resources directory
-    RewriteRule ^resources/(.*)$ /resources/$1 [L]
-
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
