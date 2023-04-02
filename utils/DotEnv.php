@@ -1,6 +1,6 @@
 <?php
 
-namespace Library;
+namespace Utils;
 
 class DotEnv
 {
@@ -29,14 +29,13 @@ class DotEnv
 
   public static function load()
   {
-    $env = file_get_contents(__DIR__ . '/../../.env');
+    $env = file_get_contents(__DIR__ . '/../.env');
     $env = explode("\n", $env);
     foreach ($env as $line) {
       $line = trim($line);
       if (empty($line)) {
         continue;
       }
-      // trim by " " or "="
       $line = preg_split('/\s+|=/', $line);
       $line = array_filter($line);
       $key = trim($line[0]);
@@ -47,4 +46,14 @@ class DotEnv
       self::set($key, $value);
     }
   }
+
+  public static function save()
+  {
+    $env = '';
+    foreach (self::$config as $key => $value) {
+      $env .= $key . '=' . $value . "\n";
+    }
+    file_put_contents(__DIR__ . '/../.env', $env);
+  }
+
 }

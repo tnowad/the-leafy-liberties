@@ -1,39 +1,36 @@
 version: "3.9"
 services:
-  database:
-    container_name: bookstore-database
-    image: mysql:8.0.32-debian
-    user:
-      "1000:1000"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: bookstore
-    volumes:
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     ports:
       - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: bookstore
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
   phpmyadmin:
-    container_name: bookstore-phpmyadmin
     image: phpmyadmin:5.2.1-apache
     ports:
       - "8080:80"
     links:
-      - database
+      - mysql
     environment:
-      PMA_HOST: database
+      PMA_HOST: mysql
       PMA_PORT: 3306
       PMA_USER: root
-      PMA_PASSWORD: root
+      PMA_PASSWORD: root_password
   php:
     build:
-      context: .
+      context: ./php
       dockerfile: Dockerfile
-    container_name: bookstore-php
     working_dir: /var/www
     links:
-      - database
+      - mysql
     volumes:
-      - .:/var/www
-    command: php -S 0.0.0.0:80 -t src/public
+      - ./../:/var/www
+    command: php -S 0.0.0.0:80 -t public
     ports:
       - "80:80"

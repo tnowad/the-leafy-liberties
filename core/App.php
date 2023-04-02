@@ -1,11 +1,11 @@
 <?php
 
-namespace Library;
+namespace Core;
 
 use Exception;
-use Library\Database;
-use Library\DotEnv;
-use Library\Route;
+use Core\Database;
+use Utils\DotEnv;
+use Core\Route;
 
 class App
 {
