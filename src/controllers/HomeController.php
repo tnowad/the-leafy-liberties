@@ -7,7 +7,7 @@ class HomeController
 {
   public function index()
   {
-    App::view(['view' => 'pages/index', ['title' => 'Home']]);
+    App::view(['view' => 'pages/index', 'layout' => 'layouts/default']);
   }
 
 }
