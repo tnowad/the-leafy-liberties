@@ -2,8 +2,7 @@
   <div class="container mx-auto">
     .
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
-      <div
-        class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
+      <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php
         $total = 6;
         for ($i = 1; $i <= $total; $i++) { ?>
@@ -44,17 +43,14 @@
           <span class="text-bill text-xl">Total:</span>
           <span class="money-bill text-xl">1500000VNĐ</span>
         </div>
-        <button
-          class="px-5 py-2 bg-[#315854] rounded-2xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+        <button class="px-5 py-2 bg-[#315854] rounded-2xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out
         </button>
       </div>
     </div>
     <div class="coupon-code flex my-8">
-      <input type="text" name="" id="" placeholder="Enter coupon code"
-        class="px-3 py-2 border-gray-400 border-solid border-[1px] rounded-xl focus:outline-none" />
-      <button
-        class="ml-5 px-5 py-2 bg-[#315854] rounded-xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+      <input type="text" name="" id="" placeholder="Enter coupon code" class="px-3 py-2 border-gray-400 border-solid border-[1px] rounded-xl focus:outline-none" />
+      <button class="ml-5 px-5 py-2 bg-[#315854] rounded-xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
         Apply
       </button>
     </div>
@@ -76,5 +72,4 @@
     count++;
     text.innerHTML = count;
   })
-
 </script>

@@ -69,314 +69,33 @@
     </div>
     <div class="">
       <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
+        <?php
+        $total = 20;
+        for ($i = 1; $i <= $total; $i++) { ?>
+          <div class="w-full flex flex-col justify-center  items-center p-1">
+            <div class="w-56 h-full object-cover">
+              <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
             </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
+            <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
+              <div class="text-center">
+                <a class="text-2xl" href="" alt> My Dearest Darkest</a>
+              </div>
+              <div class="">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </div>
+              <div class="product-author text-sm">Enrique Wallace</div>
+              <div class="desc">description</div>
+              <div class=" flex justify-center p-0 text-primary-900 font-semibold">
+                <span>150.000</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex flex-col justify-center  items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="./views/assets/img/productImg.png" alt="" class="w-full" />
-          </div>
-          <div class=" w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
-            <div class="text-center">
-              <a class="text-2xl" href="" alt> My Dearest Darkest</a>
-            </div>
-            <div class="">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="desc">description</div>
-            <div class=" flex justify-center p-0 text-primary-900 font-semibold">
-              <span>150.000</span>
-            </div>
-          </div>
-        </div>
+        <?php }
+        ?>
       </div>
       <div class="my-5">
         <ul class="pagination flex justify-center items-center gap-5 text-center">
@@ -398,6 +117,7 @@
           </li>
           <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-green-bg-green-800-600
                         font-semibold hover:text-white hover:bg-green-800 transition-all">
+
             <button>4</button>
           </li>
           <li class="pagination-items p-2 bg-gray-100 rounded-full text-green-bg-green-800-600 font-semibold
