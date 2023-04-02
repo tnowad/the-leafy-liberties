@@ -1,5 +1,5 @@
 <?php
-use Library\Route;
+use Core\Route;
 
 Route::get('/', 'HomeController@index');
 Route::get('/about', 'HomeController@about');

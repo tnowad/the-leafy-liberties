@@ -18,7 +18,8 @@ class Route
       $pattern = self::prepareRoutePattern($route);
       if (preg_match($pattern, $requestUri, $matches)) {
         $matchedRoute = true;
-        self::executeAction($action, $matches);
+        $result = self::executeAction($action, $matches);
+        echo $result;
         break;
       }
     }
@@ -52,7 +53,8 @@ class Route
       throw new Exception('Method not found');
     }
 
-    $controller->$methodName(...array_values($matches));
+    $result = $controller->$methodName(...array_values($matches));
+    return $result;
   }
 
   public static function get($uri, $action)

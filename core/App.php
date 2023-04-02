@@ -28,6 +28,7 @@ class App
   {
     $this->initDotEnv();
     $this->initDatabase();
+    $this->initRoutes();
   }
 
   private function initDotEnv()
@@ -39,6 +40,14 @@ class App
   {
     if (Database::getInstance()->getConnection() === null) {
       die('Database connection failed');
+    }
+  }
+
+  private function initRoutes()
+  {
+    $routes = glob(__DIR__ . '/../routes/*.php');
+    foreach ($routes as $route) {
+      require_once $route;
     }
   }
 
