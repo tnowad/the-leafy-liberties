@@ -1,4 +1,4 @@
-<div className="flex justify-center w-full flex-col items-center">
+<div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="static">
 
@@ -8,17 +8,17 @@
           <span
             class="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl ">Primer
             Slide</span>
-          <img src="../asset/img/mainHomeImg.png"
+          <img src="../assets/img/mainHomeImg.png"
             class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
         </div>
 
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../asset/img/mainHomeImg.png"
+          <img src="../assets/img/mainHomeImg.png"
             class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
         </div>
 
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../asset/img/mainHomeImg.png"
+          <img src="../assets/img/mainHomeImg.png"
             class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
         </div>
       </div>
@@ -65,7 +65,7 @@
       for ($i = 1; $i < $total; $i++) { ?>
         <div class="product-info w-full flex flex-col justify-center items-center p-1">
           <div class="w-56 h-full object-cover">
-            <img src="../asset/img/productImg.png" alt="" class="w-full h-full object-cover" />
+            <img src="../assets/img/productImg.png" alt="" class="w-full h-full object-cover" />
           </div>
           <div class="product-body w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
             <div class="product-name">
@@ -102,7 +102,7 @@
           for ($i = 1; $i <= $total; $i++) { ?>
             <div class="product-info w-fit flex flex-col justify-center items-center p-1">
               <div class="w-56 h-full object-cover">
-                <img src="../asset/img/productImg.png" alt="" class="w-full h-full object-cover" />
+                <img src="../assets/img/productImg.png" alt="" class="w-full h-full object-cover" />
               </div>
               <div class="product-body w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
                 <div class="product-name">
@@ -127,7 +127,7 @@
       </div>
       <div class="hidden w-[25%] xl:block 2xl:w-1/3">
         <div class="w-full h-auto sticky top-32">
-          <img src="../asset/img/bestOffer.png" alt="" class="rounded-2xl h-full w-full" />
+          <img src="../assets/img/bestOffer.png" alt="" class="rounded-2xl h-full w-full" />
           <div class="absolute top-3/4 text-center flex items-center flex-col w-full">
             <p class="text-lg text-white font-normal xl:text-base">
               Best Offer
@@ -155,7 +155,7 @@
         for ($i = 1; $i <= $total; $i++) { ?>
           <div class="genres-detail relative overflow-hidden rounded-3xl cursor-pointer mr-2 w-fit">
             <div class="img overflow-hidden w-full h-56 rounded-3xl">
-              <img src="../asset/img/genresHorror.png" alt=""
+              <img src="../assets/img/genresHorror.png" alt=""
                 class="rounded-3xl hover:scale-125 transition-transform w-full h-full object-cover" />
             </div>
             <p
@@ -180,7 +180,7 @@
           for ($i = 1; $i <= $total; $i++) { ?>
             <div class="author-card flex w-full justify-evenly items-center mb-4 mobile:flex-col lg:flex-row">
               <div class="author-face">
-                <img src="../asset/img/author.png" alt="" class='rounded-full' />
+                <img src="../assets/img/author.png" alt="" class='rounded-full' />
               </div>
               <p class="author-name font-medium whitespace-nowrap text-lg ">
                 William Graham
@@ -204,7 +204,7 @@
         <div class="list-author-bestselling">
           <div class=" h-fit top-product flex sm:w-full sm:gap-0 my-5">
             <div class="w-[400px] h-64">
-              <img src="../asset/img/productImg.png" alt="" class="w-full h-full object-contain rounded-xl" />
+              <img src="../assets/img/productImg.png" alt="" class="w-full h-full object-contain rounded-xl" />
             </div>
             <div class="top-product-detail flex flex-col gap-0 lg:gap-2 lg:justify-start mobile:w-fit">
               <p class="top-product-name xl:text-3xl lg:text-2xl">
@@ -238,7 +238,7 @@
                 <li>
                   <div class="product-info h-fit flex sm:w-64 md:w-80">
                     <div class="img w-52 h-full">
-                      <img src="../asset/img/productImg.png" alt="" />
+                      <img src="../assets/img/productImg.png" alt="" />
                     </div>
                     <div
                       class="product-body sm:w-full p-2 lg:text-lg font-medium md:text-base flex flex-col lg:gap-0 md:gap-2">

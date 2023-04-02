@@ -35,7 +35,8 @@
           quo ut. Autem conse quatur molestiae quos tempore sunt.
         </p>
         <div class="mt-8 sm:mt-28 mb-6 sm:mb-10 flex flex-wrap sm:flex-row justify-around">
-          <div class=" p-2 w-2/5 sm:w-3/12 flex justify-around border border-solid border-gray-400 rounded-3xl box-border">
+          <div
+            class=" p-2 w-2/5 sm:w-3/12 flex justify-around border border-solid border-gray-400 rounded-3xl box-border">
             <button>-</button>
             <span>1</span>
             <button>+</button>
@@ -44,11 +45,11 @@
             <FontAwesomeIcon class="mr-1" icon={faShoppingCart} />
             Add to cart
           </ButtonPill>
-          <div class="p-2 w-2/4 sm:w-3/12 flex justify-around border border-solid border-gray-400 rounded-3xl box-border">
+          <div
+            class="p-2 w-2/4 sm:w-3/12 flex justify-around border border-solid border-gray-400 rounded-3xl box-border">
             <FontAwesomeIcon class="pt-1" icon={faHeart} />
             <a href="/wishlist" src="" alt="" class="pt-1 text-xs">
-              <WindowSize onSizeChange={handleSizeChange} />
-              {window.innerWidth > 640 ? 'Add to wishlist' : ''}
+              Add to wishlist
             </a>
           </div>
         </div>

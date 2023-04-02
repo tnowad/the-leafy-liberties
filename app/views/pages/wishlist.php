@@ -4,7 +4,7 @@
     <h1 class=" text-4xl text-green-800 md:text-6xl">My wishlist</h1>
   </div>
   <div class="w-full h-[765px] overflow-y-scroll">
-    <table class="w-full border-collapse">
+    <table class="w-full border-collapse border-0 border-solid border-b-[1px]">
       <thead class="w-full bg-[#2e524e] rounded-sm text-[#F1F1F1] sticky top-0">
         <tr class="">
           <th class="px-4 py-2">
