@@ -33,4 +33,26 @@ class Database
   {
     return self::$connection;
   }
+
+  public function execute($sql, $params = [])
+  {
+    $stmt = self::$connection->prepare($sql);
+    if (count($params) > 0) {
+      $types = '';
+      foreach ($params as $param) {
+        if (is_int($param)) {
+          $types .= 'i';
+        } elseif (is_float($param)) {
+          $types .= 'd';
+        } elseif (is_string($param)) {
+          $types .= 's';
+        } else {
+          $types .= 'b';
+        }
+      }
+      $stmt->bind_param($types, ...$params);
+    }
+    $stmt->execute();
+    return $stmt;
+  }
 }

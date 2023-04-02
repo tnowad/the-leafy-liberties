@@ -21,6 +21,10 @@ require_once './autoload.php';
 
 use Core\App;
 
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
 $app = App::getInstance();
 
 $app->handleRequest();

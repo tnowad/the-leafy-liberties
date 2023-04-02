@@ -2,9 +2,9 @@
 
 namespace Models;
 
-use Models\BaseModel;
+use Core\Model;
 
-class User extends BaseModel
+class User extends Model
 {
   protected $table = 'users';
 

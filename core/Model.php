@@ -1,9 +1,9 @@
 <?php
-namespace Models;
+namespace Core;
 
-use Library\Database;
+use Core\Database;
 
-class BaseModel
+class Model
 {
   protected $table;
   protected $db;
@@ -87,6 +87,10 @@ class BaseModel
     }
 
     return $this->db->affected_rows;
+  }
+
+  public function where($column, $operator, $value)
+  {
   }
 
   public function __destruct()
