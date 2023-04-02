@@ -1,7 +1,8 @@
 <?php
 use Core\Route;
+use App\Controllers\HomeController;
 
-Route::get('/', 'HomeController@index');
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', 'HomeController@about');
 Route::get('/contact', 'HomeController@contact');
 Route::get('/login', 'AuthController@login');

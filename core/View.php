@@ -17,12 +17,12 @@ class View
 
     ob_start();
     include $viewPath;
-    return ob_get_clean();
+    echo ob_get_clean();
   }
 
   private static function getViewPath($view)
   {
-    $viewRoot = __DIR__ . '/../views/';
+    $viewRoot = __DIR__ . '/../app/views/';
     $viewPath = str_replace('/', DIRECTORY_SEPARATOR, $view);
     return $viewRoot . $viewPath . '.php';
   }

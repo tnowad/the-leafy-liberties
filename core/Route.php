@@ -18,8 +18,7 @@ class Route
       $pattern = self::prepareRoutePattern($route);
       if (preg_match($pattern, $requestUri, $matches)) {
         $matchedRoute = true;
-        $result = self::executeAction($action, $matches);
-        echo $result;
+        self::executeAction($action, $matches);
         break;
       }
     }
@@ -33,6 +32,7 @@ class Route
 
   private static function prepareRoutePattern($route)
   {
+
     $pattern = '/^' . preg_quote($route, '/') . '$/';
     $pattern = preg_replace('/{([a-zA-Z0-9_]+)}/', '(?P<$1>[^\/]+)', $pattern);
     return $pattern;
@@ -42,7 +42,6 @@ class Route
   {
     $controllerName = $action[0];
     $methodName = $action[1];
-
     if (!class_exists($controllerName)) {
       throw new Exception('Controller not found');
     }
@@ -53,8 +52,7 @@ class Route
       throw new Exception('Method not found');
     }
 
-    $result = $controller->$methodName(...array_values($matches));
-    return $result;
+    $controller->$methodName(...array_values($matches));
   }
 
   public static function get($uri, $action)

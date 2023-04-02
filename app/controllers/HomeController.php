@@ -1,14 +1,14 @@
 <?php
-namespace Controllers;
 
-use Library\App;
+namespace App\Controllers;
+
+use Core\View;
 
 class HomeController
 {
   public function index()
   {
-
-    App::view(['view' => 'pages/index', 'layout' => 'layouts/default'], );
+    View::render('pages/index');
   }
 
 }
