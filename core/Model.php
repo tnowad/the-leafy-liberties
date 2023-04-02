@@ -18,7 +18,11 @@ abstract class Model
       throw new Exception('Table name is not defined in the model class');
     }
     if (empty($this->columns)) {
-      $this->columns = $this->getColumns();
+      try {
+        $this->columns = $this->getColumns();
+      } catch (Exception $e) {
+        throw new Exception($e->getMessage());
+      }
     }
   }
 
@@ -30,7 +34,7 @@ abstract class Model
     $result = $stmt->get_result();
     $columns = [];
     while ($row = $result->fetch_assoc()) {
-      $columns[] = $row['Field'];
+      $columns[] = $row;
     }
     return $columns;
   }
