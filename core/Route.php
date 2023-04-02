@@ -14,12 +14,11 @@ class Route
     $requestUri = substr($_SERVER['REQUEST_URI'], strlen(DotEnv::get('BASE_URI')), strlen($_SERVER['REQUEST_URI']));
     $requestMethod = $_SERVER['REQUEST_METHOD'];
     $matchedRoute = false;
-
     foreach (self::$routes[$requestMethod] as $route => $action) {
       $pattern = self::prepareRoutePattern($route);
+      print_r($pattern . ' ' . $requestUri . ' ' . "<br/>");
       if (preg_match($pattern, $requestUri, $matches)) {
         $matchedRoute = true;
-        print_r($matches);
         self::executeAction($action, $matches);
         break;
       }
@@ -39,6 +38,7 @@ class Route
     $pattern = preg_replace('/{([a-zA-Z0-9_]+)}/', '(?P<$1>[^\/]+)', $pattern);
     return $pattern;
   }
+
 
   private static function executeAction($action, $matches)
   {
