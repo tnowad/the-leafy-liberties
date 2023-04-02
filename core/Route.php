@@ -3,6 +3,7 @@
 namespace Core;
 
 use Exception;
+use Utils\DotEnv;
 
 class Route
 {
@@ -10,9 +11,8 @@ class Route
 
   public static function resolve()
   {
-    $requestUri = $_SERVER['REQUEST_URI'];
+    $requestUri = substr($_SERVER['REQUEST_URI'], strlen(DotEnv::get('BASE_URI')), strlen($_SERVER['REQUEST_URI']));
     $requestMethod = $_SERVER['REQUEST_METHOD'];
-
     $matchedRoute = false;
 
     foreach (self::$routes[$requestMethod] as $route => $action) {

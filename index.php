@@ -6,13 +6,18 @@ if (ENVIRONMENT == 'development') {
   error_reporting(E_ALL);
 }
 
+// Auto load all config in config folder
+foreach (glob('./config/*.php') as $config) {
+  require_once $config;
+}
+
 // Auto load third party libraries
-if (file_exists('./../vendor/autoload.php')) {
-  require_once './../vendor/autoload.php';
+if (file_exists('./vendor/autoload.php')) {
+  require_once './vendor/autoload.php';
 }
 
 // Auto load application classes
-require_once './../autoload.php';
+require_once './autoload.php';
 
 use Core\App;
 
