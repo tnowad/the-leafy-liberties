@@ -15,9 +15,7 @@
 </head>
 
 <body>
-  <header>
-    <?php require_once($header ?? '../layouts/default/header.php'); ?>
-  </header>
+  <?php require_once($header ?? '../layouts/default/header.php'); ?>
 
   <main>
     <?php include '../pages/index.php' ?>
