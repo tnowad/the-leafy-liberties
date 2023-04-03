@@ -70,4 +70,42 @@ abstract class Model
     return $stmt->affected_rows;
   }
 
+  public function update()
+  {
+    $columns = [];
+    $values = [];
+    foreach ($this->data as $key => $value) {
+      $columns[] = $key;
+      $values[] = $value;
+    }
+    $columns = implode(',', $columns);
+    $values = implode(',', $values);
+    $sql = "UPDATE $this->table SET ($columns) VALUES ($values)";
+    $stmt = Database::getInstance()->getConnection()->prepare($sql);
+    $stmt->execute();
+    return $stmt->affected_rows;
+  }
+
+  public function delete()
+  {
+    $sql = "DELETE FROM $this->table WHERE id = ?";
+    $stmt = Database::getInstance()->getConnection()->prepare($sql);
+    $stmt->bind_param('i', $this->id);
+    $stmt->execute();
+    return $stmt->affected_rows;
+  }
+
+  public static function all($table = '')
+  {
+    $table = $table === '' ? static::$table : $table;
+    $sql = "SELECT * FROM $table";
+    $stmt = Database::getInstance()->getConnection()->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+      $data[] = $row;
+    }
+    return $data;
+  }
 }

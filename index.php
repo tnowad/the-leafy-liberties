@@ -20,9 +20,6 @@ if (file_exists('./vendor/autoload.php')) {
 require_once './autoload.php';
 
 use Core\App;
-use App\Models\User;
-
-$user = new User();
 
 $app = App::getInstance();
 
