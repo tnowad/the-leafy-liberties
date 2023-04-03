@@ -11,7 +11,7 @@ class Router
   private Response $response;
   private array $routes = [];
 
-  public function __construct(Request $request, Response $response)
+  public function __construct(Request &$request, Response &$response)
   {
     $this->request = $request;
     $this->response = $response;
@@ -95,8 +95,6 @@ class Router
       $controller = new $callback[0]();
       $callback[0] = $controller;
     }
-
-    return call_user_func($callback, $this->request, $this->response);
   }
 
   public function render($view, $params = [])

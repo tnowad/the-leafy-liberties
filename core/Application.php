@@ -8,6 +8,7 @@ use Core\Response;
 use Core\Session;
 use Core\Controller;
 use Core\View;
+use Exception;
 
 class Application
 {
@@ -24,8 +25,9 @@ class Application
   {
     $this->request = new Request();
     $this->response = new Response();
+    $this->router = new Router($this->request, $this->response);
     $this->session = new Session();
-    $this->database = new Database();
+    $this->database = Database::getInstance();
     $this->controller = new Controller();
   }
 
@@ -72,10 +74,9 @@ class Application
     return $this->view;
   }
 
-  public function run()
+  public function handleRequest()
   {
-    $this->router = new Router($this->request, $this->response);
-    echo $this->router->resolve();
+    $this->router->resolve();
   }
 
 }
