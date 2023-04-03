@@ -1,4 +1,4 @@
-<div class="w-full my-0 mx-auto -z-50">
+<div class="w-full my-0 mx-auto">
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Product</h1>
@@ -6,9 +6,9 @@
         +
       </button>
     </div>
-    <div class="table-product-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white -z-50">
+    <div class="table-product-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
       <div class="relative">
-        <table class="w-full text-sm text-center text-gray-500 rounded-2xl h-64 z-[-20]">
+        <table class="w-full text-sm text-center text-gray-500 rounded-2xl h-64">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
@@ -25,15 +25,15 @@
             <?php
             for ($i = 1; $i <= 10; $i++) { ?>
               <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100">
-                <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">
-                  My Dearest Darkest
+                <td class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
+                  <img src="../../../../resources/images/info_book_detail.png" alt="">
                 </td>
                 <td class="px-5 py-3">#1</td>
                 <td class="px-5 py-3">Jun 29,2023</td>
-                <td class="px-5 py-3">Jack Phat</td>
+                <td class="px-5 py-2">Jack Phat</td>
                 <td class="px-5 py-3">Delivered</td>
                 <td class="px-5 py-3">1</td>
-                <td class="px-5 py-4 w-44">
+                <td class="px-5 py-3 w-44">
                   <div class="button flex justify-center items-center gap-4">
                     <button
                       class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
