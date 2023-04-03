@@ -1,8 +1,8 @@
-<div class="w-full bg-white h-16 sticky top-0 border-0 border-solid border-l-[1px] border-gray-300 shadow-sm">
+<div class="w-full bg-white h-16 sticky top-0 border-0 border-solid border-l-[1px] border-gray-300 shadow-sm z-[100]">
   <div class="header flex justify-between items-center h-full p-4">
     <div class="left flex justify-center items-center">
-      <i class="fa-regular fa-bars-sort fa-lg mr-2"></i>
-      <span class="text-2xl font-normal text-primary-600">
+      <i class="fa-regular fa-bars-sort fa-lg mr-2 font-medium"></i>
+      <span class="text-2xl font-medium text-[#52938d]">
         Dashboard
       </span>
     </div>
