@@ -21,6 +21,6 @@ $app = Application::getInstance();
 
 $router = Application::getInstance()->getRouter();
 
-// $router->get('/', [HomeController::class, 'index']);
+$router->get('/', [HomeController::class, 'index']);
 
 $app->handleRequest();

@@ -15,7 +15,6 @@
 <body>
   <?php
   require_once($header ?? __DIR__ . '/default/header.php');
-
   ?>
 
   {{content}}

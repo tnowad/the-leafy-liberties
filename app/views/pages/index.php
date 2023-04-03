@@ -1,70 +1,81 @@
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="static">
-
-      <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96 -z-10">
+      <div class="relative h-56 overflow-hidden rounded-lg sm:h-64 xl:h-80 2xl:h-96 -z-10">
 
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../../../resources/images/mainHomeImg.png" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+          <img src="../../../resources/images/mainHomeImg.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
         </div>
 
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../../../resources/images/mainHomeImg.png" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+          <img src="../../../resources/images/mainHomeImg.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
         </div>
 
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../../../resources/images/mainHomeImg.png" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+          <img src="../../../resources/images/mainHomeImg.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
         </div>
       </div>
 
 
-      <div class="flex absolute bottom-5 left-1/2 -z-0 space-x-3 -translate-x-1/2">
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+      <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
+          data-carousel-slide-to="0"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+          data-carousel-slide-to="1"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+          data-carousel-slide-to="2"></button>
       </div>
 
-      <button type="button" class="flex absolute top-0 left-0 -z-0 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-gray-400 text-white  group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
+      <button type="button"
+        class="absolute top-0 left-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        data-carousel-prev>
+        <span
+          class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
           <i class="fa-solid fa-chevron-up fa-rotate-270"></i>
         </span>
       </button>
-      <button type="button" class="flex absolute top-0 right-0 -z-0 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-gray-400 text-white 0 group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
+      <button type="button"
+        class="absolute top-0 right-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        data-carousel-next>
+        <span
+          class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 0 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
           <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
         </span>
       </button>
     </div>
   </div>
   <div class="container mx-auto">
-    <div class="flex justify-between items-center text-center gap-2 my-4">
+    <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Bestselling Books</h2>
-      <span class="h-px bg-gray-600 w-full mx-2"></span>
+      <span class="w-full h-px mx-2 bg-gray-600"></span>
       <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
         View All
       </a>
     </div>
-    <div class="bestselling-products w-full relative flex overflow-hidden gap-6">
+    <div class="relative flex w-full gap-6 overflow-hidden bestselling-products">
       <?php
       $total = 10;
       for ($i = 1; $i < $total; $i++) { ?>
-        <div class="product-info w-full flex flex-col justify-center items-center p-1">
-          <div class="w-56 h-full object-cover">
-            <img src="../../../../resources/images/productImg.png" alt="" class="w-full h-full object-cover" />
+        <div class="flex flex-col items-center justify-center w-full p-1 product-info">
+          <div class="object-cover w-56 h-full">
+            <img src="../../../../resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
           </div>
-          <div class="product-body w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
+          <div class="flex flex-col items-center justify-center w-full p-1 text-lg font-medium product-body">
             <div class="product-name">
               <a href="/">My Dearest Darkest</a>
             </div>
             <div class=" product-rate">
-              <i class="fa-solid fa-star text-yellow-300"></i>
-              <i class="fa-solid fa-star text-yellow-300"></i>
-              <i class="fa-solid fa-star text-yellow-300"></i>
-              <i class="fa-solid fa-star text-yellow-300"></i>
-              <i class="fa-solid fa-star text-yellow-300"></i>
+              <i class="text-yellow-300 fa-solid fa-star"></i>
+              <i class="text-yellow-300 fa-solid fa-star"></i>
+              <i class="text-yellow-300 fa-solid fa-star"></i>
+              <i class="text-yellow-300 fa-solid fa-star"></i>
+              <i class="text-yellow-300 fa-solid fa-star"></i>
             </div>
-            <div class="product-author text-sm">Enrique Wallace</div>
-            <div class="product-price p-0 text-primary-900 font-semibold">
+            <div class="text-sm product-author">Enrique Wallace</div>
+            <div class="p-0 font-semibold product-price text-primary-900">
               150.000VND
             </div>
           </div>
@@ -72,9 +83,9 @@
       <?php }
       ?>
     </div>
-    <div class="flex justify-between items-center text-center gap-2 my-4">
+    <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Popular Books</h2>
-      <span class="h-px bg-gray-600 w-full mx-2"></span>
+      <span class="w-full h-px mx-2 bg-gray-600"></span>
       <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
         View All
       </a>
@@ -85,23 +96,23 @@
           <?php
           $total = 12;
           for ($i = 1; $i <= $total; $i++) { ?>
-            <div class="product-info w-fit flex flex-col justify-center items-center p-1">
-              <div class="w-56 h-full object-cover">
-                <img src="../../../resources/images/productImg.png" alt="" class="w-full h-full object-cover" />
+            <div class="flex flex-col items-center justify-center p-1 product-info w-fit">
+              <div class="object-cover w-56 h-full">
+                <img src="../../../resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
               </div>
-              <div class="product-body w-full p-1 text-lg font-medium flex flex-col justify-center items-center">
+              <div class="flex flex-col items-center justify-center w-full p-1 text-lg font-medium product-body">
                 <div class="product-name">
                   <a href="/">My Dearest Darkest</a>
                 </div>
                 <div class=" product-rate">
-                  <i class="fa-solid fa-star text-yellow-300"></i>
-                  <i class="fa-solid fa-star text-yellow-300"></i>
-                  <i class="fa-solid fa-star text-yellow-300"></i>
-                  <i class="fa-solid fa-star text-yellow-300"></i>
-                  <i class="fa-solid fa-star text-yellow-300"></i>
+                  <i class="text-yellow-300 fa-solid fa-star"></i>
+                  <i class="text-yellow-300 fa-solid fa-star"></i>
+                  <i class="text-yellow-300 fa-solid fa-star"></i>
+                  <i class="text-yellow-300 fa-solid fa-star"></i>
+                  <i class="text-yellow-300 fa-solid fa-star"></i>
                 </div>
-                <div class="product-author text-sm">Enrique Wallace</div>
-                <div class="product-price p-0 text-primary-900 font-semibold">
+                <div class="text-sm product-author">Enrique Wallace</div>
+                <div class="p-0 font-semibold product-price text-primary-900">
                   150.000VND
                 </div>
               </div>
@@ -111,38 +122,40 @@
         </div>
       </div>
       <div class="hidden w-[25%] xl:block 2xl:w-1/3">
-        <div class="w-full h-auto sticky top-32">
-          <img src="../../../resources/images/bestOffer.png" alt="" class="rounded-2xl h-full w-full" />
-          <div class="absolute top-3/4 text-center flex items-center flex-col w-full">
-            <p class="text-lg text-white font-normal xl:text-base">
+        <div class="sticky w-full h-auto top-32">
+          <img src="../../../resources/images/bestOffer.png" alt="" class="w-full h-full rounded-2xl" />
+          <div class="absolute flex flex-col items-center w-full text-center top-3/4">
+            <p class="text-lg font-normal text-white xl:text-base">
               Best Offer
             </p>
-            <p class="text-4xl xl:text-3xl text-white">Save 100%</p>
-            <button class=" bg-white w-32 text-lg text-pink-400 font-bold p-2 rounded-full mt-3">
+            <p class="text-4xl text-white xl:text-3xl">Save 100%</p>
+            <button class="w-32 p-2 mt-3 text-lg font-bold text-pink-400 bg-white rounded-full ">
               See more
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="flex justify-between items-center text-center gap-2 my-4">
+    <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Genres Books</h2>
-      <span class="h-px bg-gray-600 w-full mx-2"></span>
+      <span class="w-full h-px mx-2 bg-gray-600"></span>
       <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
         View All
       </a>
     </div>
-    <div class="w-full relative mb-5">
-      <div class="flex justify-center items-center gap-5">
+    <div class="relative w-full mb-5">
+      <div class="flex items-center justify-center gap-5">
         <?php
         $name = array("Fantasy", "Horror", "Drama", "Science-fiction");
         $total = 4;
         for ($i = 1; $i <= $total; $i++) { ?>
-          <div class="genres-detail relative overflow-hidden rounded-3xl cursor-pointer mr-2 w-fit">
-            <div class="img overflow-hidden w-full h-56 rounded-3xl">
-              <img src="../../../resources/images/genresHorror.png" alt="" class="rounded-3xl hover:scale-125 transition-transform w-full h-full object-cover" />
+          <div class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit">
+            <div class="w-full h-56 overflow-hidden img rounded-3xl">
+              <img src="../../../resources/images/genresHorror.png" alt=""
+                class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-125" />
             </div>
-            <p class="absolute xl:top-3/4 left-10 text-white font-normal text-4xl xl:text-3xl lg:text-2xl md:text-[22px] md:top-2/3 sm:text-[30px] mobile:top-2/3">
+            <p
+              class="absolute xl:top-3/4 left-10 text-white font-normal text-4xl xl:text-3xl lg:text-2xl md:text-[22px] md:top-2/3 sm:text-[30px] mobile:top-2/3">
               <?php echo $name[$i - 1] ?>
             </p>
           </div>
@@ -151,19 +164,21 @@
       </div>
     </div>
     <div class="flex my-8 lg:gap-0 sm:gap-3 lg:flex-row sm:flex-col">
-      <div class="lg:w-1/4 bg-orange-50 lg:p-5 rounded-2xl xl:mr-10 lg:mr-2 mobile:w-full md:p-2 overflow-hidden lg:overflow-x-hidden">
-        <div class="header-table lg:text-2xl border-0 border-solid border-b-2 mb-6 p-3 whitespace-nowrap md:text-xl sm:text-center">
+      <div
+        class="overflow-hidden lg:w-1/4 bg-orange-50 lg:p-5 rounded-2xl xl:mr-10 lg:mr-2 mobile:w-full md:p-2 lg:overflow-x-hidden">
+        <div
+          class="p-3 mb-6 border-0 border-b-2 border-solid header-table lg:text-2xl whitespace-nowrap md:text-xl sm:text-center">
           <p>Popular Author</p>
         </div>
-        <div class="grid grid-cols-3 lg:grid-cols-1 gap-5">
+        <div class="grid grid-cols-3 gap-5 lg:grid-cols-1">
           <?php
           $total = 6;
           for ($i = 1; $i <= $total; $i++) { ?>
-            <div class="author-card flex w-full justify-evenly items-center mb-4 mobile:flex-col lg:flex-row">
+            <div class="flex items-center w-full mb-4 author-card justify-evenly mobile:flex-col lg:flex-row">
               <div class="author-face">
                 <img src="../../../resources/images/author.png" alt="" class='rounded-full' />
               </div>
-              <p class="author-name font-medium whitespace-nowrap text-lg ">
+              <p class="text-lg font-medium author-name whitespace-nowrap ">
                 William Graham
               </p>
               <div class="detail-arrow mobile:hidden xl:block">
@@ -175,67 +190,70 @@
         </div>
       </div>
       <div class="author-bestselling lg:w-3/4 sm:w-full">
-        <div class="flex justify-between items-center text-center gap-2 mb-4">
+        <div class="flex items-center justify-between gap-2 mb-4 text-center">
           <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Bestselling Books</h2>
-          <span class="h-px bg-gray-600 w-full mx-2"></span>
+          <span class="w-full h-px mx-2 bg-gray-600"></span>
           <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
             View All
           </a>
         </div>
         <div class="list-author-bestselling">
-          <div class=" h-fit top-product flex sm:w-full sm:gap-0 my-5">
+          <div class="flex my-5 h-fit top-product sm:w-full sm:gap-0">
             <div class="w-[400px] h-64">
-              <img src="../../../resources/images/productImg.png" alt="" class="w-full h-full object-contain rounded-xl" />
+              <img src="../../../resources/images/productImg.png" alt=""
+                class="object-contain w-full h-full rounded-xl" />
             </div>
-            <div class="top-product-detail flex flex-col gap-0 lg:gap-2 lg:justify-start mobile:w-fit">
+            <div class="flex flex-col gap-0 top-product-detail lg:gap-2 lg:justify-start mobile:w-fit">
               <p class="top-product-name xl:text-3xl lg:text-2xl">
                 Misty Figueroa
               </p>
               <div class=" product-rate">
-                <i class="fa-solid fa-star text-yellow-300"></i>
-                <i class="fa-solid fa-star text-yellow-300"></i>
-                <i class="fa-solid fa-star text-yellow-300"></i>
-                <i class="fa-solid fa-star text-yellow-300"></i>
-                <i class="fa-solid fa-star text-yellow-300"></i>
+                <i class="text-yellow-300 fa-solid fa-star"></i>
+                <i class="text-yellow-300 fa-solid fa-star"></i>
+                <i class="text-yellow-300 fa-solid fa-star"></i>
+                <i class="text-yellow-300 fa-solid fa-star"></i>
+                <i class="text-yellow-300 fa-solid fa-star"></i>
               </div>
-              <p class="top-product-author font-bold">Misty Figueroa</p>
-              <div class="top-product-desc text-ellipsis sm:w-full sm:pr-20 inline mobile:text-sm mobile:w-3/4 mobile:h-fit">
+              <p class="font-bold top-product-author">Misty Figueroa</p>
+              <div
+                class="inline top-product-desc text-ellipsis sm:w-full sm:pr-20 mobile:text-sm mobile:w-3/4 mobile:h-fit">
                 Est numquam harum aut ut. Pariatur cum blanditiis est
                 delectus accusamus eveniet. Quis fugiat eligendi magni eos
                 dignissimos numquam.Quis ipsum incididunt non minim elit
                 veniam qui voluptate voluptate
               </div>
-              <p class="top-product-price text-lg font-bold">
+              <p class="text-lg font-bold top-product-price">
                 150.000VNĐ
               </p>
             </div>
           </div>
-          <div class="list-top-product-by-author mt-2 ml-6">
-            <ul class="grid auto-cols-max sm:grid-cols-2 gap-2">
+          <div class="mt-2 ml-6 list-top-product-by-author">
+            <ul class="grid gap-2 auto-cols-max sm:grid-cols-2">
               <?php
               $total = 4;
               for ($i = 1; $i <= $total; $i++) { ?>
                 <li>
-                  <div class="product-info h-fit flex sm:w-64 md:w-80">
-                    <div class="img w-52 h-full">
+                  <div class="flex product-info h-fit sm:w-64 md:w-80">
+                    <div class="h-full img w-52">
                       <img src="../../../resources/images/productImg.png" alt="" />
                     </div>
-                    <div class="product-body sm:w-full p-2 lg:text-lg font-medium md:text-base flex flex-col lg:gap-0 md:gap-2">
+                    <div
+                      class="flex flex-col p-2 font-medium product-body sm:w-full lg:text-lg md:text-base lg:gap-0 md:gap-2">
                       <div class={`product-name`}>
                         <a href="/book_detail">My Dearest Darkest</a>
                       </div>
                       <div class=" product-rate">
-                        <i class="fa-solid fa-star text-yellow-300"></i>
+                        <i class="text-yellow-300 fa-solid fa-star"></i>
 
 
 
-                        <i class="fa-solid fa-star text-yellow-300"></i>
-                        <i class="fa-solid fa-star text-yellow-300"></i>
-                        <i class="fa-solid fa-star text-yellow-300"></i>
-                        <i class="fa-solid fa-star text-yellow-300"></i>
+                        <i class="text-yellow-300 fa-solid fa-star"></i>
+                        <i class="text-yellow-300 fa-solid fa-star"></i>
+                        <i class="text-yellow-300 fa-solid fa-star"></i>
+                        <i class="text-yellow-300 fa-solid fa-star"></i>
                       </div>
-                      <div class="product-author text-sm">Enrique Wallace</div>
-                      <div class="product-price p-0 text-primary-900 font-semibold">
+                      <div class="text-sm product-author">Enrique Wallace</div>
+                      <div class="p-0 font-semibold product-price text-primary-900">
                         150.000VND
                       </div>
                     </div>
