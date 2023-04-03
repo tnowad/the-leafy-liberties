@@ -6,24 +6,38 @@ use Exception;
 
 class View
 {
-  public static function render(string $view, $data = [])
+
+  private string $name;
+
+  public function __construct(string $name)
+  {
+    $this->name = $name;
+  }
+
+  public static function render(View $view, array $params = []): string
   {
     $viewPath = self::getViewPath($view);
     if (!file_exists($viewPath)) {
-      throw new Exception('View not found');
+      throw new Exception("View file $viewPath not found");
     }
-
-    extract($data);
-
+    extract($params);
     ob_start();
-    include $viewPath;
-    echo ob_get_clean();
+    require_once $viewPath;
+    $content = ob_get_clean();
+    return $content;
   }
 
-  private static function getViewPath($view)
+  public static function renderWithLayout(View $view, array $params = [], $layout = 'layouts/default'): string
+  {
+    $layoutContent = self::render(new View($layout), $params);
+    $content = self::render($view, $params);
+    return str_replace('{{content}}', $content, $layoutContent);
+  }
+
+  private static function getViewPath(View $view): string
   {
     $viewRoot = __DIR__ . '/../app/views/';
-    $viewPath = str_replace('/', DIRECTORY_SEPARATOR, $view);
+    $viewPath = str_replace('/', DIRECTORY_SEPARATOR, $view->name);
     return $viewRoot . $viewPath . '.php';
   }
 }

@@ -1,4 +1,6 @@
 <?php
+use App\Controllers\Frontend\HomeController;
+
 define('ENVIRONMENT', 'development');
 if (ENVIRONMENT == 'development') {
   ini_set('display_errors', 1);
@@ -6,21 +8,26 @@ if (ENVIRONMENT == 'development') {
   error_reporting(E_ALL);
 }
 
-// Auto load all config in config folder
-foreach (glob('./config/*.php') as $config) {
-  require_once $config;
+function autoExecute($folder)
+{
+  foreach (glob($folder . '/*.php') as $file) {
+    require_once $file;
+  }
 }
 
-// Auto load third party libraries
 if (file_exists('./vendor/autoload.php')) {
   require_once './vendor/autoload.php';
 }
+if (file_exists('./autoload.php')) {
+  require_once './autoload.php';
+}
 
-// Auto load application classes
-require_once './autoload.php';
+use Core\Application;
 
-use Core\App;
+$app = Application::getInstance();
 
-$app = App::getInstance();
+$router = Application::getInstance()->getRouter();
+
+$router->get('/', [HomeController::class, 'index']);
 
 $app->handleRequest();

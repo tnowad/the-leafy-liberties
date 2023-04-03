@@ -2,12 +2,13 @@
 
 namespace App\Controllers\Frontend;
 
+use Core\Controller;
 use Core\View;
 
-class HomeController
+class HomeController extends Controller
 {
-  public function index()
+  public function index($request, $response)
   {
-    View::render('pages/index', );
+    return $this->renderWithLayout(new View('pages/index'));
   }
 }
