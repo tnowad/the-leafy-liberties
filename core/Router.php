@@ -51,11 +51,11 @@ class Router
 
   public function render($view, $params = [])
   {
-    return Application::getInstance()->view->render(new View($view), $params);
+    return Application::getInstance()->getView()->render(new View($view), $params);
   }
 
   public function renderWithLayout($view, $params = [])
   {
-    return Application::getInstance()->view->renderWithLayout(new View($view), $params);
+    return Application::getInstance()->getView()->renderWithLayout(new View($view), $params);
   }
 }
