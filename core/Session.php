@@ -1,0 +1,55 @@
+<?php
+namespace Core;
+
+class Session
+{
+  public function __construct()
+  {
+    session_start();
+  }
+
+  public function set($key, $value)
+  {
+    $_SESSION[$key] = $value;
+  }
+
+  public function get($key)
+  {
+    return $_SESSION[$key] ?? null;
+  }
+
+  public function remove($key)
+  {
+    unset($_SESSION[$key]);
+  }
+
+  public function destroy()
+  {
+    session_destroy();
+  }
+
+  public function __destruct()
+  {
+    session_write_close();
+  }
+
+  public function __get($name)
+  {
+    return $this->get($name);
+  }
+
+  public function __set($name, $value)
+  {
+    $this->set($name, $value);
+  }
+
+  public function __unset($name)
+  {
+    $this->remove($name);
+  }
+
+  public function __isset($name)
+  {
+    return isset($_SESSION[$name]);
+  }
+}

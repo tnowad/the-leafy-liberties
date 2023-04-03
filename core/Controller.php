@@ -1,0 +1,24 @@
+<?php
+namespace Core;
+
+use Core\Application;
+
+class Controller
+{
+  protected array $middlewares = [];
+
+  public function render($view, $params = [])
+  {
+    return Application::getInstance()->getView()->render($view, $params);
+  }
+
+  public function addMiddleware($middleware)
+  {
+    $this->middlewares[] = $middleware;
+  }
+
+  public function getMiddlewares()
+  {
+    return $this->middlewares;
+  }
+}
