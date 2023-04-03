@@ -21,7 +21,7 @@
       <div class="w-full">
         <?php include './dashboardHeader.php' ?>
         <div class="w-full min-h-screen xl:px-10 lg:px-0">
-          <?php include './dashboard.php' ?>
+          <?php include './customer.php' ?>
         </div>
       </div>
     </div>

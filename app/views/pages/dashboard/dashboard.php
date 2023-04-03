@@ -104,26 +104,15 @@
                   <td class="px-5 py-3">Delivered</td>
                   <td class="px-5 py-3">1</td>
                   <td class="px-5 py-4 w-44">
-                    <div class="action-button flex justify-center items-center">
+                    <div class="button flex justify-center items-center gap-4">
                       <button
-                        class='btn font-medium text-white px-4 py-2 bg-[#40736d] rounded-lg hover:bg-[#6cada6] transition-colors text-center'>
-                        •••
+                        class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                        <i class="fa-solid fa-pen-to-square"></i>
                       </button>
-                      <div id="menu-btn" class="hidden justify-center items-center gap-2">
-                        <button
-                          class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                          <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button
-                          class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                        <button
-                          class="close-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-orange-500 transition-all"
-                          onclick="closeMenu()">
-                          <i class="fa-solid fa-xmark"></i>
-                        </button>
-                      </div>
+                      <button
+                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -137,23 +126,23 @@
   </div>
 </div>
 <script>
-  let btns = document.querySelectorAll(".btn");
-  btns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      let menuBtn = btn.nextElementSibling;
-      menuBtn.style.display = "flex";
-      btn.style.display = "none";
-    });
-  });
+  // let btns = document.querySelectorAll(".btn");
+  // btns.forEach((btn) => {
+  //   btn.addEventListener("click", () => {
+  //     let menuBtn = btn.nextElementSibling;
+  //     menuBtn.style.display = "flex";
+  //     btn.style.display = "none";
+  //   });
+  // });
 
-  function closeMenu() {
-    let menuBtns = document.querySelectorAll("#menu-btn");
-    let btns = document.querySelectorAll(".btn");
-    menuBtns.forEach((menuBtn) => {
-      menuBtn.style.display = "none";
-    });
-    btns.forEach((btn) => {
-      btn.style.display = "flex";
-    });
-  }
+  // function closeMenu() {
+  //   let menuBtns = document.querySelectorAll("#menu-btn");
+  //   let btns = document.querySelectorAll(".btn");
+  //   menuBtns.forEach((menuBtn) => {
+  //     menuBtn.style.display = "none";
+  //   });
+  //   btns.forEach((btn) => {
+  //     btn.style.display = "flex";
+  //   });
+  // }
 </script>
