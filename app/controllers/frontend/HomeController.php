@@ -11,4 +11,5 @@ class HomeController extends Controller
   {
     return $this->renderWithLayout(new View('pages/index'));
   }
+
 }

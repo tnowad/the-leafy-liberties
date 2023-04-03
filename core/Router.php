@@ -40,10 +40,8 @@ class Router
 
     if ($callback === false) {
       $this->response->setStatusCode(404);
-      $this->response->setBody('Not found');
-      return $this->response;
+      throw new Exception('Not found');
     }
-
     if (is_array($callback)) {
       $controller = new $callback[0]();
       $callback[0] = $controller;

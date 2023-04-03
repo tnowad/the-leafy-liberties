@@ -80,8 +80,11 @@ class Application
     try {
       $this->response->setBody($this->router->resolve());
     } catch (Exception $e) {
-      $this->response->setStatusCode($e->getCode());
-      $this->response->setBody($e->getMessage());
+      $data = [
+        'message' => $e->getMessage(),
+        'code' => $e->getCode(),
+      ];
+      $this->response->setBody(View::render(new View('pages/404'), $data));
     }
     $this->response->send();
   }

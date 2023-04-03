@@ -14,7 +14,7 @@ class View
     $this->name = $name;
   }
 
-  public static function render(View $view, array $params = []): string
+  public static function render(View $view, $params = []): string
   {
     $viewPath = self::getViewPath($view);
     if (!file_exists($viewPath)) {
@@ -27,7 +27,7 @@ class View
     return $content;
   }
 
-  public static function renderWithLayout(View $view, array $params = [], $layout = 'layouts/default'): string
+  public static function renderWithLayout(View $view, $params = [], $layout = 'layouts/default'): string
   {
     $layoutContent = self::render(new View($layout), $params);
     $content = self::render($view, $params);

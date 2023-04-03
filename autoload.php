@@ -20,13 +20,13 @@ function lowercasePermutations($arr)
   generatePermutations($arr, $result, 0);
   return $result;
 }
+
 function autoloader($class)
 {
   $class = str_replace('\\', '/', $class);
   $namespace = explode('/', $class);
   $class = array_pop($namespace);
   $namespaces = lowercasePermutations($namespace);
-  // for each namespaces
   foreach ($namespaces as $item) {
     $path = implode('/', $item);
     $file = __DIR__ . '/' . $path . '/' . $class . '.php';

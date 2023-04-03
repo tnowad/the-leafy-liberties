@@ -8,13 +8,6 @@ if (ENVIRONMENT == 'development') {
   error_reporting(E_ALL);
 }
 
-function autoExecute($folder)
-{
-  foreach (glob($folder . '/*.php') as $file) {
-    require_once $file;
-  }
-}
-
 if (file_exists('./vendor/autoload.php')) {
   require_once './vendor/autoload.php';
 }
@@ -28,6 +21,6 @@ $app = Application::getInstance();
 
 $router = Application::getInstance()->getRouter();
 
-$router->get('/', [HomeController::class, 'index']);
+// $router->get('/', [HomeController::class, 'index']);
 
 $app->handleRequest();
