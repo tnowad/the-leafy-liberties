@@ -15,15 +15,16 @@
 </head>
 
 <body>
-  <?php require_once($header ?? '../layouts/default/header.php'); ?>
+  <?php
+  require_once($header ?? __DIR__ . '/default/header.php');
 
-  <main>
-    <?php include '../pages/index.php' ?>
-  </main>
+  ?>
 
-  <footer>
-    <?php require_once($footer ?? '../layouts/default/footer.php'); ?>
-  </footer>
+  {{content}}
+
+  <?php
+  require_once($footer ?? __DIR__ . '/default/footer.php');
+  ?>
 </body>
 <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 
