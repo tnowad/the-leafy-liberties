@@ -9,12 +9,12 @@ class View
 
   private string $name;
 
-  public function __construct($name)
+  public function __construct(string $name)
   {
     $this->name = $name;
   }
 
-  public static function render(View $view, array $params = [])
+  public static function render(View $view, array $params = []): string
   {
     $viewPath = self::getViewPath($view);
     if (!file_exists($viewPath)) {
@@ -27,15 +27,14 @@ class View
     return $content;
   }
 
-  public static function renderWithLayout(View $view, array $params = [], $layout = 'layouts/default')
+  public static function renderWithLayout(View $view, array $params = [], $layout = 'layouts/default'): string
   {
     $layoutContent = self::render(new View($layout), $params);
     $content = self::render($view, $params);
     return str_replace('{{content}}', $content, $layoutContent);
   }
 
-
-  private static function getViewPath(View $view)
+  private static function getViewPath(View $view): string
   {
     $viewRoot = __DIR__ . '/../app/views/';
     $viewPath = str_replace('/', DIRECTORY_SEPARATOR, $view->name);

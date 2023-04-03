@@ -29,6 +29,7 @@ class Application
     $this->session = new Session();
     $this->database = Database::getInstance();
     $this->controller = new Controller();
+    $this->view = new View('pages/index');
   }
 
   public static function getInstance()
@@ -76,7 +77,13 @@ class Application
 
   public function handleRequest()
   {
-    $this->router->resolve();
+    try {
+      $this->response->setBody($this->router->resolve());
+    } catch (Exception $e) {
+      $this->response->setStatusCode($e->getCode());
+      $this->response->setBody($e->getMessage());
+    }
+    $this->response->send();
   }
 
 }

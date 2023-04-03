@@ -2,12 +2,13 @@
 namespace Core;
 
 use Core\Application;
+use Core\View;
 
 class Controller
 {
   protected array $middlewares = [];
 
-  public function render($view, $params = [])
+  public function render(View $view, $params = [])
   {
     return Application::getInstance()->getView()->render($view, $params);
   }

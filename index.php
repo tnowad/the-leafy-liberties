@@ -24,10 +24,10 @@ if (file_exists('./autoload.php')) {
 
 use Core\Application;
 
-Application::getInstance();
+$app = Application::getInstance();
 
 $router = Application::getInstance()->getRouter();
 
 $router->get('/', [HomeController::class, 'index']);
 
-Application::getInstance()->handleRequest();
+$app->handleRequest();
