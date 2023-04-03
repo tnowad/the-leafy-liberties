@@ -19,8 +19,10 @@
     <div class="lg:grid lg:grid-cols-[256px_auto] sm:flex h-full">
       <?php include './dashboardMenu.php' ?>
       <div class="w-full">
-        <!-- <DashboardHeader handleTrigger={handleTrigger} /> -->
-        <div class="w-full min-h-screen xl:px-10 lg:px-0">{children}</div>
+        <?php include './dashboardHeader.php' ?>
+        <div class="w-full min-h-screen xl:px-10 lg:px-0">
+          <?php include './dashboard.php' ?>
+        </div>
       </div>
     </div>
   </div>
