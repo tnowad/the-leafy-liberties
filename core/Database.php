@@ -55,4 +55,9 @@ class Database
     $stmt->execute();
     return $stmt;
   }
+
+  public static function prepare($sql)
+  {
+    return self::$connection->prepare($sql);
+  }
 }
