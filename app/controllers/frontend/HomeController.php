@@ -4,13 +4,14 @@ namespace App\Controllers\Frontend;
 
 use Core\Controller;
 use Core\Database;
+use Core\Request;
 use Core\Response;
 use Core\View;
 use Exception;
 
 class HomeController extends Controller
 {
-  public function index($request, $response)
+  public function index(Request $request, Response $response)
   {
     // mysqli
     try {
@@ -31,16 +32,8 @@ class HomeController extends Controller
       // get users
       $users = Database::getInstance()->getConnection()->query('SELECT * FROM users')->fetch_all(MYSQLI_ASSOC);
     }
-
-    // echo '<pre>';
-    // print_r($users);
-    // echo '</pre>';
-    // return $this->renderWithLayout(new View('pages/index'), ['users' => $users]);
-    $response = new Response();
-    // echo json encode
-    $response->setBody(json_encode($users));
     $response->setStatusCode(200);
-    $response->send();
+    $response->setBody($this->renderWithLayout(new View('pages/index'), ['users' => $users]));
   }
 
 }

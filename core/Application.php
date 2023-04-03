@@ -78,7 +78,7 @@ class Application
   public function handleRequest()
   {
     try {
-      $this->response->setBody($this->router->resolve());
+      $this->router->resolve();
     } catch (Exception $e) {
       $params = [
         'message' => $e->getMessage(),
@@ -88,5 +88,4 @@ class Application
     }
     $this->response->send();
   }
-
 }
