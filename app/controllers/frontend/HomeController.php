@@ -9,6 +9,6 @@ class HomeController extends Controller
 {
   public function index($request, $response)
   {
-    return $this->render(new View('pages/index'));
+    return $this->renderWithLayout(new View('pages/index'));
   }
 }

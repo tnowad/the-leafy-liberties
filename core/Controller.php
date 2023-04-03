@@ -13,6 +13,11 @@ class Controller
     return Application::getInstance()->getView()->render($view, $params);
   }
 
+  public function renderWithLayout(View $view, $params = [], $layout = 'layouts/default')
+  {
+    return Application::getInstance()->getView()->renderWithLayout($view, $params, $layout);
+  }
+
   public function addMiddleware($middleware)
   {
     $this->middlewares[] = $middleware;
