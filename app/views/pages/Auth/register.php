@@ -1,5 +1,5 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=bookstore';
+$dsn = 'mysql:host=localhost;dbname=test';
 $username = 'root';
 $password = '';
 
@@ -11,29 +11,36 @@ try {
 }
 ?>
 <?php
-$dsn = 'mysql:host=localhost;dbname=test';
-$username = 'root';
-$password = '';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "test";
 
-try {
-  $conn = new PDO($dsn, $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $newUsername = $_POST["new_username"];
-    $newPassword = $_POST["new_password"];
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
 
-    // Check if the new username already exists
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = '$newUsername'");
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $newUsername = mysqli_real_escape_string($conn, $_POST["username"]);
+  $newPassword = mysqli_real_escape_string($conn, $_POST["password"]);
+  $confirmPassword = $_POST["confirm-password"];
 
-    if ($result) {
+  if ($newPassword !== $confirmPassword) {
+    echo "<p>Passwords do not match.</p>";
+  } else {
+    $sql = "SELECT * FROM register WHERE username='$newUsername'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
       echo "<p>Username already exists: $newUsername</p>";
     } else {
-      // Insert the new user if the username is not found
-      $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES ('$newUsername','$newPassword')");
-      $result = $stmt->execute();
+      $sql = "INSERT INTO register (username, password) VALUES ('$newUsername', '$newPassword')";
+      $result = mysqli_query($conn, $sql);
+
       if ($result) {
         echo "<p>Successfully registered new user: $newUsername</p>";
       } else {
@@ -41,12 +48,10 @@ try {
       }
     }
   }
-} catch (PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
 }
+
+mysqli_close($conn);
 ?>
-
-
 <section class="bg-white">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
@@ -54,10 +59,11 @@ try {
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
           Create and account
         </h1>
-        <form class="space-y-4 md:space-y-6" action="/views/pages/Auth/register.php" method="post">
+        <form class="space-y-4 md:space-y-6" action="/the-leafy-liberties/app/views/pages/Auth/register.php"
+          method="post">
           <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900">
-              Your email
+              Username
             </label>
             <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5" placeholder="Enter username" required="" />
           </div>

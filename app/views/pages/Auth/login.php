@@ -77,8 +77,7 @@ mysqli_close($conn);
             Don’t have an account yet?
 
             <button type="submit" name="submit" class="font-medium text-[#52938d] hover:underline">
-              Sign up
-
+              <a href="register.php">Sign up</a>
             </button>
           </p>
         </form>
