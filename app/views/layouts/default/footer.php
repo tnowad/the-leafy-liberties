@@ -5,7 +5,7 @@
       class="left-container border-0 border-solid border-gray-400 pr-3 sm:border-r-0 sm:border-b-[1px] lg:border-r-[1px] lg:border-b-0 mobile:p-0">
       <div class="sm:justify-center sm:items-center lg:flex lg:justify-start">
         <div class="flex items-center justify-center mr-3">
-          <img src="../../../resources/images/BigLogo.png" alt="FooterLogo" />
+          <img src="./resources/images/BigLogo.png" alt="FooterLogo" />
         </div>
         <div class="flex-col justify-center hidden lg:flex">
           <p class="text-3xl border-0 border-solid border-b-[1px] border-gray-400 pb-1">Leaf Liberty</p>
