@@ -2,8 +2,8 @@
 ?>
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
-    <a class="w-48" href="/">
-      <img src="./resources/images/Logo.png" alt="HeaderLogo" />
+    <a class="w-48" href="<?php echo BASE_URI ?>">
+      <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="HeaderLogo" />
     </a>
     <div class="hidden sm:block w-full max-w-[140px]">
       <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
@@ -16,7 +16,6 @@
         <div class="px-1 py-1 ">
           <!-- Get all category from database and show -->
           <?php
-          // $categories = Category::all();
           $categories = [
             [
               'id' => 1,
@@ -27,8 +26,11 @@
               'name' => 'Category 2'
             ]
           ];
+          // $categories = Category::all();
           foreach ($categories as $category): ?>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+            <a href="<?php
+
+            ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
               <?php echo $category['name'] ?>
             </a>
           <?php endforeach; ?>
