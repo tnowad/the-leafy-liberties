@@ -1,7 +1,7 @@
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
     <a class="w-48" href="/">
-      <img src="../../../resources/images/Logo.png" alt="HeaderLogo" />
+      <img src="./resources/images/Logo.png" alt="HeaderLogo" />
     </a>
     <div class="hidden sm:block w-full max-w-[140px]">
       <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
