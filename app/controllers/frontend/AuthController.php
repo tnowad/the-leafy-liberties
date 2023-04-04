@@ -71,10 +71,6 @@ class AuthController extends Controller
     $password = $_POST['password'];
 
     $user = new User();
-    // $user->name = $name;
-    // $user->email = $email;
-    // $user->password = password_hash($password, PASSWORD_DEFAULT);
-    // $user->save();
 
     $_SESSION['user'] = $user;
 

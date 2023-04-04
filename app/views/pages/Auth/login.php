@@ -1,17 +1,4 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=test';
-$username = 'root';
-$password = '';
-
-try {
-  $conn = new PDO($dsn, $username, $password);
-  echo 'success';
-} catch (PDOException $e) {
-  echo 'Connection failed: ' . $e->getMessage();
-}
-?>
-
-<?php
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -31,14 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $result = mysqli_query($conn, $sql);
 
   if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      echo "id: " . $row["id"] . " - Name: " . $row["username"] . "<br>";
-    }
-    session_start();
+    // while ($row = $result->fetch_assoc()) {
+    $row = mysqli_fetch_assoc($result);
+    echo "id: " . $row["id"] . " - Name: " . $row["username"] . "<br>";
+    // }
     $_SESSION["username"] = $username;
-    echo "<p>Success</p>";
+    echo "<script>alert('Đăng nhập thành công.');</script>";
   } else {
-    echo "Invalid username or password";
+    echo "<script>alert('Đăng nhập thất bại.');</script>";
   }
 }
 

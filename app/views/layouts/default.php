@@ -8,7 +8,7 @@
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./resources/css/all.css">
-  <script src="../../../resources/js/tailwindcss.js"></script>
+  <script src="resources/js/tailwindcss.js"></script>
 
   <script src="./resources/js/flowbite.js"></script>
 </head>
@@ -17,8 +17,6 @@
   <?php
   require_once($header ?? __DIR__ . '/default/header.php');
   ?>
-
-  <!-- {{content}} -->
 
   <?php
   include './app/views/pages/Auth/login.php';
