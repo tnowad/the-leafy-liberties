@@ -17,5 +17,7 @@ class HomeController extends Controller
     echo '<pre>';
     var_dump(new User());
     echo '</pre>';
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/index'), [], 'layouts/default'));
   }
 }
