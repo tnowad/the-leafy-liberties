@@ -31,10 +31,10 @@ class Response
     $this->body = json_encode($data);
   }
 
-  public function redirect($url)
+  public function redirect($url, $statusCode = 302)
   {
     $this->headers['Location'] = $url;
-    $this->statusCode = 302;
+    $this->statusCode = $statusCode;
   }
 
   public function getStatusCode()
