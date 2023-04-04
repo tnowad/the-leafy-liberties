@@ -25,6 +25,18 @@ class Response
     echo $this->body;
   }
 
+  public function json($data)
+  {
+    $this->headers['Content-Type'] = 'application/json';
+    $this->body = json_encode($data);
+  }
+
+  public function redirect($url)
+  {
+    $this->headers['Location'] = $url;
+    $this->statusCode = 302;
+  }
+
   public function getStatusCode()
   {
     return $this->statusCode;

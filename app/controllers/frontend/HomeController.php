@@ -14,8 +14,16 @@ class HomeController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $user = new User();
+    $user->name = 'John Doe';
+    $user->email = 'john@example.com';
+    $user->password = password_hash('password', PASSWORD_DEFAULT);
+    $user->save();
+
+    $users = User::all();
+
     echo '<pre>';
-    var_dump(new User());
+    print_r($users);
     echo '</pre>';
   }
 }
