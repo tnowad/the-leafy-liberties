@@ -18,7 +18,12 @@
   require_once($header ?? __DIR__ . '/default/header.php');
   ?>
 
-  {{content}}
+  <!-- {{content}} -->
+
+  <?php
+  include './app/views/pages/Auth/login.php';
+  ?>
+
 
   <?php
   require_once($footer ?? __DIR__ . '/default/footer.php');

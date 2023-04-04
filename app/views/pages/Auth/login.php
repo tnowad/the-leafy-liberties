@@ -53,7 +53,7 @@ mysqli_close($conn);
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
           Sign in to your account
         </h1>
-        <form class="space-y-4 md:space-y-6" action="/Do%20an%20web/the-leafy-liberties/app/views/pages/Auth/login.php" method="post">
+        <form class="space-y-4 md:space-y-6" action="login.php" method="post">
           <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900">
               Your username

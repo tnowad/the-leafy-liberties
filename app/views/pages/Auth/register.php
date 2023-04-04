@@ -59,58 +59,46 @@ try {
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900">
               Your email
             </label>
-            <input type="text" name="username" id="username"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
-              placeholder="Enter username" required="" />
+            <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5" placeholder="Enter username" required="" />
           </div>
           <div class='relative'>
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
               Password
             </label>
-            <input type="password" name="password" id="password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
-              required="" />
-            <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer"
-              aria-hidden="true"></i>
-            <i id="show-icon-password" class="fa fa-eye absolute hidden top-[60%] right-4 cursor-pointer"
-              aria-hidden="true"></i>
+            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5" required="" />
+            <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <i id="show-icon-password" class="fa fa-eye absolute hidden top-[60%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
           <div class="relative">
             <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900">
               Confirm password
             </label>
-            <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
-              required />
-            <i id="hide-icon-confirm-password" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer"
-              aria-hidden="true"></i>
-            <i id="show-icon-confirm-password" class="fa fa-eye absolute hidden top-[60%] right-4 cursor-pointer"
-              aria-hidden="true"></i>
+            <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5" required />
+            <i id="hide-icon-confirm-password" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <i id="show-icon-confirm-password" class="fa fa-eye absolute hidden top-[60%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="terms" aria-describedby="terms" type="checkbox"
-                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#add1ce]" required />
+              <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#add1ce]" required />
             </div>
             <div class="ml-3 text-sm">
               <label for="terms" class="font-light text-gray-500 dark:text-gray-300">
                 I accept the
                 <a class="font-medium text-[#52938d] hover:underline" href="#">
-                Terms and Conditions
+                  Terms and Conditions
                 </a>
               </label>
 
             </div>
 
           </div>
-          <button type="submit"
-            class="w-full text-white bg-[#52938d] hover:bg-[#40736d] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          <button type="submit" class="w-full text-white bg-[#52938d] hover:bg-[#40736d] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             Create an account
           </button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
             Already have an account?
             <a href="/login" class="font-medium text-[#52938d] hover:underline">
-            Login here
+              Login here
             </a>
           </p>
         </form>
@@ -123,14 +111,14 @@ try {
   const hideIconPassword = document.getElementById("hide-icon-password");
   const showIconPassword = document.getElementById("show-icon-password");
 
-  hideIconPassword.addEventListener("click", function () {
+  hideIconPassword.addEventListener("click", function() {
     if (password.type === "password") {
       password.type = "text";
       hideIconPassword.style.display = "none";
       showIconPassword.style.display = "block";
     }
   });
-  showIconPassword.addEventListener("click", function () {
+  showIconPassword.addEventListener("click", function() {
     if (password.type === "text") {
       password.type = "password";
       hideIconPassword.style.display = "block";
@@ -142,14 +130,14 @@ try {
   const hideIconConfirmPassword = document.getElementById("hide-icon-confirm-password");
   const showIconConfirmPassword = document.getElementById("show-icon-confirm-password");
 
-  hideIconConfirmPassword.addEventListener("click", function () {
+  hideIconConfirmPassword.addEventListener("click", function() {
     if (confirmPassword.type === "password") {
       confirmPassword.type = "text";
       hideIconConfirmPassword.style.display = "none";
       showIconConfirmPassword.style.display = "block";
     }
   });
-  showIconConfirmPassword.addEventListener("click", function () {
+  showIconConfirmPassword.addEventListener("click", function() {
     if (confirmPassword.type === "text") {
       confirmPassword.type = "password";
       hideIconConfirmPassword.style.display = "block";
