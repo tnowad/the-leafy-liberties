@@ -60,4 +60,25 @@ class Database
   {
     return self::$connection->prepare($sql);
   }
+
+  public static function fetchOne($sql, $params = [])
+  {
+    $stmt = self::execute($sql, $params);
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+  }
+
+  public static function fetchAll($sql, $params = [])
+  {
+    $stmt = self::execute($sql, $params);
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public static function getLastInsertId($table, $primaryKey)
+  {
+    $sql = "SELECT $primaryKey FROM $table ORDER BY $primaryKey DESC LIMIT 1";
+    $result = self::fetchOne($sql);
+    return $result[$primaryKey];
+  }
 }
