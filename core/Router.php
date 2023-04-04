@@ -36,6 +36,7 @@ class Router
   {
     $method = $this->request->getMethod();
     $path = $this->request->getUrl();
+
     $callback = $this->routes[$method][$path] ?? false;
 
     if ($callback === false) {
