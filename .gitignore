@@ -1,3 +1,4 @@
 # gitingore
 .env
 node_modules
+/core/database.php

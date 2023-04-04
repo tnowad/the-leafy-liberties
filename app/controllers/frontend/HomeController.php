@@ -18,5 +18,4 @@ class HomeController extends Controller
     var_dump(new User());
     echo '</pre>';
   }
-
 }

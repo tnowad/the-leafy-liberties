@@ -29,7 +29,9 @@ class DotEnv
 
   public static function load()
   {
-    $env = file_get_contents(__DIR__ . '/../.env');
+    // $env = file_get_contents(__DIR__ . '/../.env');
+    $env = __DIR__ . '/../.env';
+
     $env = explode("\n", $env);
     foreach ($env as $line) {
       $line = trim($line);
@@ -55,5 +57,4 @@ class DotEnv
     }
     file_put_contents(__DIR__ . '/../.env', $env);
   }
-
 }
