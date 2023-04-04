@@ -85,7 +85,7 @@ mysqli_close($conn);
           </div>
           <div class="flex items-start">
             <div class="flex items-center h-5">
-              <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#add1ce]" required />
+              <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#add1ce] accent-[#52938d]" required />
             </div>
             <div class="ml-3 text-sm">
               <label for="terms" class="font-light text-gray-500 dark:text-gray-300">
@@ -98,12 +98,12 @@ mysqli_close($conn);
             </div>
 
           </div>
-          <button type="submit" class="w-full text-white bg-[#52938d] hover:bg-[#40736d] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          <button type="submit" class="w-full text-white bg-[#52938d] hover:bg-[#40736d] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
             Create an account
           </button>
-          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+          <p class="text-sm font-light text-gray-500">
             Already have an account?
-            <a href="/login" class="font-medium text-[#52938d] hover:underline">
+            <a href="./app/views/pages/Auth/login.php" class="font-medium text-[#52938d] hover:underline">
               Login here
             </a>
           </p>

@@ -99,7 +99,7 @@
       </div>
       <div class="my-5">
         <ul class="pagination flex justify-center items-center gap-5 text-center">
-          <li class="pagination-items p-2 bg-gray-100 rounded-full text-green-bg-green-800-600 font-semibold
+          <li class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold
                         hover:text-white hover:bg-[#2e524e] transition-all">
             <button>Previous</button>
           </li>
