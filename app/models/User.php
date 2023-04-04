@@ -7,7 +7,7 @@ use Core\Model;
 class User extends Model
 {
   protected $table = 'users';
-  protected string $primaryKey = 'id';
-  protected $fillable = ['name', 'email', 'password'];
+
+  protected $fillable = ['email', 'password', 'name'];
 
 }

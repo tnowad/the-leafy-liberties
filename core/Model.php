@@ -40,6 +40,18 @@ abstract class Model
     return new static($result);
   }
 
+  public static function where($field, $value)
+  {
+    $table = static::table();
+    $query = "SELECT * FROM $table WHERE $field = :value";
+    $params = [':value' => $value];
+    $results = Database::getInstance()->fetchAll($query, $params);
+
+    return array_map(function ($result) {
+      return new static($result);
+    }, $results);
+  }
+
   public static function all()
   {
     $table = static::table();
