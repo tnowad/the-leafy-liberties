@@ -2,6 +2,8 @@
     "cSpell.words": [
         "autoload",
         "autoloader",
+        "errfile",
+        "errline",
         "ERRMODE",
         "flowbite"
     ]
