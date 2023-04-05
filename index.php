@@ -1,7 +1,7 @@
 <?php
 use App\Models\User;
 use Core\Application;
-use App\Controllers\Frontend\HomeController;
+
 use Core\Database;
 use Utils\DotEnv;
 
@@ -16,7 +16,6 @@ if (ENVIRONMENT == 'development') {
     echo '<pre>';
     print_r($data);
     echo '</pre>';
-    die();
   }
 }
 
@@ -28,6 +27,7 @@ if (file_exists('./autoload.php')) {
 }
 
 define('BASE_URI', DotEnv::get('BASE_URI'));
+
 try {
   Database::getInstance()->getConnection();
 } catch (\Exception $e) {
@@ -36,12 +36,8 @@ try {
 
 $app = Application::getInstance();
 
-$router = Application::getInstance()->getRouter();
-
-$router->get('/', [HomeController::class, 'index']);
+foreach (glob('./routes/*.php') as $file) {
+  require_once $file;
+}
 
 $app->handleRequest();
-
-echo "<pre>";
-print_r(User::all());
-echo "</pre>";
