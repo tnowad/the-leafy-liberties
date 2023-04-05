@@ -6,7 +6,6 @@ use Exception;
 
 class View
 {
-
   private string $name;
 
   public function __construct(string $name)

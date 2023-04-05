@@ -1,5 +1,6 @@
 <?php
 use App\Controllers\Frontend\HomeController;
+use Utils\DotEnv;
 
 define('ENVIRONMENT', 'development');
 if (ENVIRONMENT == 'development') {
@@ -24,6 +25,8 @@ if (file_exists('./autoload.php')) {
 }
 
 use Core\Application;
+
+define('BASE_URI', DotEnv::get('BASE_URI'));
 
 $app = Application::getInstance();
 
