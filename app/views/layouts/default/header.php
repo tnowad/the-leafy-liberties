@@ -53,7 +53,7 @@
         <i class="fa-regular fa-user"></i>
       </button>
       <div
-        class="absolute right-0 w-48 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none mt-11 ">
+        class="absolute w-48 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none mt-11 ">
         <div class="px-1 py-1 ">
           <?php if (isset($_SESSION['user'])): ?>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Your
