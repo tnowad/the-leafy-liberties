@@ -1,38 +1,3 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "test";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $username = mysqli_real_escape_string($conn, $_POST["username"]);
-  $password = mysqli_real_escape_string($conn, $_POST["password"]);
-
-  $sql = "SELECT * FROM users WHERE username = '$username' and password = '$password'";
-  $result = mysqli_query($conn, $sql);
-
-  if ($result->num_rows > 0) {
-    // while ($row = $result->fetch_assoc()) {
-    $row = mysqli_fetch_assoc($result);
-    echo "id: " . $row["id"] . " - Name: " . $row["username"] . "<br>";
-    // }
-    $_SESSION["username"] = $username;
-    echo "<script>alert('Đăng nhập thành công.');</script>";
-  } else {
-    echo "<script>alert('Đăng nhập thất bại.');</script>";
-  }
-}
-
-mysqli_close($conn);
-?>
-
-
 <section class="bg-white">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
     <div class="w-full bg-white rounded-lg shadow-[0_0_10px_3px_rgba(0,0,0,0.1)] md:mt-0 sm:max-w-md xl:p-0">

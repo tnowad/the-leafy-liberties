@@ -1,4 +1,6 @@
 <?php
+namespace App\Controllers\Frontend;
+
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
@@ -23,9 +25,14 @@ class AuthController extends Controller
       }
     }
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('auth/login'), [
-      'title' => 'Login'
-    ]));
+    $response->setBody(
+      View::renderWithLayout(
+        new View('pages/auth/login'),
+        [
+          'title' => 'Login'
+        ]
+      )
+    );
   }
 
   public function register(Request $request, Response $response)
