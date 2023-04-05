@@ -1,14 +1,10 @@
 <?php
-
 use Core\Application;
-use App\Controllers\Frontend\AuthController;
-use Core\Router;
-use Core\Request;
-use Core\Response;
 
-$request = new Request();
-$response = new Response($request);
-$router = new Router($request, $response);
+use App\Controllers\Frontend\HomeController;
 
-$router->get('/login', [AuthController::class, 'login']);
-$router->post('/login', [AuthController::class, 'postLogin']);
+$router = Application::getInstance()->getRouter();
+
+$router->get('/', [HomeController::class, 'index']);
+
+$router->get('/about', [HomeController::class, 'about']);

@@ -1,5 +1,8 @@
 <?php
-use App\Controllers\Frontend\HomeController;
+use App\Models\User;
+use Core\Application;
+
+use Core\Database;
 use Utils\DotEnv;
 
 define('ENVIRONMENT', 'development');
@@ -13,7 +16,6 @@ if (ENVIRONMENT == 'development') {
     echo '<pre>';
     print_r($data);
     echo '</pre>';
-    die();
   }
 }
 
@@ -24,14 +26,18 @@ if (file_exists('./autoload.php')) {
   require_once './autoload.php';
 }
 
-use Core\Application;
-
 define('BASE_URI', DotEnv::get('BASE_URI'));
+
+try {
+  Database::getInstance()->getConnection();
+} catch (\Exception $e) {
+  die("Database connection failed");
+}
 
 $app = Application::getInstance();
 
-$router = Application::getInstance()->getRouter();
-
-$router->get('/', [HomeController::class, 'index']);
+foreach (glob('./routes/*.php') as $file) {
+  require_once $file;
+}
 
 $app->handleRequest();

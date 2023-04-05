@@ -108,4 +108,12 @@ class HomeController extends Controller
 
     $response->setBody(View::renderWithLayout(new View('pages/index'), compact('authors', 'slides', 'tagName')));
   }
+
+  public function about(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/about'), [
+      'title' => 'About'
+    ]));
+  }
 }

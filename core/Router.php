@@ -34,15 +34,15 @@ class Router
 
   public function resolve()
   {
+
     $method = $this->request->getMethod();
     $path = $this->request->getUrl();
-
     $callback = $this->routes[$method][$path] ?? false;
-
     if ($callback === false) {
       $this->response->setStatusCode(404);
       throw new Exception('Not found');
     }
+
     if (is_array($callback)) {
       $controller = new $callback[0]();
       $callback[0] = $controller;

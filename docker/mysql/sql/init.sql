@@ -1,81 +1,53 @@
--- Create database bookstore
 CREATE DATABASE bookstore;
+
+ALTER DATABASE bookstore CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 USE bookstore;
 
--- Create table users
 CREATE TABLE
-  users (
-    id INT NOT NULL AUTO_INCREMENT,
-    email VARCHAR(50) NOT NULL,
-    name NVARCHAR (50) NOT NULL,
-    phone VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
-    user_image VARCHAR(255) NULL,
-    role_id INT NOT NULL DEFAULT 0,
-    status TINYINT NOT NULL DEFAULT 1,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    -- foreign key
-    CONSTRAINT fk_users_role_id FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    UNIQUE INDEX email_UNIQUE (email ASC) VISIBLE,
-    UNIQUE INDEX phone_UNIQUE (phone ASC) VISIBLE
-  );
+    roles (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        name VARCHAR(50) NOT NULL
+    );
 
 CREATE TABLE
-  roles (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    UNIQUE INDEX name_UNIQUE (name ASC) VISIBLE
-  );
+    users (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        email VARCHAR(50) NOT NULL,
+        name NVARCHAR (50) NOT NULL,
+        phone VARCHAR(50) NULL,
+        password VARCHAR(255) NOT NULL,
+        user_image VARCHAR(255),
+        role_id INT NOT NULL DEFAULT 0,
+        status TINYINT NOT NULL DEFAULT 1,
+        created_at TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        updated_at TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        deleted_at TIMESTAMP NULL,
+        -- index with email
+        UNIQUE INDEX email_UNIQUE (email ASC),
+        Foreign Key (role_id) REFERENCES roles (id)
+    );
 
 CREATE TABLE
-  permissions (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    UNIQUE INDEX name_UNIQUE (name ASC) VISIBLE
-  );
+    permissions (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        name VARCHAR(50) NOT NULL
+    );
 
 CREATE TABLE
-  role_permissions (
-    id INT NOT NULL AUTO_INCREMENT,
-    role_id INT NOT NULL,
-    permission_id INT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    -- foreign key
-    CONSTRAINT fk_role_permissions_role_id FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT fk_role_permissions_permission_id FOREIGN KEY (permission_id) REFERENCES permission (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-  );
+    users_permissions (
+        permissions_id INT,
+        users_id INT,
+        PRIMARY KEY (permissions_id, users_id),
+        FOREIGN KEY (permissions_id) REFERENCES permissions (id),
+        FOREIGN KEY (users_id) REFERENCES users (id)
+    );
 
 CREATE TABLE
-  user_permissions (
-    id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    permission_id INT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    -- foreign key
-    CONSTRAINT fk_user_permissions_user_id FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT fk_user_permissions_permission_id FOREIGN KEY (permission_id) REFERENCES permission (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-  );
-
-CREATE TABLE
-  settings (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    value VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    UNIQUE INDEX name_UNIQUE (name ASC) VISIBLE
-  );
+    roles_permissions (
+        roles_id INT,
+        permissions_id INT,
+        PRIMARY KEY (roles_id, permissions_id),
+        FOREIGN KEY (roles_id) REFERENCES roles (id),
+        FOREIGN KEY (permissions_id) REFERENCES permissions (id)
+    );
