@@ -131,6 +131,21 @@ abstract class Model
     return true;
   }
 
+  public function join($table, $on, $fields = '*', $type = 'INNER')
+  {
+    $table = static::table();
+    $primaryKey = $this->primaryKey;
+    $query = "SELECT $fields FROM $table $type JOIN $table ON $on WHERE $primaryKey = :$primaryKey";
+    $params = [':' . $primaryKey => $this->attributes[$primaryKey]];
+    $result = Database::getInstance()->fetchOne($query, $params);
+
+    if (!$result) {
+      throw new Exception("Failed to join record from $table");
+    }
+
+    return new static($result);
+  }
+
   public function __get($name)
   {
     if (array_key_exists($name, $this->attributes)) {
