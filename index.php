@@ -1,5 +1,8 @@
 <?php
+use App\Models\User;
+use Core\Application;
 use App\Controllers\Frontend\HomeController;
+use Core\Database;
 use Utils\DotEnv;
 
 define('ENVIRONMENT', 'development');
@@ -24,9 +27,12 @@ if (file_exists('./autoload.php')) {
   require_once './autoload.php';
 }
 
-use Core\Application;
-
 define('BASE_URI', DotEnv::get('BASE_URI'));
+try {
+  Database::getInstance()->getConnection();
+} catch (\Exception $e) {
+  die("Database connection failed");
+}
 
 $app = Application::getInstance();
 
@@ -35,3 +41,7 @@ $router = Application::getInstance()->getRouter();
 $router->get('/', [HomeController::class, 'index']);
 
 $app->handleRequest();
+
+echo "<pre>";
+print_r(User::all());
+echo "</pre>";
