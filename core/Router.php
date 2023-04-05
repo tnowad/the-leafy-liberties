@@ -27,6 +27,31 @@ class Router
     $this->routes['POST'][$path] = $callback;
   }
 
+  public function put($path, $callback)
+  {
+    $this->routes['PUT'][$path] = $callback;
+  }
+
+  public function delete($path, $callback)
+  {
+    $this->routes['DELETE'][$path] = $callback;
+  }
+
+  public function patch($path, $callback)
+  {
+    $this->routes['PATCH'][$path] = $callback;
+  }
+
+  public function options($path, $callback)
+  {
+    $this->routes['OPTIONS'][$path] = $callback;
+  }
+
+  public function head($path, $callback)
+  {
+    $this->routes['HEAD'][$path] = $callback;
+  }
+
   public function getRoutes($method)
   {
     return $this->routes[$method] ?? [];

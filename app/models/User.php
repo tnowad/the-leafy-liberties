@@ -10,4 +10,9 @@ class User extends Model
 
   protected $fillable = ['email', 'password', 'name'];
 
+  // user many to many with permissions
+  public function hasPermission($permission)
+  {
+
+  }
 }

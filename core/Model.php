@@ -44,7 +44,7 @@ abstract class Model
   {
     $table = static::table();
     $query = "SELECT * FROM $table WHERE $field = :value";
-    $params = [':value' => $value];
+    $params = ['value' => $value];
     $results = Database::getInstance()->fetchAll($query, $params);
 
     return array_map(function ($result) {
@@ -129,13 +129,6 @@ abstract class Model
     }
 
     return true;
-  }
-
-  public function __get($name)
-  {
-    if (array_key_exists($name, $this->attributes)) {
-      return $this->attributes[$name];
-    }
   }
 
   public function __set($name, $value)
