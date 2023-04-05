@@ -14,7 +14,7 @@
 
 <body>
   <div class="w-full bg-neutral-100">
-    <div class="lg:grid lg:grid-cols-[256px_auto] sm:flex h-full">
+    <div class="grid md:grid-cols-[256px_auto] sm:grid-cols-[64px_auto] h-full">
       <?php include './dashboardMenu.php' ?>
       <div class="w-full">
         <?php include './dashboardHeader.php' ?>
