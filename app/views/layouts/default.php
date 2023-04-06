@@ -13,6 +13,8 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="<?php echo BASE_URI . '/resources/images/logo.png' ?>" type="image/png">
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/all.css' ?>">
+  <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/reset.css' ?>">
+
   <script src="<?php echo BASE_URI . '/resources/js/tailwindcss.js' ?>"></script>
   <script src="<?php echo BASE_URI . '/resources/js/flowbite.js' ?>"></script>
 

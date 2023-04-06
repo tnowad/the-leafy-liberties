@@ -62,7 +62,7 @@
           </button>
           <p class="text-sm font-light text-gray-500">
             Already have an account?
-            <a href="./app/views/pages/Auth/login.php" class="font-medium text-[#52938d] hover:underline">
+            <a href="login" class="font-medium text-[#52938d] hover:underline">
               Login here
             </a>
           </p>

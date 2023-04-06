@@ -41,13 +41,15 @@
             <span>1</span>
             <button>+</button>
           </div>
-          <ButtonPill class="order-last w-3/4">
-            <FontAwesomeIcon class="mr-1" icon={faShoppingCart} />
+          <button class="order-last w-3/4">
+            <i class="fa-brands fa-opencart"></i>
+
             Add to cart
-          </ButtonPill>
+          </button>
           <div
             class="p-2 w-2/4 sm:w-3/12 flex justify-around border border-solid border-gray-400 rounded-3xl box-border">
-            <FontAwesomeIcon class="pt-1" icon={faHeart} />
+            <i class="fa-regular fa-heart"></i>
+
             <a href="/wishlist" src="" alt="" class="pt-1 text-xs">
               Add to wishlist
             </a>
@@ -62,9 +64,9 @@
         Books, Fiction, Romance - Contemporary
       </p>
       <div class="mt-10 w-1/5 flex justify-around">
-        <FontAwesomeIcon icon={faFacebook} />
-        <FontAwesomeIcon icon={faTwitter} />
-        <FontAwesomeIcon icon={faInstagram} />
+        <i class="text-4xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-blue-500"></i>
+        <i class="text-4xl transition-all cursor-pointer fa-brands fa-twitter hover:text-blue-600"></i>
+        <i class="text-4xl transition-all cursor-pointer fa-brands fa-instagram hover:text-pink-500"></i>
       </div>
     </div>
   </div>
@@ -104,8 +106,6 @@
         voluptatem molestiae sit vel. Libero qui rerum cum quo nesciunt et
         dolorem.
       </p>
-
-
     </div>
   </div>
 </div>
