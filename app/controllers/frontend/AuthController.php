@@ -44,7 +44,6 @@ class AuthController extends Controller
       $user->email = $email;
       $user->password = password_hash($password, PASSWORD_DEFAULT);
       $user->save();
-      // check if user is saved
       if ($user->id) {
         Application::getInstance()->session->set('user', $user);
       } else {
@@ -53,7 +52,7 @@ class AuthController extends Controller
       }
     }
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('auth/register'), [
+    $response->setBody(View::renderWithLayout(new View('pages/register'), [
       'title' => 'Register'
     ]));
   }
@@ -62,9 +61,10 @@ class AuthController extends Controller
   {
     Application::getInstance()->session->destroy();
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('auth/logout'), [
-      'title' => 'Logout'
-    ]));
+    // Write header to redirect to home pages
+    $response->setHeaders([
+      'Location' => '/'
+    ]);
   }
 
 }

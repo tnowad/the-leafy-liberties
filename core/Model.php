@@ -137,4 +137,11 @@ abstract class Model
       $this->attributes[$name] = $value;
     }
   }
+
+  public function __get($name)
+  {
+    if (array_key_exists($name, $this->attributes)) {
+      return $this->attributes[$name];
+    }
+  }
 }
