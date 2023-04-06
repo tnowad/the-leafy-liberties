@@ -76,3 +76,10 @@ FROM
   ) = permissions.id
   LEFT JOIN users_permissions user_permissions ON users.id = user_permissions.users_id
   AND user_permissions.permissions_id = role_permissions.permissions_id;
+
+
+CREATE TABLE author (
+  author_id INT NOT NULL AUTO_INCREMENT,
+  author_name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (author_id)
+);
