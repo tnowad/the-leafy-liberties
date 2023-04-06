@@ -131,6 +131,29 @@ abstract class Model
     return true;
   }
 
+  public static function findOne($params = [])
+  {
+    $table = static::table();
+    $query = "SELECT * FROM $table WHERE ";
+    $conditions = [];
+    $values = [];
+
+    foreach ($params as $field => $value) {
+      $conditions[] = "$field = :$field";
+      $values[":$field"] = $value;
+    }
+
+    $query .= implode(' AND ', $conditions);
+
+    $result = Database::getInstance()->fetchOne($query, $values);
+
+    if (!$result) {
+      return false;
+    }
+
+    return new static($result);
+  }
+
   public function __set($name, $value)
   {
     if (in_array($name, $this->fillable)) {

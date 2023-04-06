@@ -13,26 +13,29 @@ class AuthController extends Controller
 
   public function login(Request $request, Response $response)
   {
-    if ($request->getMethod() === 'POST') {
-      $email = $request->getParam('email');
-      $password = $request->getParam('password');
-      $user = User::where('email', $email)[0];
-      if ($user && password_verify($password, $user->password)) {
-        Application::getInstance()->session->set('user', $user);
-      } else {
-        $response->setStatusCode(401);
-        $response->setBody('Invalid credentials');
-      }
+    if ($request->getMethod() === 'GET') {
+      $response->setStatusCode(200);
+      $response->setBody(View::renderWithLayout(new View('pages/login'), [
+        'title' => 'Login'
+      ]));
+      die();
     }
+    $email = $request->getParam('email');
+    $password = $request->getParam('password');
+    $user = User::findOne(['email' => $email]);
+    if (!$user) {
+      $response->setStatusCode(401);
+      $response->setBody('Invalid credentials');
+      die();
+    }
+    if (!password_verify($password, $user->password)) {
+      $response->setStatusCode(401);
+      $response->setBody('Invalid credentials');
+      die();
+    }
+    Application::getInstance()->session->set('user', $user);
     $response->setStatusCode(200);
-    $response->setBody(
-      View::renderWithLayout(
-        new View('pages/auth/login'),
-        [
-          'title' => 'Login'
-        ]
-      )
-    );
+    $response->setBody('Logged in successfully');
   }
 
   public function register(Request $request, Response $response)
