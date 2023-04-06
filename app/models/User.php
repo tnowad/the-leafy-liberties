@@ -32,7 +32,7 @@ class User extends Model
     return new Role($row);
   }
 
-  public function getPermission()
+  public function getPermissions()
   {
     $query = "SELECT * FROM users_permissions WHERE user_id = {$this->primaryKey}";
     $stmt = Database::getInstance()->prepare($query);
@@ -52,18 +52,22 @@ class User extends Model
 
   public function hasPermission($permission)
   {
-    // get permissions from role
     $role = $this->getRole();
     $rolePermissions = $role->getPermissions();
-    // get permissions from user
-    $userPermissions = $this->getPermission();
-    // user permissions override role permissions
-    $permissions = array_merge($rolePermissions, $userPermissions);
-    foreach ($permissions as $p) {
-      if ($p->name === $permission) {
-        return true;
+    $userPermissions = $this->getPermissions();
+
+    foreach ($userPermissions as $userPermission) {
+      if ($userPermission->name === $permission) {
+        return $userPermission->status;
       }
     }
+
+    foreach ($rolePermissions as $rolePermission) {
+      if ($rolePermission->name === $permission) {
+        return $rolePermission->status;
+      }
+    }
+
     return false;
   }
 }
