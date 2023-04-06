@@ -15,7 +15,7 @@ class AuthController extends Controller
   {
     if ($request->getMethod() === 'GET') {
       $response->setStatusCode(200);
-      $response->setBody(View::renderWithLayout(new View('pages/login'), [
+      $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
         'title' => 'Login'
       ]));
       die();
@@ -55,7 +55,7 @@ class AuthController extends Controller
       }
     }
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/register'), [
+    $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
       'title' => 'Register'
     ]));
   }

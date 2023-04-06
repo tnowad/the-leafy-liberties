@@ -12,3 +12,4 @@ $router->get('/about', [HomeController::class, 'about']);
 
 $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);
+$router->get('/register', [AuthController::class, 'register']);
