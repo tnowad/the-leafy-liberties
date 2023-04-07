@@ -11,11 +11,14 @@ if (ENVIRONMENT == 'development') {
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 
-  function dd($data)
+  function dd()
   {
-    echo '<pre>';
-    print_r($data);
-    echo '</pre>';
+    $args = func_get_args();
+    foreach ($args as $arg) {
+      echo '<pre>';
+      var_dump($arg);
+      echo '</pre>';
+    }
   }
 }
 

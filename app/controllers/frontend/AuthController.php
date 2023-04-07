@@ -19,9 +19,10 @@ class AuthController extends Controller
         'title' => 'Login'
       ]));
     } else {
-      $email = $request->getParam('email');
-      $password = $request->getParam('password');
+      $email = $request->getQuery('email');
+      $password = $request->getQuery('password');
       $user = User::findOne(['email' => $email]);
+      dd($user);
       if (!$user) {
         $response->setStatusCode(401);
         $response->setBody('Invalid credentials');
@@ -43,8 +44,10 @@ class AuthController extends Controller
       $email = $request->getParam('email');
       $password = $request->getParam('password');
       $user = new User();
-      $user->email = $email;
-      $user->password = password_hash($password, PASSWORD_DEFAULT);
+      $user->email = "tnowad@gmail.com";
+      $user->name = "Nguyen Minh Tuan";
+      $user->phone = "0123456789";
+      $user->password = password_hash("123456789", PASSWORD_DEFAULT);
       $user->save();
       if ($user->id) {
         Application::getInstance()->session->set('user', $user);

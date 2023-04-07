@@ -5,8 +5,7 @@
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
           Create and account
         </h1>
-        <form class="space-y-4 md:space-y-6" action="/the-leafy-liberties/app/views/pages/Auth/register.php"
-          method="post">
+        <form class="space-y-4 md:space-y-6" action="<?php echo BASE_URI . "/register" ?>" method="post">
           <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900">
               Username
