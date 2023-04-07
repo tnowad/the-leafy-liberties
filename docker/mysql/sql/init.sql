@@ -1,138 +1,107 @@
-CREATE DATABASE bookstore CHARACTER
-SET
-  utf8mb4 COLLATE utf8mb4_unicode_ci;
+DROP DATABASE bookstore;
+
+CREATE DATABASE IF NOT EXISTS bookstore;
 
 USE bookstore;
 
 CREATE TABLE
-  `roles` (
-    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL
+  authors (
+    id int PRIMARY KEY NOT NULL,
+    name varchar(100) NOT NULL,
+    description varchar(500) NOT NULL
   );
 
 CREATE TABLE
-  users (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    email VARCHAR(50) NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    phone VARCHAR(50) NULL,
-    password VARCHAR(255) NOT NULL,
-    user_image VARCHAR(255),
-    role_id INT NOT NULL DEFAULT 0,
-    status TINYINT NOT NULL DEFAULT 1,
-    created_at TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-    updated_at TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-    -- index with email
-    UNIQUE INDEX email_UNIQUE (email ASC),
-    Foreign Key (role_id) REFERENCES roles (id)
+  carts (
+    id int PRIMARY KEY NOT NULL,
+    user_id int NOT NULL,
+    book_id int NOT NULL,
+    quantity int DEFAULT NULL,
+    status TINYINT NOT NULL DEFAULT "1"
+  );
+
+CREATE TABLE
+  categories (
+    id int PRIMARY KEY NOT NULL,
+    name varchar(100) NOT NULL
+  );
+
+CREATE TABLE
+  coupon (
+    id int PRIMARY KEY NOT NULL,
+    name varchar(50) NOT NULL,
+    active date NOT NULL,
+    expired date NOT NULL,
+    quantity int NOT NULL,
+    description varchar(500) NOT NULL
+  );
+
+CREATE TABLE
+  orders (
+    id int PRIMARY KEY NOT NULL,
+    cart_id int NOT NULL,
+    customer_id int NOT NULL,
+    total int NOT NULL,
+    paid int NOT NULL,
+    created_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    updated_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    status TINYINT NOT NULL DEFAULT "1"
   );
 
 CREATE TABLE
   permissions (
-    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL
+    id int PRIMARY KEY NOT NULL,
+    name varchar(50) NOT NULL
+  );
+
+CREATE TABLE
+  publishers (
+    id int PRIMARY KEY NOT NULL,
+    name varchar(100) NOT NULL,
+    description varchar(500) NOT NULL
+  );
+
+CREATE TABLE
+  roles (
+    id int PRIMARY KEY NOT NULL,
+    name varchar(50) NOT NULL
+  );
+
+CREATE TABLE
+  roles_permissions (
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    roles_id int NOT NULL,
+    permissions_id int NOT NULL,
+    status tinyint NOT NULL DEFAULT "1"
+  );
+
+CREATE TABLE
+  users (
+    id int PRIMARY KEY NOT NULL,
+    email varchar(50) NOT NULL,
+    name varchar(50) NOT NULL,
+    phone varchar(50) DEFAULT NULL,
+    password varchar(255) NOT NULL,
+    user_image varchar(255) DEFAULT NULL,
+    role_id int NOT NULL DEFAULT "0",
+    status tinyint NOT NULL DEFAULT "1",
+    created_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    updated_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP)
   );
 
 CREATE TABLE
   users_permissions (
-    permissions_id INT,
-    status TINYINT NOT NULL DEFAULT 1,
-    users_id INT,
-    PRIMARY KEY (permissions_id, users_id),
-    FOREIGN KEY (permissions_id) REFERENCES permissions (id),
-    FOREIGN KEY (users_id) REFERENCES users (id)
+    permissions_id int NOT NULL,
+    users_id int NOT NULL,
+    status tinyint NOT NULL DEFAULT "1"
   );
 
-CREATE TABLE
-  `roles_permissions` (
-    `roles_id` INT,
-    `permissions_id` INT,
-    status TINYINT NOT NULL DEFAULT 1,
-    PRIMARY KEY (roles_id, permissions_id),
-    FOREIGN KEY (roles_id) REFERENCES `roles` (`id`),
-    FOREIGN KEY (permissions_id) REFERENCES `permissions` (`id`)
-  );
+ALTER TABLE users ADD FOREIGN KEY (role_id) REFERENCES roles (id);
 
-CREATE TABLE
-  `authors` (
-    `author_id` int (11) NOT NULL AUTO_INCREMENT,
-    `author_name` varchar(100) NOT NULL,
-    `author_description` varchar(500) NOT NULL,
-    PRIMARY KEY (`author_id`)
-  );
+ALTER TABLE roles_permissions ADD FOREIGN KEY (roles_id) REFERENCES roles (id);
 
-CREATE TABLE
-  `carts` (
-    `id` int (11) NOT NULL AUTO_INCREMENT,
-    `user_id` int (11) NOT NULL,
-    `book_id` int (11) NOT NULL,
-    `status` enum ('shopping', 'pending', 'reject', 'accept') NOT NULL DEFAULT 'shopping',
-    `quantity` int (11) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-  );
+ALTER TABLE roles_permissions ADD FOREIGN KEY (permissions_id) REFERENCES permissions (id);
 
-CREATE TABLE
-  `orders` (
-    `id` int (11) NOT NULL AUTO_INCREMENT,
-    `cart_id` int (11) NOT NULL,
-    `customer_id` int (11) NOT NULL,
-    `total` int (11) NOT NULL,
-    `paid` int (11) NOT NULL,
-    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-    `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-    `status` enum ('pending') NOT NULL DEFAULT 'pending',
-    PRIMARY KEY (`id`)
-  );
+ALTER TABLE users_permissions ADD FOREIGN KEY (permissions_id) REFERENCES permissions (id);
 
-CREATE TABLE
-  `coupon` (
-    `coupon_id` int (11) NOT NULL AUTO_INCREMENT,
-    `coupon_name` varchar(50) NOT NULL,
-    `active` date NOT NULL,
-    `expired` date NOT NULL,
-    `quantity` int (10) NOT NULL,
-    `description` varchar(500) NOT NULL,
-    PRIMARY KEY (`coupon_id`)
-  );
-
-CREATE TABLE
-  `publishers` (
-    `publisher_id` int (11) NOT NULL AUTO_INCREMENT,
-    `publisher_name` varchar(100) NOT NULL,
-    `publisher_description` varchar(500) NOT NULL,
-    PRIMARY KEY (`publisher_id`)
-  );
-
-CREATE TABLE
-  `categories` (
-    `id` int (11) NOT NULL AUTO_INCREMENT,
-    `name` varchar(100) NOT NULL,
-    PRIMARY KEY (`id`)
-  );
-
-CREATE TABLE
-  books (
-    title varchar(100) NOT NULL,
-    description varchar(500) NOT NULL,
-    image char(255) NOT NULL,
-    price int (11) NOT NULL,
-    quantity int (11) NOT NULL,
-    status TINYINT NOT NULL DEFAULT 1,
-    author_id int (11) NOT NULL,
-    publisher_id int (11) NOT NULL
-  )
-CREATE TABLE
-  `wishlist` (
-    `book_id` int (11) NOT NULL,
-    `user_id` int (11) NOT NULL
-  );
-
-ALTER TABLE `books` ADD FOREIGN KEY (`author_id`) REFERENCES `authors` (`author_id`);
-
-ALTER TABLE `books` ADD FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`publisher_id`);
-
-ALTER TABLE `orders` ADD FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `orders` ADD FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`);
-
-ALTER TABLE `users_permissions` ADD FOREIGN KEY (`permissions_id`) REFERENCES `permissions` (`id`);
+ALTER TABLE users_permissions ADD FOREIGN KEY (users_id) REFERENCES users (id);
