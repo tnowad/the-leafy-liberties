@@ -119,7 +119,7 @@ CREATE TABLE `orders` (
 
 
 CREATE TABLE `publisher` (
-  `publisher_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `publisher_name` varchar(100) NOT NULL,
   `publisher_description` varchar(500) NOT NULL,
   PRIMARY KEY (`publisher_id`)
@@ -146,7 +146,7 @@ CREATE TABLE `books` (
 CREATE TABLE `wishlist` (
   `book_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
-)
+);
 
 ALTER TABLE `books`
 ADD
@@ -154,10 +154,11 @@ ADD
 
 ALTER TABLE `books`
 ADD
-    FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`publisher_id`);
+    FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`);
 
 ALTER TABLE `orders`
 ADD
     FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`);
+ALTER TABLE `orders`
 ADD
     FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`);
