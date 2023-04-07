@@ -18,9 +18,9 @@
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
               Password
             </label>
-            <input type="password" name="password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
-              required="" />
+            <input type="password" name="password" id="password" placeholder="••••••••"
+              class=" bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
+              required />
             <i id="hide-icon" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer" aria-hidden="true"></i>
             <i id="show-icon" class="fa fa-eye absolute hidden top-[60%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
@@ -47,7 +47,7 @@
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
             Don't have an account yet?
             <button type="submit" name="submit" class="font-medium text-[#52938d] hover:underline">
-              <a href="register.php">Sign up</a>
+              <a href="register">Sign up</a>
             </button>
           </p>
         </form>
@@ -64,8 +64,7 @@
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
       hideIcon.style.display = "none";
-      s
-      howIcon.style.display = "block";
+      showIcon.style.display = "block";
     }
   });
   showIcon.addEventListener("click", function () {

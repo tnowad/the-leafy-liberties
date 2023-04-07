@@ -68,18 +68,22 @@ abstract class Model
     $table = static::table();
     $primaryKey = $this->primaryKey;
 
-    $params = [];
-    $columns = [];
-
-    foreach ($this->fillable as $field) {
-      if (isset($this->attributes[$field])) {
-        $columns[] = $field . ' = :' . $field;
-        $params[':' . $field] = $this->attributes[$field];
-      }
-    }
-
     if (empty($this->attributes[$primaryKey])) {
-      $query = "INSERT INTO $table SET " . implode(', ', $columns);
+      $query = "INSERT INTO $table ";
+      $params = [];
+      $columns = [];
+      $values = [];
+
+      foreach ($this->fillable as $field) {
+        if (isset($this->attributes[$field])) {
+          $columns[] = $field;
+          $values[] = ':' . $field;
+          $params[':' . $field] = $this->attributes[$field];
+        }
+      }
+
+      $query .= '(' . implode(', ', $columns) . ') ';
+      $query .= 'VALUES (' . implode(', ', $values) . ')';
 
       $result = Database::getInstance()->execute($query, $params);
 
@@ -89,8 +93,20 @@ abstract class Model
 
       $this->attributes[$primaryKey] = Database::getInstance()->getLastInsertId($table, $primaryKey);
     } else {
+      $query = "UPDATE $table SET ";
+      $params = [];
+      $columns = [];
+
+      foreach ($this->fillable as $field) {
+        if (isset($this->attributes[$field])) {
+          $columns[] = $field . ' = :' . $field;
+          $params[':' . $field] = $this->attributes[$field];
+        }
+      }
+
+      $query .= implode(', ', $columns);
+      $query .= " WHERE $primaryKey = :$primaryKey";
       $params[':' . $primaryKey] = $this->attributes[$primaryKey];
-      $query = "UPDATE $table SET " . implode(', ', $columns) . " WHERE $primaryKey = :$primaryKey";
 
       $result = Database::getInstance()->execute($query, $params);
 

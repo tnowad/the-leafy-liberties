@@ -15,9 +15,9 @@
 <body>
   <div class="w-full bg-neutral-100">
     <div class="grid md:grid-cols-[256px_auto] sm:grid-cols-[64px_auto] h-full">
-      <?php include './dashboardMenu.php' ?>
+      <?php include '../../layouts/dashboard/dashboardMenu.php' ?>
       <div class="w-full">
-        <?php include './dashboardHeader.php' ?>
+        <?php include '../../layouts/dashboard/dashboardHeader.php' ?>
         <div class="w-full min-h-screen xl:px-10 lg:px-0">
           <?php include './slider.php' ?>
         </div>
