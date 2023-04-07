@@ -5,9 +5,9 @@ SET
 USE bookstore;
 
 CREATE TABLE
-  `roles` (
-    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL
+  roles (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL
   );
 
 CREATE TABLE
@@ -29,8 +29,8 @@ CREATE TABLE
 
 CREATE TABLE
   permissions (
-    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL
   );
 
 CREATE TABLE
@@ -44,70 +44,70 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  `roles_permissions` (
-    `roles_id` INT,
-    `permissions_id` INT,
+  roles_permissions (
+    roles_id INT,
+    permissions_id INT,
     status TINYINT NOT NULL DEFAULT 1,
     PRIMARY KEY (roles_id, permissions_id),
-    FOREIGN KEY (roles_id) REFERENCES `roles` (`id`),
-    FOREIGN KEY (permissions_id) REFERENCES `permissions` (`id`)
+    FOREIGN KEY (roles_id) REFERENCES roles (id),
+    FOREIGN KEY (permissions_id) REFERENCES permissions (id)
   );
 
 CREATE TABLE
-  `authors` (
-    `author_id` int (11) NOT NULL AUTO_INCREMENT,
-    `author_name` varchar(100) NOT NULL,
-    `author_description` varchar(500) NOT NULL,
-    PRIMARY KEY (`author_id`)
+  authors (
+    author_id int (11) NOT NULL AUTO_INCREMENT,
+    author_name varchar(100) NOT NULL,
+    author_description varchar(500) NOT NULL,
+    PRIMARY KEY (author_id)
   );
 
 CREATE TABLE
-  `carts` (
-    `id` int (11) NOT NULL AUTO_INCREMENT,
-    `user_id` int (11) NOT NULL,
-    `book_id` int (11) NOT NULL,
-    `status` enum ('shopping', 'pending', 'reject', 'accept') NOT NULL DEFAULT 'shopping',
-    `quantity` int (11) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+  carts (
+    id int (11) NOT NULL AUTO_INCREMENT,
+    user_id int (11) NOT NULL,
+    book_id int (11) NOT NULL,
+    status enum ('shopping', 'pending', 'reject', 'accept') NOT NULL DEFAULT 'shopping',
+    quantity int (11) DEFAULT NULL,
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
-  `orders` (
-    `id` int (11) NOT NULL AUTO_INCREMENT,
-    `cart_id` int (11) NOT NULL,
-    `customer_id` int (11) NOT NULL,
-    `total` int (11) NOT NULL,
-    `paid` int (11) NOT NULL,
-    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-    `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-    `status` enum ('pending') NOT NULL DEFAULT 'pending',
-    PRIMARY KEY (`id`)
+  orders (
+    id int (11) NOT NULL AUTO_INCREMENT,
+    cart_id int (11) NOT NULL,
+    customer_id int (11) NOT NULL,
+    total int (11) NOT NULL,
+    paid int (11) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp(),
+    updated_at timestamp NOT NULL DEFAULT current_timestamp(),
+    status enum ('pending') NOT NULL DEFAULT 'pending',
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
-  `coupon` (
-    `coupon_id` int (11) NOT NULL AUTO_INCREMENT,
-    `coupon_name` varchar(50) NOT NULL,
-    `active` date NOT NULL,
-    `expired` date NOT NULL,
-    `quantity` int (10) NOT NULL,
-    `description` varchar(500) NOT NULL,
-    PRIMARY KEY (`coupon_id`)
+  coupon (
+    coupon_id int (11) NOT NULL AUTO_INCREMENT,
+    coupon_name varchar(50) NOT NULL,
+    active date NOT NULL,
+    expired date NOT NULL,
+    quantity int (10) NOT NULL,
+    description varchar(500) NOT NULL,
+    PRIMARY KEY (coupon_id)
   );
 
 CREATE TABLE
-  `publishers` (
-    `publisher_id` int (11) NOT NULL AUTO_INCREMENT,
-    `publisher_name` varchar(100) NOT NULL,
-    `publisher_description` varchar(500) NOT NULL,
-    PRIMARY KEY (`publisher_id`)
+  publishers (
+    publisher_id int (11) NOT NULL AUTO_INCREMENT,
+    publisher_name varchar(100) NOT NULL,
+    publisher_description varchar(500) NOT NULL,
+    PRIMARY KEY (publisher_id)
   );
 
 CREATE TABLE
-  `categories` (
-    `id` int (11) NOT NULL AUTO_INCREMENT,
-    `name` varchar(100) NOT NULL,
-    PRIMARY KEY (`id`)
+  categories (
+    id int (11) NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
@@ -122,17 +122,17 @@ CREATE TABLE
     publisher_id int (11) NOT NULL
   )
 CREATE TABLE
-  `wishlist` (
-    `book_id` int (11) NOT NULL,
-    `user_id` int (11) NOT NULL
+  wishlist (
+    book_id int (11) NOT NULL,
+    user_id int (11) NOT NULL
   );
 
-ALTER TABLE `books` ADD FOREIGN KEY (`author_id`) REFERENCES `authors` (`author_id`);
+ALTER TABLE books ADD FOREIGN KEY (author_id) REFERENCES authors (author_id);
 
-ALTER TABLE `books` ADD FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`publisher_id`);
+ALTER TABLE books ADD FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id);
 
-ALTER TABLE `orders` ADD FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`);
+ALTER TABLE orders ADD FOREIGN KEY (customer_id) REFERENCES users (id);
 
-ALTER TABLE `orders` ADD FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`);
+ALTER TABLE orders ADD FOREIGN KEY (cart_id) REFERENCES carts (id);
 
-ALTER TABLE `users_permissions` ADD FOREIGN KEY (`permissions_id`) REFERENCES `permissions` (`id`);
+ALTER TABLE users_permissions ADD FOREIGN KEY (permissions_id) REFERENCES permissions (id);
