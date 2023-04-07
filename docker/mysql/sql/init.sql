@@ -177,7 +177,7 @@ ADD
 
 ALTER TABLE `books`
 ADD
-    FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`);
+    FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`publisher_id`);
 
 ALTER TABLE `orders`
 ADD
