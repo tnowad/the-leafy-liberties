@@ -64,9 +64,9 @@
         Books, Fiction, Romance - Contemporary
       </p>
       <div class="mt-10 w-1/5 flex justify-around">
-        <i class="text-4xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-blue-500"></i>
-        <i class="text-4xl transition-all cursor-pointer fa-brands fa-twitter hover:text-blue-600"></i>
-        <i class="text-4xl transition-all cursor-pointer fa-brands fa-instagram hover:text-pink-500"></i>
+        <i class="text-2xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-blue-500"></i>
+        <i class="text-2xl transition-all cursor-pointer fa-brands fa-twitter hover:text-blue-600"></i>
+        <i class="text-2xl transition-all cursor-pointer fa-brands fa-instagram hover:text-pink-500"></i>
       </div>
     </div>
   </div>
