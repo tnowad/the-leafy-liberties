@@ -21,11 +21,11 @@
 </head>
 
 <body>
-  <?php require_once($params['header'] ?? __DIR__ . '/default/header.php'); ?>
+  <?php $params['header'] ?? require_once(__DIR__ . '/default/header.php'); ?>
 
   {{content}}
 
-  <?php require_once($params['footer'] ?? __DIR__ . '/default/footer.php'); ?>
+  <?php $params['footer'] ?? require_once(__DIR__ . '/default/footer.php'); ?>
 </body>
 
 </html>
