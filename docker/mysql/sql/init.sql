@@ -4,12 +4,11 @@ CREATE DATABASE bookstore;
 
 USE bookstore;
 
-CREATE TABLE
-    authors (
-        id int PRIMARY KEY NOT NULL,
-        name varchar(100) NOT NULL,
-        description varchar(500) NOT NULL
-    );
+CREATE TABLE authors (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(500) NOT NULL
+);
 
 CREATE TABLE
     carts (
@@ -110,7 +109,7 @@ CREATE TABLE
         ) NOT NULL DEFAULT 'available',
         `author_id` int(11) NOT NULL,
         `publisher_id` int(11) NOT NULL
-    )
+    );
 ALTER TABLE users
 ADD
     FOREIGN KEY (role_id) REFERENCES roles (id);
