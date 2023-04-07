@@ -1,3 +1,9 @@
+DROP DATABASE bookstore;
+
+CREATE DATABASE IF NOT EXISTS bookstore;
+
+USE bookstore;
+
 CREATE TABLE
   authors (
     id int PRIMARY KEY NOT NULL,
@@ -63,6 +69,7 @@ CREATE TABLE
 
 CREATE TABLE
   roles_permissions (
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     roles_id int NOT NULL,
     permissions_id int NOT NULL,
     status tinyint NOT NULL DEFAULT "1"
@@ -70,7 +77,7 @@ CREATE TABLE
 
 CREATE TABLE
   users (
-    id int NOT NULL,
+    id int PRIMARY KEY NOT NULL,
     email varchar(50) NOT NULL,
     name varchar(50) NOT NULL,
     phone varchar(50) DEFAULT NULL,
@@ -93,8 +100,8 @@ ALTER TABLE users ADD FOREIGN KEY (role_id) REFERENCES roles (id);
 
 ALTER TABLE roles_permissions ADD FOREIGN KEY (roles_id) REFERENCES roles (id);
 
-ALTER TABLE permissions ADD FOREIGN KEY (id) REFERENCES roles_permissions (permissions_id);
+ALTER TABLE roles_permissions ADD FOREIGN KEY (permissions_id) REFERENCES permissions (id);
 
-ALTER TABLE permissions ADD FOREIGN KEY (id) REFERENCES users_permissions (permissions_id);
+ALTER TABLE users_permissions ADD FOREIGN KEY (permissions_id) REFERENCES permissions (id);
 
 ALTER TABLE users_permissions ADD FOREIGN KEY (users_id) REFERENCES users (id);
