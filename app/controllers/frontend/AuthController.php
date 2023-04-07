@@ -68,7 +68,9 @@ class AuthController extends Controller
     } else {
       $response->setStatusCode(200);
       $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
-        'title' => 'Register'
+        'title' => 'Register',
+        'header' => '',
+        'footer' => '',
       ]));
     }
   }

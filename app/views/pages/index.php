@@ -272,9 +272,6 @@
                       </div>
                       <div class=" product-rate">
                         <i class="text-yellow-300 fa-solid fa-star"></i>
-
-
-
                         <i class="text-yellow-300 fa-solid fa-star"></i>
                         <i class="text-yellow-300 fa-solid fa-star"></i>
                         <i class="text-yellow-300 fa-solid fa-star"></i>

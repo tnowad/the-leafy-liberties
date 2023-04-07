@@ -3,7 +3,7 @@ use Core\Model;
 
 class Publisher extends Model{
   protected $table = 'author';
-  protected $filltable = [
+  protected $fillable = [
     'publisher_id',
     'name',
   ];

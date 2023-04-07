@@ -61,7 +61,7 @@
           </button>
           <p class="text-sm font-light text-gray-500">
             Already have an account?
-            <a href="login" class="font-medium text-[#52938d] hover:underline">
+            <a href="login" class="font-medium text-[#52938d] hover:underline"  id="my-link1">
               Login here
             </a>
           </p>

@@ -74,4 +74,5 @@
       showIcon.style.display = "none";
     }
   });
+
 </script>
