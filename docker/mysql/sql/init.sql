@@ -89,7 +89,7 @@ CREATE TABLE
     status tinyint NOT NULL DEFAULT "1"
   );
 
-ALTER TABLE roles ADD FOREIGN KEY (id) REFERENCES users (role_id);
+ALTER TABLE users ADD FOREIGN KEY (role_id) REFERENCES roles (id);
 
 ALTER TABLE roles_permissions ADD FOREIGN KEY (roles_id) REFERENCES roles (id);
 
