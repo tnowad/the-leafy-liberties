@@ -143,6 +143,11 @@ CREATE TABLE `books` (
   `publisher_id` int(11) NOT NULL
 )
 
+CREATE TABLE `wishlist` (
+  `book_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+)
+
 ALTER TABLE `books`
 ADD
     FOREIGN KEY (`author_id`) REFERENCES `authors` (`author_id`);
@@ -156,6 +161,3 @@ ADD
     FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`);
 ADD
     FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`);
-
-ALTER TABLE `carts`
- ADD CONSTRAINT ``
