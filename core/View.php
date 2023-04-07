@@ -33,6 +33,13 @@ class View
     return str_replace('{{content}}', $content, $layoutContent);
   }
 
+  public static function renderWithDashboardLayout(View $view, $params = [], $layout = 'layouts/dashboard'): string
+  {
+    $layoutContent = self::render(new View($layout), $params);
+    $content = self::render($view, $params);
+    return str_replace('{{Dashboardcontent}}', $content, $layoutContent);
+  }
+
   private static function getViewPath(View $view): string
   {
     $viewRoot = __DIR__ . '/../app/views/';

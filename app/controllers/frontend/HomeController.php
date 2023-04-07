@@ -116,4 +116,85 @@ class HomeController extends Controller
       'title' => 'About'
     ]));
   }
+
+  public function cart(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/cart'), [
+      'title' => 'Cart'
+    ]));
+  }
+
+  public function shop(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/shop'), [
+      'title' => 'Shop'
+    ]));
+  }
+
+  public function wishlist(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/wishlist'), [
+      'title' => 'Wishlist'
+    ]));
+  }
+  public function product(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/product'), [
+      'title' => 'Product'
+    ]));
+  }
+  public function profile(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/profile'), [
+      'title' => 'Profile'
+    ]));
+  }
+
+  public function checkout(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/checkout'), [
+      'title' => 'Checkout'
+    ]));
+  }
+  public function dashboard(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/dashboard'), [
+      'title' => 'Dashboard'
+    ]));
+  }
+  public function customerDashboard(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/customer'), [
+      'title' => 'Customer Dashboard'
+    ]));
+  }
+  public function productDashboard(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product'), [
+      'title' => 'Product'
+    ]));
+  }
+  public function couponDashboard(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon'), [
+      'title' => 'Coupon'
+    ]));
+  }
+  public function sliderDashboard(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/slider'), [
+      'title' => 'Slider'
+    ]));
+  }
 }

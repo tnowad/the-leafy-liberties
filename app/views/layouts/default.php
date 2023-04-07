@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -21,11 +21,11 @@
 </head>
 
 <body>
-  <?php require_once($header ?? __DIR__ . '/default/header.php'); ?>
+  <?php $params['header'] ?? require_once(__DIR__ . '/default/header.php'); ?>
 
   {{content}}
 
-  <?php require_once($footer ?? __DIR__ . '/default/footer.php'); ?>
+  <?php $params['footer'] ?? require_once(__DIR__ . '/default/footer.php'); ?>
 </body>
 
 </html>

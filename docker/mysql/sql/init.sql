@@ -1,6 +1,6 @@
 DROP DATABASE bookstore;
 
-CREATE DATABASE IF NOT EXISTS bookstore;
+CREATE DATABASE bookstore;
 
 USE bookstore;
 
