@@ -1,4 +1,5 @@
 <?php
+
 use Core\Application;
 
 use App\Controllers\Frontend\HomeController;
@@ -14,3 +15,4 @@ $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);
 $router->get('/register', [AuthController::class, 'register']);
 $router->post('/register', [AuthController::class, 'register']);
+$router->get('/cart', [CartController::class, 'cart']);

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers\Frontend;
 
 use App\Models\User;
@@ -71,5 +72,4 @@ class AuthController extends Controller
       'Location' => '/'
     ]);
   }
-
 }
