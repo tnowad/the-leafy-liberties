@@ -20,7 +20,7 @@ $router->get('/dashboard', [HomeController::class, 'dashboard']);
 $router->get('/dashboard/customer', [HomeController::class, 'customerDashboard']);
 $router->get('/dashboard/product', [HomeController::class, 'productDashboard']);
 $router->get('/dashboard/coupon', [HomeController::class, 'couponDashboard']);
-$router->get('/dashboard/dashboardLayout', [HomeController::class, 'sliderDashboard']);
+$router->get('/dashboard/slider', [HomeController::class, 'sliderDashboard']);
 
 $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);
