@@ -18,7 +18,7 @@ class Request
     $this->method = $_SERVER['REQUEST_METHOD'];
     $this->url = substr($_SERVER['REQUEST_URI'], strlen(DotEnv::get('BASE_URI')), strlen($_SERVER['REQUEST_URI']));
     $this->params = array();
-    $this->query = $_GET;
+    $this->query = array_merge($_GET, $_POST);
     $this->body = json_decode(file_get_contents('php://input'), true);
     $this->headers = getallheaders();
     $this->files = $_FILES;
@@ -84,6 +84,7 @@ class Request
   {
     return $this->query;
   }
+
 
   public function setParams($params)
   {
