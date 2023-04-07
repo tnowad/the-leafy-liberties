@@ -1,4 +1,5 @@
 -- SQLBook: Code
+
 CREATE DATABASE bookstore;
 
 USE bookstore;
@@ -9,18 +10,22 @@ CREATE TABLE
         `name` VARCHAR(50) NOT NULL
     );
 
-CREATE TABLE users (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  email varchar(255) NOT NULL,
-  password varchar(100) NOT NULL,
-  status enum('active','inactive','banned') NOT NULL DEFAULT 'active',
-  phone varchar(10) NOT NULL,
-  created_at timestamp NOT NULL DEFAULT current_timestamp(),
-  updated_at timestamp NOT NULL DEFAULT current_timestamp(),
-  role enum('admin','customer') NOT NULL DEFAULT 'customer',
-  role_id int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (id)
-);
+CREATE TABLE
+    users (
+        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        email VARCHAR(50) NOT NULL,
+        name NVARCHAR (50) NOT NULL,
+        phone VARCHAR(50) NULL,
+        password VARCHAR(255) NOT NULL,
+        user_image VARCHAR(255),
+        role_id INT NOT NULL DEFAULT 0,
+        status TINYINT NOT NULL DEFAULT 1,
+        created_at TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        updated_at TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        -- index with email
+        UNIQUE INDEX email_UNIQUE (email ASC),
+        Foreign Key (role_id) REFERENCES roles (id)
+    );
 
 CREATE TABLE
     permissions (
@@ -38,7 +43,8 @@ CREATE TABLE
         FOREIGN KEY (users_id) REFERENCES users (id)
     );
 
-CREATE TABLE `roles_permissions` (
+CREATE TABLE
+    `roles_permissions` (
         `roles_id` INT,
         `permissions_id` INT,
         status TINYINT NOT NULL DEFAULT 1,
@@ -122,7 +128,7 @@ CREATE TABLE
         `status` enum('pending') NOT NULL DEFAULT 'pending',
         PRIMARY KEY (`id`)
     );
-    
+
 CREATE TABLE
     `coupon` (
         `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -150,21 +156,16 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    `books` (
-        `title` varchar(100) NOT NULL,
-        `description` varchar(500) NOT NULL,
-        `image` char(255) NOT NULL,
-        `price` int(11) NOT NULL,
-        `quantity` int(11) NOT NULL,
-        `status` enum(
-            'available',
-            'unavailable',
-            'deleted'
-        ) NOT NULL DEFAULT 'available',
-        `author_id` int(11) NOT NULL,
-        `publisher_id` int(11) NOT NULL
-    );
-
+    books (
+        title varchar(100) NOT NULL,
+        description varchar(500) NOT NULL,
+        image char(255) NOT NULL,
+        price int(11) NOT NULL,
+        quantity int(11) NOT NULL,
+        status TINYINT NOT NULL DEFAULT 1,
+        author_id int(11) NOT NULL,
+        publisher_id int(11) NOT NULL
+    )
 CREATE TABLE
     `wishlist` (
         `book_id` int(11) NOT NULL,
@@ -186,3 +187,8 @@ ADD
 ALTER TABLE `orders`
 ADD
     FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`);
+
+ALTER TABLE
+    `users_permissions`
+ADD
+    FOREIGN KEY (`permissions_id`) REFERENCES `permissions` (`id`);
