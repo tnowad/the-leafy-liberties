@@ -1,4 +1,6 @@
 <?php
+use App\Models\Category;
+
 ?>
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
@@ -12,24 +14,16 @@
       </button>
       <!-- show options -->
       <div
-        class="opacity-0 hidden absolute w-52 top-24 translate-y-10 transition-all bg-white border border-gray-200 rounded-md shadow-lg outline-none mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">
+        class="absolute hidden transition-all translate-y-10 bg-white border border-gray-200 rounded-md shadow-lg outline-none opacity-0 w-52 top-24 mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">
         <div class="px-1 py-1">
-          <!-- Get all category from database and show -->
           <?php
-          // use Core\Database;
-          $connect = mysqli_connect('localhost', 'root', '', 'bookstore');
-          $query = "SELECT name from categories";
-          $result = mysqli_query($connect, $query);
-          while ($row = $result->fetch_assoc()) { ?>
-          <span class="text-gray-700 group/category hover:bg-gray-300 hover:text-[#315854] px-4 py-2 transition-all block cursor-pointer">
-            <a href="<?php
-
-            ?>" class="block text-md translate-x-0 transition-all group-hover/category:translate-x-3">
-                <?php echo $row['name'] ?>
-            </a>
+          $categories = Category::all();
+          foreach ($categories as $category): ?>
+            <span
+              class="text-gray-700 group/category hover:bg-gray-300 hover:text-[#315854] px-4 py-2 transition-all block cursor-pointer">
+              <a href="" class="block transition-all translate-x-0 text-md group-hover/category:translate-x-3"></a>
             </span>
-          <?php }
-          ?>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -43,14 +37,14 @@
       </form>
     </div>
     <!-- list button -->
-    <div class="flex-row justify-between hidden gap-2 md:flex relative">
+    <div class="relative flex-row justify-between hidden gap-2 md:flex">
       <button type="button"
         class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10"
         data-dropdown-toggle="dropdownHover" data-dropdown-trigger="click" id="dropdownHoverButton">
         <i class="fa-regular fa-user"></i>
       </button>
       <div
-        class="hidden absolute w-24 right-16 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none mt-11 transition-all"
+        class="absolute hidden w-24 transition-all bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none right-16 mt-11"
         id="dropdownHover">
         <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
           <?php if (isset($_SESSION['user'])): ?>
