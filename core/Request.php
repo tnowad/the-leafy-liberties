@@ -17,10 +17,10 @@ class Request
   {
     $this->method = $_SERVER['REQUEST_METHOD'];
     $this->url = substr($_SERVER['REQUEST_URI'], strlen(DotEnv::get('BASE_URI')), strlen($_SERVER['REQUEST_URI']));
-    $this->params = array();
-    $this->query = array_merge($_GET, $_POST);
-    $this->body = json_decode(file_get_contents('php://input'), true);
-    $this->headers = getallheaders();
+    $this->query = $this->sanitizeArray($_GET);
+    $this->params = $this->sanitizeArray($_POST);
+    $this->body = $this->parseRequestBody();
+    $this->headers = $this->parseRequestHeaders();
     $this->files = $_FILES;
   }
 
@@ -86,23 +86,60 @@ class Request
   }
 
 
-  public function setParams($params)
-  {
-    $this->params = $params;
-  }
-
   public function setParam($key, $value)
   {
-    $this->params[$key] = $value;
+    $this->params[$key] = $this->sanitizeInput($value);
   }
 
   public function setQuery($key, $value)
   {
-    $this->query[$key] = $value;
+    $this->query[$key] = $this->sanitizeInput($value);
   }
 
   public function setBody($body)
   {
     $this->body = $body;
+  }
+
+  private function parseRequestBody()
+  {
+    $contentType = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
+    switch ($contentType) {
+      case 'application/json':
+        return json_decode(file_get_contents('php://input'), true);
+      case 'application/x-www-form-urlencoded':
+        return $this->sanitizeArray($_POST);
+      default:
+        return null;
+    }
+  }
+
+  private function parseRequestHeaders()
+  {
+    $headers = array();
+    foreach ($_SERVER as $key => $value) {
+      if (substr($key, 0, 5) === 'HTTP_') {
+        $headers[str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))))] = $value;
+      }
+    }
+    return $headers;
+  }
+
+  private function sanitizeArray($array)
+  {
+    $sanitized = array();
+    foreach ($array as $key => $value) {
+      $sanitized[$key] = $this->sanitizeInput($value);
+    }
+    return $sanitized;
+  }
+
+  private function sanitizeInput($input)
+  {
+    if (is_array($input)) {
+      return $this->sanitizeArray($input);
+    } else {
+      return htmlspecialchars($input);
+    }
   }
 }
