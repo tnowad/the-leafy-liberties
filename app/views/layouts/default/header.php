@@ -13,11 +13,7 @@ use App\Models\Category;
         Categories
       </button>
       <!-- show options -->
-      <?php
-      $categories = Category::all();
-      $categories = [
-        new Category(['id' => 1, 'name' => 'Category 1']),
-      ];
+      <?php $categories = Category::all();
       if (count($categories) > 0): ?>
         <div
           class="absolute hidden transition-all translate-y-10 bg-white border border-gray-200 rounded-md shadow-lg outline-none opacity-0 w-52 top-24 mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">

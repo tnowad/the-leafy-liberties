@@ -22,7 +22,7 @@ CREATE TABLE
 
 CREATE TABLE
   categories (
-    id int PRIMARY KEY NOT NULL,
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL
   );
 
@@ -109,10 +109,3 @@ CREATE TABLE
     created_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
     updated_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP)
   )
-ALTER TABLE roles_permissions ADD FOREIGN KEY (roles_id) REFERENCES roles (id);
-
-ALTER TABLE roles_permissions ADD FOREIGN KEY (permissions_id) REFERENCES permissions (id);
-
-ALTER TABLE users_permissions ADD FOREIGN KEY (permissions_id) REFERENCES permissions (id);
-
-ALTER TABLE users_permissions ADD FOREIGN KEY (users_id) REFERENCES users (id);
