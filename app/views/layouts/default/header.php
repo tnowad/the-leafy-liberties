@@ -5,28 +5,29 @@
     <a class="w-48" href="<?php echo BASE_URI ?>">
       <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="HeaderLogo" />
     </a>
-    <div class="hidden sm:block w-full max-w-[140px] group">
+    <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center">
       <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
         <i class="mr-1 fa-solid fa-bars"></i>
         Categories
       </button>
       <!-- show options -->
       <div
-        class="opacity-0 absolute w-48 top-24 transition-all bg-white border border-gray-200  rounded-md shadow-lg outline-none mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:duration-300">
-        <span class="absoulute "></span>
+        class="opacity-0 hidden absolute w-52 top-24 translate-y-10 transition-all bg-white border border-gray-200 rounded-md shadow-lg outline-none mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">
         <div class="px-1 py-1">
           <!-- Get all category from database and show -->
           <?php
           // use Core\Database;
           $connect = mysqli_connect('localhost', 'root', '', 'bookstore');
           $query = "SELECT name from categories";
-          $result = mysqli_query($connect,$query);
+          $result = mysqli_query($connect, $query);
           while ($row = $result->fetch_assoc()) { ?>
+          <span class="text-gray-700 group/category hover:bg-gray-300 hover:text-[#315854] px-4 py-2 transition-all block cursor-pointer">
             <a href="<?php
 
-            ?>" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900">
-              <?php echo $row['name'] ?>
+            ?>" class="block text-md translate-x-0 transition-all group-hover/category:translate-x-3">
+                <?php echo $row['name'] ?>
             </a>
+            </span>
           <?php }
           ?>
         </div>

@@ -72,11 +72,13 @@
       <?php
       $total = 10;
       for ($i = 1; $i < $total; $i++) { ?>
-        <div class="flex flex-col items-center justify-center w-full p-1 product-info">
-          <div class="object-cover w-56 h-full">
+        <div
+          class="flex flex-col items-center justify-center w-full px-[22px] py-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+          <div class="object-cover w-60 h-full p-2">
             <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
           </div>
-          <div class="flex flex-col items-center justify-center w-full p-1 text-lg font-medium product-body">
+          <div
+            class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium product-body group-hover:-translate-y-16 transition-all bg-white">
             <div class="product-name">
               <a href="/">My Dearest Darkest</a>
             </div>
@@ -91,6 +93,12 @@
             <div class="p-0 font-semibold product-price text-primary-900">
               150.000VND
             </div>
+            <div
+              class="heart-option opacity-0 flex justify-between items-center w-full translate-y-0 transition-all group-hover:opacity-100">
+              <p class="select-option-text font-semibold">Select option</p>
+              <i
+                class="fa-regular fa-heart cursor-pointer hover:bg-red-400 p-2 transition-all rounded-full hover:text-white"></i>
+            </div>
           </div>
         </div>
       <?php }
@@ -103,17 +111,19 @@
         View All
       </a>
     </div>
-    <div class="flex">
+    <div class="flex gap-4">
       <div class="w-full">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <?php
           $total = 12;
           for ($i = 1; $i <= $total; $i++) { ?>
-            <div class="flex flex-col items-center justify-center p-1 product-info w-fit">
-              <div class="object-cover w-56 h-full">
-                <img src="../../../resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
+            <div
+              class="flex flex-col items-center justify-center w-full px-[22px] py-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+              <div class="object-cover w-60 h-full p-2">
+                <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
               </div>
-              <div class="flex flex-col items-center justify-center w-full p-1 text-lg font-medium product-body">
+              <div
+                class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium product-body group-hover:-translate-y-16 transition-all bg-white">
                 <div class="product-name">
                   <a href="/">My Dearest Darkest</a>
                 </div>
@@ -128,6 +138,12 @@
                 <div class="p-0 font-semibold product-price text-primary-900">
                   150.000VND
                 </div>
+                <div
+                  class="heart-option opacity-0 flex justify-between items-center w-full translate-y-0 transition-all group-hover:opacity-100">
+                  <p class="select-option-text font-semibold">Select option</p>
+                  <i
+                    class="fa-regular fa-heart cursor-pointer hover:bg-red-400 p-2 transition-all rounded-full hover:text-white"></i>
+                </div>
               </div>
             </div>
           <?php }
@@ -136,7 +152,7 @@
       </div>
       <div class="hidden w-[25%] xl:block 2xl:w-1/3">
         <div class="sticky w-full h-auto top-32">
-          <img src="../../../resources/images/bestOffer.png" alt="" class="w-full h-full rounded-2xl" />
+          <img src="resources/images/bestOffer.png" alt="" class="w-full h-full rounded-2xl" />
           <div class="absolute flex flex-col items-center w-full text-center top-3/4">
             <p class="text-lg font-normal text-white xl:text-base">
               Best Offer
@@ -164,7 +180,7 @@
         for ($i = 1; $i <= $total; $i++) { ?>
           <div class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit">
             <div class="w-full h-56 overflow-hidden img rounded-3xl">
-              <img src="../../../resources/images/genresHorror.png" alt=""
+              <img src="resources/images/genresHorror.png" alt=""
                 class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-125" />
             </div>
             <p
@@ -189,7 +205,7 @@
           for ($i = 1; $i <= $total; $i++) { ?>
             <div class="flex items-center w-full mb-4 author-card justify-evenly mobile:flex-col lg:flex-row">
               <div class="author-face">
-                <img src="../../../resources/images/author.png" alt="" class='rounded-full' />
+                <img src="resources/images/author.png" alt="" class='rounded-full' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">
                 William Graham
@@ -213,7 +229,7 @@
         <div class="list-author-bestselling">
           <div class="flex my-5 h-fit top-product sm:w-full sm:gap-0">
             <div class="w-[400px] h-64">
-              <img src="../../../resources/images/productImg.png" alt=""
+              <img src="resources/images/productImg.png" alt=""
                 class="object-contain w-full h-full rounded-xl" />
             </div>
             <div class="flex flex-col gap-0 top-product-detail lg:gap-2 lg:justify-start mobile:w-fit">
@@ -248,7 +264,7 @@
                 <li>
                   <div class="flex product-info h-fit sm:w-64 md:w-80">
                     <div class="h-full img w-52">
-                      <img src="../../../resources/images/productImg.png" alt="" />
+                      <img src="resources/images/productImg.png" alt="" />
                     </div>
                     <div
                       class="flex flex-col p-2 font-medium product-body sm:w-full lg:text-lg md:text-base lg:gap-0 md:gap-2">
