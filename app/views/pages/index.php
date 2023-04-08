@@ -7,17 +7,17 @@
         $slides = [
           [
             'title' => 'Slide 1',
-            'image' => '/resources/images/mainHomeImg.png',
+            'image' => 'resources/images/mainHomeImg.png',
             'alt' => 'Slide 1'
           ],
           [
             'title' => 'Slide 2',
-            'image' => '/resources/images/mainHomeImg.png',
+            'image' => 'resources/images/mainHomeImg.png',
             'alt' => 'Slide 2'
           ],
           [
             'title' => 'Slide 3',
-            'image' => '/resources/images/mainHomeImg.png',
+            'image' => 'resources/images/mainHomeImg.png',
             'alt' => 'Slide 3'
           ]
         ];
@@ -30,21 +30,6 @@
               alt="<?php echo $slide['alt'] ?>">
           </div>
         <?php endforeach; ?>
-
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../../../resources/images/mainHomeImg.png"
-            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../../../resources/images/mainHomeImg.png"
-            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="../../../resources/images/mainHomeImg.png"
-            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
       </div>
 
 
@@ -89,7 +74,7 @@
       for ($i = 1; $i < $total; $i++) { ?>
         <div class="flex flex-col items-center justify-center w-full p-1 product-info">
           <div class="object-cover w-56 h-full">
-            <img src="../../../../resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
+            <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
           </div>
           <div class="flex flex-col items-center justify-center w-full p-1 text-lg font-medium product-body">
             <div class="product-name">
@@ -272,9 +257,6 @@
                       </div>
                       <div class=" product-rate">
                         <i class="text-yellow-300 fa-solid fa-star"></i>
-
-
-
                         <i class="text-yellow-300 fa-solid fa-star"></i>
                         <i class="text-yellow-300 fa-solid fa-star"></i>
                         <i class="text-yellow-300 fa-solid fa-star"></i>

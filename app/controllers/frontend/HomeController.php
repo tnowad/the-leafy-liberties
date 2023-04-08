@@ -180,21 +180,28 @@ class HomeController extends Controller
   {
     $response->setStatusCode(200);
     $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product'), [
-      'title' => 'Product'
+      'title' => 'Product Dashboard'
     ]));
   }
   public function couponDashboard(Request $request, Response $response)
   {
     $response->setStatusCode(200);
     $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon'), [
-      'title' => 'Coupon'
+      'title' => 'Coupon Dashboard'
     ]));
   }
   public function sliderDashboard(Request $request, Response $response)
   {
     $response->setStatusCode(200);
     $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/slider'), [
-      'title' => 'Slider'
+      'title' => 'Slider Dashboard'
+    ]));
+  }
+  public function commentDashboard(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/comment'), [
+      'title' => 'Comment Dashboard'
     ]));
   }
 }

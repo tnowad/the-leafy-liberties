@@ -8,7 +8,7 @@
     </div>
     <div class="right flex items-center relative">
       <div class="avatar w-10 mr-2">
-        <img src="../../../../resources/images/author.png" alt=""
+        <img src="<?php echo ($_SERVER['REQUEST_URI'] == '/the-leafy-liberties/dashboard') ? 'resources/images/author.png' : '../resources/images/author.png' ?>" alt=""
           class="w-full h-full object-cover rounded-full cursor-pointer" onmouseover="showMenu()"
           onmouseout="hideMenuDelayed()" />
         <ul id="menu"

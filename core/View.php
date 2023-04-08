@@ -37,7 +37,7 @@ class View
   {
     $layoutContent = self::render(new View($layout), $params);
     $content = self::render($view, $params);
-    return str_replace('{{Dashboardcontent}}', $content, $layoutContent);
+    return str_replace('{{content}}', $content, $layoutContent);
   }
 
   private static function getViewPath(View $view): string
