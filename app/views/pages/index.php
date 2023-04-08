@@ -74,11 +74,11 @@
       for ($i = 1; $i < $total; $i++) { ?>
         <div
           class="flex flex-col items-center justify-center w-full px-[22px] py-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
-          <div class="object-cover w-60 h-full p-2">
+          <div class="object-cover h-full p-2 w-60">
             <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
           </div>
           <div
-            class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium product-body group-hover:-translate-y-16 transition-all bg-white">
+            class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
             <div class="product-name">
               <a href="/">My Dearest Darkest</a>
             </div>
@@ -94,10 +94,10 @@
               150.000VND
             </div>
             <div
-              class="heart-option opacity-0 flex justify-between items-center w-full translate-y-0 transition-all group-hover:opacity-100">
-              <p class="select-option-text font-semibold">Select option</p>
+              class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+              <p class="font-semibold select-option-text">Select option</p>
               <i
-                class="fa-regular fa-heart cursor-pointer hover:bg-red-400 p-2 transition-all rounded-full hover:text-white"></i>
+                class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
             </div>
           </div>
         </div>
@@ -119,11 +119,11 @@
           for ($i = 1; $i <= $total; $i++) { ?>
             <div
               class="flex flex-col items-center justify-center w-full px-[22px] py-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
-              <div class="object-cover w-60 h-full p-2">
+              <div class="object-cover h-full p-2 w-60">
                 <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
               </div>
               <div
-                class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium product-body group-hover:-translate-y-16 transition-all bg-white">
+                class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
                 <div class="product-name">
                   <a href="/">My Dearest Darkest</a>
                 </div>
@@ -139,10 +139,10 @@
                   150.000VND
                 </div>
                 <div
-                  class="heart-option opacity-0 flex justify-between items-center w-full translate-y-0 transition-all group-hover:opacity-100">
-                  <p class="select-option-text font-semibold">Select option</p>
+                  class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                  <p class="font-semibold select-option-text">Select option</p>
                   <i
-                    class="fa-regular fa-heart cursor-pointer hover:bg-red-400 p-2 transition-all rounded-full hover:text-white"></i>
+                    class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
                 </div>
               </div>
             </div>
@@ -229,8 +229,7 @@
         <div class="list-author-bestselling">
           <div class="flex my-5 h-fit top-product sm:w-full sm:gap-0">
             <div class="w-[400px] h-64">
-              <img src="resources/images/productImg.png" alt=""
-                class="object-contain w-full h-full rounded-xl" />
+              <img src="resources/images/productImg.png" alt="" class="object-contain w-full h-full rounded-xl" />
             </div>
             <div class="flex flex-col gap-0 top-product-detail lg:gap-2 lg:justify-start mobile:w-fit">
               <p class="top-product-name xl:text-3xl lg:text-2xl">
