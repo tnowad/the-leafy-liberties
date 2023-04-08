@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use Exception;
 use mysqli;
 use Utils\DotEnv;
 
@@ -20,6 +21,8 @@ class Database
     if (self::$connection->connect_error) {
       die('Connection failed: ' . self::$connection->connect_error);
     }
+
+    self::$connection->select_db($database);
   }
 
   public static function getInstance()
@@ -35,26 +38,30 @@ class Database
     return self::$connection;
   }
 
-  public static function execute($sql, $params = [])
+  public static function execute($query, $params = [])
   {
-    $stmt = self::$connection->prepare($sql);
-    if (count($params) > 0) {
-      $types = '';
-      foreach ($params as $param) {
-        if (is_int($param)) {
-          $types .= 'i';
-        } elseif (is_float($param)) {
-          $types .= 'd';
-        } elseif (is_string($param)) {
-          $types .= 's';
-        } else {
-          $types .= 'b';
-        }
-      }
-      $stmt->bind_param($types, ...$params);
+    $connection = static::getInstance()->getConnection();
+    $statement = $connection->prepare($query);
+    dd($params);
+    if (!$statement) {
+      throw new Exception("Database query preparation failed: " . $connection->error);
     }
-    $stmt->execute();
-    return $stmt;
+    if (!empty($params)) {
+      $types = str_repeat("s", count($params));
+      $bindParams = array_merge([$types], $params);
+      $bindParamsRefs = array();
+      foreach ($bindParams as $key => $value) {
+        $bindParamsRefs[$key] = &$bindParams[$key];
+      }
+      call_user_func_array(array($statement, 'bind_param'), $bindParamsRefs);
+    }
+
+    $result = $statement->execute();
+    if (!$result) {
+      throw new Exception("Database query execution failed: " . $connection->error);
+    }
+
+    return $statement;
   }
 
   public static function prepare($sql)
@@ -76,7 +83,7 @@ class Database
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public static function getLastInsertId($table, $primaryKey)
+  public static function lastInsertId($table, $primaryKey)
   {
     $sql = "SELECT $primaryKey FROM $table ORDER BY $primaryKey DESC LIMIT 1";
     $result = self::fetchOne($sql);

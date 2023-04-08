@@ -65,56 +65,50 @@ abstract class Model
 
   public function save()
   {
-    $table = static::table();
-    $primaryKey = $this->primaryKey;
-
-    if (empty($this->attributes[$primaryKey])) {
-      $query = "INSERT INTO $table ";
-      $params = [];
-      $columns = [];
-      $values = [];
-
-      foreach ($this->fillable as $field) {
-        if (isset($this->attributes[$field])) {
-          $columns[] = $field;
-          $values[] = ':' . $field;
-          $params[':' . $field] = $this->attributes[$field];
-        }
-      }
-
-      $query .= '(' . implode(', ', $columns) . ') ';
-      $query .= 'VALUES (' . implode(', ', $values) . ')';
-
-      $result = Database::getInstance()->execute($query, $params);
-
-      if (!$result) {
-        throw new Exception("Failed to insert record into $table");
-      }
-
-      $this->attributes[$primaryKey] = Database::getInstance()->getLastInsertId($table, $primaryKey);
+    // if id is set, update record else insert new record into database
+    if (isset($this->attributes[$this->primaryKey])) {
+      return $this->update();
     } else {
-      $query = "UPDATE $table SET ";
-      $params = [];
-      $columns = [];
-
-      foreach ($this->fillable as $field) {
-        if (isset($this->attributes[$field])) {
-          $columns[] = $field . ' = :' . $field;
-          $params[':' . $field] = $this->attributes[$field];
-        }
-      }
-
-      $query .= implode(', ', $columns);
-      $query .= " WHERE $primaryKey = :$primaryKey";
-      $params[':' . $primaryKey] = $this->attributes[$primaryKey];
-
-      $result = Database::getInstance()->execute($query, $params);
-
-      if (!$result) {
-        throw new Exception("Failed to update record in $table");
-      }
+      return $this->insert();
     }
   }
+
+  public function insert()
+  {
+    $table = static::table();
+    $fields = array_keys($this->attributes);
+    $values = array_values($this->attributes);
+    $placeholders = array_fill(0, count($values), '?');
+    $query = "INSERT INTO $table (" . implode(', ', $fields) . ") VALUES (" . implode(', ', $placeholders) . ")";
+    $result = Database::getInstance()->execute($query, $values);
+
+    if (!$result) {
+      throw new Exception("Failed to insert record into $table");
+    }
+
+    return true;
+  }
+
+  public function update()
+  {
+    $table = static::table();
+    $primaryKey = $this->primaryKey;
+    $fields = array_keys($this->attributes);
+    $values = array_values($this->attributes);
+    $placeholders = array_map(function ($field) {
+      return "$field = ?";
+    }, $fields);
+    $query = "UPDATE $table SET " . implode(', ', $placeholders) . " WHERE $primaryKey = ?";
+    $values[] = $this->attributes[$primaryKey];
+    $result = Database::getInstance()->execute($query, $values);
+
+    if (!$result) {
+      throw new Exception("Failed to update record in $table");
+    }
+
+    return true;
+  }
+
 
   public function delete()
   {
