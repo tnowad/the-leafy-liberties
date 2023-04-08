@@ -70,7 +70,7 @@ class AuthController extends Controller
           $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
             'toast' => [
               'type' => 'error',
-              'message' => $e->getMessage(),
+              'message' => "Registration failed",
             ],
             'header' => '',
             'footer' => '',
