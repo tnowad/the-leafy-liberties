@@ -43,35 +43,49 @@ class AuthController extends Controller
 
   public function register(Request $request, Response $response)
   {
-    if ($request->getMethod() === 'POST') {
-      // $email = $request->getQuery('email');
-      // $password = $request->getQuery('password');
-      // $name = $request->getQuery('name');
-      // $phone = $request->getQuery('phone') ?? null;
-      $user = new User();
-      $user->email = "tnowad@gmail.com";
-      $user->name = "Nguyen Minh Tuan";
-      $user->phone = "0123456789";
-      $user->password = password_hash("123456789", PASSWORD_DEFAULT);
-
-      $user->save();
-      if ($user->id) {
-        Application::getInstance()->session->set('user', $user);
+    switch ($request->getMethod()) {
+      case 'POST':
+        $email = $request->getQuery('email');
+        $name = $request->getQuery('name');
+        $phone = $request->getQuery('phone');
+        $password = $request->getQuery('password');
+        $user = new User();
+        $user->email = $email;
+        $user->name = $name;
+        $user->phone = $phone;
+        $user->password = password_hash($password, PASSWORD_DEFAULT);
+        try {
+          $user->save();
+          $response->setStatusCode(200);
+          $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
+            'toast' => [
+              'type' => 'success',
+              'message' => 'Registered successfully',
+            ],
+            'header' => '',
+            'footer' => '',
+          ]));
+        } catch (\Exception $e) {
+          $response->setStatusCode(500);
+          $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
+            'toast' => [
+              'type' => 'error',
+              'message' => $e->getMessage(),
+            ],
+            'header' => '',
+            'footer' => '',
+          ]));
+        }
+        break;
+      case 'GET':
         $response->setStatusCode(200);
-        $response->redirect(BASE_URI . '/');
-      } else {
-        echo "Error";
-        $response->setStatusCode(401);
-        $response->setBody('Invalid credentials');
-        return;
-      }
-    } else {
-      $response->setStatusCode(200);
-      $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
-        'title' => 'Register',
-        'header' => '',
-        'footer' => '',
-      ]));
+        $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
+          'header' => '',
+          'footer' => '',
+        ]));
+        break;
+      default:
+        break;
     }
   }
 
