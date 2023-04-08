@@ -1,14 +1,14 @@
 const loadPageByAjax = async (pageTarget) => {
-  // if (pageTarget == "favorites" && (await isLogin())) {
-    // document.querySelector()
-  // }
+  const currentURL = window.location.href;
+  const newURL = `${currentURL}app/views/layouts/${pageTarget}.php`;
+
   $.ajax({
-    url: "app/views/layouts/dashboard.php",
-    type: "POST",
+    url: newURL,
+    type: "POSt",
     data: { page: pageTarget },
     dataType: "html",
     success: function (data) {
-      document.querySelector("#content").innerHTML = data;
+      window.history.pushState({}, null, currentURL);
     },
   });
 };
