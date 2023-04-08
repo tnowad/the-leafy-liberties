@@ -4,11 +4,12 @@ CREATE DATABASE bookstore;
 
 USE bookstore;
 
-CREATE TABLE authors (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    description VARCHAR(500) NOT NULL
-);
+CREATE TABLE
+    authors (
+        id int PRIMARY KEY NOT NULL,
+        name varchar(100) NOT NULL,
+        description varchar(500) NOT NULL
+    );
 
 CREATE TABLE
     carts (
@@ -21,7 +22,7 @@ CREATE TABLE
 
 CREATE TABLE
     categories (
-        id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        id int PRIMARY KEY NOT NULL,
         name varchar(100) NOT NULL
     );
 
@@ -96,16 +97,18 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    `books` (
-        `title` varchar(100) NOT NULL,
-        `description` varchar(500) NOT NULL,
-        `image` char(255) NOT NULL,
-        `price` int(11) NOT NULL,
-        `quantity` int(11) NOT NULL,
-        `status` TINYINT NOT NULL DEFAULT "1",
-        `author_id` int(11) NOT NULL,
-        `publisher_id` int(11) NOT NULL
-    );
+    books (
+        id int PRIMARY KEY NOT NULL,
+        title varchar(100) NOT NULL,
+        author varchar(100) NOT NULL,
+        publisher varchar(100) NOT NULL,
+        price decimal(10, 2) NOT NULL,
+        isbn varchar(13) NOT NULL,
+        description text NOT NULL,
+        image_url varchar(255) NOT NULL,
+        created_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+        updated_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+    )
 ALTER TABLE users
 ADD
     FOREIGN KEY (role_id) REFERENCES roles (id);
