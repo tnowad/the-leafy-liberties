@@ -13,24 +13,27 @@ use App\Models\Category;
         Categories
       </button>
       <!-- show options -->
-      <div
-        class="absolute hidden transition-all translate-y-10 bg-white border border-gray-200 rounded-md shadow-lg outline-none opacity-0 w-52 top-24 mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">
-        <div class="px-1 py-1">
-          <?php
-          $categories = Category::all();
-          $categories = [
-          ];
-          foreach ($categories as $category): ?>
-            <span
-              class="text-gray-700 group/category hover:bg-gray-300 hover:text-[#315854] px-4 py-2 transition-all block cursor-pointer">
-              <a href="<?php echo BASE_URI . `/products?category=$category->id` ?>"
-                class="block transition-all translate-x-0 text-md group-hover/category:translate-x-3">
-                <?php echo $category->name ?>
-              </a>
-            </span>
-          <?php endforeach; ?>
+      <?php
+      $categories = Category::all();
+      $categories = [
+        new Category(['id' => 1, 'name' => 'Category 1']),
+      ];
+      if (count($categories) > 0): ?>
+        <div
+          class="absolute hidden transition-all translate-y-10 bg-white border border-gray-200 rounded-md shadow-lg outline-none opacity-0 w-52 top-24 mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">
+          <div class="px-1 py-1">
+            <?php foreach ($categories as $category): ?>
+              <span
+                class="text-gray-700 group/category hover:bg-gray-300 hover:text-[#315854] px-4 py-2 transition-all block cursor-pointer">
+                <a href="<?php echo BASE_URI . "/products?category=$category->id" ?>"
+                  class="block transition-all translate-x-0 text-md group-hover/category:translate-x-3">
+                  <?php echo $category->name ?>
+                </a>
+              </span>
+            <?php endforeach; ?>
+          </div>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
     <div class="box-border w-full px-10">
       <form onSubmit="" class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">

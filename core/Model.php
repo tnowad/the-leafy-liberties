@@ -56,7 +56,6 @@ abstract class Model
   {
     $table = static::table();
     $query = "SELECT * FROM $table";
-
     $results = Database::getInstance()->fetchAll($query);
 
     return array_map(function ($result) {
