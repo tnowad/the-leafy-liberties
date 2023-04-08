@@ -98,4 +98,32 @@
     }
   });
 
+  // validate all input when mouse out if not match pattern then show error
+  const inputs = document.querySelectorAll("input");
+  inputs.forEach((input) => {
+    input.addEventListener("blur", function () {
+      if (input.type === "email") {
+        if (!input.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+          input.style.border = "1px solid red";
+        } else {
+          input.style.border = "1px solid #d1d5db";
+        }
+      }
+      if (input.type === "tel") {
+        if (!input.value.match(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g)) {
+          input.style.border = "1px solid red";
+        } else {
+          input.style.border = "1px solid #d1d5db";
+        }
+      }
+      if (input.type === "password") {
+        if (!input.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/g)) {
+          input.style.border = "1px solid red";
+        } else {
+          input.style.border = "1px solid #d1d5db";
+        }
+      }
+    });
+  });
+
 </script>
