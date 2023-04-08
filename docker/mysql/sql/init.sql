@@ -21,7 +21,7 @@ CREATE TABLE
 
 CREATE TABLE
     categories (
-        id int PRIMARY KEY NOT NULL,
+        id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
         name varchar(100) NOT NULL
     );
 
@@ -102,11 +102,7 @@ CREATE TABLE
         `image` char(255) NOT NULL,
         `price` int(11) NOT NULL,
         `quantity` int(11) NOT NULL,
-        `status` enum(
-            'available',
-            'unavailable',
-            'deleted'
-        ) NOT NULL DEFAULT 'available',
+        `status` TINYINT NOT NULL DEFAULT "1",
         `author_id` int(11) NOT NULL,
         `publisher_id` int(11) NOT NULL
     );

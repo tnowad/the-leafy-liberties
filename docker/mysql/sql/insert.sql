@@ -1,3 +1,5 @@
+-- Active: 1680850809935@@127.0.0.1@3306@bookstore
+
 -- Active: 1680891468661@@127.0.0.1@3306@bookstore
 
 INSERT INTO
@@ -392,3 +394,7 @@ VALUES (
         30,
         30
     );
+
+INSERT INTO
+    categories (id, name)
+VALUES (1, 'Fiction'), (2, 'Non-Fiction'), (3, 'Mystery'), (4, 'Romance'), (5, 'Science Fiction'), (6, 'Biography'), (7, 'History'), (8, 'Thriller'), (9, 'Horror');

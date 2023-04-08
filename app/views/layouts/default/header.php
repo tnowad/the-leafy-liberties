@@ -5,35 +5,30 @@
     <a class="w-48" href="<?php echo BASE_URI ?>">
       <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="HeaderLogo" />
     </a>
-    <div class="hidden sm:block w-full max-w-[140px]">
+    <div class="hidden sm:block w-full max-w-[140px] group">
       <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
         <i class="mr-1 fa-solid fa-bars"></i>
         Categories
       </button>
       <!-- show options -->
       <div
-        class="absolute w-48 -translate-x-[20%] origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none mt-7 ">
-        <div class="px-1 py-1 ">
+        class="opacity-0 absolute w-48 top-24 transition-all bg-white border border-gray-200  rounded-md shadow-lg outline-none mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:duration-300">
+        <span class="absoulute "></span>
+        <div class="px-1 py-1">
           <!-- Get all category from database and show -->
           <?php
-          $categories = [
-            [
-              'id' => 1,
-              'name' => 'Category 1'
-            ],
-            [
-              'id' => 2,
-              'name' => 'Category 2'
-            ]
-          ];
-          // $categories = Category::all();
-          foreach ($categories as $category): ?>
+          // use Core\Database;
+          $connect = mysqli_connect('localhost', 'root', '', 'bookstore');
+          $query = "SELECT name from categories";
+          $result = mysqli_query($connect,$query);
+          while ($row = $result->fetch_assoc()) { ?>
             <a href="<?php
 
-            ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
-              <?php echo $category['name'] ?>
+            ?>" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+              <?php echo $row['name'] ?>
             </a>
-          <?php endforeach; ?>
+          <?php }
+          ?>
         </div>
       </div>
     </div>
@@ -47,33 +42,41 @@
       </form>
     </div>
     <!-- list button -->
-    <div class="flex-row justify-between hidden gap-2 md:flex">
+    <div class="flex-row justify-between hidden gap-2 md:flex relative">
       <button type="button"
-        class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#6cada6] transition-all hover:text-white w-10 ">
+        class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10"
+        data-dropdown-toggle="dropdownHover" data-dropdown-trigger="click" id="dropdownHoverButton">
         <i class="fa-regular fa-user"></i>
       </button>
       <div
-        class="absolute w-48 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none mt-11 ">
-        <div class="px-1 py-1 ">
+        class="hidden absolute w-24 right-16 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none mt-11 transition-all"
+        id="dropdownHover">
+        <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
           <?php if (isset($_SESSION['user'])): ?>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
+            <a href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
               Profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Settings</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign out</a>
+            <a href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Settings</a>
+            <a href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign
+              out</a>
           <?php else: ?>
-            <a href="/the-leafy-liberties/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign
+            <a href="/the-leafy-liberties/login"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all text-center">Sign
               in</a>
-            <a href="/the-leafy-liberties/register" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign
+            <a href="/the-leafy-liberties/register"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all text-center">Sign
               up</a>
           <?php endif; ?>
         </div>
       </div>
       <button type="button"
-        class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#6cada6] transition-all hover:text-white w-10">
+        class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
         <i class="fa-regular fa-heart"></i>
       </button>
       <button type="button"
-        class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#6cada6] transition-all hover:text-white w-10">
+        class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
         <i class="fa-brands fa-opencart"></i>
       </button>
     </div>
