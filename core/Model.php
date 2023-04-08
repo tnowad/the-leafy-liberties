@@ -29,8 +29,8 @@ abstract class Model
   {
     $table = static::table();
     $primaryKey = (new static )->primaryKey;
-    $query = "SELECT * FROM $table WHERE $primaryKey = :id";
-    $params = [':id' => $id];
+    $query = "SELECT * FROM $table WHERE $primaryKey = ?";
+    $params = ['id' => $id];
     $result = Database::getInstance()->fetchOne($query, $params);
 
     if (!$result) {
@@ -56,6 +56,7 @@ abstract class Model
   {
     $table = static::table();
     $query = "SELECT * FROM $table";
+
     $results = Database::getInstance()->fetchAll($query);
 
     return array_map(function ($result) {

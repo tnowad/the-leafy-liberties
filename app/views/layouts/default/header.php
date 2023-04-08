@@ -18,10 +18,15 @@ use App\Models\Category;
         <div class="px-1 py-1">
           <?php
           $categories = Category::all();
+          $categories = [
+          ];
           foreach ($categories as $category): ?>
             <span
               class="text-gray-700 group/category hover:bg-gray-300 hover:text-[#315854] px-4 py-2 transition-all block cursor-pointer">
-              <a href="" class="block transition-all translate-x-0 text-md group-hover/category:translate-x-3"></a>
+              <a href="<?php echo BASE_URI . `/products?category=$category->id` ?>"
+                class="block transition-all translate-x-0 text-md group-hover/category:translate-x-3">
+                <?php echo $category->name ?>
+              </a>
             </span>
           <?php endforeach; ?>
         </div>

@@ -42,7 +42,6 @@ class Database
   {
     $connection = static::getInstance()->getConnection();
     $statement = $connection->prepare($query);
-    dd($params);
     if (!$statement) {
       throw new Exception("Database query preparation failed: " . $connection->error);
     }
