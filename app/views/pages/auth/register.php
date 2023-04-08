@@ -5,7 +5,9 @@
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
           Create and account
         </h1>
+        <!-- Start form -->
         <form class="space-y-4 md:space-y-6" action="<?php echo BASE_URI . "/register" ?>" method="post">
+          <!-- Email -->
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900">
               Email
@@ -14,6 +16,7 @@
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
               placeholder="Enter your email here" required />
           </div>
+          <!-- Name -->
           <div>
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">
               Name
@@ -22,6 +25,7 @@
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
               placeholder="Enter your name here" required />
           </div>
+          <!-- Phone -->
           <div>
             <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">
               Phone
@@ -30,11 +34,12 @@
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
               placeholder="Enter your phone here" required />
           </div>
+          <!-- Password -->
           <div class='relative'>
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
               Password
             </label>
-            <input type="password" name="password" id="password" placeholder="••••••••"
+            <input type="password" name="password" placeholder="••••••••" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
               required />
             <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer"
@@ -42,6 +47,7 @@
             <i id="show-icon-password" class="fa fa-eye absolute hidden top-[60%] right-4 cursor-pointer"
               aria-hidden="true"></i>
           </div>
+          <!-- Terms and Conditions -->
           <div class="flex items-start">
             <div class="flex items-center h-5">
               <input id="terms" aria-describedby="terms" type="checkbox"
@@ -57,6 +63,7 @@
               </label>
             </div>
           </div>
+          <!-- Submit button -->
           <button type="submit"
             class="w-full text-white bg-[#52938d] hover:bg-[#40736d] focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
             Create an account
