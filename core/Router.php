@@ -60,7 +60,7 @@ class Router
   public function resolve()
   {
     $method = $this->request->getMethod();
-    $path = $this->request->getUrl();
+    $path = $this->request->getPath();
     $callback = $this->routes[$method][$path] ?? false;
     if ($callback === false) {
       $this->response->setStatusCode(404);

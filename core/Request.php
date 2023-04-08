@@ -34,6 +34,16 @@ class Request
     return $this->url;
   }
 
+  public function getPath()
+  {
+    $path = $this->url;
+    $position = strpos($path, '?');
+    if ($position === false) {
+      return $path;
+    }
+    return substr($path, 0, $position);
+  }
+
   public function getParam($key)
   {
     if (isset($this->params[$key])) {
