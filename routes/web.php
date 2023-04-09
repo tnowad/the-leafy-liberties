@@ -30,8 +30,3 @@ $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);
 $router->get('/register', [AuthController::class, 'register']);
 $router->post('/register', [AuthController::class, 'register']);
-
-function url($route)
-{
-  return '/the-leafy-liberties' . $route;
-}
