@@ -45,10 +45,11 @@ class AuthController extends Controller
   {
     switch ($request->getMethod()) {
       case 'POST':
-        $email = $request->getQuery('email');
-        $name = $request->getQuery('name');
-        $phone = $request->getQuery('phone');
-        $password = $request->getQuery('password');
+        $email = $request->getParam('email');
+        $name = $request->getParam('name');
+        $phone = $request->getParam('phone');
+        $password = $request->getParam('password');
+        dd($request->getParams());
         $user = new User();
         $user->email = $email;
         $user->name = $name;
@@ -57,14 +58,7 @@ class AuthController extends Controller
         try {
           $user->save();
           $response->setStatusCode(200);
-          $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
-            'toast' => [
-              'type' => 'success',
-              'message' => 'Registered successfully',
-            ],
-            'header' => '',
-            'footer' => '',
-          ]));
+          $response->redirect('/');
         } catch (\Exception $e) {
           $response->setStatusCode(500);
           $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
