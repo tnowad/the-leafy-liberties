@@ -6,14 +6,7 @@ class Seeder
   public static function run()
   {
     $seeds = [
-      'UserSeeder',
-      'CategorySeeder',
-      'ProductSeeder',
-      'OrderSeeder',
-      'OrderDetailSeeder',
-      'ReviewSeeder',
-      'WishlistSeeder',
-      'CartSeeder',
+      CategorySeeder::class,
     ];
     foreach ($seeds as $seed) {
       $seed = new $seed();
