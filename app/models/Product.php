@@ -16,10 +16,8 @@ class Product extends Model
     'price',
     'isbn',
     'description',
-    'entered',
-    'remaining',
+    'quantity',
   ];
-
   public function author()
   {
     return Author::find($this->author_id);

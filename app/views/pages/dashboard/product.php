@@ -1,3 +1,9 @@
+<?php
+use App\Models\Product;
+use App\Models\Pagination;
+
+?>
+
 <div class="w-full my-0 mx-auto">
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
@@ -12,9 +18,7 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              use App\Models\Product;
-
-              $name = array("ID", "Image", "Title", "Author", "Publisher", "Price", "Isbn", "Description", 'Entered', 'Remaining', 'Action');
+              $name = array("ID", "Image", "Title", "Author", "Publisher", "Price", "Isbn", "Description", 'Quantity', 'Action');
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
                   <?php echo $name[$i - 1] ?>
@@ -54,10 +58,7 @@
                     <?php echo $product->description ?>
                   </td>
                   <td class="p-2">
-                    <?php echo $product->entered ?>
-                  </td>
-                  <td class="p-2">
-                    <?php echo $product->remaining ?>
+                    <?php echo $product->quantity ?>
                   </td>
                   <td class="px-5 py-3 w-44">
                     <div class="button flex justify-center items-center gap-4">
@@ -66,7 +67,9 @@
                         <i class="fa-solid fa-pen-to-square"></i>
                       </button>
                       <button
-                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
+                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all"
+                        <?php echo $product->id ?>
+                        >
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>
@@ -78,19 +81,54 @@
         </table>
       </div>
     </div>
+    <!-- <div class="my-5">
+      <ul class="pagination flex gap-5 text-center">
+        <li class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold
+                        hover:text-white hover:bg-[#2e524e] transition-all">
+          <button><i class="fa-solid fa-chevron-left"></i></button>
+        </li>
+        <li class="pagination-items p-2 bg-[#2e524e] text-white rounded-full w-10 h-10 font-semibold
+                        hover:text-white hover:bg-[#2e524e] transition-all">
+          <button>1</button>
+        </li>
+        <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
+                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
+          <button>2</button>
+        </li>
+        <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
+                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
+          <button>3</button>
+        </li>
+        <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
+                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
+
+          <button>4</button>
+        </li>
+        <li class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold
+                        hover:text-white hover:bg-[#2e524e] transition-all">
+          <button><i class="fa-regular fa-chevron-right"></i></button>
+        </li>
+      </ul>
+    </div> -->
     <div
-      class="form absolute top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-10">
+      class="form absolute top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[1000]">
       <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
         <h2 class="text-xl font-bold mb-4">Add Product</h2>
         <form class="flex flex-col" onSubmit="">
+          <label for="title" class="my-2">Title:</label>
+          <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
           <label for="image" class="my-2">Image:</label>
           <input type="file" />
-          <label for="category" class="my-2">Category:</label>
+          <label for="category" class="my-2">Author:</label>
           <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
-          <label for="entered" class="my-2">Entered:</label>
+
+          <label for="entered" class="my-2">Publisher:</label>
           <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
-          <label for="remaining" class="my-2">Remaining:</label>
+
+          <label for="remaining" class="my-2">Price:</label>
           <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
           <label for="status" class="my-2">Status:</label>
           <select value={status} class="bg-gray-100 p-3 focus:outline-none rounded-lg">
             <option value="">Select status</option>
@@ -119,4 +157,8 @@
     document.querySelector(".form").classList.remove("hidden");
 
   })
+  // function deleteProduct(button) {
+  //   var productId = button.getAttribute('data-id');
+  //   alert(productId);
+  // }
 </script>
