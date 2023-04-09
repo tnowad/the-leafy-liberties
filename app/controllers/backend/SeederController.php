@@ -12,7 +12,7 @@ class SeederController extends Controller
   public function index(Request $request, Response $response)
   {
     if (DotEnv::get('Seeded') == 'true') {
-      return $response->redirect('/dashboard');
+      return $response->redirect('/');
     } else {
       return $response->redirect('/seeder/run');
     }
@@ -23,6 +23,5 @@ class SeederController extends Controller
     Seeder::run();
     DotEnv::set('Seeded', 'true');
     DotEnv::save();
-    return $response->redirect('/dashboard');
   }
 }
