@@ -7,6 +7,7 @@ class CategorySeeder
 {
   public function run()
   {
+    Category::truncate();
     $categories = [
       'Fiction',
       'Non-Fiction',
