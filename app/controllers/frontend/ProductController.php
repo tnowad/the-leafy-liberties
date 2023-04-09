@@ -2,12 +2,13 @@
 
 namespace App\Controllers\Frontend;
 
+use App\Models\Product;
 use Core\Controller;
 use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
-use App\Models\Product;
+
 
 class ProductController extends Controller
 {
@@ -49,12 +50,32 @@ class ProductController extends Controller
 
   public function show(Request $request, Response $response)
   {
-    $productId = $request->getParam('id');
-    $product = Product::find($productId);
+    if (!$request->getQuery('id')) {
+      $response->setStatusCode(404);
+      $response->redirect(BASE_URI . '/');
+      return;
+    }
+    // Get product by id
+    // pass in to variable
+    // render view
+
+    // $product = Product::findOne(['id' => $request->getQuery('id')]);
+    $product = new Product([
+      'name' => 'Product 1',
+      'price' => 100,
+      'description' => 'Description',
+      'image' => 'https://picsum.photos/200/300',
+      'author_id' => 1,
+      'publisher_id' => 1,
+      'quantity' => 10,
+      'status' => 1,
+      'created_at' => '2021-05-01 00:00:00',
+      'updated_at' => '2021-05-01 00:00:00',
+    ]);
 
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/index'), [
-      'title' => 'Index',
+    $response->setBody(View::renderWithLayout(new View('pages/product'), [
+      'title' => 'Product',
       'product' => $product,
     ]));
   }
