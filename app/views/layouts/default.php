@@ -33,7 +33,15 @@
     new Toast({
       message: `<?php echo $params['toast']['message'] ?>`,
       type: '<?php echo $params['toast']['type'] ?>',
-    })
+    });
+
+    setTimeout(() => {
+      new Toast({
+        message: `<?php echo $params['toast']['message'] ?>`,
+        type: '<?php echo $params['toast']['type'] ?>',
+      });
+    }, 5000);
+
   </script>
 <?php endif; ?>
 
