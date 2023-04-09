@@ -4,7 +4,7 @@ use App\Models\Category;
 ?>
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
-    <a class="w-48" href="<?php echo BASE_URI ?>">
+    <a class="w-48" href="<?php echo BASE_URI . '/' ?>">
       <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="HeaderLogo" />
     </a>
     <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center">
@@ -61,10 +61,10 @@ use App\Models\Category;
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign
               out</a>
           <?php else: ?>
-            <a href="/the-leafy-liberties/login"
+            <a href="<?php echo BASE_URI . '/login' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all text-center">Sign
               in</a>
-            <a href="/the-leafy-liberties/register"
+            <a href="<?php echo BASE_URI . '/register' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all text-center">Sign
               up</a>
           <?php endif; ?>

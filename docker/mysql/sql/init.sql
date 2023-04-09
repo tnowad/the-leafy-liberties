@@ -78,9 +78,9 @@ CREATE TABLE
 CREATE TABLE
   users (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    email varchar(50) NOT NULL,
+    email varchar(50) NOT NULL UNIQUE,
     name varchar(50) NOT NULL,
-    phone varchar(50) DEFAULT NULL,
+    phone varchar(50) DEFAULT NULL UNIQUE,
     password varchar(255) NOT NULL,
     user_image varchar(255) DEFAULT NULL,
     role_id int NOT NULL DEFAULT "0",

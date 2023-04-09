@@ -49,7 +49,6 @@ class AuthController extends Controller
         $name = $request->getParam('name');
         $phone = $request->getParam('phone');
         $password = $request->getParam('password');
-        dd($request->getParams());
         $user = new User();
         $user->email = $email;
         $user->name = $name;
@@ -58,6 +57,7 @@ class AuthController extends Controller
         try {
           $user->save();
           $response->setStatusCode(200);
+          Application::getInstance()->getSession()->set('user', $user);
           $response->redirect('/');
         } catch (\Exception $e) {
           $response->setStatusCode(500);

@@ -14,6 +14,7 @@ class HomeController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/index'), compact('authors', 'slides', 'tagName')));
   }
