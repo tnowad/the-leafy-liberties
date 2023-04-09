@@ -12,8 +12,10 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("Products", "Category", "Entered", "Remaining", "Status", "Amount", "Action");
-              for ($i = 1; $i <= 7; $i++) { ?>
+              use App\Models\Product;
+
+              $name = array("ID", "Image", "Title", "Author", "Publisher", "Price", "Isbn", "Description", 'Entered', 'Remaining', 'Action');
+              for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
                   <?php echo $name[$i - 1] ?>
                 </th>
@@ -23,31 +25,55 @@
           </thead>
           <tbody>
             <?php
-            for ($i = 1; $i <= 10; $i++) { ?>
-              <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100">
-                <td class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
-                  <img src="../../../../resources/images/info_book_detail.png" alt="">
-                </td>
-                <td class="px-5 py-3">#1</td>
-                <td class="px-5 py-3">Jun 29,2023</td>
-                <td class="px-5 py-2">Jack Phat</td>
-                <td class="px-5 py-3">Delivered</td>
-                <td class="px-5 py-3">1</td>
-                <td class="px-5 py-3 w-44">
-                  <div class="button flex justify-center items-center gap-4">
-                    <button
-                      class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button
-                      class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            <?php }
-            ?>
+            $product_table = Product::all();
+            if (count($product_table) > 0): ?>
+              <?php foreach ($product_table as $product): ?>
+                <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
+                  <td class="px-5 py-3">
+                    <?php echo $product->id ?>
+                  </td>
+                  <td class="p-3 h-24 w-32">
+                    <img src="<?php echo $product->image_url ?>" alt="" />
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $product->title ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $product->author ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $product->publisher ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $product->price ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $product->isbn ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $product->description ?>
+                  </td>
+                  <td class="p-2">
+                    <?php echo $product->entered ?>
+                  </td>
+                  <td class="p-2">
+                    <?php echo $product->remaining ?>
+                  </td>
+                  <td class="px-5 py-3 w-44">
+                    <div class="button flex justify-center items-center gap-4">
+                      <button
+                        class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+                      <button
+                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </tbody>
         </table>
       </div>

@@ -65,7 +65,7 @@ VALUES (
         8.99,
         '9780446310789',
         'A novel set in the Deep South in the 1930s, which explores themes of racial injustice and the loss of innocence.',
-        'https://images-na.ssl-images-amazon.com/images/I/41GdLkI5OQL._SY346_.jpg'
+        'https://cdn.britannica.com/21/182021-050-666DB6B1/book-cover-To-Kill-a-Mockingbird-many-1961.jpg'
     ), (
         2,
         '1984',
@@ -74,7 +74,7 @@ VALUES (
         9.99,
         '9780451524935',
         'A dystopian novel set in a totalitarian society, where the government constantly monitors its citizens.',
-        'https://images-na.ssl-images-amazon.com/images/I/41W-Vh2Q7ZL._SX301_BO1,204,203,200_.jpg'
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/1984first.jpg/800px-1984first.jpg'
     ), (
         3,
         'The Catcher in the Rye',
@@ -83,7 +83,7 @@ VALUES (
         7.99,
         '9780316769488',
         'A novel about teenage angst and alienation, told from the perspective of Holden Caulfield.',
-        'https://images-na.ssl-images-amazon.com/images/I/41G6l+o6PgL._SY344_BO1,204,203,200_.jpg'
+        'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/61fgOuZfBGL._AC_UF1000,1000_QL80_.jpg'
     ), (
         4,
         'Pride and Prejudice',
@@ -92,7 +92,7 @@ VALUES (
         6.99,
         '9780141439518',
         'A romantic novel set in the Georgian era, which follows the lives of the Bennet family and their social circle.',
-        'https://images-na.ssl-images-amazon.com/images/I/51b5uV%2B5L5L._SX331_BO1,204,203,200_.jpg'
+        'https://m.media-amazon.com/images/M/MV5BMTA1NDQ3NTcyOTNeQTJeQWpwZ15BbWU3MDA0MzA4MzE@._V1_.jpg'
     ), (
         5,
         'Animal Farm',
@@ -101,7 +101,7 @@ VALUES (
         8.99,
         '9780141036137',
         'A novella that uses animals to satirize the events leading up to the Russian Revolution and Stalinist era of the Soviet Union.',
-        'https://images-na.ssl-images-amazon.com/images/I/51v9ZN48vnL._SX323_BO1,204,203,200_.jpg'
+        'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/91LUbAcpACL.jpg'
     ), (
         6,
         'The Great Gatsby',
@@ -110,7 +110,7 @@ VALUES (
         10.99,
         '9780743273565',
         'A novel set in the Roaring Twenties, which explores themes of decadence, idealism, and social upheaval.',
-        'https://images-na.ssl-images-amazon.com/images/I/41WolVXMrRL._SX322_BO1,204,203,200_.jpg'
+        'https://upload.wikimedia.org/wikipedia/commons/7/7a/The_Great_Gatsby_Cover_1925_Retouched.jpg'
     ), (
         7,
         'Lord of the Flies',

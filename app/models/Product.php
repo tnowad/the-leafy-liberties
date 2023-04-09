@@ -1,21 +1,23 @@
 <?php
+namespace App\Models;
+
 use Core\Model;
 
 class Product extends Model
 {
-  protected $table = 'products';
+  protected $table = 'books';
 
   protected $fillable = [
-    'name',
+    'id',
+    'image_url',
+    'title',
+    'author',
+    'publisher',
     'price',
+    'isbn',
     'description',
-    'image',
-    'author_id',
-    'publisher_id',
-    'quantity',
-    'status',
-    'created_at',
-    'updated_at',
+    'entered',
+    'remaining',
   ];
 
   public function author()

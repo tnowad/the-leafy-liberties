@@ -73,7 +73,7 @@
       $total = 10;
       for ($i = 1; $i < $total; $i++) { ?>
         <div
-          class="flex flex-col items-center justify-center w-full px-[22px] py-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+          class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
           <div class="object-cover h-full p-2 w-60">
             <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
           </div>
@@ -95,7 +95,7 @@
             </div>
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-              <p class="font-semibold select-option-text">Select option</p>
+              <p class="font-semibold select-option-text">Add to wishlist</p>
               <i
                 class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
             </div>
@@ -118,12 +118,12 @@
           $total = 12;
           for ($i = 1; $i <= $total; $i++) { ?>
             <div
-              class="flex flex-col items-center justify-center w-full px-[22px] py-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+              class="flex flex-col items-center justify-center w-full box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
               <div class="object-cover h-full p-2 w-60">
                 <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
               </div>
               <div
-                class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+                class="flex flex-col items-start justify-center w-[90%] p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16 mx-auto">
                 <div class="product-name">
                   <a href="/">My Dearest Darkest</a>
                 </div>
@@ -140,7 +140,7 @@
                 </div>
                 <div
                   class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                  <p class="font-semibold select-option-text">Select option</p>
+                  <p class="font-semibold select-option-text">Add to wishlist</p>
                   <i
                     class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
                 </div>
@@ -173,7 +173,7 @@
       </a>
     </div>
     <div class="relative w-full mb-5">
-      <div class="flex items-center justify-center gap-5">
+      <div class="grid grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
         <?php
         $name = array("Fantasy", "Horror", "Drama", "Science-fiction");
         $total = 4;
@@ -184,7 +184,7 @@
                 class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-125" />
             </div>
             <p
-              class="absolute xl:top-3/4 left-10 text-white font-normal text-4xl xl:text-3xl lg:text-2xl md:text-[22px] md:top-2/3 sm:text-[30px] mobile:top-2/3">
+              class="absolute xl:top-3/4 left-10 text-white font-normal xl:text-3xl sm:text-2xl md:top-2/3">
               <?php echo $name[$i - 1] ?>
             </p>
           </div>
