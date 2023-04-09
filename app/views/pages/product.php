@@ -1,12 +1,14 @@
-<div class="pt-3 p-5 sm:pt-10 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20 box-border">
+<?php
+dd($params['product']);
+?>
+
+<div class="box-border p-5 pt-3 sm:pt-10 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
   <!-- // ? option  -->
   <div class="grid grid-cols-1 xl:grid-cols-2">
-    <div class="lg:mr-5 p-5 border border-solid border-gray-400 rounded-3xl box-border
-          flex justify-center
-        ">
+    <div class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl ">
       <img class="h-full" src="./views/assets/img/info_book_detail.png" alt="Book info" />
     </div>
-    <div class="p-4 lg:p-10 mt-5 lg:mt-0 w-auto h-auto border border-solid border-gray-400 rounded-3xl box-border">
+    <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
       <p class="p-1 mb-2 md:mb-6 text-[11px] sm:text-sm text-green-400 bg-gray-200 inline-block">
         IN STOCK
       </p>
@@ -19,24 +21,24 @@
         Author :
       </p>
       <p class="inline-block text-[10px] sm:text-xs"> JESSICA MUNOZ</p>
-      <span class="ml-5 inline-block">
-        <img class="w-12 sm:w-20 inline-block" src={star} alt="" />
+      <span class="inline-block ml-5">
+        <img class="inline-block w-12 sm:w-20" src={star} alt="" />
       </span>
       <p class="ml-5 mr-1 inline-block text-[10px] sm:text-xs text-gray-400">
         BKU :
       </p>
-      <p class="mb-4 sm:mb-10 inline-block text-xs">65377017</p>
-      <div class="border border-solid border-gray-400 box-border border-x-0">
-        <span class="text-green-800 text-2xl sm:text-3xl">
+      <p class="inline-block mb-4 text-xs sm:mb-10">65377017</p>
+      <div class="box-border border border-gray-400 border-solid border-x-0">
+        <span class="text-2xl text-green-800 sm:text-3xl">
           150.000 VNĐ
         </span>
-        <p class="mt-4 sm:mt-8 text-xs">
+        <p class="mt-4 text-xs sm:mt-8">
           Aliquid nesciunt molestiae totam. Nostrum quidem officia dolores
           quo ut. Autem conse quatur molestiae quos tempore sunt.
         </p>
-        <div class="mt-8 sm:mt-28 mb-6 sm:mb-10 flex flex-wrap sm:flex-row justify-around">
+        <div class="flex flex-wrap justify-around mt-8 mb-6 sm:mt-28 sm:mb-10 sm:flex-row">
           <div
-            class=" p-2 w-2/5 sm:w-3/12 flex justify-around border border-solid border-gray-400 rounded-3xl box-border">
+            class="box-border flex justify-around w-2/5 p-2 border border-gray-400 border-solid  sm:w-3/12 rounded-3xl">
             <button>-</button>
             <span>1</span>
             <button>+</button>
@@ -47,7 +49,7 @@
             Add to cart
           </button>
           <div
-            class="p-2 w-2/4 sm:w-3/12 flex justify-around border border-solid border-gray-400 rounded-3xl box-border">
+            class="box-border flex justify-around w-2/4 p-2 border border-gray-400 border-solid sm:w-3/12 rounded-3xl">
             <i class="fa-regular fa-heart"></i>
 
             <a href="/wishlist" src="" alt="" class="pt-1 text-xs">
@@ -56,14 +58,14 @@
           </div>
         </div>
       </div>
-      <p class="mt-5 inline-block text-gray-400">Categories : </p>
-      <p class="ml-1 inline-block">Genre Fiction</p>
+      <p class="inline-block mt-5 text-gray-400">Categories : </p>
+      <p class="inline-block ml-1">Genre Fiction</p>
       <br />
       <p class="inline-block text-gray-400">Tags :</p>
-      <p class="ml-1 inline-block">
+      <p class="inline-block ml-1">
         Books, Fiction, Romance - Contemporary
       </p>
-      <div class="mt-10 w-1/5 flex justify-around">
+      <div class="flex justify-around w-1/5 mt-10">
         <i class="text-2xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-blue-500"></i>
         <i class="text-2xl transition-all cursor-pointer fa-brands fa-twitter hover:text-blue-600"></i>
         <i class="text-2xl transition-all cursor-pointer fa-brands fa-instagram hover:text-pink-500"></i>
@@ -72,24 +74,24 @@
   </div>
   <!-- //? info detail  -->
   <div class="mt-20">
-    <ul class="flex justify-center box-content">
-      <li class="mr-10 mb-5">
+    <ul class="box-content flex justify-center">
+      <li class="mb-5 mr-10">
         <a href="/book_detail" src="" alt="" class="text-base sm:text-2xl">
           Description
         </a>
       </li>
-      <li class="mr-10 mb-5">
+      <li class="mb-5 mr-10">
         <a href="/book_detail" src="" alt="" class="text-base sm:text-2xl">
           Review
         </a>
       </li>
-      <li class="mr-5 mb-2 sm:mr-10 sm:mb-5">
+      <li class="mb-2 mr-5 sm:mr-10 sm:mb-5">
         <a href="/book_detail" src="" alt="" class="text-base sm:text-2xl">
           Vendor
         </a>
       </li>
     </ul>
-    <div class="p-2 border border-solid border-gray-400 rounded-3xl box-border sm:h-auto sm:py-10 sm:px-20">
+    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20">
       <p>
         Ut earum iure dolor tenetur. Et sit et est deserunt. Cumque
         voluptatum recusandae molestiae recusandae velit. Eaque quam
