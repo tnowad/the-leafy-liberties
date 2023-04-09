@@ -24,7 +24,12 @@ abstract class Model
     $instance = new static;
     return $instance->table ?? strtolower(get_called_class()) . 's';
   }
-
+  public static function create($attributes)
+  {
+    $model = new static($attributes);
+    $model->save();
+    return $model;
+  }
   public static function find($id)
   {
     $table = static::table();
@@ -65,7 +70,6 @@ abstract class Model
 
   public function save()
   {
-    // if id is set, update record else insert new record into database
     if (isset($this->attributes[$this->primaryKey])) {
       return $this->update();
     } else {
@@ -80,6 +84,7 @@ abstract class Model
     $values = array_values($this->attributes);
     $placeholders = array_fill(0, count($values), '?');
     $query = "INSERT INTO $table (" . implode(', ', $fields) . ") VALUES (" . implode(', ', $placeholders) . ")";
+
     $result = Database::getInstance()->execute($query, $values);
 
     if (!$result) {
