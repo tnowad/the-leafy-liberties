@@ -1,6 +1,8 @@
 <?php
 namespace Seeds;
 
+use Seeds\CategorySeeder;
+
 class Seeder
 {
   public static function run()

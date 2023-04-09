@@ -2,6 +2,7 @@
 use Core\Application;
 
 use Core\Database;
+use Seeds\Seeder;
 use Utils\DotEnv;
 
 define('ENVIRONMENT', 'development');
@@ -35,7 +36,9 @@ try {
 } catch (\Exception $e) {
   die("Database connection failed");
 }
-
+if (ENVIRONMENT == 'development') {
+  Seeder::run();
+}
 $app = Application::getInstance();
 
 foreach (glob('./routes/*.php') as $file) {

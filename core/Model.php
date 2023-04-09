@@ -65,7 +65,6 @@ abstract class Model
 
   public function save()
   {
-    // if id is set, update record else insert new record into database
     if (isset($this->attributes[$this->primaryKey])) {
       return $this->update();
     } else {
