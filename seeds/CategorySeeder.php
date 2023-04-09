@@ -22,9 +22,10 @@ class CategorySeeder
       'Travel',
     ];
     foreach ($categories as $category) {
-      $category = new Category();
-      $category->name = $category;
-      $category->save();
+      echo "Creating category: $category" . PHP_EOL;
+      Category::create([
+        'name' => $category,
+      ]);
     }
   }
 }
