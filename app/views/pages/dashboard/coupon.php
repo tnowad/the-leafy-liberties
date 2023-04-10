@@ -12,7 +12,9 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("No", "Name", "Description", "Actived", "Expired", "Amount", "Status", "Action");
+              use App\Models\Coupon;
+
+              $name = array("No", "Name","Actived", "Expired", "Amount","Description" ,"Action");
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
                   <?php echo $name[$i - 1] ?>
@@ -23,35 +25,44 @@
           </thead>
           <tbody>
             <?php
-            for ($i = 1; $i <= 10; $i++) { ?>
-              <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100">
-                <td class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
-                  <?php echo $i ?>
-                </td>
-                <td class="px-5 py-3">APP10K</td>
-                <td class="px-5 py-3 truncate block w-80">Giảm ngay 10K khi sử dụng mã.Áp dụng cho mọi đơn hàng.Nostrud eu
-                  ipsum do ea exercitation duis magna elit cillum.Aute mollit labore consectetur excepteur.Laboris
-                  exercitation fugiat commodo esse ut veniam dolore consectetur ea fugiat.
-                </td>
-                <td class="px-5 py-2">11/12/2023</td>
-                <td class="px-5 py-3">23/12/2023</td>
-                <td class="px-5 py-3">3</td>
-                <td class="px-5 py-3">Actived</td>
-                <td class="px-5 py-3 w-44">
-                  <div class="button flex justify-center items-center gap-4">
-                    <button
-                      class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button
-                      class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            <?php }
-            ?>
+            $coupons_table = Coupon::all();
+            if (count($coupons_table) > 0): ?>
+              <?php foreach ($coupons_table as $coupon): ?>
+                <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
+                  <td class="px-5 py-3">
+                    <?php echo $coupon->id ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $coupon->name ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $coupon->active ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $coupon->expired ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $coupon->quantity ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $coupon->description ?>
+                  </td>
+                  <td class="px-5 py-3 w-44">
+                    <div class="button flex justify-center items-center gap-4">
+                      <button
+                        class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+                      <button
+                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all"
+                        <?php echo $coupon->id ?>>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </tbody>
         </table>
       </div>
