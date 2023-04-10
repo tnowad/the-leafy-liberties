@@ -97,6 +97,20 @@ CREATE TABLE
   );
 
 CREATE TABLE
+<<<<<<< HEAD
+    products (
+        id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        star int NOT NULL,
+        title varchar(100) NOT NULL,
+        author varchar(100) NOT NULL,
+        publisher varchar(100) NOT NULL,
+        price decimal(10, 2) NOT NULL,
+        isbn varchar(13) NOT NULL,
+        description text NOT NULL,
+        image_url varchar(255) NOT NULL,
+        quantity int NOT NULL
+    );
+=======
   products (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     title varchar(100) NOT NULL,
@@ -108,6 +122,7 @@ CREATE TABLE
     image_url varchar(255) NOT NULL,
     quantity int NOT NULL
   );
+>>>>>>> eb75ab29095ed00a7324528a30da836da9ab733b
 
 CREATE TABLE
   sliders (
