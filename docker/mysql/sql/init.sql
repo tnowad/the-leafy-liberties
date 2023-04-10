@@ -84,9 +84,7 @@ CREATE TABLE
         password varchar(255) NOT NULL,
         user_image varchar(255) DEFAULT NULL,
         role_id int NOT NULL DEFAULT "0",
-        status tinyint NOT NULL DEFAULT "1",
-        created_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-        updated_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+        status tinyint NOT NULL DEFAULT "1"
     );
 
 CREATE TABLE
