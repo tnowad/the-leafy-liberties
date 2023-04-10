@@ -99,6 +99,7 @@ CREATE TABLE
 CREATE TABLE
     products (
         id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        star int NOT NULL,
         title varchar(100) NOT NULL,
         author varchar(100) NOT NULL,
         publisher varchar(100) NOT NULL,
