@@ -368,3 +368,5 @@ VALUES (
             or treat yourself to 25 % off all Halloween costumes
             and decorations.'
     );
+
+DELETE FROM categories WHERE id >= 308 and id <= 407

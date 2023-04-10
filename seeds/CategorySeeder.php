@@ -24,11 +24,11 @@ class CategorySeeder
       'Self-Help',
       'Travel',
     ];
-    foreach ($categories as $category) {
-      echo "Seeding category: $category" . "<br>";
-      Category::create([
-        'name' => $category,
-      ]);
-    }
+    // foreach ($categories as $category) {
+    //   echo "Seeding category: $category" . "<br>";
+    //   Category::create([
+    //     'name' => $category,
+    //   ]);
+    // }
   }
 }
