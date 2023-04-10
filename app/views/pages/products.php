@@ -70,7 +70,6 @@
     <div class="">
       <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         <?php
-        $total = 20;
         $productList = $params['products'];
 
         foreach ($productList as $product) {
@@ -87,16 +86,14 @@
                 <a class="text-2xl" href="" alt> <?php echo $product->title ?></a>
               </div>
               <div class="">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
+                <?php for ($i = 1; $i <= $product->star; $i++) : ?>
+                  <i class="fa fa-star text-yellow-600" aria-hidden="true"></i>
+                <?php endfor; ?>
               </div>
               <div class="text-sm product-author">Enrique Wallace</div>
               <div class="desc"><?php echo $product->description ?></div>
               <div class="flex justify-center p-0 font-semibold text-primary-900">
-                <span>150.000</span>
+                <span><?php echo $product->price ?></span>
               </div>
             </div>
           </div>

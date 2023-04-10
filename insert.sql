@@ -36,6 +36,7 @@ VALUES (
 
 INSERT INTO
     products (
+        star,
         title,
         author,
         publisher,
@@ -46,6 +47,7 @@ INSERT INTO
         quantity
     )
 VALUES (
+        3,
         'To Kill a Mockingbird',
         'Harper Lee',
         'J. B. Lippincott & Co.',
@@ -55,6 +57,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/41WUz8GZn2L._SX326_BO1,204,203,200_.jpg',
         25
     ), (
+        4,
         'The Great Gatsby',
         'F. Scott Fitzgerald',
         'Charles Scribner''s Sons',
@@ -64,6 +67,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/91rQ5dGzZcL.jpg',
         30
     ), (
+        5,
         '1984',
         'George Orwell',
         'Secker and Warburg',
@@ -73,6 +77,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/91uQL53hGKL.jpg',
         20
     ), (
+        4,
         'Pride and Prejudice',
         'Jane Austen',
         'T. Egerton',
@@ -82,6 +87,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51qbGAAvhvL._SX331_BO1,204,203,200_.jpg',
         35
     ), (
+        2,
         'One Hundred Years of Solitude',
         'Gabriel García Márquez',
         'Editorial Sudamericana',
@@ -91,6 +97,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/81A-dlAZ-qL.jpg',
         15
     ), (
+        3,
         'The Catcher in the Rye',
         'J.D. Salinger',
         'Little, Brown and Company',
@@ -100,6 +107,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/41tpaQr7VBL._SX322_BO1,204,203,200_.jpg',
         25
     ), (
+        3,
         'The Lord of the Rings',
         'J.R.R. Tolkien',
         'George Allen & Unwin',
@@ -109,6 +117,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/91tBrbFR3dL.jpg',
         10
     ), (
+        5,
         'The Adventures of Huckleberry Finn',
         'Mark Twain',
         'Charles L. Webster And Company',
@@ -118,6 +127,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51s7sJbNcwL._SX331_BO1,204,203',
         30
     ), (
+        4,
         'Animal Farm',
         'George Orwell',
         'Secker and Warburg',
@@ -127,6 +137,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51PfY80eKRL._SX331_BO1,204,203,200_.jpg',
         30
     ), (
+        5,
         'The Hobbit',
         'J.R.R. Tolkien',
         'George Allen & Unwin',
@@ -136,6 +147,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51lC7XuUZ2L._SX302_BO1,204,203,200_.jpg',
         50
     ), (
+        3,
         'The Picture of Dorian Gray',
         'Oscar Wilde',
         'Penguin Classics',
@@ -145,6 +157,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51oFE6wGVOL._SX324_BO1,204,203,200_.jpg',
         20
     ), (
+        3,
         'The Hitchhikers Guide to the Galaxy',
         'Douglas Adams',
         'Del Rey',
@@ -154,6 +167,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51NqPfsDcqL._SX322_BO1,204,203,200_.jpg',
         15
     ), (
+        5,
         'The Count of Monte Cristo',
         'Alexandre Dumas',
         'Penguin Classics',
@@ -163,6 +177,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51ACU32xGaL._SX324_BO1,204,203,200_.jpg',
         25
     ), (
+        5,
         'The Brothers Karamazov',
         'Fyodor Dostoevsky',
         'Penguin Classics',
@@ -172,6 +187,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51zv5YW5Q5L._SX332_BO1,204,203,200_.jpg',
         30
     ), (
+        5,
         'The Odyssey',
         'Homer',
         'Penguin Classics',
@@ -181,6 +197,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51n4KIB4v6L._SX325_BO1,204,203,200_.jpg',
         40
     ), (
+        4,
         'The Divine Comedy',
         'Dante Alighieri',
         'Penguin Classics',
@@ -190,6 +207,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51P-OWSoiBL._SX313_BO1,204,203,200_.jpg',
         35
     ), (
+        5,
         'Crime and Punishment',
         'Fyodor Dostoevsky',
         'Penguin Classics',
@@ -199,6 +217,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51OyNrk-W6L._SX318_BO1,204,203,200_.jpg',
         22
     ), (
+        4,
         'The Wind-Up Bird Chronicle',
         'Haruki Murakami',
         'Vintage International',
@@ -208,6 +227,7 @@ VALUES (
         'https://images-na.ssl-images-amazon.com/images/I/51O7x2BCbJL._SX331_BO1,204,203,200_.jpg',
         12
     ), (
+        5,
         'Moby-Dick',
         'Herman Melville',
         'Penguin Classics',

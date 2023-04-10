@@ -27,27 +27,18 @@ class ProductController extends Controller
 
   public function show(Request $request, Response $response)
   {
-    // if (!$request->getQuery('id')) {
-    //   $response->setStatusCode(404);
-    //   $response->redirect(BASE_URI . '/');
-    //   return;
-    // }
-    // Get product by id
-    // pass in to variable
-    // render view
-
-    $product = new Product([
-      'name' => 'Product 1',
-      'price' => 100,
-      'description' => 'Description',
-      'image' => 'https://picsum.photos/200/300',
-      'author_id' => 1,
-      'publisher_id' => 1,
-      'quantity' => 10,
-      'status' => 1,
-      'created_at' => '2021-05-01 00:00:00',
-      'updated_at' => '2021-05-01 00:00:00',
-    ]);
+    if ($request->getQuery('id')) {
+      $response->setStatusCode(404);
+      $response->redirect(BASE_URI . '/');
+      return;
+    }
+    $product = Product::find($request->getQuery('id'));
+    dd($product);
+    if (!$product) {
+      $response->setStatusCode(404);
+      $response->redirect(BASE_URI . '/');
+      return;
+    }
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/product'), [
       'product' => $product,
