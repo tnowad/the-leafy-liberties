@@ -5,10 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo $params['title'] ?? 'Dashboard' ?></title>
+  <title>
+    <?php echo $params['title'] ?? 'Dashboard' ?>
+  </title>
   <link rel="icon" type="image/x-icon" href="<?php echo BASE_URI . '/resources/images/logo.png' ?>">
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/reset.css' ?>">
-  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@44659d9/css/all.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@44659d9/css/all.min.css" rel="stylesheet"
+    type="text/css" />
   <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 </head>
 
@@ -28,6 +31,8 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 <script src="resources/js/loadPage.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+  integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </html>
