@@ -31,35 +31,23 @@ class ProductController extends Controller
     $products = Product::all();
 
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/index'), [
+    $response->setBody(View::renderWithLayout(new View('pages/products'), [
       'title' => 'Index',
       'products' => $products,
     ]));
   }
 
-  // public function show(Request $request, Response $response)
-  // {
-  //   // Get product by id
-  //   // pass in to variable
-  //   // render view
-  //   $response->setStatusCode(200);
-  //   $response->setBody(View::renderWithLayout(new View('pages/product'), [
-  //     'title' => 'Product'
-  //   ]));
-  // }
-
   public function show(Request $request, Response $response)
   {
-    if (!$request->getQuery('id')) {
-      $response->setStatusCode(404);
-      $response->redirect(BASE_URI . '/');
-      return;
-    }
+    // if (!$request->getQuery('id')) {
+    //   $response->setStatusCode(404);
+    //   $response->redirect(BASE_URI . '/');
+    //   return;
+    // }
     // Get product by id
     // pass in to variable
     // render view
 
-    // $product = Product::findOne(['id' => $request->getQuery('id')]);
     $product = new Product([
       'name' => 'Product 1',
       'price' => 100,
@@ -72,10 +60,8 @@ class ProductController extends Controller
       'created_at' => '2021-05-01 00:00:00',
       'updated_at' => '2021-05-01 00:00:00',
     ]);
-
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/product'), [
-      'title' => 'Product',
       'product' => $product,
     ]));
   }
