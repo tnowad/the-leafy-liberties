@@ -1,4 +1,4 @@
--- Active: 1681017538652@@127.0.0.1@3306@bookstore_web
+-- Active: 1680850809935@@127.0.0.1@3306@bookstore
 
 INSERT INTO
     authors (name, description)

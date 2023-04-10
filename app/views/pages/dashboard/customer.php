@@ -12,8 +12,10 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("Profile", "Name", "Email", "Total Buy", "Status", "Create At", "Action");
-              for ($i = 1; $i <= 7; $i++) { ?>
+              use App\Models\User;
+
+              $name = array("ID", "Image", "Email", "Name", "Password", "Phone", "Role_ID", "Status", "Action");
+              for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
                   <?php echo $name[$i - 1] ?>
                 </th>
@@ -23,32 +25,50 @@
           </thead>
           <tbody>
             <?php
-            for ($i = 1; $i <= 10; $i++) { ?>
-              <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100">
-                <td class="px-5 py-2 font-medium text-gray-900 whitespace-nowrap flex justify-center items-center">
-                  <img src="../../../../resources/images/info_book_detail.png" alt="" class="h-32"/>
-
-                </td>
-                <td class="px-5 py-2">#1</td>
-                <td class="px-5 py-2">Jun 29,2023</td>
-                <td class="px-5 py-2">Jack Phat</td>
-                <td class="px-5 py-2">Delivered</td>
-                <td class="px-5 py-2">1</td>
-                <td class="px-5 py-2 w-44">
-                  <div class="button flex justify-center items-center gap-4">
-                    <button
-                      class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button
-                      class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            <?php }
-            ?>
+            $users_table = User::all();
+            if (count($users_table) > 0): ?>
+              <?php foreach ($users_table as $user): ?>
+                <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
+                  <td class="px-5 py-3">
+                    <?php echo $user->id ?>
+                  </td>
+                  <td class="px-5 py-3 w-28">
+                    <img src="<?php echo $user->user_image ?>" alt="">
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $user->email ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $user->name ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $user->password ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $user->phone ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $user->role_id ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo $user->status ?>
+                  </td>
+                  <td class="px-5 py-3 w-44">
+                    <div class="button flex justify-center items-center gap-4">
+                      <button
+                        class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+                      <button
+                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all"
+                        <?php echo $user->id ?>>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </tbody>
         </table>
       </div>
