@@ -11,7 +11,7 @@
   <meta name="keywords" content="bookstore, books, leafy liberties, leafy, liberties">
   <meta name="author" content="Leafy Liberties">
   <meta name="theme-color" content="#ffffff">
-  <link rel="icon" href="<?php echo BASE_URI . '/resources/images/logo.png' ?>" type="image/png">
+  <link rel="icon" type="image/x-icon" href="<?php echo BASE_URI . '/resources/images/logo.png' ?>">
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/all.css' ?>">
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/reset.css' ?>">
 
