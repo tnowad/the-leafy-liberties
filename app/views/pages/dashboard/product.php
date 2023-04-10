@@ -1,4 +1,5 @@
 <?php
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Pagination;
 
@@ -37,7 +38,7 @@ use App\Models\Pagination;
                     <?php echo $product->id ?>
                   </td>
                   <td class="p-3 h-24 w-32">
-                    <img src="<?php echo $product->image_url ?>" alt="" />
+                    <img src="../resources/images/products/<?php echo $product->image_url ?>" alt="" />
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $product->title ?>
@@ -66,9 +67,8 @@ use App\Models\Pagination;
                         class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </button>
-                      <button
+                      <button id="deleteButton"
                         class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all"
-                        <?php echo $product->id ?>
                         >
                         <i class="fa-solid fa-trash"></i>
                       </button>
@@ -81,35 +81,6 @@ use App\Models\Pagination;
         </table>
       </div>
     </div>
-    <!-- <div class="my-5">
-      <ul class="pagination flex gap-5 text-center">
-        <li class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold
-                        hover:text-white hover:bg-[#2e524e] transition-all">
-          <button><i class="fa-solid fa-chevron-left"></i></button>
-        </li>
-        <li class="pagination-items p-2 bg-[#2e524e] text-white rounded-full w-10 h-10 font-semibold
-                        hover:text-white hover:bg-[#2e524e] transition-all">
-          <button>1</button>
-        </li>
-        <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
-                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-          <button>2</button>
-        </li>
-        <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
-                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-          <button>3</button>
-        </li>
-        <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
-                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-
-          <button>4</button>
-        </li>
-        <li class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold
-                        hover:text-white hover:bg-[#2e524e] transition-all">
-          <button><i class="fa-regular fa-chevron-right"></i></button>
-        </li>
-      </ul>
-    </div> -->
     <div
       class="form absolute top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[1000]">
       <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
@@ -157,8 +128,11 @@ use App\Models\Pagination;
     document.querySelector(".form").classList.remove("hidden");
 
   })
-  // function deleteProduct(button) {
-  //   var productId = button.getAttribute('data-id');
-  //   alert(productId);
-  // }
+  function deleteProduct(id) {
+    let number = id;
+    console.log(number);
+  }
+  $('#delete-button').click(function(){
+    alert('hello');
+  })
 </script>

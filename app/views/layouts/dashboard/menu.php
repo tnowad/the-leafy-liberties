@@ -43,33 +43,15 @@
         </a>
       </li>
       <li>
-        <div
-          class="product-menu cursor-pointer relative flex flex-row items-center h-11 focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-          <input type="checkbox" name="" id="" class="absolute peer top-0 inset-x-0 h-11 opacity-0">
+        <a href="/the-leafy-liberties/dashboard/product"
+          class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
           <span class="inline-flex justify-center items-center ml-4">
             <i class="fa-solid fa-bag-shopping"></i>
           </span>
           <span class="ml-2 text-sm tracking-wide truncate">
-            Products
+            Product
           </span>
-          <i
-            class="icon-down fa-solid fa-chevron-down rotate-0 peer-checked:rotate-180 peer-check transition-all duration-300"></i>
-        </div>
-        <div id="sub-menu"
-          class="z-10 hidden bg-gray-100 divide-y divide-gray-100 w-full rounded-l-lg transition-all cursor-pointer">
-          <ul class="block py-2 px-6 text-sm text-gray-700 divide-y">
-            <li
-              class="text-[#40736d] p-2 h-11 hover:bg-[#315854] hover:text-white transition-all border-l-4 border-transparent hover:border-[#add1ce] flex flex-row justify-start items-center">
-              <i class="fa-solid fa-at mr-1"></i>
-              <a href="#">Author</a>
-            </li>
-            <li
-              class="text-[#40736d] p-2 h-11 hover:bg-[#315854] hover:text-white transition-all border-l-4 border-transparent hover:border-[#add1ce] flex flex-row justify-start items-center">
-              <i class="fa-solid fa-sitemap mr-1"></i>
-              <a href="#">Publisher</a>
-            </li>
-          </ul>
-        </div>
+        </a>
       </li>
       <li>
         <a href="/the-leafy-liberties/dashboard/comment"
@@ -107,19 +89,3 @@
     </ul>
   </div>
 </div>
-<script>
-  let dropmenu = document.querySelector('.product-menu');
-  let icon_down = document.querySelector('.icon-down');
-  let sub_menu = document.getElementById('sub-menu');
-
-  dropmenu.addEventListener("click", () => {
-    if (sub_menu.classList.contains('hidden')) {
-      sub_menu.classList.remove('hidden');
-      sub_menu.classList.add('block');
-    } else {
-      sub_menu.classList.remove('block');
-      sub_menu.classList.add('hidden');
-
-    }
-  });
-</script>

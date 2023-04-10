@@ -10,6 +10,7 @@ class Product extends Model
 
   protected $fillable = [
     'id',
+    'star',
     'image_url',
     'title',
     'author',
@@ -18,6 +19,7 @@ class Product extends Model
     'isbn',
     'description',
     'quantity',
+    'category_id',
   ];
   public function author()
   {

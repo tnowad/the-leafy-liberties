@@ -105,5 +105,10 @@ CREATE TABLE
         isbn varchar(13) NOT NULL,
         description text NOT NULL,
         image_url varchar(255) NOT NULL,
-        quantity int NOT NULL
+        quantity int NOT NULL,
+        category_id int NOT NULL
     );
+
+
+ALTER TABLE products
+ADD FOREIGN KEY(category_id) REFERENCES categories(id)

@@ -7,7 +7,7 @@ use Core\Model;
 class Coupon extends Model
 {
 
-  protected $table = 'coupon';
+  protected $table = 'coupons';
 
   protected $fillable = [
     'id',
@@ -18,5 +18,5 @@ class Coupon extends Model
     'description',
   ];
 
-  
+
 }

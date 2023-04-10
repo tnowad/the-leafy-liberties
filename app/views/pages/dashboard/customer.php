@@ -61,7 +61,8 @@
                       </button>
                       <button
                         class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all"
-                        <?php echo $user->id ?>>
+                        data-id="<?php echo $user->id ?> "
+                        >
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>
