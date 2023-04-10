@@ -104,23 +104,21 @@
                         hover:text-white hover:bg-[#2e524e] transition-all">
             <button>Previous</button>
           </li>
-          <li class="pagination-items p-2 bg-green-800 text-white rounded-full w-10 h-10 font-semibold
-                        hover:text-white hover:bg-[#2e524e] transition-all">
-            <button>1</button>
-          </li>
-          <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
-                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-            <button>2</button>
-          </li>
-          <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
-                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-            <button>3</button>
-          </li>
-          <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
-                        font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
+          <?php
+          $i = 1;
+          foreach ($productList as $product) {
+            if ($i % 20 == 0) {
+          ?>
+              <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
+                            font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
+                <button><?php echo $i / 20 ?></button>
+              </li>
 
-            <button>4</button>
-          </li>
+          <?php
+            }
+            $i++;
+          }
+          ?>
           <li class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold
                         hover:text-white hover:bg-[#2e524e] transition-all">
             <button>Next</button>
