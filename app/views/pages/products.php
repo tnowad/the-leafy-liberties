@@ -1,6 +1,6 @@
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[200px,auto] 2xl:grid-cols-[250px,auto]">
-    <div class="box-border mx-2 ">
+    <div class="min-h-[400px] box-border mx-2 ">
       <form class="fixed">
         <h1 class="mb-2 text-2xl font-bold">Filter</h1>
         <div class="grid justify-around grid-cols-3 lg:block">
@@ -37,28 +37,28 @@
             </div>
             <h1 class="mt-2 mb-2 text-xl font-bold">Rating</h1>
             <div>
-              <input type="radio" name="rating" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label htmlFor="" class="ml-2">
+              <input type="radio" id="star-1" name="rating" value="1" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
+              <label for="star-1" class="ml-2">
                 1 Star
               </label>
               <br>
-              <input type="radio" name="rating" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label htmlFor="" class="ml-2">
+              <input type="radio" id="star-2" name="rating" value="2" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
+              <label for="star-2" class="ml-2">
                 2 Star
               </label>
               <br>
-              <input type="radio" name="rating" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label htmlFor="" class="ml-2">
+              <input type="radio" id="star-3" name="rating" value="3" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
+              <label for="star-3" class="ml-2">
                 3 Star
               </label>
               <br>
-              <input type="radio" name="rating" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label htmlFor="" class="ml-2">
+              <input type="radio" id="star-4" name="rating" value="4" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
+              <label for="star-4" class="ml-2">
                 4 Star
               </label>
               <br>
-              <input type="radio" name="rating" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label htmlFor="" class="ml-2">
+              <input type="radio" id="star-5" name="rating" value="5" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
+              <label for="star-5" class="ml-2">
                 5 Star
               </label>
             </div>
@@ -67,10 +67,10 @@
       </form>
     </div>
     <div class="">
-      <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         <?php
         $productList = $params['products'];
-
+        echo json_encode($productList);
         foreach ($productList as $product) {
         ?>
 
@@ -130,3 +130,17 @@
     </div>
   </div>
 </div>
+
+<script>
+  $.ajax({
+    url: 'products.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(productList) {
+      console.log(productList);
+    },
+    error: function(xhr, status, error) {
+      console.log(error);
+    }
+  });
+</script>
