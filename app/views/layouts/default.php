@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/all.css' ?>">
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/reset.css' ?>">
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="<?php echo BASE_URI . '/resources/js/tailwindcss.js' ?>"></script>
   <script src="<?php echo BASE_URI . '/resources/js/flowbite.js' ?>"></script>
 </head>
@@ -27,7 +28,7 @@
   <?php $params['footer'] ?? require_once(__DIR__ . '/default/footer.php'); ?>
 </body>
 
-<?php if (isset($params['toast'])): ?>
+<?php if (isset($params['toast'])) : ?>
   <script type="module">
     import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
     new Toast({
@@ -41,7 +42,6 @@
         type: '<?php echo $params['toast']['type'] ?>',
       });
     }, 5000);
-
   </script>
 <?php endif; ?>
 
