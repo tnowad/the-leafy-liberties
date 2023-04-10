@@ -13,18 +13,6 @@ use Core\View;
 class ProductController extends Controller
 {
 
-  // public function index(Request $request, Response $response)
-  // {
-  //   dd($request->getQueries());
-  //   // Get all products by where
-  //   // pass in to variable
-  //   // render view
-  //   $response->setStatusCode(200);
-  //   $response->setBody(View::renderWithLayout(new View('pages/products'), [
-  //     'title' => 'Product',
-  //   ]));
-  // }
-
 
   public function index(Request $request, Response $response)
   {
@@ -32,7 +20,7 @@ class ProductController extends Controller
 
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/products'), [
-      'title' => 'Index',
+      'title' => 'products',
       'products' => $products,
     ]));
   }

@@ -1,13 +1,3 @@
-<!-- <?php foreach ($products as $product) : ?>
-  <div class="product">
-    <h2><?= $product->title ?></h2>
-    <p><?= $product->description ?></p>
-    <img src="<?= $product->image_url ?>" alt="<?= $product->title ?>">
-    <p>Price: <?= $product->price ?></p>
-  </div>
-<?php endforeach; ?> -->
-
-
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="static">

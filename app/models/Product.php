@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Models;
 
 use Core\Model;
 
 class Product extends Model
 {
-  protected $table = 'books';
+  protected $table = 'products';
 
   protected $fillable = [
     'id',
@@ -77,6 +78,4 @@ class Product extends Model
   {
     return WishlistDetail::where('product_id', $this->id);
   }
-
-
 }
