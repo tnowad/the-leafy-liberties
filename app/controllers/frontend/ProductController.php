@@ -44,4 +44,10 @@ class ProductController extends Controller
       'product' => $product,
     ]));
   }
+
+  public function filter(Request $request, Response $response)
+  {
+    // Get query from request and create list products
+    // return with json
+  }
 }
