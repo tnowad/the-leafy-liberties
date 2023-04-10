@@ -1,4 +1,4 @@
--- Active: 1681017538652@@127.0.0.1@3306@bookstore_web
+-- Active: 1680850809935@@127.0.0.1@3306@bookstore
 
 INSERT INTO
     authors (name, description)
@@ -294,8 +294,7 @@ VALUES (
     );
 
 INSERT INTO
-    coupon (
-        id,
+    coupons (
         name,
         active,
         expired,
@@ -303,28 +302,24 @@ INSERT INTO
         description
     )
 VALUES (
-        1,
         ' SPRINGSALE ',
         ' 2023 -03 -01 ',
         ' 2023 -03 -31 ',
         5,
         ' Get 10 % off on all items during the month of March.'
     ), (
-        2,
         ' SUMMERDEAL ',
         ' 2023 -06 -01 ',
         ' 2023 -06 -30 ',
         7,
         ' Get $50 off on orders over $500 during the month of June.'
     ), (
-        3,
         ' FALLSAVINGS ',
         ' 2023 -09 -01 ',
         ' 2023 -09 -30 ',
         10,
         ' Get 15 % off on all items during the month of September.'
     ), (
-        4,
         ' WINTERWONDER ',
         ' 2023 -12 -01 ',
         ' 2023 -12 -31 ',
@@ -333,14 +328,12 @@ VALUES (
         with
             any purchase over $100 during the month of December.'
     ), (
-        5,
         ' HOLIDAYSALE ',
         ' 2023 -12 -01 ',
         ' 2024 -01 -15 ',
         15,
         ' Get 25 % off on all products during the Holiday sale '
     ), (
-        6,
         ' SUMMERDEAL ',
         ' 2023 -06 -01 ',
         ' 2023 -06 -30 ',
@@ -350,7 +343,6 @@ VALUES (
         select
             items.'
     ), (
-        7,
         ' BACKTOSCHOOL ',
         ' 2023 -08 -01 ',
         ' 2023 -08 -31 ',
@@ -359,7 +351,6 @@ VALUES (
         with
             10 % off all school supplies.'
     ), (
-        8,
         ' FALLSAVINGS ',
         ' 2023 -09 -01 ',
         ' 2023 -09 -30 ',
@@ -369,7 +360,6 @@ VALUES (
             15 % off all clothing
             and accessories.'
     ), (
-        9,
         ' HALLOWEEN ',
         ' 2023 -10 -01 ',
         ' 2023 -10 -31 ',
@@ -378,3 +368,5 @@ VALUES (
             or treat yourself to 25 % off all Halloween costumes
             and decorations.'
     );
+
+DELETE FROM categories WHERE id >= 308 and id <= 407

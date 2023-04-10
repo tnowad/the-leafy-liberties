@@ -27,13 +27,13 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    coupon (
+    coupons (
         id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
         name varchar(50) NOT NULL,
         active date NOT NULL,
         expired date NOT NULL,
         quantity int NOT NULL,
-        description varchar(500) NOT NULL,
+        description varchar(500) NOT NULL
     );
 
 CREATE TABLE
@@ -106,11 +106,4 @@ CREATE TABLE
         description text NOT NULL,
         image_url varchar(255) NOT NULL,
         quantity int NOT NULL
-    );
-
-CREATE TABLE
-    sliders (
-        id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-        image_url VARCHAR(100) NOT NULL,
-        description VARCHAR(200) NOT NULL
     );
