@@ -1,8 +1,7 @@
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[200px,auto] 2xl:grid-cols-[250px,auto]">
-    <div class="box-border mx-2">
-
-      <form>
+    <div class="box-border mx-2 ">
+      <form class="fixed">
         <h1 class="mb-2 text-2xl font-bold">Filter</h1>
         <div class="grid justify-around grid-cols-3 lg:block">
 
@@ -73,13 +72,11 @@
         $productList = $params['products'];
 
         foreach ($productList as $product) {
-
-          // echo $product->image_url;
         ?>
 
           <div class="flex flex-col items-center justify-center w-full p-1">
-            <div class="object-cover w-56 h-full">
-              <img src="<?php echo $product->image_url; ?>" alt="<?php echo $product->title ?>" class="w-full" />
+            <div class="mt-2 object-cover w-56 h-80">
+              <img src="<?php echo $product->image_url; ?>" alt="<?php echo $product->title ?>" class="w-full h-72" />
             </div>
             <div class="flex flex-col items-center justify-center w-full p-1 text-lg font-medium ">
               <div class="text-center">
