@@ -52,7 +52,7 @@ VALUES (
         8.99,
         '9780061120084',
         'A novel set in the Depression-era South, narrated by a young girl named Scout Finch.',
-        'https://images-na.ssl-images-amazon.com/images/I/41WUz8GZn2L._SX326_BO1,204,203,200_.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg/1200px-To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg',
         25
     ), (
         'The Great Gatsby',
@@ -61,7 +61,7 @@ VALUES (
         9.99,
         '9780743273565',
         'A novel set in the Roaring Twenties, centered around the mysterious millionaire Jay Gatsby.',
-        'https://images-na.ssl-images-amazon.com/images/I/91rQ5dGzZcL.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/7/7a/The_Great_Gatsby_Cover_1925_Retouched.jpg',
         30
     ), (
         '1984',
@@ -70,7 +70,7 @@ VALUES (
         7.99,
         '9780451524935',
         'A dystopian novel set in a totalitarian society, where the government controls every aspect of citizens'' lives.',
-        'https://images-na.ssl-images-amazon.com/images/I/91uQL53hGKL.jpg',
+        'https://prod-bb-images.akamaized.net/book-covers/coverimage-9782384650071-bookwire-2022-05-12t11-30.jpg?w=400',
         20
     ), (
         'Pride and Prejudice',
@@ -79,7 +79,7 @@ VALUES (
         6.99,
         '9780486284736',
         'A classic romance novel set in rural England, revolving around the Bennet family and their five daughters.',
-        'https://images-na.ssl-images-amazon.com/images/I/51qbGAAvhvL._SX331_BO1,204,203,200_.jpg',
+        'https://patricktreardon.com/wp-content/uploads/2021/02/Austen.PrideAndPrejudice.jpg',
         35
     ), (
         'One Hundred Years of Solitude',
@@ -88,7 +88,7 @@ VALUES (
         11.99,
         '9780060883287',
         'A landmark novel in the magical realism genre, following the multi-generational Buendía family in the fictional town of Macondo.',
-        'https://images-na.ssl-images-amazon.com/images/I/81A-dlAZ-qL.jpg',
+        'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1327881361i/320.jpg',
         15
     ), (
         'The Catcher in the Rye',
@@ -97,7 +97,7 @@ VALUES (
         8.99,
         '9780316769488',
         'A coming-of-age novel narrated by teenage protagonist Holden Caulfield, grappling with issues of identity and disillusionment.',
-        'https://images-na.ssl-images-amazon.com/images/I/41tpaQr7VBL._SX322_BO1,204,203,200_.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/8/89/The_Catcher_in_the_Rye_%281951%2C_first_edition_cover%29.jpg',
         25
     ), (
         'The Lord of the Rings',
@@ -106,7 +106,7 @@ VALUES (
         23.99,
         '9780544003415',
         'A fantasy epic set in the fictional world of Middle-earth, following hobbit Frodo Baggins''s quest to destroy the One Ring.',
-        'https://images-na.ssl-images-amazon.com/images/I/91tBrbFR3dL.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdkVAtoabz0n09y3evVvudUwIegZrojGlAzQ&usqp=CAU',
         10
     ), (
         'The Adventures of Huckleberry Finn',
@@ -115,7 +115,7 @@ VALUES (
         7.99,
         '9780486280615',
         'A classic novel set in the pre-Civil War South, following the titular character and his journey down the Mississippi River with a runaway slave.',
-        'https://images-na.ssl-images-amazon.com/images/I/51s7sJbNcwL._SX331_BO1,204,203',
+        'https://upload.wikimedia.org/wikipedia/commons/6/61/Huckleberry_Finn_book.JPG',
         30
     ), (
         'Animal Farm',
@@ -124,7 +124,7 @@ VALUES (
         8.99,
         '978-0451526342',
         'A satirical novel about a group of farm animals that rebel against their human farmer',
-        'https://images-na.ssl-images-amazon.com/images/I/51PfY80eKRL._SX331_BO1,204,203,200_.jpg',
+        'https://bizweb.dktcdn.net/thumb/1024x1024/100/364/248/products/animalfarmfront.jpg?v=1623227280703',
         30
     ), (
         'The Hobbit',
@@ -133,7 +133,7 @@ VALUES (
         10.99,
         '978-0547928227',
         'A fantasy novel about a hobbit on a quest with a group of dwarves',
-        'https://images-na.ssl-images-amazon.com/images/I/51lC7XuUZ2L._SX302_BO1,204,203,200_.jpg',
+        'https://i.ebayimg.com/images/g/HW4AAOSwYDZgjoaO/s-l600.jpg',
         50
     ), (
         'The Picture of Dorian Gray',
@@ -142,7 +142,7 @@ VALUES (
         12.99,
         '978-0141439570',
         'A novel by Oscar Wilde, written in the late 19th century, that tells the story of the wealthy and handsome Dorian Gray, who makes a Faustian bargain to have his portrait age instead of him.',
-        'https://images-na.ssl-images-amazon.com/images/I/51oFE6wGVOL._SX324_BO1,204,203,200_.jpg',
+        'https://i0.wp.com/jaycwolfe.com/wp-content/uploads/2017/09/The-Picture-of-Dorian-Gray-cover.jpg?fit=386%2C600',
         20
     ), (
         'The Hitchhikers Guide to the Galaxy',
@@ -151,7 +151,7 @@ VALUES (
         10.99,
         '978-0345391803',
         'A comic science fiction series created by Douglas Adams that has become popular among fans of the genre and members of the scientific community.',
-        'https://images-na.ssl-images-amazon.com/images/I/51NqPfsDcqL._SX322_BO1,204,203,200_.jpg',
+        'https://devontrevarrowflaherty.files.wordpress.com/2014/09/hitchhikers-guide-to-the-galaxy.png',
         15
     ), (
         'The Count of Monte Cristo',
@@ -160,7 +160,7 @@ VALUES (
         15.99,
         '978-0140449266',
         'A classic adventure novel by Alexandre Dumas that tells the story of Edmond Dantès, a young man who is imprisoned for a crime he did not commit and seeks revenge against those who betrayed him.',
-        'https://images-na.ssl-images-amazon.com/images/I/51ACU32xGaL._SX324_BO1,204,203,200_.jpg',
+        'https://kbimages1-a.akamaihd.net/11b28dec-5607-42cb-8375-fab3a1ed3107/353/569/90/False/the-count-of-monte-cristo-164.jpg',
         25
     ), (
         'The Brothers Karamazov',
@@ -169,7 +169,7 @@ VALUES (
         18.99,
         '978-0140449242',
         'A philosophical novel by Fyodor Dostoevsky that explores the themes of faith, reason, and morality through the story of three brothers and their father.',
-        'https://images-na.ssl-images-amazon.com/images/I/51zv5YW5Q5L._SX332_BO1,204,203,200_.jpg',
+        'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/51g-dbTK1pL.jpg',
         30
     ), (
         'The Odyssey',
@@ -178,7 +178,7 @@ VALUES (
         9.99,
         '978-0140449112',
         'An epic poem attributed to the ancient Greek poet Homer, telling the story of Odysseus and his ten-year journey home after the Trojan War.',
-        'https://images-na.ssl-images-amazon.com/images/I/51n4KIB4v6L._SX325_BO1,204,203,200_.jpg',
+        'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/A15XQ+h74LL._AC_UF1000,1000_QL80_.jpg',
         40
     ), (
         'The Divine Comedy',
@@ -187,7 +187,7 @@ VALUES (
         14.99,
         '978-0140449327',
         'An epic poem by Dante Alighieri, describing Dante''s journey through Hell, Purgatory, and Paradise.',
-        'https://images-na.ssl-images-amazon.com/images/I/51P-OWSoiBL._SX313_BO1,204,203,200_.jpg',
+        'https://kbimages1-a.akamaihd.net/6e5d9a87-148d-4846-aecb-061f0a0bcf14/353/569/90/False/the-divine-comedy-51.jpg',
         35
     ), (
         'Crime and Punishment',
@@ -196,7 +196,7 @@ VALUES (
         12.99,
         '978-0140449136',
         'A psychological novel by Fyodor Dostoevsky that explores the themes of guilt, redemption, and morality through the story of a poor ex-student named Raskolnikov who commits a murder and grapples with his conscience.',
-        'https://images-na.ssl-images-amazon.com/images/I/51OyNrk-W6L._SX318_BO1,204,203,200_.jpg',
+        'https://prodimage.images-bn.com/pimages/9781593080815_p0_v2_s1200x630.jpg',
         22
     ), (
         'The Wind-Up Bird Chronicle',
@@ -205,7 +205,7 @@ VALUES (
         13.99,
         '978-0679775430',
         'A novel by Haruki Murakami that tells the story of Toru Okada, a man who is searching for his wife and discovers a mysterious world beneath the surface of Tokyo.',
-        'https://images-na.ssl-images-amazon.com/images/I/51O7x2BCbJL._SX331_BO1,204,203,200_.jpg',
+        'https://bizweb.dktcdn.net/100/326/228/products/the-wind-up-bird-chronicle-by-haruki-murakami-bookworm-hanoi.jpg?v=1543299799317',
         12
     ), (
         'Moby-Dick',
@@ -214,7 +214,7 @@ VALUES (
         15.99,
         '978-0142437247',
         'A novel by Herman Melville that tells the story of a man named Ishmael and his adventures on a whaling ship.',
-        'https://images-na.ssl-images-amazon.com/images/I/41LgF8BChxL._SX319_BO1,204,203,200_.jpg',
+        'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781681778488/moby-dick-9781681778488_hr.jpg',
         22
     );
 
