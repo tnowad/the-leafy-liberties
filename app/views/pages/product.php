@@ -1,5 +1,6 @@
 <?php
-dd($params['product']);
+$product = $params['product'];
+echo $product->name;
 ?>
 
 <div class="box-border p-5 pt-3 sm:pt-10 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
@@ -38,7 +39,7 @@ dd($params['product']);
         </p>
         <div class="flex flex-wrap justify-around mt-8 mb-6 sm:mt-28 sm:mb-10 sm:flex-row">
           <div
-            class="box-border flex justify-around w-2/5 p-2 border border-gray-400 border-solid  sm:w-3/12 rounded-3xl">
+            class="box-border flex justify-around w-2/5 p-2 border border-gray-400 border-solid sm:w-3/12 rounded-3xl">
             <button>-</button>
             <span>1</span>
             <button>+</button>

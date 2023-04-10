@@ -54,7 +54,6 @@ class Database
       }
       call_user_func_array(array($statement, 'bind_param'), $bindParamsRefs);
     }
-    // ($params);
     $result = $statement->execute();
     if (!$result) {
       throw new Exception("Database query execution failed: " . $connection->error);

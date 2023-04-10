@@ -7,6 +7,9 @@ class CategorySeeder
 {
   public function run()
   {
+    Category::truncate();
+    echo "Truncated categories table" . "<br>";
+    echo "Seeding categories" . "<br>";
     $categories = [
       'Fiction',
       'Non-Fiction',
@@ -22,7 +25,7 @@ class CategorySeeder
       'Travel',
     ];
     foreach ($categories as $category) {
-      echo "Creating category: $category" . PHP_EOL;
+      echo "Seeding category: $category" . "<br>";
       Category::create([
         'name' => $category,
       ]);

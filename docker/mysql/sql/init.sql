@@ -97,7 +97,7 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    books (
+    products (
         id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
         title varchar(100) NOT NULL,
         author varchar(100) NOT NULL,

@@ -36,9 +36,7 @@ try {
 } catch (\Exception $e) {
   die("Database connection failed");
 }
-if (ENVIRONMENT == 'development') {
-  Seeder::run();
-}
+
 $app = Application::getInstance();
 
 foreach (glob('./routes/*.php') as $file) {

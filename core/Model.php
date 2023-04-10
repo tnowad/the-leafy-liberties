@@ -153,6 +153,19 @@ abstract class Model
     return new static($result);
   }
 
+  public static function truncate()
+  {
+    $table = static::table();
+    $query = "TRUNCATE TABLE $table";
+    $result = Database::getInstance()->execute($query);
+
+    if (!$result) {
+      throw new Exception("Failed to truncate table $table");
+    }
+
+    return true;
+  }
+
   public function __set($name, $value)
   {
     if (in_array($name, $this->fillable)) {
