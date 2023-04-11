@@ -1,31 +1,41 @@
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
-    <div id="default-carousel" class="relative" data-carousel="static">
+    <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg sm:h-64 xl:h-80 2xl:h-96 -z-10">
 
         <?php
         $slides = [
           [
             'title' => 'Slide 1',
-            'image' => 'resources/images/mainHomeImg.png',
+            'image' => 'resources/images/banner/banner-books-1.png',
             'alt' => 'Slide 1'
           ],
           [
             'title' => 'Slide 2',
-            'image' => 'resources/images/mainHomeImg.png',
+            'image' => 'resources/images/banner/banner-books-2.jpg',
             'alt' => 'Slide 2'
           ],
           [
             'title' => 'Slide 3',
-            'image' => 'resources/images/mainHomeImg.png',
+            'image' => 'resources/images/banner/banner-books-3.png',
             'alt' => 'Slide 3'
+          ],
+          [
+            'title' => 'Slide 4',
+            'image' => 'resources/images/banner/banner-books-4.png',
+            'alt' => 'Slide 4'
+          ],
+          [
+            'title' => 'Slide 5',
+            'image' => 'resources/images/banner/banner-books-5.png',
+            'alt' => 'Slide 5'
           ]
         ];
         ?>
 
         <?php foreach ($slides as $slide) : ?>
-          <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="<?php echo $slide['image'] ?>" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="<?php echo $slide['alt'] ?>">
+          <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
+            <img src="<?php echo $slide['image'] ?>" class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="<?php echo $slide['alt'] ?>">
           </div>
         <?php endforeach; ?>
       </div>
@@ -35,6 +45,8 @@
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="3"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="4"></button>
       </div>
 
       <button type="button" class="absolute top-0 left-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none" data-carousel-prev>

@@ -3,7 +3,7 @@
     <div class="left flex justify-center items-center">
       <i class="fa-regular fa-bars-sort fa-lg mr-2 font-medium"></i>
       <span class="text-2xl font-medium text-[#52938d]">
-        Dashboard
+        <?php echo ucfirst(basename($_SERVER['REQUEST_URI'])) ?>
       </span>
     </div>
     <div class="right flex items-center relative">

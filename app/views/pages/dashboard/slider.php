@@ -9,7 +9,7 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("No", "Location", "Type" ,"Action");
+              $name = array("No", "Location", "Type", "Action");
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
                   <?php echo $name[$i - 1] ?>
@@ -28,12 +28,15 @@
                 <td class="px-5 py-3">Home Slider</td>
                 <td class="px-5 py-3">Image</td>
                 <td class="px-5 py-3 w-44">
-                  <div class="button flex justify-center items-center gap-4">
-                    <button
-                      class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer shadow-lg rounded-full border-solid border-blue-300">
+                    <input type="checkbox" value="" class="sr-only peer">
+                    <div
+                      class="w-20 h-8 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-[50px] peer-checked:after:border-white after:content-[''] after:absolute after:left-[0px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-8 after:w-8 after:transition-all peer-checked:bg-blue-600">
+                    </div>
+                    <span class="ml-3 text-sm font-medium text-gray-700 absolute -left-2 peer-checked:text-blue-600">Off</span>
+                    <span class="ml-3 text-sm font-medium text-gray-700 absolute left-11 peer-checked:text-gray-900">On</span>
+
+                  </label>
                 </td>
               </tr>
             <?php }

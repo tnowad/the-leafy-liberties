@@ -1,10 +1,7 @@
 <div class="w-full my-0 mx-auto">
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
-      <h1 class="text-xl font-bold">Coupon</h1>
-      <button class="add-coupon w-5 h-5 text-2xl">
-        +
-      </button>
+      <h1 class="text-xl font-bold">Comment</h1>
     </div>
     <div class="table-coupon-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
       <div class="relative">
