@@ -12,7 +12,6 @@ $router->get('/', [HomeController::class, 'index']);
 
 $router->get('/about', [HomeController::class, 'about']);
 $router->get('/cart', [HomeController::class, 'cart']);
-$router->get('/shop', [HomeController::class, 'shop']);
 $router->get('/wishlist', [HomeController::class, 'wishlist']);
 $router->get('/products', [ProductController::class, 'index']);
 $router->get('/products/filter', [ProductController::class, 'filter']);
