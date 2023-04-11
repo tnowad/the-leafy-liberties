@@ -62,17 +62,17 @@ use App\Models\Pagination;
                     <?php echo $product->quantity ?>
                   </td>
                   <td class="px-5 py-3 w-44">
-                    <div class="button flex justify-center items-center gap-4">
-                      <button
+                    <form action="/the-leafy-liberties/dashboard/product" class="button flex justify-center items-center gap-4" method="POST">
+                      <!-- <button
                         class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
-                      </button>
-                      <button id="deleteButton"
+                      </button> -->
+                      <button id="deleteButton" type="submit"
                         class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all"
                         >
                         <i class="fa-solid fa-trash"></i>
                       </button>
-                    </div>
+                    </form>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -127,12 +127,5 @@ use App\Models\Pagination;
     document.querySelector(".form").classList.add("flex");
     document.querySelector(".form").classList.remove("hidden");
 
-  })
-  function deleteProduct(id) {
-    let number = id;
-    console.log(number);
-  }
-  $('#delete-button').click(function(){
-    alert('hello');
   })
 </script>
