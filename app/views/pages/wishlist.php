@@ -44,7 +44,7 @@
                   <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-minus"></i>
                   </button>
-                  <span class="m-5 text-lg text-count"><?php echo $wishlist->quantity ?></span>
+                  <span class="m-5 text-lg text-count <?php echo $wishlist->product_id ?> "><?php echo $wishlist->quantity ?></span>
                   <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-plus"></i>
                   </button>
@@ -68,20 +68,18 @@
     </table>
   </div>
 </div>
+
 <script>
-  let count = 1;
-  let text = document.querySelector(".text-count")
-  let minus = document.querySelector(".minus")
-  let plus = document.querySelector(".plus")
-  console.log(text.innerHTML);
-  minus.addEventListener("click", () => {
-    if (count > 1) {
-      count--;
-      text.innerHTML = count;
-    }
-  })
-  plus.addEventListener("click", () => {
-    count++;
-    text.innerHTML = count;
-  })
+  document.querySelectorAll('.plus, .minus').forEach(button => {
+    button.addEventListener('click', event => {
+      const span = event.currentTarget.parentElement.querySelector('.text-count');
+      let quantity = parseInt(span.textContent);
+      if (event.currentTarget.classList.contains('plus')) {
+        quantity++;
+      } else if (event.currentTarget.classList.contains('minus') && quantity > 0) {
+        quantity--;
+      }
+      span.textContent = quantity;
+    });
+  });
 </script>

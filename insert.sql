@@ -1,4 +1,4 @@
--- Active: 1680850809935@@127.0.0.1@3306@bookstore
+-- Active: 1681017538652@@127.0.0.1@3306@bookstore_web
 
 INSERT INTO
     authors (name, description)
@@ -389,3 +389,42 @@ VALUES (
             and decorations.'
     );
 
+INSERT INTO
+    wishlist (
+        product_id,
+        product_name,
+        price,
+        quantity,
+        image
+    )
+VALUES (
+        2001,
+        'Conan',
+        18.99,
+        1,
+        'https://bookbuy.vn/Res/Images/Product/tham-tu-lung-danh-conan-tap-85_47468_1.jpg'
+    ), (
+        2002,
+        'Doraemon',
+        10.99,
+        2,
+        'https://th.bing.com/th/id/R.31993ffd15ce1206a27fc1829e0c9d8f?rik=dMrzi3M%2be416sA&pid=ImgRaw&r=0'
+    ), (
+        2003,
+        'Songoku',
+        13.49,
+        1,
+        'https://th.bing.com/th/id/R.ef03b49629f5db65d9cfc716e90c0c3f?rik=Ex%2bdiGww6Fv%2fQQ&pid=ImgRaw&r=0'
+    ), (
+        2004,
+        'Luffy',
+        19.79,
+        1,
+        'https://th.bing.com/th/id/R.9dc27f4b4f637febf6d3454ea3a28006?rik=Vfitn%2f704jnLVg&riu=http%3a%2f%2fpm1.narvii.com%2f5806%2f6db51fe677ea1157413bd0e2253c5f45adc22d11_hq.jpg&ehk=f6CeIoZ8bh5Qb6HVQ7SO1HMsXBSl7u6AsGBK47O%2fVWQ%3d&risl=&pid=ImgRaw&r=0'
+    ), (
+        2005,
+        'Naruto',
+        12.99,
+        2,
+        'https://preview.redd.it/d4inm7jx46s51.jpg?auto=webp&s=38e82ad2bdec5a0b9d9d3309abd40e1c21ee3c28'
+    );
