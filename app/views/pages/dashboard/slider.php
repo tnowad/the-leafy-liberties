@@ -55,14 +55,14 @@
   </div>
 </div>
 <script>
-  let input_check = document.querySelector('input[type="checkbox"]');
-  let btn_toggle = document.querySelector('.toggle-btn');
-  <?php foreach ($slides as $slide): ?>
-    if(input_chec.checked == false){
-      <?php $slide['image'] = '' ?>
-    }
-    else{
-      continue;
-    }
-  <?php endforeach ?>
+  // let input_check = document.querySelector('input[type="checkbox"]');
+  // let btn_toggle = document.querySelector('.toggle-btn');
+  // <?php foreach ($slides as $slide): ?>
+  //   if(input_chec.checked == false){
+  //     <?php $slide['image'] = '' ?>
+  //   }
+  //   else{
+  //     continue;
+  //   }
+  // <?php endforeach ?>
 </script>

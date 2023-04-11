@@ -34,15 +34,6 @@ class HomeController extends Controller
       'title' => 'Cart'
     ]));
   }
-
-  public function shop(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/shop'), [
-      'title' => 'Shop'
-    ]));
-  }
-
   public function wishlist(Request $request, Response $response)
   {
     $response->setStatusCode(200);

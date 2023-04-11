@@ -41,7 +41,7 @@
         ?>
       </div>
       <div class="body-wrap w-full my-8 flex justify-between items-start flex-wrap">
-        <div class="chart xl:w-[65.5%] px-6 py-4 bg-white rounded-2xl shadow-lg sm:w-full">
+        <div class="chart-layout xl:w-[65.5%] px-6 py-4 bg-white rounded-2xl shadow-lg sm:w-full">
           <div class="top-content flex justify-between items-center">
             <div class="total-revuenes">
               <p class="font-semibold text-2xl">Total Revuenes</p>
@@ -49,15 +49,17 @@
             </div>
             <div class="chart-type p-2 bg-[#8cbfba] rounded-xl">
               <label for="chart-type" class="text-black font-medium">Choose a type:</label>
-              <select name="chart-type" id="" class="">
-                <option value="Bar Vertical Chart">Bar Vertical Chart</option>
-                <option value="Bar Horizontal Chart">Bar Horizontal Chart</option>
-                <option value="Donut Chart">Donut Chart</option>
-                <option value="Line Chart">Line Chart</option>
+              <select name="chart-ttype" id="c-type" class="">
+                <option value="BarVertical">Bar Vertical Chart</option>
+                <option value="BarHorizontal">Bar Horizontal Chart</option>
+                <option value="Donut">Donut Chart</option>
+                <option value="Line">Line Chart</option>
               </select>
             </div>
           </div>
-          <!-- <Chart series={options.series} options={options} type="bar" width="100%" height="350px" /> -->
+          <div id="chart">
+
+          </div>
         </div>
         <div class="most-sold-items xl:w-[31.5%] py-4 px-4 bg-white rounded-2xl shadow-lg sm:w-full sm:mt-5 2xl:mt-0">
           <p class="font-bold text-2xl mb-5">Most Sold Items</p>
@@ -126,23 +128,65 @@
   </div>
 </div>
 <script>
-  // let btns = document.querySelectorAll(".btn");
-  // btns.forEach((btn) => {
-  //   btn.addEventListener("click", () => {
-  //     let menuBtn = btn.nextElementSibling;
-  //     menuBtn.style.display = "flex";
-  //     btn.style.display = "none";
-  //   });
-  // });
+  let select = document.getElementById('c-type');
+  select.addEventListener("change", (event) => {
+    const selectedValue = event.target.value;
+    console.log(selectedValue);
+  })
+</script>
 
-  // function closeMenu() {
-  //   let menuBtns = document.querySelectorAll("#menu-btn");
-  //   let btns = document.querySelectorAll(".btn");
-  //   menuBtns.forEach((menuBtn) => {
-  //     menuBtn.style.display = "none";
-  //   });
-  //   btns.forEach((btn) => {
-  //     btn.style.display = "flex";
-  //   });
-  // }
+
+<script>
+
+
+  var options = {
+    series: [{
+      name: 'Net Profit',
+      data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+    }, {
+      name: 'Revenue',
+      data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+    },],
+    chart: {
+      type: 'bar',
+      height: 350,
+      width: '100%',
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '55%',
+        endingShape: 'rounded'
+      },
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$(thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    }
+  };
+
+  var chart = new ApexCharts(document.getElementById("chart"), options);
+  chart.render();
 </script>

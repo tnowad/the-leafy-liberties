@@ -72,24 +72,26 @@
         $productList = $params['products'];
         foreach ($productList as $product) {
         ?>
-
-          <div class="flex flex-col items-center justify-center w-full p-1">
-            <div class="mt-2 object-cover w-56 h-80">
-              <img src="<?php echo $product->image_url; ?>" alt="<?php echo $product->title ?>" class="w-full h-72" />
+          <div class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+            <div class="object-cover h-full p-2 w-60">
+              <img src="resources/images/products/<?php echo $product->image_url ?>" alt="" class="object-cover w-full h-full" />
             </div>
-            <div class="flex flex-col items-center justify-center w-full p-1 text-lg font-medium ">
-              <div class="text-center">
-                <a class="text-2xl" href="" alt> <?php echo $product->title ?></a>
+            <div class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+              <div class="product-name">
+                <a href="/"><?php echo $product->title ?></a>
               </div>
-              <div class="">
+              <div class=" product-rate">
                 <?php for ($i = 1; $i <= $product->star; $i++) : ?>
-                  <i class="fa fa-star text-yellow-600" aria-hidden="true"></i>
+                  <i class="fa fa-star text-yellow-400" aria-hidden="true"></i>
                 <?php endfor; ?>
               </div>
-              <div class="text-sm product-author">Enrique Wallace</div>
-              <div class="desc"><?php echo $product->description ?></div>
-              <div class="flex justify-center p-0 font-semibold text-primary-900">
-                <span><?php echo $product->price ?></span>
+              <div class="text-sm product-author"><?php echo $product->author ?></div>
+              <div class="p-0 font-semibold product-price text-primary-900">
+                <?php echo $product->price ?>$
+              </div>
+              <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                <p class="font-semibold select-option-text">Add to wishlist</p>
+                <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
               </div>
             </div>
           </div>
@@ -104,19 +106,7 @@
             <button>Previous</button>
           </li>
           <?php
-          $i = 1;
-          foreach ($productList as $product) {
-            if ($i % 20 == 0) {
-          ?>
-              <li class="pagination-items p-2 bg-gray-100 rounded-full w-10 h-10 text-[#52938d]
-                            font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-                <button><?php echo $i / 20 ?></button>
-              </li>
 
-          <?php
-            }
-            $i++;
-          }
           ?>
           <li class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold
                         hover:text-white hover:bg-[#2e524e] transition-all">
