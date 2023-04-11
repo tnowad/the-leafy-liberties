@@ -21,7 +21,7 @@ class SeederController extends Controller
   public function run(Request $request, Response $response)
   {
     Seeder::run();
-    // DotEnv::set('Seeded', 'true');
+    DotEnv::set('Seeded', 'true');
     DotEnv::save();
   }
 }
