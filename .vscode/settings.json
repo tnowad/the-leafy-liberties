@@ -5,6 +5,7 @@
         "errfile",
         "errline",
         "ERRMODE",
-        "flowbite"
+        "flowbite",
+        "opencart"
     ]
 }
