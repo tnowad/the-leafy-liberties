@@ -21,8 +21,6 @@
           <tbody>
             <?php
             require_once 'app/views/pages/slides.php';
-            // print_r(basename($slides[0]['image']))
-
             ?>
             <?php foreach ($slides as $slide): ?>
               <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100">
@@ -36,7 +34,7 @@
                 <td class="px-5 py-3 w-44">
                   <label
                     class="toggle-btn relative inline-flex items-center cursor-pointer shadow-lg rounded-full border-solid border-blue-300">
-                    <input type="checkbox" value="" class="sr-only peer">
+                    <input type="checkbox" value="" class="sr-only peer" data-number="<?php echo $slide['title'] ?>">
                     <div
                       class="w-20 h-8 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-[50px] peer-checked:after:border-white after:content-[''] after:absolute after:left-[0px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-8 after:w-8 after:transition-all peer-checked:bg-blue-600">
                     </div>
@@ -55,14 +53,11 @@
   </div>
 </div>
 <script>
-  // let input_check = document.querySelector('input[type="checkbox"]');
-  // let btn_toggle = document.querySelector('.toggle-btn');
-  // <?php foreach ($slides as $slide): ?>
-  //   if(input_chec.checked == false){
-  //     <?php $slide['image'] = '' ?>
-  //   }
-  //   else{
-  //     continue;
-  //   }
-  // <?php endforeach ?>
+  let input_check = document.querySelectorAll("input[type='checkbox']");
+  input_check.forEach(element => {
+    element.addEventListener("change", () => {
+      let number = element.getAttribute("data-number");
+      console.log(number + (element.checked ? ' On' : ' Off'))
+    })
+  });
 </script>

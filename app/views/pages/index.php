@@ -1,35 +1,42 @@
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
-      <div class="relative h-56 overflow-hidden rounded-lg sm:h-64 xl:h-80 2xl:h-96 -z-10">
+      <div class="carousel relative h-56 overflow-hidden rounded-lg sm:h-64 xl:h-80 2xl:h-96 -z-10">
 
         <?php
         require_once 'app/views/pages/slides.php';
         ?>
-
-        <?php foreach ($slides as $slide) : ?>
+        <?php foreach ($slides as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
-            <img src="<?php echo $slide['image'] ?>" class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="<?php echo $slide['alt'] ?>">
+            <img src="<?php echo $slide['image'] ?>"
+              class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="<?php echo $slide['alt'] ?>">
           </div>
         <?php endforeach; ?>
       </div>
 
 
-      <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
+      <!-- <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="3"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="4"></button>
-      </div>
+      </div> -->
 
-      <button type="button" class="absolute top-0 left-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+      <button type="button"
+        class="absolute top-0 left-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        data-carousel-prev>
+        <span
+          class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
           <i class="fa-solid fa-chevron-up fa-rotate-270"></i>
         </span>
       </button>
-      <button type="button" class="absolute top-0 right-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 0 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+      <button type="button"
+        class="absolute top-0 right-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        data-carousel-next>
+        <span
+          class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 0 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
           <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
         </span>
       </button>
@@ -47,11 +54,13 @@
       <?php
       $total = 10;
       for ($i = 1; $i < $total; $i++) { ?>
-        <div class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+        <div
+          class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
           <div class="object-cover h-full p-2 w-60">
             <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
           </div>
-          <div class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+          <div
+            class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
             <div class="product-name">
               <a href="/">My Dearest Darkest</a>
             </div>
@@ -66,9 +75,11 @@
             <div class="p-0 font-semibold product-price text-primary-900">
               150.000VND
             </div>
-            <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+            <div
+              class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
               <p class="font-semibold select-option-text">Add to wishlist</p>
-              <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
+              <i
+                class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
             </div>
           </div>
         </div>
@@ -88,11 +99,13 @@
           <?php
           $total = 12;
           for ($i = 1; $i <= $total; $i++) { ?>
-            <div class="flex flex-col items-center justify-center w-full box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+            <div
+              class="flex flex-col items-center justify-center w-full box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
               <div class="object-cover h-full p-2 w-60">
                 <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
               </div>
-              <div class="flex flex-col items-start justify-center w-[90%] p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16 mx-auto">
+              <div
+                class="flex flex-col items-start justify-center w-[90%] p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16 mx-auto">
                 <div class="product-name">
                   <a href="/">My Dearest Darkest</a>
                 </div>
@@ -107,9 +120,11 @@
                 <div class="p-0 font-semibold product-price text-primary-900">
                   150.000VND
                 </div>
-                <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                <div
+                  class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
                   <p class="font-semibold select-option-text">Add to wishlist</p>
-                  <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
+                  <i
+                    class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
                 </div>
               </div>
             </div>
@@ -147,7 +162,8 @@
         for ($i = 1; $i <= $total; $i++) { ?>
           <div class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit">
             <div class="w-full h-56 overflow-hidden img rounded-3xl">
-              <img src="resources/images/genresHorror.png" alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-125" />
+              <img src="resources/images/genresHorror.png" alt=""
+                class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-125" />
             </div>
             <p class="absolute xl:top-3/4 left-10 text-white font-normal xl:text-3xl sm:text-2xl md:top-2/3">
               <?php echo $name[$i - 1] ?>
@@ -158,8 +174,10 @@
       </div>
     </div>
     <div class="flex my-8 lg:gap-0 sm:gap-3 lg:flex-row sm:flex-col">
-      <div class="overflow-hidden lg:w-1/4 bg-orange-50 lg:p-5 rounded-2xl xl:mr-10 lg:mr-2 mobile:w-full md:p-2 lg:overflow-x-hidden">
-        <div class="p-3 mb-6 border-0 border-b-2 border-solid header-table lg:text-2xl whitespace-nowrap md:text-xl sm:text-center">
+      <div
+        class="overflow-hidden lg:w-1/4 bg-orange-50 lg:p-5 rounded-2xl xl:mr-10 lg:mr-2 mobile:w-full md:p-2 lg:overflow-x-hidden">
+        <div
+          class="p-3 mb-6 border-0 border-b-2 border-solid header-table lg:text-2xl whitespace-nowrap md:text-xl sm:text-center">
           <p>Popular Author</p>
         </div>
         <div class="grid grid-cols-3 gap-5 lg:grid-cols-1">
@@ -206,7 +224,8 @@
                 <i class="text-yellow-300 fa-solid fa-star"></i>
               </div>
               <p class="font-bold top-product-author">Misty Figueroa</p>
-              <div class="inline top-product-desc text-ellipsis sm:w-full sm:pr-20 mobile:text-sm mobile:w-3/4 mobile:h-fit">
+              <div
+                class="inline top-product-desc text-ellipsis sm:w-full sm:pr-20 mobile:text-sm mobile:w-3/4 mobile:h-fit">
                 Est numquam harum aut ut. Pariatur cum blanditiis est
                 delectus accusamus eveniet. Quis fugiat eligendi magni eos
                 dignissimos numquam.Quis ipsum incididunt non minim elit
@@ -227,7 +246,8 @@
                     <div class="h-full img w-52">
                       <img src="resources/images/productImg.png" alt="" />
                     </div>
-                    <div class="flex flex-col p-2 font-medium product-body sm:w-full lg:text-lg md:text-base lg:gap-0 md:gap-2">
+                    <div
+                      class="flex flex-col p-2 font-medium product-body sm:w-full lg:text-lg md:text-base lg:gap-0 md:gap-2">
                       <div class={`product-name`}>
                         <a href="/book_detail">My Dearest Darkest</a>
                       </div>
@@ -252,6 +272,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
