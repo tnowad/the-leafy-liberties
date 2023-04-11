@@ -44,7 +44,7 @@
                   <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-minus"></i>
                   </button>
-                  <span class="m-5 text-lg text-count <?php echo $wishlist->product_id ?> "><?php echo $wishlist->quantity ?></span>
+                  <span class="m-5 w-3 text-lg text-count <?php echo $wishlist->product_id ?> "><?php echo $wishlist->quantity ?></span>
                   <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-plus"></i>
                   </button>
