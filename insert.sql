@@ -428,3 +428,13 @@ VALUES (
         2,
         'https://preview.redd.it/d4inm7jx46s51.jpg?auto=webp&s=38e82ad2bdec5a0b9d9d3309abd40e1c21ee3c28'
     );
+
+INSERT INTO
+    carts (
+        id,
+        user_id,
+        book_id,
+        quantity,
+        status
+    )
+VALUES (1, 101, 201, 2, 1), (2, 102, 202, 1, 1), (3, 101, 203, 3, 1), (4, 103, 204, 1, 1), (5, 104, 205, 2, 1);

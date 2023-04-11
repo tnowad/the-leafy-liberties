@@ -4,8 +4,9 @@
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php
-        $total = 6;
-        for ($i = 1; $i <= $total; $i++) { ?>
+        foreach ($cart as $cart) {
+
+        ?>
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
               <div class="item-detail flex justify-between items-center">
@@ -22,7 +23,7 @@
                     <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-minus"></i>
                     </button>
-                    <span class="m-5 text-lg text-count">1</span>
+                    <span class="m-5 text-lg text-count"><?php echo $cart->quantity ?></span>
                     <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-plus"></i>
                     </button>
@@ -57,19 +58,16 @@
   </div>
 </div>
 <script>
-  let count = 1;
-  let text = document.querySelector(".text-count")
-  let minus = document.querySelector(".minus")
-  let plus = document.querySelector(".plus")
-  console.log(text.innerHTML);
-  minus.addEventListener("click", () => {
-    if (count > 1) {
-      count--;
-      text.innerHTML = count;
-    }
-  })
-  plus.addEventListener("click", () => {
-    count++;
-    text.innerHTML = count;
-  })
+  document.querySelectorAll('.plus, .minus').forEach(button => {
+    button.addEventListener('click', event => {
+      const span = event.currentTarget.parentElement.querySelector('.text-count');
+      let quantity = parseInt(span.textContent);
+      if (event.currentTarget.classList.contains('plus')) {
+        quantity++;
+      } else if (event.currentTarget.classList.contains('minus') && quantity > 0) {
+        quantity--;
+      }
+      span.textContent = quantity;
+    });
+  });
 </script>

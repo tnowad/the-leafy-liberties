@@ -16,9 +16,9 @@
           <th class="px-4 py-2">
             Price
           </th>
-          <th class="px-4 py-2">
+          <!-- <th class="px-4 py-2">
             Quantity
-          </th>
+          </th> -->
           <th class="px-4 py-2">
             Add to cart
           </th>
@@ -38,7 +38,7 @@
             </td>
             <td><?php echo $wishlist->product_name ?></td>
             <td><?php echo $wishlist->price ?></td>
-            <td>
+            <!-- <td>
               <div>
                 <div class="flex items-center justify-center w-fit mx-auto h-fit">
                   <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
@@ -50,7 +50,7 @@
                   </button>
                 </div>
               </div>
-            </td>
+            </td> -->
             <td class="px-1 py-2">
               <button class="bg-[#315854] hover:bg-[#8cbfba] text-white font-bold py-2 px-4 rounded-md transition-all">
                 <i class="fa-brands fa-opencart"></i>
