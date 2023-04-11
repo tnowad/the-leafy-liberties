@@ -129,16 +129,16 @@
   </div>
 </div>
 
+
 <script>
   $.ajax({
-    url: 'products.php',
-    type: 'GET',
-    dataType: 'json',
-    success: function(productList) {
-      console.log(productList);
+    url: 'app/controllers/frontend/ProductController.php',
+    method: 'GET',
+    success: function(data) {
+      console.log(data);
     },
     error: function(xhr, status, error) {
-      console.log(error);
+      console.error(error);
     }
   });
 </script>
