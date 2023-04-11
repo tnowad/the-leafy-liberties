@@ -5,7 +5,7 @@ use App\Models\Category;
 
 class CategorySeeder
 {
-  public function run()
+  public static function run()
   {
     Category::truncate();
     echo "Truncated categories table" . "<br>";
@@ -24,11 +24,11 @@ class CategorySeeder
       'Self-Help',
       'Travel',
     ];
-    // foreach ($categories as $category) {
-    //   echo "Seeding category: $category" . "<br>";
-    //   Category::create([
-    //     'name' => $category,
-    //   ]);
-    // }
+    foreach ($categories as $category) {
+      echo "Seeding category: $category" . "<br>";
+      Category::create([
+        'name' => $category,
+      ]);
+    }
   }
 }

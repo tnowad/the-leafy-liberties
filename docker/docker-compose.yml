@@ -4,6 +4,7 @@ services:
     build:
       context: ./mysql
       dockerfile: Dockerfile
+    restart: always
     ports:
       - "3306:3306"
     environment:
