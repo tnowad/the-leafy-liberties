@@ -15,6 +15,7 @@ $router->get('/cart', [HomeController::class, 'cart']);
 $router->get('/shop', [HomeController::class, 'shop']);
 $router->get('/wishlist', [HomeController::class, 'wishlist']);
 $router->get('/products', [ProductController::class, 'index']);
+$router->get('/products/filter', [ProductController::class, 'filter']);
 $router->get('/product', [ProductController::class, 'show']);
 $router->get('/profile', [HomeController::class, 'profile']);
 $router->get('/checkout', [HomeController::class, 'checkout']);

@@ -56,5 +56,7 @@ class ProductController extends Controller
   {
     // Get query from request and create list products
     // return with json
+    $response->setBody(json_encode($request->getQueries()));
+
   }
 }
