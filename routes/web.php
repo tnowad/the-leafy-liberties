@@ -5,6 +5,7 @@ use Core\Application;
 use App\Controllers\Frontend\HomeController;
 use App\Controllers\Frontend\AuthController;
 use App\Controllers\Frontend\ProductController;
+use App\Controllers\Frontend\WishlistController;
 
 $router = Application::getInstance()->getRouter();
 
@@ -13,10 +14,10 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('/about', [HomeController::class, 'about']);
 $router->get('/cart', [HomeController::class, 'cart']);
 $router->get('/shop', [HomeController::class, 'shop']);
-$router->get('/wishlist', [HomeController::class, 'wishlist']);
+$router->get('/wishlist', [WishlistController::class, 'index']);
 $router->get('/products', [ProductController::class, 'index']);
-$router->get('/products/filter', [ProductController::class, 'filter']);
 $router->get('/product', [ProductController::class, 'show']);
+$router->get('/products/filter', [ProductController::class, 'filter']);
 $router->get('/profile', [HomeController::class, 'profile']);
 $router->get('/checkout', [HomeController::class, 'checkout']);
 $router->get('/dashboard', [HomeController::class, 'dashboard']);

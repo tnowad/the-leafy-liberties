@@ -29,21 +29,22 @@
       </thead>
       <tbody>
         <?php
-        $total = 6;
-        for ($i = 1; $i <= $total; $i++) { ?>
+        $wishlist = $params['wishlist'];
+        foreach ($wishlist as $wishlist) {
+        ?>
           <tr class="text-center border-0 border-solid border-b-[1px]">
             <td>
-              <img src="../assets/img/info_book_detail.png" class="h-36 w-32 mx-auto" />
+              <img src="<?php echo $wishlist->image ?>" alt="<?php echo $wishlist->product_name ?>" class="h-36 w-32 mx-auto" />
             </td>
-            <td>Jack Phats</td>
-            <td>Jack Phats</td>
+            <td><?php echo $wishlist->product_name ?></td>
+            <td><?php echo $wishlist->price ?></td>
             <td>
               <div>
                 <div class="flex items-center justify-center w-fit mx-auto h-fit">
                   <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-minus"></i>
                   </button>
-                  <span class="m-5 text-lg text-count">1</span>
+                  <span class="m-5 text-lg text-count"><?php echo $wishlist->quantity ?></span>
                   <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-plus"></i>
                   </button>
@@ -66,34 +67,6 @@
       </tbody>
     </table>
   </div>
-  <!-- <table key={item.id}
-    class="ml-5 mb-8 pt-10 flex flex-row justify-around border-0 border-t-2 border-gray-200 border-solid ">
-    <thead>
-      <tr class="flex flex-col">
-        <th class={ item.name==='Action' ? `h-16 pt-5` : `h-auto` } key={item.name}>
-          {item.name}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="text-center flex flex-col justify-around ">
-        <td>{item.image}</td>
-        <td>{item.category}</td>
-
-        <td>{item.status}</td>
-        <td>{item.amount}</td>
-        <td class="border px-1 py-2">
-          <button class="bg-green-800 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-            <FontAwesomeIcon class="hover:" icon={faCartPlus} />
-          </button>
-          <button class="ml-3 bg-green-800 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-        </td>
-        <td class="border px-4 py-2"></td>
-      </tr>
-    </tbody>
-  </table> -->
 </div>
 <script>
   let count = 1;
@@ -111,5 +84,4 @@
     count++;
     text.innerHTML = count;
   })
-
 </script>

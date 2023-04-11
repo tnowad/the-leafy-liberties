@@ -70,7 +70,6 @@
       <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         <?php
         $productList = $params['products'];
-        echo json_encode($productList);
         foreach ($productList as $product) {
         ?>
 
