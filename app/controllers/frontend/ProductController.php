@@ -13,11 +13,13 @@ use Core\View;
 class ProductController extends Controller
 {
 
-
   public function index(Request $request, Response $response)
   {
-    $products = Product::all();
-
+    try {
+      $products = Product::all();
+    } catch (\Exception $e) {
+      dd($e->getMessage());
+    }
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/products'), [
       'title' => 'products',
@@ -32,7 +34,12 @@ class ProductController extends Controller
       $response->redirect(BASE_URI . '/');
       return;
     }
-    $product = Product::find($request->getQuery('id'));
+    try {
+
+      $product = Product::find($request->getQuery('id'));
+    } catch (\Exception $e) {
+      dd($e->getMessage());
+    }
     dd($product);
     if (!$product) {
       $response->setStatusCode(404);
