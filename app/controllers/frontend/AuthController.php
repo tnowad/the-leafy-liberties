@@ -21,10 +21,8 @@ class AuthController extends Controller
         try {
           $user = User::where(['email' => $email])[0];
         } catch (\Exception $e) {
-          dd($e->getMessage());
           $user = null;
         }
-
         if ($user && password_verify($password, $user->password)) {
           $response->setStatusCode(200);
           Application::getInstance()->getSession()->set('user', $user);
@@ -52,8 +50,6 @@ class AuthController extends Controller
       default:
         break;
     }
-
-
   }
 
   public function register(Request $request, Response $response)
@@ -100,9 +96,8 @@ class AuthController extends Controller
 
   public function logout(Request $request, Response $response)
   {
-    Application::getInstance()->session->destroy();
+    Application::getInstance()->getSession()->destroy();
     $response->setStatusCode(200);
-    // Write header to redirect to home pages
     $response->setHeaders([
       'Location' => '/'
     ]);
