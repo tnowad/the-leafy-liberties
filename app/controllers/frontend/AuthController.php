@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Frontend;
 
+use App\Models\Role;
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
@@ -60,26 +61,41 @@ class AuthController extends Controller
         $name = $request->getParam('name');
         $phone = $request->getParam('phone');
         $password = $request->getParam('password');
-        $user = new User();
-        $user->email = $email;
-        $user->name = $name;
-        $user->phone = $phone;
-        $user->password = password_hash($password, PASSWORD_DEFAULT);
-        try {
-          $user->save();
+        $existingUser = User::where(['email' => $email]);
+        if ($existingUser) {
           $response->setStatusCode(200);
-          Application::getInstance()->getSession()->set('user', $user);
-          $response->redirect('/');
-        } catch (\Exception $e) {
-          $response->setStatusCode(500);
           $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
             'toast' => [
               'type' => 'error',
-              'message' => "Registration failed",
+              'message' => "User already exists",
             ],
             'header' => '',
             'footer' => '',
           ]));
+          break;
+        } else {
+          $user = new User();
+          $user->email = $email;
+          $user->name = $name;
+          $user->phone = $phone;
+          $user->password = password_hash($password, PASSWORD_DEFAULT);
+          $user->setRole(Role::where(['name' => 'customer'])[0]);
+          try {
+            $user->save();
+            $response->setStatusCode(200);
+            Application::getInstance()->getSession()->set('user', $user);
+            $response->redirect('/');
+          } catch (\Exception $e) {
+            $response->setStatusCode(500);
+            $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
+              'toast' => [
+                'type' => 'error',
+                'message' => "Registration failed",
+              ],
+              'header' => '',
+              'footer' => '',
+            ]));
+          }
         }
         break;
       case 'GET':
