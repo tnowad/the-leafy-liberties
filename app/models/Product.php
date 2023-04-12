@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Modelsl\ProductCategory;
 use Core\Model;
 use App\Models\Author;
 use App\Models\ProductTag;
@@ -73,15 +74,44 @@ class Product extends Model
     }
     return false;
   }
-
-  public function getTags()
+  public function categories()
   {
-    $productTags = ProductTag::where('product_id', $this->id);
-    $tags = [];
-    foreach ($productTags as $productTag) {
-      $tags[] = Tag::find($productTag->tag_id);
+    $productCategories = ProductCategory::where('product_id', $this->id);
+    $categories = [];
+    foreach ($productCategories as $productCategory) {
+      $categories[] = Category::find($productCategory->category_id);
     }
-    return $tags;
+    return $categories;
   }
 
+  public function addCategory($category)
+  {
+    ProductCategory::create([
+      'product_id' => $this->id,
+      'category_id' => $category->id,
+    ]);
+  }
+
+  public function removeCategory($category)
+  {
+    $productCategories = ProductCategory::where('product_id', $this->id);
+    $productCategory = null;
+    foreach ($productCategories as $productCategory) {
+      if ($productCategory->category_id == $category->id) {
+        break;
+      }
+    }
+    $productCategory->delete();
+  }
+
+  public function hasCategory($category)
+  {
+    $productCategories = ProductCategory::where('product_id', $this->id);
+    foreach ($productCategories as $productCategory) {
+      if ($productCategory->category_id == $category->id) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
