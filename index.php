@@ -31,6 +31,7 @@ if (file_exists('./autoload.php')) {
 
 define('BASE_URI', DotEnv::get('BASE_URI'));
 
+echo password_hash("password", PASSWORD_DEFAULT);
 try {
   Database::getInstance()->getConnection();
 } catch (\Exception $e) {
