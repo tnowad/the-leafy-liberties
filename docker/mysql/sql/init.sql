@@ -51,23 +51,23 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  products_tags (
-    products_id int NOT NULL,
-    tags_id int NOT NULL,
+  product_tags (
+    product_id int NOT NULL,
+    tag_id int NOT NULL,
     -- key
-    PRIMARY KEY (products_id, tags_id),
-    FOREIGN KEY (products_id) REFERENCES products (id),
-    FOREIGN KEY (tags_id) REFERENCES tags (id)
+    PRIMARY KEY (product_id, tag_id),
+    FOREIGN KEY (product_id) REFERENCES products (id),
+    FOREIGN KEY (tag_id) REFERENCES tags (id)
   );
 
 CREATE TABLE
-  products_categories (
-    products_id int NOT NULL,
-    categories_id int NOT NULL,
+  product_categories (
+    product_id int NOT NULL,
+    category_id int NOT NULL,
     -- key
-    PRIMARY KEY (products_id, categories_id),
-    FOREIGN KEY (products_id) REFERENCES products (id),
-    FOREIGN KEY (categories_id) REFERENCES categories (id)
+    PRIMARY KEY (product_id, category_id),
+    FOREIGN KEY (product_id) REFERENCES products (id),
+    FOREIGN KEY (category_id) REFERENCES categories (id)
   );
 
 -- User
@@ -102,21 +102,21 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  roles_permissions (
-    permissions_id int NOT NULL,
-    roles_id int NOT NULL,
+  role_permissions (
+    permission_id int NOT NULL,
+    role_id int NOT NULL,
     status tinyint NOT NULL DEFAULT "1",
-    PRIMARY KEY (permissions_id, roles_id),
-    FOREIGN KEY (permissions_id) REFERENCES permissions (id)
+    PRIMARY KEY (permission_id, role_id),
+    FOREIGN KEY (permission_id) REFERENCES permissions (id)
   );
 
 CREATE TABLE
-  users_permissions (
-    permissions_id int NOT NULL,
-    users_id int NOT NULL,
+  user_permissions (
+    permission_id int NOT NULL,
+    user_id int NOT NULL,
     status tinyint NOT NULL DEFAULT "1",
-    PRIMARY KEY (permissions_id, users_id),
-    FOREIGN KEY (permissions_id) REFERENCES permissions (id)
+    PRIMARY KEY (permission_id, user_id),
+    FOREIGN KEY (permission_id) REFERENCES permissions (id)
   );
 
 -- Wishlist

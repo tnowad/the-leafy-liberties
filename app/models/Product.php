@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use Core\Model;
+use App\Models\Author;
+use App\Models\ProductTag;
+use App\Models\Publisher;
+use App\Models\Tag;
 
 class Product extends Model
 {
@@ -10,16 +14,14 @@ class Product extends Model
 
   protected $fillable = [
     'id',
-    'star',
-    'image_url',
-    'title',
-    'author',
-    'publisher',
-    'price',
     'isbn',
+    'title',
+    'author_id',
+    'publisher_id',
+    'price',
     'description',
+    'image_url',
     'quantity',
-    'category_id',
   ];
   public function author()
   {
@@ -39,45 +41,5 @@ class Product extends Model
       $tags[] = Tag::find($productTag->tag_id);
     }
     return $tags;
-  }
-
-  public function reviews()
-  {
-    return Review::where('product_id', $this->id);
-  }
-
-  public function ratings()
-  {
-    return Rating::where('product_id', $this->id);
-  }
-
-  public function orders()
-  {
-    return Order::where('product_id', $this->id);
-  }
-
-  public function orderDetails()
-  {
-    return OrderDetail::where('product_id', $this->id);
-  }
-
-  public function carts()
-  {
-    return Cart::where('product_id', $this->id);
-  }
-
-  public function cartDetails()
-  {
-    return CartDetail::where('product_id', $this->id);
-  }
-
-  public function wishlists()
-  {
-    return Wishlist::where('product_id', $this->id);
-  }
-
-  public function wishlistDetails()
-  {
-    return WishlistDetail::where('product_id', $this->id);
   }
 }
