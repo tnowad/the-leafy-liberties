@@ -12,10 +12,10 @@ class ProfileController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    if (!Application::getInstance()->getSession()->get('user')) {
+    if (!Application::getInstance()->getAuthentication()->check()) {
       $response->redirect('/login');
     }
-    $user = User::find(Application::getInstance()->getSession()->get('user')->id);
+    $user = Application::getInstance()->getAuthentication()->getUser();
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/profile'), [
       'user' => $user,

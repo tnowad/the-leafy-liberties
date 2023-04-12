@@ -21,17 +21,13 @@ class AuthController extends Controller
         $password = $request->getParam('password');
         try {
           $users = User::where(['email' => $email]);
-          if (count($users) > 0) {
-            $user = $users[0];
-          } else {
-            $user = null;
-          }
+          $user = $users ? $users[0] : null;
         } catch (\Exception $e) {
           $user = null;
         }
         if ($user && password_verify($password, $user->password)) {
           $response->setStatusCode(200);
-          Application::getInstance()->getSession()->set('user', $user);
+          Application::getInstance()->getAuthentication()->setUser($user);
           $response->redirect('/');
         } else {
           $response->setStatusCode(200);
@@ -87,7 +83,7 @@ class AuthController extends Controller
           try {
             $user->save();
             $response->setStatusCode(200);
-            Application::getInstance()->getSession()->set('user', $user);
+            Application::getInstance()->getAuthentication()->setUser($user);
             $response->redirect('/');
           } catch (\Exception $e) {
             $response->setStatusCode(500);

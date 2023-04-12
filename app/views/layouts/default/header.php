@@ -51,7 +51,7 @@ use App\Models\Category;
         class="absolute hidden w-24 transition-all bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none right-16 mt-11"
         id="dropdownHover">
         <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
-          <?php if (isset($_SESSION['user'])): ?>
+          <?php if (isset($_SESSION['user_id'])): ?>
             <a href="<?php echo BASE_URI . '/profile' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
               Profile</a>

@@ -2,6 +2,8 @@
 
 namespace Core;
 
+
+use Core\Authentication;
 use Core\Database;
 use Core\Request;
 use Core\Response;
@@ -19,6 +21,7 @@ class Application
   private Session $session;
   private Database $database;
   private Controller $controller;
+  private Authentication $authentication;
   private View $view;
 
   public function __construct()
@@ -29,6 +32,7 @@ class Application
     $this->session = new Session();
     $this->database = Database::getInstance();
     $this->controller = new Controller();
+    $this->authentication = new Authentication();
     $this->view = new View('pages/index');
   }
 
@@ -87,5 +91,15 @@ class Application
       $this->response->setBody(View::renderWithLayout(new View('pages/404'), $params));
     }
     $this->response->send();
+  }
+
+  public function getAuthentication()
+  {
+    return $this->authentication;
+  }
+  public function setAuthentication(Authentication $authentication)
+  {
+    $this->authentication = $authentication;
+    return $this;
   }
 }

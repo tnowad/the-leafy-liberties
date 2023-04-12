@@ -37,7 +37,7 @@ abstract class Model
     $query = "SELECT * FROM $table WHERE $primaryKey = $id";
     $result = Database::getInstance()->fetchOne($query);
     if (!$result) {
-      return null;
+      throw new Exception("No record found for ID $id");
     }
     return new static($result);
   }
