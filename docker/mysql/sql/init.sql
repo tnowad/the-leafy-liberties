@@ -92,6 +92,7 @@ CREATE TABLE
     name varchar(50) NOT NULL,
     phone varchar(50) DEFAULT NULL,
     password varchar(255) NOT NULL,
+    gender tinyint NOT NULL DEFAULT "0",
     user_image varchar(255) DEFAULT NULL,
     role_id int DEFAULT NULL,
     status tinyint NOT NULL DEFAULT "1",

@@ -11,7 +11,7 @@ class User extends Model
 {
   protected $table = 'users';
 
-  protected $fillable = ['email', 'password', 'name', 'phone', 'role_id', 'status', 'user_image'];
+  protected $fillable = ['email', 'password', 'name', 'phone', 'role_id', 'status', 'user_image', 'gender'];
 
   public function setPassword($password)
   {

@@ -20,7 +20,12 @@ class AuthController extends Controller
         $email = $request->getParam('email');
         $password = $request->getParam('password');
         try {
-          $user = User::where(['email' => $email])[0];
+          $users = User::where(['email' => $email]);
+          if (count($users) > 0) {
+            $user = $users[0];
+          } else {
+            $user = null;
+          }
         } catch (\Exception $e) {
           $user = null;
         }
@@ -41,7 +46,6 @@ class AuthController extends Controller
         }
         break;
       case 'GET':
-        dd($request->getParams());
         $response->setStatusCode(200);
         $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
           'header' => '',

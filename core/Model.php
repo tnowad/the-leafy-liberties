@@ -34,14 +34,11 @@ abstract class Model
   {
     $table = static::table();
     $primaryKey = (new static )->primaryKey;
-    $query = "SELECT * FROM $table WHERE $primaryKey = ?";
-    $params = ['id' => $id];
-    $result = Database::getInstance()->fetchOne($query, $params);
-
+    $query = "SELECT * FROM $table WHERE $primaryKey = $id";
+    $result = Database::getInstance()->fetchOne($query);
     if (!$result) {
-      throw new Exception("Record not found with $primaryKey = $id");
+      return null;
     }
-
     return new static($result);
   }
 
