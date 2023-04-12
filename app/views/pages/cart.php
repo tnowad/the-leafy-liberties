@@ -5,7 +5,9 @@
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php
         foreach ($cart as $cart) {
-
+          $product = array_filter($products, function ($product) use ($cart) {
+            return $product->id == $cart->product_id;
+          });
         ?>
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
@@ -14,10 +16,10 @@
                   <img src="../assets/img/info_book_detail.png" alt="" class="w-full h-full object-cover rounded-2xl" />
                 </div>
                 <div class="text">
-                  <p class="book-name text-2xl mb-2">Misty Figueroa</p>
+                  <p class="book-name text-2xl mb-2"><?php $product->title ?></p>
                   <p class="book-author text-base">Misty Figueroa</p>
                 </div>
-                <p class="price text-xl">150.000VNĐ</p>
+                <p class="price text-xl"><?php $product->price ?></p>
                 <div>
                   <div class="flex items-center justify-center w-fit mx-auto h-fit">
                     <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">

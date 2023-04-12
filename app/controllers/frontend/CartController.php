@@ -3,6 +3,7 @@
 namespace App\Controllers\Frontend;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Core\Controller;
 use Core\Database;
 use Core\Request;
@@ -17,6 +18,7 @@ class CartController extends Controller
   {
     try {
       $cart = Cart::all();
+      $products = Product::all();
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
@@ -25,6 +27,7 @@ class CartController extends Controller
     $response->setBody(View::renderWithLayout(new View('pages/cart'), [
       'title' => 'cart',
       'cart' => $cart,
+      'products' => $products,
     ]));
   }
 }
