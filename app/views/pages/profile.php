@@ -70,17 +70,7 @@
 
           <label>Birthday *</label>
           <div class="flex justify-between w-full h-8 md:h-10 md:w-2/4">
-            <input type="number" min="1" max="31"
-              class="p-1 pl-6 text-base border border-gray-300 border-solid rounded md:text-2xl" />
-            <div class="h-8 p-1 border border-gray-300 border-solid rounded md:h-10">
-              <span>Month:</span>
-              <input type="number" class="w-8 h-2 pl-1 md:pl-2 md:h-8" min="1" max="12" />
-            </div>
-
-            <div class="p-1 border border-gray-300 border-solid rounded">
-              <span>Year:</span>
-              <input type="number" class="h-2 pl-1 md:pl-2 md:h-8" min="1900" max="2023" />
-            </div>
+            <input type="date" value="<?php echo $user->birthday ?>" />
           </div>
           <label class="mt-10 ml-10">Password change</label>
           <div class="flex flex-col p-2 border border-teal-800 border-solid rounded">
