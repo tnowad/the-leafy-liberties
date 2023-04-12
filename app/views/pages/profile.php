@@ -29,18 +29,17 @@
         </div>
       </div>
       <div class="w-full p-2 md:w-3/4">
-        <form class="flex flex-col">
+        <form class="flex flex-col" action="<?php echo BASE_URI . '/profile' ?>" method="post">
           <label>Name</label>
-          <input value="<?php echo $user->name ?>" type="text" required
+          <input name="name" value="<?php echo $user->name ?>" type="text" required
             class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
           <label>Email</label>
-          <input value="<?php echo $user->email ?>" type="email" required
+          <input name="email" value=" <?php echo $user->email ?>" type="email" required
             class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
           <label>Phone number</label>
-          <input value="<?php echo $user->phone ?>" type="tel"
+          <input name="phone" value="<?php echo $user->phone ?>" type="tel"
             class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm"
-            name="phone" placeholder="+84XXXXXXXXX" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$"
-            required></input>
+            pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
           <label>Gender</label>
           <div class="relative inline-block">
             <select name="gender" id="gender"
@@ -59,20 +58,17 @@
 
           <label>Birthday</label>
           <div class="flex justify-between w-full h-8 md:h-10 md:w-2/4">
-            <input type="date" value="<?php echo $user->birthday ?>" />
+            <input name="birthday" type="date" value="<?php echo $user->birthday ?>" />
           </div>
           <label>Password change</label>
           <div class="flex flex-col p-2 border border-gray-300 border-solid rounded">
-            <label>
+            <label for="password">
               Current password (leave blank to leave unchanged)
             </label>
-            <input type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
-            <label>
-              Current password (leave blank to leave unchanged)
-            </label>
-            <input type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
-            <label>Confirm new password</label>
-            <input type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
+            <input name="password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
+            <label for="new-password">Confirm new password</label>
+            <input name="new-password" type="text"
+              class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
           </div>
           <input type="submit" value="Save changes"
             class="w-3/6 p-2 mt-5 text-white transition-all bg-teal-800 border cursor-pointer sm:w-1/6 rounded-2xl" />

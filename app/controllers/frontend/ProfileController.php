@@ -23,8 +23,8 @@ class ProfileController extends Controller
     ]));
   }
 
-  public function update()
+  public function update(Request $request, Response $response)
   {
-
+    dd($request->getParams());
   }
 }

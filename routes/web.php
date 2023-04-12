@@ -20,7 +20,10 @@ $router->get('/wishlist', [WishlistController::class, 'index']);
 $router->get('/products', [ProductController::class, 'index']);
 $router->get('/product', [ProductController::class, 'show']);
 $router->get('/products/filter', [ProductController::class, 'filter']);
+
 $router->get('/profile', [ProfileController::class, 'index']);
+$router->post('/profile', [ProfileController::class, 'update']);
+
 $router->get('/checkout', [HomeController::class, 'checkout']);
 $router->get('/dashboard', [HomeController::class, 'dashboard']);
 $router->get('/dashboard/customer', [HomeController::class, 'customerDashboard']);
