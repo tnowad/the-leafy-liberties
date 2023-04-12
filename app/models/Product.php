@@ -42,4 +42,46 @@ class Product extends Model
     }
     return $tags;
   }
+
+  public function addTag($tag)
+  {
+    ProductTag::create([
+      'product_id' => $this->id,
+      'tag_id' => $tag->id,
+    ]);
+  }
+
+  public function removeTag($tag)
+  {
+    $productTags = ProductTag::where('product_id', $this->id);
+    $productTag = null;
+    foreach ($productTags as $productTag) {
+      if ($productTag->tag_id == $tag->id) {
+        break;
+      }
+    }
+    $productTag->delete();
+  }
+
+  public function hasTag($tag)
+  {
+    $productTags = ProductTag::where('product_id', $this->id);
+    foreach ($productTags as $productTag) {
+      if ($productTag->tag_id == $tag->id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public function getTags()
+  {
+    $productTags = ProductTag::where('product_id', $this->id);
+    $tags = [];
+    foreach ($productTags as $productTag) {
+      $tags[] = Tag::find($productTag->tag_id);
+    }
+    return $tags;
+  }
+
 }
