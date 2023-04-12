@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use Core\Model;
+use App\Models\Author;
+use App\Models\ProductTag;
+use App\Models\Publisher;
+use App\Models\Tag;
 
 class Product extends Model
 {
@@ -10,16 +14,14 @@ class Product extends Model
 
   protected $fillable = [
     'id',
-    'star',
-    'image_url',
-    'title',
-    'author',
-    'publisher',
-    'price',
     'isbn',
+    'title',
+    'author_id',
+    'publisher_id',
+    'price',
     'description',
+    'image_url',
     'quantity',
-    'category_id',
   ];
   public function author()
   {
@@ -41,43 +43,45 @@ class Product extends Model
     return $tags;
   }
 
-  public function reviews()
+  public function addTag($tag)
   {
-    return Review::where('product_id', $this->id);
+    ProductTag::create([
+      'product_id' => $this->id,
+      'tag_id' => $tag->id,
+    ]);
   }
 
-  public function ratings()
+  public function removeTag($tag)
   {
-    return Rating::where('product_id', $this->id);
+    $productTags = ProductTag::where('product_id', $this->id);
+    $productTag = null;
+    foreach ($productTags as $productTag) {
+      if ($productTag->tag_id == $tag->id) {
+        break;
+      }
+    }
+    $productTag->delete();
   }
 
-  public function orders()
+  public function hasTag($tag)
   {
-    return Order::where('product_id', $this->id);
+    $productTags = ProductTag::where('product_id', $this->id);
+    foreach ($productTags as $productTag) {
+      if ($productTag->tag_id == $tag->id) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  public function orderDetails()
+  public function getTags()
   {
-    return OrderDetail::where('product_id', $this->id);
+    $productTags = ProductTag::where('product_id', $this->id);
+    $tags = [];
+    foreach ($productTags as $productTag) {
+      $tags[] = Tag::find($productTag->tag_id);
+    }
+    return $tags;
   }
 
-  public function carts()
-  {
-    return Cart::where('product_id', $this->id);
-  }
-
-  public function cartDetails()
-  {
-    return CartDetail::where('product_id', $this->id);
-  }
-
-  public function wishlists()
-  {
-    return Wishlist::where('product_id', $this->id);
-  }
-
-  public function wishlistDetails()
-  {
-    return WishlistDetail::where('product_id', $this->id);
-  }
 }

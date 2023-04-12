@@ -126,7 +126,6 @@ abstract class Model
     if (!$result) {
       throw new Exception("Failed to delete record from $table");
     }
-
     return true;
   }
 
