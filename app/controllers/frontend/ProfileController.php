@@ -25,6 +25,14 @@ class ProfileController extends Controller
 
   public function update(Request $request, Response $response)
   {
-    dd($request->getParams());
+    $user = Application::getInstance()->getAuthentication()->getUser();
+    $user->name = $request->getParam('name');
+    $user->save();
+    // $response->redirect('/profile');
+    $response->json([
+      "data" => [
+        "name" => $user->name,
+      ]
+    ]);
   }
 }

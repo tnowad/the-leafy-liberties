@@ -32,7 +32,6 @@ $router->get('/dashboard/coupon', [HomeController::class, 'couponDashboard']);
 $router->get('/dashboard/slider', [HomeController::class, 'sliderDashboard']);
 $router->get('/dashboard/comment', [HomeController::class, 'commentDashboard']);
 
-
 $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);
 $router->get('/register', [AuthController::class, 'register']);
