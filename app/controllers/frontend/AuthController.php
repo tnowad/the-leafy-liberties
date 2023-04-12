@@ -14,31 +14,46 @@ class AuthController extends Controller
 
   public function login(Request $request, Response $response)
   {
-    if ($request->getMethod() === 'GET') {
-      $response->setStatusCode(200);
-      $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
-        'title' => 'Login',
-        'header' => '',
-        'footer' => '',
-      ]));
-    } else {
-      $email = $request->getQuery('email');
-      $password = $request->getQuery('password');
-      $user = User::findOne(['email' => $email]);
-      dd($user);
-      if (!$user) {
-        $response->setStatusCode(401);
-        $response->setBody('Invalid credentials');
-      }
-      if (!password_verify($password, $user->password)) {
-        $response->setStatusCode(401);
-        $response->setBody('Invalid credentials');
-      } else {
-        Application::getInstance()->session->set('user', $user);
+    switch ($request->getMethod()) {
+      case 'POST':
+        $email = $request->getParam('email');
+        $password = $request->getParam('password');
+        try {
+          $user = User::where(['email' => $email])[0];
+        } catch (\Exception $e) {
+          dd($e->getMessage());
+          $user = null;
+        }
+
+        if ($user && password_verify($password, $user->password)) {
+          $response->setStatusCode(200);
+          Application::getInstance()->getSession()->set('user', $user);
+          $response->redirect('/');
+        } else {
+          $response->setStatusCode(200);
+          $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
+            'toast' => [
+              'type' => 'error',
+              'message' => "Login failed",
+            ],
+            'header' => '',
+            'footer' => '',
+          ]));
+        }
+        break;
+      case 'GET':
+        dd($request->getParams());
         $response->setStatusCode(200);
-        $response->setBody('Logged in successfully');
-      }
+        $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
+          'header' => '',
+          'footer' => '',
+        ]));
+        break;
+      default:
+        break;
     }
+
+
   }
 
   public function register(Request $request, Response $response)

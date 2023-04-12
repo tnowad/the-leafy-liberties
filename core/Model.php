@@ -45,12 +45,21 @@ abstract class Model
     return new static($result);
   }
 
-  public static function where($field, $value)
+  public static function where($params = [])
   {
     $table = static::table();
-    $query = "SELECT * FROM $table WHERE $field = :value";
-    $params = ['value' => $value];
-    $results = Database::getInstance()->fetchAll($query, $params);
+    $query = "SELECT * FROM $table WHERE ";
+    $conditions = [];
+    $values = [];
+
+    foreach ($params as $field => $value) {
+      $conditions[] = "$field = ?";
+      $values[] = $value;
+    }
+
+    $query .= implode(' AND ', $conditions);
+
+    $results = Database::getInstance()->fetchAll($query, $values);
 
     return array_map(function ($result) {
       return new static($result);
