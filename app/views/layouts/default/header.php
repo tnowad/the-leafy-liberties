@@ -52,12 +52,12 @@ use App\Models\Category;
         id="dropdownHover">
         <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
           <?php if (isset($_SESSION['user'])): ?>
-            <a href="#"
+            <a href="<?php echo BASE_URI . '/profile' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
               Profile</a>
-            <a href="#"
+            <a href="<?php echo BASE_URI . '/settings' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Settings</a>
-            <a href="#"
+            <a href="<?php echo BASE_URI . '/logout' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign
               out</a>
           <?php else: ?>

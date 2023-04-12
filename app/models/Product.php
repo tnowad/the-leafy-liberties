@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Modelsl\ProductCategory;
+use App\Models\ProductCategory;
 use Core\Model;
 use App\Models\Author;
 use App\Models\ProductTag;
