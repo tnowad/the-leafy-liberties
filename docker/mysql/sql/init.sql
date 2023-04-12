@@ -6,27 +6,30 @@ USE bookstore;
 
 CREATE TABLE
   categories (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(100) NOT NULL
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
   tags (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(100) NOT NULL
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
   authors (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(100) NOT NULL
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
   publishers (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
-    description varchar(500) NOT NULL
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
@@ -40,6 +43,7 @@ CREATE TABLE
     description text NOT NULL,
     image_url varchar(255) NOT NULL,
     quantity int NOT NULL DEFAULT "0",
+    -- key
     PRIMARY KEY (id),
     UNIQUE KEY isbn (isbn),
     FOREIGN KEY (author_id) REFERENCES authors (id),
@@ -50,6 +54,7 @@ CREATE TABLE
   products_tags (
     products_id int NOT NULL,
     tags_id int NOT NULL,
+    -- key
     PRIMARY KEY (products_id, tags_id),
     FOREIGN KEY (products_id) REFERENCES products (id),
     FOREIGN KEY (tags_id) REFERENCES tags (id)
@@ -59,80 +64,102 @@ CREATE TABLE
   products_categories (
     products_id int NOT NULL,
     categories_id int NOT NULL,
+    -- key
     PRIMARY KEY (products_id, categories_id),
     FOREIGN KEY (products_id) REFERENCES products (id),
     FOREIGN KEY (categories_id) REFERENCES categories (id)
   );
 
--- DONE---
-CREATE TABLE
-  carts (
-    id int PRIMARY KEY NOT NULL,
-    user_id int NOT NULL,
-    book_id int NOT NULL,
-    quantity int DEFAULT NULL,
-    status TINYINT NOT NULL DEFAULT "1"
-  );
-
-CREATE TABLE
-  coupons (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(50) NOT NULL,
-    active date NOT NULL,
-    expired date NOT NULL,
-    quantity int NOT NULL,
-    description varchar(500) NOT NULL
-  );
-
-CREATE TABLE
-  orders (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    cart_id int NOT NULL,
-    customer_id int NOT NULL,
-    total int NOT NULL,
-    paid int NOT NULL,
-    created_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-    updated_at timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-    status TINYINT NOT NULL DEFAULT "1"
-  );
-
+-- User
 CREATE TABLE
   permissions (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(50) NOT NULL
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(50) NOT NULL,
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
   roles (
-    id int PRIMARY KEY NOT NULL,
-    name varchar(50) NOT NULL
-  );
-
-CREATE TABLE
-  roles_permissions (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    roles_id int NOT NULL,
-    permissions_id int NOT NULL,
-    status tinyint NOT NULL DEFAULT "1"
+    id int NOT NULL,
+    name varchar(50) NOT NULL,
+    PRIMARY KEY (id)
   );
 
 CREATE TABLE
   users (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    email varchar(50) NOT NULL UNIQUE,
+    id int NOT NULL AUTO_INCREMENT,
+    email varchar(50) NOT NULL,
     name varchar(50) NOT NULL,
-    phone varchar(50) DEFAULT NULL UNIQUE,
+    phone varchar(50) DEFAULT NULL,
     password varchar(255) NOT NULL,
     user_image varchar(255) DEFAULT NULL,
-    role_id int NOT NULL DEFAULT "0",
-    status tinyint NOT NULL DEFAULT "1"
+    role_id int DEFAULT NULL,
+    status tinyint NOT NULL DEFAULT "1",
+    -- key
+    PRIMARY KEY (id),
+    UNIQUE KEY email (email),
+    FOREIGN KEY (role_id) REFERENCES roles (id)
+  );
+
+CREATE TABLE
+  roles_permissions (
+    permissions_id int NOT NULL,
+    roles_id int NOT NULL,
+    status tinyint NOT NULL DEFAULT "1",
+    PRIMARY KEY (permissions_id, roles_id),
+    FOREIGN KEY (permissions_id) REFERENCES permissions (id)
   );
 
 CREATE TABLE
   users_permissions (
     permissions_id int NOT NULL,
     users_id int NOT NULL,
-    status tinyint NOT NULL DEFAULT "1"
+    status tinyint NOT NULL DEFAULT "1",
+    PRIMARY KEY (permissions_id, users_id),
+    FOREIGN KEY (permissions_id) REFERENCES permissions (id)
   );
 
-ALTER TABLE products ADD FOREIGN KEY (category_id) REFERENCES categories (id)
+-- Wishlist
+CREATE TABLE
+  wishlists (
+    id int NOT NULL AUTO_INCREMENT,
+    user_id int NOT NULL,
+    product_id int NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+  );
+
+-- Cart
+CREATE TABLE
+  carts (
+    id int NOT NULL AUTO_INCREMENT,
+    user_id int NOT NULL,
+    product_id int NOT NULL,
+    quantity int NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+  );
+
+-- Order
+CREATE TABLE
+  orders (
+    id int NOT NULL AUTO_INCREMENT,
+    user_id int NOT NULL,
+    total_price decimal(10, 2) NOT NULL,
+    status tinyint NOT NULL DEFAULT "0",
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES users (id)
+  );
+
+CREATE TABLE
+  order_details (
+    id int NOT NULL AUTO_INCREMENT,
+    order_id int NOT NULL,
+    product_id int NOT NULL,
+    quantity int NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (order_id) REFERENCES orders (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+  );
