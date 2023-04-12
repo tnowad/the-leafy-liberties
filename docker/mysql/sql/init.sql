@@ -8,6 +8,7 @@ CREATE TABLE
   categories (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
+    deleted_at datetime DEFAULT NULL,
     PRIMARY KEY (id)
   );
 
@@ -15,6 +16,7 @@ CREATE TABLE
   tags (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
+    deleted_at datetime DEFAULT NULL,
     PRIMARY KEY (id)
   );
 
@@ -22,6 +24,7 @@ CREATE TABLE
   authors (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
+    deleted_at datetime DEFAULT NULL,
     PRIMARY KEY (id)
   );
 
@@ -29,6 +32,7 @@ CREATE TABLE
   publishers (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
+    deleted_at datetime DEFAULT NULL,
     PRIMARY KEY (id)
   );
 
@@ -43,6 +47,7 @@ CREATE TABLE
     description text NOT NULL,
     image_url varchar(255) NOT NULL,
     quantity int NOT NULL DEFAULT "0",
+    deleted_at datetime DEFAULT NULL,
     -- key
     PRIMARY KEY (id),
     UNIQUE KEY isbn (isbn),
@@ -75,6 +80,7 @@ CREATE TABLE
   permissions (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(50) NOT NULL,
+    deleted_at datetime DEFAULT NULL,
     PRIMARY KEY (id)
   );
 
@@ -82,6 +88,7 @@ CREATE TABLE
   roles (
     id int NOT NULL,
     name varchar(50) NOT NULL,
+    deleted_at datetime DEFAULT NULL,
     PRIMARY KEY (id)
   );
 
@@ -95,6 +102,7 @@ CREATE TABLE
     user_image varchar(255) DEFAULT NULL,
     role_id int DEFAULT NULL,
     status tinyint NOT NULL DEFAULT "1",
+    deleted_at datetime DEFAULT NULL,
     -- key
     PRIMARY KEY (id),
     UNIQUE KEY email (email),
@@ -149,6 +157,7 @@ CREATE TABLE
     user_id int NOT NULL,
     total_price decimal(10, 2) NOT NULL,
     status tinyint NOT NULL DEFAULT "0",
+    deleted_at datetime DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
   );
