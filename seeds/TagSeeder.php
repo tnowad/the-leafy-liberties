@@ -3,7 +3,7 @@ namespace Seeds;
 
 use App\Models\Tag;
 
-class TagSeeder
+class TagSeeder extends Seeder
 {
   public static function run()
   {

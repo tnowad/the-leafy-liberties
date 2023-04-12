@@ -19,10 +19,52 @@ CREATE TABLE
 CREATE TABLE
   authors (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL
+  );
+
+CREATE TABLE
+  publishers (
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
     description varchar(500) NOT NULL
   );
 
+CREATE TABLE
+  products (
+    id int NOT NULL AUTO_INCREMENT,
+    isbn varchar(13) NOT NULL,
+    title varchar(100) NOT NULL,
+    author_id INT NOT NULL,
+    publisher_id INT NOT NULL,
+    price decimal(10, 2) NOT NULL,
+    description text NOT NULL,
+    image_url varchar(255) NOT NULL,
+    quantity int NOT NULL DEFAULT "0",
+    PRIMARY KEY (id),
+    UNIQUE KEY isbn (isbn),
+    FOREIGN KEY (author_id) REFERENCES authors (id),
+    FOREIGN KEY (publisher_id) REFERENCES publishers (id)
+  );
+
+CREATE TABLE
+  products_tags (
+    products_id int NOT NULL,
+    tags_id int NOT NULL,
+    PRIMARY KEY (products_id, tags_id),
+    FOREIGN KEY (products_id) REFERENCES products (id),
+    FOREIGN KEY (tags_id) REFERENCES tags (id)
+  );
+
+CREATE TABLE
+  products_categories (
+    products_id int NOT NULL,
+    categories_id int NOT NULL,
+    PRIMARY KEY (products_id, categories_id),
+    FOREIGN KEY (products_id) REFERENCES products (id),
+    FOREIGN KEY (categories_id) REFERENCES categories (id)
+  );
+
+-- DONE---
 CREATE TABLE
   carts (
     id int PRIMARY KEY NOT NULL,
@@ -61,13 +103,6 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  publishers (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(100) NOT NULL,
-    description varchar(500) NOT NULL
-  );
-
-CREATE TABLE
   roles (
     id int PRIMARY KEY NOT NULL,
     name varchar(50) NOT NULL
@@ -98,21 +133,6 @@ CREATE TABLE
     permissions_id int NOT NULL,
     users_id int NOT NULL,
     status tinyint NOT NULL DEFAULT "1"
-  );
-
-CREATE TABLE
-  products (
-    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    star int NOT NULL,
-    title varchar(100) NOT NULL,
-    author varchar(100) NOT NULL,
-    publisher varchar(100) NOT NULL,
-    price decimal(10, 2) NOT NULL,
-    isbn varchar(13) NOT NULL,
-    description text NOT NULL,
-    image_url varchar(255) NOT NULL,
-    quantity int NOT NULL,
-    category_id int NOT NULL
   );
 
 ALTER TABLE products ADD FOREIGN KEY (category_id) REFERENCES categories (id)

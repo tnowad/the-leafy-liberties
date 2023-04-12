@@ -2,8 +2,9 @@
 namespace Seeds;
 
 use App\Models\Category;
+use Core\ISeeder;
 
-class CategorySeeder
+class CategorySeeder implements ISeeder
 {
   public static function run()
   {
