@@ -19,6 +19,7 @@ class ProfileController extends Controller
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/profile'), [
       'user' => $user,
+      'footer' => ''
     ]));
   }
 
