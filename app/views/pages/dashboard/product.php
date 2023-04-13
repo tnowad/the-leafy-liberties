@@ -19,7 +19,7 @@ use App\Models\Pagination;
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("ID", "Image", "Title", "Author", "Publisher", "Price", "Isbn", "Description", 'Quantity', 'Action');
+              $name = array("ID", "Image", "Title", "Price", "Isbn", "Description", 'Quantity', 'Action');
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
                   <?php echo $name[$i - 1] ?>
@@ -44,12 +44,6 @@ use App\Models\Pagination;
                     <?php echo $product->title ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $product->author ?>
-                  </td>
-                  <td class="px-5 py-3">
-                    <?php echo $product->publisher ?>
-                  </td>
-                  <td class="px-5 py-3">
                     <?php echo $product->price ?>
                   </td>
                   <td class="px-5 py-3">
@@ -62,17 +56,14 @@ use App\Models\Pagination;
                     <?php echo $product->quantity ?>
                   </td>
                   <td class="px-5 py-3 w-44">
-                    <form action="/the-leafy-liberties/dashboard/product" class="button flex justify-center items-center gap-4" method="POST">
-                      <!-- <button
-                        class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                      </button> -->
-                      <button id="deleteButton" type="submit"
-                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all"
-                        >
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </form>
+                    <button
+                      class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button id="deleteButton" type="submit"
+                      class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -82,23 +73,27 @@ use App\Models\Pagination;
       </div>
     </div>
     <div
-      class="form absolute top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[1000]">
-      <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
+      class="add-form absolute top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[1000]">
+      <div class="bg-white p-8 rounded-md shadow-lg w-[550px] ">
         <h2 class="text-xl font-bold mb-4">Add Product</h2>
-        <form class="flex flex-col" onSubmit="">
+        <form class="flex flex-col" action="" method="POST">
           <label for="title" class="my-2">Title:</label>
-          <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+          <input type="text" value="" name="title" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
           <label for="image" class="my-2">Image:</label>
-          <input type="file" />
-          <label for="category" class="my-2">Author:</label>
-          <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+          <input type="file" name="image" id="imgInp" />
+          <!-- <img id="blah" src="#" class="w-fit h-40 object-contain bg-gray-100 mx-auto" /> -->
+          <label for="entered" class="my-2">ISBN:</label>
+          <input type="number" value="" name="isbn" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
-          <label for="entered" class="my-2">Publisher:</label>
-          <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+          <label for="price" class="my-2">Price:</label>
+          <input type="number" value="" name="price" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
-          <label for="remaining" class="my-2">Price:</label>
-          <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+          <label for="category" class="my-2">Description:</label>
+          <input type="text" value="" name="description" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
+          <label for="quantity" class="my-2">Quantity:</label>
+          <input type="text" value="" name="quantity" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
           <label for="status" class="my-2">Status:</label>
           <select value={status} class="bg-gray-100 p-3 focus:outline-none rounded-lg">
@@ -106,14 +101,49 @@ use App\Models\Pagination;
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
-
-          <label for="amount">Amount:</label>
-          <input type="text" value={amount} class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
           <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
             type="submit">
             Submit
           </button>
-          <button class="my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+          <button class="cancel-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+    <div
+      class="edit-form absolute top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[1000]">
+      <div class="bg-white p-8 rounded-md shadow-lg w-[550px] ">
+        <form class="flex flex-col" action="" method="POST">
+          <label for="title" class="my-2">Title:</label>
+          <input type="text" value="" name="title" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
+          <label for="image" class="my-2">Image:</label>
+          <input type="file" name="image" id="imgInp" />
+
+          <label for="entered" class="my-2">ISBN:</label>
+          <input type="number" value="" name="isbn" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
+          <label for="price" class="my-2">Price:</label>
+          <input type="number" value="" name="price" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
+          <label for="category" class="my-2">Description:</label>
+          <input type="text" value="" name="description" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
+          <label for="quantity" class="my-2">Quantity:</label>
+          <input type="text" value="" name="quantity" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+
+          <label for="status" class="my-2">Status:</label>
+          <select value={status} class="bg-gray-100 p-3 focus:outline-none rounded-lg">
+            <option value="">Select status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+          <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
+            type="submit">
+            Submit
+          </button>
+          <button class="cancel-edit-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             Cancel
           </button>
         </form>
@@ -124,8 +154,29 @@ use App\Models\Pagination;
 <script>
   let btn = document.querySelector(".add-product")
   btn.addEventListener("click", () => {
-    document.querySelector(".form").classList.add("flex");
-    document.querySelector(".form").classList.remove("hidden");
+    document.querySelector(".add-form").classList.add("flex");
+    document.querySelector(".add-form").classList.remove("hidden");
 
+  })
+  let cancel = document.querySelector(".cancel-button")
+  cancel.addEventListener("click", (event) => {
+    event.preventDefault();
+    document.querySelector(".add-form").classList.add("hidden")
+  })
+  imgInp.onchange = evt => {
+    const [file] = imgInp.files
+    if (file) {
+      blah.src = URL.createObjectURL(file)
+    }
+  }
+  let cancel_edit = document.querySelector(".cancel-edit-button")
+  cancel_edit.addEventListener("click", (event) => {
+    event.preventDefault();
+    document.querySelector(".edit-form").classList.add("hidden")
+  })
+  let editbtn = document.querySelector(".edit-button")
+  editbtn.addEventListener("click", () => {
+    document.querySelector(".edit-form").classList.add("flex");
+    document.querySelector(".edit-form").classList.remove("hidden");
   })
 </script>
