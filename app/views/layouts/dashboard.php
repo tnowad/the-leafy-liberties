@@ -12,8 +12,40 @@
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/reset.css' ?>">
   <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@44659d9/css/all.min.css" rel="stylesheet"
     type="text/css" />
-    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="<?php echo BASE_URI . '/resources/js/tailwindcss.js' ?>"></script>
+  <script src="<?php echo BASE_URI . '/resources/js/flowbite.js' ?>"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+          mobile: "470px",
+          sm: "576px",
+          md: "768px",
+          lg: "992px",
+          xl: "1200px",
+          "2xl": "1440px",
+        },
+        extend: {
+          colors: {
+            primary: "#315854",
+            "primary-100": "#eff6f5",
+            "primary-200": "#cee4e1",
+            "primary-300": "#add1ce",
+            "primary-400": "#8cbfba",
+            "primary-500": "#6cada6",
+            "primary-600": "#52938d",
+            "primary-700": "#40736d",
+            "primary-800": "#2e524e",
+            "primary-900": "#1b312f",
+          },
+        },
+      },
+
+    }
+  </script>
 </head>
 
 <body>
@@ -34,5 +66,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
   integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<?php if (isset($params['toast'])): ?>
+  <script type="module">
+    import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
+    new Toast({
+      message: `<?php echo $params['toast']['message'] ?>`,
+      type: '<?php echo $params['toast']['type'] ?>',
+    });
+
+    setTimeout(() => {
+      new Toast({
+        message: `<?php echo $params['toast']['message'] ?>`,
+        type: '<?php echo $params['toast']['type'] ?>',
+      });
+    }, 5000);
+  </script>
+<?php endif; ?>
 
 </html>
