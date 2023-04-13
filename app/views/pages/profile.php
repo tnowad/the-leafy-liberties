@@ -4,8 +4,7 @@
     <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row">
       <div class="flex flex-row justify-around w-3/4 md:flex-col md:justify-start md:w-1/4">
         <div class="flex flex-col items-center justify-center">
-          <img src="<?php echo $user->user_image ? $user->user_image : BASE_URI . "/resources/images/avatar.png" ?>"
-            class="w-3/6" alt="avatar" />
+          <img src="<?php echo $user->user_image ? $user->user_image : BASE_URI . "/resources/images/avatar.png" ?>" class="w-3/6" alt="avatar" />
           <h1 class="inline-block w-8/12 mt-5 text-xl lg:w-5/12 lg:text-center">
           </h1>
         </div>
@@ -31,28 +30,23 @@
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col" action="<?php echo BASE_URI . '/profile' ?>" method="post">
           <label>Name</label>
-          <input name="name" value="<?php echo $user->name ?>" type="text" required
-            class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
+          <input name="name" value="<?php echo $user->name ?>" type="text" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
           <label>Email</label>
-          <input name="email" value=" <?php echo $user->email ?>" type="email" required
-            class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
+          <input name="email" value=" <?php echo $user->email ?>" type="email" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
           <label>Phone number</label>
-          <input name="phone" value="<?php echo $user->phone ?>" type="tel"
-            class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm"
-            pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
+          <input name="phone" value="<?php echo $user->phone ?>" type="tel" class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
           <label>Gender</label>
           <div class="relative inline-block">
-            <select name="gender" id="gender"
-              class="block w-full px-4 py-2 pr-8 leading-tight duration-300 bg-white border border-gray-400 rounded shadow appearance-none hover:shadow-sm focus:outline-none focus:shadow-outline">
+            <select name="gender" id="gender" class="block w-full px-4 py-2 pr-8 leading-tight duration-300 bg-white border border-gray-400 rounded shadow appearance-none hover:shadow-sm focus:outline-none focus:shadow-outline">
               <option value="male" <?php if ($user->gender == "1") {
-                echo "selected";
-              } ?>>Male</option>
+                                      echo "selected";
+                                    } ?>>Male</option>
               <option value="female" <?php if ($user->gender == "2") {
-                echo "selected";
-              } ?>>Female</option>
+                                        echo "selected";
+                                      } ?>>Female</option>
               <option value="other" <?php if ($user->gender == "0") {
-                echo "selected";
-              } ?>>Other</option>
+                                      echo "selected";
+                                    } ?>>Other</option>
             </select>
           </div>
 
@@ -67,13 +61,24 @@
             </label>
             <input name="password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
             <label for="new-password">Confirm new password</label>
-            <input name="new-password" type="text"
-              class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
+            <input name="new-password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
           </div>
-          <input type="submit" value="Save changes"
-            class="w-3/6 p-2 mt-5 text-white transition-all bg-teal-800 border cursor-pointer sm:w-1/6 rounded-2xl" />
+          <input type="submit" value="Save changes" class="w-3/6 p-2 mt-5 text-white transition-all bg-teal-800 border cursor-pointer sm:w-1/6 rounded-2xl" />
         </form>
       </div>
     </div>
   </div>
 </div>
+<script>
+  async function getUser() {
+    let d1 = await fetch("http://localhost/the-leafy-liberties/profile")
+    let d2 = await d1.json()
+    console.log(d2)
+    // document.getElementById("name").value = d2.name;
+    // document.getElementById("gender").value = d2.gender;
+    // document.getElementById("birthday").value = d2.birthday;
+    // document.getElementById("password").value = d2.password;
+  }
+  console.log(1)
+  getUser()
+</script>

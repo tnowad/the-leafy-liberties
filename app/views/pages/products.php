@@ -61,8 +61,7 @@
                 5 Star
               </label>
             </div>
-            <input type="submit" value="Find"
-              class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 hover:bg-[#6cada6] transition-all cursor-pointer" />
+            <input type="submit" value="Find" class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 hover:bg-[#6cada6] transition-all cursor-pointer" />
           </form>
         </div>
       </div>
@@ -135,4 +134,17 @@
       console.error(error);
     }
   });
+</script>
+<script>
+  async function getUser() {
+    let d1 = await fetch("http://localhost/the-leafy-liberties/profile")
+    let d2 = await d1.json()
+    console.log(d2)
+    // document.getElementById("name").value = d2.name;
+    // document.getElementById("gender").value = d2.gender;
+    // document.getElementById("birthday").value = d2.birthday;
+    // document.getElementById("password").value = d2.password;
+  }
+  console.log(1)
+  getUser()
 </script>

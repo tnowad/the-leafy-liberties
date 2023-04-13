@@ -58,4 +58,28 @@ class ProductController extends Controller
     // return with json
     $response->setBody(json_encode($request->getQueries()));
   }
+  // public function index(Request $request, Response $response)
+  // {
+  //   if (!Application::getInstance()->getAuthentication()->check()) {
+  //     $response->redirect('/login');
+  //   }
+  //   header("Access-Control-Allow-Origin: *");
+  //   $user = Application::getInstance()->getAuthentication()->getUser();
+  //   $response->setStatusCode(200);
+  //   // $response->setBody(View::renderWithLayout(new View('pages/profile'), [
+  //   //   'user' => $user,
+  //   //   'footer' => ''
+  //   // ]));
+  //   $userList = User::all();
+  //   // echo json_encode($userList);
+  //   $userListJson = array_map(function ($user) {
+  //     return [
+  //       "name" => $user->name,
+  //       "email" => $user->email
+  //     ];
+  //   }, $userList);
+
+  //   $response->json($userListJson);
+  //   // dd($userList);
+  // }
 }
