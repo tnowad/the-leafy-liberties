@@ -52,12 +52,12 @@ class ProductController extends Controller
     ]));
   }
 
-  public function filter(Request $request, Response $response)
-  {
-    // Get query from request and create list products
-    // return with json
-    $response->setBody(json_encode($request->getQueries()));
-  }
+  // public function filter(Request $request, Response $response)
+  // {
+  //   // Get query from request and create list products
+  //   // return with json
+  //   $response->setBody(json_encode($request->getQueries()));
+  // }
   public function getProducts(Request $request, Response $response)
   {
 
