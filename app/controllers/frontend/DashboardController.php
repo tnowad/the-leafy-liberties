@@ -12,7 +12,14 @@ class DashboardController extends Controller
   public function index(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
+
+    if (!$auth->isAuthenticated() || !$auth->hasPermission('dashboard.access')) {
+      $response->redirect('/login');
+      return;
+    }
+
     $user = $auth->getUser();
+
 
     // todo: get list permission contain '.access'
 

@@ -6,7 +6,7 @@ use Core\Model;
 
 class Wishlist extends Model
 {
-  protected $table = 'wishlist';
+  protected $table = 'wishlists';
 
   protected $fillable = [
     'product_id',

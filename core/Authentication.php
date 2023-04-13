@@ -43,11 +43,21 @@ class Authentication
     return !$this->check();
   }
 
-  public function hasPermission(Permission $permission): bool
+  public function isAuthenticated(): bool
+  {
+    return $this->check();
+  }
+
+  public function hasPermission(Permission|string $permission): bool
   {
     if ($this->guest()) {
       return false;
     }
+
+    if (is_string($permission)) {
+      $permission = Permission::findOne(['name' => $permission]);
+    }
+
     $user = $this->getUser();
     $role = $user->role();
     $rolePermissions = RolePermission::where(['role_id' => $role->id]);
