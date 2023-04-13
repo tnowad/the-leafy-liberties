@@ -64,12 +64,15 @@ class ProductController extends Controller
     header("Access-Control-Allow-Origin: *");
 
     $response->setStatusCode(200);
-
+    // $response->setBody(View::renderWithLayout(new View('pages/profile'), [
+    //   'user' => $user,
+    //   'footer' => ''
+    // ]));
     $productList = Product::all();
-    $productJson = array_map(function ($user) {
+    $productJson = array_map(function ($product) {
       return [
-        "name" => $user->name,
-        "email" => $user->email
+        "name" => $product->name,
+        "email" => $product->email
       ];
     }, $productList);
 
