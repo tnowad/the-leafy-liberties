@@ -137,8 +137,12 @@ abstract class Model
 
   public static function findOne($params = [])
   {
-    $results = static::where($params);
-    return array_shift($results);
+    $query = static::where($params);
+    if (count($query) == 1) {
+      return array_shift($query);
+    } else {
+      return false;
+    }
   }
 
   public static function truncate()

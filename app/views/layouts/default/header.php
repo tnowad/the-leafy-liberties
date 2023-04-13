@@ -1,6 +1,9 @@
 <?php
+use Core\Application;
 use App\Models\Category;
 
+$auth = Application::getInstance()->getAuthentication();
+$user = $auth->getUser();
 ?>
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
@@ -51,12 +54,15 @@ use App\Models\Category;
         class="absolute hidden w-24 transition-all bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none right-16 mt-11"
         id="dropdownHover">
         <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
-          <?php if (isset($_SESSION['user_id'])): ?>
+          <?php if ($user): ?>
             <a href="<?php echo BASE_URI . '/profile' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
               Profile</a>
-            <a href="<?php echo BASE_URI . '/settings' ?>"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Settings</a>
+            <?php if ($auth->hasPermissions('dashboard.access')): ?>
+              <a href="<?php echo BASE_URI . '/admin' ?>"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Admin
+                Panel</a>
+            <?php endif; ?>
             <a href="<?php echo BASE_URI . '/logout' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign
               out</a>
@@ -70,14 +76,14 @@ use App\Models\Category;
           <?php endif; ?>
         </div>
       </div>
-      <button type="button"
+      <a href="<?php echo BASE_URI . '/wishlist' ?>"
         class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
         <i class="fa-regular fa-heart"></i>
-      </button>
-      <button type="button"
+      </a>
+      <a href="<?php echo BASE_URI . '/cart' ?>"
         class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
         <i class="fa-brands fa-opencart"></i>
-      </button>
+      </a>
     </div>
   </div>
 </header>

@@ -2,7 +2,9 @@
 namespace Core;
 
 use App\Models\Permission;
+use App\Models\RolePermission;
 use App\Models\User;
+use App\Models\UserPermission;
 
 class Authentication
 {
@@ -43,12 +45,18 @@ class Authentication
     if ($this->guest()) {
       return false;
     }
-    $userPermissions = $this->getUser()->permissions();
-    $rolePermissions = $this->getUser()->role()->permissions();
-    $permissions = array_merge($userPermissions, $rolePermissions);
-    foreach ($permissions as $userPermission) {
+    $user = $this->getUser();
+    $userPermissions = $user->permissions();
+    foreach ($userPermissions as $userPermission) {
       if ($userPermission->id == $permission->id) {
-        return true;
+        return UserPermission::findOne(['user_id' => $user->id, 'permission_id' => $permission->id]) ? true : false;
+      }
+    }
+    $role = $user->role();
+    $rolePermissions = $role->permissions();
+    foreach ($rolePermissions as $rolePermission) {
+      if ($rolePermission->id == $permission->id) {
+        return RolePermission::findOne(['role_id' => $role->id, 'permission_id' => $permission->id]) ? true : false;
       }
     }
     return false;
