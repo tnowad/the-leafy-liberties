@@ -4,27 +4,29 @@
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php
+        $total = 0;
         foreach ($cart as $cart) {
           $product = array_filter($products, function ($product) use ($cart) {
             return $product->id === $cart->product_id;
           });
           $product = reset($product);
-          // $author = array_filter($authors, function ($author) use ($cart) {
-          //   return $author->id === $cart->author_id;
-          // });
-          // $author = reset($author);
+          $author = array_filter($authors, function ($author) use ($product) {
+            return $author->id === $product->author_id;
+          });
+          $author = reset($author);
+          $total = $total + $product->price * $cart->quantity;
         ?>
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
               <div class="item-detail flex justify-between items-center">
                 <div class="item-img w-36">
-                  <img src="../assets/img/info_book_detail.png" alt="" class="w-full h-full object-cover rounded-2xl" />
+                  <img src="resources/images/products/<?php echo $product->image_url ?>" alt="" class="w-full h-full object-cover rounded-2xl" />
                 </div>
                 <div class="text">
                   <p class="book-name text-2xl mb-2"><?php echo $product->title ?></p>
-                  <p class="book-author text-base"><?php echo $product->author ?></p>
+                  <p class="book-author text-base"><?php echo $author->name ?></p>
                 </div>
-                <p class="price text-xl"><?php $product->price ?></p>
+                <p class="price text-xl"><?php echo $product->price  ?></p>
                 <div>
                   <div class="flex items-center justify-center w-fit mx-auto h-fit">
                     <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
@@ -36,7 +38,7 @@
                     </button>
                   </div>
                 </div>
-                <p class="counter-price text-xl"><?php $product->price ?>VNĐ</p>
+                <p class="counter-price text-xl"><?php echo $product->price * $cart->quantity  ?>$</p>
               </div>
             </div>
           </div>
@@ -49,7 +51,12 @@
         </p>
         <div class="total-bill flex justify-between items-center py-4">
           <span class="text-bill text-xl">Total:</span>
-          <span class="money-bill text-xl">1500000VNĐ</span>
+          <span class="money-bill text-xl">
+            <?php
+            echo $total;
+            ?>
+            $
+          </span>
         </div>
         <button class="px-5 py-2 bg-[#315854] rounded-2xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out

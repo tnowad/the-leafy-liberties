@@ -1,3 +1,5 @@
+-- Active: 1681017538652@@127.0.0.1@3306@bookstore_web
+
 INSERT INTO
     `categories` (`id`, `name`, `deleted_at`)
 VALUES (1, 'Fiction', NULL), (2, 'Non-Fiction', NULL), (3, 'Mystery', NULL), (4, 'Romance', NULL), (5, 'Science Fiction', NULL), (6, 'Biography', NULL), (7, 'History', NULL), (8, 'Thriller', NULL), (9, 'Horror', NULL);
@@ -202,7 +204,7 @@ VALUES (
         '9780060850524',
         'The Picture of Dorian Guy',
         7,
-        8,
+        9,
         14.99,
         'Paulo Coelho’s inspiring tale of following your dreams.',
         'The_Picture_of_Dorian_Gray.jpg',
@@ -238,7 +240,7 @@ VALUES (
         '9780765311788',
         'Crime and Punishment',
         7,
-        8,
+        9,
         8.99,
         'The first book in the Mistborn trilogy.',
         'crime-and-punishment.jpg',
@@ -254,4 +256,4 @@ VALUES (
         15
     );
 
-ALTER TABLE products AUTO_INCREMENT = 1
+ALTER TABLE products AUTO_INCREMENT = 1 

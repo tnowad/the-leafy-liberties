@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Frontend;
 
+use App\Models\Author;
 use App\Models\Cart;
 use App\Models\Product;
 use Core\Controller;
@@ -19,6 +20,7 @@ class CartController extends Controller
     try {
       $cart = Cart::all();
       $products = Product::all();
+      $authors = Author::all();
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
@@ -28,6 +30,7 @@ class CartController extends Controller
       'title' => 'cart',
       'cart' => $cart,
       'products' => $products,
+      'authors' => $authors,
     ]));
   }
 }
