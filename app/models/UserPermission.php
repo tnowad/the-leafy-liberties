@@ -1,9 +1,9 @@
 <?php
 namespace App\Models;
 
+use App\Models\Permission;
 use App\Models\User;
 use Core\Model;
-use Permission;
 
 class UserPermission extends Model
 {

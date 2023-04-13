@@ -36,7 +36,7 @@ class Product extends Model
 
   public function tags()
   {
-    $productTags = ProductTag::where('product_id', $this->id);
+    $productTags = ProductTag::where(['product_id' => $this->id]);
     $tags = [];
     foreach ($productTags as $productTag) {
       $tags[] = Tag::find($productTag->tag_id);
@@ -54,7 +54,7 @@ class Product extends Model
 
   public function removeTag($tag)
   {
-    $productTags = ProductTag::where('product_id', $this->id);
+    $productTags = ProductTag::where(['product_id' => $this->id]);
     $productTag = null;
     foreach ($productTags as $productTag) {
       if ($productTag->tag_id == $tag->id) {
@@ -66,7 +66,7 @@ class Product extends Model
 
   public function hasTag($tag)
   {
-    $productTags = ProductTag::where('product_id', $this->id);
+    $productTags = ProductTag::where(['product_id' => $this->id]);
     foreach ($productTags as $productTag) {
       if ($productTag->tag_id == $tag->id) {
         return true;
@@ -76,7 +76,7 @@ class Product extends Model
   }
   public function categories()
   {
-    $productCategories = ProductCategory::where('product_id', $this->id);
+    $productCategories = ProductCategory::where(['product_id' => $this->id]);
     $categories = [];
     foreach ($productCategories as $productCategory) {
       $categories[] = Category::find($productCategory->category_id);
@@ -94,7 +94,7 @@ class Product extends Model
 
   public function removeCategory($category)
   {
-    $productCategories = ProductCategory::where('product_id', $this->id);
+    $productCategories = ProductCategory::where(['product_id' => $this->id]);
     $productCategory = null;
     foreach ($productCategories as $productCategory) {
       if ($productCategory->category_id == $category->id) {
@@ -106,7 +106,7 @@ class Product extends Model
 
   public function hasCategory($category)
   {
-    $productCategories = ProductCategory::where('product_id', $this->id);
+    $productCategories = ProductCategory::where(['product_id' => $this->id]);
     foreach ($productCategories as $productCategory) {
       if ($productCategory->category_id == $category->id) {
         return true;
