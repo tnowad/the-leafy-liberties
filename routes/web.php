@@ -25,16 +25,6 @@ $router->get('/profile', [ProfileController::class, 'index']);
 $router->post('/profile', [ProfileController::class, 'update']);
 
 $router->get('/checkout', [HomeController::class, 'checkout']);
-$router->get('/dashboard', [HomeController::class, 'dashboard']);
-$router->get('/dashboard/customer', [HomeController::class, 'customerDashboard']);
-
-$router->get('/dashboard/product', [HomeController::class, 'productDashboard']);
-$router->post('/dashboard/product', [HomeController::class, 'editProduct']);
-
-
-$router->get('/dashboard/coupon', [HomeController::class, 'couponDashboard']);
-$router->get('/dashboard/slider', [HomeController::class, 'sliderDashboard']);
-$router->get('/dashboard/comment', [HomeController::class, 'commentDashboard']);
 
 $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);

@@ -106,7 +106,8 @@ class HomeController extends Controller
       'title' => 'Comment Dashboard'
     ]));
   }
-  public function editProduct(){
+  public function editProduct()
+  {
     // $product
   }
 }
