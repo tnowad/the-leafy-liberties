@@ -58,4 +58,24 @@ class ProductController extends Controller
     // return with json
     $response->setBody(json_encode($request->getQueries()));
   }
+  public function getProducts(Request $request, Response $response)
+  {
+
+    header("Access-Control-Allow-Origin: *");
+
+    $response->setStatusCode(200);
+    // $response->setBody(View::renderWithLayout(new View('pages/profile'), [
+    //   'user' => $user,
+    //   'footer' => ''
+    // ]));
+    $productList = Product::all();
+    $productJson = array_map(function ($product) {
+      return [
+        "name" => $product->name,
+        "email" => $product->email
+      ];
+    }, $productList);
+
+    $response->json($productJson);
+  }
 }

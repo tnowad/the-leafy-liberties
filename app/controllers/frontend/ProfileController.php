@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers\Frontend;
 
 use App\Models\User;
@@ -28,11 +29,6 @@ class ProfileController extends Controller
     $user = Application::getInstance()->getAuthentication()->getUser();
     $user->name = $request->getParam('name');
     $user->save();
-    // $response->redirect('/profile');
-    $response->json([
-      "data" => [
-        "name" => $user->name,
-      ]
-    ]);
+    $response->redirect('profile');
   }
 }
