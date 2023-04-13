@@ -31,6 +31,11 @@ class User extends Model
     $this->role_id = $role->id;
   }
 
+  public function hasRole(Role $role)
+  {
+    return $this->role_id == $role->id;
+  }
+
   public function permissions()
   {
     $userPermissions = UserPermission::where(['user_id' => $this->id]);

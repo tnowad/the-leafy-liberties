@@ -30,7 +30,7 @@ abstract class Model
     $model->save();
     return $model;
   }
-  public static function find($id)
+  public static function find($id): Model
   {
     $table = static::table();
     $primaryKey = (new static )->primaryKey;
@@ -137,25 +137,8 @@ abstract class Model
 
   public static function findOne($params = [])
   {
-    $table = static::table();
-    $query = "SELECT * FROM $table WHERE ";
-    $conditions = [];
-    $values = [];
-
-    foreach ($params as $field => $value) {
-      $conditions[] = "$field = :$field";
-      $values[":$field"] = $value;
-    }
-
-    $query .= implode(' AND ', $conditions);
-
-    $result = Database::getInstance()->fetchOne($query, $values);
-
-    if (!$result) {
-      return false;
-    }
-
-    return new static($result);
+    $results = static::where($params);
+    return array_shift($results);
   }
 
   public static function truncate()
