@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Models;
+
 use App\Models\Role;
 use App\Models\User;
 use Core\Database;
@@ -9,32 +12,23 @@ class Permission extends Model
   protected $table = 'permissions';
   protected $fillable = ['name', 'status'];
 
-  public function getRole()
+  public function roles()
   {
-    $query = "SELECT * FROM roles_permissions WHERE role_id = ?";
-    $stmt = Database::getInstance()->prepare($query);
-    $stmt->bind_param('i', $this->role_id);
-    $stmt->execute();
+    $rolePermissions = RolePermission::where(['permission_id' => $this->id]);
     $roles = [];
-    while ($row = $stmt->get_result()->fetch_assoc()) {
-      $roles[] = new Role($row);
+    foreach ($rolePermissions as $rolePermission) {
+      $roles[] = Role::find($rolePermission->role_id);
     }
-    $stmt->close();
     return $roles;
   }
 
-  public function getUsers()
+  public function users()
   {
-    $query = "SELECT * FROM users_permissions WHERE permission_id = ?";
-    $stmt = Database::getInstance()->prepare($query);
-    $stmt->bind_param('i', $this->primaryKey);
-    $stmt->execute();
+    $userPermissions = UserPermission::where(['permission_id' => $this->id]);
     $users = [];
-    while ($row = $stmt->get_result()->fetch_assoc()) {
-      $users[] = new User($row);
+    foreach ($userPermissions as $userPermission) {
+      $users[] = User::find($userPermission->user_id);
     }
-    $stmt->close();
     return $users;
   }
-
 }

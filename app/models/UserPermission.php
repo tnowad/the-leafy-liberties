@@ -1,0 +1,20 @@
+<?php
+namespace App\Models;
+
+use App\Models\User;
+use Core\Model;
+use Permission;
+
+class UserPermission extends Model
+{
+  protected $table = 'user_permissions';
+  protected $fillable = ['user_id', 'permission_id'];
+  public function user()
+  {
+    return User::find($this->user_id);
+  }
+  public function permission()
+  {
+    return Permission::find($this->permission_id);
+  }
+}
