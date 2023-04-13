@@ -3,7 +3,7 @@ use Core\Application;
 use App\Models\Category;
 
 $auth = Application::getInstance()->getAuthentication();
-$user = $auth->getUser();
+$user = $auth->getUser() ?? null;
 ?>
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
@@ -54,14 +54,13 @@ $user = $auth->getUser();
         class="absolute hidden w-24 transition-all bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none right-16 mt-11"
         id="dropdownHover">
         <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
-          <?php if ($user): ?>
+          <?php if ($user != null): ?>
             <a href="<?php echo BASE_URI . '/profile' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
               Profile</a>
             <?php if ($auth->hasPermissions('dashboard.access')): ?>
-              <a href="<?php echo BASE_URI . '/admin' ?>"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Admin
-                Panel</a>
+              <a href="<?php echo BASE_URI . '/dashboard' ?>"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Dashboard</a>
             <?php endif; ?>
             <a href="<?php echo BASE_URI . '/logout' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign

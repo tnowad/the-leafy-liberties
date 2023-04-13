@@ -21,9 +21,12 @@ class Authentication
     return $this->getUser() ? true : false;
   }
 
-  public function getUser(): User
+  public function getUser(): ?User
   {
-    return User::find($this->userId);
+    if ($this->userId == null) {
+      return null;
+    }
+    return User::findOne(['id' => $this->userId]);
   }
   public function setUser(User $user)
   {
@@ -46,17 +49,17 @@ class Authentication
       return false;
     }
     $user = $this->getUser();
-    $userPermissions = $user->permissions();
-    foreach ($userPermissions as $userPermission) {
-      if ($userPermission->id == $permission->id) {
-        return UserPermission::findOne(['user_id' => $user->id, 'permission_id' => $permission->id]) ? true : false;
+    $role = $user->role();
+    $rolePermissions = RolePermission::where(['role_id' => $role->id]);
+    foreach ($rolePermissions as $rolePermission) {
+      if ($rolePermission->permission_id == $permission->id) {
+        return true;
       }
     }
-    $role = $user->role();
-    $rolePermissions = $role->permissions();
-    foreach ($rolePermissions as $rolePermission) {
-      if ($rolePermission->id == $permission->id) {
-        return RolePermission::findOne(['role_id' => $role->id, 'permission_id' => $permission->id]) ? true : false;
+    $userPermissions = UserPermission::where(['user_id' => $user->id]);
+    foreach ($userPermissions as $userPermission) {
+      if ($userPermission->permission_id == $permission->id) {
+        return true;
       }
     }
     return false;
