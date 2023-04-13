@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Frontend;
 
+use App\Models\Product;
 use App\Models\User;
 use Core\Controller;
 use Core\Database;
@@ -105,7 +106,7 @@ class HomeController extends Controller
       'title' => 'Comment Dashboard'
     ]));
   }
-  public function editproductDashboard(){
-
+  public function editProduct(){
+    // $product
   }
 }
