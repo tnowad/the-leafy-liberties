@@ -21,7 +21,7 @@
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="3"></button>
         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="4"></button>
-      </div> -->
+      </div>
 
       <button type="button"
         class="absolute top-0 left-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
