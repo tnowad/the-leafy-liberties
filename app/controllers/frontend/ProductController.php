@@ -91,25 +91,18 @@ class ProductController extends Controller
     ]));
   }
 
-  public function store(Request $request, Response $response)
+  public function update(Request $request, Response $response)
   {
-    $product = new Product();
-    $product->isbn = $request->getBody('isbn');
-    $product->title = $request->getBody('title');
-    $product->author_id = $request->getBody('author_id');
-    $product->publisher_id = $request->getBody('publisher_id');
-    $product->price = $request->getBody('price');
-    $product->description = $request->getBody('description');
-    $product->image_url = $request->getBody('image_url');
-    $product->quantity = $request->getBody('quantity');
-    $product->save();
-    $response->redirect(BASE_URI . '/products');
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/update'), [
+      'title' => 'Update Product'
+    ]));
   }
 
   public function destroy(Request $request, Response $response)
   {
     $product = Product::find($request->getQuery('id'));
     $product->delete();
-    $response->redirect(BASE_URI . '/products');
   }
+
 }
