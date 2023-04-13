@@ -58,6 +58,9 @@ INSERT INTO
     authors (name, deleted_at)
 VALUES ('J.K. Rowling', NULL), ('Stephen King', NULL), ('Agatha Christie', NULL), ('Harper Lee', NULL), ('F. Scott Fitzgerald', NULL), ('Jane Austen', NULL), ('Charles Dickens', NULL), ('Mark Twain', NULL), ('Ernest Hemingway', NULL);
 
+INSERT INTO publishers (name)
+VALUES ('Penguin Random House'), ('HarperCollins'), ('Simon & Schuster'), ('Hachette Livre'), ('Macmillan Publishers'), ('Bloomsbury Publishing'), ('Scholastic Corporation'), ('Pearson Education'), ('Wiley'), ('Oxford University Press');
+
 INSERT INTO
     products (
         isbn,
@@ -71,30 +74,30 @@ INSERT INTO
     )
 VALUES (
         '9780439139601',
-        'Harry Potter and the Philosopher\'s Stone',
+        'Harry Potter and the Philosophers Stone',
         1,
         1,
         10.99,
         'The first book in the Harry Potter series',
-        'https://images-na.ssl-images-amazon.com/images/I/51UoqRAxwEL._SX331_BO1,204,203,200_.jpg',
+        'harry-potter-and-stone.jpg',
         100
     ), (
         '9780545010221',
-        'The Hunger Games',
+        'Pride and Prejudice',
         2,
         2,
         7.99,
         'The first book in The Hunger Games trilogy',
-        'https://images-na.ssl-images-amazon.com/images/I/51fQm0c%2B9ZL._SX330_BO1,204,203,200_.jpg',
+        'PrideAndPrejudice.jpg',
         150
     ), (
-        '9780061120084',
+        '9780061891922',
         'To Kill a Mockingbird',
         3,
         3,
         8.99,
         'A Pulitzer Prize-winning novel set in the 1930s',
-        'https://images-na.ssl-images-amazon.com/images/I/51CkJbY+w-L._SX331_BO1,204,203,200_.jpg',
+        'To_Kill_a_Mockingbird.jpg',
         80
     ), (
         '9780547928227',
@@ -103,16 +106,16 @@ VALUES (
         4,
         6.99,
         'A fantasy novel by J. R. R. Tolkien',
-        'https://images-na.ssl-images-amazon.com/images/I/91bE%2Bl8uV7L.jpg',
+        'The_Hobbit.jpg',
         120
     ), (
         '9780060256654',
-        'Where the Wild Things Are',
+        'The Adventures of Huckleberry Fin',
         5,
         5,
         5.99,
-        'A children\'s picture book by Maurice Sendak',
-        'https://images-na.ssl-images-amazon.com/images/I/41f32xyxutL._SX415_BO1,204,203,200_.jpg',
+        'A childrens picture book by Maurice Sendak',
+        'The_Adventures_of_Huckleberry_Finn.jpg',
         200
     ), (
         '9780439554930',
@@ -121,7 +124,7 @@ VALUES (
         1,
         11.99,
         'The second book in the Harry Potter series',
-        'https://images-na.ssl-images-amazon.com/images/I/51-VjKt1HXL._SX331_BO1,204,203,200_.jpg',
+        'Harry-Potter-and-the-chamber-of-secrets.jpg',
         90
     ), (
         '9780439139595',
@@ -130,7 +133,7 @@ VALUES (
         1,
         12.99,
         'The third book in the Harry Potter series',
-        'https://images-na.ssl-images-amazon.com/images/I/51cK67bL+uL._SX331_BO1,204,203,200_.jpg',
+        'harry-potter-and-prisoner.jpg',
         70
     ), (
         '9780439136365',
@@ -139,7 +142,7 @@ VALUES (
         1,
         13.99,
         'The fourth book in the Harry Potter series',
-        'https://images-na.ssl-images-amazon.com/images/I/51e8U6WMBML._SX331_BO1,204,203,200_.jpg',
+        'harry-potter-and-goblet-of-fire.jpg',
         60
     ), (
         '9780439358071',
@@ -148,25 +151,25 @@ VALUES (
         1,
         14.99,
         'The fifth book in the Harry Potter series',
-        'https://images-na.ssl-images-amazon.com/images/I/51z7LVwQRRL._SX331_BO1,204,203,200_.jpg',
+        'harry-potter-and-order-of-phoenix.jpg',
         50
     ), (
         '9780345337665',
-        'The Hobbit',
+        'The Great Gatsby',
         1,
         1,
         10.99,
-        'The adventure of Bilbo Baggins',
-        'https://images-na.ssl-images-amazon.com/images/I/91B3qGvlxqL.jpg',
+        'The story of the mysteriously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan',
+        'The_Great_Gatsby.jpg',
         100
     ), (
         '9780061120084',
-        'To Kill a Mockingbird',
+        'The Odyssey',
         2,
         2,
         8.99,
-        'A story of racial injustice and the loss of innocence in the American South',
-        'https://images-na.ssl-images-amazon.com/images/I/51jyEB8F9XL._SX322_BO1,204,203,200_.jpg',
+        'The Odyssey does not follow a linear chronology. The reader begins in the middle of the tale',
+        'The_Odyssey.jpg',
         50
     ), (
         '9780743273565',
@@ -174,8 +177,8 @@ VALUES (
         3,
         3,
         14.99,
-        'A murder in the Louvre and clues in Da Vinci\'s art lead to a religious mystery',
-        'https://images-na.ssl-images-amazon.com/images/I/81aiKerIOiL.jpg',
+        'A murder in the Louvre and clues in Da Vincis art lead to a religious mystery',
+        'the-davinci-code.jpg',
         200
     ), (
         '9780679723165',
@@ -183,70 +186,72 @@ VALUES (
         3,
         4,
         9.99,
-        'George Orwell’s dystopian classic.',
-        'https://images-na.ssl-images-amazon.com/images/I/71C1bX9xWQL.jpg',
+        'George Orwells dystopian classic.',
+        '1984.jpg',
         10
     ), (
         '9780141187761',
-        'One Hundred Years of Solitude',
+        'The Hitchhikers Guide To The Galaxy',
         5,
         6,
         16.99,
-        'Gabriel Garcia Marquez’s masterpiece of magical realism.',
-        'https://images-na.ssl-images-amazon.com/images/I/51Ppji9xT8L._SX328_BO1,204,203,200_.jpg',
+        'Gabriel Garcia Marquezs masterpiece of magical realism.',
+        'The_Hitchhikers_Guide_to_the_Galaxy.jpg',
         15
     ), (
         '9780060850524',
-        'The Alchemist',
+        'The Picture of Dorian Guy',
         7,
         8,
         14.99,
         'Paulo Coelho’s inspiring tale of following your dreams.',
-        'https://images-na.ssl-images-amazon.com/images/I/81nzxODnaJL.jpg',
+        'The_Picture_of_Dorian_Gray.jpg',
         30
     ), (
         '9780062315007',
-        'The Girl on the Train',
+        'The Catcher in the Rye',
         9,
         10,
         10.99,
         'Paula Hawkins’ thrilling page-turner.',
-        'https://images-na.ssl-images-amazon.com/images/I/81r+znM-yWL.jpg',
+        'The_Catcher_in_the_Rye.jpg',
         20
     ), (
         '9780142410370',
-        'The Hunger Games',
+        'The Brothers Karamazov',
         5,
         6,
         12.99,
         'The first book in the Hunger Games trilogy.',
-        'https://images-na.ssl-images-amazon.com/images/I/71z%2BStN9kKL.jpg',
+        'The_Brothers_Karamazov.jpg',
         15
     ), (
         '9780765331724',
-        'The Name of the Wind',
+        'Animal Farm',
         6,
         7,
         15.99,
         'The first book in the Kingkiller Chronicle series.',
-        'https://images-na.ssl-images-amazon.com/images/I/81da+%2BbS1WL.jpg',
+        'Animal_Farm.jpg',
         12
     ), (
         '9780765311788',
-        'Mistborn: The Final Empire',
+        'Crime and Punishment',
         7,
         8,
         8.99,
         'The first book in the Mistborn trilogy.',
-        'https://images-na.ssl-images-amazon.com/images/I/81fnD6UkHoL.jpg',
+        'crime-and-punishment.jpg',
         10
     ), (
         '9780143134770',
-        'The Overstory',
+        'Moby Dick',
         6,
         5,
         12.99,
         'An impassioned novel of activism and natural-world power that is literary in its roots and in its soaring imagination.',
-        'https://images-na.ssl-images-amazon.com/images/I/41ChfdDGkPL._SX326_BO1,204,203,200_.jpg',
+        'moby-dick.jpg',
         15
     );
+
+ALTER TABLE products AUTO_INCREMENT = 1
