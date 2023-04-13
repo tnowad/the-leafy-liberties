@@ -114,4 +114,8 @@ class Product extends Model
     }
     return false;
   }
+  public function getProduct()
+  {
+    return Product::find($this->id);
+  }
 }
