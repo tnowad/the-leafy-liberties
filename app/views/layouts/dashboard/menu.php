@@ -11,7 +11,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="/the-leafy-liberties/dashboard/" class="relative flex flex-row items-center h-11">
+        <a href="<?php echo BASE_URI . "/dashboard" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-bars"></i>
           </span>
@@ -22,7 +22,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="/the-leafy-liberties/dashboard/statistics" class="relative flex flex-row items-center h-11">
+        <a href="<?php echo BASE_URI . "/dashboard/statistics" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-signal-bars"></i>
           </span>
@@ -33,7 +33,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="/the-leafy-liberties/dashboard/customer" class="relative flex flex-row items-center h-11">
+        <a href="<?php echo BASE_URI . "/dashboard/customer" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-users"></i>
           </span>
@@ -44,7 +44,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="/the-leafy-liberties/dashboard/product" class="relative flex flex-row items-center h-11">
+        <a href="<?php echo BASE_URI . "/dashboard/product" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-bag-shopping"></i>
           </span>
@@ -55,7 +55,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="/the-leafy-liberties/dashboard/comment" class="relative flex flex-row items-center h-11">
+        <a href="<?php echo BASE_URI . "/dashboard/comment" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-message"></i>
           </span>
@@ -66,7 +66,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="/the-leafy-liberties/dashboard/coupon" class="relative flex flex-row items-center h-11 ">
+        <a href="<?php echo BASE_URI . "/dashboard/coupon" ?>" class="relative flex flex-row items-center h-11 ">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-ticket"></i>
           </span>
@@ -77,7 +77,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="/the-leafy-liberties/dashboard/slider" class="relative flex flex-row items-center h-11">
+        <a href="<?php echo BASE_URI . "/dashboard/slider" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-sliders"></i>
           </span>

@@ -18,24 +18,26 @@ $user = $auth->getUser();
     </div>
     <div class="relative flex items-center right">
       <div class="w-10 mr-2 avatar">
-        <img src="<?php echo BASE_URI . '/resources/images/avatar.png' ?>" alt=""
-          class="object-cover w-full h-full rounded-full cursor-pointer" onmouseover="showMenu()"
+        <img src="<?php echo $user->user_image ? $user->user_image : BASE_URI . '/resources/images/avatar.png' ?>"
+          alt="" class="object-cover w-full h-full rounded-full cursor-pointer" onmouseover="showMenu()"
           onmouseout="hideMenuDelayed()" />
         <ul id="menu"
           class="absolute right-0 flex-col hidden gap-2 p-2 transition-all bg-white rounded-lg shadow-lg top-full"
           onmouseover="showMenu()" onmouseout="hideMenuDelayed()">
           <li class=" whitespace-nowrap hover:bg-[#cee4e1] transition-all cursor-pointer p-2 text-left text-gray-600">
-            <a href="/">User Setting</a>
+            <a href="<?php echo BASE_URI . '/dashboard/profile' ?>">User Setting</a>
           </li>
           <li class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600">
-            <a href="/">Change password</a>
+            <a href="<?php echo BASE_URI . '/dashboard/profile#password' ?>">Change password</a>
           </li>
           <li class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600">
             <a href="<?php echo BASE_URI . '/logout' ?> ">Logout</a>
           </li>
         </ul>
       </div>
-      <span class="user" onmouseover="showMenu()" onmouseout="hideMenuDelayed()">admin</span>
+      <span class="user" onmouseover="showMenu()" onmouseout="hideMenuDelayed()">
+        <?php echo $user->name ?>
+      </span>
     </div>
   </div>
 </div>
