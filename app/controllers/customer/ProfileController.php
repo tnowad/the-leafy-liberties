@@ -13,8 +13,9 @@ class ProfileController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    if (!Application::getInstance()->getAuthentication()->check()) {
-      $response->redirect('/login');
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      return $response->redirect('/login');
     }
     $user = Application::getInstance()->getAuthentication()->getUser();
     $response->setStatusCode(200);
