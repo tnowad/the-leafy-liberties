@@ -1,15 +1,18 @@
 <?php
 
 use App\Controllers\Customer\DashboardController;
+use App\Controllers\Dashboard\ProductController;
+use App\Controllers\Dashboard\UserController;
 use Core\Application;
 
 $router = Application::getInstance()->getRouter();
 
 $router->get('/dashboard', [DashboardController::class, 'index']);
-$router->get('/dashboard/customer', [HomeController::class, 'customerDashboard']);
 
-$router->get('/dashboard/product', [HomeController::class, 'productDashboard']);
-$router->post('/dashboard/product', [HomeController::class, 'editProduct']);
+$router->get('/dashboard/user', [UserController::class, 'customerDashboard']);
+
+$router->get('/dashboard/product', [ProductController::class, 'productDashboard']);
+$router->post('/dashboard/product', [ProductController::class, 'editProduct']);
 
 
 $router->get('/dashboard/coupon', [HomeController::class, 'couponDashboard']);
