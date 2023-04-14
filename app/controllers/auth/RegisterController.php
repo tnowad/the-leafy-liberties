@@ -49,7 +49,12 @@ class RegisterController extends Controller
         $user->save();
         $response->setStatusCode(200);
         Application::getInstance()->getAuthentication()->setUser($user);
-        $response->redirect('/');
+        $response->setBody(View::renderWithLayout(new View('pages/index'), [
+          'toast' => [
+            'type' => 'success',
+            'message' => "Registration successful",
+          ],
+        ]));
       } catch (\Exception $e) {
         $response->setStatusCode(500);
         $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
