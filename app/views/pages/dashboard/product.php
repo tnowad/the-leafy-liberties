@@ -38,10 +38,10 @@ use App\Models\Pagination;
                     <?php echo $product->id ?>
                   </td>
                   <td class="p-3 h-24 w-32">
-                    <img src="../resources/images/products/<?php echo $product->image_url ?>" alt="" />
+                    <img src="<?php echo BASE_URI ?>/resources/images/products/<?php echo $product->image ?>" alt="" />
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $product->title ?>
+                    <?php echo $product->name ?>
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $product->price ?>
@@ -78,7 +78,7 @@ use App\Models\Pagination;
         <h2 class="text-xl font-bold mb-4">Add Product</h2>
         <form class="flex flex-col" action="" method="POST">
           <label for="title" class="my-2">Title:</label>
-          <input type="text" value="" name="title" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+          <input type="text" value="" name="name" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
           <label for="image" class="my-2">Image:</label>
           <input type="file" name="image" id="imgInp" />
@@ -94,13 +94,6 @@ use App\Models\Pagination;
 
           <label for="quantity" class="my-2">Quantity:</label>
           <input type="text" value="" name="quantity" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
-
-          <label for="status" class="my-2">Status:</label>
-          <select value={status} class="bg-gray-100 p-3 focus:outline-none rounded-lg">
-            <option value="">Select status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-          </select>
           <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
             type="submit">
             Submit
@@ -180,6 +173,6 @@ use App\Models\Pagination;
     document.querySelector(".edit-form").classList.remove("hidden");
   })
   function showProductEdit(id){
-    
+
   }
 </script>

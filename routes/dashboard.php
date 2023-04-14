@@ -13,7 +13,7 @@ $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/dashboard/user', [UserController::class, 'customerDashboard']);
 
 $router->get('/dashboard/product', [ProductController::class, 'index']);
-$router->post('/dashboard/product', [ProductController::class, 'editProduct']);
+$router->post('/dashboard/product', [ProductController::class, 'create']);
 
 
 $router->get('/dashboard/coupon', [HomeController::class, 'couponDashboard']);

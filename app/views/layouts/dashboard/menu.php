@@ -1,7 +1,7 @@
 <?php
 ?>
 <div
-  class="menu-left flex flex-col w-16 hover:w-64 md:w-64 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[999] hover:shadow-lg">
+  class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[999] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
     <ul class="flex flex-col py-4 space-y-1 list sticky top-0">
       <li class="block px-5">
@@ -100,10 +100,10 @@
   })
   let menu = document.querySelector(".menu-left");
   function navMenu() {
-    if(menu.classList.contains('md:w-64')){
-      menu.classList.remove('md:w-64');
+    if(menu.classList.contains('md:w-72')){
+      menu.classList.remove('md:w-72');
     }else{
-      menu.classList.add('md:w-64');
+      menu.classList.add('md:w-72');
 
     }
   }

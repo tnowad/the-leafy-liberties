@@ -86,7 +86,7 @@ VALUES
     1,
     10.99,
     'The first book in the Harry Potter series',
-    'harry-potter-and-stone.jpg',
+    '/resources/images/products/harry-potter-and-stone.jpg',
     100,
     NULL
   ),
@@ -98,7 +98,7 @@ VALUES
     2,
     7.99,
     'The first book in The Hunger Games trilogy',
-    'PrideAndPrejudice.jpg',
+    '/resources/images/products/PrideAndPrejudice.jpg',
     150,
     NULL
   ),
@@ -110,7 +110,7 @@ VALUES
     3,
     8.99,
     'A Pulitzer Prize-winning novel set in the 1930s',
-    'To_Kill_a_Mockingbird.jpg',
+    '/resources/images/products/To_Kill_a_Mockingbird.jpg',
     80,
     NULL
   ),
@@ -122,7 +122,7 @@ VALUES
     4,
     6.99,
     'A fantasy novel by J. R. R. Tolkien',
-    'The_Hobbit.jpg',
+    '/resources/images/products/The_Hobbit.jpg',
     120,
     NULL
   ),
@@ -134,7 +134,7 @@ VALUES
     5,
     5.99,
     'A childrens picture book by Maurice Sendak',
-    'The_Adventures_of_Huckleberry_Finn.jpg',
+    '/resources/images/products/The_Adventures_of_Huckleberry_Finn.jpg',
     200,
     NULL
   ),
@@ -146,7 +146,7 @@ VALUES
     1,
     11.99,
     'The second book in the Harry Potter series',
-    'Harry-Potter-and-the-chamber-of-secrets.jpg',
+    '/resources/images/products/Harry-Potter-and-the-chamber-of-secrets.jpg',
     90,
     NULL
   ),
@@ -158,7 +158,7 @@ VALUES
     1,
     12.99,
     'The third book in the Harry Potter series',
-    'harry-potter-and-prisoner.jpg',
+    '/resources/images/products/harry-potter-and-prisoner.jpg',
     70,
     NULL
   ),
@@ -170,7 +170,7 @@ VALUES
     1,
     13.99,
     'The fourth book in the Harry Potter series',
-    'harry-potter-and-goblet-of-fire.jpg',
+    '/resources/images/products/harry-potter-and-goblet-of-fire.jpg',
     60,
     NULL
   ),
@@ -182,7 +182,7 @@ VALUES
     1,
     14.99,
     'The fifth book in the Harry Potter series',
-    'harry-potter-and-order-of-phoenix.jpg',
+    '/resources/images/products/harry-potter-and-order-of-phoenix.jpg',
     50,
     NULL
   ),
@@ -194,7 +194,7 @@ VALUES
     1,
     10.99,
     'The story of the mysteriously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan',
-    'The_Great_Gatsby.jpg',
+    '/resources/images/products/The_Great_Gatsby.jpg',
     100,
     NULL
   ),
@@ -206,7 +206,7 @@ VALUES
     2,
     8.99,
     'The Odyssey does not follow a linear chronology. The reader begins in the middle of the tale',
-    'The_Odyssey.jpg',
+    '/resources/images/products/The_Odyssey.jpg',
     50,
     NULL
   ),
@@ -218,7 +218,7 @@ VALUES
     3,
     14.99,
     'A murder in the Louvre and clues in Da Vincis art lead to a religious mystery',
-    'the-davinci-code.jpg',
+    '/resources/images/products/the-davinci-code.jpg',
     200,
     NULL
   ),
@@ -230,7 +230,7 @@ VALUES
     4,
     9.99,
     'George Orwells dystopian classic.',
-    '1984.jpg',
+    '/resources/images/products/1984.jpg',
     10,
     NULL
   ),
@@ -242,7 +242,7 @@ VALUES
     6,
     16.99,
     'Gabriel Garcia Marquezs masterpiece of magical realism.',
-    'The_Hitchhikers_Guide_to_the_Galaxy.jpg',
+    '/resources/images/products/The_Hitchhikers_Guide_to_the_Galaxy.jpg',
     15,
     NULL
   ),
@@ -254,7 +254,7 @@ VALUES
     9,
     14.99,
     'Paulo Coelhoâ€™s inspiring tale of following your dreams.',
-    'The_Picture_of_Dorian_Gray.jpg',
+    '/resources/images/products/The_Picture_of_Dorian_Gray.jpg',
     30,
     NULL
   ),
@@ -266,7 +266,7 @@ VALUES
     10,
     10.99,
     'Paula Hawkinsâ€™ thrilling page-turner.',
-    'The_Catcher_in_the_Rye.jpg',
+    '/resources/images/products/The_Catcher_in_the_Rye.jpg',
     20,
     NULL
   ),
@@ -278,7 +278,7 @@ VALUES
     6,
     12.99,
     'The first book in the Hunger Games trilogy.',
-    'The_Brothers_Karamazov.jpg',
+    '/resources/images/products/The_Brothers_Karamazov.jpg',
     15,
     NULL
   ),
@@ -290,7 +290,7 @@ VALUES
     7,
     15.99,
     'The first book in the Kingkiller Chronicle series.',
-    'Animal_Farm.jpg',
+    '/resources/images/products/Animal_Farm.jpg',
     12,
     NULL
   ),
@@ -302,7 +302,7 @@ VALUES
     9,
     8.99,
     'The first book in the Mistborn trilogy.',
-    'crime-and-punishment.jpg',
+    '/resources/images/products/crime-and-punishment.jpg',
     10,
     NULL
   ),
@@ -314,7 +314,7 @@ VALUES
     5,
     12.99,
     'An impassioned novel of activism and natural-world power that is literary in its roots and in its soaring imagination.',
-    'moby-dick.jpg',
+    '/resources/images/products/moby-dick.jpg',
     15,
     NULL
   );

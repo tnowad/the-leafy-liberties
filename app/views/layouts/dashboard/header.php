@@ -8,7 +8,7 @@ if (!$auth->isAuthenticated() || !$auth->hasPermission('dashboard.access')) {
 
 $user = $auth->getUser();
 ?>
-<div class="w-full bg-white h-16 sticky top-0 border-0 border-solid border-l-[1px] border-gray-300 shadow-sm z-[100]">
+<div class="w-full bg-white h-16 sticky top-0 border-0 border-solid border-l-[1px] border-gray-300 shadow-sm z-40">
   <div class="flex items-center justify-between h-full p-4 header">
     <div class="flex items-center justify-center left">
       <i class="mr-2 font-medium fa-regular fa-bars-sort fa-lg cursor-pointer" onclick="navMenu()"></i>
