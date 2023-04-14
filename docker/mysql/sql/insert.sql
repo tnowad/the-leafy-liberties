@@ -1,42 +1,28 @@
 INSERT INTO
-  `authors` (`id`, `name`, `deleted_at`)
+  `authors` (`id`, `image`, `name`, `deleted_at`)
 VALUES
-  (1, 'J.K. Rowling', NULL),
-  (2, 'Stephen King', NULL),
-  (3, 'Agatha Christie', NULL),
-  (4, 'Harper Lee', NULL),
-  (5, 'F. Scott Fitzgerald', NULL),
-  (6, 'Jane Austen', NULL),
-  (7, 'Charles Dickens', NULL),
-  (8, 'Mark Twain', NULL),
-  (9, 'Ernest Hemingway', NULL);
+  (1, NULL, 'J.K. Rowling', NULL),
+  (2, NULL, 'Stephen King', NULL),
+  (3, NULL, 'Agatha Christie', NULL),
+  (4, NULL, 'Harper Lee', NULL),
+  (5, NULL, 'F. Scott Fitzgerald', NULL),
+  (6, NULL, 'Jane Austen', NULL),
+  (7, NULL, 'Charles Dickens', NULL),
+  (8, NULL, 'Mark Twain', NULL),
+  (9, NULL, 'Ernest Hemingway', NULL);
 
 INSERT INTO
-  `categories` (`id`, `name`, `deleted_at`)
+  `categories` (`id`, `image`, `name`, `deleted_at`)
 VALUES
-  (1, 'Fiction', NULL),
-  (2, 'Non-Fiction', NULL),
-  (3, 'Mystery', NULL),
-  (4, 'Romance', NULL),
-  (5, 'Science Fiction', NULL),
-  (6, 'Biography', NULL),
-  (7, 'History', NULL),
-  (8, 'Thriller', NULL),
-  (9, 'Horror', NULL);
-
-INSERT INTO
-  `publishers` (`id`, `name`, `deleted_at`)
-VALUES
-  (1, 'Penguin Random House', NULL),
-  (2, 'HarperCollins', NULL),
-  (3, 'Simon & Schuster', NULL),
-  (4, 'Hachette Livre', NULL),
-  (5, 'Macmillan Publishers', NULL),
-  (6, 'Bloomsbury Publishing', NULL),
-  (7, 'Scholastic Corporation', NULL),
-  (8, 'Pearson Education', NULL),
-  (9, 'Wiley', NULL),
-  (10, 'Oxford University Press', NULL);
+  (1, NULL, 'Fiction', NULL),
+  (2, NULL, 'Non-Fiction', NULL),
+  (3, NULL, 'Mystery', NULL),
+  (4, NULL, 'Romance', NULL),
+  (5, NULL, 'Science Fiction', NULL),
+  (6, NULL, 'Biography', NULL),
+  (7, NULL, 'History', NULL),
+  (8, NULL, 'Thriller', NULL),
+  (9, NULL, 'Horror', NULL);
 
 INSERT INTO
   `permissions` (`id`, `name`, `deleted_at`)
@@ -44,23 +30,50 @@ VALUES
   (1, 'dashboard.access', NULL);
 
 INSERT INTO
-  `tags` (`id`, `name`, `deleted_at`)
+  `publishers` (`id`, `image`, `name`, `deleted_at`)
 VALUES
-  (1, 'Bestselling', NULL),
-  (2, 'Popular', NULL),
-  (3, 'New', NULL),
-  (4, 'Recommended', NULL);
+  (1, NULL, 'Penguin Random House', NULL),
+  (2, NULL, 'HarperCollins', NULL),
+  (3, NULL, 'Simon & Schuster', NULL),
+  (4, NULL, 'Hachette Livre', NULL),
+  (5, NULL, 'Macmillan Publishers', NULL),
+  (6, NULL, 'Bloomsbury Publishing', NULL),
+  (7, NULL, 'Scholastic Corporation', NULL),
+  (8, NULL, 'Pearson Education', NULL),
+  (9, NULL, 'Wiley', NULL),
+  (10, NULL, 'Oxford University Press', NULL);
+
+INSERT INTO
+  `roles` (`id`, `name`, `deleted_at`)
+VALUES
+  (1, 'customer', NULL),
+  (2, 'moderator', NULL),
+  (3, 'administrator', NULL);
+
+INSERT INTO
+  `role_permissions` (`id`, `permission_id`, `role_id`, `status`)
+VALUES
+  (1, 1, 3, 1),
+  (2, 1, 2, 1);
+
+INSERT INTO
+  `tags` (`id`, `image`, `name`, `deleted_at`)
+VALUES
+  (1, NULL, 'Bestselling', NULL),
+  (2, NULL, 'Popular', NULL),
+  (3, NULL, 'New', NULL),
+  (4, NULL, 'Recommended', NULL);
 
 INSERT INTO
   `products` (
     `id`,
     `isbn`,
-    `title`,
+    `name`,
     `author_id`,
     `publisher_id`,
     `price`,
     `description`,
-    `image_url`,
+    `image`,
     `quantity`,
     `deleted_at`
   )
@@ -307,19 +320,6 @@ VALUES
   );
 
 INSERT INTO
-  `roles` (`id`, `name`, `deleted_at`)
-VALUES
-  (1, 'customer', NULL),
-  (2, 'moderator', NULL),
-  (3, 'administrator', NULL);
-
-INSERT INTO
-  `role_permissions` (`id`, `permission_id`, `role_id`, `status`)
-VALUES
-  (1, 1, 3, 1),
-  (2, 1, 2, 1);
-
-INSERT INTO
   `users` (
     `id`,
     `email`,
@@ -327,7 +327,7 @@ INSERT INTO
     `phone`,
     `password`,
     `gender`,
-    `user_image`,
+    `image`,
     `role_id`,
     `status`,
     `deleted_at`

@@ -7,6 +7,7 @@ USE bookstore;
 CREATE TABLE
   categories (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    image varchar(255) DEFAULT NULL,
     name varchar(100) NOT NULL,
     deleted_at datetime DEFAULT NULL
   );
@@ -14,6 +15,7 @@ CREATE TABLE
 CREATE TABLE
   tags (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    image varchar(255) DEFAULT NULL,
     name varchar(100) NOT NULL,
     deleted_at datetime DEFAULT NULL
   );
@@ -21,6 +23,7 @@ CREATE TABLE
 CREATE TABLE
   authors (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    image varchar(255) DEFAULT NULL,
     name varchar(100) NOT NULL,
     deleted_at datetime DEFAULT NULL
   );
@@ -28,6 +31,7 @@ CREATE TABLE
 CREATE TABLE
   publishers (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    image varchar(255) DEFAULT NULL,
     name varchar(100) NOT NULL,
     deleted_at datetime DEFAULT NULL
   );
@@ -36,12 +40,12 @@ CREATE TABLE
   products (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     isbn varchar(13) NOT NULL,
-    title varchar(100) NOT NULL,
+    name varchar(100) NOT NULL,
     author_id INT NOT NULL,
     publisher_id INT NOT NULL,
     price decimal(10, 2) NOT NULL,
     description text NOT NULL,
-    image_url varchar(255) NOT NULL,
+    image varchar(255) NOT NULL,
     quantity int NOT NULL DEFAULT "0",
     deleted_at datetime DEFAULT NULL,
     -- key
@@ -93,7 +97,7 @@ CREATE TABLE
     phone varchar(50) DEFAULT NULL,
     password varchar(255) NOT NULL,
     gender tinyint NOT NULL DEFAULT "0",
-    user_image varchar(255) DEFAULT NULL,
+    image varchar(255) DEFAULT NULL,
     role_id int DEFAULT NULL,
     status tinyint NOT NULL DEFAULT "1",
     deleted_at datetime DEFAULT NULL,
@@ -168,6 +172,7 @@ CREATE TABLE
   coupons (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(50) NOT NULL,
+    image varchar(255) DEFAULT NULL,
     quantity int NOT NULL,
     expired date NOT NULL,
     description VARCHAR(255) NOT NULL,
