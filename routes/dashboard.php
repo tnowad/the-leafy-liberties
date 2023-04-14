@@ -1,6 +1,6 @@
 <?php
 
-use App\Controllers\Frontend\DashboardController;
+use App\Controllers\Customer\DashboardController;
 use Core\Application;
 
 $router = Application::getInstance()->getRouter();

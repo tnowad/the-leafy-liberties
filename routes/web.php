@@ -2,12 +2,12 @@
 
 use Core\Application;
 
-use App\Controllers\Frontend\HomeController;
-use App\Controllers\Frontend\AuthController;
-use App\Controllers\Frontend\ProductController;
-use App\Controllers\Frontend\WishlistController;
-use App\Controllers\Frontend\CartController;
-use App\Controllers\Frontend\ProfileController;
+use App\Controllers\Customer\HomeController;
+use App\Controllers\Customer\AuthController;
+use App\Controllers\Customer\ProductController;
+use App\Controllers\Customer\WishlistController;
+use App\Controllers\Customer\CartController;
+use App\Controllers\Customer\ProfileController;
 
 $router = Application::getInstance()->getRouter();
 

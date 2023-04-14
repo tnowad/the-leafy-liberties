@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\Backend;
+namespace App\Controllers\Dashboard;
 
 use App\Models\Product;
 use Core\Application;

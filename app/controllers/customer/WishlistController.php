@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Frontend;
+namespace App\Controllers\Customer;
 
 use App\Models\Wishlist;
 use Core\Controller;

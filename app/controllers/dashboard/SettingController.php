@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\Backend;
+namespace App\Controllers\Dashboard;
 
 use Core\Controller;
 use Core\Request;
