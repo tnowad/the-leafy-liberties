@@ -6,7 +6,7 @@ use Core\Model;
 
 class RolePermission extends Model
 {
-  protected $table = 'role_permissions';
+  protected $table = 'roles_permissions';
   protected $fillable = ['role_id', 'permission_id', 'status'];
   public function role()
   {

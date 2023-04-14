@@ -138,7 +138,7 @@ abstract class Model
   public static function findOne($params = [])
   {
     $query = static::where($params);
-    if (count($query) == 1) {
+    if (count($query) > 0) {
       return array_shift($query);
     } else {
       return false;
