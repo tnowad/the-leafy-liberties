@@ -79,7 +79,7 @@ $user = $auth->getUser() ?? null;
           <?php endif; ?>
         </div>
       </div>
-      <?php if ($user === null && !$auth->hasPermission('dashboard.access')): ?>
+      <?php if ($user != null && !$auth->hasPermission('dashboard.access')): ?>
         <a href="<?php echo BASE_URI . '/wishlist' ?>"
           class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
           <i class="fa-regular fa-heart"></i>
@@ -91,5 +91,6 @@ $user = $auth->getUser() ?? null;
         </a>
       <?php endif; ?>
     </div>
+  </div>
   </div>
 </header>

@@ -20,10 +20,10 @@
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
               <div class="item-detail flex justify-between items-center">
                 <div class="item-img w-36">
-                  <img src="resources/images/products/<?php echo $product->image_url ?>" alt="" class="w-full h-full object-cover rounded-2xl" />
+                  <img src="resources/images/products/<?php echo $product->image ?>" alt="" class="w-full h-full object-cover rounded-2xl" />
                 </div>
                 <div class="text">
-                  <p class="book-name text-2xl mb-2"><?php echo $product->title ?></p>
+                  <p class="book-name text-2xl mb-2"><?php echo $product->name ?></p>
                   <p class="book-author text-base"><?php echo $author->name ?></p>
                 </div>
                 <p class="price text-xl"><?php echo $product->price  ?></p>

@@ -20,7 +20,7 @@ class CartController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->isAuthenticated()) {
-      return $response->redirect( BASE_URI . '/login');
+      return $response->redirect(BASE_URI . '/login');
     }
     $cartItems = Cart::where(['user_id' => $auth->getUser()->id]);
     $products = [];
@@ -32,9 +32,50 @@ class CartController extends Controller
       $products[] = $product;
     }
 
-    return $response->setBody(View::render(new View('pages/cart'), [
+    return $response->setBody(View::renderWithLayout(new View('pages/cart'), [
       'products' => $products,
-      'cartItems' => $cartItems,
     ]));
   }
+
+//   public function addProduct(Request $request, Response $response)
+//   {
+//     $auth = Application::getInstance()->getAuthentication();
+//     if (!$auth->isAuthenticated()) {
+//       return $response->redirect( BASE_URI . '/login');
+//     }
+//     $productId = $request->getParam('product_id');
+//     $quantity = $request->getParam('quantity');
+//     $cartItems = Cart::where(['user_id' => $auth->getUser()->id]);
+
+//     foreach ($cartItems as $cartItem) {
+//       $product = Product::find($cartItem->product_id);
+//       $product->quantity = $cartItem->quantity;
+//       $products[] = $product;
+//     }
+
+//     if ($cartItem) {
+//         $cartItem->quantity += $quantity;
+//         $cartItem->save();
+//     } else {
+//         $cartItem = new Cart();
+//         $cartItem->user_id = $auth->getUser()->id;
+//         $cartItem->product_id = $productId;
+//         $cartItem->quantity = $quantity;
+//         $cartItem->save();
+//     }
+
+//     $cartItems = Cart::where(['user_id' => $auth->getUser()->id]);
+//     $products = [];
+
+//     foreach ($cartItems as $cartItem) {
+//         $product = Product::find($cartItem->product_id);
+//         $product->quantity = $cartItem->quantity;
+//         $products[] = $product;
+//     }
+
+//     return $response->setBody(View::renderWithLayout(new View('pages/cart'), [
+//       'products' => $products,
+//       'cartItems' => $cartItems,
+//     ]));
+//   }
 }

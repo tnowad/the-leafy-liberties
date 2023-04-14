@@ -51,6 +51,53 @@ VALUES
   (3, 'administrator', NULL);
 
 INSERT INTO
+  `slides` (`id`, `image`, `name`, `status`, `deleted_at`)
+VALUES
+  (
+    1,
+    '/resources/images/slides/slide-books-1.jpg',
+    'book festival',
+    1,
+    NULL
+  ),
+  (
+    2,
+    '/resources/images/slides/slide-books-2.png',
+    'book festival',
+    1,
+    NULL
+  ),
+  (
+    3,
+    '/resources/images/slides/slide-books-3.png',
+    'book festival',
+    1,
+    NULL
+  ),
+  (
+    4,
+    '/resources/images/slides/slide-books-4.png',
+    'book festival',
+    1,
+    NULL
+  ),
+  (
+    5,
+    '/resources/images/slides/slide-books-5.jpg',
+    'book festival',
+    1,
+    NULL
+  ),
+  (
+    6,
+    '/resources/images/slides/slide-books-6.png',
+    'book festival',
+    1,
+    NULL
+  );
+
+a
+INSERT INTO
   `roles_permissions` (`id`, `permission_id`, `role_id`, `status`)
 VALUES
   (1, 1, 3, 1),
