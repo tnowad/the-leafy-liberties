@@ -59,18 +59,23 @@ class Router
 
   public function resolve()
   {
-    $method = $this->request->getMethod();
-    $path = $this->request->getPath();
-    $callback = $this->routes[$method][$path] ?? false;
-    if ($callback === false) {
-      $this->response->setStatusCode(404);
-      throw new Exception('Not found');
+    try {
+      $method = $this->request->getMethod();
+      $path = $this->request->getPath();
+      $callback = $this->routes[$method][$path] ?? false;
+      if ($callback === false) {
+        $this->response->setStatusCode(404);
+        throw new Exception('Not found');
+      }
+      if (is_array($callback)) {
+        $controller = new $callback[0]();
+        $callback[0] = $controller;
+      }
+      call_user_func($callback, array(&$this->request)[0], array(&$this->response)[0]);
+    } catch (Exception $e) {
+      $this->response->setStatusCode(500);
+      echo $e;
     }
-    if (is_array($callback)) {
-      $controller = new $callback[0]();
-      $callback[0] = $controller;
-    }
-    call_user_func($callback, array(&$this->request)[0], array(&$this->response)[0]);
   }
 
   public function render($view, $params = [])

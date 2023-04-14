@@ -10,43 +10,40 @@ use Core\View;
 
 class LoginController extends Controller
 {
+
+  public function index(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
+      'header' => '',
+      'footer' => '',
+    ]));
+  }
+
   public function login(Request $request, Response $response)
   {
-    switch ($request->getMethod()) {
-      case 'POST':
-        $email = $request->getParam('email');
-        $password = $request->getParam('password');
-        try {
-          $users = User::where(['email' => $email]);
-          $user = $users ? $users[0] : null;
-        } catch (\Exception $e) {
-          $user = null;
-        }
-        if ($user && password_verify($password, $user->password)) {
-          $response->setStatusCode(200);
-          Application::getInstance()->getAuthentication()->setUser($user);
-          $response->redirect('/');
-        } else {
-          $response->setStatusCode(200);
-          $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
-            'toast' => [
-              'type' => 'error',
-              'message' => "Login failed",
-            ],
-            'header' => '',
-            'footer' => '',
-          ]));
-        }
-        break;
-      case 'GET':
-        $response->setStatusCode(200);
-        $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
-          'header' => '',
-          'footer' => '',
-        ]));
-        break;
-      default:
-        break;
+    $email = $request->getParam('email');
+    $password = $request->getParam('password');
+    try {
+      $users = User::where(['email' => $email]);
+      $user = $users ? $users[0] : null;
+    } catch (\Exception $e) {
+      $user = null;
+    }
+    if ($user && password_verify($password, $user->password)) {
+      $response->setStatusCode(200);
+      Application::getInstance()->getAuthentication()->setUser($user);
+      $response->redirect('/');
+    } else {
+      $response->setStatusCode(200);
+      $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
+        'toast' => [
+          'type' => 'error',
+          'message' => "Login failed",
+        ],
+        'header' => '',
+        'footer' => '',
+      ]));
     }
   }
 
@@ -54,6 +51,11 @@ class LoginController extends Controller
   {
     Application::getInstance()->getSession()->destroy();
     $response->setStatusCode(200);
-    $response->redirect('/login');
+    $response->setBody(View::renderWithLayout(new View('pages/index'), [
+      'toast' => [
+        'type' => 'success',
+        'message' => "Logout successful",
+      ],
+    ]));
   }
 }
