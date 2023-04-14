@@ -6,6 +6,9 @@ $categories = Category::all();
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser() ?? null;
+
+// Todo: Cart: add count items in cart
+// Todo: Wishlist: add count items in wishlist, move wishlist to cart
 ?>
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
@@ -81,6 +84,7 @@ $user = $auth->getUser() ?? null;
           class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
           <i class="fa-regular fa-heart"></i>
         </a>
+
         <a href="<?php echo BASE_URI . '/cart' ?>"
           class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
           <i class="fa-brands fa-opencart"></i>
