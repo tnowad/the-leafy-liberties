@@ -34,7 +34,6 @@ class CartController extends Controller
 
     return $response->setBody(View::renderWithLayout(new View('pages/cart'), [
       'products' => $products,
-      'cartItems' => $cartItems,
     ]));
   }
 }

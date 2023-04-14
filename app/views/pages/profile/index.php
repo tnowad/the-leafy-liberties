@@ -3,6 +3,7 @@
   <div class="container">
     <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row">
       <?php include 'menu.php'; ?>
+      <!-- content -->
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col" action="<?php echo BASE_URI . '/profile' ?>" method="post">
           <label>Name</label>
@@ -57,14 +58,4 @@
   }
   console.log(1)
   getUser()
-
-  var currentPath = window.location.pathname;
-  var links = document.getElementsByTagName("a");
-  for (var i = 0; i < links.length; i++) {
-    if (links[i].getAttribute("href") === currentPath) {
-      links[i].classList.add("bg-green-800", "text-white");
-    } else {
-      links[i].classList.remove("bg-green-800", "text-white");
-    }
-  }
 </script>

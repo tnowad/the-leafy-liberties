@@ -26,7 +26,21 @@ class ProfileController extends Controller
     ]));
   }
 
-  public function accountSettings(Request $request, Response $response)
+  public function update(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+
+    if (!$auth->isAuthenticated()) {
+      $response->redirect('/login');
+    }
+    $user = $auth->getUser();
+
+    $user->name = $request->getParam('name');
+    $user->save();
+    $response->redirect(BASE_URI . '/profile');
+  }
+
+  public function settings(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
 
@@ -41,17 +55,32 @@ class ProfileController extends Controller
     ]));
   }
 
-  public function update(Request $request, Response $response)
+  public function payments(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
 
     if (!$auth->isAuthenticated()) {
-      $response->redirect('/login');
+      $response->redirect(BASE_URI . '/login');
     }
-    $user = $auth->getUser();
+    $user = Application::getInstance()->getAuthentication()->getUser();
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/profile/payments'), [
+      'user' => $user,
+      'footer' => ''
+    ]));
+  }
+  public function orders(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
 
-    $user->name = $request->getParam('name');
-    $user->save();
-    $response->redirect(BASE_URI . '/profile');
+    if (!$auth->isAuthenticated()) {
+      $response->redirect(BASE_URI . '/login');
+    }
+    $user = Application::getInstance()->getAuthentication()->getUser();
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/profile/orders'), [
+      'user' => $user,
+      'footer' => ''
+    ]));
   }
 }
