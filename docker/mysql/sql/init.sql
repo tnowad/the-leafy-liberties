@@ -25,6 +25,7 @@ CREATE TABLE
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     image varchar(255) DEFAULT NULL,
     name varchar(100) NOT NULL,
+    status tinyint NOT NULL DEFAULT "1",
     deleted_at datetime DEFAULT NULL
   );
 
