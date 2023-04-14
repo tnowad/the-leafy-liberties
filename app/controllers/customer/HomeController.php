@@ -111,11 +111,5 @@ class HomeController extends Controller
       'title' => 'Comment Dashboard'
     ]));
   }
-  public function updateProduct(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/updateProduct'), [
-      'title' => 'Product Dashboard'
-    ]));
-  }
+
 }

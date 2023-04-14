@@ -135,13 +135,13 @@ abstract class Model
     return true;
   }
 
-  public static function findOne($params = [])
+  public static function findOne($params = []) : ?Model
   {
     $query = static::where($params);
     if (count($query) > 0) {
       return array_shift($query);
     } else {
-      return false;
+      return null;
     }
   }
 

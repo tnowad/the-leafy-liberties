@@ -57,7 +57,7 @@ use App\Models\Pagination;
                   </td>
                   <td class="px-5 py-3 flex h-full justify-center items-center">
                     <a
-                      href="<?php echo BASE_URI . '/dashboard/product/update/' ?>"
+                      href="<?php echo BASE_URI . '/dashboard/product/update' . '?id=' .  $product->id ?>"
                       class="edit-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all block">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
