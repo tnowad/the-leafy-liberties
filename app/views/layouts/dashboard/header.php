@@ -18,8 +18,8 @@ $user = $auth->getUser();
     </div>
     <div class="relative flex items-center right">
       <div class="w-10 mr-2 avatar">
-        <img src="<?php echo $user->user_image ? $user->user_image : BASE_URI . '/resources/images/avatar.png' ?>"
-          alt="" class="object-cover w-full h-full rounded-full cursor-pointer" onmouseover="showMenu()"
+        <img src="<?php echo $user->image ? $user->image : BASE_URI . '/resources/images/avatar.png' ?>" alt=""
+          class="object-cover w-full h-full rounded-full cursor-pointer" onmouseover="showMenu()"
           onmouseout="hideMenuDelayed()" />
         <ul id="menu"
           class="absolute right-0 flex-col hidden gap-2 p-2 transition-all bg-white rounded-lg shadow-lg top-full"

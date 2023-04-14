@@ -2,6 +2,8 @@
 use Core\Application;
 use App\Models\Category;
 
+$categories = Category::all();
+
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser() ?? null;
 ?>
@@ -16,8 +18,7 @@ $user = $auth->getUser() ?? null;
         Categories
       </button>
       <!-- show options -->
-      <?php $categories = Category::all();
-      if (count($categories) > 0): ?>
+      <?php if (count($categories) > 0): ?>
         <div
           class="absolute hidden transition-all translate-y-10 bg-white border border-gray-200 rounded-md shadow-lg outline-none opacity-0 w-52 top-24 mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">
           <div class="px-1 py-1">
@@ -75,14 +76,16 @@ $user = $auth->getUser() ?? null;
           <?php endif; ?>
         </div>
       </div>
-      <a href="<?php echo BASE_URI . '/wishlist' ?>"
-        class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
-        <i class="fa-regular fa-heart"></i>
-      </a>
-      <a href="<?php echo BASE_URI . '/cart' ?>"
-        class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
-        <i class="fa-brands fa-opencart"></i>
-      </a>
+      <?php if ($user === null && !$auth->hasPermission('dashboard.access')): ?>
+        <a href="<?php echo BASE_URI . '/wishlist' ?>"
+          class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+        <a href="<?php echo BASE_URI . '/cart' ?>"
+          class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
+          <i class="fa-brands fa-opencart"></i>
+        </a>
+      <?php endif; ?>
     </div>
   </div>
 </header>
