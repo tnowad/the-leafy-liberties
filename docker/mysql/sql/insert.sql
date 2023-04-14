@@ -51,7 +51,7 @@ VALUES
   (3, 'administrator', NULL);
 
 INSERT INTO
-  `role_permissions` (`id`, `permission_id`, `role_id`, `status`)
+  `roles_permissions` (`id`, `permission_id`, `role_id`, `status`)
 VALUES
   (1, 1, 3, 1),
   (2, 1, 2, 1);

@@ -55,7 +55,7 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  product_tags (
+  products_tags (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     product_id int NOT NULL,
     tag_id int NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  product_categories (
+  products_categories (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     product_id int NOT NULL,
     category_id int NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  role_permissions (
+  roles_permissions (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     permission_id int NOT NULL,
     role_id int NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  user_permissions (
+  users_permissions (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     permission_id int NOT NULL,
     user_id int NOT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  order_details (
+  orders_products (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     order_id int NOT NULL,
     product_id int NOT NULL,

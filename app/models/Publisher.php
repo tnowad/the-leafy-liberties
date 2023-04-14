@@ -7,9 +7,8 @@ class Publisher extends Model
 {
   protected $table = 'author';
   protected $fillable = [
-    'publisher_id',
-    'name',
     'image',
+    'name',
     'deleted_at'
   ];
 
