@@ -14,7 +14,7 @@ class DashboardController extends Controller
     $auth = Application::getInstance()->getAuthentication();
 
     if (!$auth->isAuthenticated() || !$auth->hasPermission('dashboard.access')) {
-      $response->redirect('/login');
+      $response->redirect(BASE_URI . '/login');
       return;
     }
 

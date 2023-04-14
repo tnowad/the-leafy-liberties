@@ -14,8 +14,9 @@ class ProfileController extends Controller
   public function index(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
+
     if (!$auth->isAuthenticated()) {
-      return $response->redirect('/login');
+      $response->redirect(BASE_URI . '/login');
     }
     $user = Application::getInstance()->getAuthentication()->getUser();
     $response->setStatusCode(200);
@@ -27,9 +28,15 @@ class ProfileController extends Controller
 
   public function update(Request $request, Response $response)
   {
-    $user = Application::getInstance()->getAuthentication()->getUser();
+    $auth = Application::getInstance()->getAuthentication();
+
+    if (!$auth->isAuthenticated()) {
+      $response->redirect('/login');
+    }
+    $user = $auth->getUser();
+
     $user->name = $request->getParam('name');
     $user->save();
-    $response->redirect('profile');
+    $response->redirect(BASE_URI . '/profile');
   }
 }

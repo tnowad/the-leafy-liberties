@@ -3,7 +3,7 @@ use Core\Application;
 
 $auth = Application::getInstance()->getAuthentication();
 if (!$auth->isAuthenticated() || !$auth->hasPermission('dashboard.access')) {
-  Application::getInstance()->getResponse()->redirect('/login');
+  Application::getInstance()->getResponse()->redirect(BASE_URI . '/login');
 }
 
 $user = $auth->getUser();

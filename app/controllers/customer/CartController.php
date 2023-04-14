@@ -20,7 +20,7 @@ class CartController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->isAuthenticated()) {
-      return $response->redirect('/login');
+      return $response->redirect( BASE_URI . '/login');
     }
     $cartItems = Cart::where(['user_id' => $auth->getUser()->id]);
     $products = [];

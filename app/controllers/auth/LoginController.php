@@ -33,7 +33,7 @@ class LoginController extends Controller
     if ($user && password_verify($password, $user->password)) {
       $response->setStatusCode(200);
       Application::getInstance()->getAuthentication()->setUser($user);
-      $response->redirect('/');
+      $response->redirect( BASE_URI . '/');
     } else {
       $response->setStatusCode(200);
       $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
