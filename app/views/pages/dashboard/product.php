@@ -57,7 +57,7 @@ use App\Models\Pagination;
                   </td>
                   <td class="px-5 py-3 w-44">
                     <button
-                      class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                      class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all" onclick="showProductEdit(<?php echo $product->id ?>)">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button id="deleteButton" type="submit"
@@ -179,4 +179,7 @@ use App\Models\Pagination;
     document.querySelector(".edit-form").classList.add("flex");
     document.querySelector(".edit-form").classList.remove("hidden");
   })
+  function showProductEdit(id){
+    
+  }
 </script>

@@ -1,9 +1,9 @@
 <?php
 ?>
 <div
-  class="menu-left flex flex-col w-16 hover:w-64 md:w-64 bg-white h-full text-[#315854] transition-all duration-300 border-none z-[999] hover:shadow-lg">
-  <div class="flex flex-col justify-between flex-grow sticky top-0 z-[888]">
-    <ul class="flex flex-col py-4 space-y-1 list">
+  class="menu-left flex flex-col w-16 hover:w-64 md:w-64 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[999] hover:shadow-lg">
+  <div class="flex flex-col justify-between flex-grow  z-[888]">
+    <ul class="flex flex-col py-4 space-y-1 list sticky top-0">
       <li class="block px-5">
         <a href="<?php echo BASE_URI . '/dashboard' ?>" class="flex items-center justify-center py-4">
           <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="logo" />
@@ -89,6 +89,7 @@
     </ul>
   </div>
 </div>
+<script src="../../../resources/js/header.js"></script>
 <script>
   let btnAll = document.querySelectorAll('ul.list li:not(:first-child)');
   btnAll.forEach(element => {
@@ -97,4 +98,13 @@
       element.classList.add('bg-[#315854]');
     });
   })
+  let menu = document.querySelector(".menu-left");
+  function navMenu() {
+    if(menu.classList.contains('md:w-64')){
+      menu.classList.remove('md:w-64');
+    }else{
+      menu.classList.add('md:w-64');
+
+    }
+  }
 </script>

@@ -11,7 +11,7 @@ $user = $auth->getUser();
 <div class="w-full bg-white h-16 sticky top-0 border-0 border-solid border-l-[1px] border-gray-300 shadow-sm z-[100]">
   <div class="flex items-center justify-between h-full p-4 header">
     <div class="flex items-center justify-center left">
-      <i class="mr-2 font-medium fa-regular fa-bars-sort fa-lg"></i>
+      <i class="mr-2 font-medium fa-regular fa-bars-sort fa-lg cursor-pointer" onclick="navMenu()"></i>
       <span class="text-2xl font-medium text-[#52938d]">
         <?php echo ucfirst(basename($_SERVER['REQUEST_URI'])) ?>
       </span>
@@ -41,19 +41,17 @@ $user = $auth->getUser();
     </div>
   </div>
 </div>
+<script src="../../../resources/js/menu.js"></script>
 <script>
   var timeoutId;
 
   function showMenu() {
     clearTimeout(timeoutId);
     document.getElementById("menu").style.display = "flex";
-    document.getElementById("menu").style.opacity = "1";
   }
 
   function hideMenu() {
     document.getElementById("menu").style.display = "none";
-    document.getElementById("menu").style.opacity = "0";
-
   }
 
   function hideMenuDelayed() {
