@@ -50,7 +50,7 @@
 
 <body>
   <div class="w-full bg-neutral-100">
-    <div class="grid md:grid-cols-[256px_auto] sm:grid-cols-[64px_auto] h-full">
+    <div class="flex h-full">
       <?php $params['sidebar'] ?? require_once(__DIR__ . '/dashboard/menu.php'); ?>
       <div class="w-full">
         <?php $params['header'] ?? require_once(__DIR__ . '/dashboard/header.php'); ?>
@@ -63,9 +63,7 @@
 </body>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-  integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <?php if (isset($params['toast'])): ?>
   <script type="module">
     import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
