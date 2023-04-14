@@ -22,9 +22,9 @@ $router->delete('/wishlist', [WishlistController::class, 'remove']);
 $router->put('/wishlist', [WishlistController::class, 'add']);
 
 $router->get('/products', [ProductController::class, 'index']);
-$router->get('/products/filter', [ProductController::class, 'filter']);
-
 $router->get('/product', [ProductController::class, 'show']);
+$router->get('/products/filter', [ProductController::class, 'filter']);
+$router->get('/data/getProducts', [ProductController::class, 'getProducts']);
 
 // profile
 $router->get('/profile', [ProfileController::class, 'index']);

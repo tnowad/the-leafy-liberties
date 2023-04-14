@@ -1,4 +1,5 @@
 <?php
+
 namespace Core;
 
 class Response
@@ -76,5 +77,4 @@ class Response
   {
     $this->$name = $value;
   }
-
 }
