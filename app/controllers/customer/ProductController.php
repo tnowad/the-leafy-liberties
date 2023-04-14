@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Customer;
 
+use App\Models\Author;
 use App\Models\Product;
 use Core\Controller;
 use Core\Database;
@@ -17,6 +18,7 @@ class ProductController extends Controller
   {
     try {
       $products = Product::all();
+      $authors = Author::all();
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
@@ -24,6 +26,7 @@ class ProductController extends Controller
     $response->setBody(View::renderWithLayout(new View('pages/products'), [
       'title' => 'Shop',
       'products' => $products,
+      'authors' => $authors,
     ]));
   }
 

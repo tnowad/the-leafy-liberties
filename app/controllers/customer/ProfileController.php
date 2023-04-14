@@ -37,6 +37,6 @@ class ProfileController extends Controller
 
     $user->name = $request->getParam('name');
     $user->save();
-    $response->redirect( BASE_URI . '/profile');
+    $response->redirect(BASE_URI . '/profile');
   }
 }

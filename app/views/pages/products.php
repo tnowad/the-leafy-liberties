@@ -34,7 +34,7 @@
                 Greater than $30
               </label>
             </div>
-            <h1 class="mt-2 mb-2 text-xl font-bold">Rating</h1>
+            <!-- <h1 class="mt-2 mb-2 text-xl font-bold">Rating</h1>
             <div>
               <input type="radio" id="star-1" name="rating" value="1" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
               <label for="star-1" class="ml-2">
@@ -60,7 +60,7 @@
               <label for="star-5" class="ml-2">
                 5 Star
               </label>
-            </div>
+            </div> -->
             <input type="submit" value="Find" class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 hover:bg-[#6cada6] transition-all cursor-pointer" />
           </form>
         </div>
@@ -71,24 +71,28 @@
         <?php
         $productList = $params['products'];
         foreach ($productList as $product) {
+          $author = array_filter($authors, function ($author) use ($product) {
+            return $author->id === $product->author_id;
+          });
+          $author = reset($author);
         ?>
           <div class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
             <div class="object-cover h-full p-2 w-60">
-              <img src="resources/images/products/<?php echo $product->image_url ?>" alt="" class="object-cover w-full h-full" />
+              <img src="resources/images/products/<?php echo $product->image ?>" alt="" class="object-cover w-full h-full" />
             </div>
             <div class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
               <div class="product-name">
                 <a href="/">
-                  <?php echo $product->title ?>
+                  <?php echo $product->name ?>
                 </a>
               </div>
-              <div class=" product-rate">
+              <!-- <div class=" product-rate">
                 <?php for ($i = 1; $i <= $product->star; $i++) : ?>
                   <i class="fa fa-star text-yellow-400" aria-hidden="true"></i>
                 <?php endfor; ?>
-              </div>
-              <div class="text-sm product-author">
-                <?php echo $product->author ?>
+              </div> -->
+              <div class="text-sm text-gray-500 product-author">
+                <?php echo $author->name ?>
               </div>
               <div class="p-0 font-semibold product-price text-primary-900">
                 <?php echo $product->price ?>$

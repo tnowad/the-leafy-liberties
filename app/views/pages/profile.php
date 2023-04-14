@@ -9,22 +9,22 @@
           </h1>
         </div>
         <div class="box-border flex flex-col items-start justify-center px-6">
-          <div class="flex mt-5 bg-primary">
+          <a href="/the-leafy-liberties/profile" class="flex mt-5 bg-primary">
             <i class="flex items-center fa fa-home"></i>
             <h3 class="text-xl cursor-pointer">Overview</h3>
-          </div>
-          <div class="flex mt-5 ">
+          </a>
+          <a href="/the-leafy-liberties/profile/accountSettings" class="flex mt-5 ">
             <i class="flex items-center fa fa-user"></i>
             <h3 class="cursor-pointer">Account settings</h3>
-          </div>
-          <div class="flex mt-5">
+          </a>
+          <a href="/the-leafy-liberties/profile/payments" class="flex mt-5">
             <i class="flex items-center fa fa-check"></i>
             <h3 class="cursor-pointer">Payments</h3>
-          </div>
-          <div class="flex justify-between mt-5">
+          </a>
+          <a href="/the-leafy-liberties/profile/orders" class="flex justify-between mt-5">
             <i class="flex items-center fa fa-bag-shopping"></i>
             <h3 class="cursor-pointer">Order</h3>
-          </div>
+          </a>
         </div>
       </div>
       <div class="w-full p-2 md:w-3/4">

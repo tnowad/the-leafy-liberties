@@ -32,8 +32,9 @@ class CartController extends Controller
       $products[] = $product;
     }
 
-    return $response->setBody(View::render(new View('pages/cart/index'), [
+    return $response->setBody(View::render(new View('pages/cart'), [
       'products' => $products,
+      'cartItems' => $cartItems,
     ]));
   }
 }

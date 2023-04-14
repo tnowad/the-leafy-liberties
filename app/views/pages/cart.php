@@ -5,7 +5,7 @@
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php
         $total = 0;
-        foreach ($cart as $cart) {
+        foreach ($cartItems as $cart) {
           $product = array_filter($products, function ($product) use ($cart) {
             return $product->id === $cart->product_id;
           });
