@@ -1,14 +1,17 @@
 <?php
 namespace App\Models;
 
+use App\Models\Permission;
 use Core\Database;
 use Core\Model;
-use Permission;
 
 class Role extends Model
 {
   protected $table = 'roles';
-  protected $fillable = ['name'];
+  protected $fillable = [
+    'name',
+    'deleted_at'
+  ];
 
   public function getPermissions()
   {

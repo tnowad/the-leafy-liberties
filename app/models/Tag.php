@@ -6,7 +6,11 @@ use Core\Model;
 class Tag extends Model
 {
   protected $table = 'tags';
-  protected $fillable = ['name'];
+  protected $fillable = [
+    'name',
+    'image',
+    'deleted_at'
+  ];
 
   public function products()
   {

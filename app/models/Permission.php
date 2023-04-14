@@ -10,7 +10,7 @@ use Core\Model;
 class Permission extends Model
 {
   protected $table = 'permissions';
-  protected $fillable = ['name', 'status'];
+  protected $fillable = ['name', 'status', 'deleted_at'];
 
   public function roles()
   {

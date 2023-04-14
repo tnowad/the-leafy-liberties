@@ -9,6 +9,8 @@ class Publisher extends Model
   protected $fillable = [
     'publisher_id',
     'name',
+    'image',
+    'deleted_at'
   ];
 
 }

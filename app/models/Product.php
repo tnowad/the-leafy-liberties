@@ -16,13 +16,14 @@ class Product extends Model
   protected $fillable = [
     'id',
     'isbn',
-    'title',
+    'name',
     'author_id',
     'publisher_id',
     'price',
     'description',
-    'image_url',
+    'image',
     'quantity',
+    'deleted_at'
   ];
   public function author()
   {
