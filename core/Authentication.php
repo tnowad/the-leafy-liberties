@@ -15,12 +15,6 @@ class Authentication
     $this->userId = $_SESSION['user_id'] ?? null;
   }
 
-
-  public function check()
-  {
-    return $this->getUser() ? true : false;
-  }
-
   public function getUser(): ?User
   {
     if ($this->userId == null) {
@@ -28,29 +22,26 @@ class Authentication
     }
     return User::findOne(['id' => $this->userId]);
   }
+
   public function setUser(User $user)
   {
     $_SESSION['user_id'] = $user->id;
   }
 
-  public function id()
+  public function isAuthentication(): bool
   {
-    return $this->userId;
+    return $this->getUser() ? true : false;
   }
 
-  public function guest()
+  public function isGuest(): bool
   {
-    return !$this->check();
+    return !$this->isAuthentication();
   }
 
-  public function isAuthenticated(): bool
-  {
-    return $this->check();
-  }
 
   public function hasPermission(Permission|string $permission): bool
   {
-    if ($this->guest()) {
+    if ($this->isGuest()) {
       return false;
     }
 
