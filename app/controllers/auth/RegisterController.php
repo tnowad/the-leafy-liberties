@@ -11,60 +11,56 @@ use Core\View;
 
 class RegisterController extends Controller
 {
+
+  public function index(Request $request, Response $response)
+  {
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
+      'header' => '',
+      'footer' => '',
+    ]));
+  }
+
   public function register(Request $request, Response $response)
   {
-    switch ($request->getMethod()) {
-      case 'POST':
-        $email = $request->getParam('email');
-        $name = $request->getParam('name');
-        $phone = $request->getParam('phone');
-        $password = $request->getParam('password');
-        $existingUser = User::where(['email' => $email]);
-        if ($existingUser) {
-          $response->setStatusCode(200);
-          $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
-            'toast' => [
-              'type' => 'error',
-              'message' => "User already exists",
-            ],
-            'header' => '',
-            'footer' => '',
-          ]));
-          break;
-        } else {
-          $user = new User();
-          $user->email = $email;
-          $user->name = $name;
-          $user->phone = $phone;
-          $user->password = password_hash($password, PASSWORD_DEFAULT);
-          $user->setRole(Role::where(['name' => 'customer'])[0]);
-          try {
-            $user->save();
-            $response->setStatusCode(200);
-            Application::getInstance()->getAuthentication()->setUser($user);
-            $response->redirect('/');
-          } catch (\Exception $e) {
-            $response->setStatusCode(500);
-            $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
-              'toast' => [
-                'type' => 'error',
-                'message' => "Registration failed",
-              ],
-              'header' => '',
-              'footer' => '',
-            ]));
-          }
-        }
-        break;
-      case 'GET':
+    $email = $request->getParam('email');
+    $name = $request->getParam('name');
+    $phone = $request->getParam('phone');
+    $password = $request->getParam('password');
+    $existingUser = User::where(['email' => $email]);
+    if ($existingUser) {
+      $response->setStatusCode(200);
+      return $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
+        'toast' => [
+          'type' => 'error',
+          'message' => "User already exists",
+        ],
+        'header' => '',
+        'footer' => '',
+      ]));
+    } else {
+      $user = new User();
+      $user->email = $email;
+      $user->name = $name;
+      $user->phone = $phone;
+      $user->password = password_hash($password, PASSWORD_DEFAULT);
+      $user->setRole(Role::where(['name' => 'customer'])[0]);
+      try {
+        $user->save();
         $response->setStatusCode(200);
+        Application::getInstance()->getAuthentication()->setUser($user);
+        $response->redirect('/');
+      } catch (\Exception $e) {
+        $response->setStatusCode(500);
         $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
+          'toast' => [
+            'type' => 'error',
+            'message' => "Registration failed",
+          ],
           'header' => '',
           'footer' => '',
         ]));
-        break;
-      default:
-        break;
+      }
     }
   }
 
