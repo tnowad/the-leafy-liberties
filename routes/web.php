@@ -27,7 +27,8 @@ $router->get('/products/filter', [ProductController::class, 'filter']);
 $router->get('/product', [ProductController::class, 'show']);
 
 $router->get('/profile', [ProfileController::class, 'index']);
-$router->post('/profile', [ProfileController::class, 'update']);
+$router->post('/profile/index', [ProfileController::class, 'update']);
+$router->get('/profile/settings', [ProfileController::class, 'accountSettings']);
 
 $router->get('/checkout', [HomeController::class, 'checkout']);
 
