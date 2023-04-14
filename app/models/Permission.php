@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Role;
 use App\Models\User;
-use Core\Database;
 use Core\Model;
 
 class Permission extends Model
