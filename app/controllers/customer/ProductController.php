@@ -64,25 +64,16 @@ class ProductController extends Controller
   public function getProducts(Request $request, Response $response)
   {
 
-    $response->setHeaders("Access-Control-Allow-Origin: *");
     $response->setStatusCode(200);
 
-    $productList = Product::all();
-    $productJson = array_map(function ($product) {
-      return [
-        "id" => $product->id,
-        "isbn" => $product->isbn,
-        "title" => $product->title,
-        "author_id" => $product->author_id,
-        "publisher_id" => $product->publisher_id,
-        "price" => $product->price,
-        "description" => $product->description,
-        "image_url" => $product->image_url,
-        "quantity" => $product->quantity,
-        "deleted_at" => $product->deleted_at
-      ];
-    }, $productList);
-
-    $response->json($productJson);
+    try {
+      $products = [];
+      foreach (Product::all() as $product) {
+        $products[] = $product->getAttributes();
+      }
+      $response->json($products);
+    } catch (\Exception $e) {
+      dd($e->getMessage());
+    }
   }
 }

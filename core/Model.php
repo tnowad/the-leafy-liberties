@@ -1,4 +1,5 @@
 <?php
+
 namespace Core;
 
 use Core\Database;
@@ -33,7 +34,7 @@ abstract class Model
   public static function find($id): Model
   {
     $table = static::table();
-    $primaryKey = (new static )->primaryKey;
+    $primaryKey = (new static)->primaryKey;
     $query = "SELECT * FROM $table WHERE $primaryKey = $id";
     $result = Database::getInstance()->fetchOne($query);
     if (!$result) {
@@ -157,7 +158,10 @@ abstract class Model
 
     return true;
   }
-
+  public function getAttributes()
+  {
+    return $this->attributes;
+  }
   public function __set($name, $value)
   {
     if (in_array($name, $this->fillable)) {
