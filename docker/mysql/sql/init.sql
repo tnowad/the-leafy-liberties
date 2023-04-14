@@ -21,6 +21,14 @@ CREATE TABLE
   );
 
 CREATE TABLE
+  slides (
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    image varchar(255) DEFAULT NULL,
+    name varchar(100) NOT NULL,
+    deleted_at datetime DEFAULT NULL
+  );
+
+CREATE TABLE
   authors (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     image varchar(255) DEFAULT NULL,
