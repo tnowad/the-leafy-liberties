@@ -52,12 +52,12 @@ class ProductController extends Controller
     ]));
   }
 
-  // public function filter(Request $request, Response $response)
-  // {
-  //   // Get query from request and create list products
-  //   // return with json
-  //   $response->setBody(json_encode($request->getQueries()));
-  // }
+  public function filter(Request $request, Response $response)
+  {
+    // Get query from request and create list products
+    // return with json
+    $response->setBody(json_encode($request->getQueries()));
+  }
   public function getProducts(Request $request, Response $response)
   {
 
@@ -82,27 +82,4 @@ class ProductController extends Controller
 
     $response->json($productJson);
   }
-
-  public function create(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/create'), [
-      'title' => 'Create Product'
-    ]));
-  }
-
-  public function update(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/update'), [
-      'title' => 'Update Product'
-    ]));
-  }
-
-  public function destroy(Request $request, Response $response)
-  {
-    $product = Product::find($request->getQuery('id'));
-    $product->delete();
-  }
-
 }
