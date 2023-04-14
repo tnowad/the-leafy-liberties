@@ -6,7 +6,7 @@ class Toast {
       "fixed",
       "top-0",
       "right-0",
-      "z-50",
+      "z-[200]",
       "w-1/2",
       "max-w-sm",
       "p-4",

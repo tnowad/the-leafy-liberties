@@ -20,7 +20,22 @@ class ProfileController extends Controller
     }
     $user = Application::getInstance()->getAuthentication()->getUser();
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/profile'), [
+    $response->setBody(View::renderWithLayout(new View('pages/profile/index'), [
+      'user' => $user,
+      'footer' => ''
+    ]));
+  }
+
+  public function accountSettings(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+
+    if (!$auth->isAuthenticated()) {
+      $response->redirect(BASE_URI . '/login');
+    }
+    $user = Application::getInstance()->getAuthentication()->getUser();
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithLayout(new View('pages/profile/settings'), [
       'user' => $user,
       'footer' => ''
     ]));

@@ -2,31 +2,7 @@
 <div class="flex justify-center w-full bg-white">
   <div class="container">
     <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row">
-      <div class="flex flex-row justify-around w-3/4 md:flex-col md:justify-start md:w-1/4">
-        <div class="flex flex-col items-center justify-center">
-          <img src="<?php echo $user->user_image ? $user->user_image : BASE_URI . "/resources/images/avatar.png" ?>" class="w-3/6" alt="avatar" />
-          <h1 class="inline-block w-8/12 mt-5 text-xl lg:w-5/12 lg:text-center">
-          </h1>
-        </div>
-        <div class="box-border flex flex-col items-start justify-center px-6">
-          <a href="/the-leafy-liberties/profile" class="flex mt-5 bg-primary">
-            <i class="flex items-center fa fa-home"></i>
-            <h3 class="text-xl cursor-pointer">Overview</h3>
-          </a>
-          <a href="/the-leafy-liberties/profile/accountSettings" class="flex mt-5 ">
-            <i class="flex items-center fa fa-user"></i>
-            <h3 class="cursor-pointer">Account settings</h3>
-          </a>
-          <a href="/the-leafy-liberties/profile/payments" class="flex mt-5">
-            <i class="flex items-center fa fa-check"></i>
-            <h3 class="cursor-pointer">Payments</h3>
-          </a>
-          <a href="/the-leafy-liberties/profile/orders" class="flex justify-between mt-5">
-            <i class="flex items-center fa fa-bag-shopping"></i>
-            <h3 class="cursor-pointer">Order</h3>
-          </a>
-        </div>
-      </div>
+      <?php include 'menu.php'; ?>
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col" action="<?php echo BASE_URI . '/profile' ?>" method="post">
           <label>Name</label>
@@ -63,7 +39,7 @@
             <label for="new-password">Confirm new password</label>
             <input name="new-password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
           </div>
-          <input type="submit" value="Save changes" class="w-3/6 p-2 mt-5 text-white transition-all bg-teal-800 border cursor-pointer sm:w-1/6 rounded-2xl" />
+          <input type="submit" value="Save changes" class="w-3/6 p-2 mt-5 text-white   bg-primary-800 hover:bg-teal-700 border cursor-pointer sm:w-1/6 rounded-2xl transition-all" />
         </form>
       </div>
     </div>
@@ -81,4 +57,14 @@
   }
   console.log(1)
   getUser()
+
+  var currentPath = window.location.pathname;
+  var links = document.getElementsByTagName("a");
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute("href") === currentPath) {
+      links[i].classList.add("bg-green-800", "text-white");
+    } else {
+      links[i].classList.remove("bg-green-800", "text-white");
+    }
+  }
 </script>
