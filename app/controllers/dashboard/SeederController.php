@@ -12,9 +12,9 @@ class SeederController extends Controller
   public function index(Request $request, Response $response)
   {
     if (DotEnv::get('Seeded') == 'true') {
-      return $response->redirect('/');
+      return $response->redirect(BASE_URI . '/');
     } else {
-      return $response->redirect('/seeder/run');
+      return $response->redirect(BASE_URI . '/seeder/run');
     }
   }
 

@@ -14,7 +14,7 @@ class ProductController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission('products.access')) {
-      return $response->redirect('/dashboard');
+      return $response->redirect(BASE_URI . '/dashboard');
     }
     $products = Product::all();
     return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/index'), [
@@ -27,7 +27,7 @@ class ProductController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission('products.create')) {
-      return $response->redirect('/dashboard');
+      return $response->redirect(BASE_URI . '/dashboard');
     }
     return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/create'), [
       'title' => 'Create Product',
@@ -38,23 +38,23 @@ class ProductController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission('products.create')) {
-      return $response->redirect('/dashboard');
+      return $response->redirect(BASE_URI . '/dashboard');
     }
     $product = new Product();
     // get from request
     $product->save();
-    return $response->redirect('/dashboard/products');
+    return $response->redirect(BASE_URI . '/dashboard/products');
   }
 
   public function show(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission('products.access')) {
-      return $response->redirect('/dashboard');
+      return $response->redirect(BASE_URI . '/dashboard');
     }
     $product = Product::find($request->getQuery('id'));
     if (!$product) {
-      return $response->redirect('/dashboard/products');
+      return $response->redirect(BASE_URI . '/dashboard/products');
     }
     return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/show'), [
       'title' => 'Show Product',
@@ -66,28 +66,28 @@ class ProductController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission('products.update')) {
-      return $response->redirect('/dashboard');
+      return $response->redirect(BASE_URI . '/dashboard');
     }
     $product = Product::find($request->getQuery('id'));
     if (!$product) {
-      return $response->redirect('/dashboard/products');
+      return $response->redirect(BASE_URI . '/dashboard/products');
     }
     // get from request
     $product->save();
-    return $response->redirect('/dashboard/products');
+    return $response->redirect(BASE_URI . '/dashboard/products');
   }
 
   public function destroy(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission('products.delete')) {
-      return $response->redirect('/dashboard');
+      return $response->redirect(BASE_URI . '/dashboard');
     }
     $product = Product::find($request->getQuery('id'));
     if (!$product) {
-      return $response->redirect('/dashboard/products');
+      return $response->redirect(BASE_URI . '/dashboard/products');
     }
     $product->delete();
-    return $response->redirect('/dashboard/products');
+    return $response->redirect(BASE_URI . '/dashboard/products');
   }
 }
