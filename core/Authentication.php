@@ -28,14 +28,14 @@ class Authentication
     $_SESSION['user_id'] = $user->id;
   }
 
-  public function isAuthentication(): bool
+  public function isAuthenticated(): bool
   {
     return $this->getUser() ? true : false;
   }
 
   public function isGuest(): bool
   {
-    return !$this->isAuthentication();
+    return !$this->isAuthenticated();
   }
 
 
