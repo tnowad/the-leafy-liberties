@@ -83,7 +83,7 @@ VALUES
   ),
   (
     5,
-    '/resources/images/slides/slide-books-5.png',
+    '/resources/images/slides/slide-books-5.jpg',
     'book festival',
     1,
     NULL
@@ -96,6 +96,7 @@ VALUES
     NULL
   );
 
+a
 INSERT INTO
   `roles_permissions` (`id`, `permission_id`, `role_id`, `status`)
 VALUES

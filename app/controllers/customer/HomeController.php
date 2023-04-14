@@ -3,6 +3,7 @@
 namespace App\Controllers\Customer;
 
 use App\Models\Product;
+use App\Models\Slide;
 use App\Models\User;
 use Core\Controller;
 use Core\Database;
@@ -15,9 +16,13 @@ class HomeController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $slides = Slide::where(['status' => 1]);
 
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/index')));
+    $response->setBody(View::renderWithLayout(new View('pages/index'), [
+      'title' => 'Home',
+      'slides' => $slides
+    ]));
   }
 
   public function about(Request $request, Response $response)
@@ -106,8 +111,11 @@ class HomeController extends Controller
       'title' => 'Comment Dashboard'
     ]));
   }
-  public function editProduct()
+  public function updateProduct(Request $request, Response $response)
   {
-    // $product
+    $response->setStatusCode(200);
+    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/updateProduct'), [
+      'title' => 'Product Dashboard'
+    ]));
   }
 }

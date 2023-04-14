@@ -81,10 +81,12 @@ class ProductController extends Controller
     //   return $response->redirect(BASE_URI . '/dashboard');
     // }
     $product = Product::find($request->getQuery('id'));
+
     if (!$product) {
       return $response->redirect(BASE_URI . '/dashboard/product');
     }
     // get from request
+    
     $product->save();
     return $response->redirect(BASE_URI . '/dashboard/product');
   }

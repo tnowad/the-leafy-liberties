@@ -1,26 +1,32 @@
+<?php
+
+$slides = $params['slides'];
+?>
+
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
-      <div class="carousel relative h-56 overflow-hidden rounded-lg sm:h-64 xl:h-80 2xl:h-96 -z-10">
-
-        <?php
-        require_once 'app/views/pages/slides.php';
-        ?>
+      <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
         <?php foreach ($slides as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
-            <img src="<?php echo $slide['image'] ?>"
+            <img src="<?php echo BASE_URI . $slide->image ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              alt="<?php echo $slide['alt'] ?>">
+              alt="<?php echo $slide->name ?>">
           </div>
         <?php endforeach; ?>
       </div>
 
       <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="3"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="4"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
+          data-carousel-slide-to="0"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+          data-carousel-slide-to="1"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+          data-carousel-slide-to="2"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+          data-carousel-slide-to="3"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+          data-carousel-slide-to="4"></button>
       </div>
 
       <button type="button"
@@ -99,7 +105,7 @@
           $total = 12;
           for ($i = 1; $i <= $total; $i++) { ?>
             <div
-              class="flex flex-col items-center justify-center w-full box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
+              class="box-border flex flex-col items-center justify-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
               <div class="object-cover h-full p-2 w-60">
                 <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
               </div>
@@ -164,7 +170,7 @@
               <img src="resources/images/genresHorror.png" alt=""
                 class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-125" />
             </div>
-            <p class="absolute xl:top-3/4 left-10 text-white font-normal xl:text-3xl sm:text-2xl md:top-2/3">
+            <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
               <?php echo $name[$i - 1] ?>
             </p>
           </div>
