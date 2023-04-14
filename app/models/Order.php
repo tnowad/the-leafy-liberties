@@ -15,7 +15,7 @@ class Order extends Model
     return User::find($this->user_id);
   }
 
-  public function orderItems()
+  public function products()
   {
     return OrderProduct::where(['order_id' => $this->id]);
   }
