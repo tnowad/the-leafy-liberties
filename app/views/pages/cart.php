@@ -5,16 +5,13 @@
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php
         $total = 0;
-        foreach ($cartItems as $cart) {
-          $product = array_filter($products, function ($product) use ($cart) {
-            return $product->id === $cart->product_id;
-          });
-          $product = reset($product);
+        foreach ($products as $product) {
+
           $author = array_filter($authors, function ($author) use ($product) {
             return $author->id === $product->author_id;
           });
           $author = reset($author);
-          $total = $total + $product->price * $cart->quantity;
+          $total = $total + $product->price * $product->quantity;
         ?>
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
@@ -32,13 +29,13 @@
                     <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-minus"></i>
                     </button>
-                    <span class="m-5 text-lg text-count"><?php echo $cart->quantity ?></span>
+                    <span class="m-5 text-lg text-count"><?php echo $product->quantity ?></span>
                     <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-plus"></i>
                     </button>
                   </div>
                 </div>
-                <p class="counter-price text-xl"><?php echo $product->price * $cart->quantity  ?>$</p>
+                <p class="counter-price text-xl"><?php echo $product->price * $product->quantity  ?>$</p>
               </div>
             </div>
           </div>
