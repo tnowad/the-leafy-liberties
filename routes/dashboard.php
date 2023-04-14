@@ -14,8 +14,11 @@ $router->get('/dashboard/user', [UserController::class, 'customerDashboard']);
 
 $router->get('/dashboard/product', [ProductController::class, 'index']);
 $router->post('/dashboard/product', [ProductController::class, 'create']);
+$router->post('/dashboard/product/update', [ProductController::class, 'updateProduct']);
 
 
+
+$router->get('/dashboard/product/update',[HomeController::class,'updateProduct']);
 $router->get('/dashboard/coupon', [HomeController::class, 'couponDashboard']);
 $router->get('/dashboard/slider', [HomeController::class, 'sliderDashboard']);
 $router->get('/dashboard/comment', [HomeController::class, 'commentDashboard']);

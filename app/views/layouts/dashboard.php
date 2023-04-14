@@ -54,7 +54,7 @@
       <?php $params['sidebar'] ?? require_once(__DIR__ . '/dashboard/menu.php'); ?>
       <div class="w-full">
         <?php $params['header'] ?? require_once(__DIR__ . '/dashboard/header.php'); ?>
-        <div class="w-full min-h-screen xl:px-10 lg:px-0" id="content">
+        <div class="w-full xl:px-10 lg:px-0" id="content">
           {{content}}
         </div>
       </div>
