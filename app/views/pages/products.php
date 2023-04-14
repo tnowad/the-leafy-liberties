@@ -21,7 +21,7 @@
             <div>
               <input type="radio" name="yourBudget" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
               <label htmlFor="" class="ml-2">
-                Less than $5
+                Less than $10
               </label>
               <br>
               <input type="radio" name="yourBudget" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
@@ -34,33 +34,6 @@
                 Greater than $30
               </label>
             </div>
-            <!-- <h1 class="mt-2 mb-2 text-xl font-bold">Rating</h1>
-            <div>
-              <input type="radio" id="star-1" name="rating" value="1" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label for="star-1" class="ml-2">
-                1 Star
-              </label>
-              <br>
-              <input type="radio" id="star-2" name="rating" value="2" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label for="star-2" class="ml-2">
-                2 Star
-              </label>
-              <br>
-              <input type="radio" id="star-3" name="rating" value="3" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label for="star-3" class="ml-2">
-                3 Star
-              </label>
-              <br>
-              <input type="radio" id="star-4" name="rating" value="4" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label for="star-4" class="ml-2">
-                4 Star
-              </label>
-              <br>
-              <input type="radio" id="star-5" name="rating" value="5" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
-              <label for="star-5" class="ml-2">
-                5 Star
-              </label>
-            </div> -->
             <input type="submit" value="Find" class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 hover:bg-[#6cada6] transition-all cursor-pointer" />
           </form>
         </div>
@@ -127,18 +100,6 @@
 </div>
 
 
-<!-- <script>
-  $.ajax({
-    url: 'app/controllers/frontend/ProductController.php',
-    method: 'GET',
-    success: function(data) {
-      console.log(data);
-    },
-    error: function(xhr, status, error) {
-      console.error(error);
-    }
-  });
-</script> -->
 <script>
   const getUsers = async () => {
     let d1 = await fetch("http://localhost/the-leafy-liberties/data/getProducts")
