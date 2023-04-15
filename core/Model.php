@@ -19,7 +19,7 @@ abstract class Model
     self::$db = Database::getInstance();
   }
 
-  public static function find($id)
+  public static function find($id): ?static
   {
     $table = (new static )->table;
     $primaryKey = (new static )->primaryKey;
@@ -31,7 +31,7 @@ abstract class Model
     return null;
   }
 
-  public static function findOne($params)
+  public static function findOne($params): ?static
   {
     $table = (new static )->table;
     $query = "SELECT * FROM $table WHERE ";
@@ -48,10 +48,9 @@ abstract class Model
     return null;
   }
 
-  public static function where($params)
+  public static function where($params): array
   {
     $table = (new static )->table;
-    $primaryKey = (new static )->primaryKey;
     $query = "SELECT * FROM $table WHERE ";
     $values = [];
     foreach ($params as $key => $value) {
@@ -67,7 +66,7 @@ abstract class Model
     return $models;
   }
 
-  public static function all()
+  public static function all(): array
   {
     $table = (new static )->table;
     $query = "SELECT * FROM $table";
@@ -78,33 +77,44 @@ abstract class Model
     }
     return $models;
   }
+  public function save(): void
+  {
+    if (isset($this->attributes[$this->primaryKey])) {
+      $this->update();
+    } else {
+      $this->insert();
+    }
+  }
 
-  public function save()
+  private function insert(): void
   {
     $table = $this->table;
-    $primaryKey = $this->primaryKey;
     $fillable = $this->fillable;
     $attributes = array_intersect_key($this->attributes, array_flip($fillable));
     $columns = implode(", ", array_keys($attributes));
     $placeholders = implode(", ", array_fill(0, count($attributes), "?"));
     $values = array_values($attributes);
 
-    if (isset($this->attributes[$primaryKey])) {
-      // Update an existing model
-      $id = $this->attributes[$primaryKey];
-      $setClause = implode(" = ?, ", array_keys($attributes)) . " = ?";
-      $query = "UPDATE $table SET $setClause WHERE $primaryKey = ?";
-      $values[] = $id;
-      self::$db->update($query, $values);
-    } else {
-      // Create a new model
-      $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-      self::$db->insert($query, $values);
-      $this->attributes[$primaryKey] = self::$db->getLastInsertedId();
-    }
+    $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+    self::$db->insert($query, $values);
+    $this->attributes[$this->primaryKey] = self::$db->getLastInsertedId();
   }
 
-  public function delete()
+  private function update(): void
+  {
+    $table = $this->table;
+    $primaryKey = $this->primaryKey;
+    $fillable = $this->fillable;
+    $attributes = array_intersect_key($this->attributes, array_flip($fillable));
+    $setClause = implode(" = ?, ", array_keys($attributes)) . " = ?";
+    $values = array_values($attributes);
+    $values[] = $this->attributes[$primaryKey];
+
+    $query = "UPDATE $table SET $setClause WHERE $primaryKey = ?";
+    self::$db->update($query, $values);
+  }
+
+  public function delete(): void
   {
     $table = $this->table;
     $primaryKey = $this->primaryKey;
@@ -112,17 +122,17 @@ abstract class Model
     $query = "DELETE FROM $table WHERE $primaryKey = ?";
     self::$db->delete($query, [$id]);
   }
-  public function toJson()
+  public function toJson(): string
   {
     return json_encode($this->attributes);
   }
 
-  public function __get($key)
+  public function __get($key): ?string
   {
     return $this->attributes[$key] ?? null;
   }
 
-  public function __set($key, $value)
+  public function __set($key, $value): void
   {
     $this->attributes[$key] = $value;
   }
