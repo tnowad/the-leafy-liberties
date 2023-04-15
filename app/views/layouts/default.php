@@ -9,7 +9,9 @@ $auth = Application::getInstance()->getAuthentication();
 $currentUser = $auth->getUser();
 $role = $currentUser->role();
 $permissions = Permission::all();
-
+foreach ($permissions as $permission) {
+  $role->addPermission($permission);
+}
 dd($permissions);
 ?>
 
