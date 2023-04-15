@@ -40,8 +40,6 @@ function errorHandler($errno, $errstr, $errfile, $errline)
 
 set_error_handler("errorHandler");
 
-set_exception_handler("exceptionHandler");
-
 try {
   Database::getInstance();
 } catch (\Exception $e) {
