@@ -1,3 +1,4 @@
+-- Active: 1680850809935@@127.0.0.1@3306@bookstore
 INSERT INTO
     `authors` (
         `id`,
@@ -447,7 +448,7 @@ INSERT INTO
         quantity,
         expired,
         description,
-        delete_at
+        deleted_at
     )
 VALUES (
         'SAVE10',

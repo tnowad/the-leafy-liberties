@@ -76,7 +76,7 @@ use App\Models\Pagination;
       class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[500]">
       <div class="bg-white p-8 rounded-md shadow-lg w-[550px] ">
         <h2 class="text-xl font-bold mb-4">Add Product</h2>
-        <form class="flex flex-col" action="<?php BASE_URI . '/dashboard/product' ?>" method="POST">
+        <form class="flex flex-col" action="<?php BASE_URI . '/dashboard/product' ?>" method="POST" enctype="multipart/form-data">
           <label for="title" class="my-2">Title:</label>
           <input type="text" value="" name="name" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
