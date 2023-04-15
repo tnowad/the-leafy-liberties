@@ -41,49 +41,27 @@ class User extends Model
     $this->role_id = $role->id;
   }
 
-  public function hasRole(Role $role)
+  public function permissions(): array
   {
-    return $this->role_id == $role->id;
-  }
-
-  public function permissions()
-  {
-    $userPermissions = UserPermission::findAll(['user_id' => $this->id]);
-    $permissions = [];
-    foreach ($userPermissions as $userPermission) {
-      $permissions[] = Permission::find($userPermission->permission_id);
-    }
-    return $permissions;
+    return UserPermission::findAll([
+      'user_id' => $this->id
+    ]);
   }
 
   public function addPermission(Permission $permission)
   {
-    UserPermission::create([
-      'user_id' => $this->id,
-      'permission_id' => $permission->id,
-    ]);
+    $userPermission = new UserPermission();
+    $userPermission->user_id = $this->id;
+    $userPermission->permission_id = $permission->id;
+    $userPermission->save();
   }
 
   public function removePermission(Permission $permission)
   {
-    $userPermissions = UserPermission::findAll(['user_id' => $this->id]);
-    $userPermission = null;
-    foreach ($userPermissions as $userPermission) {
-      if ($userPermission->permission_id == $permission->id) {
-        $userPermission->delete();
-        break;
-      }
-    }
-  }
-
-  public function hasPermission(Permission $permission)
-  {
-    $userPermissions = UserPermission::findAll(['user_id' => $this->id]);
-    foreach ($userPermissions as $userPermission) {
-      if ($userPermission->permission_id == $permission->id) {
-        return true;
-      }
-    }
-    return false;
+    $userPermission = UserPermission::findOne([
+      'user_id' => $this->id,
+      'permission_id' => $permission->id
+    ]);
+    $userPermission->delete();
   }
 }

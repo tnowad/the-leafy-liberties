@@ -9,11 +9,11 @@ class UserPermission extends Model
 {
   protected $table = 'users_permissions';
   protected $fillable = ['user_id', 'permission_id', 'status'];
-  public function user()
+  public function user(): User
   {
     return User::find($this->user_id);
   }
-  public function permission()
+  public function permission(): Permission
   {
     return Permission::find($this->permission_id);
   }

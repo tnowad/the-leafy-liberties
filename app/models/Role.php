@@ -13,28 +13,27 @@ class Role extends Model
     'deleted_at'
   ];
 
-  public function permissions()
+  public function permissions(): array
   {
-    $rolePermissions = RolePermission::findAll(['role_id' => $this->id]);
-    $permissions = [];
-    foreach ($rolePermissions as $rolePermission) {
-      $permissions[] = Permission::find($rolePermission->permission_id);
-    }
-    return $permissions;
+    return RolePermission::findAll([
+      'role_id' => $this->id
+    ]);
   }
 
   public function addPermission(Permission $permission)
   {
-    $rolePermission = RolePermission::findAll([
-      'role_id' => $this->id,
-      'permission_id' => $permission->id
-    ]);
-    if ($rolePermission) {
-      return;
-    }
     $rolePermission = new RolePermission();
     $rolePermission->role_id = $this->id;
     $rolePermission->permission_id = $permission->id;
     $rolePermission->save();
+  }
+
+  public function removePermission(Permission $permission)
+  {
+    $rolePermission = RolePermission::findOne([
+      'role_id' => $this->id,
+      'permission_id' => $permission->id
+    ]);
+    $rolePermission->delete();
   }
 }
