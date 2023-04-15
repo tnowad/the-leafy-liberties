@@ -38,41 +38,23 @@ class Authentication
     return !$this->isAuthenticated();
   }
 
-
-  public function hasPermission(Permission|string $permission): bool
+  public function hasPermission($permission)
   {
-    if ($this->isGuest()) {
+    $user = $this->getUser();
+    if ($user == null) {
       return false;
     }
-
-    if (is_string($permission)) {
-      $permission = Permission::findOne(['name' => $permission]);
+    $permission = Permission::findOne(['name' => $permission]);
+    if ($permission == null) {
+      return false;
     }
-
-    $user = $this->getUser();
-    $role = $user->role();
-    $rolePermissions = RolePermission::where(['role_id' => $role->id]);
-    foreach ($rolePermissions as $rolePermission) {
-      if ($rolePermission->permission_id == $permission->id) {
-        return true;
-      }
+    $userPermission = UserPermission::findOne(['user_id' => $user->id, 'permission_id' => $permission->id]);
+    if ($userPermission != null && $userPermission->value == 1) {
+      return true;
     }
-    $userPermissions = UserPermission::where(['user_id' => $user->id]);
-    foreach ($userPermissions as $userPermission) {
-      if ($userPermission->permission_id == $permission->id) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public function hasPermissions(string $permissions): bool
-  {
-    $permissions = explode('|', $permissions);
-    foreach ($permissions as $permission) {
-      if ($this->hasPermission(Permission::findOne(['name' => $permission]))) {
-        return true;
-      }
+    $rolePermission = RolePermission::findOne(['role_id' => $user->role_id, 'permission_id' => $permission->id]);
+    if ($rolePermission != null) {
+      return true;
     }
     return false;
   }
