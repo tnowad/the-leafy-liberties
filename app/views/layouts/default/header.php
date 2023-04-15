@@ -62,7 +62,7 @@ $user = $auth->getUser() ?? null;
             <a href="<?php echo BASE_URI . '/profile' ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
               Profile</a>
-            <?php if ($auth->hasPermissions('dashboard.access')): ?>
+            <?php if ($auth->hasPermission('dashboard.access')): ?>
               <a href="<?php echo BASE_URI . '/dashboard' ?>"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Dashboard</a>
             <?php endif; ?>
