@@ -39,10 +39,10 @@ class ProductController extends Controller
       )
     );
 
-    $result = $uploader->upload($_FILES[$request->getParam('image')]);
+    $result = $uploader->upload($_FILES['image']);
 
-    if ($result['success']) {
-      $request->setParam('image', $result['file']);
+    if ($result) {
+      $request->setParam('image', $result);
     } else {
       return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product'), [
         'title' => 'Products',
