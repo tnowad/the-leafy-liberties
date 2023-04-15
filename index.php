@@ -33,7 +33,7 @@ if (file_exists('./autoload.php')) {
 define('BASE_URI', DotEnv::get('BASE_URI'));
 
 try {
-  Database::getInstance()->getConnection();
+  Database::getInstance();
 } catch (\Exception $e) {
   die("Database connection failed");
 }

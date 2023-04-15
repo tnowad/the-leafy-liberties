@@ -8,171 +8,122 @@ use Exception;
 abstract class Model
 {
   protected $table;
-
-  protected string $primaryKey = 'id';
-
+  protected $primaryKey = 'id';
   protected $fillable = [];
-
   protected $attributes = [];
+  protected static $db;
 
   public function __construct($attributes = [])
   {
     $this->attributes = $attributes;
+    self::$db = Database::getInstance();
   }
 
-  public static function table()
+  public static function find($id)
   {
-    $instance = new static;
-    return $instance->table ?? strtolower(get_called_class()) . 's';
-  }
-  public static function create($attributes)
-  {
-    $model = new static($attributes);
-    $model->save();
-    return $model;
-  }
-  public static function find($id): Model
-  {
-    $table = static::table();
-    $primaryKey = (new static)->primaryKey;
-    $query = "SELECT * FROM $table WHERE $primaryKey = $id";
-    $result = Database::getInstance()->fetchOne($query);
-    if (!$result) {
-      throw new Exception("No record found for ID $id");
+    $table = (new static )->table;
+    $primaryKey = (new static )->primaryKey;
+    $query = "SELECT * FROM $table WHERE $primaryKey = ?";
+    $result = self::$db->select($query, [$id]);
+    if (!empty($result)) {
+      return new static($result[0]);
     }
-    return new static($result);
+    return null;
   }
 
-  public static function where($params = [])
+  public static function findOne($params)
   {
-    $table = static::table();
+    $table = (new static )->table;
     $query = "SELECT * FROM $table WHERE ";
-    $conditions = [];
     $values = [];
-
-    foreach ($params as $field => $value) {
-      $conditions[] = "$field = ?";
+    foreach ($params as $key => $value) {
+      $query .= "$key = ? AND ";
       $values[] = $value;
     }
+    $query = rtrim($query, " AND ");
+    $result = self::$db->select($query, $values);
+    if (!empty($result)) {
+      return new static($result[0]);
+    }
+    return null;
+  }
 
-    $query .= implode(' AND ', $conditions);
-
-    $results = Database::getInstance()->fetchAll($query, $values);
-
-    return array_map(function ($result) {
-      return new static($result);
-    }, $results);
+  public static function where($params)
+  {
+    $table = (new static )->table;
+    $primaryKey = (new static )->primaryKey;
+    $query = "SELECT * FROM $table WHERE ";
+    $values = [];
+    foreach ($params as $key => $value) {
+      $query .= "$key = ? AND ";
+      $values[] = $value;
+    }
+    $query = rtrim($query, " AND ");
+    $result = self::$db->select($query, $values);
+    $models = [];
+    foreach ($result as $row) {
+      $models[] = new static($row);
+    }
+    return $models;
   }
 
   public static function all()
   {
-    $table = static::table();
+    $table = (new static )->table;
     $query = "SELECT * FROM $table";
-    $results = Database::getInstance()->fetchAll($query);
-
-    return array_map(function ($result) {
-      return new static($result);
-    }, $results);
+    $result = self::$db->select($query);
+    $models = [];
+    foreach ($result as $row) {
+      $models[] = new static($row);
+    }
+    return $models;
   }
 
   public function save()
   {
-    if (isset($this->attributes[$this->primaryKey])) {
-      return $this->update();
-    } else {
-      return $this->insert();
-    }
-  }
-
-  public function insert()
-  {
-    $table = static::table();
-    $fields = array_keys($this->attributes);
-    $values = array_values($this->attributes);
-    $placeholders = array_fill(0, count($values), '?');
-    $query = "INSERT INTO $table (" . implode(', ', $fields) . ") VALUES (" . implode(', ', $placeholders) . ")";
-
-    $result = Database::getInstance()->execute($query, $values);
-
-    if (!$result) {
-      throw new Exception("Failed to insert record into $table");
-    }
-
-    return true;
-  }
-
-  public function update()
-  {
-    $table = static::table();
+    $table = $this->table;
     $primaryKey = $this->primaryKey;
-    $fields = array_keys($this->attributes);
-    $values = array_values($this->attributes);
-    $placeholders = array_map(function ($field) {
-      return "$field = ?";
-    }, $fields);
-    $query = "UPDATE $table SET " . implode(', ', $placeholders) . " WHERE $primaryKey = ?";
-    $values[] = $this->attributes[$primaryKey];
-    $result = Database::getInstance()->execute($query, $values);
+    $fillable = $this->fillable;
+    $attributes = array_intersect_key($this->attributes, array_flip($fillable));
+    $columns = implode(", ", array_keys($attributes));
+    $placeholders = implode(", ", array_fill(0, count($attributes), "?"));
+    $values = array_values($attributes);
 
-    if (!$result) {
-      throw new Exception("Failed to update record in $table");
+    if (isset($this->attributes[$primaryKey])) {
+      // Update an existing model
+      $id = $this->attributes[$primaryKey];
+      $setClause = implode(" = ?, ", array_keys($attributes)) . " = ?";
+      $query = "UPDATE $table SET $setClause WHERE $primaryKey = ?";
+      $values[] = $id;
+      self::$db->update($query, $values);
+    } else {
+      // Create a new model
+      $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+      self::$db->insert($query, $values);
+      $this->attributes[$primaryKey] = self::$db->getLastInsertedId();
     }
-
-    return true;
   }
-
 
   public function delete()
   {
-    $table = static::table();
+    $table = $this->table;
     $primaryKey = $this->primaryKey;
-    $query = "DELETE FROM $table WHERE $primaryKey = :$primaryKey";
-    $params = [':' . $primaryKey => $this->attributes[$primaryKey]];
-    $result = Database::getInstance()->execute($query, $params);
-
-    if (!$result) {
-      throw new Exception("Failed to delete record from $table");
-    }
-    return true;
+    $id = $this->attributes[$primaryKey];
+    $query = "DELETE FROM $table WHERE $primaryKey = ?";
+    self::$db->delete($query, [$id]);
+  }
+  public function toJson()
+  {
+    return json_encode($this->attributes);
   }
 
-  public static function findOne($params = []) : ?Model
+  public function __get($key)
   {
-    $query = static::where($params);
-    if (count($query) > 0) {
-      return array_shift($query);
-    } else {
-      return null;
-    }
+    return $this->attributes[$key] ?? null;
   }
 
-  public static function truncate()
+  public function __set($key, $value)
   {
-    $table = static::table();
-    $query = "TRUNCATE TABLE $table";
-    $result = Database::getInstance()->execute($query);
-
-    if (!$result) {
-      throw new Exception("Failed to truncate table $table");
-    }
-
-    return true;
-  }
-  public function getAttributes()
-  {
-    return $this->attributes;
-  }
-  public function __set($name, $value)
-  {
-    if (in_array($name, $this->fillable)) {
-      $this->attributes[$name] = $value;
-    }
-  }
-
-  public function __get($name)
-  {
-    if (array_key_exists($name, $this->attributes)) {
-      return $this->attributes[$name];
-    }
+    $this->attributes[$key] = $value;
   }
 }
