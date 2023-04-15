@@ -223,24 +223,24 @@
       "http://localhost/the-leafy-liberties/data/getProducts"
     ).then((response) => response.json())
     console.log(products)
-    // let productCategories = await fetch(
-    //   "http://localhost/the-leafy-liberties/data/getProductCategories"
-    // ).then((response) => response.json())
-    // // console.log(products)
-    // if (categoryId == "All" || categoryId == "" || categoryId == null) return products
-    // for (let i = 0; i < productCategories.length; i++) {
-    //   // console.log(productCategories[i].category_id)
-    //   if (productCategories[i].category_id == categoryId) {
-    //     for (let j = 0; j < products.length; j++) {
-    //       // console.log(1)
-    //       if (productCategories[i].product_id == products[j].id) {
-    //         categoriesFilter.push(products[j])
-    //       }
-    //     }
-    //   }
-    // }
+    let productCategories = await fetch(
+      "http://localhost/the-leafy-liberties/data/getProductCategories"
+    ).then((response) => response.json())
+    // console.log(products)
+    if (categoryId == "All" || categoryId == "" || categoryId == null) return products
+    for (let i = 0; i < productCategories.length; i++) {
+      // console.log(productCategories[i].category_id)
+      if (productCategories[i].category_id == categoryId) {
+        for (let j = 0; j < products.length; j++) {
+          // console.log(1)
+          if (productCategories[i].product_id == products[j].id) {
+            categoriesFilter.push(products[j])
+          }
+        }
+      }
+    }
     // console.log(categoriesFilter)
-    // return categoriesFilter
+    return categoriesFilter
   }
 
   window.onload = async function() {
