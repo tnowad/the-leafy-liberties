@@ -13,7 +13,7 @@ class Role extends Model
     'deleted_at'
   ];
 
-  public function permissions()
+  public function permissions(): array
   {
     return RolePermission::findAll([
       'role_id' => $this->id

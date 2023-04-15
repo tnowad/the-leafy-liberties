@@ -41,7 +41,7 @@ class User extends Model
     $this->role_id = $role->id;
   }
 
-  public function permissions()
+  public function permissions(): array
   {
     return UserPermission::findAll([
       'user_id' => $this->id

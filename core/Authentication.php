@@ -40,11 +40,31 @@ class Authentication
 
   public function getPermissions()
   {
-    $user = $this->getUser();
-    if ($user == null) {
+    if (!$this->isAuthenticated()) {
       return [];
     }
-    $userPermissions = UserPermission::findAll(['user_id' => $user->id]);
+    $user = $this->getUser();
+    $role = $user->role();
+
+    $userPermissions = $user->permissions();
+    $rolePermissions = $role->permissions();
+    $permissions = [];
+
+    foreach ($rolePermissions as $rolePermission) {
+      $permission = $rolePermission->permission();
+      if ($permission) {
+        $permissions[$permission->name] = $permission;
+      }
+    }
+
+    foreach ($userPermissions as $userPermission) {
+      $permission = $userPermission->permission();
+      if ($permission) {
+        $permissions[$permission->name] = $permission;
+      }
+    }
+
+    return array_values($permissions);
   }
 
   public function hasPermission($permission)
@@ -62,7 +82,7 @@ class Authentication
       return true;
     }
     $rolePermission = RolePermission::findOne(['role_id' => $user->role_id, 'permission_id' => $permission->id]);
-    if ($rolePermission != null) {
+    if ($rolePermission != null && $rolePermission->status == 1) {
       return true;
     }
     return false;
