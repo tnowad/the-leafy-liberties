@@ -156,7 +156,7 @@ class UserController extends Controller
     if (!$user) {
       return $response->redirect(BASE_URI . 'pages/dashboard/user/index');
     }
-    $user->delete();
+    // $user->delete();
     return $response->redirect(BASE_URI . 'pages/dashboard/user/index');
   }
 }

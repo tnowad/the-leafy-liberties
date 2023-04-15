@@ -1,5 +1,5 @@
 <?php $coupon = $params['coupon'] ?>
-<div class="w-full ">
+<div class="w-full min-h-screen">
   <div class="bg-white rounded-md shadow-lg w-full p-5 m-5 h-full">
     <form class="flex flex-col" action="<?php echo BASE_URI . '/dashboard/coupon/update' ?>" method="POST">
 
