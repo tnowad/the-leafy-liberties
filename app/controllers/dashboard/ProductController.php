@@ -39,6 +39,10 @@ class ProductController extends Controller
     $product->save();
     return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product'), [
       'title' => 'Products',
+      'toast' => [
+        'type' => 'success',
+        'message' => "Add product successful!",
+      ]
     ]));
   }
 
@@ -72,27 +76,18 @@ class ProductController extends Controller
 
   public function update(Request $request, Response $response)
   {
-    // if ($request->getMethod() == 'GET') {
-    //   // dd($request->getQueries());
-    //   $product = Product::findOne(['id' => $request->getQuery('id')]);
-    //   $response->setStatusCode(200);
-    //   return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/update'), [
-    //     'title' => 'Product Dashboard',
-    //     'product' => $product,
-    //   ]));
-    // }
     switch ($request->getMethod()) {
       case 'GET':
         $product = Product::findOne(['id' => $request->getQuery('id')]);
+        // dd($request->getQueries());
         $response->setStatusCode(200);
         return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/update'), [
           'title' => 'Product Dashboard',
           'product' => $product,
         ]));
       case 'POST':
-        dd($request->getParams());
-        $product = Product::findOne(['id' => $request->getParam('id')]);
-        dd($product);
+        $product = Product::find($request->getParam('id'));
+        // dd($product);
         $product->name = $request->getParam('name');
         $product->image = $request->getParam('image');
         $product->isbn = $request->getParam('isbn');
@@ -109,9 +104,6 @@ class ProductController extends Controller
         ]));
         default:
           break;
-      // default:
-
-
     }
     // $auth = Application::getInstance()->getAuthentication();
     // if (!$auth->hasPermission('products.update')) {
@@ -128,17 +120,19 @@ class ProductController extends Controller
     // return $response->redirect(BASE_URI . '/dashboard/product');
   }
 
-  public function destroy(Request $request, Response $response)
+  public function delete(Request $request, Response $response)
   {
-    $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('products.delete')) {
-      return $response->redirect(BASE_URI . '/dashboard');
-    }
+    // $auth = Application::getInstance()->getAuthentication();
+    // if (!$auth->hasPermission('products.delete')) {
+    //   return $response->redirect(BASE_URI . '/dashboard');
+    // }
+    // dd($request->getQuery('id'));
     $product = Product::find($request->getQuery('id'));
+    dd($product);
     if (!$product) {
-      return $response->redirect(BASE_URI . '/dashboard/product');
+      return $response->redirect(BASE_URI . 'pages/dashboard/product/index');
     }
     $product->delete();
-    return $response->redirect(BASE_URI . '/dashboard/product');
+    return $response->redirect(BASE_URI . 'pages/dashboard/product/index');
   }
 }
