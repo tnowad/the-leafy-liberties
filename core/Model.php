@@ -48,6 +48,13 @@ abstract class Model
     return null;
   }
 
+  public static function create($attributes): ?static
+  {
+    $model = new static($attributes);
+    $model->save();
+    return $model;
+  }
+
   public static function where($params): array
   {
     $table = (new static )->table;
