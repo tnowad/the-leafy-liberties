@@ -134,6 +134,11 @@ abstract class Model
     return json_encode($this->attributes);
   }
 
+  public function toArray(): array
+  {
+    return $this->attributes;
+  }
+
   public function __get($key): ?string
   {
     return $this->attributes[$key] ?? null;
