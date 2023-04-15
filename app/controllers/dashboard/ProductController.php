@@ -111,21 +111,36 @@ class ProductController extends Controller
         ]));
       case 'POST':
         $product = Product::find($request->getParam('id'));
-        // dd($product);
-        $product->name = $request->getParam('name');
-        $product->image = $request->getParam('image');
-        $product->isbn = $request->getParam('isbn');
-        $product->price = $request->getParam('price');
-        $product->description = $request->getParam('description');
-        $product->quantity = $request->getParam('quantity');
-        $product->save();
-        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/index'), [
-          'title' => 'Product Dashboard',
-          'toast' => [
-            'type' => 'success',
-            'message' => "Edit product successful!",
-          ]
-        ]));
+        if (!$product) {
+          return $response->redirect(BASE_URI . '/dashboard/product', 200, [
+            'toast' => [
+              'type' => 'error',
+              'message' => 'Edit product fail',
+            ]
+          ]);
+        } else {
+          // dd($product);
+          $product->name = $request->getParam('name');
+          $product->image = $request->getParam('image');
+          $product->isbn = $request->getParam('isbn');
+          $product->price = $request->getParam('price');
+          $product->description = $request->getParam('description');
+          $product->quantity = $request->getParam('quantity');
+          $product->save();
+          return $response->redirect(BASE_URI . '/dashboard/product', 200, [
+            'toast' => [
+              'type' => 'success',
+              'message' => 'Edit product successful',
+            ]
+          ]);
+        }
+      // return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/index'), [
+      //   'title' => 'Product Dashboard',
+      //   'toast' => [
+      //     'type' => 'success',
+      //     'message' => "Edit product successful!",
+      //   ]
+      // ]));
       default:
         break;
     }

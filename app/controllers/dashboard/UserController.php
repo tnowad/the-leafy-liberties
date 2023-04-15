@@ -111,21 +111,31 @@ class UserController extends Controller
         ]));
       case 'POST':
         $user = User::find($request->getParam('id'));
-        // dd($product);
-        $user->name = $request->getParam('name');
-        $user->image = $request->getParam('image');
-        $user->phone = $request->getParam('phone');
-        $user->email = $request->getParam('email');
-        $user->gender = $request->getParam('gender');
-        $user->password = $request->getParam('passowrd');
-        $user->save();
-        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/user/index'), [
-          'title' => 'Customer Dashboard',
-          'toast' => [
-            'type' => 'success',
-            'message' => "Edit account successful!",
-          ]
-        ]));
+        if (!$user) {
+          return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/customer'), [
+            'title' => 'Customer Dashboard',
+            'toast' => [
+              'type' => 'error',
+              'message' => "Edit account fail!",
+            ]
+          ]));
+        } else {
+          // dd($product);
+          $user->name = $request->getParam('name');
+          $user->image = $request->getParam('image');
+          $user->phone = $request->getParam('phone');
+          $user->email = $request->getParam('email');
+          $user->gender = $request->getParam('gender');
+          $user->password = $request->getParam('passowrd');
+          $user->save();
+          return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/customer'), [
+            'title' => 'Customer Dashboard',
+            'toast' => [
+              'type' => 'success',
+              'message' => "Edit account successful!",
+            ]
+          ]));
+        }
       default:
         break;
     }

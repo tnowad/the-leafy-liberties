@@ -84,21 +84,36 @@ class CouponController extends Controller
           'coupon' => $coupon,
         ]));
       case 'POST':
+
         $coupon = Coupon::find($request->getParam('id'));
-        // dd($coupon);
-        $coupon->code = $request->getParam('code');
-        $coupon->expired = $request->getParam('expired');
-        $coupon->quantity = $request->getParam('quantity');
-        $coupon->description = $request->getParam('description');
-        $coupon->save();
-        return $response->redirect(BASE_URI . '/dashboard/coupon');
-        // return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon/index'), [
-        //   'title' => 'Coupon Dashboard',
-        //   'toast' => [
-        //     'type' => 'success',
-        //     'message' => "Edit coupon successful!",
-        //   ]
-        // ]));
+        if (!$coupon) {
+          return $response->redirect(BASE_URI . '/dashboard/coupon', 200, [
+            'toast' => [
+              'type' => 'error',
+              'message' => 'Edit coupon fail'
+            ]
+          ]);
+        } else {
+          // dd($coupon);
+          $coupon->code = $request->getParam('code');
+          $coupon->expired = $request->getParam('expired');
+          $coupon->quantity = $request->getParam('quantity');
+          $coupon->description = $request->getParam('description');
+          $coupon->save();
+          return $response->redirect(BASE_URI . '/dashboard/coupon', 200, [
+            'toast' => [
+              'type' => 'success',
+              'message' => 'Edit coupon success'
+            ]
+          ]);
+        }
+      // return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon/index'), [
+      //   'title' => 'Coupon Dashboard',
+      //   'toast' => [
+      //     'type' => 'success',
+      //     'message' => "Edit coupon successful!",
+      //   ]
+      // ]));
       default:
         break;
     }
