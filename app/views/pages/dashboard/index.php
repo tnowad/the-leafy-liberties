@@ -51,7 +51,7 @@
               <label for="chart-type" class="font-medium text-black">Choose a type:</label>
               <select name="chart-ttype" id="c-type" class="" onchange="ChangeChart(this)">
                 <option value="bar">Bar Chart</option>
-                <option value="line">LineChart</option>
+                <option value="line">Line Chart</option>
                 <option value="area">Area Chart</option>
                 <option value="radar">Radar Chart</option>
               </select>

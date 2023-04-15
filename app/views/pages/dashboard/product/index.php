@@ -38,7 +38,7 @@ use App\Models\Pagination;
                     <?php echo $product->id ?>
                   </td>
                   <td class="w-32 h-24 p-3">
-                    <img src="<?php echo BASE_URI ?>/resources/images/products/<?php echo $product->image ?>" alt="" />
+                    <img src="<?php echo BASE_URI . $product->image ?>" alt="" />
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $product->name ?>
@@ -55,7 +55,7 @@ use App\Models\Pagination;
                   <td class="p-2">
                     <?php echo $product->quantity ?>
                   </td>
-                  <td class="flex items-center justify-center h-full px-5 py-3">
+                  <td class="flex items-center justify-center h-full px-5 py-3 gap-2">
                     <a href="<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>"
                       class="edit-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all block">
                       <i class="fa-solid fa-pen-to-square"></i>
