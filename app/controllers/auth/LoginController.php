@@ -7,6 +7,7 @@ use Core\Controller;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Exception;
 
 class LoginController extends Controller
 {
@@ -25,25 +26,28 @@ class LoginController extends Controller
     $email = $request->getParam('email');
     $password = $request->getParam('password');
     try {
-      $users = User::where(['email' => $email]);
+      $users = User::findAll(['email' => $email]);
       $user = $users ? $users[0] : null;
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
       $user = null;
     }
     if ($user && password_verify($password, $user->password)) {
       $response->setStatusCode(200);
       Application::getInstance()->getAuthentication()->setUser($user);
-      $response->redirect( BASE_URI . '/');
+      $response->redirect(BASE_URI . '/', 200, [
+        'toast' => [
+          'type' => 'success',
+          'message' => "Login success",
+        ]
+      ]);
     } else {
       $response->setStatusCode(200);
-      $response->setBody(View::renderWithLayout(new View('pages/auth/login'), [
+      $response->redirect(BASE_URI . '/login', 200, [
         'toast' => [
           'type' => 'error',
           'message' => "Login failed",
-        ],
-        'header' => '',
-        'footer' => '',
-      ]));
+        ]
+      ]);
     }
   }
 
@@ -51,11 +55,11 @@ class LoginController extends Controller
   {
     Application::getInstance()->getSession()->destroy();
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/index'), [
+    $response->redirect(BASE_URI . '/', 200, [
       'toast' => [
         'type' => 'success',
-        'message' => "Logout successful",
-      ],
-    ]));
+        'message' => "Logout success",
+      ]
+    ]);
   }
 }

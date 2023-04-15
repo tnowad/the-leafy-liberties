@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use InvalidArgumentException;
+
 class Response
 {
   private $statusCode;
@@ -23,21 +25,35 @@ class Response
       header("$key: $value");
     }
 
-    echo $this->body;
+    if (is_array($this->body) || is_object($this->body)) {
+      $this->jsonResponse($this->body);
+    } else {
+      echo $this->body;
+    }
   }
-
-  public function json($data)
+  public function jsonResponse($data)
   {
     $this->headers['Content-Type'] = 'application/json';
     $this->body = json_encode($data);
   }
-
-  public function redirect($url, $statusCode = 302)
+  public function redirect($url, $statusCode = 302, $message = null)
   {
+    if ($message !== null) {
+      if (is_array($message)) {
+        $message = http_build_query($message);
+      } elseif (is_string($message)) {
+        $message = 'message=' . urlencode($message);
+      } else {
+        throw new InvalidArgumentException('Invalid message parameter');
+      }
+      $url .= (strpos($url, '?') === false ? '?' : '&') . $message;
+    }
+
     $this->headers['Location'] = $url;
     $this->statusCode = $statusCode;
-  }
 
+    $this->send();
+  }
   public function getStatusCode()
   {
     return $this->statusCode;

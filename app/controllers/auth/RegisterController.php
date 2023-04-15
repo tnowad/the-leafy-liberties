@@ -27,7 +27,7 @@ class RegisterController extends Controller
     $name = $request->getParam('name');
     $phone = $request->getParam('phone');
     $password = $request->getParam('password');
-    $existingUser = User::where(['email' => $email]);
+    $existingUser = User::findAll(['email' => $email]);
     if ($existingUser) {
       $response->setStatusCode(200);
       return $response->setBody(View::renderWithLayout(new View('pages/auth/register'), [
@@ -44,7 +44,7 @@ class RegisterController extends Controller
       $user->name = $name;
       $user->phone = $phone;
       $user->password = password_hash($password, PASSWORD_DEFAULT);
-      $user->setRole(Role::where(['name' => 'customer'])[0]);
+      $user->setRole(Role::findAll(['name' => 'customer'])[0]);
       try {
         $user->save();
         $response->setStatusCode(200);

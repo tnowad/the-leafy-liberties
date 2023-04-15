@@ -13,21 +13,28 @@ class Role extends Model
     'deleted_at'
   ];
 
-  public function getPermissions()
+  public function permissions()
   {
-    $query = "SELECT * FROM permissions WHERE role_id = {$this->primaryKey}";
-    $stmt = Database::getInstance()->prepare($query);
-    if ($stmt === false) {
-      return false;
-    }
-    $stmt->execute();
-    if ($stmt->errno) {
-      return false;
-    }
+    $rolePermissions = RolePermission::findAll(['role_id' => $this->id]);
     $permissions = [];
-    while ($row = $stmt->get_result()->fetch_assoc()) {
-      $permissions[] = new Permission($row);
+    foreach ($rolePermissions as $rolePermission) {
+      $permissions[] = Permission::find($rolePermission->permission_id);
     }
     return $permissions;
+  }
+
+  public function addPermission(Permission $permission)
+  {
+    $rolePermission = RolePermission::findAll([
+      'role_id' => $this->id,
+      'permission_id' => $permission->id
+    ]);
+    if ($rolePermission) {
+      return;
+    }
+    $rolePermission = new RolePermission();
+    $rolePermission->role_id = $this->id;
+    $rolePermission->permission_id = $permission->id;
+    $rolePermission->save();
   }
 }

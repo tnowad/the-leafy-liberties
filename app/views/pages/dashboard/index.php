@@ -1,12 +1,12 @@
 <div class="w-full bg-neutral-100">
-  <div class="w-full my-0 mx-auto overflow-x-hidden">
-    <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
+  <div class="w-full mx-auto my-0 overflow-x-hidden">
+    <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
       <div class="flex justify-between">
         <h1 class="text-xl font-bold">
           Dashboard
         </h1>
       </div>
-      <div class="top-wrap box-border grid 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
+      <div class="box-border grid top-wrap 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
         <?php
         $text = array("Sales", "Total Revenues", "New Customer", "New Orders");
         $quantity = array("$20.4K", "100K", "203", "15");
@@ -19,12 +19,12 @@
           "bg-red-400 border-red-400 shadow-[0_0_5px_1px_rgba(255,138,76,0.3)] shadow-red-400"
         );
         for ($i = 1; $i <= 4; $i++) { ?>
-          <div class="mt-5 flex justify-between items-center p-8 bg-white rounded-2xl shadow-lg w-full">
-            <div class="hero-one flex flex-col gap-1">
-              <p class="font-semibold text-sm">
+          <div class="flex items-center justify-between w-full p-8 mt-5 bg-white shadow-lg rounded-2xl">
+            <div class="flex flex-col gap-1 hero-one">
+              <p class="text-sm font-semibold">
                 <?php echo $text[$i - 1] ?>
               </p>
-              <p class="font-bold text-lg">
+              <p class="text-lg font-bold">
                 <?php echo $quantity[$i - 1] ?>
 
               </p>
@@ -40,20 +40,20 @@
         <?php }
         ?>
       </div>
-      <div class="body-wrap w-full my-8 flex justify-between items-start flex-wrap">
+      <div class="flex flex-wrap items-start justify-between w-full my-8 body-wrap">
         <div class="chart-layout xl:w-[65.5%] px-6 py-4 bg-white rounded-2xl shadow-lg sm:w-full">
-          <div class="top-content flex justify-between items-center">
+          <div class="flex items-center justify-between top-content">
             <div class="total-revuenes">
-              <p class="font-semibold text-2xl">Total Revuenes</p>
-              <p class="mt-2 font-bold text-lg">$50.4K</p>
+              <p class="text-2xl font-semibold">Total Revuenes</p>
+              <p class="mt-2 text-lg font-bold">$50.4K</p>
             </div>
             <div class="chart-type p-2 bg-[#8cbfba] rounded-xl">
-              <label for="chart-type" class="text-black font-medium">Choose a type:</label>
-              <select name="chart-ttype" id="c-type" class="">
-                <option value="BarVertical">Bar Vertical Chart</option>
-                <option value="BarHorizontal">Bar Horizontal Chart</option>
-                <option value="Donut">Donut Chart</option>
-                <option value="Line">Line Chart</option>
+              <label for="chart-type" class="font-medium text-black">Choose a type:</label>
+              <select name="chart-ttype" id="c-type" class="" onchange="ChangeChart(this)">
+                <option value="bar">Bar Chart</option>
+                <option value="line">Line Chart</option>
+                <option value="area">Area Chart</option>
+                <option value="radar">Radar Chart</option>
               </select>
             </div>
           </div>
@@ -62,12 +62,12 @@
           </div>
         </div>
         <div class="most-sold-items xl:w-[31.5%] py-4 px-4 bg-white rounded-2xl shadow-lg sm:w-full sm:mt-5 2xl:mt-0">
-          <p class="font-bold text-2xl mb-5">Most Sold Items</p>
+          <p class="mb-5 text-2xl font-bold">Most Sold Items</p>
           <div class="flex flex-col gap-4">
             <?php
             $title = array("Blue", "Black", "Yellow", "White", "Red", "Green");
             for ($i = 1; $i <= 6; $i++) { ?>
-              <div class=" text-lg font-medium">
+              <div class="text-lg font-medium ">
                 <?php echo $title[$i - 1] ?>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
@@ -78,9 +78,9 @@
           </div>
         </div>
       </div>
-      <div class="table-statistics my-8 shadow-lg cursor-pointer rounded-2xl overflow-hidden bg-white">
+      <div class="my-8 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl">
         <div class="relative">
-          <table class="w-full text-sm text-center text-gray-500 rounded-2xl overflow-y-scroll h-64">
+          <table class="w-full h-64 overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <?php
@@ -96,7 +96,7 @@
             <tbody>
               <?php
               for ($i = 1; $i <= 6; $i++) { ?>
-                <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100">
+                <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">
                     My Dearest Darkest
                   </td>
@@ -106,7 +106,7 @@
                   <td class="px-5 py-3">Delivered</td>
                   <td class="px-5 py-3">1</td>
                   <td class="px-5 py-4 w-44">
-                    <div class="button flex justify-center items-center gap-4">
+                    <div class="flex items-center justify-center gap-4 button">
                       <button
                         class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -128,44 +128,39 @@
   </div>
 </div>
 <script>
-  let select = document.getElementById('c-type');
-  select.addEventListener("change", (event) => {
-    const selectedValue = event.target.value;
-    console.log(selectedValue);
-  })
-</script>
-
-
-<script>
-
-
-  var options = {
-    series: [{
-      name: 'Net Profit',
-      data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-    }, {
-      name: 'Revenue',
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-    },],
+  var series = [{
+    name: 'Net Profit', data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+  }, {
+    name: 'Revenue',
+    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+  }];
+  var plotOptions = {
+    bar: {
+      horizontal: false,
+      columnWidth: '55%',
+      endingShape: 'rounded'
+    },
+    line: {
+      markers: {
+        size: 6
+      }
+    }
+  }
+  var bar_options = {
+    series: series,
     chart: {
       type: 'bar',
       height: 350,
       width: '100%',
     },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '55%',
-        endingShape: 'rounded'
-      },
-    },
+    plotOptions: plotOptions,
     dataLabels: {
       enabled: false
     },
     stroke: {
       show: true,
       width: 2,
-      colors: ['transparent']
+      // colors: ['transparent']
     },
     xaxis: {
       categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
@@ -186,7 +181,137 @@
       }
     }
   };
-
-  var chart = new ApexCharts(document.getElementById("chart"), options);
+  var radar_options = {
+    series: series,
+    chart: {
+      type: 'radar',
+      height: 350,
+      width: '100%',
+    },
+    plotOptions: plotOptions,
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      // colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$(thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    }
+  };
+  var line_options = {
+    series: series,
+    chart: {
+      type: 'line',
+      height: 350,
+      width: '100%',
+    },
+    plotOptions: plotOptions,
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      // colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$(thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    }
+  };
+  var area_options = {
+    series: series,
+    chart: {
+      type: 'area',
+      height: 350,
+      width: '100%',
+    },
+    plotOptions: plotOptions,
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      // colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$(thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    }
+  };
+  let chart = new ApexCharts(document.getElementById("chart"), bar_options);
   chart.render();
+  // chart.destroy();
+  // let new_options = options;
+  function ChangeChart(chartType) {
+    console.log(chartType.value);
+    chart.destroy();
+    if (chartType.value == 'line') {
+      chart = new ApexCharts(document.getElementById("chart"), line_options);
+      chart.render();
+
+    }
+    if (chartType.value == 'bar') {
+      chart = new ApexCharts(document.getElementById("chart"), bar_options);
+      chart.render();
+
+    }
+    if (chartType.value == 'area') {
+      chart = new ApexCharts(document.getElementById("chart"), area_options);
+      chart.render();
+
+    }
+    if (chartType.value == 'radar') {
+      chart = new ApexCharts(document.getElementById("chart"), radar_options);
+      chart.render();
+
+    }
+  }
 </script>

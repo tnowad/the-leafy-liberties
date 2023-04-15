@@ -62,21 +62,24 @@ class Toast {
         "translate-x-0",
         "translate-y-0"
       );
+      setTimeout(() => {
+        this.toast.classList.remove(
+          "opacity-100",
+          "scale-100",
+          "translate-x-0",
+          "translate-y-0"
+        );
+        this.toast.classList.add(
+          "opacity-0",
+          "scale-95",
+          "translate-x-1/2",
+          "translate-y-1/2"
+        );
+        setTimeout(() => {
+          this.toast.remove();
+        }, 300);
+      }, 5000);
     }, 100);
-    setTimeout(() => {
-      this.toast.classList.remove(
-        "opacity-100",
-        "scale-100",
-        "translate-x-0",
-        "translate-y-0"
-      );
-      this.toast.classList.add(
-        "opacity-0",
-        "scale-95",
-        "translate-x-1/2",
-        "translate-y-1/2"
-      );
-    }, 5000);
   }
 }
 

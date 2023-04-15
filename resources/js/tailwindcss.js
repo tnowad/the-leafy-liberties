@@ -1,3 +1,4 @@
+console.warn = () => {};
 (() => {
   var Qw = Object.create;
   var ti = Object.defineProperty;
@@ -355,9 +356,7 @@
   function zn(r, e, t) {
     (typeof m != "undefined" && m.env.JEST_WORKER_ID) ||
       (t && ru.has(t)) ||
-      (t && ru.add(t),
-      console.warn(""),
-      e.forEach((i) => console.warn(r, "-", i)));
+      (t && ru.add(t), e.forEach((i) => console.warn(r, "-", i)));
   }
   function jn(r) {
     return Ae.dim(r);
@@ -20758,9 +20757,6 @@ Check your Browserslist config to be sure that your targets are set up correctly
   function Qe(r) {
     return r && r.__esModule ? r : { default: r };
   }
-  console.warn(
-    "cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation"
-  );
   var Nn = "tailwind",
     Ll = "text/tailwindcss",
     Vw = "/template.html",
@@ -20857,4 +20853,3 @@ Check your Browserslist config to be sure that your targets are set up correctly
     }
   }
 })();
-/*! https://mths.be/cssesc v3.0.0 by @mathias */

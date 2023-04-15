@@ -3,20 +3,23 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Leafy Liberties Bookstore">
+  <meta name="keywords" content="bookstore, books, leafy liberties, leafy, liberties">
+  <meta name="author" content="Leafy Liberties">
+
   <title>
     <?php echo $params['title'] ?? 'Dashboard' ?>
   </title>
   <link rel="icon" type="image/x-icon" href="<?php echo BASE_URI . '/resources/images/logo.png' ?>">
+  <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/all.css' ?>">
   <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/reset.css' ?>">
-  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro-v6@44659d9/css/all.min.css" rel="stylesheet"
-    type="text/css" />
+
   <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="<?php echo BASE_URI . '/resources/js/tailwindcss.js' ?>"></script>
   <script src="<?php echo BASE_URI . '/resources/js/flowbite.js' ?>"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -64,21 +67,16 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 
-<?php if (isset($params['toast'])): ?>
-  <script type="module">
-    import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
-    new Toast({
-      message: `<?php echo $params['toast']['message'] ?>`,
-      type: '<?php echo $params['toast']['type'] ?>',
-    });
+<script type="module">
+  import { parseUrlParameters } from '<?php echo BASE_URI . '/resources/js/url-utils.js' ?>';
+  import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
 
-    setTimeout(() => {
-      new Toast({
-        message: `<?php echo $params['toast']['message'] ?>`,
-        type: '<?php echo $params['toast']['type'] ?>',
-      });
-    }, 5000);
-  </script>
-<?php endif; ?>
+  const paramsString = window.location.search.substr(1);
+  const params = parseUrlParameters(paramsString);
+  const { toast } = params;
+  if (toast) {
+    new Toast(toast);
+  }
+</script>
 
 </html>

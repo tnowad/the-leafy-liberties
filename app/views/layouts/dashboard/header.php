@@ -13,7 +13,10 @@ $user = $auth->getUser();
     <div class="flex items-center justify-center left">
       <i class="mr-2 font-medium fa-regular fa-bars-sort fa-lg cursor-pointer" onclick="navMenu()"></i>
       <span class="text-2xl font-medium text-[#52938d]">
-        <?php echo ucfirst(basename($_SERVER['REQUEST_URI'])) ?>
+        <?php
+        $title = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+        echo ucfirst(basename($title));
+        ?>
       </span>
     </div>
     <div class="relative flex items-center right">

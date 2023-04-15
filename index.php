@@ -32,8 +32,16 @@ if (file_exists('./autoload.php')) {
 
 define('BASE_URI', DotEnv::get('BASE_URI'));
 
+function errorHandler($errno, $errstr, $errfile, $errline)
+{
+  echo "<b>Error:</b> [$errno] $errstr<br>";
+  echo "Error on line $errline in $errfile<br>";
+}
+
+set_error_handler("errorHandler");
+
 try {
-  Database::getInstance()->getConnection();
+  Database::getInstance();
 } catch (\Exception $e) {
   die("Database connection failed");
 }

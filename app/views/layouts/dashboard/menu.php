@@ -1,9 +1,15 @@
 <?php
+use Core\Application;
+
+$auth = Application::getInstance()->getAuthentication();
+
+
+dd($auth->getPermissions());
 ?>
 <div
   class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
-    <ul class="flex flex-col py-4 space-y-1 list sticky top-0">
+    <ul class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
         <a href="<?php echo BASE_URI . '/dashboard' ?>" class="flex items-center justify-center py-4">
           <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="logo" />
@@ -77,7 +83,7 @@
       </li>
       <li
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/slider" ?>" class="relative flex flex-row items-center h-11">
+        <a href="<?php echo BASE_URI . "/dashboard/slide" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
             <i class="fa-solid fa-sliders"></i>
           </span>
@@ -91,20 +97,19 @@
 </div>
 <script src="../../../resources/js/header.js"></script>
 <script>
-  let btnAll = document.querySelectorAll('ul.list li:not(:first-child)');
-  btnAll.forEach(element => {
-    element.addEventListener('click', function () {
-      btnAll.forEach(btn => btn.classList.remove('bg-[#315854]'));
-      element.classList.add('bg-[#315854]');
-    });
-  })
   let menu = document.querySelector(".menu-left");
   function navMenu() {
-    if(menu.classList.contains('md:w-72')){
+    if (menu.classList.contains('md:w-72')) {
       menu.classList.remove('md:w-72');
-    }else{
+    } else {
       menu.classList.add('md:w-72');
 
     }
   }
+  let list = document.querySelectorAll("ul li:not(:first-child)");
+  list.forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.add("bg-[#315854]")
+    })
+  })
 </script>

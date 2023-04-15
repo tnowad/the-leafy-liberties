@@ -28,6 +28,18 @@ class Session
     session_destroy();
   }
 
+  public function setFlash($key, $value)
+  {
+    $_SESSION['_flash'][$key] = $value;
+  }
+
+  public function getFlash($key)
+  {
+    $value = $_SESSION['_flash'][$key] ?? null;
+    unset($_SESSION['_flash'][$key]);
+    return $value;
+  }
+
   public function __destruct()
   {
     session_write_close();
