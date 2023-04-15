@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+use Core\Application;
+
+?>
 
 <head>
   <meta charset="UTF-8">
   <title>
-    <?php echo $params['title'] ?? 'The Leafy Liberties Bookstore' ?>
+    <?php echo $params['title'] ?? 'The Leafy Liberties Bookstore'
+      ?>
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="The Leafy Liberties Bookstore">
@@ -56,15 +61,19 @@
 
   <?php $params['footer'] ?? require_once(__DIR__ . '/default/footer.php'); ?>
 </body>
+<?php
 
-<?php if (isset($params['toast'])): ?>
-  <script type="module">
-    import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
-    new Toast({
-      message: `<?php echo $params['toast']['message'] ?>`,
-      type: '<?php echo $params['toast']['type'] ?>',
-    });
-  </script>
-<?php endif; ?>
+?>
+<script type="module">
+  import { parseUrlParameters } from '<?php echo BASE_URI . '/resources/js/url-utils.js' ?>';
+  import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
+
+  const paramsString = window.location.search.substr(1);
+  const params = parseUrlParameters(paramsString);
+  const { toast } = params;
+  if (toast) {
+    new Toast(toast);
+  }
+</script>
 
 </html>

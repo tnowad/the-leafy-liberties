@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use InvalidArgumentException;
+
 class Response
 {
   private $statusCode;
@@ -37,13 +39,21 @@ class Response
   public function redirect($url, $statusCode = 302, $message = null)
   {
     if ($message !== null) {
-      Application::getInstance()->getSession()->setFlash('message', $message);
+      if (is_array($message)) {
+        $message = http_build_query($message);
+      } elseif (is_string($message)) {
+        $message = 'message=' . urlencode($message);
+      } else {
+        throw new InvalidArgumentException('Invalid message parameter');
+      }
+      $url .= (strpos($url, '?') === false ? '?' : '&') . $message;
     }
 
     $this->headers['Location'] = $url;
     $this->statusCode = $statusCode;
-  }
 
+    $this->send();
+  }
   public function getStatusCode()
   {
     return $this->statusCode;
