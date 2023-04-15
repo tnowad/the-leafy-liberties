@@ -28,7 +28,7 @@ class User extends Model
     $this->password = password_hash($password, PASSWORD_DEFAULT);
   }
 
-  public function role()
+  public function role(): Role
   {
     return Role::find($this->role_id);
   }

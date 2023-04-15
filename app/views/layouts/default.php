@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+use App\Models\Permission;
 use Core\Application;
 
+$auth = Application::getInstance()->getAuthentication();
+
+$currentUser = $auth->getUser();
+$role = $currentUser->role();
+$permissions = Permission::all();
+
+dd($permissions);
 ?>
 
 <head>
