@@ -51,8 +51,6 @@ class Response
 
     $this->headers['Location'] = $url;
     $this->statusCode = $statusCode;
-
-    $this->send();
   }
   public function getStatusCode()
   {
