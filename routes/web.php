@@ -24,7 +24,6 @@ $router->put('/wishlist', [WishlistController::class, 'add']);
 $router->get('/products', [ProductController::class, 'index']);
 $router->get('/product', [ProductController::class, 'show']);
 $router->get('/products/filter', [ProductController::class, 'filter']);
-$router->get('/data/getProducts', [ProductController::class, 'getProducts']);
 
 // profile
 $router->get('/profile', [ProfileController::class, 'index']);
@@ -42,3 +41,9 @@ $router->get('/register', [RegisterController::class, 'index']);
 $router->post('/register', [RegisterController::class, 'register']);
 
 $router->get('/logout', [LoginController::class, 'logout']);
+
+// get data
+$router->get('/data/getProducts', [ProductController::class, 'getProducts']);
+$router->get('/data/getCategories', [ProductController::class, 'getCategories']);
+$router->get('/data/getProductCategories', [ProductController::class, 'getProductCategories']);
+$router->get('/data/getAuthors', [ProductController::class, 'getAuthors']);

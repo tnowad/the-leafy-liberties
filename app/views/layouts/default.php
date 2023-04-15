@@ -57,7 +57,7 @@
   <?php $params['footer'] ?? require_once(__DIR__ . '/default/footer.php'); ?>
 </body>
 
-<?php if (isset($params['toast'])): ?>
+<?php if (isset($params['toast'])) : ?>
   <script type="module">
     import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
     new Toast({
