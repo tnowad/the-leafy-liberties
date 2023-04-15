@@ -64,21 +64,16 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 
-<?php if (isset($params['toast'])): ?>
-  <script type="module">
-    import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
-    new Toast({
-      message: `<?php echo $params['toast']['message'] ?>`,
-      type: '<?php echo $params['toast']['type'] ?>',
-    });
+<script type="module">
+  import { parseUrlParameters } from '<?php echo BASE_URI . '/resources/js/url-utils.js' ?>';
+  import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
 
-    setTimeout(() => {
-      new Toast({
-        message: `<?php echo $params['toast']['message'] ?>`,
-        type: '<?php echo $params['toast']['type'] ?>',
-      });
-    }, 5000);
-  </script>
-<?php endif; ?>
+  const paramsString = window.location.search.substr(1);
+  const params = parseUrlParameters(paramsString);
+  const { toast } = params;
+  if (toast) {
+    new Toast(toast);
+  }
+</script>
 
 </html>
