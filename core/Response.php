@@ -37,7 +37,7 @@ class Response
   public function redirect($url, $statusCode = 302, $message = null)
   {
     if ($message !== null) {
-      $url .= '?message=' . urlencode($message);
+      Application::getInstance()->getSession()->setFlash('message', $message);
     }
 
     $this->headers['Location'] = $url;
