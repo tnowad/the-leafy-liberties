@@ -65,7 +65,7 @@ class ProductController extends Controller
     try {
       $products = [];
       foreach (Product::all() as $product) {
-        $products[] = $product->getAttributes();
+        $products[] = $product->toArray();
       }
       $response->jsonResponse($products);
     } catch (\Exception $e) {
@@ -81,7 +81,7 @@ class ProductController extends Controller
     try {
       $categories = [];
       foreach (Category::all() as $category) {
-        $categories[] = $category->getAttributes();
+        $categories[] = $category->toArray();
       }
       $response->jsonResponse($categories);
     } catch (\Exception $e) {
@@ -97,7 +97,7 @@ class ProductController extends Controller
     try {
       $productCategories = [];
       foreach (ProductCategory::all() as $productCategory) {
-        $productCategories[] = $productCategory->getAttributes();
+        $productCategories[] = $productCategory->toArray();
       }
       $response->jsonResponse($productCategories);
     } catch (\Exception $e) {
@@ -113,7 +113,7 @@ class ProductController extends Controller
     try {
       $authors = [];
       foreach (Author::all() as $author) {
-        $authors[] = $author->getAttributes();
+        $authors[] = $author->toArray();
       }
       $response->jsonResponse($authors);
     } catch (\Exception $e) {
