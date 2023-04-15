@@ -19,7 +19,7 @@ abstract class Model
     self::$db = Database::getInstance();
   }
 
-  public static function find($id): ?static
+  public static function find($id)
   {
     $table = (new static )->table;
     $primaryKey = (new static )->primaryKey;
@@ -31,7 +31,7 @@ abstract class Model
     return null;
   }
 
-  public static function findOne($params): ?static
+  public static function findOne($params)
   {
     $table = (new static )->table;
     $query = "SELECT * FROM $table WHERE ";
@@ -48,14 +48,14 @@ abstract class Model
     return null;
   }
 
-  public static function create($attributes): ?static
+  public static function create($attributes)
   {
     $model = new static($attributes);
     $model->save();
     return $model;
   }
 
-  public static function where($params): array
+  public static function where($params)
   {
     $table = (new static )->table;
     $query = "SELECT * FROM $table WHERE ";
@@ -73,7 +73,7 @@ abstract class Model
     return $models;
   }
 
-  public static function all(): array
+  public static function all()
   {
     $table = (new static )->table;
     $query = "SELECT * FROM $table";
