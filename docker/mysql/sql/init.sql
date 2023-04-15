@@ -181,7 +181,6 @@ CREATE TABLE
   coupons (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(50) NOT NULL,
-    image varchar(255) DEFAULT NULL,
     quantity int NOT NULL,
     expired date NOT NULL,
     description VARCHAR(255) NOT NULL,
