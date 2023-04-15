@@ -48,7 +48,7 @@ class User extends Model
 
   public function permissions()
   {
-    $userPermissions = UserPermission::where(['user_id' => $this->id]);
+    $userPermissions = UserPermission::findAll(['user_id' => $this->id]);
     $permissions = [];
     foreach ($userPermissions as $userPermission) {
       $permissions[] = Permission::find($userPermission->permission_id);
@@ -66,7 +66,7 @@ class User extends Model
 
   public function removePermission(Permission $permission)
   {
-    $userPermissions = UserPermission::where(['user_id' => $this->id]);
+    $userPermissions = UserPermission::findAll(['user_id' => $this->id]);
     $userPermission = null;
     foreach ($userPermissions as $userPermission) {
       if ($userPermission->permission_id == $permission->id) {
@@ -78,7 +78,7 @@ class User extends Model
 
   public function hasPermission(Permission $permission)
   {
-    $userPermissions = UserPermission::where(['user_id' => $this->id]);
+    $userPermissions = UserPermission::findAll(['user_id' => $this->id]);
     foreach ($userPermissions as $userPermission) {
       if ($userPermission->permission_id == $permission->id) {
         return true;

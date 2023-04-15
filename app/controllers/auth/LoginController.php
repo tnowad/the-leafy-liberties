@@ -26,7 +26,7 @@ class LoginController extends Controller
     $email = $request->getParam('email');
     $password = $request->getParam('password');
     try {
-      $users = User::where(['email' => $email]);
+      $users = User::findAll(['email' => $email]);
       $user = $users ? $users[0] : null;
     } catch (Exception $e) {
       $user = null;

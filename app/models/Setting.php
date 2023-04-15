@@ -12,7 +12,7 @@ class Setting extends Model
 
   public static function get($key)
   {
-    $setting = self::where(['key' => $key]);
+    $setting = self::findAll(['key' => $key]);
     if ($setting) {
       return (new static($setting))->value;
     }
@@ -21,7 +21,7 @@ class Setting extends Model
 
   public static function set($key, $value)
   {
-    $setting = self::where(['key' => $key]);
+    $setting = self::findAll(['key' => $key]);
     if ($setting) {
       $setting = new static($setting);
       $setting->value = $value;

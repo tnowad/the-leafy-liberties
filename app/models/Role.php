@@ -15,7 +15,7 @@ class Role extends Model
 
   public function permissions()
   {
-    $rolePermissions = RolePermission::where(['role_id' => $this->id]);
+    $rolePermissions = RolePermission::findAll(['role_id' => $this->id]);
     $permissions = [];
     foreach ($rolePermissions as $rolePermission) {
       $permissions[] = Permission::find($rolePermission->permission_id);
@@ -25,7 +25,7 @@ class Role extends Model
 
   public function addPermission(Permission $permission)
   {
-    $rolePermission = RolePermission::where([
+    $rolePermission = RolePermission::findAll([
       'role_id' => $this->id,
       'permission_id' => $permission->id
     ]);

@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    $slides = Slide::where(['status' => 1]);
+    $slides = Slide::findAll(['status' => 1]);
 
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/index'), [

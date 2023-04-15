@@ -17,6 +17,6 @@ class Order extends Model
 
   public function products()
   {
-    return OrderProduct::where(['order_id' => $this->id]);
+    return OrderProduct::findAll(['order_id' => $this->id]);
   }
 }
