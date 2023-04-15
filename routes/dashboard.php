@@ -19,6 +19,7 @@ $router->post('/dashboard/product', [ProductController::class, 'create']);
 
 $router->get('/dashboard/product/update', [ProductController::class, 'update']);
 $router->post('/dashboard/product/update', [ProductController::class, 'update']);
+$router->get('/dashboard/product/delete', [ProductController::class, 'delete']);
 
 $router->get('/dashboard/coupon', [HomeController::class, 'couponDashboard']);
 
