@@ -91,13 +91,14 @@ class CouponController extends Controller
         $coupon->quantity = $request->getParam('quantity');
         $coupon->description = $request->getParam('description');
         $coupon->save();
-        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon/index'), [
-          'title' => 'Coupon Dashboard',
-          'toast' => [
-            'type' => 'success',
-            'message' => "Edit coupon successful!",
-          ]
-        ]));
+        return $response->redirect(BASE_URI . '/dashboard/coupon');
+        // return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon/index'), [
+        //   'title' => 'Coupon Dashboard',
+        //   'toast' => [
+        //     'type' => 'success',
+        //     'message' => "Edit coupon successful!",
+        //   ]
+        // ]));
       default:
         break;
     }

@@ -91,13 +91,6 @@
 </div>
 <script src="../../../resources/js/header.js"></script>
 <script>
-  let btnAll = document.querySelectorAll('ul.list li:not(:first-child)');
-  btnAll.forEach(element => {
-    element.addEventListener('click', function () {
-      btnAll.forEach(btn => btn.classList.remove('bg-[#315854]'));
-      element.classList.add('bg-[#315854]');
-    });
-  })
   let menu = document.querySelector(".menu-left");
   function navMenu() {
     if(menu.classList.contains('md:w-72')){
@@ -107,4 +100,10 @@
 
     }
   }
+  let list =document.querySelectorAll("ul li:not(:first-child)");
+  list.forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.add("bg-[#315854]")
+    })
+  })
 </script>

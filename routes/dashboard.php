@@ -36,4 +36,10 @@ $router->post('/dashboard/slide/create', [SlideController::class, 'create']);
 $router->get('/dashboard/slide/update', [SlideController::class, 'update']);
 
 $router->get('/dashboard/comment', [HomeController::class, 'commentDashboard']);
-$router->get('/dashboard/customer', [HomeController::class, 'customerDashboard']);
+
+//User
+$router->get('/dashboard/customer', [UserController::class, 'index']);
+
+//user function
+$router->get('/dashboard/user/update', [UserController::class, 'update']);
+$router->post('/dashboard/user/update', [UserController::class, 'update']);
