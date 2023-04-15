@@ -55,28 +55,20 @@
   <?php $params['footer'] ?? require_once(__DIR__ . '/default/footer.php'); ?>
 </body>
 
-<<<<<<< HEAD
-<?php if (isset($params['toast'])) : ?>
-  <script type="module">
-    import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
-    new Toast({
-      message: `<?php echo $params['toast']['message'] ?>`,
-      type: '<?php echo $params['toast']['type'] ?>',
-    });
-  </script>
-<?php endif; ?>
-=======
 <script type="module">
-  import { parseUrlParameters } from '<?php echo BASE_URI . '/resources/js/url-utils.js' ?>';
+  import {
+    parseUrlParameters
+  } from '<?php echo BASE_URI . '/resources/js/url-utils.js' ?>';
   import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
 
   const paramsString = window.location.search.substr(1);
   const params = parseUrlParameters(paramsString);
-  const { toast } = params;
+  const {
+    toast
+  } = params;
   if (toast) {
     new Toast(toast);
   }
 </script>
->>>>>>> 3b32ce4aa0282a22ba6bf57bebc139e087e05a74
 
 </html>

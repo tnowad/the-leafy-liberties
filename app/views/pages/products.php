@@ -59,7 +59,7 @@
         ?>
           <div class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
             <div class="object-cover h-full p-2 w-60">
-              <img src="resources/images/products/<?php echo $product->image ?>" alt="" class="object-cover w-full h-full" />
+              <img src="<?php echo $product->image ?>" alt="" class="object-cover w-full h-full" />
             </div>
             <div class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
               <div class="product-name">
@@ -122,7 +122,7 @@
       productContainer.innerHTML += `
         <div class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
           <div class="object-cover h-full p-2 w-60">
-            <img src="resources/images/products/${product.image}" alt="" class="object-cover w-full h-full" />
+            <img src="${product.image}" alt="" class="object-cover w-full h-full" />
           </div>
           <div class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
             <div class="product-name">
@@ -222,6 +222,7 @@
     let products = await fetch(
       "http://localhost/the-leafy-liberties/data/getProducts"
     ).then((response) => response.json())
+    console.log(products)
     let productCategories = await fetch(
       "http://localhost/the-leafy-liberties/data/getProductCategories"
     ).then((response) => response.json())
@@ -246,4 +247,4 @@
     renderProducts(products)
   }
 </script>
-<script src="./test.js"></script>
+<!-- <script src="./test.js"></script> -->
