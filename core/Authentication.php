@@ -44,10 +44,7 @@ class Authentication
     if ($user == null) {
       return [];
     }
-    $userPermissions = $user->permissions();
-    $rolePermissions = $user->role->permissions();
-
-    return array_merge($userPermissions, $rolePermissions);
+    $userPermissions = UserPermission::findAll(['user_id' => $user->id]);
   }
 
   public function hasPermission($permission)
@@ -61,7 +58,7 @@ class Authentication
       return false;
     }
     $userPermission = UserPermission::findOne(['user_id' => $user->id, 'permission_id' => $permission->id]);
-    if ($userPermission != null && $userPermission->value == 1) {
+    if ($userPermission != null && $userPermission->status == 1) {
       return true;
     }
     $rolePermission = RolePermission::findOne(['role_id' => $user->role_id, 'permission_id' => $permission->id]);

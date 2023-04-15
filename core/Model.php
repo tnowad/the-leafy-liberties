@@ -48,14 +48,7 @@ abstract class Model
     return null;
   }
 
-  public static function create($attributes)
-  {
-    $model = new static($attributes);
-    $model->save();
-    return $model;
-  }
-
-  public static function where($params)
+  public static function findAll($params)
   {
     $table = (new static )->table;
     $query = "SELECT * FROM $table WHERE ";
@@ -71,6 +64,13 @@ abstract class Model
       $models[] = new static($row);
     }
     return $models;
+  }
+
+  public static function create($attributes)
+  {
+    $model = new static($attributes);
+    $model->save();
+    return $model;
   }
 
   public static function all()
