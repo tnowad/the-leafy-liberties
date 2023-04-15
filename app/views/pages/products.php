@@ -34,13 +34,32 @@
                 Greater than $30
               </label>
             </div>
+            <h1 class="mt-2 mb-2 text-xl font-bold">Filter prices by</h1>
+            <div>
+              <input type="radio" name="price-sort" id="high-to-low" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
+              <label for="high-to-low" class="ml-2">
+                High to low
+              </label>
+              <br>
+              <input type="radio" name="price-sort" id="low-to-high" class="w-4 h-4 text-green-600 bg-gray-300 rounded focus:ring-green-500 " />
+              <label for="low-to-high" class="ml-2">
+                Low to high
+              </label>
+            </div>
+            <h1 class="mt-2 mb-2 text-xl font-bold">Price range</h1>
+            <div class="flex items-center">
+              <span class="ml-2 font-medium text-gray-700">$0</span>
+              <input id="price-slider" class="w-full" type="range" min="0" max="100" step="1" value="0">
+              <span class="ml-auto font-medium text-gray-700">$100</span>
+            </div>
+
             <input type="submit" value="Find" onclick="filterProducts(event)" class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 hover:bg-[#6cada6] transition-all cursor-pointer" />
           </form>
 
         </div>
       </div>
     </div>
-    <div class="">
+    <div id="products-content">
       <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         <?php
         $productList = $params['products'];
@@ -99,6 +118,7 @@
 <script>
   function renderProducts(products) {
     const productContainer = document.getElementById('product-list');
+    const productContent = document.getElementById('products-content');
     productContainer.innerHTML = '';
 
     products.forEach(product => {
@@ -130,6 +150,9 @@
           </div>
           `;
     });
+    if (productContainer.innerHTML === '') {
+      productContainer.innerHTML += `<h1 class="text-sm sm:text-4xl text-primary-600 w-[1100px] text-center">Không có sản phẩm nào</h1>`
+    }
   }
 
   function filterByPrice(products, priceRange) {
@@ -157,14 +180,22 @@
     event.preventDefault();
 
     let products = await fetch("http://localhost/the-leafy-liberties/data/getProducts").then((response) => response.json())
-
     const bestValue = document.getElementById('best-value').checked;
     const memberOnly = document.getElementById('member-only').checked;
     const lessThan10 = document.getElementById('less-than-10').checked;
     const between11And30 = document.getElementById('11-to-30').checked;
     const greaterThan30 = document.getElementById('greater-than-30').checked;
+    const highToLow = document.getElementById('high-to-low').checked;
+    const lowToHigh = document.getElementById('low-to-high').checked;
 
-    let filteredProducts = [];
+    let filteredProducts = products;
+
+    if (highToLow) {
+      products.sort((a, b) => b.price - a.price);
+    } else if (lowToHigh) {
+      products.sort((a, b) => a.price - b.price);
+    }
+
     if (lessThan10) {
       filteredProducts = filterByPrice(products, "lessThan10");
     } else if (between11And30) {
@@ -172,6 +203,7 @@
     } else if (greaterThan30) {
       filteredProducts = filterByPrice(products, "greaterThan30");
     }
+
 
     renderProducts(filteredProducts);
   }
