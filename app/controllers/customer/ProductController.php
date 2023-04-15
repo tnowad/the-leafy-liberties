@@ -57,13 +57,6 @@ class ProductController extends Controller
     ]));
   }
 
-  public function filter(Request $request, Response $response)
-  {
-    // Get query from request and create list products
-    // return with json
-    $response->setBody(json_encode($request->getQueries()));
-  }
-
   public function getProducts(Request $request, Response $response)
   {
 
@@ -74,7 +67,7 @@ class ProductController extends Controller
       foreach (Product::all() as $product) {
         $products[] = $product->getAttributes();
       }
-      $response->json($products);
+      $response->jsonResponse($products);
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
@@ -90,7 +83,7 @@ class ProductController extends Controller
       foreach (Category::all() as $category) {
         $categories[] = $category->getAttributes();
       }
-      $response->json($categories);
+      $response->jsonResponse($categories);
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
@@ -106,7 +99,7 @@ class ProductController extends Controller
       foreach (ProductCategory::all() as $productCategory) {
         $productCategories[] = $productCategory->getAttributes();
       }
-      $response->json($productCategories);
+      $response->jsonResponse($productCategories);
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
@@ -122,7 +115,7 @@ class ProductController extends Controller
       foreach (Author::all() as $author) {
         $authors[] = $author->getAttributes();
       }
-      $response->json($authors);
+      $response->jsonResponse($authors);
     } catch (\Exception $e) {
       dd($e->getMessage());
     }

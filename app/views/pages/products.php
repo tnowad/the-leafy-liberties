@@ -226,6 +226,7 @@
     let productCategories = await fetch(
       "http://localhost/the-leafy-liberties/data/getProductCategories"
     ).then((response) => response.json())
+    // console.log(products)
     if (categoryId == "All" || categoryId == "" || categoryId == null) return products
     for (let i = 0; i < productCategories.length; i++) {
       // console.log(productCategories[i].category_id)
