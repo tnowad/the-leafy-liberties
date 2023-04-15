@@ -7,6 +7,7 @@ use Core\Controller;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Utils\FileUploader;
 
 class ProductController extends Controller
 {
@@ -29,6 +30,29 @@ class ProductController extends Controller
     // if (!$auth->hasPermission('products.create')) {
     //   return $response->redirect(BASE_URI . '/dashboard');
     // }
+
+    $uploader = new FileUploader(
+      array(
+        'allowedExtensions' => array('jpeg', 'jpg', 'png'),
+        'maxFileSize' => 2097152,
+        'uploadPath' => 'resources/images/products/'
+      )
+    );
+
+    $result = $uploader->upload($_FILES[$request->getParam('image')]);
+
+    if ($result['success']) {
+      $request->setParam('image', $result['file']);
+    } else {
+      return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product'), [
+        'title' => 'Products',
+        'toast' => [
+          'type' => 'error',
+          'message' => "Add product failed!",
+        ]
+      ]));
+    }
+
     $product = new Product();
     $product->name = $request->getParam('name');
     $product->image = $request->getParam('image');
@@ -102,8 +126,8 @@ class ProductController extends Controller
             'message' => "Edit product successful!",
           ]
         ]));
-        default:
-          break;
+      default:
+        break;
     }
     // $auth = Application::getInstance()->getAuthentication();
     // if (!$auth->hasPermission('products.update')) {

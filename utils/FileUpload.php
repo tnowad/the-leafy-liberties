@@ -1,36 +1,59 @@
 <?php
 namespace Utils;
 
-class FileUpload
+class FileUploader
 {
-  public static function upload($file, $path)
+
+  private $allowedExtensions = array("jpeg", "jpg", "png");
+  private $maxFileSize = 2097152; // 2MB
+  private $uploadPath = "resource/uploads/";
+
+  public function __construct($config = array())
   {
-    $fileName = $file['name'];
-    $fileTmpName = $file['tmp_name'];
-    $fileSize = $file['size'];
-    $fileError = $file['error'];
-    $fileType = $file['type'];
-
-    $fileExt = explode('.', $fileName);
-    $fileActualExt = strtolower(end($fileExt));
-
-    $allowed = ['jpg', 'jpeg', 'png'];
-
-    if (in_array($fileActualExt, $allowed)) {
-      if ($fileError === 0) {
-        if ($fileSize < 1000000) {
-          $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-          $fileDestination = $path . $fileNameNew;
-          move_uploaded_file($fileTmpName, $fileDestination);
-          return $fileNameNew;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    } else {
-      return false;
+    if (isset($config['allowedExtensions'])) {
+      $this->allowedExtensions = $config['allowedExtensions'];
     }
+    if (isset($config['maxFileSize'])) {
+      $this->maxFileSize = $config['maxFileSize'];
+    }
+    if (isset($config['uploadPath'])) {
+      $this->uploadPath = $config['uploadPath'];
+    }
+  }
+
+  public function upload($file)
+  {
+    $errors = array();
+    $fileName = $file['name'];
+    $fileSize = $file['size'];
+    $fileTmpName = $file['tmp_name'];
+    $fileType = $file['type'];
+    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    if (!in_array($fileExt, $this->allowedExtensions)) {
+      $errors[] = "Extension not allowed, please choose a " . implode(", ", $this->allowedExtensions) . " file.";
+    }
+
+    if ($fileSize > $this->maxFileSize) {
+      $errors[] = "File size must be less than " . $this->formatBytes($this->maxFileSize) . ".";
+    }
+
+    if (empty($errors)) {
+      $newFileName = uniqid() . "." . $fileExt;
+      $destination = $this->uploadPath . $newFileName;
+      if (move_uploaded_file($fileTmpName, $destination)) {
+        return $destination;
+      } else {
+        $errors[] = "An error occurred while uploading the file.";
+      }
+    }
+    return $errors;
+  }
+
+  private function formatBytes($size, $precision = 2)
+  {
+    $base = log($size, 1024);
+    $suffixes = array('B', 'KB', 'MB', 'GB', 'TB');
+    return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
   }
 }
