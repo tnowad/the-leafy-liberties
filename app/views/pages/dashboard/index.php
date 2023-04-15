@@ -49,11 +49,11 @@
             </div>
             <div class="chart-type p-2 bg-[#8cbfba] rounded-xl">
               <label for="chart-type" class="font-medium text-black">Choose a type:</label>
-              <select name="chart-ttype" id="c-type" class="">
-                <option value="BarVertical">Bar Vertical Chart</option>
-                <option value="BarHorizontal">Bar Horizontal Chart</option>
-                <option value="Donut">Donut Chart</option>
-                <option value="Line">Line Chart</option>
+              <select name="chart-ttype" id="c-type" class="" onchange="ChangeChart(this)">
+                <option value="bar">Bar Chart</option>
+                <option value="line">LineChart</option>
+                <option value="area">Area Chart</option>
+                <option value="radar">Radar Chart</option>
               </select>
             </div>
           </div>
@@ -128,44 +128,39 @@
   </div>
 </div>
 <script>
-  let select = document.getElementById('c-type');
-  select.addEventListener("change", (event) => {
-    const selectedValue = event.target.value;
-    console.log(selectedValue);
-  })
-</script>
-
-
-<script>
-
-
-  var options = {
-    series: [{
-      name: 'Net Profit',
-      data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-    }, {
-      name: 'Revenue',
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-    },],
+  var series = [{
+    name: 'Net Profit', data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+  }, {
+    name: 'Revenue',
+    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+  }];
+  var plotOptions = {
+    bar: {
+      horizontal: false,
+      columnWidth: '55%',
+      endingShape: 'rounded'
+    },
+    line: {
+      markers: {
+        size: 6
+      }
+    }
+  }
+  var bar_options = {
+    series: series,
     chart: {
       type: 'bar',
       height: 350,
       width: '100%',
     },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '55%',
-        endingShape: 'rounded'
-      },
-    },
+    plotOptions: plotOptions,
     dataLabels: {
       enabled: false
     },
     stroke: {
       show: true,
       width: 2,
-      colors: ['transparent']
+      // colors: ['transparent']
     },
     xaxis: {
       categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
@@ -186,7 +181,137 @@
       }
     }
   };
-
-  var chart = new ApexCharts(document.getElementById("chart"), options);
+  var radar_options = {
+    series: series,
+    chart: {
+      type: 'radar',
+      height: 350,
+      width: '100%',
+    },
+    plotOptions: plotOptions,
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      // colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$(thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    }
+  };
+  var line_options = {
+    series: series,
+    chart: {
+      type: 'line',
+      height: 350,
+      width: '100%',
+    },
+    plotOptions: plotOptions,
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      // colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$(thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    }
+  };
+  var area_options = {
+    series: series,
+    chart: {
+      type: 'area',
+      height: 350,
+      width: '100%',
+    },
+    plotOptions: plotOptions,
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      // colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$(thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return "$ " + val + " thousands"
+        }
+      }
+    }
+  };
+  let chart = new ApexCharts(document.getElementById("chart"), bar_options);
   chart.render();
+  // chart.destroy();
+  // let new_options = options;
+  function ChangeChart(chartType) {
+    console.log(chartType.value);
+    chart.destroy();
+    if (chartType.value == 'line') {
+      chart = new ApexCharts(document.getElementById("chart"), line_options);
+      chart.render();
+
+    }
+    if (chartType.value == 'bar') {
+      chart = new ApexCharts(document.getElementById("chart"), bar_options);
+      chart.render();
+
+    }
+    if (chartType.value == 'area') {
+      chart = new ApexCharts(document.getElementById("chart"), area_options);
+      chart.render();
+
+    }
+    if (chartType.value == 'radar') {
+      chart = new ApexCharts(document.getElementById("chart"), radar_options);
+      chart.render();
+
+    }
+  }
 </script>
