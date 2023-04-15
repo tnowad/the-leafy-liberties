@@ -23,17 +23,23 @@ class Response
       header("$key: $value");
     }
 
-    echo $this->body;
+    if (is_array($this->body) || is_object($this->body)) {
+      $this->jsonResponse($this->body);
+    } else {
+      echo $this->body;
+    }
   }
-
-  public function json($data)
+  public function jsonResponse($data)
   {
     $this->headers['Content-Type'] = 'application/json';
     $this->body = json_encode($data);
   }
-
-  public function redirect($url, $statusCode = 302)
+  public function redirect($url, $statusCode = 302, $message = null)
   {
+    if ($message !== null) {
+      Application::getInstance()->getSession()->setFlash('message', $message);
+    }
+
     $this->headers['Location'] = $url;
     $this->statusCode = $statusCode;
   }
