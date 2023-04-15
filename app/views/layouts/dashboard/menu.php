@@ -1,9 +1,15 @@
 <?php
+use Core\Application;
+
+$auth = Application::getInstance()->getAuthentication();
+
+
+dd($auth->getPermissions());
 ?>
 <div
   class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
-    <ul class="flex flex-col py-4 space-y-1 list sticky top-0">
+    <ul class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
         <a href="<?php echo BASE_URI . '/dashboard' ?>" class="flex items-center justify-center py-4">
           <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="logo" />
@@ -93,14 +99,14 @@
 <script>
   let menu = document.querySelector(".menu-left");
   function navMenu() {
-    if(menu.classList.contains('md:w-72')){
+    if (menu.classList.contains('md:w-72')) {
       menu.classList.remove('md:w-72');
-    }else{
+    } else {
       menu.classList.add('md:w-72');
 
     }
   }
-  let list =document.querySelectorAll("ul li:not(:first-child)");
+  let list = document.querySelectorAll("ul li:not(:first-child)");
   list.forEach(btn => {
     btn.addEventListener("click", () => {
       btn.classList.add("bg-[#315854]")

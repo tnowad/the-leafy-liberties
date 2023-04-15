@@ -38,6 +38,18 @@ class Authentication
     return !$this->isAuthenticated();
   }
 
+  public function getPermissions()
+  {
+    $user = $this->getUser();
+    if ($user == null) {
+      return [];
+    }
+    $userPermissions = $user->permissions();
+    $rolePermissions = $user->role->permissions();
+
+    return array_merge($userPermissions, $rolePermissions);
+  }
+
   public function hasPermission($permission)
   {
     $user = $this->getUser();
