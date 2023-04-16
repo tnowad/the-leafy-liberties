@@ -5,19 +5,19 @@
     </h1>
   </div>
   <div class="box-border flex flex-col items-start justify-center px-6">
-    <a href="<?php echo BASE_URI . '/profile' ?>" class="flex mt-5 p-2 rounded-sm transition-all">
+    <a href="<?php echo BASE_URI . '/profile' ?>" class="w-40 flex mt-5 p-2 hover:bg-primary-800 hover:text-white rounded-sm transition-all">
       <i class="flex items-center fa fa-home mr-2"></i>
       <h3 class="text-xl cursor-pointer">Overview</h3>
     </a>
-    <a href="<?php echo BASE_URI . '/profile/settings' ?>" class="flex mt-5 p-2 rounded-sm transition-all">
+    <a href="<?php echo BASE_URI . '/profile/settings' ?>" class="w-40 flex mt-5 p-2 hover:bg-primary-800 hover:text-white rounded-sm transition-all">
       <i class="flex items-center fa fa-user mr-2"></i>
       <h3 class="cursor-pointer">Account settings</h3>
     </a>
-    <a href="<?php echo BASE_URI . '/profile/payments' ?>" class="flex mt-5 p-2 rounded-sm transition-all">
+    <a href="<?php echo BASE_URI . '/profile/payments' ?>" class="w-40 flex mt-5 p-2 hover:bg-primary-800 hover:text-white rounded-sm transition-all">
       <i class="flex items-center fa fa-check mr-2"></i>
       <h3 class="cursor-pointer">Payments</h3>
     </a>
-    <a href="<?php echo BASE_URI . '/profile/orders' ?>" class="flex justify-between mt-5 p-2 rounded-sm transition-all">
+    <a href="<?php echo BASE_URI . '/profile/orders' ?>" class="w-40 flex mt-5 p-2 hover:bg-primary-800 hover:text-white rounded-sm transition-all">
       <i class="flex items-center fa fa-bag-shopping mr-2"></i>
       <h3 class="cursor-pointer">Order</h3>
     </a>
@@ -29,10 +29,10 @@
   var links = document.getElementsByTagName("a");
   for (var i = 0; i < links.length; i++) {
     if (links[i].getAttribute("href") === currentPath) {
-      links[i].classList.add("bg-primary-800", "text-white", "hover:bg-teal-600");
+      links[i].classList.add("bg-primary-800", "text-white");
       console.log(links[i].classList)
     } else {
-      links[i].classList.remove("bg-primary-800", "text-white", "hover:bg-teal-600");
+      links[i].classList.remove("bg-primary-800", "text-white");
     }
   }
 </script>
