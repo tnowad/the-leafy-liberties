@@ -160,5 +160,16 @@ abstract class Model
     }
     return $models;
   }
-
+  public static function filterAdvancedCoupon($input)
+  {
+    $table = (new static())->table;
+    $query = "SELECT * FROM $table WHERE code LIKE ?";
+    $params = array("%$input%");
+    $result = self::$db->select($query, $params);
+    $models = [];
+    foreach ($result as $row) {
+      $models[] = new static($row);
+    }
+    return $models;
+  }
 }

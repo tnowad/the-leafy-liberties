@@ -29,6 +29,8 @@ $router->get('/dashboard/product/delete', [ProductController::class, 'delete']);
 //coupon
 $router->get('/dashboard/coupon', [CouponController::class, 'index']);
 $router->post('/dashboard/coupon', [CouponController::class, 'create']);
+$router->post('/dashboard/coupon', [CouponController::class, 'filterCoupon']);
+
 //coupon function
 $router->get('/dashboard/coupon/update', [CouponController::class, 'update']);
 $router->post('/dashboard/coupon/update', [CouponController::class, 'update']);

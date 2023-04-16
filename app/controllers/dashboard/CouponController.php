@@ -147,4 +147,19 @@ class CouponController extends Controller
     $coupon->delete();
     return $response->redirect(BASE_URI . 'pages/dashboard/coupon/index');
   }
+  public function filterCoupon(Request $request, Response $response)
+  {
+    switch ($request->getMethod()) {
+      case 'GET':
+        $response->setStatusCode(200);
+        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon/index'), [
+          'title' => 'Coupon Dashboard',
+        ]));
+      case 'POST':
+        // $coupons = Coupon::filterAdvancedCoupon($request->getQuery('searchQuery'));
+        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon/index'), [
+          'title' => 'Coupon Dashboard',
+        ]));
+    }
+  }
 }
