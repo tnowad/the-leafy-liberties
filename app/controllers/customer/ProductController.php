@@ -52,7 +52,7 @@ class ProductController extends Controller
       return;
     }
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('/product'), [
+    $response->setBody(View::renderWithLayout(new View('pages/product'), [
       'product' => $product,
     ]));
   }
