@@ -81,11 +81,6 @@ echo $product->name;
           Description
         </a>
       </li>
-      <li class="mb-5 mr-10">
-        <a href="/book_detail" src="" alt="" class="text-base sm:text-2xl">
-          Review
-        </a>
-      </li>
       <li class="mb-2 mr-5 sm:mr-10 sm:mb-5">
         <a href="/book_detail" src="" alt="" class="text-base sm:text-2xl">
           Vendor
@@ -97,11 +92,6 @@ echo $product->name;
         Ut earum iure dolor tenetur. Et sit et est deserunt. Cumque
         voluptatum recusandae molestiae recusandae velit. Eaque quam
         repellat omnis.
-        <br />
-        <br />
-        Nulla excepturi iure nobis rerum. Voluptatum aut doloribus quos amet
-        ipsa voluptatibus eius aperiam. Occaecati reiciendis dicta adipisci
-        eum aut velit.
         <br />
         <br />
         Consequuntur occaecati in maxime ab numquam voluptatem. Quo cumque

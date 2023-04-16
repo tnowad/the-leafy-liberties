@@ -35,8 +35,8 @@ class ProductController extends Controller
   public function show(Request $request, Response $response)
   {
     if ($request->getQuery('id')) {
-      $response->setStatusCode(404);
-      $response->redirect(BASE_URI . '/');
+      $response->setStatusCode(200);
+      $response->redirect(BASE_URI . '/product');
       return;
     }
     try {
@@ -52,7 +52,7 @@ class ProductController extends Controller
       return;
     }
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/product'), [
+    $response->setBody(View::renderWithLayout(new View('/product'), [
       'product' => $product,
     ]));
   }
