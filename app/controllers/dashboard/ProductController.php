@@ -189,17 +189,13 @@ class ProductController extends Controller
   {
     switch ($request->getMethod()) {
       case 'GET':
-        $product = Product::filterAdvanced($request->getQuery('searchQuery'));
         $response->setStatusCode(200);
         return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/index'), [
-          'title' => 'Product Dashboard',
-          'product' => $product,
+          'title' => 'Products',
         ]));
       case 'POST':
-        $product = Product::filterAdvanced($request->getQuery('searchQuery'));
         return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/index'), [
-          'title' => 'Product Dashboard',
-          'product' => $product,
+          'title' => 'Products',
         ]));
     }
   }
