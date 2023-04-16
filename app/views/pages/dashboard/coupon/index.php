@@ -1,7 +1,21 @@
+<!-- <?php
+$text = $_POST['searchQuery'];
+echo $text;
+?> -->
 <div class="w-full my-0 mx-auto">
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Coupon</h1>
+      <div class="box-border w-1/2 px-10">
+        <form class="input flex items-center justify-center w-full h-10 bg-white rounded-full"
+          action="<?php BASE_URI . '/dashboard/product' ?>" method="POST">
+          <input type="text" name="searchQuery"
+            class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
+          <button class="flex items-center justify-center w-10 h-10">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
       <button class="add-coupon w-5 h-5 text-2xl">
         +
       </button>
@@ -13,6 +27,7 @@
             <tr>
               <?php
               use App\Models\Coupon;
+
               $name = array("No", "Code", "Expired", "Quantity", "Description", "Action");
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
@@ -24,7 +39,12 @@
           </thead>
           <tbody>
             <?php
-            $coupons = Coupon::all();
+            if (isset($_POST['searchQuery'])) {
+              $text = $_POST['searchQuery'];
+              $coupons = Coupon::filterAdvancedCoupon($text);
+            } else {
+              $coupons = Coupon::all();
+            }
             if (count($coupons) > 0): ?>
               <?php foreach ($coupons as $coupon): ?>
                 <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
@@ -68,16 +88,17 @@
         <h2 class="text-xl font-bold mb-4">Add Coupon</h2>
         <form class="flex flex-col" method="POST" action="<?php BASE_URI . '/dashboard/coupon' ?>">
           <label for="image" class="my-2">Code:</label>
-          <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="code"/>
+          <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="code" />
           <label for="category" class="my-2">Description:</label>
           <textarea name="description" class="bg-gray-100 p-3 focus:outline-none rounded-lg"></textarea>
           <!-- <script>
             CKEDITOR.replace('description');
           </script> -->
           <label for="expired" class="my-2">Expired:</label>
-          <input type="date" value="" id="task_date" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="expired" onchange="return CheckExpired();" />
+          <input type="date" value="" id="task_date" class="bg-gray-100 p-3 focus:outline-none rounded-lg"
+            name="expired" onchange="return CheckExpired();" />
           <label for="remaining" class="my-2">Quantity:</label>
-          <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="quantity"/>
+          <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="quantity" />
           <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
             type="submit">
             Submit
@@ -102,18 +123,15 @@
     event.preventDefault();
     document.querySelector(".add-form").classList.add("hidden")
   })
-  function CheckExpired()
-{
-    var current=new Date(document.getElementById('task_date').value);
-    var today=new Date();
-    if(current.getTime() <= today.getTime())
-    {
-        alert("You Can't Assign Task For Expired Date");
-        document.getElementById('task_date').value="";
+  function CheckExpired() {
+    var current = new Date(document.getElementById('task_date').value);
+    var today = new Date();
+    if (current.getTime() <= today.getTime()) {
+      alert("You Can't Assign Task For Expired Date");
+      document.getElementById('task_date').value = "";
     }
-    else
-    {
-        return true;
+    else {
+      return true;
     }
-}
+  }
 </script>
