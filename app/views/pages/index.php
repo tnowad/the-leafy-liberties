@@ -51,7 +51,7 @@ $slides = $params['slides'];
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Bestselling Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
-      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
+      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="<?php echo BASE_URI . '/products' ?>">
         View All
       </a>
     </div>
@@ -94,7 +94,7 @@ $slides = $params['slides'];
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Popular Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
-      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
+      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="<?php echo BASE_URI . '/products' ?>">
         View All
       </a>
     </div>
@@ -208,7 +208,7 @@ $slides = $params['slides'];
         <div class="flex items-center justify-between gap-2 mb-4 text-center">
           <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Bestselling Books</h2>
           <span class="w-full h-px mx-2 bg-gray-600"></span>
-          <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
+          <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="<?php echo BASE_URI . '/products' ?>">
             View All
           </a>
         </div>

@@ -17,6 +17,10 @@ $router->get('/dashboard/user', [UserController::class, 'customerDashboard']);
 //product
 $router->get('/dashboard/product', [ProductController::class, 'index']);
 $router->post('/dashboard/product', [ProductController::class, 'create']);
+$router->post('/dashboard/product', [ProductController::class, 'filterProduct']);
+
+
+
 //product function
 $router->get('/dashboard/product/update', [ProductController::class, 'update']);
 $router->post('/dashboard/product/update', [ProductController::class, 'update']);
