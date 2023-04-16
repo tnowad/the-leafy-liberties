@@ -4,7 +4,7 @@ use Core\Application;
 $auth = Application::getInstance()->getAuthentication();
 
 
-dd($auth->getPermissions());
+// dd($auth->getPermissions());
 ?>
 <div
   class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">

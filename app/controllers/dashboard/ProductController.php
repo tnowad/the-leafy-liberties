@@ -120,15 +120,15 @@ class ProductController extends Controller
 
   public function update(Request $request, Response $response)
   {
-    $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('products.update')) {
-      return $response->redirect(BASE_URI . '/dashboard', 200, [
-        'toast' => [
-          'type' => 'error',
-          'message' => 'You do not have permission to access this page.'
-        ]
-      ]);
-    }
+    // $auth = Application::getInstance()->getAuthentication();
+    // if (!$auth->hasPermission('products.update')) {
+    //   return $response->redirect(BASE_URI . '/dashboard', 200, [
+    //     'toast' => [
+    //       'type' => 'error',
+    //       'message' => 'You do not have permission to access this page.'
+    //     ]
+    //   ]);
+    // }
     switch ($request->getMethod()) {
       case 'GET':
         $product = Product::findOne(['id' => $request->getQuery('id')]);
@@ -184,5 +184,19 @@ class ProductController extends Controller
     }
     $product->delete();
     return $response->redirect(BASE_URI . 'pages/dashboard/product/index');
+  }
+  public function filterProduct(Request $request, Response $response)
+  {
+    switch ($request->getMethod()) {
+      case 'GET':
+        $response->setStatusCode(200);
+        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/index'), [
+          'title' => 'Products',
+        ]));
+      case 'POST':
+        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/index'), [
+          'title' => 'Products',
+        ]));
+    }
   }
 }

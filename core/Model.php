@@ -65,7 +65,6 @@ abstract class Model
     }
     return $models;
   }
-
   public static function create($attributes)
   {
     $model = new static($attributes);
@@ -148,4 +147,18 @@ abstract class Model
   {
     $this->attributes[$key] = $value;
   }
+
+  public static function filterAdvanced($input)
+  {
+    $table = (new static())->table;
+    $query = "SELECT * FROM $table WHERE name LIKE ?";
+    $params = array("%$input%");
+    $result = self::$db->select($query, $params);
+    $models = [];
+    foreach ($result as $row) {
+      $models[] = new static($row);
+    }
+    return $models;
+  }
+
 }

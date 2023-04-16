@@ -119,4 +119,8 @@ class Product extends Model
   {
     return Product::find($this->id);
   }
+  public function filterProduct($input)
+  {
+    return Product::filterAdvanced($input);
+  }
 }
