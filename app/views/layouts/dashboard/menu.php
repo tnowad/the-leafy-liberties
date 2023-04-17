@@ -92,6 +92,17 @@ $auth = Application::getInstance()->getAuthentication();
           </span>
         </a>
       </li>
+      <li
+        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
+        <a href="<?php echo BASE_URI . "/dashboard/role" ?>" class="relative flex flex-row items-center h-11">
+          <span class="inline-flex items-center justify-center ml-4">
+          <i class="fa-solid fa-user-plus"></i>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">
+            Role
+          </span>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

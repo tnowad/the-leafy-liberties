@@ -4,6 +4,7 @@ use App\Controllers\Customer\DashboardController;
 use App\Controllers\Customer\HomeController;
 use App\Controllers\Dashboard\CouponController;
 use App\Controllers\Dashboard\ProductController;
+use App\Controllers\Dashboard\RoleController;
 use App\Controllers\Dashboard\SlideController;
 use App\Controllers\Dashboard\UserController;
 use Core\Application;
@@ -49,3 +50,7 @@ $router->get('/dashboard/customer', [UserController::class, 'index']);
 //user function
 $router->get('/dashboard/user/update', [UserController::class, 'update']);
 $router->post('/dashboard/user/update', [UserController::class, 'update']);
+
+
+//role
+$router->get('/dashboard/role', [RoleController::class, 'index']);
