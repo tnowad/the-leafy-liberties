@@ -1,5 +1,5 @@
 import { page } from "../Pagination/get-data-by-pagination.js"
-import { handleClick } from "../Pagination/handle-click.js"
+import { handleClick } from "../Pagination/get-data-by-pagination.js" 
 
 const renderPageNumber = async (products) => {
     const totalPage = Math.ceil(products.length / page)
