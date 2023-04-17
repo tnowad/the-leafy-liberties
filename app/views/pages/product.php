@@ -55,7 +55,7 @@ $category = $params['category'];
             class="cursor-pointer flex justify-between items-center bg-gray-50 border border-gray-300 py-2 px-3 rounded-full text-lg gap-2 hover:bg-primary-500 hover:text-gray-700 transition-all group">
             <i
               class="fa-regular fa-heart group-hover:text-white transition-all p-2 group-hover:bg-red-400 rounded-full"></i>
-            <a href="<?php echo BASE_URI . '/wishlist' ?>" src="" alt="" class="font-medium add-to-wishlist">
+            <a href="<?php echo BASE_URI . '/wishlist' . '?id=' . $product->id ?>" src="" alt="" class="font-medium add-to-wishlist">
               Add to wishlist
             </a>
           </div>
