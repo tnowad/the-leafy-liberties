@@ -190,6 +190,7 @@ const filterProducts = async (event) => {
     }
 
     await handlePagination(filteredProducts)
+    handlePageNumber(null,products)
 }
 
 const categoriesFilter = async () => {
