@@ -13,24 +13,49 @@ INSERT INTO
         `name`,
         `deleted_at`
     )
-VALUES (1, NULL, 'J.K. Rowling', NULL), (2, NULL, 'Stephen King', NULL), (
+VALUES (
+        1,
+        'resources/images/authors/jkrowling.jpg',
+        'J.K. Rowling',
+        NULL
+    ), (
+        2,
+        'resources/images/authors/stephenking.jpg',
+        'Stephen King',
+        NULL
+    ), (
         3,
-        NULL,
+        'resources/images/authors/agatha.jpg',
         'Agatha Christie',
         NULL
-    ), (4, NULL, 'Harper Lee', NULL), (
+    ), (
+        4,
+        'resources/images/authors/harperlee.jpg',
+        'Harper Lee',
+        NULL
+    ), (
         5,
-        NULL,
+        'resources/images/authors/fitzgerald.jpg',
         'F. Scott Fitzgerald',
         NULL
-    ), (6, NULL, 'Jane Austen', NULL), (
+    ), (
+        6,
+        'resources/images/authors/janeausten.jpg',
+        'Jane Austen',
+        NULL
+    ), (
         7,
-        NULL,
+        'resources/images/authors/charliedickens.jpg',
         'Charles Dickens',
         NULL
-    ), (8, NULL, 'Mark Twain', NULL), (
+    ), (
+        8,
+        'resources/images/authors/marktwain.jpg',
+        'Mark Twain',
+        NULL
+    ), (
         9,
-        NULL,
+        'resources/images/authors/ernesthemingway.jpg',
         'Ernest Hemingway',
         NULL
     );
@@ -119,6 +144,50 @@ VALUES (
 INSERT INTO
     `permissions` (`id`, `name`, `deleted_at`)
 VALUES (1, 'dashboard.access', NULL), (2, 'author.access', NULL), (3, 'author.create', NULL), (4, 'author. Delete', NULL), (5, 'author. Show', NULL), (6, 'author.update', NULL), (7, 'cart.access', NULL), (8, 'cart.create', NULL), (9, 'cart.delete', NULL), (10, 'cart.show', NULL), (11, 'cart.update', NULL), (12, 'category.access', NULL), (13, 'category.create', NULL), (14, 'category.delete', NULL), (15, 'category.show', NULL), (16, 'category.update', NULL), (17, 'coupon.access', NULL), (18, 'coupon.create', NULL), (19, 'coupon.delete', NULL), (20, 'coupon.show', NULL), (21, 'coupon.update', NULL), (22, 'order.access', NULL), (23, 'order.create', NULL), (24, 'order.delete', NULL), (25, 'order.show', NULL), (26, 'order.update', NULL), (27, 'permission.access', NULL), (28, 'permission.create', NULL), (29, 'permission.delete', NULL), (30, 'permission.show', NULL), (31, 'permission.update', NULL), (32, 'product.access', NULL), (33, 'product.create', NULL), (34, 'product.delete', NULL), (35, 'product.show', NULL), (36, 'product.update', NULL), (37, 'publisher.access', NULL), (38, 'publisher.create', NULL), (39, 'publisher.delete', NULL), (40, 'publisher.show', NULL), (41, 'publisher.update', NULL), (42, 'review.access', NULL), (43, 'review.create', NULL), (44, 'review.delete', NULL), (45, 'review.show', NULL), (46, 'review.update', NULL), (47, 'role.access', NULL), (48, 'role.create', NULL), (49, 'role.delete', NULL), (50, 'role.show', NULL), (51, 'role.update', NULL), (52, 'setting.access', NULL), (53, 'setting.create', NULL), (54, 'setting.delete', NULL), (55, 'setting.show', NULL), (56, 'setting.update', NULL), (57, 'slide.access', NULL), (58, 'slide.create', NULL), (59, 'slide.delete', NULL), (60, 'slide.show', NULL), (61, 'slide.update', NULL), (62, 'tag.access', NULL), (63, 'tag.create', NULL), (64, 'tag.delete', NULL), (65, 'tag.show', NULL), (66, 'tag.update', NULL), (67, 'user.access', NULL), (68, 'user.create', NULL), (69, 'user.delete', NULL), (70, 'user.show', NULL), (71, 'user.update', NULL), (72, 'wishlist.access', NULL), (73, 'wishlist.create', NULL), (74, 'wishlist.delete', NULL), (75, 'wishlist.show', NULL), (76, 'wishlist.update', NULL);
+
+INSERT INTO
+    `publishers` (
+        `id`,
+        `image`,
+        `name`,
+        `deleted_at`
+    )
+VALUES (
+        1,
+        NULL,
+        'Penguin Random House',
+        NULL
+    ), (2, NULL, 'HarperCollins', NULL), (
+        3,
+        NULL,
+        'Simon & Schuster',
+        NULL
+    ), (4, NULL, 'Hachette Livre', NULL), (
+        5,
+        NULL,
+        'Macmillan Publishers',
+        NULL
+    ), (
+        6,
+        NULL,
+        'Bloomsbury Publishing',
+        NULL
+    ), (
+        7,
+        NULL,
+        'Scholastic Corporation',
+        NULL
+    ), (
+        8,
+        NULL,
+        'Pearson Education',
+        NULL
+    ), (9, NULL, 'Wiley', NULL), (
+        10,
+        NULL,
+        'Oxford University Press',
+        NULL
+    );
 
 INSERT INTO
     `products` (
@@ -352,50 +421,6 @@ VALUES (
         'An impassioned novel of activism and natural-world power that is literary in its roots and in its soaring imagination.',
         'resources/images/products/moby-dick.jpg',
         15,
-        NULL
-    );
-
-INSERT INTO
-    `publishers` (
-        `id`,
-        `image`,
-        `name`,
-        `deleted_at`
-    )
-VALUES (
-        1,
-        NULL,
-        'Penguin Random House',
-        NULL
-    ), (2, NULL, 'HarperCollins', NULL), (
-        3,
-        NULL,
-        'Simon & Schuster',
-        NULL
-    ), (4, NULL, 'Hachette Livre', NULL), (
-        5,
-        NULL,
-        'Macmillan Publishers',
-        NULL
-    ), (
-        6,
-        NULL,
-        'Bloomsbury Publishing',
-        NULL
-    ), (
-        7,
-        NULL,
-        'Scholastic Corporation',
-        NULL
-    ), (
-        8,
-        NULL,
-        'Pearson Education',
-        NULL
-    ), (9, NULL, 'Wiley', NULL), (
-        10,
-        NULL,
-        'Oxford University Press',
         NULL
     );
 

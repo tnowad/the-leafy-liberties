@@ -34,26 +34,28 @@ class ProductController extends Controller
 
   public function show(Request $request, Response $response)
   {
-    if ($request->getQuery('id')) {
-      $response->setStatusCode(200);
-      $response->redirect(BASE_URI . '/product');
-      return;
-    }
+    // if ($request->getQuery('id')) {
+    //   $response->setStatusCode(200);
+    //   $response->redirect(BASE_URI . '/product');
+    //   return;
+    // }
     try {
 
       $product = Product::find($request->getQuery('id'));
+      $author = Author::find($product->author_id);
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
-    dd($product);
-    if (!$product) {
-      $response->setStatusCode(404);
-      $response->redirect(BASE_URI . '/');
-      return;
-    }
+    // dd($product);
+    // if (!$product) {
+    //   $response->setStatusCode(404);
+    //   $response->redirect(BASE_URI . '/');
+    //   return;
+    // }
     $response->setStatusCode(200);
     $response->setBody(View::renderWithLayout(new View('pages/product'), [
       'product' => $product,
+      'author' => $author,
     ]));
   }
 

@@ -106,16 +106,19 @@ $slides = $params['slides'];
       <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         <?php
         $productList = Product::filterAdvanced('the');
+        $authors = Author::all();
         foreach ($productList as $product) {
-          // $author = array_filter($authors, function ($author) use ($product) {
-          //   return $author->id === $product->author_id;
-          // });
-          // $author = reset($author);
+          $author = array_filter($authors, function ($author) use ($product) {
+            return $author->id === $product->author_id;
+          });
+          $author = reset($author);
           ?>
           <div
             class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
             <div class="object-cover h-full p-2 w-60">
-              <img src="<?php echo BASE_URI . '/' . $product->image ?>" alt="" class="object-cover w-full h-full" />
+              <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
+                <img src="<?php echo BASE_URI . '/' . $product->image ?>" alt="" class="object-cover w-full h-full" />
+              </a>
             </div>
             <div
               class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
@@ -125,8 +128,7 @@ $slides = $params['slides'];
                 </a>
               </div>
               <div class="text-sm text-gray-500 product-author">
-                <!-- <?php echo $author->name ?> -->
-                Name
+                <?php echo $author->name ?>
               </div>
               <div class="p-0 font-semibold product-price text-primary-900">
                 <?php echo $product->price ?>$
@@ -186,8 +188,7 @@ $slides = $params['slides'];
     </div>
     <div class="flex my-10 lg:gap-0 sm:gap-3 lg:flex-row sm:flex-col">
       <div class="overflow-hidden bg-orange-50 lg:p-5 rounded-2xl w-full md:p-2 lg:overflow-x-hidden">
-        <div
-          class="p-3 mb-6 border-0 border-b-2 border-solid header-table text-4xl whitespace-nowrap text-center">
+        <div class="p-3 mb-6 border-0 border-b-2 border-solid header-table text-4xl whitespace-nowrap text-center">
           <p>Popular Authors</p>
         </div>
         <div class="flex justify-between items-center gap-7">
@@ -196,8 +197,8 @@ $slides = $params['slides'];
           foreach ($authors as $author):
             ?>
             <div class="flex items-center w-full mb-4 author-card justify-between flex-col">
-              <div class="author-face w-44 mb-3">
-                <img src="resources/images/author.png" alt="" class='rounded-full w-full h-full object-contain' />
+              <div class="author-face w-44 mb-3 h-44 rounded-full">
+                <img src="<?php echo BASE_URI . '/' .$author->image ?>" alt="" class='rounded-full w-full h-full object-contain' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">
                 <?php echo $author->name ?>
