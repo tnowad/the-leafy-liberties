@@ -123,7 +123,7 @@ $slides = $params['slides'];
             <div
               class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
               <div class="product-name">
-                <a href="/">
+                <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
                   <?php echo $product->name ?>
                 </a>
               </div>
@@ -198,7 +198,8 @@ $slides = $params['slides'];
             ?>
             <div class="flex items-center w-full mb-4 author-card justify-between flex-col">
               <div class="author-face w-44 mb-3 h-44 rounded-full">
-                <img src="<?php echo BASE_URI . '/' .$author->image ?>" alt="" class='rounded-full w-full h-full object-contain' />
+                <img src="<?php echo BASE_URI . '/' . $author->image ?>" alt=""
+                  class='rounded-full w-full h-full object-contain' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">
                 <?php echo $author->name ?>

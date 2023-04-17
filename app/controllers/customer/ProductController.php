@@ -43,9 +43,11 @@ class ProductController extends Controller
 
       $product = Product::find($request->getQuery('id'));
       $author = Author::find($product->author_id);
+      $category = Category::find($product->author_id);
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
+    // dd($category);
     // dd($product);
     // if (!$product) {
     //   $response->setStatusCode(404);
@@ -56,6 +58,7 @@ class ProductController extends Controller
     $response->setBody(View::renderWithLayout(new View('pages/product'), [
       'product' => $product,
       'author' => $author,
+      'category' => $category,
     ]));
   }
 

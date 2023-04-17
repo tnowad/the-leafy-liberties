@@ -540,16 +540,18 @@ VALUES (
         NULL
     );
 
+-- 1,6,7,8,9 is for JKRowling
+
 INSERT INTO products_categories (product_id, category_id) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
 (4, 4),
 (5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
 (10, 1),
 (11, 2),
 (12, 3),
