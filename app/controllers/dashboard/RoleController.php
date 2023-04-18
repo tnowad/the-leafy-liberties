@@ -33,6 +33,40 @@ class RoleController extends Controller
     ]));
   }
 
+  public function show(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('role.show')) {
+      return $response->redirect(BASE_URI . '/dashboard', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'You do not have permission to access this page.'
+        ]
+      ]);
+    }
+
+    $role = Role::find($request->getQuery('id'));
+    if (!$role || !$role instanceof Role) {
+      return $response->redirect('/dashboard/roles');
+    }
+
+    $rolePermissions = (function () use ($role) {
+      $permissions = [];
+      foreach ($role->permissions() as $rolePermission) {
+        if ($rolePermission->status == '1') {
+          $permissions[] = $rolePermission->permission();
+        }
+      }
+      return $permissions;
+    })();
+
+    return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/role/show'), [
+      'title' => 'Role',
+      'role' => $role,
+      'rolePermissions' => $rolePermissions,
+    ]));
+  }
+
   public function create(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
@@ -69,9 +103,6 @@ class RoleController extends Controller
     }
   }
 
-  public function show(Request $request, Response $response)
-  {
-  }
 
   public function update(Request $request, Response $response)
   {

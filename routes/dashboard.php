@@ -54,6 +54,7 @@ $router->post('/dashboard/user/update', [UserController::class, 'update']);
 
 //role
 $router->get('/dashboard/role', [RoleController::class, 'index']);
+$router->get('/dashboard/role/show', [RoleController::class, 'show']);
 $router->get('/dashboard/role/create', [RoleController::class, 'create']);
 $router->post('/dashboard/role/create', [RoleController::class, 'create']);
 $router->get('/dashboard/role/update', [RoleController::class, 'update']);

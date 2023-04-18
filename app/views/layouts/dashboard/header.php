@@ -14,8 +14,7 @@ $user = $auth->getUser();
       <i class="mr-2 font-medium fa-regular fa-bars-sort fa-lg cursor-pointer" onclick="navMenu()"></i>
       <span class="text-2xl font-medium text-[#52938d]">
         <?php
-        $title = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
-        echo ucfirst(basename($title));
+        echo ucfirst(basename($params['title'] ?? 'Dashboard'));
         ?>
       </span>
     </div>

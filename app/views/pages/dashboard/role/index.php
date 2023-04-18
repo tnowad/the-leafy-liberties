@@ -24,10 +24,9 @@ $roles = $params['roles'];
       <?php foreach ($roles as $role): ?>
         <div class="relative bg-white rounded-2xl shadow-lg">
           <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
-            <p class="text-lg font-semibold">
+            <a class="text-lg font-semibold" href="<?php echo BASE_URI . '/dashboard/role/show?id=' . $role->id ?>">
               <?php echo ucfirst($role->name) ?>
-            </p>
-            <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
+            </a>
             <!-- Icon edit or delete -->
             <div class="flex items-center gap-2">
               <a href="<?php echo BASE_URI . '/dashboard/role/update?id=' . $role->id ?>">
