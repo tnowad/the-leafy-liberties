@@ -65,7 +65,12 @@ class Router
       $callback = $this->routes[$method][$path] ?? false;
       if ($callback === false) {
         $this->response->setStatusCode(404);
-        throw new Exception('Not found');
+        return $this->response->redirect(BASE_URI . '/', 404, [
+          'toast' => [
+            'message' => 'Page not found',
+            'type' => 'error'
+          ]
+        ]);
       }
       if (is_array($callback)) {
         $controller = new $callback[0]();
@@ -74,7 +79,7 @@ class Router
       call_user_func($callback, array(&$this->request)[0], array(&$this->response)[0]);
     } catch (Exception $e) {
       $this->response->setStatusCode(500);
-      echo $e;
+      echo $e->getMessage();
     }
   }
 
