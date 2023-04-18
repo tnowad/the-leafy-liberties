@@ -44,15 +44,9 @@ trait SoftDeletes
 
   public static function all()
   {
-    $records = parent::all();
-
-    $filteredRecords = [];
-    foreach ($records as $record) {
-      if (!$record->deleted_at) {
-        $filteredRecords[] = $record;
-      }
-    }
-    return $filteredRecords;
+    return parent::where([
+      'sql' => 'deleted_at IS NULL',
+    ]);
   }
 
 }

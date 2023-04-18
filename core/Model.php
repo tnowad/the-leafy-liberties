@@ -65,6 +65,32 @@ abstract class Model
     }
     return $models;
   }
+
+  public static function where($conditions = [])
+  {
+    $table = (new static )->table;
+    $query = "SELECT * FROM $table WHERE ";
+    if (isset($conditions['sql'])) {
+      $query .= $conditions['sql'];
+      $result = self::$db->select($query, $conditions['params'] ?? []);
+      $models = [];
+      foreach ($result as $row) {
+        $models[] = new static($row);
+      }
+      return $models;
+    }
+    foreach ($conditions as $condition) {
+      $query .= $condition['column'] . " " . $condition['operator'] . " " . $condition['value'] . " AND ";
+    }
+    $query = rtrim($query, " AND ");
+    $result = self::$db->select($query);
+    $models = [];
+    foreach ($result as $row) {
+      $models[] = new static($row);
+    }
+    return $models;
+  }
+
   public static function create($attributes)
   {
     $model = new static($attributes);
