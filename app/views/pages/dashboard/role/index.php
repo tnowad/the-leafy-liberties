@@ -25,10 +25,9 @@ $roles = $params['roles'];
         <div class="relative bg-white rounded-2xl shadow-lg">
           <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
             <p class="text-lg font-semibold">
-              <?php echo $role->name ?>
+              <?php echo ucfirst($role->name) ?>
             </p>
             <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
-            <i class="fa-solid fa-chevron-down peer-checked/admin:rotate-180 rotate-0 transition-all duration-300"></i>
             <!-- Icon edit or delete -->
             <div class="flex items-center gap-2">
               <a href="<?php echo BASE_URI . '/dashboard/role/update?id=' . $role->id ?>">
@@ -41,6 +40,7 @@ $roles = $params['roles'];
           </div>
         </div>
       <?php endforeach; ?>
+      <!--
       <div class="relative bg-white rounded-2xl shadow-lg">
         <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
           <p class="text-lg font-semibold">User</p>
@@ -268,15 +268,16 @@ $roles = $params['roles'];
                     class="shadow-lg w-16 h-8 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-8 after:w-8 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                   </div>
                 </label>
-
+                
               </div>
             </li>
           </ul>
         </div>
       </div>
+      </div>
+      -->
     </div>
   </div>
-</div>
 </div>
 <script>
   let input = document.querySelectorAll(".checkbox-input");
