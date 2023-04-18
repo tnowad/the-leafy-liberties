@@ -2,6 +2,8 @@
 
 namespace Utils;
 
+use Exception;
+
 class DotEnv
 {
   private static $config = [];
@@ -29,7 +31,11 @@ class DotEnv
 
   public static function load()
   {
-    $env = file_get_contents(__DIR__ . '/../.env');
+    $path = __DIR__ . '/../.env';
+    if (!file_exists($path)) {
+      die('File .env not found');
+    }
+    $env = file_get_contents($path);
     $env = explode("\n", $env);
     foreach ($env as $line) {
       $line = trim($line);
