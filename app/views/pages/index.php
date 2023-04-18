@@ -2,19 +2,15 @@
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Slide;
 
-$slides = $params['slides'];
-
-$productHtml = function () use ($product) {
-}
-
-  ?>
+?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
-        <?php foreach ($slides as $slide): ?>
+        <?php foreach (array_slice(Slide::findAll(['status' => '1']), 0, 5) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
             <img src="<?php echo BASE_URI . $slide->image ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
@@ -24,16 +20,10 @@ $productHtml = function () use ($product) {
       </div>
 
       <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
-          data-carousel-slide-to="0"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
-          data-carousel-slide-to="1"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-          data-carousel-slide-to="2"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-          data-carousel-slide-to="3"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-          data-carousel-slide-to="4"></button>
+        <?php for ($i = 0; $i < 5; $i++): ?>
+          <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
+            data-carousel-slide-to="<?php echo $i ?>"></button>
+        <?php endfor; ?>
       </div>
 
       <button type="button"
@@ -52,6 +42,7 @@ $productHtml = function () use ($product) {
           <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
         </span>
       </button>
+
     </div>
   </div>
   <div class="container mx-auto">
@@ -64,6 +55,7 @@ $productHtml = function () use ($product) {
       </a>
     </div>
     <div class="relative flex w-full gap-6 overflow-hidden bestselling-products">
+
       <?php foreach (array_slice(Product::all(), 0, 6) as $product): ?>
         <div
           class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
@@ -94,6 +86,7 @@ $productHtml = function () use ($product) {
           </div>
         </div>
       <?php endforeach; ?>
+
     </div>
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Popular Books</h2>
