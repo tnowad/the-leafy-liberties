@@ -35,6 +35,38 @@ class RoleController extends Controller
 
   public function create(Request $request, Response $response)
   {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('role.create')) {
+      return $response->redirect(BASE_URI . '/dashboard', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'You do not have permission to access this page.'
+        ]
+      ]);
+    }
+
+    switch ($request->getMethod()) {
+      case 'POST':
+        $role = new Role();
+        $role->name = $request->getParam('name');
+        $role->save();
+
+        $permissions = $request->getParam('permissions');
+        if (is_array($permissions)) {
+          foreach ($permissions as $permission) {
+            $role->addPermission($permission);
+          }
+        }
+        return $response->redirect('/dashboard/roles');
+      case 'GET':
+        $permissions = Permission::all();
+        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/role/create'), [
+          'title' => 'Create Role',
+          'permissions' => $permissions,
+        ]));
+      default:
+        break;
+    }
   }
 
   public function show(Request $request, Response $response)

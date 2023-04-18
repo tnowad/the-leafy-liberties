@@ -1,5 +1,4 @@
 <?php
-$role = $params['role'];
 $permissions = $params['permissions'];
 $allPermissions = [];
 
@@ -21,10 +20,8 @@ $allPermissions = array_values($allPermissions);
         </label>
         <input
             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-            type="text" name="name" id="name" value="<?php echo $role->name ?>">
+            type="text" name="name" id="name" placeholder="Role name">
     </div>
-
-    <input type="hidden" name="id" value="<?php echo $role->id ?>">
 
     <!-- submit -->
     <button type="submit"
