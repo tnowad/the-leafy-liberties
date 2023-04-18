@@ -42,6 +42,7 @@ use App\Models\Pagination;
             <?php
             if (isset($_POST['searchQuery'])) {
               $text = $_POST['searchQuery'];
+              dd($text);
               $products = Product::filterAdvanced($text);
             } else {
               $products = Product::all();
@@ -53,7 +54,7 @@ use App\Models\Pagination;
                     <?php echo $product->id ?>
                   </td>
                   <td class="w-32 h-24 p-3">
-                    <img src="<?php echo BASE_URI . $product->image ?>" alt="" />
+                    <img src="<?php echo BASE_URI . '/' .$product->image ?>" alt="" />
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $product->name ?>
