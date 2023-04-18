@@ -14,16 +14,18 @@ class RoleController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('product.access')) {
-    //   return $response->redirect(BASE_URI . '/dashboard', 200, [
-    //     'toast' => [
-    //       'type' => 'error',
-    //       'message' => 'You do not have permission to access this page.'
-    //     ]
-    //   ]);
-    // }
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('role.access')) {
+      return $response->redirect(BASE_URI . '/dashboard', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'You do not have permission to access this page.'
+        ]
+      ]);
+    }
+
     $role = Role::all();
+
     return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/role/index'), [
       'title' => 'Roles',
       'roles' => $role,

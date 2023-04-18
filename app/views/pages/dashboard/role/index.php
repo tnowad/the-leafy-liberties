@@ -1,8 +1,5 @@
 <?php
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Pagination;
-
+$roles = $params['roles'];
 ?>
 
 <div class="w-full mx-auto my-0">
@@ -95,13 +92,22 @@ use App\Models\Pagination;
                     class="shadow-lg w-16 h-8 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-8 after:w-8 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                   </div>
                 </label>
-
               </div>
             </li>
           </ul>
         </div>
       </div>
       <div class="relative bg-white rounded-2xl shadow-lg">
+
+        <?php foreach ($roles as $role): ?>
+          <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
+            <p class="text-lg font-semibold">
+              <?php echo $role->name ?>
+            </p>
+            <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
+            <i class="fa-solid fa-chevron-down peer-checked/admin:rotate-180 rotate-0 transition-all duration-300"></i>
+          </div>
+        <?php endforeach; ?>
         <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
           <p class="text-lg font-semibold">Admin</p>
           <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
