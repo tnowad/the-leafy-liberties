@@ -3,18 +3,14 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Pagination;
 
-// $test = Product::filterAdvanced('Harry Potter');
-// dd($test)
-// $test = $_POST['searchQuery'];
-// echo $test;
-  ?>
+?>
 
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Product</h1>
       <div class="box-border w-1/2 px-10">
-        <form class="input flex items-center justify-center w-full h-10 bg-white rounded-full"
+        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input"
           action="<?php BASE_URI . '/dashboard/product' ?>" method="POST">
           <input type="text" name="searchQuery"
             class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
@@ -44,10 +40,10 @@ use App\Models\Pagination;
           </thead>
           <tbody>
             <?php
-            if(isset($_POST['searchQuery'])){
+            if (isset($_POST['searchQuery'])) {
               $text = $_POST['searchQuery'];
               $products = Product::filterAdvanced($text);
-            }else{
+            } else {
               $products = Product::all();
             }
             if (count($products) > 0): ?>
@@ -74,7 +70,7 @@ use App\Models\Pagination;
                   <td class="p-2">
                     <?php echo $product->quantity ?>
                   </td>
-                  <td class="flex items-center justify-center h-full px-5 py-3 gap-2">
+                  <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
                     <a href="<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>"
                       class="edit-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all block">
                       <i class="fa-solid fa-pen-to-square"></i>

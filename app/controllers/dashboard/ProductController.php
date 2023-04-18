@@ -169,7 +169,7 @@ class ProductController extends Controller
   public function delete(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('products.delete')) {
+    if (!$auth->hasPermission('product.delete')) {
       return $response->redirect(BASE_URI . '/dashboard', 200, [
         'toast' => [
           'type' => 'error',
@@ -178,12 +178,21 @@ class ProductController extends Controller
       ]);
     }
     $product = Product::find($request->getQuery('id'));
-    dd($product);
     if (!$product) {
-      return $response->redirect(BASE_URI . 'pages/dashboard/product/index');
+      return $response->redirect(BASE_URI . '/dashboard/products');
     }
-    $product->delete();
-    return $response->redirect(BASE_URI . 'pages/dashboard/product/index');
+
+    switch ($request->getMethod()) {
+      case 'GET':
+        $response->setStatusCode(200);
+        $product->delete();
+        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/product/delete'), [
+          'title' => 'Delete Product',
+          'product' => $product,
+        ]));
+      case 'POST':
+        return $response->redirect(BASE_URI . '/dashboard/products');
+    }
   }
   public function filterProduct(Request $request, Response $response)
   {

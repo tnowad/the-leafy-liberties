@@ -8,9 +8,11 @@ use App\Models\Author;
 use App\Models\ProductTag;
 use App\Models\Publisher;
 use App\Models\Tag;
+use Core\Traits\SoftDeletes;
 
 class Product extends Model
 {
+  use SoftDeletes;
   protected $table = 'products';
 
   protected $fillable = [
