@@ -16,9 +16,9 @@ $roles = $params['roles'];
           </button>
         </form>
       </div>
-      <button class="w-5 h-5 text-2xl add-product">
-        +
-      </button>
+      <a href="<?php echo BASE_URI . '/dashboard/role/create' ?>">
+        <i class="fa-solid fa-plus"></i>
+      </a>
     </div>
     <div class="my-8 cursor-pointer role-statistics rounded-2xl bg-transparent flex flex-col gap-5">
       <?php foreach ($roles as $role): ?>
