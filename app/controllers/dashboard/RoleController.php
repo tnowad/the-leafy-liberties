@@ -78,9 +78,7 @@ class RoleController extends Controller
       ]));
     }
     if ($request->getMethod() === 'POST') {
-      $role = Role::find($request->getParam('id'));
-      $role->name = $request->getParam('name');
-      $role->save();
+
       return $response->redirect('/dashboard/roles');
     }
 
@@ -88,5 +86,30 @@ class RoleController extends Controller
 
   public function delete(Request $request, Response $response)
   {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('role.delete')) {
+      return $response->redirect(BASE_URI . '/dashboard', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'You do not have permission to access this page.'
+        ]
+      ]);
+    }
+
+    switch ($request->getMethod()) {
+      case 'POST':
+        break;
+      case 'GET':
+        $role = Role::find($request->getQuery('id'));
+        if (!$role || !$role instanceof Role) {
+          return $response->redirect('/dashboard/roles');
+        }
+        return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/role/delete'), [
+          'title' => 'Delete Role',
+          'role' => $role,
+        ]));
+      default:
+        break;
+    }
   }
 }
