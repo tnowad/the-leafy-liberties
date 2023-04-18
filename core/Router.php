@@ -3,7 +3,6 @@
 namespace Core;
 
 use Exception;
-use Utils\DotEnv;
 
 class Router
 {
@@ -25,31 +24,6 @@ class Router
   public function post($path, $callback)
   {
     $this->routes['POST'][$path] = $callback;
-  }
-
-  public function put($path, $callback)
-  {
-    $this->routes['PUT'][$path] = $callback;
-  }
-
-  public function delete($path, $callback)
-  {
-    $this->routes['DELETE'][$path] = $callback;
-  }
-
-  public function patch($path, $callback)
-  {
-    $this->routes['PATCH'][$path] = $callback;
-  }
-
-  public function options($path, $callback)
-  {
-    $this->routes['OPTIONS'][$path] = $callback;
-  }
-
-  public function head($path, $callback)
-  {
-    $this->routes['HEAD'][$path] = $callback;
   }
 
   public function getRoutes($method)
@@ -81,15 +55,5 @@ class Router
       $this->response->setStatusCode(500);
       echo $e->getMessage();
     }
-  }
-
-  public function render($view, $params = [])
-  {
-    return Application::getInstance()->getView()->render(new View($view), $params);
-  }
-
-  public function renderWithLayout($view, $params = [])
-  {
-    return Application::getInstance()->getView()->renderWithLayout(new View($view), $params);
   }
 }
