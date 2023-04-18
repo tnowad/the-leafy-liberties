@@ -72,6 +72,16 @@ class Response
     $this->headers = $headers;
   }
 
+  public function getHeader($key)
+  {
+    return $this->headers[$key] ?? null;
+  }
+
+  public function setHeader($key, $value)
+  {
+    $this->headers[$key] = $value;
+  }
+
   public function getBody()
   {
     return $this->body;
