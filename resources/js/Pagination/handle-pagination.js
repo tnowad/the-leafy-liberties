@@ -4,6 +4,8 @@ import { getDataByPagination } from "./get-data-by-pagination.js"
 
 const handlePagination = async (products) => {
     await renderPageNumber(products)
+    const perProducts = getDataByPagination(null, products)
+    renderProducts(perProducts)
 }
 
 export { handlePagination }

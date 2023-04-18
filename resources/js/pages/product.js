@@ -1,7 +1,3 @@
-// import { getData } from "../getDataFormServer/get-data.js"
-// import { handlePagination } from "../Pagination/handle-pagination.js"
-// import { handlePageNumber } from "../Pagination/handle-page-number.js"
-
 const page = 6
 let currentPage = 1
 
@@ -38,6 +34,7 @@ const handleClick = (i, products) => {
 }
 
 const handlePageNumber = async (number, products) => {
+    if (!products.length) return renderProducts(products)
     const pagination = document.querySelector('ul')
     const liElements = pagination.querySelectorAll('li')
     const perProducts = getDataByPagination(number, products)
@@ -56,40 +53,46 @@ const handlePagination = async (products) => {
 }
 
 const renderPageNumber = async (products) => {
-    const totalPage = Math.ceil(products.length / page)
-    document.getElementById("pagination").innerHTML = ''
-    for (var i = 0; i < totalPage + 2; i++) {
-        const li = document.createElement("li")
-        if (i == 0) {
-            li.innerHTML = "Prev"
-            li.onclick = handleClick(i, products)
-            li.classList.add("bg-primary", "p-3", "rounded-full", "text-white", "w-13", "h-12", "cursor-pointer", "hover:bg-primary-500", "transition-all", `page${i}`)
+
+    // console.log(products.length)
+    if (products.length == 0) document.getElementById("pagination").innerHTML = ''
+    else {
+        // console.log("Pagination")
+        const totalPage = Math.ceil(products.length / page)
+        document.getElementById("pagination").innerHTML = ''
+        for (var i = 0; i < totalPage + 2; i++) {
+            const li = document.createElement("li")
+            if (i == 0) {
+                li.innerHTML = "Prev"
+                li.onclick = handleClick(i, products)
+                li.classList.add("bg-primary", "p-3", "rounded-full", "text-white", "w-13", "h-12", "cursor-pointer", "hover:bg-primary-500", "transition-all", `page${i}`)
+            }
+            else if (i == totalPage + 1) {
+                li.innerHTML = "Next"
+                li.onclick = handleClick(i, products)
+                li.classList.add("bg-primary", "p-3", "rounded-full", "text-white", "w-13", "h-12", "cursor-pointer", "hover:bg-primary-500", "transition-all", `page${i}`)
+            }
+            else {
+                li.innerHTML = i
+                li.onclick = handleClick(i, products)
+                li.classList.add("bg-primary", "p-3", "rounded-full", "text-white", "w-12", "h-12", "cursor-pointer", "hover:bg-primary-500", "transition-all", `page${i}`)
+            }
+            document.getElementById("pagination").appendChild(li)
         }
-        else if (i == totalPage + 1) {
-            li.innerHTML = "Next"
-            li.onclick = handleClick(i, products)
-            li.classList.add("bg-primary", "p-3", "rounded-full", "text-white", "w-13", "h-12", "cursor-pointer", "hover:bg-primary-500", "transition-all", `page${i}`)
-        }
-        else {
-            li.innerHTML = i
-            li.onclick = handleClick(i, products)
-            li.classList.add("bg-primary", "p-3", "rounded-full", "text-white", "w-12", "h-12", "cursor-pointer", "hover:bg-primary-500", "transition-all", `page${i}`)
-        }
-        document.getElementById("pagination").appendChild(li)
     }
 }
 
 const renderProducts = async (products) => {
     const productContainer = document.getElementById("product-list");
     productContainer.innerHTML = "";
-  
+
     let authors = await getData("getAuthors");
-  
+
     products.forEach((product) => {
-      const productElement = document.createElement("div");
-      productElement.classList.add("product");
-      const author = authors.find((author) => author.id === product.author_id);
-      productContainer.innerHTML += `
+        const productElement = document.createElement("div");
+        productElement.classList.add("product");
+        const author = authors.find((author) => author.id === product.author_id);
+        productContainer.innerHTML += `
           <div class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
               <div class="object-cover h-full p-2 w-60">
               <a href="/the-leafy-liberties/product?id=${product.id}">
@@ -117,9 +120,9 @@ const renderProducts = async (products) => {
           `;
     });
     if (productContainer.innerHTML === "") {
-      productContainer.innerHTML += `<h1 class="text-sm sm:text-4xl text-primary-600 w-[1100px] text-center">Không có sản phẩm nào</h1>`;
+        productContainer.innerHTML += `<h1 class="text-sm sm:text-4xl text-primary-600 w-[1100px] text-center">Không có sản phẩm nào</h1>`;
     }
-  };
+};
 
 
 
@@ -183,7 +186,7 @@ const filterProducts = async (event) => {
     }
 
     await handlePagination(filteredProducts)
-    handlePageNumber(null, products)
+    handlePageNumber(null, filteredProducts)
 }
 
 const categoriesFilter = async () => {
