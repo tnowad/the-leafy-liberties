@@ -199,7 +199,7 @@ $slides = $params['slides'];
             <div class="flex items-center w-full mb-4 author-card justify-between flex-col">
               <div class="author-face w-44 mb-3 h-44 rounded-full">
                 <img src="<?php echo BASE_URI . '/' . $author->image ?>" alt=""
-                  class='rounded-full w-full h-full object-contain' />
+                  class='rounded-full w-full h-full object-cover' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">
                 <?php echo $author->name ?>
