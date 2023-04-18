@@ -46,11 +46,25 @@ class Router
           ]
         ]);
       }
+
       if (is_array($callback)) {
+        if (class_exists($callback[0]) === false) {
+          throw new Exception("Class {$callback[0]} not found");
+        }
+
+        if (method_exists($callback[0], $callback[1]) === false) {
+          throw new Exception("Method {$callback[1]} not found");
+        }
+
+        if (is_subclass_of($callback[0], 'Core\Controller') === false) {
+          throw new Exception("Class {$callback[0]} must be a subclass of Core\Controller");
+        }
+
         $controller = new $callback[0]();
         $callback[0] = $controller;
       }
       call_user_func($callback, array(&$this->request)[0], array(&$this->response)[0]);
+
     } catch (Exception $e) {
       $this->response->setStatusCode(500);
       echo $e->getMessage();

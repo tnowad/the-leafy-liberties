@@ -18,7 +18,7 @@ $router->get('/cart', [CartController::class, 'index']);
 
 $router->get('/wishlist', [WishlistController::class, 'index']);
 $router->post('/wishlist', [WishlistController::class, 'moveToCart']);
-$router->delete('/wishlist', [WishlistController::class, 'remove']);
+$router->post('/wishlist/delete', [WishlistController::class, 'remove']);
 // $router->post('/wishlist', [WishlistController::class, 'add']);
 
 $router->get('/products', [ProductController::class, 'index']);
