@@ -19,7 +19,7 @@ $router->get('/cart', [CartController::class, 'index']);
 $router->get('/wishlist', [WishlistController::class, 'index']);
 $router->post('/wishlist', [WishlistController::class, 'moveToCart']);
 $router->delete('/wishlist', [WishlistController::class, 'remove']);
-$router->put('/wishlist', [WishlistController::class, 'add']);
+// $router->post('/wishlist', [WishlistController::class, 'add']);
 
 $router->get('/products', [ProductController::class, 'index']);
 $router->get('/product', [ProductController::class, 'show']);
