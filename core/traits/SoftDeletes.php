@@ -22,28 +22,11 @@ trait SoftDeletes
     $this->save();
   }
 
-  public static function withTrashed(): self
+  public static function all($withDeleted = false)
   {
-    return new static;
-  }
-
-  public static function onlyTrashed(): self
-  {
-    return new static;
-  }
-
-  protected function getQualifiedDeletedAtColumn(): string
-  {
-    return $this->table . '.' . $this->deletedAtColumn;
-  }
-
-  public function isSoftDeleted(): bool
-  {
-    return !is_null($this->{$this->deletedAtColumn});
-  }
-
-  public static function all()
-  {
+    if ($withDeleted) {
+      return parent::all();
+    }
     return parent::where([
       'sql' => 'deleted_at IS NULL',
     ]);
