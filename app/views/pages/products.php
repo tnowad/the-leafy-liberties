@@ -70,5 +70,6 @@
 </div>
 
 
-<script type="module" src="resources/js/pages/products.js">
+<script src="resources/js/pages/product.js">
+
 </script>
