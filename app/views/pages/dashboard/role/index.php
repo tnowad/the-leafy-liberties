@@ -21,6 +21,17 @@ $roles = $params['roles'];
       </button>
     </div>
     <div class="my-8 cursor-pointer role-statistics rounded-2xl bg-transparent flex flex-col gap-5">
+      <?php foreach ($roles as $role): ?>
+        <div class="relative bg-white rounded-2xl shadow-lg">
+          <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
+            <p class="text-lg font-semibold">
+              <?php echo $role->name ?>
+            </p>
+            <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
+            <i class="fa-solid fa-chevron-down peer-checked/admin:rotate-180 rotate-0 transition-all duration-300"></i>
+          </div>
+        </div>
+      <?php endforeach; ?>
       <div class="relative bg-white rounded-2xl shadow-lg">
         <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
           <p class="text-lg font-semibold">User</p>
@@ -99,15 +110,8 @@ $roles = $params['roles'];
       </div>
       <div class="relative bg-white rounded-2xl shadow-lg">
 
-        <?php foreach ($roles as $role): ?>
-          <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
-            <p class="text-lg font-semibold">
-              <?php echo $role->name ?>
-            </p>
-            <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
-            <i class="fa-solid fa-chevron-down peer-checked/admin:rotate-180 rotate-0 transition-all duration-300"></i>
-          </div>
-        <?php endforeach; ?>
+
+
         <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
           <p class="text-lg font-semibold">Admin</p>
           <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
