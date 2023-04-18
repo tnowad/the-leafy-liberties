@@ -13,14 +13,15 @@ $router = Application::getInstance()->getRouter();
 
 $router->get('/dashboard', [DashboardController::class, 'index']);
 
-$router->get('/dashboard/user', [UserController::class, 'customerDashboard']);
-
-//product
+// product
 $router->get('/dashboard/product', [ProductController::class, 'index']);
-$router->post('/dashboard/product', [ProductController::class, 'create']);
-$router->post('/dashboard/product', [ProductController::class, 'filterProduct']);
-
-
+$router->get('/dashboard/product/show', [ProductController::class, 'show']);
+$router->get('/dashboard/product/create', [ProductController::class, 'create']);
+$router->post('/dashboard/product/create', [ProductController::class, 'create']);
+$router->get('/dashboard/product/update', [ProductController::class, 'update']);
+$router->post('/dashboard/product/update', [ProductController::class, 'update']);
+$router->get('/dashboard/product/delete', [ProductController::class, 'delete']);
+$router->post('/dashboard/product/delete', [ProductController::class, 'delete']);
 
 //product function
 $router->get('/dashboard/product/update', [ProductController::class, 'update']);
@@ -36,21 +37,25 @@ $router->post('/dashboard/coupon', [CouponController::class, 'filterCoupon']);
 $router->get('/dashboard/coupon/update', [CouponController::class, 'update']);
 $router->post('/dashboard/coupon/update', [CouponController::class, 'update']);
 
-
 // slide
 $router->get('/dashboard/slide', [SlideController::class, 'index']);
+$router->get('/dashboard/slide/show', [SlideController::class, 'show']);
+$router->get('/dashboard/slide/create', [SlideController::class, 'create']);
 $router->post('/dashboard/slide/create', [SlideController::class, 'create']);
 $router->get('/dashboard/slide/update', [SlideController::class, 'update']);
+$router->post('/dashboard/slide/update', [SlideController::class, 'update']);
+$router->get('/dashboard/slide/delete', [SlideController::class, 'delete']);
+$router->post('/dashboard/slide/delete', [SlideController::class, 'delete']);
 
-$router->get('/dashboard/comment', [HomeController::class, 'commentDashboard']);
-
-//User
-$router->get('/dashboard/customer', [UserController::class, 'index']);
-
-//user function
+// user
+$router->get('/dashboard/user', [UserController::class, 'index']);
+$router->get('/dashboard/user/show', [UserController::class, 'show']);
+$router->get('/dashboard/user/create', [UserController::class, 'create']);
+$router->post('/dashboard/user/create', [UserController::class, 'create']);
 $router->get('/dashboard/user/update', [UserController::class, 'update']);
 $router->post('/dashboard/user/update', [UserController::class, 'update']);
-
+$router->get('/dashboard/user/delete', [UserController::class, 'delete']);
+$router->post('/dashboard/user/delete', [UserController::class, 'delete']);
 
 //role
 $router->get('/dashboard/role', [RoleController::class, 'index']);
