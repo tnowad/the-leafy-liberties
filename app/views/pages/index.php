@@ -1,9 +1,14 @@
 <?php
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Product;
 
 $slides = $params['slides'];
-?>
+
+$productHtml = function () use ($product) {
+}
+
+  ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
@@ -59,40 +64,36 @@ $slides = $params['slides'];
       </a>
     </div>
     <div class="relative flex w-full gap-6 overflow-hidden bestselling-products">
-      <?php
-      $total = 10;
-      for ($i = 1; $i < $total; $i++) { ?>
+      <?php foreach (array_slice(Product::all(), 0, 6) as $product): ?>
         <div
-          class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
-          <div class="object-cover h-full p-2 w-60">
-            <img src="resources/images/productImg.png" alt="" class="object-cover w-full h-full" />
+          class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
+          <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
+            <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
+              <img src="<?php echo BASE_URI . '/' . $product->image ?>" alt="" class="object-cover w-full h-full" />
+            </a>
           </div>
           <div
-            class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+            class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
             <div class="product-name">
-              <a href="/">My Dearest Darkest</a>
+              <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
+                <?php echo $product->name ?>
+              </a>
             </div>
-            <div class=" product-rate">
-              <i class="text-yellow-300 fa-solid fa-star"></i>
-              <i class="text-yellow-300 fa-solid fa-star"></i>
-              <i class="text-yellow-300 fa-solid fa-star"></i>
-              <i class="text-yellow-300 fa-solid fa-star"></i>
-              <i class="text-yellow-300 fa-solid fa-star"></i>
+            <div class="text-sm text-gray-500 product-author">
+              <?php echo $product->author()->name ?>
             </div>
-            <div class="text-sm product-author">Enrique Wallace</div>
             <div class="p-0 font-semibold product-price text-primary-900">
-              150.000VND
+              <?php echo $product->price ?>$
             </div>
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-              <p class="font-semibold select-option-text">Add to wishlist</p>
+              <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
               <i
                 class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
             </div>
           </div>
         </div>
-      <?php }
-      ?>
+      <?php endforeach; ?>
     </div>
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Popular Books</h2>
@@ -104,31 +105,24 @@ $slides = $params['slides'];
     </div>
     <div class="flex gap-4">
       <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        <?php
-        $productList = Product::filterAdvanced('the');
-        $authors = Author::all();
-        foreach ($productList as $product) {
-          $author = array_filter($authors, function ($author) use ($product) {
-            return $author->id === $product->author_id;
-          });
-          $author = reset($author);
-          ?>
+
+        <?php foreach (array_slice(Product::all(), 0, 24) as $product): ?>
           <div
-            class="flex flex-col items-center justify-center w-full px-[22px] box-border pt-5 product-info group border-solid border hover:border-gray-500 transition-all hover:shadow-xl">
-            <div class="object-cover h-full p-2 w-60">
+            class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
+            <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
               <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
                 <img src="<?php echo BASE_URI . '/' . $product->image ?>" alt="" class="object-cover w-full h-full" />
               </a>
             </div>
             <div
-              class="flex flex-col items-start justify-center w-full p-1 text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+              class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
               <div class="product-name">
                 <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
                   <?php echo $product->name ?>
                 </a>
               </div>
               <div class="text-sm text-gray-500 product-author">
-                <?php echo $author->name ?>
+                <?php echo $product->author()->name ?>
               </div>
               <div class="p-0 font-semibold product-price text-primary-900">
                 <?php echo $product->price ?>$
@@ -141,9 +135,8 @@ $slides = $params['slides'];
               </div>
             </div>
           </div>
-          <?php
-        }
-        ?>
+        <?php endforeach ?>
+
       </div>
       <div class="hidden w-[25%] xl:block 2xl:w-1/3">
         <div class="sticky w-full h-auto top-32">
@@ -161,7 +154,7 @@ $slides = $params['slides'];
       </div>
     </div>
     <div class="flex items-center justify-between gap-2 my-4 text-center">
-      <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Genres Books</h2>
+      <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Category Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
       <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
         View All
@@ -169,42 +162,41 @@ $slides = $params['slides'];
     </div>
     <div class="relative w-full mb-5">
       <div class="grid grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
-        <?php
-        $name = array("Fantasy", "Horror", "Drama", "Science-fiction");
-        $total = 4;
-        for ($i = 1; $i <= $total; $i++) { ?>
-          <div class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit">
+
+        <?php foreach (array_slice(Category::all(), 0, 4) as $category): ?>
+          <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit"
+            href="<?php echo BASE_URI . '/products?categories[]=' . $category->id ?>">
             <div class="w-full h-56 overflow-hidden img rounded-3xl">
-              <img src="resources/images/genresHorror.png" alt=""
-                class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-125" />
+              <img
+                src="<?php echo $category->image ? BASE_URI . '/' . $category->image : BASE_URI . '/resources/images/categories/placeholder.png' ?>"
+                alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
             <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
-              <?php echo $name[$i - 1] ?>
+              <?php echo $category->name ?>
             </p>
-          </div>
-        <?php }
-        ?>
+          </a>
+        <?php endforeach; ?>
+
       </div>
     </div>
     <div class="flex my-10 lg:gap-0 sm:gap-3 lg:flex-row sm:flex-col">
-      <div class="overflow-hidden bg-orange-50 lg:p-5 rounded-2xl w-full md:p-2 lg:overflow-x-hidden">
-        <div class="p-3 mb-6 border-0 border-b-2 border-solid header-table text-4xl whitespace-nowrap text-center">
+      <div class="w-full overflow-hidden bg-orange-50 lg:p-5 rounded-2xl md:p-2 lg:overflow-x-hidden">
+        <div class="p-3 mb-6 text-4xl text-center border-0 border-b-2 border-solid header-table whitespace-nowrap">
           <p>Popular Authors</p>
         </div>
-        <div class="flex justify-between items-center gap-7">
-          <?php
-          $authors = Author::all();
-          foreach ($authors as $author):
-            ?>
-            <div class="flex items-center w-full mb-4 author-card justify-between flex-col">
-              <div class="author-face w-44 mb-3 h-44 rounded-full">
+        <div class="flex items-center justify-between gap-7">
+
+          <?php foreach (array_slice(Author::all(), 0, 7) as $author): ?>
+            <a class="flex flex-col items-center justify-between w-full mb-4 author-card"
+              href="<?php echo BASE_URI . '/products?author=' . $author->id ?>">
+              <div class="mb-3 rounded-full author-face w-44 h-44">
                 <img src="<?php echo BASE_URI . '/' . $author->image ?>" alt=""
-                  class='rounded-full w-full h-full object-cover' />
+                  class='object-cover w-full h-full rounded-full' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">
                 <?php echo $author->name ?>
               </p>
-            </div>
+            </a>
           <?php endforeach; ?>
 
         </div>
