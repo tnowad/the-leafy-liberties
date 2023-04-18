@@ -29,6 +29,15 @@ $roles = $params['roles'];
             </p>
             <input type="checkbox" name="" id="" class="peer/admin w-full h-11 opacity-0 checkbox-input">
             <i class="fa-solid fa-chevron-down peer-checked/admin:rotate-180 rotate-0 transition-all duration-300"></i>
+            <!-- Icon edit or delete -->
+            <div class="flex items-center gap-2">
+              <a href="<?php echo BASE_URI . '/dashboard/role/update?id=' . $role->id ?>">
+                <i class="fa-solid fa-edit"></i>
+              </a>
+              <a href="<?php echo BASE_URI . '/dashboard/role/delete?id=' . $role->id ?>">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </div>
           </div>
         </div>
       <?php endforeach; ?>
