@@ -24,6 +24,21 @@ $menu = [
     'icon' => 'fa-message',
     'url' => BASE_URI . '/dashboard/comment',
   ],
+  'order.access' => [
+    'name' => 'Orders',
+    'icon' => 'fa-shopping-cart',
+    'url' => BASE_URI . '/dashboard/order',
+  ],
+  'category.access' => [
+    'name' => 'Categories',
+    'icon' => 'fa-list',
+    'url' => BASE_URI . '/dashboard/category',
+  ],
+  'permission.access' => [
+    'name' => 'Permissions',
+    'icon' => 'fa-user-lock',
+    'url' => BASE_URI . '/dashboard/permission',
+  ],
   'coupon.access' => [
     'name' => 'Coupons',
     'icon' => 'fa-ticket',
