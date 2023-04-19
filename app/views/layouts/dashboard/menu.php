@@ -3,8 +3,28 @@ use Core\Application;
 
 $auth = Application::getInstance()->getAuthentication();
 
+$menu = [
+  'dashboard.access' => [
+    'name' => 'Dashboard',
+    'icon' => 'fa-bars',
+    'url' => BASE_URI . '/dashboard',
+  ],
+  'user.access' => [
+    'name' => 'Users',
+    'icon' => 'fa-users',
+    'url' => BASE_URI . '/dashboard/users',
+  ],
 
-// dd($auth->getPermissions());
+];
+
+$menuItem = [];
+
+foreach ($auth->getPermissions() as $permission) {
+  // filter permission name to menu item
+}
+
+dd($menuItem);
+
 ?>
 <div
   class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
@@ -96,7 +116,7 @@ $auth = Application::getInstance()->getAuthentication();
         class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
         <a href="<?php echo BASE_URI . "/dashboard/role" ?>" class="relative flex flex-row items-center h-11">
           <span class="inline-flex items-center justify-center ml-4">
-          <i class="fa-solid fa-user-plus"></i>
+            <i class="fa-solid fa-user-plus"></i>
           </span>
           <span class="ml-2 text-sm tracking-wide truncate">
             Role
