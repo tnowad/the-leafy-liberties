@@ -69,21 +69,11 @@ class Authentication
 
   public function hasPermission($permission)
   {
-    $user = $this->getUser();
-    if ($user == null) {
-      return false;
-    }
-    $permission = Permission::findOne(['name' => $permission]);
-    if ($permission == null) {
-      return false;
-    }
-    $userPermission = UserPermission::findOne(['user_id' => $user->id, 'permission_id' => $permission->id]);
-    if ($userPermission != null && $userPermission->status == 1) {
-      return true;
-    }
-    $rolePermission = RolePermission::findOne(['role_id' => $user->role_id, 'permission_id' => $permission->id]);
-    if ($rolePermission != null && $rolePermission->status == 1) {
-      return true;
+    $permissions = $this->getPermissions();
+    foreach ($permissions as $p) {
+      if ($p->name == $permission) {
+        return true;
+      }
     }
     return false;
   }

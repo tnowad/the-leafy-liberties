@@ -11,11 +11,9 @@ $user = $auth->getUser();
 <div class="w-full bg-white h-16 sticky top-0 border-0 border-solid border-l-[1px] border-gray-300 shadow-sm z-40">
   <div class="flex items-center justify-between h-full p-4 header">
     <div class="flex items-center justify-center left">
-      <i class="mr-2 font-medium fa-regular fa-bars-sort fa-lg cursor-pointer" onclick="navMenu()"></i>
+      <i class="mr-2 font-medium cursor-pointer fa-regular fa-bars-sort fa-lg" onclick="toggleMenu()"></i>
       <span class="text-2xl font-medium text-[#52938d]">
-        <?php
-        echo ucfirst(basename($params['title'] ?? 'Dashboard'));
-        ?>
+        <?php echo ucfirst(basename($params['title'] ?? 'Dashboard')) ?>
       </span>
     </div>
     <div class="relative flex items-center right">
@@ -43,7 +41,6 @@ $user = $auth->getUser();
     </div>
   </div>
 </div>
-<script src="../../../resources/js/menu.js"></script>
 <script>
   var timeoutId;
 

@@ -12,129 +12,74 @@ $menu = [
   'user.access' => [
     'name' => 'Users',
     'icon' => 'fa-users',
-    'url' => BASE_URI . '/dashboard/users',
+    'url' => BASE_URI . '/dashboard/customer',
   ],
-
+  'product.access' => [
+    'name' => 'Products',
+    'icon' => 'fa-bag-shopping',
+    'url' => BASE_URI . '/dashboard/product',
+  ],
+  'review.access' => [
+    'name' => 'Reviews',
+    'icon' => 'fa-message',
+    'url' => BASE_URI . '/dashboard/comment',
+  ],
+  'coupon.access' => [
+    'name' => 'Coupons',
+    'icon' => 'fa-ticket',
+    'url' => BASE_URI . '/dashboard/coupon',
+  ],
+  'slide.access' => [
+    'name' => 'Slides',
+    'icon' => 'fa-sliders',
+    'url' => BASE_URI . '/dashboard/slide',
+  ],
+  'role.access' => [
+    'name' => 'Roles',
+    'icon' => 'fa-user-plus',
+    'url' => BASE_URI . '/dashboard/role',
+  ],
 ];
 
-$menuItem = [];
-
-foreach ($auth->getPermissions() as $permission) {
-  // filter permission name to menu item
+foreach ($menu as $key => $menuItem) {
+  if (!$auth->hasPermission($key)) {
+    unset($menu[$key]);
+  }
 }
-
-dd($menuItem);
 
 ?>
 <div
   class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
-    <ul class="sticky top-0 flex flex-col py-4 space-y-1 list">
+    <ul id='menu-list' class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
         <a href="<?php echo BASE_URI . '/dashboard' ?>" class="flex items-center justify-center py-4">
           <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="logo" />
         </a>
       </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard" ?>" class="relative flex flex-row items-center h-11">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-bars"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Dashboard
-          </span>
-        </a>
-      </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/statistics" ?>" class="relative flex flex-row items-center h-11">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-signal-bars"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Statistics
-          </span>
-        </a>
-      </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/customer" ?>" class="relative flex flex-row items-center h-11">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-users"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Customer
-          </span>
-        </a>
-      </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/product" ?>" class="relative flex flex-row items-center h-11">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-bag-shopping"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Product
-          </span>
-        </a>
-      </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/comment" ?>" class="relative flex flex-row items-center h-11">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-message"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Comment
-          </span>
-        </a>
-      </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/coupon" ?>" class="relative flex flex-row items-center h-11 ">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-ticket"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Coupon
-          </span>
-        </a>
-      </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/slide" ?>" class="relative flex flex-row items-center h-11">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-sliders"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Slider
-          </span>
-        </a>
-      </li>
-      <li
-        class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-        <a href="<?php echo BASE_URI . "/dashboard/role" ?>" class="relative flex flex-row items-center h-11">
-          <span class="inline-flex items-center justify-center ml-4">
-            <i class="fa-solid fa-user-plus"></i>
-          </span>
-          <span class="ml-2 text-sm tracking-wide truncate">
-            Role
-          </span>
-        </a>
-      </li>
+      <?php foreach ($menu as $menuItem): ?>
+        <li
+          class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
+          <a href="<?php echo $menuItem['url'] ?>" class="relative flex flex-row items-center h-11">
+            <span class="inline-flex items-center justify-center ml-4">
+              <i class="fa-solid <?php echo $menuItem['icon'] ?>"></i>
+            </span>
+            <span class="ml-2 text-sm tracking-wide truncate">
+              <?php echo $menuItem['name'] ?>
+            </span>
+          </a>
+        </li>
+      <?php endforeach; ?>
     </ul>
   </div>
 </div>
-<script src="../../../resources/js/header.js"></script>
 <script>
   let menu = document.querySelector(".menu-left");
-  function navMenu() {
+  function toggleMenu() {
     if (menu.classList.contains('md:w-72')) {
       menu.classList.remove('md:w-72');
     } else {
       menu.classList.add('md:w-72');
-
     }
   }
   let list = document.querySelectorAll("ul li:not(:first-child)");
