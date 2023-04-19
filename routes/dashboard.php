@@ -27,6 +27,7 @@ $router->post('/dashboard/product/delete', [ProductController::class, 'delete'])
 $router->get('/dashboard/product/update', [ProductController::class, 'update']);
 $router->post('/dashboard/product/update', [ProductController::class, 'update']);
 $router->get('/dashboard/product/delete', [ProductController::class, 'delete']);
+$router->post('/dashboard/product',[ProductController::class,'filterProduct']);
 
 //coupon
 $router->get('/dashboard/coupon', [CouponController::class, 'index']);
@@ -48,14 +49,14 @@ $router->get('/dashboard/slide/delete', [SlideController::class, 'delete']);
 $router->post('/dashboard/slide/delete', [SlideController::class, 'delete']);
 
 // user
-$router->get('/dashboard/user', [UserController::class, 'index']);
-$router->get('/dashboard/user/show', [UserController::class, 'show']);
-$router->get('/dashboard/user/create', [UserController::class, 'create']);
-$router->post('/dashboard/user/create', [UserController::class, 'create']);
-$router->get('/dashboard/user/update', [UserController::class, 'update']);
-$router->post('/dashboard/user/update', [UserController::class, 'update']);
-$router->get('/dashboard/user/delete', [UserController::class, 'delete']);
-$router->post('/dashboard/user/delete', [UserController::class, 'delete']);
+$router->get('/dashboard/customer', [UserController::class, 'index']);
+$router->get('/dashboard/customer/show', [UserController::class, 'show']);
+$router->get('/dashboard/customer/create', [UserController::class, 'create']);
+$router->post('/dashboard/customer/create', [UserController::class, 'create']);
+$router->get('/dashboard/customerr/update', [UserController::class, 'update']);
+$router->post('/dashboard/customer/update', [UserController::class, 'update']);
+$router->get('/dashboard/customer/delete', [UserController::class, 'delete']);
+$router->post('/dashboard/customer/delete', [UserController::class, 'delete']);
 
 //role
 $router->get('/dashboard/role', [RoleController::class, 'index']);

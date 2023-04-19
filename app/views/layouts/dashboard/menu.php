@@ -64,7 +64,7 @@ foreach ($menu as $key => $menuItem) {
             <span class="inline-flex items-center justify-center ml-4">
               <i class="fa-solid <?php echo $menuItem['icon'] ?>"></i>
             </span>
-            <span class="ml-2 text-sm tracking-wide truncate">
+            <span class="menu-text ml-2 text-sm tracking-wide truncate">
               <?php echo $menuItem['name'] ?>
             </span>
           </a>
@@ -84,8 +84,12 @@ foreach ($menu as $key => $menuItem) {
   }
   let list = document.querySelectorAll("ul li:not(:first-child)");
   list.forEach(btn => {
-    btn.addEventListener("click", () => {
-      btn.classList.add("bg-[#315854]")
+    btn.addEventListener("click", (event) => {
+      // event.preventDefault();
+      btn.classList.add("bg-[#315854]");
+      // list.forEach(btn => {
+      //   btn.classList.remove("bg-[#315854]");
+      // })
     })
   })
 </script>

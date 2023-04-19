@@ -42,7 +42,7 @@ use App\Models\Pagination;
             <?php
             if (isset($_POST['searchQuery'])) {
               $text = $_POST['searchQuery'];
-              dd($text);
+              // dd($text);
               $products = Product::filterAdvanced($text);
             } else {
               $products = Product::all();
