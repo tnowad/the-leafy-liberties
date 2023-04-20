@@ -45,12 +45,10 @@ class WishlistController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->isAuthenticated()) {
-      $response->jsonResponse(
-        [
-          "type" => "error",
-          "message" => "You are not authenticated",
-        ]
-      );
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
       return;
     }
 

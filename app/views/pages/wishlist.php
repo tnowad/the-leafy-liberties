@@ -1,6 +1,5 @@
 <?php
-$products = $params["products"];
-?>
+$products = $params["products"]; ?>
 <div class="container mx-auto">
   <div class="flex flex-col items-center my-10 md:my-16">
     <i class="fa-solid fa-heart text-9xl text-[#2e524e]"></i>

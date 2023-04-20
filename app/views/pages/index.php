@@ -3,14 +3,16 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slide;
-
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
-        <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
+        <?php foreach (
+          array_slice(Slide::findAll(["status" => "1"]), 0, 5)
+          as $slide
+        ): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
             <img src="<?php echo BASE_URI . $slide->image; ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
@@ -89,7 +91,7 @@ use App\Models\Slide;
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
               <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
               <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
-                onclick="addToWishList(`<?php echo $product->id ?>`)"></i>
+                onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>
           </div>
         </div>
@@ -180,7 +182,7 @@ use App\Models\Slide;
               <img src="<?php echo $category->image
                 ? BASE_URI . "/" . $category->image
                 : BASE_URI .
-                "/resources/images/categories/placeholder.png"; ?>" alt=""
+                  "/resources/images/categories/placeholder.png"; ?>" alt=""
                 class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
             <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
