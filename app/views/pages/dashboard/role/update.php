@@ -27,7 +27,7 @@ if ($allPermissions['dashboard.access']['status'] == 0) {
     }
   }
 }
-$content = ['Dashboard', 'Users', 'Product', 'Author', 'Publisher', 'Slider', 'Role', 'Coupon', 'Cart', 'Category', 'Permission', 'Setting'];
+$content = ['Dashboard', 'Users', 'Product', 'Author', 'Publisher', 'Slider', 'Role', 'Coupon', 'Cart', 'Category', 'Permission', 'Setting','Order','Wishlist'];
 $allPermissions = array_values($allPermissions);
 ?>
 
@@ -49,7 +49,7 @@ $allPermissions = array_values($allPermissions);
     Update
   </button>
 
-  <table class="w-full h-64 text-sm text-center text-gray-500 rounded-2xl mt-5" width="100%">
+  <table class="w-full h-64 text-sm text-center text-gray-500 rounded-2xl mt-5 cursor-pointer" width="100%">
     <thead class="text-md text-gray-700 uppercase bg-gray-50 p-2">
       <tr>
         <th class="py-3 px-4" width="50%">Permissions</th>
@@ -67,6 +67,7 @@ $allPermissions = array_values($allPermissions);
           <td class="px-5 py-3">
             <?php echo $item ?>
           </td>
+
           <!-- <?php foreach ($allPermissions as $permission): ?>
             <td>
               <input
