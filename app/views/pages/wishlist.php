@@ -46,7 +46,8 @@ $products = $params["products"]; ?>
               </button>
             </td>
             <td class="px-4 py-2">
-              <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400">
+              <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400"
+                onclick="removeFromWishlist(<?php echo $product->id; ?>)">
                 <i class="fa-solid fa-trash"></i>
               </button>
             </td>
@@ -111,8 +112,8 @@ $products = $params["products"]; ?>
     });
   }
 
-  document.deleteFromWishlist = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/delete"; ?>', {
+  document.removeFromWishlist = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/remove"; ?>', {
       id: id,
     }).then(response => {
       if (response.type === 'error') {
@@ -127,8 +128,8 @@ $products = $params["products"]; ?>
     });
   }
 
-  document.deleteAllFromWishlist = () => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/delete-all"; ?>').then(response => {
+  document.removeAllFromWishlist = () => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/empty"; ?>').then(response => {
       if (response.type === 'error') {
         alert(response.message);
       } else if (response.type === 'info') {
