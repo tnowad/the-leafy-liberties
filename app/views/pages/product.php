@@ -76,10 +76,10 @@
   <!-- //? info detail  -->
   <div class="mt-20">
     <ul class="box-content flex justify-center">
-      <li class="mb-5 mr-10 cursor-pointer" onclick="showDescription()">
+      <li class="p-2 rounded mb-5 mr-10 cursor-pointer hover:bg-primary hover:text-white transition-all" onclick="showDescription()">
         Description
       </li>
-      <li class="mb-2 mr-5 sm:mr-10 sm:mb-5 cursor-pointer" onclick="showReveiw()">
+      <li class="p-2 rounded mb-2 mr-5 sm:mr-10 sm:mb-5 cursor-pointer hover:bg-primary hover:text-white transition-all" onclick="showReveiw()">
         Review
       </li>
     </ul>
@@ -88,7 +88,7 @@
         <?php echo $product->description; ?>
       </p>
     </div>
-    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="review">
+    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20 hidden" id="review">
       <p class="mt-3 text-lg sm:mt-8 text-center">
         Sản phẩm chất cmn lượng
       </p>
