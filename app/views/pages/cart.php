@@ -6,9 +6,7 @@ $cartItems = $params["cartItems"];
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php foreach ($cartItems as $cartItem): ?>
-          <?php
-          $product = $cartItem->product();
-          ?>
+          <?php $product = $cartItem->product() ?>
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
               <div class="flex items-center justify-between item-detail">
@@ -33,7 +31,7 @@ $cartItems = $params["cartItems"];
                       <i class="fa-solid fa-minus"></i>
                     </button>
                     <span class="m-5 text-lg text-count">
-                      <?php echo $product->quantity; ?>
+                      <?php echo $cartItem->quantity; ?>
                     </span>
                     <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-plus"></i>
@@ -42,7 +40,7 @@ $cartItems = $params["cartItems"];
                 </div>
                 <p class="text-xl counter-price">
                   <?php echo $product->price *
-                    $product->quantity; ?>$
+                    $cartItem->quantity; ?>$
                 </p>
               </div>
             </div>
@@ -56,7 +54,12 @@ $cartItems = $params["cartItems"];
         <div class="flex items-center justify-between py-4 total-bill">
           <span class="text-xl text-bill">Total:</span>
           <span class="text-xl money-bill">
-            <?php echo $total; ?>
+            <?php
+            $total = 0; foreach ($cartItems as $cartItem) {
+              $product = $cartItem->product();
+              $total += $product->price * $cartItem->quantity;
+            }
+            echo $total; ?>
             $
           </span>
         </div>
