@@ -21,20 +21,10 @@ class CartController extends Controller
       return $response->redirect(BASE_URI . "/login");
     }
     $cartItems = Cart::findAll(["user_id" => $auth->getUser()->id]);
-    $products = [];
-    $authors = Author::all();
-
-    // Get all products in cart
-    foreach ($cartItems as $cartItem) {
-      $product = Product::find($cartItem->product_id);
-      $product->quantity = $cartItem->quantity;
-      $products[] = $product;
-    }
-
     return $response->setBody(
       View::renderWithLayout(new View("pages/cart"), [
-        "products" => $products,
-        "authors" => $authors,
+        "title" => "Cart",
+        "cartItems" => $cartItems,
       ])
     );
   }
