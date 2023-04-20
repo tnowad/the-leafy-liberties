@@ -42,7 +42,8 @@ class ProductController extends Controller
     try {
       $product = Product::find($request->getQuery("id"));
       $author = Author::find($product->author_id);
-      $category = Category::find($product->author_id);
+      $product_category = ProductCategory::find($product->id);
+      $category = Category::find($product_category->category_id);
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
