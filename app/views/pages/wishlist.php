@@ -58,10 +58,20 @@ $products = $params["products"]; ?>
     </table>
   </div>
   <div class="flex justify-end mt-4">
-    <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800">
+    <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800"
+      onclick="moveAllToCart()">
       <i class="fa-solid fa-cart-plus"></i>
       Move all to cart
     </button>
+
+    <!-- remove all product in wishlist -->
+
+    <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400"
+      onclick="removeAllFromWishlist()">
+      <i class="fa-solid fa-trash"></i>
+      Remove all
+    </button>
+
   </div>
 </div>
 <script>
