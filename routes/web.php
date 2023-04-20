@@ -2,6 +2,7 @@
 
 use App\Controllers\Auth\LoginController;
 use App\Controllers\Auth\RegisterController;
+use App\Controllers\Customer\CheckoutController;
 use Core\Application;
 
 use App\Controllers\Customer\HomeController;
@@ -14,12 +15,12 @@ $router = Application::getInstance()->getRouter();
 
 $router->get("/", [HomeController::class, "index"]);
 
-$router->get("/cart", [CartController::class, "index"]);
 
 $router->get("/wishlist", [WishlistController::class, "index"]);
-$router->post("/wishlist", [WishlistController::class, "moveToCart"]);
-$router->post("/wishlist/delete", [WishlistController::class, "remove"]);
-// $router->post('/wishlist', [WishlistController::class, 'add']);
+
+$router->get("/cart", [CartController::class, "index"]);
+
+$router->get("/checkout", [CheckoutController::class, "index"]);
 
 $router->get("/products", [ProductController::class, "index"]);
 $router->get("/product", [ProductController::class, "show"]);
@@ -31,8 +32,6 @@ $router->post("/profile/index", [ProfileController::class, "update"]);
 $router->get("/profile/settings", [ProfileController::class, "settings"]);
 $router->get("/profile/payments", [ProfileController::class, "payments"]);
 $router->get("/profile/orders", [ProfileController::class, "orders"]);
-
-$router->get("/checkout", [HomeController::class, "checkout"]);
 
 $router->get("/login", [LoginController::class, "index"]);
 $router->post("/login", [LoginController::class, "login"]);
