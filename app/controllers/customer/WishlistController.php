@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Customer;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Core\Application;
@@ -85,6 +86,140 @@ class WishlistController extends Controller
     $response->jsonResponse([
       "type" => "success",
       "message" => "Product added to wishlist",
+    ]);
+  }
+
+  public function remove(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $product = Product::find($request->getBody()["id"]);
+
+    if (!$product) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product not found",
+      ]);
+      return;
+    }
+
+    $wishlist = Wishlist::findOne([
+      "product_id" => $product->id,
+      "user_id" => $user->id,
+    ]);
+
+    if (!$wishlist) {
+      $response->jsonResponse([
+        "type" => "info",
+        "message" => "Product not in wishlist",
+      ]);
+      return;
+    }
+
+    $wishlist->delete();
+
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Product removed from wishlist",
+    ]);
+  }
+
+  public function empty(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $wishlists = Wishlist::findAll([
+      "user_id" => $user->id,
+    ]);
+
+    foreach ($wishlists as $wishlist) {
+      $wishlist->delete();
+    }
+
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Wishlist emptied",
+    ]);
+  }
+
+  public function addToCart(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $product = Product::find($request->getBody()["id"]);
+
+    if (!$product) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product not found",
+      ]);
+      return;
+    }
+
+    $wishlist = Wishlist::findOne([
+      "product_id" => $product->id,
+      "user_id" => $user->id,
+    ]);
+
+    if (!$wishlist) {
+      $response->jsonResponse([
+        "type" => "info",
+        "message" => "Product not in wishlist",
+      ]);
+      return;
+    }
+
+    $wishlist->delete();
+
+    $cart = Cart::findOne([
+      "product_id" => $product->id,
+      "user_id" => $user->id,
+    ]);
+
+    if ($cart) {
+      $response->jsonResponse([
+        "type" => "info",
+        "message" => "Product already in cart",
+      ]);
+      return;
+    }
+
+    $cart = new Cart();
+    $cart->product_id = $product->id;
+    $cart->user_id = $user->id;
+    $cart->quantity = 1;
+    $cart->save();
+
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Product added to cart",
     ]);
   }
 }

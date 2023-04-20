@@ -15,17 +15,17 @@
           ?>
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
-              <div class="item-detail flex justify-between items-center">
+              <div class="flex items-center justify-between item-detail">
                 <div class="item-img w-36">
-                  <img src="resources/images/products/<?php echo $product->image; ?>" alt="" class="w-full h-full object-cover rounded-2xl" />
+                  <img src="<?php echo BASE_URI. $product->image; ?>" alt="" class="object-cover w-full h-full rounded-2xl" />
                 </div>
                 <div class="text">
-                  <p class="book-name text-2xl mb-2"><?php echo $product->name; ?></p>
-                  <p class="book-author text-base"><?php echo $author->name; ?></p>
+                  <p class="mb-2 text-2xl book-name"><?php echo $product->name; ?></p>
+                  <p class="text-base book-author"><?php echo $author->name; ?></p>
                 </div>
-                <p class="price text-xl"><?php echo $product->price; ?></p>
+                <p class="text-xl price"><?php echo $product->price; ?></p>
                 <div>
-                  <div class="flex items-center justify-center w-fit mx-auto h-fit">
+                  <div class="flex items-center justify-center mx-auto w-fit h-fit">
                     <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-minus"></i>
                     </button>
@@ -35,7 +35,7 @@
                     </button>
                   </div>
                 </div>
-                <p class="counter-price text-xl"><?php echo $product->price *
+                <p class="text-xl counter-price"><?php echo $product->price *
                   $product->quantity; ?>$</p>
               </div>
             </div>
@@ -48,9 +48,9 @@
         <p class="cart-bill-header text-2xl text-left py-3 border-0 border-b-[1px] border-solid border-gray-300 ">
           Cart Totals
         </p>
-        <div class="total-bill flex justify-between items-center py-4">
-          <span class="text-bill text-xl">Total:</span>
-          <span class="money-bill text-xl">
+        <div class="flex items-center justify-between py-4 total-bill">
+          <span class="text-xl text-bill">Total:</span>
+          <span class="text-xl money-bill">
             <?php echo $total; ?>
             $
           </span>
@@ -60,7 +60,7 @@
         </button>
       </div>
     </div>
-    <div class="coupon-code flex my-8">
+    <div class="flex my-8 coupon-code">
       <input type="text" name="" id="" placeholder="Enter coupon code" class="px-3 py-2 border-gray-400 border-solid border-[1px] rounded-xl focus:outline-none" />
       <button class="ml-5 px-5 py-2 bg-[#315854] rounded-xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
         Apply

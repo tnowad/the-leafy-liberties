@@ -40,12 +40,14 @@ $products = $params["products"]; ?>
               <?php echo $product->price; ?>
             </td>
             <td class="px-1 py-2">
-              <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800">
+              <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800"
+                onclick="addToCart(<?php echo $product->id; ?>)">
                 <i class="fa-solid fa-cart-plus"></i>
               </button>
             </td>
             <td class="px-4 py-2">
-              <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400">
+              <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400"
+                onclick="removeFromWishlist(<?php echo $product->id; ?>)">
                 <i class="fa-solid fa-trash"></i>
               </button>
             </td>
@@ -56,10 +58,20 @@ $products = $params["products"]; ?>
     </table>
   </div>
   <div class="flex justify-end mt-4">
-    <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800">
+    <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800"
+      onclick="moveAllToCart()">
       <i class="fa-solid fa-cart-plus"></i>
       Move all to cart
     </button>
+
+    <!-- remove all product in wishlist -->
+
+    <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400"
+      onclick="removeAllFromWishlist()">
+      <i class="fa-solid fa-trash"></i>
+      Remove all
+    </button>
+
   </div>
 </div>
 <script>
@@ -75,21 +87,70 @@ $products = $params["products"]; ?>
       span.textContent = quantity;
     });
   });
+</script>
 
-  document.removeProductFromWishlist = (id) => {
-    // with xhr
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/wishlist/remove', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({ id }));
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        if (response.success) {
-          document.querySelector(`#product-${id}`).remove();
-        }
+<script type="module">
+  import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
+
+  document.addToCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/add-to-cart"; ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type,
+      });
+    }).catch(error => {
+      new Toast({
+        message: 'Something went wrong',
+        type: 'error',
+      });
+    });
+  }
+
+  document.moveAllToCart = () => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/move-all-to-cart"; ?>').then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('All products added to cart');
       }
-    };
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
 
+  document.removeFromWishlist = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/remove"; ?>', {
+      id: id,
+    }).then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('Product deleted from wishlist');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
+
+  document.removeAllFromWishlist = () => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/empty"; ?>').then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('All products deleted from wishlist');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
   }
 </script>
