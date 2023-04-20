@@ -22,7 +22,7 @@ $menu = [
   "review.access" => [
     "name" => "Reviews",
     "icon" => "fa-message",
-    "url" => BASE_URI . "/dashboard/comment",
+    "url" => BASE_URI . "/dashboard/review",
   ],
   "order.access" => [
     "name" => "Orders",

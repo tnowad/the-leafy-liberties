@@ -1,4 +1,4 @@
--- Active: 1681017538652@@127.0.0.1@3306@bookstore_web
+-- Active: 1681623675640@@127.0.0.1@3306@bookstore
 
 DROP DATABASE bookstore;
 
@@ -191,4 +191,13 @@ CREATE TABLE
         expired date NOT NULL,
         description VARCHAR(255) NOT NULL,
         deleted_at DATETIME DEFAULT NULL
+    );
+
+CREATE TABLE
+    reviews (
+        ID INT PRIMARY KEY,
+        isbn INT NOT NULL,
+        author_id INT NOT NULL,
+        general_comments VARCHAR(255),
+        review_score INT
     );

@@ -1,7 +1,7 @@
 <?php
 
 use App\Controllers\Customer\DashboardController;
-use App\Controllers\Customer\HomeController;
+use App\Controllers\Dashboard\ReviewController;
 use App\Controllers\Dashboard\CouponController;
 use App\Controllers\Dashboard\ProductController;
 use App\Controllers\Dashboard\RoleController;
@@ -82,3 +82,6 @@ $router->get("/dashboard/role/update", [RoleController::class, "update"]);
 $router->post("/dashboard/role/update", [RoleController::class, "update"]);
 $router->get("/dashboard/role/delete", [RoleController::class, "delete"]);
 $router->post("/dashboard/role/delete", [RoleController::class, "delete"]);
+
+// reveiw
+$router->get("/dashboard/review", [ReviewController::class, "index"]);
