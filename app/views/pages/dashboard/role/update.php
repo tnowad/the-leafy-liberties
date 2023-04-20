@@ -67,11 +67,10 @@ foreach ($allPermissions as $key => $permission) {
       </tr>
     </thead>
     <tbody>
-
       <?php foreach ($groupPermissions as $groupName => $groupPermission): ?>
         <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100 !text-md">
           <td class="px-5 py-3">
-            <?php echo $item ?>
+            <?php echo $groupName ?>
           </td>
           <?php foreach ($groupPermission as $permission): ?>
             <td>
