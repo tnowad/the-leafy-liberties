@@ -19,9 +19,6 @@ $products = $params["products"];
           <th class="px-4 py-2">
             Price
           </th>
-          <!-- <th class="px-4 py-2">
-            Quantity
-          </th> -->
           <th class="px-4 py-2">
             Add to cart
           </th>
@@ -31,10 +28,8 @@ $products = $params["products"];
         </tr>
       </thead>
       <tbody>
-        <!-- foreach product -->
 
         <?php foreach ($products as $product): ?>
-
           <tr class="text-center border-0 border-solid border-b-[1px]">
             <td>
               <img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>" class="w-32 mx-auto h-36" />
@@ -46,8 +41,6 @@ $products = $params["products"];
               <?php echo $product->price; ?>
             </td>
             <td class="px-1 py-2">
-
-              <!-- button move to cart -->
               <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800">
                 <i class="fa-solid fa-cart-plus"></i>
               </button>
@@ -63,8 +56,13 @@ $products = $params["products"];
       </tbody>
     </table>
   </div>
+  <div class="flex justify-end mt-4">
+    <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800">
+      <i class="fa-solid fa-cart-plus"></i>
+      Move all to cart
+    </button>
+  </div>
 </div>
-
 <script>
   document.querySelectorAll('.plus, .minus').forEach(button => {
     button.addEventListener('click', event => {
@@ -78,4 +76,21 @@ $products = $params["products"];
       span.textContent = quantity;
     });
   });
+
+  document.removeProductFromWishlist = (id) => {
+    // with xhr
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/wishlist/remove', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ id }));
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          document.querySelector(`#product-${id}`).remove();
+        }
+      }
+    };
+
+  }
 </script>
