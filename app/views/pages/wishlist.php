@@ -96,13 +96,11 @@ $products = $params["products"]; ?>
     FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/add-to-cart"; ?>', {
       id: id,
     }).then(response => {
-      if (response.type === 'error') {
-        alert(response.message);
-      } else if (response.type === 'info') {
-        alert(response.message);
-      } else {
-        alert('Product added to cart');
-      }
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type,
+      });
     }).catch(error => {
       alert('Something went wrong');
     });
