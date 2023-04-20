@@ -3,16 +3,14 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slide;
+
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
-        <?php foreach (
-          array_slice(Slide::findAll(["status" => "1"]), 0, 5)
-          as $slide
-        ): ?>
+        <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
             <img src="<?php echo BASE_URI . $slide->image; ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
@@ -182,7 +180,7 @@ use App\Models\Slide;
               <img src="<?php echo $category->image
                 ? BASE_URI . "/" . $category->image
                 : BASE_URI .
-                  "/resources/images/categories/placeholder.png"; ?>" alt=""
+                "/resources/images/categories/placeholder.png"; ?>" alt=""
                 class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
             <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
@@ -222,22 +220,19 @@ use App\Models\Slide;
 
 <script type="module">
   import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
-  document.addToWishList = (id)=>{
-    // with xhr
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/wishlist/add", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        new Toast({
-          message: response.message,
-          type: response.type
-        })
-      }
-    };
-    xhr.send(JSON.stringify({ id }));
-  }
-
+  document.addToWishList = (id) => {
+    FetchXHR.post('/api/wishlist/add', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
 </script>
