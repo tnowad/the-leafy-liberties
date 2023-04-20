@@ -87,4 +87,48 @@ class WishlistController extends Controller
       "message" => "Product added to wishlist",
     ]);
   }
+
+  public function remove(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $product = Product::find($request->getBody()["id"]);
+
+    if (!$product) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product not found",
+      ]);
+      return;
+    }
+
+    $wishlist = Wishlist::findOne([
+      "product_id" => $product->id,
+      "user_id" => $user->id,
+    ]);
+
+    if (!$wishlist) {
+      $response->jsonResponse([
+        "type" => "info",
+        "message" => "Product not in wishlist",
+      ]);
+      return;
+    }
+
+    $wishlist->delete();
+
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Product removed from wishlist",
+    ]);
+  }
 }
