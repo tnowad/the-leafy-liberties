@@ -12,8 +12,9 @@ $user = $auth->getUser() ?? null;
 ?>
 <header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
   <div class="container flex items-center justify-between h-24 mt-5">
-    <a class="w-48" href="<?php echo BASE_URI . '/' ?>">
-      <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="HeaderLogo" />
+    <a class="w-48" href="<?php echo BASE_URI . "/"; ?>">
+      <img src="<?php echo BASE_URI .
+        "/resources/images/logo.png"; ?>" alt="HeaderLogo" />
     </a>
     <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center">
       <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
@@ -28,9 +29,10 @@ $user = $auth->getUser() ?? null;
             <?php foreach ($categories as $category): ?>
               <span
                 class="text-gray-700 group/category hover:bg-gray-300 hover:text-[#315854] px-4 py-2 transition-all block cursor-pointer">
-                <a href="<?php echo BASE_URI . "/products?category=$category->id" ?>"
+                <a href="<?php echo BASE_URI .
+                  "/products?category=$category->id"; ?>"
                   class="block transition-all translate-x-0 text-md group-hover/category:translate-x-3">
-                  <?php echo $category->name ?>
+                  <?php echo $category->name; ?>
                 </a>
               </span>
             <?php endforeach; ?>
@@ -59,33 +61,33 @@ $user = $auth->getUser() ?? null;
         id="dropdownHover">
         <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
           <?php if ($user != null): ?>
-            <a href="<?php echo BASE_URI . '/profile' ?>"
+            <a href="<?php echo BASE_URI . "/profile"; ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
               Profile</a>
-            <?php if ($auth->hasPermission('dashboard.access')): ?>
-              <a href="<?php echo BASE_URI . '/dashboard' ?>"
+            <?php if ($auth->hasPermission("dashboard.access")): ?>
+              <a href="<?php echo BASE_URI . "/dashboard"; ?>"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Dashboard</a>
             <?php endif; ?>
-            <a href="<?php echo BASE_URI . '/logout' ?>"
+            <a href="<?php echo BASE_URI . "/logout"; ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Sign
               out</a>
           <?php else: ?>
-            <a href="<?php echo BASE_URI . '/login' ?>"
+            <a href="<?php echo BASE_URI . "/login"; ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all text-center">Sign
               in</a>
-            <a href="<?php echo BASE_URI . '/register' ?>"
+            <a href="<?php echo BASE_URI . "/register"; ?>"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all text-center">Sign
               up</a>
           <?php endif; ?>
         </div>
       </div>
-      <?php if ($user != null && !$auth->hasPermission('dashboard.access')): ?>
-        <a href="<?php echo BASE_URI . '/wishlist' ?>"
+      <?php if ($user != null && !$auth->hasPermission("dashboard.access")): ?>
+        <a href="<?php echo BASE_URI . "/wishlist"; ?>"
           class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
           <i class="fa-regular fa-heart"></i>
         </a>
 
-        <a href="<?php echo BASE_URI . '/cart' ?>"
+        <a href="<?php echo BASE_URI . "/cart"; ?>"
           class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10">
           <i class="fa-brands fa-opencart"></i>
         </a>

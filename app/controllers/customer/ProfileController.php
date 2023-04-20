@@ -16,14 +16,18 @@ class ProfileController extends Controller
     $auth = Application::getInstance()->getAuthentication();
 
     if (!$auth->isAuthenticated()) {
-      $response->redirect(BASE_URI . '/login');
+      $response->redirect(BASE_URI . "/login");
     }
-    $user = Application::getInstance()->getAuthentication()->getUser();
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/profile/index'), [
-      'user' => $user,
-      'footer' => ''
-    ]));
+    $response->setBody(
+      View::renderWithLayout(new View("pages/profile/index"), [
+        "user" => $user,
+        "footer" => "",
+      ])
+    );
   }
 
   public function update(Request $request, Response $response)
@@ -31,13 +35,13 @@ class ProfileController extends Controller
     $auth = Application::getInstance()->getAuthentication();
 
     if (!$auth->isAuthenticated()) {
-      $response->redirect('/login');
+      $response->redirect("/login");
     }
     $user = $auth->getUser();
 
-    $user->name = $request->getParam('name');
+    $user->name = $request->getParam("name");
     $user->save();
-    $response->redirect(BASE_URI . '/profile');
+    $response->redirect(BASE_URI . "/profile");
   }
 
   public function settings(Request $request, Response $response)
@@ -45,14 +49,18 @@ class ProfileController extends Controller
     $auth = Application::getInstance()->getAuthentication();
 
     if (!$auth->isAuthenticated()) {
-      $response->redirect(BASE_URI . '/login');
+      $response->redirect(BASE_URI . "/login");
     }
-    $user = Application::getInstance()->getAuthentication()->getUser();
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/profile/settings'), [
-      'user' => $user,
-      'footer' => ''
-    ]));
+    $response->setBody(
+      View::renderWithLayout(new View("pages/profile/settings"), [
+        "user" => $user,
+        "footer" => "",
+      ])
+    );
   }
 
   public function payments(Request $request, Response $response)
@@ -60,27 +68,35 @@ class ProfileController extends Controller
     $auth = Application::getInstance()->getAuthentication();
 
     if (!$auth->isAuthenticated()) {
-      $response->redirect(BASE_URI . '/login');
+      $response->redirect(BASE_URI . "/login");
     }
-    $user = Application::getInstance()->getAuthentication()->getUser();
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/profile/payments'), [
-      'user' => $user,
-      'footer' => ''
-    ]));
+    $response->setBody(
+      View::renderWithLayout(new View("pages/profile/payments"), [
+        "user" => $user,
+        "footer" => "",
+      ])
+    );
   }
   public function orders(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
 
     if (!$auth->isAuthenticated()) {
-      $response->redirect(BASE_URI . '/login');
+      $response->redirect(BASE_URI . "/login");
     }
-    $user = Application::getInstance()->getAuthentication()->getUser();
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/profile/orders'), [
-      'user' => $user,
-      'footer' => ''
-    ]));
+    $response->setBody(
+      View::renderWithLayout(new View("pages/profile/orders"), [
+        "user" => $user,
+        "footer" => "",
+      ])
+    );
   }
 }

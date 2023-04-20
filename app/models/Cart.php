@@ -6,11 +6,7 @@ use Core\Model;
 
 class Cart extends Model
 {
-  protected $table = 'carts';
+  protected $table = "carts";
 
-  protected $fillable = [
-    'user_id',
-    'product_id',
-    'quantity',
-  ];
+  protected $fillable = ["user_id", "product_id", "quantity"];
 }

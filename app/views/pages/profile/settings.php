@@ -1,34 +1,35 @@
-<?php $user = $params['user']; ?>
+<?php $user = $params["user"]; ?>
 <div class="flex justify-center w-full bg-white">
   <div class="container">
     <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row">
-      <?php include 'menu.php'; ?>
+      <?php include "menu.php"; ?>
       <div class="w-full p-2 md:w-3/4">
-        <form class="flex flex-col" action="<?php echo BASE_URI . '/profile' ?>" method="post">
+        <form class="flex flex-col" action="<?php echo BASE_URI .
+          "/profile"; ?>" method="post">
           <label>Name</label>
-          <input name="name" value="<?php echo $user->name ?>" type="text" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
+          <input name="name" value="<?php echo $user->name; ?>" type="text" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
           <label>Email</label>
-          <input name="email" value=" <?php echo $user->email ?>" type="email" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
+          <input name="email" value=" <?php echo $user->email; ?>" type="email" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
           <label>Phone number</label>
-          <input name="phone" value="<?php echo $user->phone ?>" type="tel" class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
+          <input name="phone" value="<?php echo $user->phone; ?>" type="tel" class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
           <label>Gender</label>
           <div class="relative inline-block">
             <select name="gender" id="gender" class="block w-full px-4 py-2 pr-8 leading-tight duration-300 bg-white border border-gray-400 rounded shadow appearance-none hover:shadow-sm focus:outline-none focus:shadow-outline">
               <option value="male" <?php if ($user->gender == "1") {
-                                      echo "selected";
-                                    } ?>>Male</option>
+                echo "selected";
+              } ?>>Male</option>
               <option value="female" <?php if ($user->gender == "2") {
-                                        echo "selected";
-                                      } ?>>Female</option>
+                echo "selected";
+              } ?>>Female</option>
               <option value="other" <?php if ($user->gender == "0") {
-                                      echo "selected";
-                                    } ?>>Other</option>
+                echo "selected";
+              } ?>>Other</option>
             </select>
           </div>
 
           <label>Birthday</label>
           <div class="flex justify-between w-full h-8 md:h-10 md:w-2/4">
-            <input name="birthday" type="date" value="<?php echo $user->birthday ?>" />
+            <input name="birthday" type="date" value="<?php echo $user->birthday; ?>" />
           </div>
           <label>Password change</label>
           <div class="flex flex-col p-2 border border-gray-300 border-solid rounded">

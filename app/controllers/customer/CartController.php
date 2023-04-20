@@ -12,17 +12,15 @@ use Core\Request;
 use Core\Response;
 use Core\View;
 
-
 class CartController extends Controller
 {
-
   public function index(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->isAuthenticated()) {
-      return $response->redirect(BASE_URI . '/login');
+      return $response->redirect(BASE_URI . "/login");
     }
-    $cartItems = Cart::findAll(['user_id' => $auth->getUser()->id]);
+    $cartItems = Cart::findAll(["user_id" => $auth->getUser()->id]);
     $products = [];
     $authors = Author::all();
 
@@ -33,10 +31,11 @@ class CartController extends Controller
       $products[] = $product;
     }
 
-    return $response->setBody(View::renderWithLayout(new View('pages/cart'), [
-      'products' => $products,
-      'authors' => $authors,
-    ]));
+    return $response->setBody(
+      View::renderWithLayout(new View("pages/cart"), [
+        "products" => $products,
+        "authors" => $authors,
+      ])
+    );
   }
-
 }

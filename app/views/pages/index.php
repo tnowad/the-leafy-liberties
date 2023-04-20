@@ -3,18 +3,20 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slide;
-
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
-        <?php foreach (array_slice(Slide::findAll(['status' => '1']), 0, 5) as $slide): ?>
+        <?php foreach (
+          array_slice(Slide::findAll(["status" => "1"]), 0, 5)
+          as $slide
+        ): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
-            <img src="<?php echo BASE_URI . $slide->image ?>"
+            <img src="<?php echo BASE_URI . $slide->image; ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              alt="<?php echo $slide->name ?>">
+              alt="<?php echo $slide->name; ?>">
           </div>
         <?php endforeach; ?>
       </div>
@@ -22,7 +24,7 @@ use App\Models\Slide;
       <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
         <?php for ($i = 0; $i < 5; $i++): ?>
           <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
-            data-carousel-slide-to="<?php echo $i ?>"></button>
+            data-carousel-slide-to="<?php echo $i; ?>"></button>
         <?php endfor; ?>
       </div>
 
@@ -50,7 +52,7 @@ use App\Models\Slide;
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Bestselling Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
       <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl"
-        href="<?php echo BASE_URI . '/products' ?>">
+        href="<?php echo BASE_URI . "/products"; ?>">
         View All
       </a>
     </div>
@@ -60,22 +62,30 @@ use App\Models\Slide;
         <div
           class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
           <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
-            <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
-              <img src="<?php echo BASE_URI . '/' . $product->image ?>" alt="" class="object-cover w-full h-full" />
+            <a href="<?php echo BASE_URI .
+              "/product" .
+              "?id=" .
+              $product->id; ?>">
+              <img src="<?php echo BASE_URI .
+                "/" .
+                $product->image; ?>" alt="" class="object-cover w-full h-full" />
             </a>
           </div>
           <div
             class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
             <div class="product-name">
-              <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
-                <?php echo $product->name ?>
+              <a href="<?php echo BASE_URI .
+                "/product" .
+                "?id=" .
+                $product->id; ?>">
+                <?php echo $product->name; ?>
               </a>
             </div>
             <div class="text-sm text-gray-500 product-author">
-              <?php echo $product->author()->name ?>
+              <?php echo $product->author()->name; ?>
             </div>
             <div class="p-0 font-semibold product-price text-primary-900">
-              <?php echo $product->price ?>$
+              <?php echo $product->price; ?>$
             </div>
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
@@ -92,7 +102,7 @@ use App\Models\Slide;
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Popular Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
       <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl"
-        href="<?php echo BASE_URI . '/products' ?>">
+        href="<?php echo BASE_URI . "/products"; ?>">
         View All
       </a>
     </div>
@@ -103,22 +113,30 @@ use App\Models\Slide;
           <div
             class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
             <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
-              <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
-                <img src="<?php echo BASE_URI . '/' . $product->image ?>" alt="" class="object-cover w-full h-full" />
+              <a href="<?php echo BASE_URI .
+                "/product" .
+                "?id=" .
+                $product->id; ?>">
+                <img src="<?php echo BASE_URI .
+                  "/" .
+                  $product->image; ?>" alt="" class="object-cover w-full h-full" />
               </a>
             </div>
             <div
               class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
               <div class="product-name">
-                <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
-                  <?php echo $product->name ?>
+                <a href="<?php echo BASE_URI .
+                  "/product" .
+                  "?id=" .
+                  $product->id; ?>">
+                  <?php echo $product->name; ?>
                 </a>
               </div>
               <div class="text-sm text-gray-500 product-author">
-                <?php echo $product->author()->name ?>
+                <?php echo $product->author()->name; ?>
               </div>
               <div class="p-0 font-semibold product-price text-primary-900">
-                <?php echo $product->price ?>$
+                <?php echo $product->price; ?>$
               </div>
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
@@ -128,7 +146,7 @@ use App\Models\Slide;
               </div>
             </div>
           </div>
-        <?php endforeach ?>
+        <?php endforeach; ?>
 
       </div>
       <div class="hidden w-[25%] xl:block 2xl:w-1/3">
@@ -158,14 +176,19 @@ use App\Models\Slide;
 
         <?php foreach (array_slice(Category::all(), 0, 4) as $category): ?>
           <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit"
-            href="<?php echo BASE_URI . '/products?categories[]=' . $category->id ?>">
+            href="<?php echo BASE_URI .
+              "/products?categories[]=" .
+              $category->id; ?>">
             <div class="w-full h-56 overflow-hidden img rounded-3xl">
               <img
-                src="<?php echo $category->image ? BASE_URI . '/' . $category->image : BASE_URI . '/resources/images/categories/placeholder.png' ?>"
+                src="<?php echo $category->image
+                  ? BASE_URI . "/" . $category->image
+                  : BASE_URI .
+                    "/resources/images/categories/placeholder.png"; ?>"
                 alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
             <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
-              <?php echo $category->name ?>
+              <?php echo $category->name; ?>
             </p>
           </a>
         <?php endforeach; ?>
@@ -181,13 +204,15 @@ use App\Models\Slide;
 
           <?php foreach (array_slice(Author::all(), 0, 7) as $author): ?>
             <a class="flex flex-col items-center justify-between w-full mb-4 author-card"
-              href="<?php echo BASE_URI . '/products?author=' . $author->id ?>">
+              href="<?php echo BASE_URI .
+                "/products?author=" .
+                $author->id; ?>">
               <div class="mb-3 rounded-full author-face w-44 h-44">
-                <img src="<?php echo BASE_URI . '/' . $author->image ?>" alt=""
+                <img src="<?php echo BASE_URI . "/" . $author->image; ?>" alt=""
                   class='object-cover w-full h-full rounded-full' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">
-                <?php echo $author->name ?>
+                <?php echo $author->name; ?>
               </p>
             </a>
           <?php endforeach; ?>

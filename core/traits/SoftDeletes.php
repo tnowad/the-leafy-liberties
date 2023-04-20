@@ -3,11 +3,11 @@ namespace Core\Traits;
 
 trait SoftDeletes
 {
-  protected $deletedAtColumn = 'deleted_at';
+  protected $deletedAtColumn = "deleted_at";
 
   public function delete(): void
   {
-    $this->{$this->deletedAtColumn} = date('Y-m-d H:i:s');
+    $this->{$this->deletedAtColumn} = date("Y-m-d H:i:s");
     $this->save();
   }
 
@@ -28,8 +28,7 @@ trait SoftDeletes
       return parent::all();
     }
     return parent::where([
-      'sql' => 'deleted_at IS NULL',
+      "sql" => "deleted_at IS NULL",
     ]);
   }
-
 }

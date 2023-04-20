@@ -7,8 +7,15 @@ use Core\Model;
 
 class Order extends Model
 {
-  protected $table = 'orders';
-  protected $fillable = ['user_id', 'status', 'total', 'created_at', 'updated_at', 'deleted_at'];
+  protected $table = "orders";
+  protected $fillable = [
+    "user_id",
+    "status",
+    "total",
+    "created_at",
+    "updated_at",
+    "deleted_at",
+  ];
 
   public function user()
   {
@@ -17,6 +24,6 @@ class Order extends Model
 
   public function products()
   {
-    return OrderProduct::findAll(['order_id' => $this->id]);
+    return OrderProduct::findAll(["order_id" => $this->id]);
   }
 }

@@ -4,11 +4,11 @@ use Core\Application;
 use Core\Database;
 use Utils\DotEnv;
 
-define('ENVIRONMENT', 'development');
+define("ENVIRONMENT", "development");
 
-if (ENVIRONMENT == 'development') {
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
+if (ENVIRONMENT == "development") {
+  ini_set("display_errors", 1);
+  ini_set("display_startup_errors", 1);
 
   error_reporting(E_ALL & ~E_NOTICE);
 
@@ -16,21 +16,21 @@ if (ENVIRONMENT == 'development') {
   {
     $args = func_get_args();
     foreach ($args as $arg) {
-      echo '<pre>';
+      echo "<pre>";
       var_dump($arg);
-      echo '</pre>';
+      echo "</pre>";
     }
   }
 }
 
-if (file_exists('./vendor/autoload.php')) {
-  require_once './vendor/autoload.php';
+if (file_exists("./vendor/autoload.php")) {
+  require_once "./vendor/autoload.php";
 }
-if (file_exists('./autoload.php')) {
-  require_once './autoload.php';
+if (file_exists("./autoload.php")) {
+  require_once "./autoload.php";
 }
 
-define('BASE_URI', DotEnv::get('BASE_URI'));
+define("BASE_URI", DotEnv::get("BASE_URI"));
 
 function errorHandler($errno, $errstr, $errfile, $errline)
 {
@@ -48,7 +48,7 @@ try {
 
 $app = Application::getInstance();
 
-foreach (glob('./routes/*.php') as $file) {
+foreach (glob("./routes/*.php") as $file) {
   require_once $file;
 }
 

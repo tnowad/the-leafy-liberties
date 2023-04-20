@@ -1,13 +1,13 @@
 <?php
-$permissions = $params['permissions'];
+$permissions = $params["permissions"];
 $allPermissions = [];
 
 foreach ($permissions as $permission) {
-    $allPermissions[$permission->name] = [
-        'id' => $permission->id,
-        'name' => ucwords(str_replace('.', ' ', $permission->name)),
-        'status' => "0"
-    ];
+  $allPermissions[$permission->name] = [
+    "id" => $permission->id,
+    "name" => ucwords(str_replace(".", " ", $permission->name)),
+    "status" => "0",
+  ];
 }
 
 $allPermissions = array_values($allPermissions);
@@ -33,10 +33,18 @@ $allPermissions = array_values($allPermissions);
         <div class="flex items-center my-2">
             <input
                 class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mr-3"
-                type="checkbox" name="permissions[]" id="<?php echo $permission['name'] ?>"
-                value="<?php echo $permission['id'] ?>" <?php echo $permission['status'] == 1 ? 'checked' : '' ?>>
-            <label class="text-gray-700" for="<?php echo $permission['name'] ?>">
-                <?php echo $permission['name'] ?>
+                type="checkbox" name="permissions[]" id="<?php echo $permission[
+                  "name"
+                ]; ?>"
+                value="<?php echo $permission["id"]; ?>" <?php echo $permission[
+  "status"
+] == 1
+  ? "checked"
+  : ""; ?>>
+            <label class="text-gray-700" for="<?php echo $permission[
+              "name"
+            ]; ?>">
+                <?php echo $permission["name"]; ?>
             </label>
         </div>
     <?php endforeach; ?>

@@ -13,21 +13,28 @@ class DashboardController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
 
-    if (!$auth->isAuthenticated() || !$auth->hasPermission('dashboard.access')) {
-      $response->redirect(BASE_URI . '/login');
+    if (
+      !$auth->isAuthenticated() ||
+      !$auth->hasPermission("dashboard.access")
+    ) {
+      $response->redirect(BASE_URI . "/login");
       return;
     }
 
     $user = $auth->getUser();
 
-
     // todo: get list permission contain '.access'
 
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/dashboard/index'), [
-      'title' => 'Dashboard',
-      'user' => $user,
-    ], 'layouts/dashboard'));
+    $response->setBody(
+      View::renderWithLayout(
+        new View("pages/dashboard/index"),
+        [
+          "title" => "Dashboard",
+          "user" => $user,
+        ],
+        "layouts/dashboard"
+      )
+    );
   }
-
 }

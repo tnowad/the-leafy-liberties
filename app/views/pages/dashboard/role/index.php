@@ -1,6 +1,5 @@
 <?php
-$roles = $params['roles'];
-?>
+$roles = $params["roles"]; ?>
 
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
@@ -8,7 +7,7 @@ $roles = $params['roles'];
       <h1 class="text-xl font-bold">Role</h1>
       <div class="box-border w-1/2 px-10">
         <form class="input flex items-center justify-center w-full h-10 bg-white rounded-full"
-          action="<?php BASE_URI . '/dashboard/product' ?>" method="POST">
+          action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
           <input type="text" name="searchQuery"
             class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
           <button class="flex items-center justify-center w-10 h-10">
@@ -16,7 +15,7 @@ $roles = $params['roles'];
           </button>
         </form>
       </div>
-      <a href="<?php echo BASE_URI . '/dashboard/role/create' ?>">
+      <a href="<?php echo BASE_URI . "/dashboard/role/create"; ?>">
         <i class="fa-solid fa-plus"></i>
       </a>
     </div>
@@ -24,15 +23,21 @@ $roles = $params['roles'];
       <?php foreach ($roles as $role): ?>
         <div class="relative bg-white rounded-2xl shadow-lg">
           <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
-            <a class="text-lg font-semibold" href="<?php echo BASE_URI . '/dashboard/role/show?id=' . $role->id ?>">
-              <?php echo ucfirst($role->name) ?>
+            <a class="text-lg font-semibold" href="<?php echo BASE_URI .
+              "/dashboard/role/show?id=" .
+              $role->id; ?>">
+              <?php echo ucfirst($role->name); ?>
             </a>
             <!-- Icon edit or delete -->
             <div class="flex items-center gap-2">
-              <a href="<?php echo BASE_URI . '/dashboard/role/update?id=' . $role->id ?>">
+              <a href="<?php echo BASE_URI .
+                "/dashboard/role/update?id=" .
+                $role->id; ?>">
                 <i class="fa-solid fa-edit"></i>
               </a>
-              <a href="<?php echo BASE_URI . '/dashboard/role/delete?id=' . $role->id ?>">
+              <a href="<?php echo BASE_URI .
+                "/dashboard/role/delete?id=" .
+                $role->id; ?>">
                 <i class="fa-solid fa-trash"></i>
               </a>
             </div>

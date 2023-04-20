@@ -5,7 +5,8 @@
         Create and account
       </h1>
       <!-- Start form -->
-      <form class="space-y-4 md:space-y-6" action="<?php echo BASE_URI . "/register" ?>" method="post">
+      <form class="space-y-4 md:space-y-6" action="<?php echo BASE_URI .
+        "/register"; ?>" method="post">
         <!-- Email -->
         <div>
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900">

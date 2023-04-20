@@ -12,34 +12,36 @@
           });
           $author = reset($author);
           $total = $total + $product->price * $product->quantity;
-        ?>
+          ?>
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
               <div class="item-detail flex justify-between items-center">
                 <div class="item-img w-36">
-                  <img src="resources/images/products/<?php echo $product->image ?>" alt="" class="w-full h-full object-cover rounded-2xl" />
+                  <img src="resources/images/products/<?php echo $product->image; ?>" alt="" class="w-full h-full object-cover rounded-2xl" />
                 </div>
                 <div class="text">
-                  <p class="book-name text-2xl mb-2"><?php echo $product->name ?></p>
-                  <p class="book-author text-base"><?php echo $author->name ?></p>
+                  <p class="book-name text-2xl mb-2"><?php echo $product->name; ?></p>
+                  <p class="book-author text-base"><?php echo $author->name; ?></p>
                 </div>
-                <p class="price text-xl"><?php echo $product->price  ?></p>
+                <p class="price text-xl"><?php echo $product->price; ?></p>
                 <div>
                   <div class="flex items-center justify-center w-fit mx-auto h-fit">
                     <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-minus"></i>
                     </button>
-                    <span class="m-5 text-lg text-count"><?php echo $product->quantity ?></span>
+                    <span class="m-5 text-lg text-count"><?php echo $product->quantity; ?></span>
                     <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-plus"></i>
                     </button>
                   </div>
                 </div>
-                <p class="counter-price text-xl"><?php echo $product->price * $product->quantity  ?>$</p>
+                <p class="counter-price text-xl"><?php echo $product->price *
+                  $product->quantity; ?>$</p>
               </div>
             </div>
           </div>
-        <?php }
+        <?php
+        }
         ?>
       </div>
       <div class="cart-bill w-[30%] p-5 bg-white shadow-lg rounded-2xl">
@@ -49,9 +51,7 @@
         <div class="total-bill flex justify-between items-center py-4">
           <span class="text-bill text-xl">Total:</span>
           <span class="money-bill text-xl">
-            <?php
-            echo $total;
-            ?>
+            <?php echo $total; ?>
             $
           </span>
         </div>

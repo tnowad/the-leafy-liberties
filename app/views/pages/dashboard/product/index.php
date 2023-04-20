@@ -2,7 +2,6 @@
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Pagination;
-
 ?>
 
 <div class="w-full mx-auto my-0">
@@ -11,7 +10,7 @@ use App\Models\Pagination;
       <h1 class="text-xl font-bold">Product</h1>
       <div class="box-border w-1/2 px-10">
         <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input"
-          action="<?php BASE_URI . '/dashboard/product' ?>" method="POST">
+          action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
           <input type="text" name="searchQuery"
             class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
           <button class="flex items-center justify-center w-10 h-10">
@@ -29,10 +28,19 @@ use App\Models\Pagination;
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("ID", "Image", "Title", "Price", "Isbn", "Description", 'Quantity', 'Action');
+              $name = [
+                "ID",
+                "Image",
+                "Title",
+                "Price",
+                "Isbn",
+                "Description",
+                "Quantity",
+                "Action",
+              ];
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
-                  <?php echo $name[$i - 1] ?>
+                  <?php echo $name[$i - 1]; ?>
                 </th>
               <?php }
               ?>
@@ -40,8 +48,8 @@ use App\Models\Pagination;
           </thead>
           <tbody>
             <?php
-            if (isset($_POST['searchQuery'])) {
-              $text = $_POST['searchQuery'];
+            if (isset($_POST["searchQuery"])) {
+              $text = $_POST["searchQuery"];
               // dd($text);
               $products = Product::filterAdvanced($text);
             } else {
@@ -51,39 +59,48 @@ use App\Models\Pagination;
               <?php foreach ($products as $product): ?>
                 <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-3">
-                    <?php echo $product->id ?>
+                    <?php echo $product->id; ?>
                   </td>
                   <td class="w-32 h-24 p-3">
-                    <img src="<?php echo BASE_URI . '/' .$product->image ?>" alt="" />
+                    <img src="<?php echo BASE_URI .
+                      "/" .
+                      $product->image; ?>" alt="" />
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $product->name ?>
+                    <?php echo $product->name; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $product->price ?>
+                    <?php echo $product->price; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $product->isbn ?>
+                    <?php echo $product->isbn; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $product->description ?>
+                    <?php echo $product->description; ?>
                   </td>
                   <td class="p-2">
-                    <?php echo $product->quantity ?>
+                    <?php echo $product->quantity; ?>
                   </td>
                   <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
-                    <a href="<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>"
+                    <a href="<?php echo BASE_URI .
+                      "/dashboard/product/update" .
+                      "?id=" .
+                      $product->id; ?>"
                       class="edit-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all block">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
-                    <a id="deleteButton" href="<?php echo BASE_URI . '/dashboard/product/delete' . '?id=' . $product->id ?>"
+                    <a id="deleteButton" href="<?php echo BASE_URI .
+                      "/dashboard/product/delete" .
+                      "?id=" .
+                      $product->id; ?>"
                       class="delete-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all">
                       <i class="fa-solid fa-trash"></i>
                     </a>
                   </td>
                 </tr>
               <?php endforeach; ?>
-            <?php endif; ?>
+            <?php endif;
+            ?>
           </tbody>
         </table>
       </div>
@@ -92,7 +109,8 @@ use App\Models\Pagination;
       class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[500]">
       <div class="bg-white p-8 rounded-md shadow-lg w-[550px] ">
         <h2 class="mb-4 text-xl font-bold">Add Product</h2>
-        <form class="flex flex-col" action="<?php BASE_URI . '/dashboard/product' ?>" method="POST"
+        <form class="flex flex-col" action="<?php BASE_URI .
+          "/dashboard/product"; ?>" method="POST"
           enctype="multipart/form-data">
           <label for="title" class="my-2">Title:</label>
           <input type="text" value="" name="name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
@@ -151,7 +169,7 @@ use App\Models\Pagination;
     const value = input.value;
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '<?php echo BASE_URI . '/dashboard/product' ?>', true);
+    xhr.open('POST', '<?php echo BASE_URI . "/dashboard/product"; ?>', true);
     // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {

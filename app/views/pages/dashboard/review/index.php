@@ -9,21 +9,29 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("No", "Name", "Description", "Actived", "Expired", "Amount", "Status", "Action");
+              $name = [
+                "No",
+                "Name",
+                "Description",
+                "Actived",
+                "Expired",
+                "Amount",
+                "Status",
+                "Action",
+              ];
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
-                  <?php echo $name[$i - 1] ?>
+                  <?php echo $name[$i - 1]; ?>
                 </th>
               <?php }
               ?>
             </tr>
           </thead>
           <tbody>
-            <?php
-            for ($i = 1; $i <= 10; $i++) { ?>
+            <?php for ($i = 1; $i <= 10; $i++) { ?>
               <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                 <td class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
-                  <?php echo $i ?>
+                  <?php echo $i; ?>
                 </td>
                 <td class="px-5 py-3">APP10K</td>
                 <td class="block px-5 py-3 truncate w-80">Giảm ngay 10K khi sử dụng mã.Áp dụng cho mọi đơn hàng.Nostrud eu
@@ -47,8 +55,7 @@
                   </div>
                 </td>
               </tr>
-            <?php }
-            ?>
+            <?php } ?>
           </tbody>
         </table>
       </div>

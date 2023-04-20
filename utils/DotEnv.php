@@ -31,9 +31,9 @@ class DotEnv
 
   public static function load()
   {
-    $path = __DIR__ . '/../.env';
+    $path = __DIR__ . "/../.env";
     if (!file_exists($path)) {
-      die('File .env not found');
+      die("File .env not found");
     }
     $env = file_get_contents($path);
     $env = explode("\n", $env);
@@ -42,11 +42,11 @@ class DotEnv
       if (empty($line)) {
         continue;
       }
-      $line = preg_split('/\s+|=/', $line);
+      $line = preg_split("/\s+|=/", $line);
       $line = array_filter($line);
       $key = trim($line[0]);
       if (!isset($line[1])) {
-        $line[1] = '';
+        $line[1] = "";
       }
       $value = trim($line[1]);
       self::set($key, $value);
@@ -55,10 +55,10 @@ class DotEnv
 
   public static function save()
   {
-    $env = '';
+    $env = "";
     foreach (self::$config as $key => $value) {
-      $env .= $key . '=' . $value . "\n";
+      $env .= $key . "=" . $value . "\n";
     }
-    file_put_contents(__DIR__ . '/../.env', $env);
+    file_put_contents(__DIR__ . "/../.env", $env);
   }
 }

@@ -8,33 +8,45 @@
       </div>
       <div class="box-border grid top-wrap 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
         <?php
-        $text = array("Sales", "Total Revenues", "New Customer", "New Orders");
-        $quantity = array("$20.4K", "100K", "203", "15");
-        $desc = array("We have sold 1105 items", "Available to pay out", "More customer more money", "New things coming' up");
-        $icon = array("fa-solid fa-arrow-trend-up", "fa-solid fa-dollar-sign", "fa-solid fa-user-group-crown", "fa-duotone fa-suitcase");
-        $class = array(
+        $text = ["Sales", "Total Revenues", "New Customer", "New Orders"];
+        $quantity = ["$20.4K", "100K", "203", "15"];
+        $desc = [
+          "We have sold 1105 items",
+          "Available to pay out",
+          "More customer more money",
+          "New things coming' up",
+        ];
+        $icon = [
+          "fa-solid fa-arrow-trend-up",
+          "fa-solid fa-dollar-sign",
+          "fa-solid fa-user-group-crown",
+          "fa-duotone fa-suitcase",
+        ];
+        $class = [
           "bg-blue-400 border-blue-400 shadow-[0_0_5px_1px_rgba(164,202,254,0.3)] shadow-blue-400",
           "bg-green-400 border-green-400 shadow-[0_0_5px_1px_rgba(49,196,141,0.3)] shadow-green-400",
           "bg-orange-400 border-orange-400 shadow-[0_0_5px_1px_rgba(255,138,76,0.3)] shadow-orange-400",
-          "bg-red-400 border-red-400 shadow-[0_0_5px_1px_rgba(255,138,76,0.3)] shadow-red-400"
-        );
+          "bg-red-400 border-red-400 shadow-[0_0_5px_1px_rgba(255,138,76,0.3)] shadow-red-400",
+        ];
         for ($i = 1; $i <= 4; $i++) { ?>
           <div class="flex items-center justify-between w-full p-8 mt-5 bg-white shadow-lg rounded-2xl">
             <div class="flex flex-col gap-1 hero-one">
               <p class="text-sm font-semibold">
-                <?php echo $text[$i - 1] ?>
+                <?php echo $text[$i - 1]; ?>
               </p>
               <p class="text-lg font-bold">
-                <?php echo $quantity[$i - 1] ?>
+                <?php echo $quantity[$i - 1]; ?>
 
               </p>
               <p class="text-gray-500 break-words">
-                <?php echo $desc[$i - 1] ?>
+                <?php echo $desc[$i - 1]; ?>
 
               </p>
             </div>
-            <div class="icon w-20 border-solid p-5 rounded-2xl text-center <?php echo $class[$i - 1] ?>">
-              <i class="<?php echo $icon[$i - 1] ?> fa-xl text-white"></i>
+            <div class="icon w-20 border-solid p-5 rounded-2xl text-center <?php echo $class[
+              $i - 1
+            ]; ?>">
+              <i class="<?php echo $icon[$i - 1]; ?> fa-xl text-white"></i>
             </div>
           </div>
         <?php }
@@ -65,10 +77,10 @@
           <p class="mb-5 text-2xl font-bold">Most Sold Items</p>
           <div class="flex flex-col gap-4">
             <?php
-            $title = array("Blue", "Black", "Yellow", "White", "Red", "Green");
+            $title = ["Blue", "Black", "Yellow", "White", "Red", "Green"];
             for ($i = 1; $i <= 6; $i++) { ?>
               <div class="text-lg font-medium ">
-                <?php echo $title[$i - 1] ?>
+                <?php echo $title[$i - 1]; ?>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                 <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
@@ -84,18 +96,25 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <?php
-                $name = array("Product", "Order ID", "Date", "Customer Name", "Status", "Amount", "Action");
+                $name = [
+                  "Product",
+                  "Order ID",
+                  "Date",
+                  "Customer Name",
+                  "Status",
+                  "Amount",
+                  "Action",
+                ];
                 for ($i = 1; $i <= 7; $i++) { ?>
                   <th scope="col" class="px-6 py-3">
-                    <?php echo $name[$i - 1] ?>
+                    <?php echo $name[$i - 1]; ?>
                   </th>
                 <?php }
                 ?>
               </tr>
             </thead>
             <tbody>
-              <?php
-              for ($i = 1; $i <= 6; $i++) { ?>
+              <?php for ($i = 1; $i <= 6; $i++) { ?>
                 <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">
                     My Dearest Darkest
@@ -118,8 +137,7 @@
                     </div>
                   </td>
                 </tr>
-              <?php }
-              ?>
+              <?php } ?>
             </tbody>
           </table>
         </div>

@@ -1,22 +1,23 @@
-<?php $user = $params['user'] ?>
+<?php $user = $params["user"]; ?>
 <div class="w-full min-h-screen ">
   <div class="bg-white rounded-md shadow-lg w-full p-5 my-5">
-    <form class="flex flex-col" action="<?php echo BASE_URI . '/dashboard/user/update' ?>" method="POST">
+    <form class="flex flex-col" action="<?php echo BASE_URI .
+      "/dashboard/user/update"; ?>" method="POST">
 
       <label for="id" class="my-2">ID:</label>
-      <input type="text" value="<?php echo $user->id ?>" name="id" class="bg-gray-100 p-3 focus:outline-none rounded-lg"
+      <input type="text" value="<?php echo $user->id; ?>" name="id" class="bg-gray-100 p-3 focus:outline-none rounded-lg"
         disabled />
 
       <label for="name" class="my-2">Name:</label>
-      <input type="text" value="<?php echo $user->name ?>" name="name"
+      <input type="text" value="<?php echo $user->name; ?>" name="name"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
       <label for="expired" class="my-2">Email:</label>
-      <input type="email" value="<?php echo $user->email ?>" name="email"
+      <input type="email" value="<?php echo $user->email; ?>" name="email"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
       <label for="expired" class="my-2">Password:</label>
-      <input type="password" value="<?php echo $user->password ?>" name="password"
+      <input type="password" value="<?php echo $user->password; ?>" name="password"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
       <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[43.5%] right-20 cursor-pointer"
         aria-hidden="true"></i>
@@ -24,7 +25,7 @@
         aria-hidden="true"></i>
 
       <label for="expired" class="my-2">Phone:</label>
-      <input type="tel" value="<?php echo $user->phone ?>" name="phone"
+      <input type="tel" value="<?php echo $user->phone; ?>" name="phone"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
       <label for="gender" class="my-2">Select gender:</label>
@@ -40,7 +41,7 @@
         Submit
       </button>
       <a class="cancel-edit-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-center"
-        href="<?php echo BASE_URI . '/dashboard/customer' ?>">
+        href="<?php echo BASE_URI . "/dashboard/customer"; ?>">
         Cancel
       </a>
     </form>

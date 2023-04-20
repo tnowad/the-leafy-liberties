@@ -15,8 +15,12 @@ class Request
 
   public function __construct()
   {
-    $this->method = $_SERVER['REQUEST_METHOD'];
-    $this->url = substr($_SERVER['REQUEST_URI'], strlen(DotEnv::get('BASE_URI')), strlen($_SERVER['REQUEST_URI']));
+    $this->method = $_SERVER["REQUEST_METHOD"];
+    $this->url = substr(
+      $_SERVER["REQUEST_URI"],
+      strlen(DotEnv::get("BASE_URI")),
+      strlen($_SERVER["REQUEST_URI"])
+    );
     $this->query = $this->sanitizeArray($_GET);
     $this->params = $this->sanitizeArray($_POST);
     $this->body = $this->parseRequestBody();
@@ -37,7 +41,7 @@ class Request
   public function getPath()
   {
     $path = $this->url;
-    $position = strpos($path, '?');
+    $position = strpos($path, "?");
     if ($position === false) {
       return $path;
     }
@@ -95,7 +99,6 @@ class Request
     return $this->query;
   }
 
-
   public function setParam($key, $value)
   {
     $this->params[$key] = $this->sanitizeInput($value);
@@ -113,11 +116,13 @@ class Request
 
   private function parseRequestBody()
   {
-    $contentType = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
+    $contentType = isset($_SERVER["CONTENT_TYPE"])
+      ? $_SERVER["CONTENT_TYPE"]
+      : "";
     switch ($contentType) {
-      case 'application/json':
-        return json_decode(file_get_contents('php://input'), true);
-      case 'application/x-www-form-urlencoded':
+      case "application/json":
+        return json_decode(file_get_contents("php://input"), true);
+      case "application/x-www-form-urlencoded":
         return $this->sanitizeArray($_POST);
       default:
         return null;
@@ -126,10 +131,16 @@ class Request
 
   private function parseRequestHeaders()
   {
-    $headers = array();
+    $headers = [];
     foreach ($_SERVER as $key => $value) {
-      if (substr($key, 0, 5) === 'HTTP_') {
-        $headers[str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))))] = $value;
+      if (substr($key, 0, 5) === "HTTP_") {
+        $headers[
+          str_replace(
+            " ",
+            "-",
+            ucwords(str_replace("_", " ", strtolower(substr($key, 5))))
+          )
+        ] = $value;
       }
     }
     return $headers;
@@ -137,7 +148,7 @@ class Request
 
   private function sanitizeArray($array)
   {
-    $sanitized = array();
+    $sanitized = [];
     foreach ($array as $key => $value) {
       $sanitized[$key] = $this->sanitizeInput($value);
     }

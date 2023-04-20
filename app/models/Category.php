@@ -6,11 +6,6 @@ use App\Models\Product;
 
 class Category extends Model
 {
-  protected $table = 'categories';
-  protected $fillable = [
-    'name',
-    'image',
-    'deleted_at'
-  ];
-
+  protected $table = "categories";
+  protected $fillable = ["name", "image", "deleted_at"];
 }

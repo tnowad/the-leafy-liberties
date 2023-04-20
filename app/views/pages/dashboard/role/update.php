@@ -1,28 +1,28 @@
 <?php
-$role = $params['role'];
-$permissions = $params['permissions'];
-$rolePermissions = $params['rolePermissions'];
+$role = $params["role"];
+$permissions = $params["permissions"];
+$rolePermissions = $params["rolePermissions"];
 $allPermissions = [];
 
 foreach ($permissions as $permission) {
   $allPermissions[$permission->name] = [
-    'id' => $permission->id,
-    'name' => ucwords(str_replace('.', ' ', $permission->name)),
-    'status' => "0"
+    "id" => $permission->id,
+    "name" => ucwords(str_replace(".", " ", $permission->name)),
+    "status" => "0",
   ];
 }
 
 foreach ($rolePermissions as $rolePermission) {
   $allPermissions[$rolePermission->name] = [
-    'id' => $rolePermission->permission_id,
-    'name' => ucwords(str_replace('.', ' ', $rolePermission->name)),
-    'status' => "1"
+    "id" => $rolePermission->permission_id,
+    "name" => ucwords(str_replace(".", " ", $rolePermission->name)),
+    "status" => "1",
   ];
 }
 
-if ($allPermissions['dashboard.access']['status'] == 0) {
+if ($allPermissions["dashboard.access"]["status"] == 0) {
   foreach ($allPermissions as $key => $permission) {
-    if ($key != 'dashboard.access') {
+    if ($key != "dashboard.access") {
       unset($allPermissions[$key]);
     }
   }
@@ -31,10 +31,9 @@ if ($allPermissions['dashboard.access']['status'] == 0) {
 $groupPermissions = [];
 
 foreach ($allPermissions as $key => $permission) {
-  $group = explode('.', $key)[0];
+  $group = explode(".", $key)[0];
   $groupPermissions[$group][] = $permission;
 }
-
 ?>
 
 <form class="min-h-screen mt-6">
@@ -44,10 +43,10 @@ foreach ($allPermissions as $key => $permission) {
     </label>
     <input
       class="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
-      type="text" name="name" id="name" value="<?php echo $role->name ?>">
+      type="text" name="name" id="name" value="<?php echo $role->name; ?>">
   </div>
 
-  <input type="hidden" name="id" value="<?php echo $role->id ?>">
+  <input type="hidden" name="id" value="<?php echo $role->id; ?>">
 
   <!-- submit -->
   <button type="submit"
@@ -70,18 +69,24 @@ foreach ($allPermissions as $key => $permission) {
       <?php foreach ($groupPermissions as $groupName => $groupPermission): ?>
         <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100 !text-md">
           <td class="px-5 py-3">
-            <?php echo ucfirst($groupName) ?>
+            <?php echo ucfirst($groupName); ?>
           </td>
           <?php foreach ($groupPermission as $permission): ?>
             <td>
               <input
                 class="w-5 h-5 mr-3 text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                type="checkbox" name="permissions[]" id="<?php echo $permission['name'] ?>"
-                value="<?php echo $permission['id'] ?>" <?php echo $permission['status'] == 1 ? 'checked' : '' ?>>
+                type="checkbox" name="permissions[]" id="<?php echo $permission[
+                  "name"
+                ]; ?>"
+                value="<?php echo $permission["id"]; ?>" <?php echo $permission[
+  "status"
+] == 1
+  ? "checked"
+  : ""; ?>>
             </td>
-          <?php endforeach ?>
+          <?php endforeach; ?>
         </tr>
-      <?php endforeach ?>
+      <?php endforeach; ?>
     </tbody>
   </table>
 </form>

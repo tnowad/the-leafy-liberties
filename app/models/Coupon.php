@@ -6,16 +6,7 @@ use Core\Model;
 
 class Coupon extends Model
 {
+  protected $table = "coupons";
 
-  protected $table = 'coupons';
-
-  protected $fillable = [
-    'id',
-    'code',
-    'expired',
-    'quantity',
-    'description',
-  ];
-
-
+  protected $fillable = ["id", "code", "expired", "quantity", "description"];
 }

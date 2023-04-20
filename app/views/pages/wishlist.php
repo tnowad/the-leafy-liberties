@@ -29,22 +29,21 @@
       </thead>
       <tbody>
         <?php
-        $wishlist = $params['wishlist'];
-        foreach ($wishlist as $wishlist) {
-        ?>
+        $wishlist = $params["wishlist"];
+        foreach ($wishlist as $wishlist) { ?>
           <tr class="text-center border-0 border-solid border-b-[1px]">
             <td>
-              <img src="<?php echo $wishlist->image ?>" alt="<?php echo $wishlist->product_name ?>" class="h-36 w-32 mx-auto" />
+              <img src="<?php echo $wishlist->image; ?>" alt="<?php echo $wishlist->product_name; ?>" class="h-36 w-32 mx-auto" />
             </td>
-            <td><?php echo $wishlist->product_name ?></td>
-            <td><?php echo $wishlist->price ?></td>
+            <td><?php echo $wishlist->product_name; ?></td>
+            <td><?php echo $wishlist->price; ?></td>
             <!-- <td>
               <div>
                 <div class="flex items-center justify-center w-fit mx-auto h-fit">
                   <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-minus"></i>
                   </button>
-                  <span class="m-5 w-3 text-lg text-count <?php echo $wishlist->product_id ?> "><?php echo $wishlist->quantity ?></span>
+                  <span class="m-5 w-3 text-lg text-count <?php echo $wishlist->product_id; ?> "><?php echo $wishlist->quantity; ?></span>
                   <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
                     <i class="fa-solid fa-plus"></i>
                   </button>

@@ -1,7 +1,7 @@
 <?php
-$product = $params['product'];
-$author = $params['author'];
-$category = $params['category'];
+$product = $params["product"];
+$author = $params["author"];
+$category = $params["category"];
 ?>
 
 <div class="box-border p-5 pt-3 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
@@ -9,7 +9,9 @@ $category = $params['category'];
   <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
     <div
       class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
-      <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI . '/' . $product->image ?>"
+      <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI .
+        "/" .
+        $product->image; ?>"
         alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
@@ -18,7 +20,7 @@ $category = $params['category'];
       </p>
       <br />
       <label class="text-2xl md:text-3xl lg:text-4xl">
-        <?php echo $product->name ?>
+        <?php echo $product->name; ?>
       </label>
       <br />
       <div class="author-tag my-3">
@@ -26,21 +28,21 @@ $category = $params['category'];
           Author:
         </span>
         <span class="font-bold text-primary hover:underline cursor-pointer">
-          <?php echo $author->name ?>
+          <?php echo $author->name; ?>
         </span>
       </div>
       <div class="isbn-tag">
         <span>ISBN:</span>
         <span class="font-bold text-primary hover:underline cursor-pointer">
-          <?php echo $product->isbn ?>
+          <?php echo $product->isbn; ?>
         </span>
       </div>
       <div class="box-border border border-gray-400 border-solid border-x-0 py-3">
         <span class="text-2xl text-green-800 sm:text-3xl font-semibold">
-          <?php echo $product->price ?>$
+          <?php echo $product->price; ?>$
         </span>
         <p class="mt-3 text-lg sm:mt-8">
-          <?php echo $product->description ?>
+          <?php echo $product->description; ?>
         </p>
         <div class="flex w-1/2 justify-between items-center mt-4">
           <div
@@ -55,7 +57,7 @@ $category = $params['category'];
             class="cursor-pointer flex justify-between items-center bg-gray-50 border border-gray-300 py-2 px-3 rounded-full text-lg gap-2 hover:bg-primary-500 hover:text-gray-700 transition-all group">
             <i
               class="fa-regular fa-heart group-hover:text-white transition-all p-2 group-hover:bg-red-400 rounded-full"></i>
-            <button type="submit" src="" alt="" class="font-medium add-to-wishlist" onclick="addToCart(<?php echo $product->id ?>)">
+            <button type="submit" src="" alt="" class="font-medium add-to-wishlist" onclick="addToCart(<?php echo $product->id; ?>)">
               Add to wishlist
             </button>
           </div>
@@ -63,7 +65,7 @@ $category = $params['category'];
       </div>
       <p class="inline-block mt-5 text-gray-400">Category: </p>
       <p class="inline-block ml-1">
-        <?php echo $category->name ?>
+        <?php echo $category->name; ?>
       </p>
       <br />
       <p class="inline-block text-gray-400">Tags :</p>

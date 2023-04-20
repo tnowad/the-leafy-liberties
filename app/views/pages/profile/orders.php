@@ -1,8 +1,8 @@
-<?php $user = $params['user']; ?>
+<?php $user = $params["user"]; ?>
 <div class="flex justify-center w-full bg-white">
     <div class="container">
         <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row">
-            <?php include 'menu.php'; ?>
+            <?php include "menu.php"; ?>
             <!-- content -->
             <div class="table-statistics my-8 shadow-lg cursor-pointer rounded-2xl overflow-hidden bg-white">
                 <div class="relative">
@@ -10,18 +10,23 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <?php
-                $name = array("STT", "booking date", "Status", "Total Price", "Action");
-                for ($i = 1; $i <= 5; $i++) { ?>
+                                $name = [
+                                  "STT",
+                                  "booking date",
+                                  "Status",
+                                  "Total Price",
+                                  "Action",
+                                ];
+                                for ($i = 1; $i <= 5; $i++) { ?>
                                 <th scope="col" class="px-16 py-3">
-                                    <?php echo $name[$i - 1] ?>
+                                    <?php echo $name[$i - 1]; ?>
                                 </th>
                                 <?php }
-                ?>
+                                ?>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-              for ($i = 1; $i <= 6; $i++) { ?>
+                            <?php for ($i = 1; $i <= 6; $i++) { ?>
                             <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100">
                                 <!-- <td class="px-5 py-3">#1</td> -->
                                 <td class="px-5 py-3"></td>
@@ -41,8 +46,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <?php }
-              ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

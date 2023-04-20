@@ -9,18 +9,18 @@ use Core\Model;
 
 class User extends Model
 {
-  protected $table = 'users';
+  protected $table = "users";
 
   protected $fillable = [
-    'email',
-    'name',
-    'phone',
-    'password',
-    'gender',
-    'image',
-    'role_id',
-    'status',
-    'deleted_at'
+    "email",
+    "name",
+    "phone",
+    "password",
+    "gender",
+    "image",
+    "role_id",
+    "status",
+    "deleted_at",
   ];
 
   public function setPassword($password)
@@ -44,7 +44,7 @@ class User extends Model
   public function permissions(): array
   {
     return UserPermission::findAll([
-      'user_id' => $this->id
+      "user_id" => $this->id,
     ]);
   }
 
@@ -59,8 +59,8 @@ class User extends Model
   public function removePermission(Permission $permission)
   {
     $userPermission = UserPermission::findOne([
-      'user_id' => $this->id,
-      'permission_id' => $permission->id
+      "user_id" => $this->id,
+      "permission_id" => $permission->id,
     ]);
     $userPermission->delete();
   }

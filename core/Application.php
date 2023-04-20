@@ -2,7 +2,6 @@
 
 namespace Core;
 
-
 use Core\Authentication;
 use Core\Database;
 use Core\Request;
@@ -33,7 +32,7 @@ class Application
     $this->database = Database::getInstance();
     $this->controller = new Controller();
     $this->authentication = new Authentication();
-    $this->view = new View('pages/index');
+    $this->view = new View("pages/index");
   }
 
   public static function getInstance()
@@ -85,10 +84,12 @@ class Application
       $this->router->resolve();
     } catch (Exception $e) {
       $params = [
-        'message' => $e->getMessage(),
-        'code' => 404,
+        "message" => $e->getMessage(),
+        "code" => 404,
       ];
-      $this->response->setBody(View::renderWithLayout(new View('pages/404'), $params));
+      $this->response->setBody(
+        View::renderWithLayout(new View("pages/404"), $params)
+      );
     }
     $this->response->send();
   }

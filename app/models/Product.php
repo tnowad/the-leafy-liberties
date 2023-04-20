@@ -13,19 +13,19 @@ use Core\Traits\SoftDeletes;
 class Product extends Model
 {
   use SoftDeletes;
-  protected $table = 'products';
+  protected $table = "products";
 
   protected $fillable = [
-    'id',
-    'isbn',
-    'name',
-    'author_id',
-    'publisher_id',
-    'price',
-    'description',
-    'image',
-    'quantity',
-    'deleted_at'
+    "id",
+    "isbn",
+    "name",
+    "author_id",
+    "publisher_id",
+    "price",
+    "description",
+    "image",
+    "quantity",
+    "deleted_at",
   ];
   public function author()
   {
@@ -39,7 +39,7 @@ class Product extends Model
 
   public function tags()
   {
-    $productTags = ProductTag::findAll(['product_id' => $this->id]);
+    $productTags = ProductTag::findAll(["product_id" => $this->id]);
     $tags = [];
     foreach ($productTags as $productTag) {
       $tags[] = Tag::find($productTag->tag_id);
@@ -50,14 +50,14 @@ class Product extends Model
   public function addTag($tag)
   {
     ProductTag::create([
-      'product_id' => $this->id,
-      'tag_id' => $tag->id,
+      "product_id" => $this->id,
+      "tag_id" => $tag->id,
     ]);
   }
 
   public function removeTag($tag)
   {
-    $productTags = ProductTag::findAll(['product_id' => $this->id]);
+    $productTags = ProductTag::findAll(["product_id" => $this->id]);
     $productTag = null;
     foreach ($productTags as $productTag) {
       if ($productTag->tag_id == $tag->id) {
@@ -69,7 +69,7 @@ class Product extends Model
 
   public function hasTag($tag)
   {
-    $productTags = ProductTag::findAll(['product_id' => $this->id]);
+    $productTags = ProductTag::findAll(["product_id" => $this->id]);
     foreach ($productTags as $productTag) {
       if ($productTag->tag_id == $tag->id) {
         return true;
@@ -79,7 +79,7 @@ class Product extends Model
   }
   public function categories()
   {
-    $productCategories = ProductCategory::findAll(['product_id' => $this->id]);
+    $productCategories = ProductCategory::findAll(["product_id" => $this->id]);
     $categories = [];
     foreach ($productCategories as $productCategory) {
       $categories[] = Category::find($productCategory->category_id);
@@ -90,14 +90,14 @@ class Product extends Model
   public function addCategory($category)
   {
     ProductCategory::create([
-      'product_id' => $this->id,
-      'category_id' => $category->id,
+      "product_id" => $this->id,
+      "category_id" => $category->id,
     ]);
   }
 
   public function removeCategory($category)
   {
-    $productCategories = ProductCategory::findAll(['product_id' => $this->id]);
+    $productCategories = ProductCategory::findAll(["product_id" => $this->id]);
     $productCategory = null;
     foreach ($productCategories as $productCategory) {
       if ($productCategory->category_id == $category->id) {
@@ -109,7 +109,7 @@ class Product extends Model
 
   public function hasCategory($category)
   {
-    $productCategories = ProductCategory::findAll(['product_id' => $this->id]);
+    $productCategories = ProductCategory::findAll(["product_id" => $this->id]);
     foreach ($productCategories as $productCategory) {
       if ($productCategory->category_id == $category->id) {
         return true;

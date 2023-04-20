@@ -8,7 +8,7 @@ use Exception;
 abstract class Model
 {
   protected $table;
-  protected $primaryKey = 'id';
+  protected $primaryKey = "id";
   protected $fillable = [];
   protected $attributes = [];
   protected static $db;
@@ -21,8 +21,8 @@ abstract class Model
 
   public static function find($id)
   {
-    $table = (new static )->table;
-    $primaryKey = (new static )->primaryKey;
+    $table = (new static())->table;
+    $primaryKey = (new static())->primaryKey;
     $query = "SELECT * FROM $table WHERE $primaryKey = ?";
     $result = self::$db->select($query, [$id]);
     if (!empty($result)) {
@@ -33,7 +33,7 @@ abstract class Model
 
   public static function findOne($params)
   {
-    $table = (new static )->table;
+    $table = (new static())->table;
     $query = "SELECT * FROM $table WHERE ";
     $values = [];
     foreach ($params as $key => $value) {
@@ -50,7 +50,7 @@ abstract class Model
 
   public static function findAll($params)
   {
-    $table = (new static )->table;
+    $table = (new static())->table;
     $query = "SELECT * FROM $table WHERE ";
     $values = [];
     foreach ($params as $key => $value) {
@@ -68,11 +68,11 @@ abstract class Model
 
   public static function where($conditions = [])
   {
-    $table = (new static )->table;
+    $table = (new static())->table;
     $query = "SELECT * FROM $table WHERE ";
-    if (isset($conditions['sql'])) {
-      $query .= $conditions['sql'];
-      $result = self::$db->select($query, $conditions['params'] ?? []);
+    if (isset($conditions["sql"])) {
+      $query .= $conditions["sql"];
+      $result = self::$db->select($query, $conditions["params"] ?? []);
       $models = [];
       foreach ($result as $row) {
         $models[] = new static($row);
@@ -80,7 +80,13 @@ abstract class Model
       return $models;
     }
     foreach ($conditions as $condition) {
-      $query .= $condition['column'] . " " . $condition['operator'] . " " . $condition['value'] . " AND ";
+      $query .=
+        $condition["column"] .
+        " " .
+        $condition["operator"] .
+        " " .
+        $condition["value"] .
+        " AND ";
     }
     $query = rtrim($query, " AND ");
     $result = self::$db->select($query);
@@ -100,7 +106,7 @@ abstract class Model
 
   public static function all()
   {
-    $table = (new static )->table;
+    $table = (new static())->table;
     $query = "SELECT * FROM $table";
     $result = self::$db->select($query);
     $models = [];
@@ -178,7 +184,7 @@ abstract class Model
   {
     $table = (new static())->table;
     $query = "SELECT * FROM $table WHERE name LIKE ?";
-    $params = array("%$input%");
+    $params = ["%$input%"];
     $result = self::$db->select($query, $params);
     $models = [];
     foreach ($result as $row) {
@@ -190,7 +196,7 @@ abstract class Model
   {
     $table = (new static())->table;
     $query = "SELECT * FROM $table WHERE code LIKE ?";
-    $params = array("%$input%");
+    $params = ["%$input%"];
     $result = self::$db->select($query, $params);
     $models = [];
     foreach ($result as $row) {

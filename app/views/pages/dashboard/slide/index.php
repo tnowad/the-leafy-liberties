@@ -1,6 +1,6 @@
 <?php
-$slides = $params['slides'];
-$filter = $params['filter'];
+$slides = $params["slides"];
+$filter = $params["filter"];
 ?>
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
@@ -13,10 +13,10 @@ $filter = $params['filter'];
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              $name = array("Title", "Image", "Location", "Action");
+              $name = ["Title", "Image", "Location", "Action"];
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
-                  <?php echo $name[$i - 1] ?>
+                  <?php echo $name[$i - 1]; ?>
                 </th>
               <?php }
               ?>
@@ -26,10 +26,10 @@ $filter = $params['filter'];
             <?php foreach ($slides as $slide): ?>
               <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                 <td class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
-                  <?php echo $slide->name ?>
+                  <?php echo $slide->name; ?>
                 </td>
                 <td class="w-64 px-5 py-3">
-                  <img src="<?php echo BASE_URI . $slide->image ?>" alt="" />
+                  <img src="<?php echo BASE_URI . $slide->image; ?>" alt="" />
                 </td>
                 <td class="px-5 py-3">Image</td>
                 <td class="px-5 py-3 w-44">
@@ -45,7 +45,7 @@ $filter = $params['filter'];
                   </div>
                 </td>
               </tr>
-            <?php endforeach ?>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </div>

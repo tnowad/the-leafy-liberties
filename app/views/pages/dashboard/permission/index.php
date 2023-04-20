@@ -1,3 +1,3 @@
 <?php
-$permissions = $params['permissions'];
+$permissions = $params["permissions"];
 ?>

@@ -4,55 +4,55 @@ use Core\Application;
 $auth = Application::getInstance()->getAuthentication();
 
 $menu = [
-  'dashboard.access' => [
-    'name' => 'Dashboard',
-    'icon' => 'fa-bars',
-    'url' => BASE_URI . '/dashboard',
+  "dashboard.access" => [
+    "name" => "Dashboard",
+    "icon" => "fa-bars",
+    "url" => BASE_URI . "/dashboard",
   ],
-  'user.access' => [
-    'name' => 'Users',
-    'icon' => 'fa-users',
-    'url' => BASE_URI . '/dashboard/customer',
+  "user.access" => [
+    "name" => "Users",
+    "icon" => "fa-users",
+    "url" => BASE_URI . "/dashboard/customer",
   ],
-  'product.access' => [
-    'name' => 'Products',
-    'icon' => 'fa-bag-shopping',
-    'url' => BASE_URI . '/dashboard/product',
+  "product.access" => [
+    "name" => "Products",
+    "icon" => "fa-bag-shopping",
+    "url" => BASE_URI . "/dashboard/product",
   ],
-  'review.access' => [
-    'name' => 'Reviews',
-    'icon' => 'fa-message',
-    'url' => BASE_URI . '/dashboard/comment',
+  "review.access" => [
+    "name" => "Reviews",
+    "icon" => "fa-message",
+    "url" => BASE_URI . "/dashboard/comment",
   ],
-  'order.access' => [
-    'name' => 'Orders',
-    'icon' => 'fa-shopping-cart',
-    'url' => BASE_URI . '/dashboard/order',
+  "order.access" => [
+    "name" => "Orders",
+    "icon" => "fa-shopping-cart",
+    "url" => BASE_URI . "/dashboard/order",
   ],
-  'category.access' => [
-    'name' => 'Categories',
-    'icon' => 'fa-list',
-    'url' => BASE_URI . '/dashboard/category',
+  "category.access" => [
+    "name" => "Categories",
+    "icon" => "fa-list",
+    "url" => BASE_URI . "/dashboard/category",
   ],
-  'permission.access' => [
-    'name' => 'Permissions',
-    'icon' => 'fa-user-lock',
-    'url' => BASE_URI . '/dashboard/permission',
+  "permission.access" => [
+    "name" => "Permissions",
+    "icon" => "fa-user-lock",
+    "url" => BASE_URI . "/dashboard/permission",
   ],
-  'coupon.access' => [
-    'name' => 'Coupons',
-    'icon' => 'fa-ticket',
-    'url' => BASE_URI . '/dashboard/coupon',
+  "coupon.access" => [
+    "name" => "Coupons",
+    "icon" => "fa-ticket",
+    "url" => BASE_URI . "/dashboard/coupon",
   ],
-  'slide.access' => [
-    'name' => 'Slides',
-    'icon' => 'fa-sliders',
-    'url' => BASE_URI . '/dashboard/slide',
+  "slide.access" => [
+    "name" => "Slides",
+    "icon" => "fa-sliders",
+    "url" => BASE_URI . "/dashboard/slide",
   ],
-  'role.access' => [
-    'name' => 'Roles',
-    'icon' => 'fa-user-plus',
-    'url' => BASE_URI . '/dashboard/role',
+  "role.access" => [
+    "name" => "Roles",
+    "icon" => "fa-user-plus",
+    "url" => BASE_URI . "/dashboard/role",
   ],
 ];
 
@@ -61,26 +61,29 @@ foreach ($menu as $key => $menuItem) {
     unset($menu[$key]);
   }
 }
-
 ?>
 <div
   class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
     <ul id='menu-list' class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
-        <a href="<?php echo BASE_URI . '/dashboard' ?>" class="flex items-center justify-center py-4">
-          <img src="<?php echo BASE_URI . '/resources/images/logo.png' ?>" alt="logo" />
+        <a href="<?php echo BASE_URI .
+          "/dashboard"; ?>" class="flex items-center justify-center py-4">
+          <img src="<?php echo BASE_URI .
+            "/resources/images/logo.png"; ?>" alt="logo" />
         </a>
       </li>
       <?php foreach ($menu as $menuItem): ?>
         <li
           class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-          <a href="<?php echo $menuItem['url'] ?>" class="relative flex flex-row items-center h-11">
+          <a href="<?php echo $menuItem[
+            "url"
+          ]; ?>" class="relative flex flex-row items-center h-11">
             <span class="inline-flex items-center justify-center ml-4">
-              <i class="fa-solid <?php echo $menuItem['icon'] ?>"></i>
+              <i class="fa-solid <?php echo $menuItem["icon"]; ?>"></i>
             </span>
             <span class="menu-text ml-2 text-sm tracking-wide truncate">
-              <?php echo $menuItem['name'] ?>
+              <?php echo $menuItem["name"]; ?>
             </span>
           </a>
         </li>

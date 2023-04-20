@@ -6,10 +6,6 @@ use Core\Model;
 
 class Author extends Model
 {
-  protected $table = 'authors';
-  protected $fillable = [
-    'image',
-    'name',
-    'deleted_at'
-  ];
+  protected $table = "authors";
+  protected $fillable = ["image", "name", "deleted_at"];
 }

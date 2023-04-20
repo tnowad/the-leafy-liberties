@@ -10,12 +10,19 @@ class Controller
 
   public function render(View $view, $params = [])
   {
-    return Application::getInstance()->getView()->render($view, $params);
+    return Application::getInstance()
+      ->getView()
+      ->render($view, $params);
   }
 
-  public function renderWithLayout(View $view, $params = [], $layout = 'layouts/default')
-  {
-    return Application::getInstance()->getView()->renderWithLayout($view, $params, $layout);
+  public function renderWithLayout(
+    View $view,
+    $params = [],
+    $layout = "layouts/default"
+  ) {
+    return Application::getInstance()
+      ->getView()
+      ->renderWithLayout($view, $params, $layout);
   }
 
   public function addMiddleware($middleware)
@@ -27,5 +34,4 @@ class Controller
   {
     return $this->middlewares;
   }
-
 }

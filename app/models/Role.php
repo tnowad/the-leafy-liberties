@@ -7,16 +7,13 @@ use Core\Model;
 
 class Role extends Model
 {
-  protected $table = 'roles';
-  protected $fillable = [
-    'name',
-    'deleted_at'
-  ];
+  protected $table = "roles";
+  protected $fillable = ["name", "deleted_at"];
 
   public function permissions(): array
   {
     return RolePermission::findAll([
-      'role_id' => $this->id
+      "role_id" => $this->id,
     ]);
   }
 
@@ -31,8 +28,8 @@ class Role extends Model
   public function removePermission(Permission $permission)
   {
     $rolePermission = RolePermission::findOne([
-      'role_id' => $this->id,
-      'permission_id' => $permission->id
+      "role_id" => $this->id,
+      "permission_id" => $permission->id,
     ]);
     $rolePermission->delete();
   }

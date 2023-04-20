@@ -14,10 +14,10 @@ class Database
 
   private function __construct()
   {
-    $host = DotEnv::get('DB_HOST');
-    $user = DotEnv::get('DB_USER');
-    $password = DotEnv::get('DB_PASSWORD');
-    $database = DotEnv::get('DB_NAME');
+    $host = DotEnv::get("DB_HOST");
+    $user = DotEnv::get("DB_USER");
+    $password = DotEnv::get("DB_PASSWORD");
+    $database = DotEnv::get("DB_NAME");
 
     $this->transactionDepth = 0;
 
@@ -65,35 +65,35 @@ class Database
     return $result;
   }
 
-  public function select($query, $params = array())
+  public function select($query, $params = [])
   {
     $result = $this->executeQuery($query, $params);
-    $rows = array();
+    $rows = [];
     while ($row = $result->fetch_assoc()) {
       $rows[] = $row;
     }
     return $rows;
   }
 
-  public function insert($query, $params = array())
+  public function insert($query, $params = [])
   {
     $this->executeQuery($query, $params);
     return $this->mysqli->affected_rows;
   }
 
-  public function update($query, $params = array())
+  public function update($query, $params = [])
   {
     $this->executeQuery($query, $params);
     return $this->mysqli->affected_rows;
   }
 
-  public function delete($query, $params = array())
+  public function delete($query, $params = [])
   {
     $this->executeQuery($query, $params);
     return $this->mysqli->affected_rows;
   }
 
-  public function count($query, $params = array())
+  public function count($query, $params = [])
   {
     $result = $this->executeQuery($query, $params);
     $row = $result->fetch_row();
@@ -103,7 +103,7 @@ class Database
   public function truncate($table)
   {
     $query = "TRUNCATE TABLE $table";
-    $this->executeQuery($query, array());
+    $this->executeQuery($query, []);
     return $this->mysqli->affected_rows;
   }
 

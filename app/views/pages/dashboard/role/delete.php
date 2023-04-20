@@ -2,7 +2,7 @@
 use App\Models\Role;
 
 // find all user contains this role and move them to default role or another role
-$role = $params['role'];
+$role = $params["role"];
 ?>
 
 <form>
@@ -12,10 +12,10 @@ $role = $params['role'];
         </label>
         <input
             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-            type="text" name="name" id="name" value="<?php echo $role->name ?>" disabled>
+            type="text" name="name" id="name" value="<?php echo $role->name; ?>" disabled>
     </div>
 
-    <input type="hidden" name="id" value="<?php echo $role->id ?>">
+    <input type="hidden" name="id" value="<?php echo $role->id; ?>">
     <!-- new role -->
     <div class="mb-4">
         <label class="block font-bold text-gray-700" for="new_role">
@@ -25,7 +25,7 @@ $role = $params['role'];
             class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
             name="new_role" id="new_role">
             <?php foreach (Role::all() as $role): ?>
-                <option value="<?php echo $role->id ?>"><?php echo $role->name ?></option>
+                <option value="<?php echo $role->id; ?>"><?php echo $role->name; ?></option>
             <?php endforeach; ?>
         </select>
     </div>

@@ -11,10 +11,8 @@ use Core\Request;
 use Core\Response;
 use Core\View;
 
-
 class WishlistController extends Controller
 {
-
   public function index(Request $request, Response $response)
   {
     try {
@@ -24,18 +22,22 @@ class WishlistController extends Controller
     }
 
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/wishlist'), [
-      'title' => 'Wishlist',
-      'wishlist' => $wishlist,
-    ]));
+    $response->setBody(
+      View::renderWithLayout(new View("pages/wishlist"), [
+        "title" => "Wishlist",
+        "wishlist" => $wishlist,
+      ])
+    );
   }
   public function add(Request $request, Response $response)
   {
-    $product = Product::find($request->getQuery('id'));
-    $user = Application::getInstance()->getAuthentication()->getUser();
+    $product = Product::find($request->getQuery("id"));
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
     dd($product);
     dd($user);
-    $products = array();
+    $products = [];
     $wishlist = new Wishlist();
     // $response->redirect(BASE_URI . '/product');
   }

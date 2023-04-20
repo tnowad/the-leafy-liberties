@@ -5,9 +5,6 @@ use Core\Model;
 
 class ProductCategory extends Model
 {
-  protected $table = 'products_categories';
-  protected $fillable = [
-    'product_id',
-    'category_id',
-  ];
+  protected $table = "products_categories";
+  protected $fillable = ["product_id", "category_id"];
 }

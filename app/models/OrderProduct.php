@@ -6,8 +6,16 @@ use Core\Model;
 
 class OrderProduct extends Model
 {
-  protected $table = 'order_products';
-  protected $fillable = ['order_id', 'product_id', 'quantity', 'price', 'created_at', 'updated_at', 'deleted_at'];
+  protected $table = "order_products";
+  protected $fillable = [
+    "order_id",
+    "product_id",
+    "quantity",
+    "price",
+    "created_at",
+    "updated_at",
+    "deleted_at",
+  ];
 
   public function order()
   {

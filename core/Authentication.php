@@ -12,7 +12,7 @@ class Authentication
 
   public function __construct()
   {
-    $this->userId = $_SESSION['user_id'] ?? null;
+    $this->userId = $_SESSION["user_id"] ?? null;
   }
 
   public function getUser(): ?User
@@ -20,12 +20,12 @@ class Authentication
     if ($this->userId == null) {
       return null;
     }
-    return User::findOne(['id' => $this->userId]);
+    return User::findOne(["id" => $this->userId]);
   }
 
   public function setUser(User $user)
   {
-    $_SESSION['user_id'] = $user->id;
+    $_SESSION["user_id"] = $user->id;
   }
 
   public function isAuthenticated(): bool

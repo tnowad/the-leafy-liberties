@@ -10,8 +10,11 @@ class Response
   private $headers;
   private $body;
 
-  public function __construct($statusCode = 200, $body = '', array $headers = [])
-  {
+  public function __construct(
+    $statusCode = 200,
+    $body = "",
+    array $headers = []
+  ) {
     $this->statusCode = $statusCode;
     $this->headers = $headers;
     $this->body = $body;
@@ -33,7 +36,7 @@ class Response
   }
   public function jsonResponse($data)
   {
-    $this->headers['Content-Type'] = 'application/json';
+    $this->headers["Content-Type"] = "application/json";
     $this->body = json_encode($data);
   }
   public function redirect($url, $statusCode = 302, $message = null)
@@ -42,14 +45,14 @@ class Response
       if (is_array($message)) {
         $message = http_build_query($message);
       } elseif (is_string($message)) {
-        $message = 'message=' . urlencode($message);
+        $message = "message=" . urlencode($message);
       } else {
-        throw new InvalidArgumentException('Invalid message parameter');
+        throw new InvalidArgumentException("Invalid message parameter");
       }
-      $url .= (strpos($url, '?') === false ? '?' : '&') . $message;
+      $url .= (strpos($url, "?") === false ? "?" : "&") . $message;
     }
 
-    $this->headers['Location'] = $url;
+    $this->headers["Location"] = $url;
     $this->statusCode = $statusCode;
   }
   public function getStatusCode()

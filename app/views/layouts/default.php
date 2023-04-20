@@ -9,14 +9,18 @@
   <meta name="author" content="Leafy Liberties">
 
   <title>
-    <?php echo $params['title'] ?? 'The Leafy Liberties Bookstore' ?>
+    <?php echo $params["title"] ?? "The Leafy Liberties Bookstore"; ?>
   </title>
-  <link rel="icon" type="image/x-icon" href="<?php echo BASE_URI . '/resources/images/logo.png' ?>">
-  <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/all.css' ?>">
-  <link rel="stylesheet" href="<?php echo BASE_URI . '/resources/css/reset.css' ?>">
+  <link rel="icon" type="image/x-icon" href="<?php echo BASE_URI .
+    "/resources/images/logo.png"; ?>">
+  <link rel="stylesheet" href="<?php echo BASE_URI .
+    "/resources/css/all.css"; ?>">
+  <link rel="stylesheet" href="<?php echo BASE_URI .
+    "/resources/css/reset.css"; ?>">
 
-  <script src="<?php echo BASE_URI . '/resources/js/tailwindcss.js' ?>"></script>
-  <script src="<?php echo BASE_URI . '/resources/js/flowbite.js' ?>"></script>
+  <script src="<?php echo BASE_URI .
+    "/resources/js/tailwindcss.js"; ?>"></script>
+  <script src="<?php echo BASE_URI . "/resources/js/flowbite.js"; ?>"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -48,18 +52,18 @@
 </head>
 
 <body>
-  <?php $params['header'] ?? require_once(__DIR__ . '/default/header.php'); ?>
+  <?php $params["header"] ?? (require_once __DIR__ . "/default/header.php"); ?>
 
   {{content}}
 
-  <?php $params['footer'] ?? require_once(__DIR__ . '/default/footer.php'); ?>
+  <?php $params["footer"] ?? (require_once __DIR__ . "/default/footer.php"); ?>
 </body>
 
 <script type="module">
   import {
     parseUrlParameters
-  } from '<?php echo BASE_URI . '/resources/js/url-utils.js' ?>';
-  import Toast from '<?php echo BASE_URI . '/resources/js/toast.js' ?>';
+  } from '<?php echo BASE_URI . "/resources/js/url-utils.js"; ?>';
+  import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
 
   const paramsString = window.location.search.substr(1);
   const params = parseUrlParameters(paramsString);

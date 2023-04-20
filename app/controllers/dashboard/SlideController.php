@@ -16,14 +16,15 @@ class SlideController extends Controller
     // filter and pagination
     $filter = [];
 
-    $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/slide/index'), [
-      'slides' => $slides,
-      'filter' => $filter
-    ]));
+    $response->setBody(
+      View::renderWithDashboardLayout(new View("pages/dashboard/slide/index"), [
+        "slides" => $slides,
+        "filter" => $filter,
+      ])
+    );
   }
 
   public function show(Request $request, Response $response)
   {
-
   }
 }

@@ -12,10 +12,8 @@ use Core\Request;
 use Core\Response;
 use Core\View;
 
-
 class ProductController extends Controller
 {
-
   public function index(Request $request, Response $response)
   {
     try {
@@ -25,11 +23,13 @@ class ProductController extends Controller
       dd($e->getMessage());
     }
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/products'), [
-      'title' => 'Shop',
-      'products' => $products,
-      'authors' => $authors,
-    ]));
+    $response->setBody(
+      View::renderWithLayout(new View("pages/products"), [
+        "title" => "Shop",
+        "products" => $products,
+        "authors" => $authors,
+      ])
+    );
   }
 
   public function show(Request $request, Response $response)
@@ -40,8 +40,7 @@ class ProductController extends Controller
     //   return;
     // }
     try {
-
-      $product = Product::find($request->getQuery('id'));
+      $product = Product::find($request->getQuery("id"));
       $author = Author::find($product->author_id);
       $category = Category::find($product->author_id);
     } catch (\Exception $e) {
@@ -55,16 +54,17 @@ class ProductController extends Controller
     //   return;
     // }
     $response->setStatusCode(200);
-    $response->setBody(View::renderWithLayout(new View('pages/product'), [
-      'product' => $product,
-      'author' => $author,
-      'category' => $category,
-    ]));
+    $response->setBody(
+      View::renderWithLayout(new View("pages/product"), [
+        "product" => $product,
+        "author" => $author,
+        "category" => $category,
+      ])
+    );
   }
 
   public function getProducts(Request $request, Response $response)
   {
-
     $response->setStatusCode(200);
 
     try {
@@ -80,7 +80,6 @@ class ProductController extends Controller
 
   public function getCategories(Request $request, Response $response)
   {
-
     $response->setStatusCode(200);
 
     try {
@@ -96,7 +95,6 @@ class ProductController extends Controller
 
   public function getProductCategories(Request $request, Response $response)
   {
-
     $response->setStatusCode(200);
 
     try {
@@ -112,7 +110,6 @@ class ProductController extends Controller
 
   public function getAuthors(Request $request, Response $response)
   {
-
     $response->setStatusCode(200);
 
     try {

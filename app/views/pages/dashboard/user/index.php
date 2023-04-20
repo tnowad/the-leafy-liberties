@@ -14,10 +14,21 @@
               <?php
               use App\Models\User;
 
-              $name = array("ID", "Image", "Email", "Name", "Password", "Phone", "Gender", "Role_ID", "Status", "Action");
+              $name = [
+                "ID",
+                "Image",
+                "Email",
+                "Name",
+                "Password",
+                "Phone",
+                "Gender",
+                "Role_ID",
+                "Status",
+                "Action",
+              ];
               for ($i = 1; $i <= count($name); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
-                  <?php echo $name[$i - 1] ?>
+                  <?php echo $name[$i - 1]; ?>
                 </th>
               <?php }
               ?>
@@ -30,35 +41,38 @@
               <?php foreach ($users as $user): ?>
                 <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
                   <td class="px-5 py-3">
-                    <?php echo $user->id ?>
+                    <?php echo $user->id; ?>
                   </td>
                   <td class="px-5 py-3 w-28">
-                    <img src="<?php echo $user->user_image ?>" alt="">
+                    <img src="<?php echo $user->user_image; ?>" alt="">
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->email ?>
+                    <?php echo $user->email; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->name ?>
+                    <?php echo $user->name; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->password ?>
+                    <?php echo $user->password; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->phone ?>
+                    <?php echo $user->phone; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->gender ?>
+                    <?php echo $user->gender; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->role_id ?>
+                    <?php echo $user->role_id; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->status ?>
+                    <?php echo $user->status; ?>
                   </td>
                   <td class="px-5 py-3 w-44">
                     <div class="button flex justify-center items-center gap-4">
-                      <a href="<?php echo BASE_URI . '/dashboard/user/update' . '?id=' . $user->id ?>"
+                      <a href="<?php echo BASE_URI .
+                        "/dashboard/user/update" .
+                        "?id=" .
+                        $user->id; ?>"
                         class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
@@ -70,7 +84,8 @@
                   </td>
                 </tr>
               <?php endforeach; ?>
-            <?php endif; ?>
+            <?php endif;
+            ?>
           </tbody>
         </table>
       </div>
@@ -79,7 +94,8 @@
       class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[300]">
       <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
         <h2 class="text-xl font-bold mb-4">Add Customer</h2>
-        <form class="flex flex-col" action="<?php echo BASE_URI . '/dashboard/user/update' ?>" method="POST">
+        <form class="flex flex-col" action="<?php echo BASE_URI .
+          "/dashboard/user/update"; ?>" method="POST">
           <label for="image" class="my-2">Image:</label>
           <input type="file" name="image"/>
           <label for="entered" class="my-2">Email:</label>

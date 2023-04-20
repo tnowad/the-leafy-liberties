@@ -5,16 +5,12 @@ use Core\Model;
 
 class Tag extends Model
 {
-  protected $table = 'tags';
-  protected $fillable = [
-    'name',
-    'image',
-    'deleted_at'
-  ];
+  protected $table = "tags";
+  protected $fillable = ["name", "image", "deleted_at"];
 
   public function products()
   {
-    $productTags = ProductTag::findAll(['tag_id' => $this->id]);
+    $productTags = ProductTag::findAll(["tag_id" => $this->id]);
     $products = [];
     foreach ($productTags as $productTag) {
       $products[] = Product::find($productTag->product_id);
@@ -25,14 +21,14 @@ class Tag extends Model
   public function addProduct($product)
   {
     ProductTag::create([
-      'product_id' => $product->id,
-      'tag_id' => $this->id,
+      "product_id" => $product->id,
+      "tag_id" => $this->id,
     ]);
   }
 
   public function removeProduct($product)
   {
-    $productTags = ProductTag::findAll(['tag_id' => $this->id]);
+    $productTags = ProductTag::findAll(["tag_id" => $this->id]);
     $productTag = null;
     foreach ($productTags as $productTag) {
       if ($productTag->product_id == $product->id) {
@@ -44,7 +40,7 @@ class Tag extends Model
 
   public function delete()
   {
-    $productTags = ProductTag::findAll(['tag_id' => $this->id]);
+    $productTags = ProductTag::findAll(["tag_id" => $this->id]);
     foreach ($productTags as $productTag) {
       $productTag->delete();
     }
