@@ -20,7 +20,7 @@ class UserController extends Controller
     $users = User::all();
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/user/index"), [
-        "title" => "Customers",
+        "title" => "Users",
         "users" => $users,
       ])
     );
@@ -45,8 +45,8 @@ class UserController extends Controller
       $request->setParam("image", $result);
     } else {
       return $response->setBody(
-        View::renderWithDashboardLayout(new View("pages/dashboard/customer"), [
-          "title" => "Customers",
+        View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
+          "title" => "Users",
           "toast" => [
             "type" => "error",
             "message" => "Add user failed!",
@@ -55,17 +55,17 @@ class UserController extends Controller
       );
     }
 
-    $product = new User();
-    $product->name = $request->getParam("name");
-    $product->image = $request->getParam("image");
-    $product->isbn = $request->getParam("isbn");
-    $product->price = $request->getParam("price");
-    $product->description = $request->getParam("description");
-    $product->quantity = $request->getParam("quantity");
-    $product->save();
+    $user = new User();
+    $user->name = $request->getParam("name");
+    $user->image = $request->getParam("image");
+    $user->isbn = $request->getParam("isbn");
+    $user->price = $request->getParam("price");
+    $user->description = $request->getParam("description");
+    $user->quantity = $request->getParam("quantity");
+    $user->save();
     return $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/customer"), [
-        "title" => "Customers",
+      View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
+        "title" => "Users",
         "toast" => [
           "type" => "success",
           "message" => "Add user successful!",
@@ -78,27 +78,27 @@ class UserController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("users.create")) {
-      return $response->redirect(BASE_URI . "/dashboard/customer");
+      return $response->redirect(BASE_URI . "/dashboard/user");
     }
     $user = new User();
     // get from request
     $user->save();
-    return $response->redirect(BASE_URI . "/dashboard/customer");
+    return $response->redirect(BASE_URI . "/dashboard/user");
   }
 
   public function show(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("users.access")) {
-      return $response->redirect(BASE_URI . "/dashboard/customer");
+      return $response->redirect(BASE_URI . "/dashboard/user");
     }
     $user = User::find($request->getQuery("id"));
     if (!$user) {
-      return $response->redirect(BASE_URI . "/dashboard/customer");
+      return $response->redirect(BASE_URI . "/dashboard/user");
     }
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/user/show"), [
-        "title" => "Show Product",
+        "title" => "Show User",
         "user" => $user,
       ])
     );
@@ -115,7 +115,7 @@ class UserController extends Controller
           View::renderWithDashboardLayout(
             new View("pages/dashboard/user/update"),
             [
-              "title" => "Customer Dashboard",
+              "title" => "User Update",
               "user" => $user,
             ]
           )
@@ -125,9 +125,9 @@ class UserController extends Controller
         if (!$user) {
           return $response->setBody(
             View::renderWithDashboardLayout(
-              new View("pages/dashboard/customer"),
+              new View("pages/dashboard/user"),
               [
-                "title" => "Customer Dashboard",
+                "title" => "Users",
                 "toast" => [
                   "type" => "error",
                   "message" => "Edit account fail!",
@@ -146,9 +146,9 @@ class UserController extends Controller
           $user->save();
           return $response->setBody(
             View::renderWithDashboardLayout(
-              new View("pages/dashboard/customer"),
+              new View("pages/dashboard/user"),
               [
-                "title" => "Customer Dashboard",
+                "title" => "Users",
                 "toast" => [
                   "type" => "success",
                   "message" => "Edit account successful!",

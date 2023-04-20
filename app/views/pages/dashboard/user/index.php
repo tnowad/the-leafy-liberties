@@ -1,7 +1,7 @@
 <div class="w-full my-0 mx-auto">
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
-      <h1 class="text-xl font-bold">Customer</h1>
+      <h1 class="text-xl font-bold">Users</h1>
       <button class="add-user w-5 h-5 text-2xl">
         +
       </button>
@@ -12,6 +12,7 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
+              use App\Models\Role;
               use App\Models\User;
 
               $name = [
@@ -19,10 +20,9 @@
                 "Image",
                 "Email",
                 "Name",
-                "Password",
                 "Phone",
                 "Gender",
-                "Role_ID",
+                "Role",
                 "Status",
                 "Action",
               ];
@@ -43,8 +43,10 @@
                   <td class="px-5 py-3">
                     <?php echo $user->id; ?>
                   </td>
-                  <td class="px-5 py-3 w-28">
-                    <img src="<?php echo $user->user_image; ?>" alt="">
+                  <td class="px-5 py-3 w-32">
+                    <img
+                      src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/temp.png' : BASE_URI . $user->image ?>"
+                      alt="" class="w-full h-full object-contain">
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $user->email; ?>
@@ -53,19 +55,33 @@
                     <?php echo $user->name; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->password; ?>
-                  </td>
-                  <td class="px-5 py-3">
                     <?php echo $user->phone; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->gender; ?>
+                    <?php
+                    if ($user->gender == 0) {
+                      echo 'Undefined';
+                    } else if ($user->gender == 1) {
+                      echo 'Male';
+                    } else {
+                      echo 'Female';
+                    }
+                    ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $user->role_id; ?>
+                    <?php
+                    $role = Role::find($user->role_id);
+                    echo $role->name;
+                    ?>
                   </td>
-                  <td class="px-5 py-3">
-                    <?php echo $user->status; ?>
+                  <td class="px-5 py-3 <?php echo ($user->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
+                    <?php
+                    if ($user->status == 1) {
+                      echo "Active";
+                    } else {
+                      echo "Banned";
+                    }
+                    ?>
                   </td>
                   <td class="px-5 py-3 w-44">
                     <div class="button flex justify-center items-center gap-4">
@@ -97,7 +113,7 @@
         <form class="flex flex-col" action="<?php echo BASE_URI .
           "/dashboard/user/update"; ?>" method="POST">
           <label for="image" class="my-2">Image:</label>
-          <input type="file" name="image"/>
+          <input type="file" name="image" />
           <label for="entered" class="my-2">Email:</label>
           <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="email" />
           <label for="category" class="my-2">Name:</label>

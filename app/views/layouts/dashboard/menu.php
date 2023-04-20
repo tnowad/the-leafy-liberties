@@ -12,7 +12,7 @@ $menu = [
   "user.access" => [
     "name" => "Users",
     "icon" => "fa-users",
-    "url" => BASE_URI . "/dashboard/customer",
+    "url" => BASE_URI . "/dashboard/user",
   ],
   "product.access" => [
     "name" => "Products",
