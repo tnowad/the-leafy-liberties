@@ -40,7 +40,8 @@ $products = $params["products"]; ?>
               <?php echo $product->price; ?>
             </td>
             <td class="px-1 py-2">
-              <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800">
+              <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800"
+                onclick="addToCart(<?php echo $product->id; ?>)">
                 <i class="fa-solid fa-cart-plus"></i>
               </button>
             </td>
@@ -75,21 +76,68 @@ $products = $params["products"]; ?>
       span.textContent = quantity;
     });
   });
+</script>
 
-  document.removeProductFromWishlist = (id) => {
-    // with xhr
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/wishlist/remove', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({ id }));
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        if (response.success) {
-          document.querySelector(`#product-${id}`).remove();
-        }
+<script type="module">
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
+
+  document.addToCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/add-to-cart"; ?>', {
+      id: id,
+    }).then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('Product added to cart');
       }
-    };
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
 
+  document.moveAllToCart = () => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/move-all-to-cart"; ?>').then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('All products added to cart');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
+
+  document.deleteFromWishlist = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/delete"; ?>', {
+      id: id,
+    }).then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('Product deleted from wishlist');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
+
+  document.deleteAllFromWishlist = () => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/delete-all"; ?>').then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('All products deleted from wishlist');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
   }
 </script>

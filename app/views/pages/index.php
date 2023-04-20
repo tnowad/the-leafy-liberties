@@ -223,7 +223,7 @@ use App\Models\Slide;
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
   document.addToWishList = (id) => {
-    FetchXHR.post('/api/wishlist/add', { id }, {
+    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', { id }, {
       'Content-Type': 'application/json'
     }).then(response => {
       const data = response.data;
@@ -235,4 +235,6 @@ use App\Models\Slide;
       console.error(error);
     });
   };
+
+
 </script>
