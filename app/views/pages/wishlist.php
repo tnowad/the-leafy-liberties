@@ -90,11 +90,12 @@ $products = $params["products"]; ?>
 </script>
 
 <script type="module">
+  import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
   document.addToCart = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/add-to-cart"; ?>', {
-      id: id,
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/add-to-cart"; ?>', { id }, {
+      'Content-Type': 'application/json'
     }).then(response => {
       const data = response.data;
       new Toast({
@@ -102,7 +103,10 @@ $products = $params["products"]; ?>
         type: data.type,
       });
     }).catch(error => {
-      alert('Something went wrong');
+      new Toast({
+        message: 'Something went wrong',
+        type: 'error',
+      });
     });
   }
 

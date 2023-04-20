@@ -17,12 +17,12 @@ class FetchXHR {
             data: responseData,
           });
         } catch (e) {
-          // Remove this console.log in production
-          console.log(xhr.response);
+          reject(e);
         }
       };
 
       xhr.onerror = () => {
+        console.log(xhr.status, xhr.statusText, xhr.response);
         reject(new Error('An error occurred during the XMLHttpRequest'));
       };
 
