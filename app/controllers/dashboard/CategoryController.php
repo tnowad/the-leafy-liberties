@@ -4,11 +4,17 @@ namespace App\Controllers\Dashboard;
 use Core\Controller;
 use Core\Request;
 use Core\Response;
+use Core\View;
 
-class SettingController extends Controller
+class CategoryController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    return $response->setBody(
+      View::renderWithDashboardLayout(new View("pages/dashboard/category/index"), [
+          "title" => "category",
+      ])
+  );
   }
 
   public function show(Request $request, Response $response)

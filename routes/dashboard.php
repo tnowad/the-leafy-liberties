@@ -1,12 +1,16 @@
 <?php
 
 use App\Controllers\Customer\DashboardController;
+use App\Controllers\Dashboard\CategoryController;
 use App\Controllers\Dashboard\ReviewController;
 use App\Controllers\Dashboard\CouponController;
+use App\Controllers\Dashboard\OrderController;
+use App\Controllers\Dashboard\PermissionController;
 use App\Controllers\Dashboard\ProductController;
 use App\Controllers\Dashboard\RoleController;
 use App\Controllers\Dashboard\SlideController;
 use App\Controllers\Dashboard\UserController;
+use App\Models\Category;
 use Core\Application;
 
 $router = Application::getInstance()->getRouter();
@@ -85,3 +89,16 @@ $router->post("/dashboard/role/delete", [RoleController::class, "delete"]);
 
 // reveiw
 $router->get("/dashboard/review", [ReviewController::class, "index"]);
+
+// order
+$router->get("/dashboard/order", [OrderController::class, "index"]);
+
+// categories
+$router->get("/dashboard/category", [CategoryController::class, "index"]);
+
+// permission
+
+$router->get("/dashboard/permission", [PermissionController::class, "index"]);
+$router->post("/dashboard/permission", [PermissionController::class, "create"]);
+$router->post("/dashboard/permission/update", [PermissionController::class, "update"]);
+$router->post("/dashboard/permission/delete", [PermissionController::class, "delete"]);
