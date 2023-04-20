@@ -33,11 +33,11 @@ class WishlistController extends Controller
   {
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->isAuthenticated()) {
-      $response->setStatusCode(401);
-      $response->setBody(
-        View::renderWithLayout(new View("pages/401"), [
-          "title" => "401",
-        ])
+      $response->jsonResponse(
+        [
+          "type" => "error",
+          "message" => "You are not authenticated",
+        ]
       );
       return;
     }
@@ -45,12 +45,33 @@ class WishlistController extends Controller
     $user = $auth->getUser();
 
     $product = Product::find($request->getBody()["id"]);
+
+    if (!$product) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product not found",
+      ]);
+      return;
+    }
+
+    $wishlist = Wishlist::findOne([
+      "product_id" => $product->id,
+      "user_id" => $user->id,
+    ]);
+
+    if ($wishlist) {
+      $response->jsonResponse([
+        "type" => "info",
+        "message" => "Product already in wishlist",
+      ]);
+      return;
+    }
+
     $wishlist = new Wishlist();
     $wishlist->product_id = $product->id;
     $wishlist->user_id = $user->id;
     $wishlist->save();
 
-    $response->setStatusCode(200);
     $response->jsonResponse([
       "type" => "success",
       "message" => "Product added to wishlist",

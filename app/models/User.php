@@ -64,4 +64,11 @@ class User extends Model
     ]);
     $userPermission->delete();
   }
+
+  public function wishlist(): array
+  {
+    return Wishlist::findAll([
+      "user_id" => $this->id,
+    ]);
+  }
 }
