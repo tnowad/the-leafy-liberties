@@ -15,17 +15,29 @@ class WishlistController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    try {
-      $wishlist = Wishlist::all();
-    } catch (\Exception $e) {
-      dd($e->getMessage());
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->redirect("/login");
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $wishlists = Wishlist::findAll([
+      "user_id" => $user->id,
+    ]);
+
+    $products = [];
+
+    foreach ($wishlists as $wishlist) {
+      $products[] = $wishlist->product();
     }
 
     $response->setStatusCode(200);
     $response->setBody(
       View::renderWithLayout(new View("pages/wishlist"), [
         "title" => "Wishlist",
-        "wishlist" => $wishlist,
+        "products" => $products,
       ])
     );
   }
