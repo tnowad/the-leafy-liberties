@@ -92,7 +92,8 @@
       </div>
       <div class="my-8 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl">
         <div class="relative">
-          <table class="w-full h-64 overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
+          table for new order 
+          <!-- <table class="w-full h-64 overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <?php
@@ -139,7 +140,7 @@
                 </tr>
               <?php } ?>
             </tbody>
-          </table>
+          </table> -->
         </div>
       </div>
     </div>

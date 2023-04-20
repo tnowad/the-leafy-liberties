@@ -63,7 +63,7 @@ foreach ($menu as $key => $menuItem) {
 }
 ?>
 <div
-  class="menu-left flex flex-col w-16 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
+  class="menu-left flex flex-col w-16 lg:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
     <ul id='menu-list' class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
@@ -94,10 +94,10 @@ foreach ($menu as $key => $menuItem) {
 <script>
   let menu = document.querySelector(".menu-left");
   function toggleMenu() {
-    if (menu.classList.contains('md:w-72')) {
-      menu.classList.remove('md:w-72');
+    if (menu.classList.contains('lg:w-72')) {
+      menu.classList.remove('lg:w-72');
     } else {
-      menu.classList.add('md:w-72');
+      menu.classList.add('lg:w-72');
     }
   }
   let list = document.querySelectorAll("ul li:not(:first-child)");
