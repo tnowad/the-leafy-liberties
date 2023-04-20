@@ -10,11 +10,16 @@ class FetchXHR {
       });
 
       xhr.onload = () => {
-        const responseData = xhr.response ? JSON.parse(xhr.response) : null;
-        resolve({
-          status: xhr.status,
-          data: responseData,
-        });
+        try {
+          const responseData = xhr.response ? JSON.parse(xhr.response) : null;
+          resolve({
+            status: xhr.status,
+            data: responseData,
+          });
+        } catch (e) {
+          // Remove this console.log in production
+          console.log(xhr.response);
+        }
       };
 
       xhr.onerror = () => {
