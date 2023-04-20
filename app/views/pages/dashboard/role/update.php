@@ -42,7 +42,7 @@ foreach ($allPermissions as $key => $permission) {
       Name
     </label>
     <input
-      class="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+      class="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0 p-2"
       type="text" name="name" id="name" value="<?php echo $role->name; ?>">
   </div>
 
@@ -74,7 +74,7 @@ foreach ($allPermissions as $key => $permission) {
           <?php foreach ($groupPermission as $permission): ?>
             <td>
               <input
-                class="w-5 h-5 mr-3 text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                class="w-4 h-4 mr-3 text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 type="checkbox" name="permissions[]" id="<?php echo $permission[
                   "name"
                 ]; ?>"

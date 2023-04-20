@@ -63,7 +63,7 @@
       <div class="w-full">
         <?php $params["header"] ??
           (require_once __DIR__ . "/dashboard/header.php"); ?>
-        <div class="w-full xl:px-10 lg:px-0" id="content">
+        <div class="w-full px-10" id="content">
           {{content}}
         </div>
       </div>

@@ -21,7 +21,6 @@
                 "Email",
                 "Name",
                 "Phone",
-                "Gender",
                 "Role",
                 "Status",
                 "Action",
@@ -45,7 +44,7 @@
                   </td>
                   <td class="px-5 py-3 w-32">
                     <img
-                      src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/temp.png' : BASE_URI . $user->image ?>"
+                      src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>"
                       alt="" class="w-full h-full object-contain">
                   </td>
                   <td class="px-5 py-3">
@@ -56,17 +55,6 @@
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $user->phone; ?>
-                  </td>
-                  <td class="px-5 py-3">
-                    <?php
-                    if ($user->gender == 0) {
-                      echo 'Undefined';
-                    } else if ($user->gender == 1) {
-                      echo 'Male';
-                    } else {
-                      echo 'Female';
-                    }
-                    ?>
                   </td>
                   <td class="px-5 py-3">
                     <?php

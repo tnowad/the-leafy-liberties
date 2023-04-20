@@ -10,7 +10,7 @@ $user = $auth->getUser() ?? null;
 // Todo: Cart: add count items in cart
 // Todo: Wishlist: add count items in wishlist, move wishlist to cart
 ?>
-<header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px]">
+<header class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px] shadow-lg">
   <div class="container flex items-center justify-between h-24 mt-5">
     <a class="w-48" href="<?php echo BASE_URI . "/"; ?>">
       <img src="<?php echo BASE_URI .
@@ -57,12 +57,12 @@ $user = $auth->getUser() ?? null;
         <i class="fa-regular fa-user"></i>
       </button>
       <div
-        class="absolute hidden w-24 transition-all bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none right-16 mt-11"
+        class="absolute hidden w-28 transition-all bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none right-16 mt-11"
         id="dropdownHover">
         <div class="px-1 py-1 " aria-labelledby="dropdownHoverButton">
           <?php if ($user != null): ?>
             <a href="<?php echo BASE_URI . "/profile"; ?>"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all">Your
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#315854] hover:text-white transition-all whitespace-nowrap">Your
               Profile</a>
             <?php if ($auth->hasPermission("dashboard.access")): ?>
               <a href="<?php echo BASE_URI . "/dashboard"; ?>"

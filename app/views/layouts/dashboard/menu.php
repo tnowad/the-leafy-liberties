@@ -63,7 +63,7 @@ foreach ($menu as $key => $menuItem) {
 }
 ?>
 <div
-  class="menu-left flex flex-col w-16 hover:w-72 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
+  class="menu-left flex flex-col w-16 md:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
     <ul id='menu-list' class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">

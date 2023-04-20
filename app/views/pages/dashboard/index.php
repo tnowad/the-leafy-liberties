@@ -53,7 +53,7 @@
         ?>
       </div>
       <div class="flex flex-wrap items-start justify-between w-full my-8 body-wrap">
-        <div class="chart-layout xl:w-[65.5%] px-6 py-4 bg-white rounded-2xl shadow-lg sm:w-full">
+        <div class="chart-layout xl:w-[65.5%] px-6 py-7 bg-white rounded-2xl shadow-lg sm:w-full h-full">
           <div class="flex items-center justify-between top-content">
             <div class="total-revuenes">
               <p class="text-2xl font-semibold">Total Revuenes</p>
