@@ -77,14 +77,10 @@
   <div class="mt-20">
     <ul class="box-content flex justify-center">
       <li class="mb-5 mr-10 cursor-pointer" onclick="showDescription()">
-        <!-- <a href="/book_detail" src="" alt="" class="text-base sm:text-2xl"> -->
         Description
-        <!-- </a> -->
       </li>
       <li class="mb-2 mr-5 sm:mr-10 sm:mb-5 cursor-pointer" onclick="showReveiw()">
-        <!-- <a href="/book_detail" src="" alt="" class="text-base sm:text-2xl"> -->
         Review
-        <!-- </a> -->
       </li>
     </ul>
     <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="description">
