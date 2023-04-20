@@ -63,10 +63,10 @@ $cartItems = $params["cartItems"];
             $
           </span>
         </div>
-        <button
+        <a href="<?php echo BASE_URI . "/checkout"; ?>"
           class="px-5 py-2 bg-[#315854] rounded-2xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out
-        </button>
+        </a>
       </div>
     </div>
     <div class="flex my-8 coupon-code">
