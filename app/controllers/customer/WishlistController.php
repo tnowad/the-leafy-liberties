@@ -31,14 +31,29 @@ class WishlistController extends Controller
   }
   public function add(Request $request, Response $response)
   {
-    $product = Product::find($request->getQuery("id"));
-    $user = Application::getInstance()
-      ->getAuthentication()
-      ->getUser();
-    dd($product);
-    dd($user);
-    $products = [];
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->setStatusCode(401);
+      $response->setBody(
+        View::renderWithLayout(new View("pages/401"), [
+          "title" => "401",
+        ])
+      );
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $product = Product::find($request->getBody()["id"]);
     $wishlist = new Wishlist();
-    // $response->redirect(BASE_URI . '/product');
+    $wishlist->product_id = $product->id;
+    $wishlist->user_id = $user->id;
+    $wishlist->save();
+
+    $response->setStatusCode(200);
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Product added to wishlist",
+    ]);
   }
 }

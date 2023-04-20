@@ -3,16 +3,14 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slide;
+
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
-        <?php foreach (
-          array_slice(Slide::findAll(["status" => "1"]), 0, 5)
-          as $slide
-        ): ?>
+        <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
             <img src="<?php echo BASE_URI . $slide->image; ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
@@ -90,8 +88,8 @@ use App\Models\Slide;
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
               <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
-              <i
-                class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
+              <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                onclick="addToWishList(`<?php echo $product->id ?>`)"></i>
             </div>
           </div>
         </div>
@@ -175,17 +173,15 @@ use App\Models\Slide;
       <div class="grid grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
 
         <?php foreach (array_slice(Category::all(), 0, 4) as $category): ?>
-          <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit"
-            href="<?php echo BASE_URI .
-              "/products?categories[]=" .
-              $category->id; ?>">
+          <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit" href="<?php echo BASE_URI .
+            "/products?categories[]=" .
+            $category->id; ?>">
             <div class="w-full h-56 overflow-hidden img rounded-3xl">
-              <img
-                src="<?php echo $category->image
-                  ? BASE_URI . "/" . $category->image
-                  : BASE_URI .
-                    "/resources/images/categories/placeholder.png"; ?>"
-                alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
+              <img src="<?php echo $category->image
+                ? BASE_URI . "/" . $category->image
+                : BASE_URI .
+                "/resources/images/categories/placeholder.png"; ?>" alt=""
+                class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
             <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
               <?php echo $category->name; ?>
@@ -203,10 +199,9 @@ use App\Models\Slide;
         <div class="flex items-center justify-between gap-7">
 
           <?php foreach (array_slice(Author::all(), 0, 7) as $author): ?>
-            <a class="flex flex-col items-center justify-between w-full mb-4 author-card"
-              href="<?php echo BASE_URI .
-                "/products?author=" .
-                $author->id; ?>">
+            <a class="flex flex-col items-center justify-between w-full mb-4 author-card" href="<?php echo BASE_URI .
+              "/products?author=" .
+              $author->id; ?>">
               <div class="mb-3 rounded-full author-face w-44 h-44">
                 <img src="<?php echo BASE_URI . "/" . $author->image; ?>" alt=""
                   class='object-cover w-full h-full rounded-full' />
@@ -222,3 +217,25 @@ use App\Models\Slide;
     </div>
   </div>
 </div>
+
+<script type="module">
+  import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
+
+  document.addToWishList = (id)=>{
+    // with xhr
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/wishlist/add", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        new Toast({
+          message: response.message,
+          type: response.type
+        })
+      }
+    };
+    xhr.send(JSON.stringify({ id }));
+  }
+
+</script>
