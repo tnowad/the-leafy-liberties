@@ -208,61 +208,62 @@ use App\Models\Wishlist;
   import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
-  document.addToWishList = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', { id }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      const data = response.data;
-      new Toast({
-        message: data.message,
-        type: data.type
+  const BASE_URI = '<?php echo BASE_URI; ?>';
+
+  const handleApiCall = (endpoint, method = 'GET', data = {}) => {
+    const options = {
+      method,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: method === 'GET' ? null : JSON.stringify(data)
+    };
+
+    FetchXHR(endpoint, options)
+      .then(response => {
+        const data = response.data;
+        new Toast({
+          message: data.message,
+          type: data.type
+        });
+      })
+      .catch(error => {
+        console.error(error);
       });
-    }).catch(error => {
-      console.error(error);
-    });
   };
 
-  document.addToCart = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      const data = response.data;
-      new Toast({
-        message: data.message,
-        type: data.type
-      });
-    }).catch(error => {
-      console.error(error);
-    });
+  const addToWishList = (id) => {
+    handleApiCall(`${BASE_URI}/api/wishlist/add`, 'POST', { id });
   };
 
-  document.removeFromWishList = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/remove' ?>', { id }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      const data = response.data;
-      new Toast({
-        message: data.message,
-        type: data.type
-      });
-    }).catch(error => {
-      console.error(error);
-    });
+  const addToCart = (id) => {
+    handleApiCall(`${BASE_URI}/api/cart/add`, 'POST', { id });
   };
 
-  document.removeFromCart = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/cart/remove' ?>', { id }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      const data = response.data;
-      new Toast({
-        message: data.message,
-        type: data.type
-      });
-    }).catch(error => {
-      console.error(error);
-    });
+  const removeFromWishList = (id) => {
+    handleApiCall(`${BASE_URI}/api/wishlist/remove`, 'POST', { id });
   };
+
+  const removeFromCart = (id) => {
+    handleApiCall(`${BASE_URI}/api/cart/remove`, 'POST', { id });
+  };
+
+  const removeWishList = () => {
+    handleApiCall(`${BASE_URI}/api/wishlist/remove`, 'POST');
+  };
+
+  const removeCart = () => {
+    handleApiCall(`${BASE_URI}/api/cart/remove`, 'POST');
+  };
+
+  const getWishList = () => {
+    handleApiCall(`${BASE_URI}/api/wishlist`);
+  };
+
+  const getCart = () => {
+    handleApiCall(`${BASE_URI}/api/cart`);
+  };
+
 
   document.querySelectorAll('.wishlist-icon').forEach(icon => {
     icon.addEventListener('click', () => {
