@@ -4,9 +4,7 @@
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/user/update"; ?>" method="POST">
 
-      <label for="id" class="my-2">ID:</label>
-      <input type="text" value="<?php echo $user->id; ?>" name="id" class="bg-gray-100 p-3 focus:outline-none rounded-lg"
-        disabled />
+      <input type="hidden" name="id" value="<?php echo $user->id; ?>"  class="bg-gray-100 p-3 focus:outline-none rounded-lg"/>
 
       <label for="name" class="my-2">Name:</label>
       <input type="text" value="<?php echo $user->name; ?>" name="name"

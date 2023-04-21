@@ -23,7 +23,7 @@ class ReviewController extends Controller
         // $review = Review::all();
         return $response->setBody(
             View::renderWithDashboardLayout(new View("pages/dashboard/review/index"), [
-                "title" => "reviews",
+                "title" => "Dashboard",
                 // "review" => $review,
             ])
         );

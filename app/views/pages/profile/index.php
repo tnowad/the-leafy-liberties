@@ -7,7 +7,7 @@
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col gap-1" action="<?php echo BASE_URI .
           "/profile"; ?>" method="post">
-          <input type="file" name="" id="upload-image" class="hidden" >
+          <input type="file" name="image" id="upload-image" class="hidden" >
 
           <label>Name</label>
           <input name="name" value="<?php echo $user->name; ?>" type="text" required class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow" />

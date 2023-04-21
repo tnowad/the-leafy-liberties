@@ -109,7 +109,7 @@ class UserController extends Controller
     switch ($request->getMethod()) {
       case "GET":
         $user = User::findOne(["id" => $request->getQuery("id")]);
-        // dd($request->getQueries());
+        // dd($user->id);
         $response->setStatusCode(200);
         return $response->setBody(
           View::renderWithDashboardLayout(
@@ -121,6 +121,7 @@ class UserController extends Controller
           )
         );
       case "POST":
+        dd($request->getParam("id"));   
         $user = User::find($request->getParam("id"));
         if (!$user) {
           return $response->setBody(
@@ -146,9 +147,9 @@ class UserController extends Controller
           $user->save();
           return $response->setBody(
             View::renderWithDashboardLayout(
-              new View("pages/dashboard/user"),
+              new View("pages/dashboard/user/index"),
               [
-                "title" => "Users",
+                "title" => "Dashboard",
                 "toast" => [
                   "type" => "success",
                   "message" => "Edit account successful!",
