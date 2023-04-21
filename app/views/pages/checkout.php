@@ -38,9 +38,8 @@ foreach ($cartItems as $cartItem) {
 }
 
 $shipping = 2.99;
-$tax = 0.1 * $totalMoney;
-$grandTotal = $totalMoney + $shipping + $tax;
-
+$taxMoney = $totalMoney * $tax;
+$grandTotal = $totalMoney + $shipping + $taxMoney;
 ?>
 <div class="flex items-center justify-center w-full mt-10">
   <form class="container flex flex-wrap xl:flex-nowrap">
