@@ -44,7 +44,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
 
 ?>
 <div class="flex items-center justify-center w-full mt-10">
-  <form class="container flex flex-wrap xl:flex-nowrap">
+  <form method="post" action class="container flex flex-wrap xl:flex-nowrap">
     <div class="flex flex-col w-full left-container">
       <div class="w-full p-5 border-0 shadow-lg bill-container rounded-2xl shadow-gray-300">
         <h2 class="mb-5 text-xl font-bold bill-header">
@@ -239,4 +239,15 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
   btnToggleOrderPreview.addEventListener("click", function() {
     orderPreviewList.classList.toggle("hidden");
   });
+
+  // if credit card is checked or credit card is not checked
+  if (creditCard.checked) {
+    document.getElementById("card-number").required = true
+    document.getElementById("expiry-date").required = true
+    document.getElementById("cvv").required = true
+  } else {
+    document.getElementById("card-number").required = false
+    document.getElementById("expiry-date").required = false
+    document.getElementById("cvv").required = false
+  }
 </script>

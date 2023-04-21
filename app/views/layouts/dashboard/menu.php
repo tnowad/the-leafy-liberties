@@ -55,6 +55,11 @@ $menu = [
     "icon" => "fa-user-plus",
     "url" => BASE_URI . "/dashboard/role",
   ],
+  "setting.access" => [
+    "name" => "Settings",
+    "icon" => "fa-cog",
+    "url" => BASE_URI . "/dashboard/setting",
+  ],
 ];
 
 foreach ($menu as $key => $menuItem) {
@@ -63,23 +68,25 @@ foreach ($menu as $key => $menuItem) {
   }
 }
 ?>
-<div class="menu-left flex flex-col w-16 lg:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
+<div
+  class="menu-left flex flex-col w-16 lg:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
     <ul id='menu-list' class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
         <a href="<?php echo BASE_URI .
-                    "/dashboard"; ?>" class="flex items-center justify-center py-4">
+          "/dashboard"; ?>" class="flex items-center justify-center py-4">
           <img src="<?php echo BASE_URI .
-                      "/resources/images/logo.png"; ?>" alt="logo" />
+            "/resources/images/logo.png"; ?>" alt="logo" />
         </a>
       </li>
-      <?php foreach ($menu as $menuItem) : ?>
-        <li class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 hover:border-[#add1ce] pr-6 transition-all">
+      <?php foreach ($menu as $menuItem): ?>
+        <li
+          class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 hover:border-[#add1ce] pr-6 transition-all">
           <a href="<?php echo $menuItem["url"]; ?>" class="relative flex flex-row items-center h-11">
             <span class="inline-flex items-center justify-center ml-4">
               <i class="fa-solid <?php echo $menuItem["icon"]; ?>"></i>
             </span>
-            <span class="menu-text ml-2 text-sm tracking-wide truncate">
+            <span class="ml-2 text-sm tracking-wide truncate menu-text">
               <?php echo $menuItem["name"]; ?>
             </span>
           </a>
