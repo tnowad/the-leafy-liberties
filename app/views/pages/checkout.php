@@ -90,22 +90,21 @@ $grandTotal = $totalMoney + $shipping + $tax;
           Shipping Method
         </h2>
         <div class="flex flex-col justify-between gap-5 px-5 choice">
-          <div
-            class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer">
-            <input type="radio" name="ship-options" id="ship-one" class="accent-[#315854]" />
-            <span class="ml-2 text-lg font-bold">$2.99</span>
-            <p class="ml-6">
-              USPS 1st Class With Tracking (5 - 13 days) COVID19 Delay
-            </p>
-          </div>
-          <div
-            class="second-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer">
-            <input type="radio" name="ship-options" id="ship-two" class="accent-[#315854]" />
-            <span class="ml-2 text-lg font-bold">$9.00</span>
-            <p class="ml-6">
-              USPS 1st Class With Tracking (3 - 5 days) COVID19 Delay
-            </p>
-          </div>
+          <?php foreach ($shippingMethods as $shippingMethod): ?>
+            <div
+              class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
+              onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
+              <input type="radio" name="shipping-method" id="shipping-method-<?php echo $shippingMethod['id']; ?>"
+                class="accent-[#315854]" />
+              <label for="shipping-method-<?php echo $shippingMethod['id']; ?>"
+                class="ml-2 text-lg font-bold cursor-pointer">
+                <?php echo $shippingMethod["price"] ?>$
+              </label>
+              <p class="ml-6">
+                <?php echo $shippingMethod["name"] ?>
+              </p>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
       <div class="w-full p-5 mt-5 mb-10 border-0 shadow-lg payment-container rounded-2xl shadow-gray-300">
