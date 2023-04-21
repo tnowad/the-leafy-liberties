@@ -1,5 +1,7 @@
 <?php
 $products = $params['products'];
+
+
 ?>
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[200px,auto] 2xl:grid-cols-[250px,auto]">

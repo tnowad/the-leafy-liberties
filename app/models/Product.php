@@ -121,8 +121,17 @@ class Product extends Model
   {
     return Product::find($this->id);
   }
-  public function filterProduct($input)
+  public static function filter($filter)
   {
-    return Product::filterAdvanced($input);
+    $products = Product::all();
+    $filteredProducts = [];
+    foreach ($products as $product) {
+      if ($filter['keywords']) {
+        if (strpos($product->name, $filter['keywords']) !== false) {
+          $filteredProducts[] = $product;
+        }
+      }
+    }
+    return [];
   }
 }
