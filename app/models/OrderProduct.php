@@ -6,7 +6,7 @@ use Core\Model;
 
 class OrderProduct extends Model
 {
-  protected $table = "order_products";
+  protected $table = "orders_products";
   protected $fillable = [
     "order_id",
     "product_id",

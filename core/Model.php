@@ -3,9 +3,8 @@
 namespace Core;
 
 use Core\Database;
-use Exception;
 
-abstract class Model
+class Model
 {
   protected $table;
   protected $primaryKey = "id";

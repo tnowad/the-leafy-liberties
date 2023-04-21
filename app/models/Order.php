@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\OrderProduct;
+use App\Models\ShippingMethod;
 use App\Models\User;
 use Core\Model;
 
@@ -9,12 +10,22 @@ class Order extends Model
 {
   protected $table = "orders";
   protected $fillable = [
-    "user_id",
+    'user_id',
+    "name",
+    "email",
+    "address",
+    "phone",
+    "shipping_method_id",
+    "description",
+    "payment_method_type",
+    "card_number",
+    "expiry_date",
+    'total_price',
+    "cvv",
+    "total_price",
     "status",
-    "total",
     "created_at",
     "updated_at",
-    "deleted_at",
   ];
 
   public function user()
@@ -25,5 +36,20 @@ class Order extends Model
   public function products()
   {
     return OrderProduct::findAll(["order_id" => $this->id]);
+  }
+
+  public function shippingMethod()
+  {
+    return ShippingMethod::find($this->shipping_method_id);
+  }
+
+  public function paymentMethod()
+  {
+    return new Model([
+      "type" => $this->payment_method_type,
+      "card_number" => $this->card_number,
+      "expiry_date" => $this->expiry_date,
+      "cvv" => $this->cvv,
+    ]);
   }
 }
