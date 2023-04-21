@@ -2,9 +2,6 @@
     <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
         <div class="flex justify-between">
             <h1 class="text-xl font-bold">Users</h1>
-            <button class="add-user w-5 h-5 text-2xl">
-                +
-            </button>
         </div>
         <div class="table-customer-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
             <div class="relative">
@@ -42,9 +39,6 @@
                                     <a href="" class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <button class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
                                 </div>
                             </td>
                         </tr>  
