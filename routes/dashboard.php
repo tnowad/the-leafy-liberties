@@ -8,6 +8,7 @@ use App\Controllers\Dashboard\OrderController;
 use App\Controllers\Dashboard\PermissionController;
 use App\Controllers\Dashboard\ProductController;
 use App\Controllers\Dashboard\RoleController;
+use App\Controllers\Dashboard\SettingController;
 use App\Controllers\Dashboard\SlideController;
 use App\Controllers\Dashboard\UserController;
 use App\Models\Category;
@@ -102,3 +103,10 @@ $router->get("/dashboard/permission", [PermissionController::class, "index"]);
 $router->post("/dashboard/permission", [PermissionController::class, "create"]);
 $router->post("/dashboard/permission/update", [PermissionController::class, "update"]);
 $router->post("/dashboard/permission/delete", [PermissionController::class, "delete"]);
+
+// settings
+
+$router->get("/dashboard/setting", [SettingController::class, "index"]);
+$router->post("/dashboard/setting", [SettingController::class, "create"]);
+$router->post("/dashboard/setting/update", [SettingController::class, "update"]);
+$router->post("/dashboard/setting/delete", [SettingController::class, "delete"]);
