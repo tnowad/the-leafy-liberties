@@ -71,4 +71,11 @@ class User extends Model
       "user_id" => $this->id,
     ]);
   }
+
+  public function orders(): array
+  {
+    return Order::findAll([
+      "user_id" => $this->id,
+    ]);
+  }
 }
