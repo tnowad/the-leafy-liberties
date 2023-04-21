@@ -53,20 +53,20 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
         <div class="px-5 sm:w-full md:w-full ">
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Name</legend>
-            <input type="text" name="name" placeholder="Your name" class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->name ?>" />
+            <input type="text" name="name" id="name" placeholder="Your name" require class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->name ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Email</legend>
-            <input type="email" name="email" id="" placeholder="Your Email" class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
+            <input type="email" name="email" id="email"  placeholder="Your Email" require class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md px-2 py-1 mt-3">
             <legend class="px-1">Address</legend>
-            <input type="text" name="address" id="" value="<?php echo $user->address ?>" class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
+            <input type="text" name="address" id="address" require value="<?php echo $user->address ?>" class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
           </fieldset>
 
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full">
             <legend class="px-1">Phone</legend>
-            <input type="number" name="phone" id="" placeholder="Your phone" class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->phone ?>" />
+            <input type="number" name="phone" id="phone" require placeholder="Your phone" class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->phone ?>" />
           </fieldset>
         </div>
       </div>
