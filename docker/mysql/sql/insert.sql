@@ -128,8 +128,8 @@ INSERT INTO `products` (`id`, `isbn`, `name`, `author_id`, `publisher_id`, `pric
 (12, '9780743273565', 'The Da Vinci Code', 3, 3, 14.99, 'A murder in the Louvre and clues in Da Vincis art lead to a religious mystery', 'resources/images/products/the-davinci-code.jpg', 200, NULL),
 (13, '9780679723165', '1984', 3, 4, 9.99, 'George Orwells dystopian classic.', 'resources/images/products/1984.jpg', 10, NULL),
 (14, '9780141187761', 'The Hitchhikers Guide To The Galaxy', 5, 6, 16.99, 'Gabriel Garcia Marquezs masterpiece of magical realism.', 'resources/images/products/The_Hitchhikers_Guide_to_the_Galaxy.jpg', 15, NULL),
-(15, '9780060850524', 'The Picture of Dorian Guy', 7, 9, 14.99, 'Paulo CoelhoÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢s inspiring tale of following your dreams.', 'resources/images/products/The_Picture_of_Dorian_Gray.jpg', 30, NULL),
-(16, '9780062315007', 'The Catcher in the Rye', 9, 10, 10.99, 'Paula HawkinsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ thrilling page-turner.', 'resources/images/products/The_Catcher_in_the_Rye.jpg', 20, NULL),
+(15, '9780060850524', 'The Picture of Dorian Guy', 7, 9, 14.99, 'Paulo inspiring tale of following your dreams.', 'resources/images/products/The_Picture_of_Dorian_Gray.jpg', 30, NULL),
+(16, '9780062315007', 'The Catcher in the Rye', 9, 10, 10.99, 'Paula thrilling page-turner.', 'resources/images/products/The_Catcher_in_the_Rye.jpg', 20, NULL),
 (17, '9780142410370', 'The Brothers Karamazov', 5, 6, 12.99, 'The first book in the Hunger Games trilogy.', 'resources/images/products/The_Brothers_Karamazov.jpg', 15, NULL),
 (18, '9780765331724', 'Animal Farm', 6, 7, 15.99, 'The first book in the Kingkiller Chronicle series.', 'resources/images/products/Animal_Farm.jpg', 12, NULL),
 (19, '9780765311788', 'Crime and Punishment', 7, 9, 8.99, 'The first book in the Mistborn trilogy.', 'resources/images/products/crime-and-punishment.jpg', 10, NULL),
@@ -297,6 +297,13 @@ INSERT INTO `roles_permissions` (`id`, `permission_id`, `role_id`, `status`) VAL
 
 INSERT INTO `settings` (`id`, `name`, `value`) VALUES
 (1, 'tax', '50');
+
+INSERT INTO `shipping_methods` (`id`, `name`, `price`, `description`, `status`, `deleted_at`) VALUES
+(1, 'Standard Shipping', 5.99, 'Delivery within 7-10 business days', 1, NULL),
+(2, 'Express Shipping', 14.99, 'Delivery within 2-3 business days', 1, NULL),
+(3, 'Next Day Shipping', 29.99, 'Guaranteed delivery next business day', 1, NULL),
+(4, 'International Shipping', 24.99, 'Delivery within 10-14 business days to international destinations', 1, NULL),
+(5, 'Free Shipping', 0.00, 'Delivery within 10-14 business days, free for orders over $50.00', 1, NULL);
 
 INSERT INTO `slides` (`id`, `image`, `name`, `status`, `deleted_at`) VALUES
 (1, '/resources/images/slides/slide-books-1.jpg', 'book festival', 1, NULL),
