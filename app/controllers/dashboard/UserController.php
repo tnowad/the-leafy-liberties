@@ -125,7 +125,7 @@ class UserController extends Controller
         if (!$user) {
           return $response->setBody(
             View::renderWithDashboardLayout(
-              new View("pages/dashboard/user"),
+              new View("pages/dashboard/user/index"),
               [
                 "title" => "Users",
                 "toast" => [

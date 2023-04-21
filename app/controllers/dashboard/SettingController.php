@@ -64,7 +64,7 @@ class SettingController extends Controller
         if (!$setting) {
           return $response->setBody(
             View::renderWithDashboardLayout(
-              new View("pages/dashboard/setting"),
+              new View("pages/dashboard/setting/index"),
               [
                 "title" => "settings",
                 "toast" => [
