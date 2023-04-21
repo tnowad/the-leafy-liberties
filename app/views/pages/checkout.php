@@ -53,20 +53,20 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
         <div class="px-5 sm:w-full md:w-full ">
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Name</legend>
-            <input type="text" name="name" id="name" placeholder="Your name" require class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->name ?>" />
+            <input type="text" name="name" id="name" placeholder="Your name" required class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->name ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Email</legend>
-            <input type="email" name="email" id="email"  placeholder="Your Email" require class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
+            <input type="email" name="email" id="email"  placeholder="Your Email" required class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md px-2 py-1 mt-3">
             <legend class="px-1">Address</legend>
-            <input type="text" name="address" id="address" require value="<?php echo $user->address ?>" class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
+            <input type="text" name="address" id="address" required value="<?php echo $user->address ?>" class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
           </fieldset>
 
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full">
             <legend class="px-1">Phone</legend>
-            <input type="number" name="phone" id="phone" require placeholder="Your phone" class="w-full px-2 py-1 focus:outline-none focus:border-0" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" value="<?php echo $user->phone ?>" />
+            <input type="number" name="phone" id="phone" required placeholder="Your phone" class="w-full px-2 py-1 focus:outline-none focus:border-0" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" value="<?php echo $user->phone ?>" />
           </fieldset>
         </div>
       </div>
@@ -77,7 +77,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
         <div class="flex flex-col justify-between gap-5 px-5 choice">
           <?php foreach ($shippingMethods as $shippingMethod) : ?>
             <div class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer" onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
-              <input type="radio" name="shipping-method" id="shipping-method-<?php echo $shippingMethod['id']; ?>" class="accent-[#315854]" />
+              <input type="radio" name="shipping-method" required id="shipping-method-<?php echo $shippingMethod['id']; ?>" class="accent-[#315854]" />
               <label for="shipping-method-<?php echo $shippingMethod['id']; ?>" class="ml-2 text-lg font-bold cursor-pointer">
                 <?php echo $shippingMethod["price"] ?>$
               </label>
@@ -94,14 +94,14 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
         </h2>
         <div class="flex flex-col justify-between gap-5 px-5 choice">
           <div class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer transition-all">
-            <input type="radio" name="pay-option" id="cash" class="accent-[#315854]" value="cash" />
+            <input type="radio" name="pay-option" id="cash" required class="accent-[#315854]" value="cash" />
             <label for="cash" class="ml-2 text-lg font-bold">Cash on delivery
               <span class="ml-6 text-sm font-normal ">
                 You will pay when your order is delivered</span>
             </label>
           </div>
           <div class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer" for="credit">
-            <input type="radio" name="pay-option" id="credit" class="accent-[#315854]" value="credit" />
+            <input type="radio" name="pay-option" id="credit" required class="accent-[#315854]" value="credit" />
             <label for="credit" class="ml-2 text-lg font-bold">Credit
               <span class="ml-6 text-sm font-normal">
                 You will pay with your credit card and your order will be delivered
@@ -110,11 +110,11 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           </div>
           <div id="credit-info" class="hidden mt-5">
             <label for="card-number" class="block mb-2 font-medium">Card Number:</label>
-            <input type="text" name="card-number" id="card-number" class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <input type="text" name="card-number" id="card-number" required class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
             <label for="expiry-date" class="block mb-2 font-medium">Expiration Date:</label>
-            <input type="text" name="expiry-date" id="expiry-date" class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <input type="text" name="expiry-date" id="expiry-date" required class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
             <label for="cvv" class="block mb-2 font-medium">CVV:</label>
-            <input type="text" name="cvv" id="cvv" class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <input type="text" name="cvv" id="cvv" required class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
           </div>
         </div>
       </div>
