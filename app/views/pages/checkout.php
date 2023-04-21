@@ -37,7 +37,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
 <div class="flex items-center justify-center w-full mt-10">
 
   <form class="container flex flex-wrap xl:flex-nowrap">
-    <div class="flex flex-col justify-center w-full left-container">
+    <div class="flex flex-col w-full left-container">
       <div class="w-full p-5 border-0 shadow-lg bill-container rounded-2xl shadow-gray-300">
         <h2 class="mb-5 text-xl font-bold bill-header">
           Billing Address
@@ -176,15 +176,17 @@ $grandTotal = $totalMoney + $shipping + $tax;
           </div>
         <?php endforeach; ?>
       </div>
-      <div
-        class="flex items-start justify-between w-full p-5 mt-5 border-0 shadow-lg discount-container rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
-        <div class="mb-5 text-xl font-bold discount-code">
-          <h2>Discount Codes</h2>
+      <?php if (isset($coupon)): ?>
+        <div
+          class="flex items-start justify-between w-full p-5 mt-5 border-0 shadow-lg discount-container rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
+          <div class="mb-5 text-xl font-bold discount-code">
+            <h2>Discount Codes</h2>
+          </div>
+          <div class="w-3 h-3 right">
+            <i class="cursor-pointer fa-solid fa-chevron-down"></i>
+          </div>
         </div>
-        <div class="w-3 h-3 right">
-          <i class="cursor-pointer fa-solid fa-chevron-down"></i>
-        </div>
-      </div>
+      <?php endif; ?>
       <div class="w-full p-5 mt-5 border-0 shadow-lg billing-summary rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
         <div class="flex items-start justify-between header">
           <div class="mb-5 text-xl font-bold">
