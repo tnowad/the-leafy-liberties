@@ -21,6 +21,7 @@ $router->get("/wishlist", [WishlistController::class, "index"]);
 $router->get("/cart", [CartController::class, "index"]);
 
 $router->get("/checkout", [CheckoutController::class, "index"]);
+$router->post("/checkout/confirm", [CheckoutController::class, "confirm"]);
 
 $router->get("/products", [ProductController::class, "index"]);
 $router->get("/product", [ProductController::class, "show"]);

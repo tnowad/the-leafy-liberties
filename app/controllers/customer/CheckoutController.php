@@ -25,4 +25,14 @@ class CheckoutController extends Controller
       ])
     );
   }
+
+  public function confirm(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      return $response->redirect(BASE_URI . "/login");
+    }
+
+    dd($request->getParams());
+  }
 }

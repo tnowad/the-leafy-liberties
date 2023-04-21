@@ -44,7 +44,8 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
 
 ?>
 <div class="flex items-center justify-center w-full mt-10">
-  <form method="post" action class="container flex flex-wrap xl:flex-nowrap">
+  <form action="<?php echo BASE_URI . '/checkout/confirm' ?>" method="POST" action
+    class="container flex flex-wrap xl:flex-nowrap">
     <div class="flex flex-col w-full left-container">
       <div class="w-full p-5 border-0 shadow-lg bill-container rounded-2xl shadow-gray-300">
         <h2 class="mb-5 text-xl font-bold bill-header">
@@ -53,20 +54,25 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
         <div class="px-5 sm:w-full md:w-full ">
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Name</legend>
-            <input type="text" name="name" id="name" placeholder="Your name" required class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->name ?>" />
+            <input type="text" name="name" id="name" placeholder="Your name" required
+              class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->name ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Email</legend>
-            <input type="email" name="email" id="email" placeholder="Your Email" required class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
+            <input type="email" name="email" id="email" placeholder="Your Email" required
+              class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md px-2 py-1 mt-3">
             <legend class="px-1">Address</legend>
-            <input type="text" name="address" id="address" required value="<?php echo $user->address ?>" class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
+            <input type="text" name="address" id="address" required value="<?php echo $user->address ?>"
+              class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
           </fieldset>
 
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full">
             <legend class="px-1">Phone</legend>
-            <input type="number" name="phone" id="phone" required placeholder="Your phone" class="w-full px-2 py-1 focus:outline-none focus:border-0" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" value="<?php echo $user->phone ?>" />
+            <input type="number" name="phone" id="phone" required placeholder="Your phone"
+              class="w-full px-2 py-1 focus:outline-none focus:border-0"
+              pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" value="<?php echo $user->phone ?>" />
           </fieldset>
         </div>
       </div>
@@ -75,10 +81,14 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           Shipping Method
         </h2>
         <div class="flex flex-col justify-between gap-5 px-5 choice">
-          <?php foreach ($shippingMethods as $shippingMethod) : ?>
-            <div class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer" onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
-              <input type="radio" name="shipping-method" required id="shipping-method-<?php echo $shippingMethod['id']; ?>" class="accent-[#315854]" />
-              <label for="shipping-method-<?php echo $shippingMethod['id']; ?>" class="ml-2 text-lg font-bold cursor-pointer">
+          <?php foreach ($shippingMethods as $shippingMethod): ?>
+            <div
+              class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
+              onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
+              <input type="radio" name="shipping-method" required
+                id="shipping-method-<?php echo $shippingMethod['id']; ?>" class="accent-[#315854]" />
+              <label for="shipping-method-<?php echo $shippingMethod['id']; ?>"
+                class="ml-2 text-lg font-bold cursor-pointer">
                 <?php echo $shippingMethod["price"] ?>$
               </label>
               <p class="ml-6">
@@ -93,14 +103,17 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           Payment method
         </h2>
         <div class="flex flex-col justify-between gap-5 px-5 choice">
-          <div class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer transition-all">
+          <div
+            class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer transition-all">
             <input type="radio" name="pay-option" id="cash" required class="accent-[#315854]" value="cash" />
             <label for="cash" class="ml-2 text-lg font-bold">Cash on delivery
               <span class="ml-6 text-sm font-normal ">
                 You will pay when your order is delivered</span>
             </label>
           </div>
-          <div class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer" for="credit">
+          <div
+            class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
+            for="credit">
             <input type="radio" name="pay-option" id="credit" required class="accent-[#315854]" value="credit" />
             <label for="credit" class="ml-2 text-lg font-bold">Credit
               <span class="ml-6 text-sm font-normal">
@@ -110,11 +123,14 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           </div>
           <div id="credit-info" class="hidden mt-5">
             <label for="card-number" class="block mb-2 font-medium">Card Number:</label>
-            <input type="text" name="card-number" id="card-number" required class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <input type="text" name="card-number" id="card-number" required
+              class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
             <label for="expiry-date" class="block mb-2 font-medium">Expiration Date:</label>
-            <input type="text" name="expiry-date" id="expiry-date" required class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <input type="text" name="expiry-date" id="expiry-date" required
+              class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
             <label for="cvv" class="block mb-2 font-medium">CVV:</label>
-            <input type="text" name="cvv" id="cvv" required class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <input type="text" name="cvv" id="cvv" required
+              class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
           </div>
         </div>
       </div>
@@ -133,11 +149,12 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           </div>
         </div>
         <div class="w-full" id="order-preview-list">
-          <?php foreach ($cartItems as $CartItem) : ?>
+          <?php foreach ($cartItems as $CartItem): ?>
             <?php $product = $CartItem->product(); ?>
             <div class="flex items-center justify-between mt-5">
               <div class="flex items-center">
-                <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>" class="object-cover w-20 h-24 rounded-md">
+                <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
+                  class="object-cover w-20 h-24 rounded-md">
                 <div class="ml-4">
                   <h3 class="font-medium text-gray-700">
                     <?php echo $product->name ?>
@@ -158,8 +175,9 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           <?php endforeach; ?>
         </div>
       </div>
-      <?php if (isset($coupon)) : ?>
-        <div class="flex items-start justify-between w-full p-5 mt-5 border-0 shadow-lg discount-container rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
+      <?php if (isset($coupon)): ?>
+        <div
+          class="flex items-start justify-between w-full p-5 mt-5 border-0 shadow-lg discount-container rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
           <div class="mb-5 text-xl font-bold discount-code">
             <h2>Discount Codes</h2>
           </div>
@@ -204,10 +222,12 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             </div>
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-1 mr-10 w-full h-auto mt-4">
               <legend class="px-2">Order Comment</legend>
-              <textarea type="text" name="comment" id="comment" required placeholder="Type here..." rows="7" class="w-full p-1 text-lg focus:outline-none focus:border-0">
+              <textarea type="text" name="comment" id="comment" required placeholder="Type here..." rows="7"
+                class="w-full p-1 text-lg focus:outline-none focus:border-0">
               </textarea>
             </fieldset>
-            <div class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
+            <div
+              class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
               <button type="submit" class="text-xl">
                 Pay $
                 <?php echo $grandTotal ?>
@@ -225,18 +245,18 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
 
   const creditInfo = document.getElementById("credit-info");
 
-  creditCard.addEventListener("click", function() {
+  creditCard.addEventListener("click", function () {
     creditInfo.classList.remove("hidden");
   });
 
-  cashOnDelivery.addEventListener("click", function() {
+  cashOnDelivery.addEventListener("click", function () {
     creditInfo.classList.add("hidden");
   });
 
   const btnToggleOrderPreview = document.getElementById("btn-toggle-order-preview");
   const orderPreviewList = document.getElementById("order-preview-list");
 
-  btnToggleOrderPreview.addEventListener("click", function() {
+  btnToggleOrderPreview.addEventListener("click", function () {
     orderPreviewList.classList.toggle("hidden");
   });
 
