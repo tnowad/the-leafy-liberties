@@ -154,34 +154,36 @@ $grandTotal = $totalMoney + $shipping + $tax;
               <?php echo count($cartItems) ?> items in cart
             </p>
           </div>
-          <div class="w-3 h-3 right">
+          <div class="w-3 h-3 right" id="btn-toggle-order-preview">
             <i class="cursor-pointer fa-solid fa-chevron-down"></i>
           </div>
         </div>
-        <?php foreach ($cartItems as $CartItem): ?>
-          <?php $product = $CartItem->product(); ?>
-          <div class="flex items-center justify-between mt-5">
-            <div class="flex items-center">
-              <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
-                class="object-cover w-20 h-24 rounded-md">
-              <div class="ml-4">
-                <h3 class="font-medium text-gray-700">
-                  <?php echo $product->name ?>
-                </h3>
-                <div class="mt-1 text-sm text-gray-500">
-                  <?php echo $product->author()->name ?>
-                </div>
-                <div class="mt-1 text-sm font-medium text-gray-700">
-                  <?php echo $cartItem->quantity ?> x
-                  <?php echo $product->price ?>
+        <div class="w-full" id="order-preview-list">
+          <?php foreach ($cartItems as $CartItem): ?>
+            <?php $product = $CartItem->product(); ?>
+            <div class="flex items-center justify-between mt-5">
+              <div class="flex items-center">
+                <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
+                  class="object-cover w-20 h-24 rounded-md">
+                <div class="ml-4">
+                  <h3 class="font-medium text-gray-700">
+                    <?php echo $product->name ?>
+                  </h3>
+                  <div class="mt-1 text-sm text-gray-500">
+                    <?php echo $product->author()->name ?>
+                  </div>
+                  <div class="mt-1 text-sm font-medium text-gray-700">
+                    <?php echo $cartItem->quantity ?> x
+                    <?php echo $product->price ?>
+                  </div>
                 </div>
               </div>
+              <div class="text-gray-600">
+                <?php echo $product->price * $cartItem->quantity ?>
+              </div>
             </div>
-            <div class="text-gray-600">
-              <?php echo $product->price * $cartItem->quantity ?>
-            </div>
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        </div>
       </div>
       <?php if (isset($coupon)): ?>
         <div
@@ -261,4 +263,12 @@ $grandTotal = $totalMoney + $shipping + $tax;
   cashOnDelivery.addEventListener("click", function () {
     creditInfo.classList.add("hidden");
   });
+
+  const btnToggleOrderPreview = document.getElementById("btn-toggle-order-preview");
+  const orderPreviewList = document.getElementById("order-preview-list");
+
+  btnToggleOrderPreview.addEventListener("click", function () {
+    orderPreviewList.classList.toggle("hidden");
+  });
+
 </script>
