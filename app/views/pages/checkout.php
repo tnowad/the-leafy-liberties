@@ -57,7 +57,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Email</legend>
-            <input type="email" name="email" id="email"  placeholder="Your Email" required class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
+            <input type="email" name="email" id="email" placeholder="Your Email" required class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md px-2 py-1 mt-3">
             <legend class="px-1">Address</legend>
@@ -204,7 +204,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             </div>
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-1 mr-10 w-full h-auto mt-4">
               <legend class="px-2">Order Comment</legend>
-              <textarea type="text" name="" id="" placeholder="Type here..." rows="7" class="w-full p-1 text-lg focus:outline-none focus:border-0">
+              <textarea type="text" name="comment" id="comment" required placeholder="Type here..." rows="7" class="w-full p-1 text-lg focus:outline-none focus:border-0">
               </textarea>
             </fieldset>
             <div class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
