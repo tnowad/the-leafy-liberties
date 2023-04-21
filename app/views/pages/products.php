@@ -71,5 +71,6 @@
 <script src="resources/js/pages/product.js">
 </script>
 
-<script src="resources/js/pages/search-product.js">
+<script src="resources/js/pages/search-p
+roduct.js">
 </script>
