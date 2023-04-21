@@ -9,16 +9,20 @@ class Order extends Model
 {
   protected $table = "orders";
   protected $fillable = [
-    "user_id",
     "name",
     "email",
+    "address",
     "phone",
-    "status",
-    "total",
     "shipping_method_id",
+    "description",
+    "payment_method_type",
+    "card_number",
+    "expiry_date",
+    "cvv",
+    "total_price",
+    "status",
     "created_at",
     "updated_at",
-    "deleted_at",
   ];
 
   public function user()
