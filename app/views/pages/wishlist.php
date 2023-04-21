@@ -5,62 +5,69 @@ $products = $params["products"]; ?>
     <h1 class="text-xl text-primary-700 md:text-3xl uppercase tracking-widest">wishlist</h1>
   </div>
   <div class="w-full h-[765px] overflow-y-scroll px-8">
-    <table class="w-full border-collapse border-0 border-solid border-b-[1px]">
-      <thead class="w-full rounded-sm text-gray-600 sticky top-0 border-b border-gray-300 m-3">
-        <tr class="text-left uppercase font-normal">
-          <th>
+    <?php if (count($products) == 0): ?>
+      <div class="flex flex-col justify-center items-center h-[60%]">
+        <i class="fa-solid fa-heart-pulse text-[100px] text-gray-400"></i>
+        <h1 class="uppercase text-6xl text-gray-400 tracking-widest">Wishlist is
+          empty</h1>
+      </div>
+    <?php else: ?>
+      <table class="w-full border-collapse border-0 border-solid border-b-[1px]">
+        <thead class="w-full rounded-sm text-gray-600 sticky top-0 border-b border-gray-300 m-3">
+          <tr class="text-left uppercase font-normal">
+            <th>
 
-          </th>
-          <th class="px-9 py-2">
-            Product
-          </th>
-          <th class="py-2">
-          </th>
-          <th>
-            Author
-          </th>
-          <th class="py-2">
-            Price
-          </th>
-          <th class="py-2">
-            Action
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($products as $product): ?>
-          <tr class="border-0 border-solid border-b-[1px]">
-            <td class="text-right">
-              <button class="px-4 py-2 font-bold text-gray-800 hover:text-black transition-all"
-                onclick="removeFromWishlist(<?php echo $product->id; ?>)">
-                <i class="fa-solid fa-x"></i>
-              </button>
-            </td>
-            <td class="p-3 w-36 h-36">
-              <img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>"
-                class="w-full h-full mx-auto object-contain" />
-            </td>
-            <td>
-              <?php echo $product->name; ?>
-            </td>
-            <td>
-              <?php echo $product->author()->name ?>
-            </td>
-            <td>
-              <?php echo $product->price; ?>
-            </td>
-            <td class="px-1 py-2">
-              <button class="px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700 w-full"
-                onclick="addToCart(<?php echo $product->id; ?>)">
-                <i class="fa-solid fa-cart-plus"></i>
-                Add to cart
-              </button>
-            </td>
+            </th>
+            <th class="px-9 py-2">
+              Product
+            </th>
+            <th class="py-2">
+            </th>
+            <th>
+              Author
+            </th>
+            <th class="py-2">
+              Price
+            </th>
+            <th class="py-2">
+              Action
+            </th>
           </tr>
-        <?php endforeach; ?>
-
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach ($products as $product): ?>
+            <tr class="border-0 border-solid border-b-[1px]">
+              <td class="text-right">
+                <button class="px-4 py-2 font-bold text-gray-800 hover:text-black transition-all"
+                  onclick="removeFromWishlist(<?php echo $product->id; ?>)">
+                  <i class="fa-solid fa-x"></i>
+                </button>
+              </td>
+              <td class="p-3 w-36 h-36">
+                <img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>"
+                  class="w-full h-full mx-auto object-contain" />
+              </td>
+              <td>
+                <?php echo $product->name; ?>
+              </td>
+              <td>
+                <?php echo $product->author()->name ?>
+              </td>
+              <td>
+                <?php echo $product->price; ?>
+              </td>
+              <td class="px-1 py-2">
+                <button class="px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700 w-full"
+                  onclick="addToCart(<?php echo $product->id; ?>)">
+                  <i class="fa-solid fa-cart-plus"></i>
+                  Add to cart
+                </button>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    <?php endif ?>
   </div>
   <div class="flex justify-end mt-4 gap-3">
     <!-- move all product in wishlist to cart -->
@@ -94,6 +101,7 @@ $products = $params["products"]; ?>
       span.textContent = quantity;
     });
   });
+
 </script>
 
 <script type="module">
