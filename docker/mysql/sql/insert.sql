@@ -113,20 +113,6 @@ INSERT INTO `permissions` (`id`, `name`, `deleted_at`) VALUES
 (75, 'wishlist.show', NULL),
 (76, 'wishlist.update', NULL);
 
-
-INSERT INTO `publishers` (`id`, `image`, `name`, `deleted_at`) VALUES
-(1, NULL, 'Penguin Random House', NULL),
-(2, NULL, 'HarperCollins', NULL),
-(3, NULL, 'Simon & Schuster', NULL),
-(4, NULL, 'Hachette Livre', NULL),
-(5, NULL, 'Macmillan Publishers', NULL),
-(6, NULL, 'Bloomsbury Publishing', NULL),
-(7, NULL, 'Scholastic Corporation', NULL),
-(8, NULL, 'Pearson Education', NULL),
-(9, NULL, 'Wiley', NULL),
-(10, NULL, 'Oxford University Press', NULL);
-
-
 INSERT INTO `products` (`id`, `isbn`, `name`, `author_id`, `publisher_id`, `price`, `description`, `image`, `quantity`, `deleted_at`) VALUES
 (1, '9780439139601', 'Harry Potter and the Philosophers Stone', 1, 1, 10.99, 'The first book in the Harry Potter series', 'resources/images/products/harry-potter-and-stone.jpg', 100, NULL),
 (2, '9780545010221', 'Pride and Prejudice', 2, 2, 7.99, 'The first book in The Hunger Games trilogy', 'resources/images/products/PrideAndPrejudice.jpg', 150, NULL),
@@ -142,8 +128,8 @@ INSERT INTO `products` (`id`, `isbn`, `name`, `author_id`, `publisher_id`, `pric
 (12, '9780743273565', 'The Da Vinci Code', 3, 3, 14.99, 'A murder in the Louvre and clues in Da Vincis art lead to a religious mystery', 'resources/images/products/the-davinci-code.jpg', 200, NULL),
 (13, '9780679723165', '1984', 3, 4, 9.99, 'George Orwells dystopian classic.', 'resources/images/products/1984.jpg', 10, NULL),
 (14, '9780141187761', 'The Hitchhikers Guide To The Galaxy', 5, 6, 16.99, 'Gabriel Garcia Marquezs masterpiece of magical realism.', 'resources/images/products/The_Hitchhikers_Guide_to_the_Galaxy.jpg', 15, NULL),
-(15, '9780060850524', 'The Picture of Dorian Guy', 7, 9, 14.99, 'Paulo CoelhoÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s inspiring tale of following your dreams.', 'resources/images/products/The_Picture_of_Dorian_Gray.jpg', 30, NULL),
-(16, '9780062315007', 'The Catcher in the Rye', 9, 10, 10.99, 'Paula HawkinsÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ thrilling page-turner.', 'resources/images/products/The_Catcher_in_the_Rye.jpg', 20, NULL),
+(15, '9780060850524', 'The Picture of Dorian Guy', 7, 9, 14.99, 'Paulo CoelhoÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢s inspiring tale of following your dreams.', 'resources/images/products/The_Picture_of_Dorian_Gray.jpg', 30, NULL),
+(16, '9780062315007', 'The Catcher in the Rye', 9, 10, 10.99, 'Paula HawkinsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ thrilling page-turner.', 'resources/images/products/The_Catcher_in_the_Rye.jpg', 20, NULL),
 (17, '9780142410370', 'The Brothers Karamazov', 5, 6, 12.99, 'The first book in the Hunger Games trilogy.', 'resources/images/products/The_Brothers_Karamazov.jpg', 15, NULL),
 (18, '9780765331724', 'Animal Farm', 6, 7, 15.99, 'The first book in the Kingkiller Chronicle series.', 'resources/images/products/Animal_Farm.jpg', 12, NULL),
 (19, '9780765311788', 'Crime and Punishment', 7, 9, 8.99, 'The first book in the Mistborn trilogy.', 'resources/images/products/crime-and-punishment.jpg', 10, NULL),
@@ -170,14 +156,6 @@ INSERT INTO `products_categories` (`id`, `product_id`, `category_id`) VALUES
 (18, 18, 9),
 (19, 19, 1),
 (20, 20, 2);
-
-
-INSERT INTO `tags` (`id`, `image`, `name`, `deleted_at`) VALUES
-(1, NULL, 'Bestselling', NULL),
-(2, NULL, 'Popular', NULL),
-(3, NULL, 'New', NULL),
-(4, NULL, 'Recommended', NULL);
-
 
 INSERT INTO `products_tags` (`id`, `product_id`, `tag_id`) VALUES
 (1, 1, 1),
@@ -220,6 +198,18 @@ INSERT INTO `products_tags` (`id`, `product_id`, `tag_id`) VALUES
 (38, 19, 4),
 (39, 20, 4),
 (40, 20, 1);
+
+INSERT INTO `publishers` (`id`, `image`, `name`, `deleted_at`) VALUES
+(1, NULL, 'Penguin Random House', NULL),
+(2, NULL, 'HarperCollins', NULL),
+(3, NULL, 'Simon & Schuster', NULL),
+(4, NULL, 'Hachette Livre', NULL),
+(5, NULL, 'Macmillan Publishers', NULL),
+(6, NULL, 'Bloomsbury Publishing', NULL),
+(7, NULL, 'Scholastic Corporation', NULL),
+(8, NULL, 'Pearson Education', NULL),
+(9, NULL, 'Wiley', NULL),
+(10, NULL, 'Oxford University Press', NULL);
 
 INSERT INTO `roles` (`id`, `name`, `deleted_at`) VALUES
 (1, 'customer', NULL),
@@ -305,6 +295,9 @@ INSERT INTO `roles_permissions` (`id`, `permission_id`, `role_id`, `status`) VAL
 (76, 75, 3, 1),
 (77, 76, 3, 1);
 
+INSERT INTO `settings` (`id`, `name`, `value`) VALUES
+(1, 'tax', '50');
+
 INSERT INTO `slides` (`id`, `image`, `name`, `status`, `deleted_at`) VALUES
 (1, '/resources/images/slides/slide-books-1.jpg', 'book festival', 1, NULL),
 (2, '/resources/images/slides/slide-books-2.png', 'book festival', 1, NULL),
@@ -312,6 +305,12 @@ INSERT INTO `slides` (`id`, `image`, `name`, `status`, `deleted_at`) VALUES
 (4, '/resources/images/slides/slide-books-4.png', 'book festival', 1, NULL),
 (5, '/resources/images/slides/slide-books-5.jpg', 'book festival', 1, NULL),
 (6, '/resources/images/slides/slide-books-6.png', 'book festival', 1, NULL);
+
+INSERT INTO `tags` (`id`, `image`, `name`, `deleted_at`) VALUES
+(1, NULL, 'Bestselling', NULL),
+(2, NULL, 'Popular', NULL),
+(3, NULL, 'New', NULL),
+(4, NULL, 'Recommended', NULL);
 
 INSERT INTO `users` (`id`, `email`, `name`, `phone`, `password`, `gender`, `image`, `role_id`, `status`, `address`, `deleted_at`) VALUES
 (1, 'customer@customer.com', 'Customer', '0123456789', '$2y$10$msjZCcmhGinMn7R8Mg9zbe29bbnF/wgeIpr/5eIwQugefkko7eiRK', 0, NULL, 1, 1, NULL, NULL),
