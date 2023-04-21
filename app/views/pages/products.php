@@ -1,7 +1,9 @@
 <?php
 use App\Models\Category;
-$products = $params['products'];
 
+$products = $params['products'];
+$filter = $params['filter'];
+$pagination = $params['pagination'];
 
 ?>
 <div class="flex justify-center my-10">
@@ -46,21 +48,21 @@ $products = $params['products'];
               </label>
             </div>
             <h1 class="mt-2 mb-2 text-xl font-bold">Category</h1>
-            <select name="" id="" class="border border-gray-200 px-3 py-1 rounded-sm ">
+            <select name="" id="" class="px-3 py-1 border border-gray-200 rounded-sm ">
               <?php
-                $categories = Category::all();
-                foreach($categories as $item): ?>
+              $categories = Category::all();
+              foreach ($categories as $item): ?>
                 <option value="<?php echo $item->id ?>">
                   <?php echo $item->name ?>
-              </option>
+                </option>
               <?php endforeach ?>
             </select>
-            
+
             <h1 class="mt-2 mb-2 text-xl font-bold">Price range</h1>
             <div class="flex items-center justify-start gap-2">
-              <input type="text" name="" id="" class="border border-gray-300 w-20 px-3 py-1 rounded-sm">
+              <input type="text" name="" id="" class="w-20 px-3 py-1 border border-gray-300 rounded-sm">
               <span class="text-lg"> - </span>
-              <input type="text" name="" id="" class="border border-gray-300 w-20 px-3 py-1 rounded-sm">
+              <input type="text" name="" id="" class="w-20 px-3 py-1 border border-gray-300 rounded-sm">
             </div>
             <button onclick="resetOption(event)"
               class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 hover:bg-[#6cada6] transition-all cursor-pointer">Reset</button>

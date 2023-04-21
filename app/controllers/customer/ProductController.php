@@ -40,6 +40,8 @@ class ProductController extends Controller
       View::renderWithLayout(new View("pages/products"), [
         "title" => "Shop",
         "products" => $products,
+        "filter" => $filter,
+        "pagination" => $pagination,
       ])
     );
   }
