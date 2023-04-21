@@ -29,8 +29,8 @@ class ProductController extends Controller
     ];
 
     $pagination = [
-      "page" => $request->getQuery("page"),
-      "limit" => $request->getQuery("limit"),
+      "page" => $request->getQuery("page") ?? 1,
+      "limit" => $request->getQuery("limit") ?? 24,
     ];
 
     $products = Product::filterAdvanced($filter);
