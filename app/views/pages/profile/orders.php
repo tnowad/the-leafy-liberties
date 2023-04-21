@@ -76,11 +76,8 @@ $orders = $params['orders'];
                     <?php endif; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <!-- icon view -->
                     <a href="<?php echo BASE_URI . '/profile/orders?id=' . $order->id ?>" class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a href="">
+                      <!-- <i class="fa-solid fa-pen-to-square"></i> -->
                       <i class="text-blue-500 fas fa-eye"></i>
                     </a>
                   </td>
