@@ -86,7 +86,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
               class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
               onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
               <input type="radio" name="shipping-method" required
-                id="shipping-method-<?php echo $shippingMethod['id']; ?>" class="accent-[#315854]" />
+                id="shipping-method-<?php echo $shippingMethod['id']; ?>" value="<?php echo $shippingMethod['id'] ?>" class="accent-[#315854]" />
               <label for="shipping-method-<?php echo $shippingMethod['id']; ?>"
                 class="ml-2 text-lg font-bold cursor-pointer">
                 <?php echo $shippingMethod["price"] ?>$
