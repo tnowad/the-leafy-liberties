@@ -135,12 +135,6 @@ $grandTotal = $totalMoney + $shipping + $tax;
             <input type="text" name="cvv" id="cvv"
               class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
           </div>
-
-          <div class="flex flex-col items-center justify-center w-full mt-5">
-            <button class="w-full px-5 py-2 text-white bg-[#315854] rounded-md">
-              Place order
-            </button>
-          </div>
         </div>
       </div>
     </div>
