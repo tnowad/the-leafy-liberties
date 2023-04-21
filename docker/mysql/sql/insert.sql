@@ -113,6 +113,20 @@ INSERT INTO `permissions` (`id`, `name`, `deleted_at`) VALUES
 (75, 'wishlist.show', NULL),
 (76, 'wishlist.update', NULL);
 
+
+INSERT INTO `publishers` (`id`, `image`, `name`, `deleted_at`) VALUES
+(1, NULL, 'Penguin Random House', NULL),
+(2, NULL, 'HarperCollins', NULL),
+(3, NULL, 'Simon & Schuster', NULL),
+(4, NULL, 'Hachette Livre', NULL),
+(5, NULL, 'Macmillan Publishers', NULL),
+(6, NULL, 'Bloomsbury Publishing', NULL),
+(7, NULL, 'Scholastic Corporation', NULL),
+(8, NULL, 'Pearson Education', NULL),
+(9, NULL, 'Wiley', NULL),
+(10, NULL, 'Oxford University Press', NULL);
+
+
 INSERT INTO `products` (`id`, `isbn`, `name`, `author_id`, `publisher_id`, `price`, `description`, `image`, `quantity`, `deleted_at`) VALUES
 (1, '9780439139601', 'Harry Potter and the Philosophers Stone', 1, 1, 10.99, 'The first book in the Harry Potter series', 'resources/images/products/harry-potter-and-stone.jpg', 100, NULL),
 (2, '9780545010221', 'Pride and Prejudice', 2, 2, 7.99, 'The first book in The Hunger Games trilogy', 'resources/images/products/PrideAndPrejudice.jpg', 150, NULL),
@@ -157,6 +171,14 @@ INSERT INTO `products_categories` (`id`, `product_id`, `category_id`) VALUES
 (19, 19, 1),
 (20, 20, 2);
 
+
+INSERT INTO `tags` (`id`, `image`, `name`, `deleted_at`) VALUES
+(1, NULL, 'Bestselling', NULL),
+(2, NULL, 'Popular', NULL),
+(3, NULL, 'New', NULL),
+(4, NULL, 'Recommended', NULL);
+
+
 INSERT INTO `products_tags` (`id`, `product_id`, `tag_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
@@ -198,18 +220,6 @@ INSERT INTO `products_tags` (`id`, `product_id`, `tag_id`) VALUES
 (38, 19, 4),
 (39, 20, 4),
 (40, 20, 1);
-
-INSERT INTO `publishers` (`id`, `image`, `name`, `deleted_at`) VALUES
-(1, NULL, 'Penguin Random House', NULL),
-(2, NULL, 'HarperCollins', NULL),
-(3, NULL, 'Simon & Schuster', NULL),
-(4, NULL, 'Hachette Livre', NULL),
-(5, NULL, 'Macmillan Publishers', NULL),
-(6, NULL, 'Bloomsbury Publishing', NULL),
-(7, NULL, 'Scholastic Corporation', NULL),
-(8, NULL, 'Pearson Education', NULL),
-(9, NULL, 'Wiley', NULL),
-(10, NULL, 'Oxford University Press', NULL);
 
 INSERT INTO `roles` (`id`, `name`, `deleted_at`) VALUES
 (1, 'customer', NULL),
@@ -302,12 +312,6 @@ INSERT INTO `slides` (`id`, `image`, `name`, `status`, `deleted_at`) VALUES
 (4, '/resources/images/slides/slide-books-4.png', 'book festival', 1, NULL),
 (5, '/resources/images/slides/slide-books-5.jpg', 'book festival', 1, NULL),
 (6, '/resources/images/slides/slide-books-6.png', 'book festival', 1, NULL);
-
-INSERT INTO `tags` (`id`, `image`, `name`, `deleted_at`) VALUES
-(1, NULL, 'Bestselling', NULL),
-(2, NULL, 'Popular', NULL),
-(3, NULL, 'New', NULL),
-(4, NULL, 'Recommended', NULL);
 
 INSERT INTO `users` (`id`, `email`, `name`, `phone`, `password`, `gender`, `image`, `role_id`, `status`, `address`, `deleted_at`) VALUES
 (1, 'customer@customer.com', 'Customer', '0123456789', '$2y$10$msjZCcmhGinMn7R8Mg9zbe29bbnF/wgeIpr/5eIwQugefkko7eiRK', 0, NULL, 1, 1, NULL, NULL),
