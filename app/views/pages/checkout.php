@@ -1,4 +1,5 @@
 <?php
+use App\Models\Setting;
 use Core\Application;
 
 $auth = Application::getInstance()->getAuthentication();
@@ -22,9 +23,16 @@ $shippingMethods = [
   ]
 ];
 
+$tax = 0;
+$setting = Setting::findOne(["name" => "tax"]);
+if ($setting) {
+  $tax = $setting->value / 100;
+}
 
 $cartItems = $params["cartItems"];
+
 $totalMoney = 0;
+
 foreach ($cartItems as $cartItem) {
   $totalMoney += $cartItem->quantity * $cartItem->product()->price;
 }
@@ -236,6 +244,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
           </div>
         </div>
       </div>
+    </div>
   </form>
 </div>
 <script>
