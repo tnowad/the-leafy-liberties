@@ -5,45 +5,53 @@ $cartItems = $params["cartItems"];
   <div class="container mx-auto">
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
-        <?php foreach ($cartItems as $cartItem): ?>
-          <?php $product = $cartItem->product() ?>
-          <div class="w-full">
-            <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
-              <div class="flex items-center justify-between item-detail">
-                <div class="item-img w-36 h-36">
-                  <img src="<?php echo BASE_URI . '/' . $product->image; ?>" alt="" class="w-full h-full object-contain" />
-                </div>
-                <div class="text">
-                  <p class="mb-2 text-2xl book-name">
-                    <?php echo $product->name; ?>
-                  </p>
-                  <p class="text-base book-author">
-                    <?php echo $product->author()->name; ?>
-                  </p>
-                </div>
-                <p class="text-xl price">
-                  <?php echo $product->price; ?>
-                </p>
-                <div>
-                  <div class="flex items-center justify-center mx-auto w-fit h-fit">
-                    <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
-                      <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <span class="m-5 text-lg text-count">
-                      <?php echo $cartItem->quantity; ?>
-                    </span>
-                    <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
-                      <i class="fa-solid fa-plus"></i>
-                    </button>
+        <?php if (count($cartItems) == 0): ?>
+          <div class="flex justify-center items-center h-full flex-col gap-2">
+            <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
+            <h1 class="text-5xl uppercase tracking-wider text-gray-400">Cart is empty</h1>
+          </div>
+        <?php else: ?>
+          <?php foreach ($cartItems as $cartItem): ?>
+            <?php $product = $cartItem->product() ?>
+            <div class="w-full">
+              <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
+                <div class="flex items-center justify-between item-detail">
+                  <div class="item-img w-36 h-36">
+                    <img src="<?php echo BASE_URI . '/' . $product->image; ?>" alt=""
+                      class="w-full h-full object-contain" />
                   </div>
+                  <div class="text">
+                    <p class="mb-2 text-2xl book-name">
+                      <?php echo $product->name; ?>
+                    </p>
+                    <p class="text-base book-author">
+                      <?php echo $product->author()->name; ?>
+                    </p>
+                  </div>
+                  <p class="text-xl price">
+                    <?php echo $product->price; ?>
+                  </p>
+                  <div>
+                    <div class="flex items-center justify-center mx-auto w-fit h-fit">
+                      <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+                      <span class="m-5 text-lg text-count">
+                        <?php echo $cartItem->quantity; ?>
+                      </span>
+                      <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
+                        <i class="fa-solid fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <p class="text-xl counter-price">
+                    <?php echo $product->price * $cartItem->quantity; ?>$
+                  </p>
                 </div>
-                <p class="text-xl counter-price">
-                  <?php echo $product->price * $cartItem->quantity; ?>$
-                </p>
               </div>
             </div>
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        <?php endif ?>
       </div>
       <div class="cart-bill w-[30%] p-5 bg-white shadow-lg rounded-2xl">
         <p class="cart-bill-header text-2xl text-left py-3 border-0 border-b-[1px] border-solid border-gray-300 ">
