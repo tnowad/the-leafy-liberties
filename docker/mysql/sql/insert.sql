@@ -303,7 +303,6 @@ INSERT INTO `shipping_methods` (`id`, `name`, `price`, `description`, `status`, 
 (2, 'Express Shipping', 14.99, 'Delivery within 2-3 business days', 1, NULL),
 (3, 'Next Day Shipping', 29.99, 'Guaranteed delivery next business day', 1, NULL),
 (4, 'International Shipping', 24.99, 'Delivery within 10-14 business days to international destinations', 1, NULL),
-(5, 'Free Shipping', 0.00, 'Delivery within 10-14 business days, free for orders over $50.00', 1, NULL);
 
 INSERT INTO `slides` (`id`, `image`, `name`, `status`, `deleted_at`) VALUES
 (1, '/resources/images/slides/slide-books-1.jpg', 'book festival', 1, NULL),
