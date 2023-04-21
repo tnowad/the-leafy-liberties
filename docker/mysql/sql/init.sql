@@ -110,6 +110,7 @@ CREATE TABLE
         image varchar(255) DEFAULT NULL,
         role_id int DEFAULT NULL,
         status tinyint NOT NULL DEFAULT "1",
+        address text DEFAULT NULL,
         deleted_at datetime DEFAULT NULL,
         -- key
         UNIQUE KEY email (email),
