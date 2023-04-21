@@ -12,14 +12,25 @@ use Core\Traits\SoftDeletes;
 
 class Review extends Model
 {
-    use SoftDeletes;
-    protected $table = "reviews";
+  use SoftDeletes;
+  protected $table = "reviews";
 
-    protected $fillable = [
-        "id",
-        "isbn",
-        "author_id",
-        "general_comments",
-        "review_score"
-    ];
+  protected $fillable = [
+    "id",
+    "user_id",
+    "product_id",
+    "content",
+    "rating",
+    "created_at",
+  ];
+
+  public function user()
+  {
+    return User::findOne(["id" => $this->user_id]);
+  }
+
+  public function product()
+  {
+    return Product::findOne(["id" => $this->product_id]);
+  }
 }
