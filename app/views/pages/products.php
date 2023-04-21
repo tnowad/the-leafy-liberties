@@ -1,7 +1,11 @@
 <?php
+use App\Models\Category;
+
 $products = $params['products'];
-
-
+$filter = $params['filter'];
+$pagination = $params['pagination'];
+dd($filter);
+dd($pagination);
 ?>
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[200px,auto] 2xl:grid-cols-[250px,auto]">
@@ -44,11 +48,22 @@ $products = $params['products'];
                 Low to high
               </label>
             </div>
+            <h1 class="mt-2 mb-2 text-xl font-bold">Category</h1>
+            <select name="" id="" class="px-3 py-1 border border-gray-200 rounded-sm ">
+              <?php
+              $categories = Category::all();
+              foreach ($categories as $item): ?>
+                <option value="<?php echo $item->id ?>">
+                  <?php echo $item->name ?>
+                </option>
+              <?php endforeach ?>
+            </select>
+
             <h1 class="mt-2 mb-2 text-xl font-bold">Price range</h1>
-            <div class="flex items-center">
-              <span class="ml-2 font-medium text-gray-700">$0</span>
-              <input id="price-slider" class="w-full" type="range" min="0" max="100" step="1" value="0">
-              <span class="ml-auto font-medium text-gray-700">$100</span>
+            <div class="flex items-center justify-start gap-2">
+              <input type="text" name="" id="" class="w-20 px-3 py-1 border border-gray-300 rounded-sm">
+              <span class="text-lg"> - </span>
+              <input type="text" name="" id="" class="w-20 px-3 py-1 border border-gray-300 rounded-sm">
             </div>
             <button onclick="resetOption(event)"
               class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 hover:bg-[#6cada6] transition-all cursor-pointer">Reset</button>

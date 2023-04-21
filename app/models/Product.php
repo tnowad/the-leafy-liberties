@@ -121,17 +121,84 @@ class Product extends Model
   {
     return Product::find($this->id);
   }
-  public static function filter($filter)
+  public static function filterAdvanced($filter)
   {
     $products = Product::all();
-    $filteredProducts = [];
-    foreach ($products as $product) {
-      if ($filter['keywords']) {
-        if (strpos($product->name, $filter['keywords']) !== false) {
+
+    // Filter by keywords
+    if (!empty($filter['keywords'])) {
+      $filteredProducts = [];
+      foreach ($products as $product) {
+        if (strpos(strtolower($product->name), strtolower($filter['keywords'])) !== false) {
+          $filteredProducts[] = $product;
+        }
+      }
+      $products = $filteredProducts;
+    }
+
+    // Filter by categories
+    if (!empty($filter['categories'])) {
+      $categories = $filter['categories'];
+      $filteredProducts = [];
+      foreach ($products as $product) {
+        foreach ($product->categories() as $category) {
+          if (in_array($category->id, $categories)) {
+            $filteredProducts[] = $product;
+            break;
+          }
+        }
+      }
+      $products = $filteredProducts;
+    }
+
+    // Filter by tags
+    if (!empty($filter['tags'])) {
+      $tags = $filter['tags'];
+      $filteredProducts = [];
+      foreach ($products as $product) {
+        foreach ($product->tags() as $tag) {
+          if (in_array($tag->id, $tags)) {
+            $filteredProducts[] = $product;
+            break;
+          }
+        }
+      }
+      $products = $filteredProducts;
+    }
+
+    // Filter by author
+    if (!empty($filter['author'])) {
+      $authorId = $filter['author'];
+      $filteredProducts = [];
+      foreach ($products as $product) {
+        if ($product->author_id == $authorId) {
+          $filteredProducts[] = $product;
+        }
+      }
+      $products = $filteredProducts;
+    }
+
+    // Filter by price range
+    if (!empty($filter['price']['min'])) {
+      $minPrice = $filter['price']['min'];
+      $filteredProducts = [];
+      foreach ($products as $product) {
+        if ($product->price >= $minPrice) {
+          $filteredProducts[] = $product;
+        }
+      }
+      $products = $filteredProducts;
+    }
+    if (!empty($filter['price']['max'])) {
+      $maxPrice = $filter['price']['max'];
+      $filteredProducts = [];
+      foreach ($products as $product) {
+        if ($product->price <= $maxPrice) {
           $filteredProducts[] = $product;
         }
       }
     }
-    return [];
+
+    return $products;
   }
 }
