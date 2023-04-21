@@ -127,7 +127,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
           <?php $product = $CartItem->product(); ?>
           <div class="flex items-center justify-between mt-5">
             <div class="flex items-center">
-              <img src="<?php echo $product->image ?>" alt="<?php echo $product->name ?>"
+              <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
                 class="object-cover w-20 h-24 rounded-md">
               <div class="ml-4">
                 <h3 class="font-medium text-gray-700">
@@ -200,7 +200,8 @@ $grandTotal = $totalMoney + $shipping + $tax;
             <div
               class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
               <button class="text-xl">
-                Pay $3,439.00
+                Pay $
+                <?php echo $grandTotal ?>
               </button>
             </div>
           </div>
