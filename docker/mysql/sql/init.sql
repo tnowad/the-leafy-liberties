@@ -211,3 +211,12 @@ CREATE TABLE
       FOREIGN KEY (product_id) REFERENCES products (id)
     );
 
+CREATE TABLE
+    shipping_methods (
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      name text NOT NULL,
+      price decimal(10, 2) NOT NULL,
+      description text NOT NULL,
+      status int NOT NULL DEFAULT "1",
+      deleted_at datetime DEFAULT NULL
+    );
