@@ -13,8 +13,7 @@ $user = $auth->getUser() ?? null;
   class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px] shadow-lg">
   <div class="container flex items-center justify-between h-24 mt-5">
     <a class="w-48" href="<?php echo BASE_URI . "/"; ?>">
-      <img src="<?php echo BASE_URI .
-        "/resources/images/logo.png"; ?>" alt="HeaderLogo" />
+      <img src="<?php echo BASE_URI . "/resources/images/logo.png"; ?>" alt="HeaderLogo" />
     </a>
     <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center">
       <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
@@ -43,7 +42,7 @@ $user = $auth->getUser() ?? null;
     <div class="box-border w-full px-10">
       <form action="<?php echo BASE_URI . '/products' ?>" method="GET"
         class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
-        <input type="text" name="keyword" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full"
+        <input type="text" name="keywords" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full"
           placeholder="Search.... " />
         <button class="flex items-center justify-center w-10 h-10">
           <i class="fa-solid fa-magnifying-glass" onclick="handleSearch()"></i>

@@ -19,7 +19,8 @@ class ProductController extends Controller
 
     $filter = [
       "categories" => $request->getQuery("categories"),
-      "authors" => $request->getQuery("authors"),
+      /* array */
+      "author" => $request->getQuery("author"),
       "price" => [
         "min" => $request->getQuery("min-price"),
         "max" => $request->getQuery("max-price"),
@@ -32,7 +33,7 @@ class ProductController extends Controller
       "limit" => $request->getQuery("limit"),
     ];
 
-    $products = Product::filter($filter);
+    $products = Product::filterAdvanced($filter);
 
     $response->setStatusCode(200);
     $response->setBody(
