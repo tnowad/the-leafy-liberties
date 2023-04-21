@@ -6,7 +6,7 @@ use App\Models\Tag;
 $products = $params['products'];
 $filter = $params['filter'];
 $pagination = $params['pagination'];
-// dd($filter);
+dd($filter);
 // dd($pagination);
 ?>
 <div class="flex justify-center my-10">

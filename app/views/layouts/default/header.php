@@ -43,7 +43,8 @@ $user = $auth->getUser() ?? null;
       <form action="<?php echo BASE_URI . '/products' ?>" method="GET"
         class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
         <input type="text" name="keywords" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full"
-          placeholder="Search.... " />
+          placeholder="Search.... "
+          value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
         <button class="flex items-center justify-center w-10 h-10">
           <i class="fa-solid fa-magnifying-glass" onclick="handleSearch()"></i>
         </button>
