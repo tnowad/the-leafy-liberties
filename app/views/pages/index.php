@@ -132,7 +132,7 @@ use App\Models\Tag;
         <?php endforeach; ?>
 
       </div>
-      <div class="hidden w-[25%] xl:block 2xl:w-1/3">
+      <div class="hidden 2xl:block 2xl:w-1/3">
         <div class="sticky w-full h-auto top-32">
           <img src="resources/images/bestOffer.png" alt="" class="w-full h-full rounded-2xl" />
           <div class="absolute flex flex-col items-center w-full text-center top-3/4">
