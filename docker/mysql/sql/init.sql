@@ -202,10 +202,12 @@ CREATE TABLE
 
 CREATE TABLE
     reviews (
-        ID INT PRIMARY KEY,
-        isbn INT NOT NULL,
-        author_id INT NOT NULL,
-        general_comments VARCHAR(255),
-        review_score INT
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      user_id int NOT NULL,
+      product_id int NOT NULL,
+      content text NOT NULL,
+      rating int NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users (id),
+      FOREIGN KEY (product_id) REFERENCES products (id)
     );
 
