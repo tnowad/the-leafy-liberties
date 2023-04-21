@@ -1,4 +1,5 @@
 <?php
+
 use Core\Application;
 
 $auth = Application::getInstance()->getAuthentication();
@@ -62,23 +63,19 @@ foreach ($menu as $key => $menuItem) {
   }
 }
 ?>
-<div
-  class="menu-left flex flex-col w-16 lg:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
+<div class="menu-left flex flex-col w-16 lg:w-72 bg-white h-auto text-[#315854] transition-all duration-300 border-none z-[200] hover:shadow-lg">
   <div class="flex flex-col justify-between flex-grow  z-[888]">
     <ul id='menu-list' class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
         <a href="<?php echo BASE_URI .
-          "/dashboard"; ?>" class="flex items-center justify-center py-4">
+                    "/dashboard"; ?>" class="flex items-center justify-center py-4">
           <img src="<?php echo BASE_URI .
-            "/resources/images/logo.png"; ?>" alt="logo" />
+                      "/resources/images/logo.png"; ?>" alt="logo" />
         </a>
       </li>
-      <?php foreach ($menu as $menuItem): ?>
-        <li
-          class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 border-transparent hover:border-[#add1ce] pr-6 transition-all">
-          <a href="<?php echo $menuItem[
-            "url"
-          ]; ?>" class="relative flex flex-row items-center h-11">
+      <?php foreach ($menu as $menuItem) : ?>
+        <li class="focus:outline-none hover:bg-[#315854] text-[#40736d] hover:text-white border-l-4 hover:border-[#add1ce] pr-6 transition-all">
+          <a href="<?php echo $menuItem["url"]; ?>" class="relative flex flex-row items-center h-11">
             <span class="inline-flex items-center justify-center ml-4">
               <i class="fa-solid <?php echo $menuItem["icon"]; ?>"></i>
             </span>
@@ -93,6 +90,7 @@ foreach ($menu as $key => $menuItem) {
 </div>
 <script>
   let menu = document.querySelector(".menu-left");
+
   function toggleMenu() {
     if (menu.classList.contains('lg:w-72')) {
       menu.classList.remove('lg:w-72');
@@ -100,14 +98,14 @@ foreach ($menu as $key => $menuItem) {
       menu.classList.add('lg:w-72');
     }
   }
-  let list = document.querySelectorAll("ul li:not(:first-child)");
-  list.forEach(btn => {
-    btn.addEventListener("click", (event) => {
-      // event.preventDefault();
-      btn.classList.add("bg-[#315854]");
-      // list.forEach(btn => {
-      //   btn.classList.remove("bg-[#315854]");
-      // })
-    })
-  })
+  var currentPath = window.location.pathname;
+  var links = document.getElementsByTagName("a");
+  for (var i = 1; i < links.length; i++) {
+    if (links[i].getAttribute("href") === currentPath) {
+      links[i].parentElement.classList.add("bg-primary", "text-white", "border-l-2", "border-[#add1ce]");
+      console.log(links[i].classList)
+    } else {
+      links[i].parentElement.classList.remove("bg-primary", "text-white", "border-l-2", "border-[#add1ce]");
+    }
+  }
 </script>

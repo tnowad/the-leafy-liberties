@@ -18,6 +18,7 @@ class SlideController extends Controller
 
     $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/slide/index"), [
+        'title' => 'Slide',
         "slides" => $slides,
         "filter" => $filter,
       ])

@@ -34,7 +34,7 @@
           <?php echo $product->price; ?>$
         </span>
 
-        <div class="flex w-full justify-around items-center mt-4">
+        <div class="flex w-full justify-start gap-3  items-center mt-4">
           <div class="cursor-pointer flex justify-between items-center bg-gray-50 border border-gray-300 py-2 px-3 rounded-full text-lg gap-2 hover:bg-primary-500 hover:text-gray-700 transition-all group">
             <i class="fa-brands fa-opencart group-hover:text-white transition-all p-2 group-hover:bg-primary-400 rounded-full"></i>
             <a href="/cart" src="" alt="" class="font-medium text-sm sm:text-base md:text-lg">
