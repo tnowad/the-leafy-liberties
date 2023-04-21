@@ -10,9 +10,8 @@ $cartItems = $params["cartItems"];
           <div class="w-full">
             <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
               <div class="flex items-center justify-between item-detail">
-                <div class="item-img w-36">
-                  <img src="<?php echo BASE_URI . $product->image; ?>" alt=""
-                    class="object-cover w-full h-full rounded-2xl" />
+                <div class="item-img w-36 h-36">
+                  <img src="<?php echo BASE_URI . '/' . $product->image; ?>" alt="" class="w-full h-full object-contain" />
                 </div>
                 <div class="text">
                   <p class="mb-2 text-2xl book-name">
@@ -39,8 +38,7 @@ $cartItems = $params["cartItems"];
                   </div>
                 </div>
                 <p class="text-xl counter-price">
-                  <?php echo $product->price *
-                    $cartItem->quantity; ?>$
+                  <?php echo $product->price * $cartItem->quantity; ?>$
                 </p>
               </div>
             </div>
@@ -64,7 +62,7 @@ $cartItems = $params["cartItems"];
           </span>
         </div>
         <a href="<?php echo BASE_URI . "/checkout"; ?>"
-          class="px-5 py-2 bg-[#315854] rounded-2xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+          class="px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out
         </a>
       </div>

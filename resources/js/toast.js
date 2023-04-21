@@ -49,7 +49,7 @@ class Toast {
         </div>
       </div>`;
     document.body.appendChild(this.toast);
-    setTimeout(() => {
+    const removeToast = () => {
       this.toast.classList.remove(
         "opacity-0",
         "scale-95",
@@ -78,8 +78,9 @@ class Toast {
         setTimeout(() => {
           this.toast.remove();
         }, 300);
-      }, 5000);
-    }, 100);
+      }, 2000);
+    }
+    setTimeout(removeToast, 100);
   }
 }
 

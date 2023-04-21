@@ -1,54 +1,59 @@
 <?php
 $products = $params["products"]; ?>
 <div class="container mx-auto">
-  <div class="flex flex-col items-center my-10 md:my-16">
-    <i class="fa-solid fa-heart text-9xl text-[#2e524e]"></i>
-    <h1 class="text-4xl text-green-800 md:text-6xl">My wishlist</h1>
+  <div class="flex justify-start items-center my-8 md:my-14">
+    <h1 class="text-xl text-primary-700 md:text-3xl uppercase tracking-widest">wishlist</h1>
   </div>
-  <div class="w-full h-[765px] overflow-y-scroll">
+  <div class="w-full h-[765px] overflow-y-scroll px-8">
     <table class="w-full border-collapse border-0 border-solid border-b-[1px]">
-      <thead class="w-full bg-[#2e524e] rounded-sm text-[#F1F1F1] sticky top-0">
-        <tr class="">
-          <th class="px-4 py-2">
+      <thead class="w-full rounded-sm text-gray-600 sticky top-0 border-b border-gray-300 m-3">
+        <tr class="text-left uppercase font-normal">
+          <th>
+
+          </th>
+          <th class="px-9 py-2">
             Product
           </th>
-          <th class="px-4 py-2">
-            Product name
+          <th class="py-2">
           </th>
-          <th class="px-4 py-2">
+          <th>
+            Author
+          </th>
+          <th class="py-2">
             Price
           </th>
-          <th class="px-4 py-2">
-            Add to cart
-          </th>
-          <th class="px-4 py-2">
+          <th class="py-2">
             Action
           </th>
         </tr>
       </thead>
       <tbody>
-
         <?php foreach ($products as $product): ?>
-          <tr class="text-center border-0 border-solid border-b-[1px]">
-            <td>
-              <img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>" class="w-32 mx-auto h-36" />
+          <tr class="border-0 border-solid border-b-[1px]">
+            <td class="text-right">
+              <button class="px-4 py-2 font-bold text-gray-800 hover:text-black transition-all"
+                onclick="removeFromWishlist(<?php echo $product->id; ?>)">
+                <i class="fa-solid fa-x"></i>
+              </button>
+            </td>
+            <td class="p-3 w-36 h-36">
+              <img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>"
+                class="w-full h-full mx-auto object-contain" />
             </td>
             <td>
               <?php echo $product->name; ?>
             </td>
             <td>
+              <?php echo $product->author()->name ?>
+            </td>
+            <td>
               <?php echo $product->price; ?>
             </td>
             <td class="px-1 py-2">
-              <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800"
+              <button class="px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700 w-full"
                 onclick="addToCart(<?php echo $product->id; ?>)">
                 <i class="fa-solid fa-cart-plus"></i>
-              </button>
-            </td>
-            <td class="px-4 py-2">
-              <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400"
-                onclick="removeFromWishlist(<?php echo $product->id; ?>)">
-                <i class="fa-solid fa-trash"></i>
+                Add to cart
               </button>
             </td>
           </tr>
@@ -57,8 +62,10 @@ $products = $params["products"]; ?>
       </tbody>
     </table>
   </div>
-  <div class="flex justify-end mt-4">
-    <button class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-800"
+  <div class="flex justify-end mt-4 gap-3">
+    <!-- move all product in wishlist to cart -->
+
+    <button class="px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700"
       onclick="moveAllToCart()">
       <i class="fa-solid fa-cart-plus"></i>
       Move all to cart
@@ -66,7 +73,7 @@ $products = $params["products"]; ?>
 
     <!-- remove all product in wishlist -->
 
-    <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 rounded-md hover:bg-red-400"
+    <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 hover:bg-red-400"
       onclick="removeAllFromWishlist()">
       <i class="fa-solid fa-trash"></i>
       Remove all
