@@ -11,7 +11,7 @@
                             <tr>
                                 <?php
                                 $name = [
-                                  "STT",
+                                  "No",
                                   "booking date",
                                   "Status",
                                   "Total Price",
