@@ -3,6 +3,7 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slide;
+use App\Models\Tag;
 
 ?>
 
@@ -56,7 +57,8 @@ use App\Models\Slide;
       </a>
     </div>
     <div class="relative flex w-full gap-6 overflow-hidden bestselling-products">
-      <?php foreach (array_slice(Product::all(), 0, 6) as $product): ?>
+      <?php foreach (Tag::findOne(["name" => "Bestselling"])->products() as $product):
+        ?>
         <div
           class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl h-[500px]">
           <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60 mx-auto">

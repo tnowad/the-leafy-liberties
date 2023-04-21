@@ -10,7 +10,7 @@ $user = $auth->getUser() ?? null;
 
 ?>
 <header
-  class="flex justify-center bg-white z-10 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px] shadow-lg">
+  class="flex justify-center bg-white z-50 sticky top-0 border-0 border-solid border-gray-200 border-b-[1px] shadow-lg">
   <div class="container flex items-center justify-between h-24 mt-5">
     <a class="w-48" href="<?php echo BASE_URI . "/"; ?>">
       <img src="<?php echo BASE_URI . "/resources/images/logo.png"; ?>" alt="HeaderLogo" />
