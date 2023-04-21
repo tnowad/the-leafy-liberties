@@ -181,7 +181,7 @@ class Product extends Model
       $minPrice = $filter['price']['min'];
       $filteredProducts = [];
       foreach ($products as $product) {
-        if ($product->price >= $minPrice) {
+        if (floatval($product->price) >= floatval($minPrice)) {
           $filteredProducts[] = $product;
         }
       }
@@ -191,10 +191,11 @@ class Product extends Model
       $maxPrice = $filter['price']['max'];
       $filteredProducts = [];
       foreach ($products as $product) {
-        if ($product->price <= $maxPrice) {
+        if (floatval($product->price) <= floatval($maxPrice)) {
           $filteredProducts[] = $product;
         }
       }
+      $products = $filteredProducts;
     }
 
     return $products;
