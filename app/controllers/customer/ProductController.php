@@ -17,7 +17,6 @@ class ProductController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-
     $filter = [
       "categories" => $request->getQuery("categories") ?? [],
       "tags" => $request->getQuery("tags") ?? [],
