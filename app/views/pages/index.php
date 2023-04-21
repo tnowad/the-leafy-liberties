@@ -236,5 +236,4 @@ use App\Models\Slide;
     });
   };
 
-
 </script>
