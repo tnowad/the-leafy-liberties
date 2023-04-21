@@ -71,9 +71,10 @@ class WishlistController extends Controller
     ]);
 
     if ($wishlist) {
+      $wishlist->delete();
       $response->jsonResponse([
-        "type" => "info",
-        "message" => "Product already in wishlist",
+        "type" => "success",
+        "message" => "Product removed from wishlist",
       ]);
       return;
     }

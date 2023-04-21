@@ -4,6 +4,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slide;
 use App\Models\Tag;
+use App\Models\Wishlist;
 
 ?>
 
@@ -57,8 +58,7 @@ use App\Models\Tag;
       </a>
     </div>
     <div class="relative flex w-full gap-6 overflow-hidden bestselling-products">
-      <?php foreach (Tag::findOne(["name" => "Bestselling"])->products() as $product):
-        ?>
+      <?php foreach (Tag::findOne(["name" => "Bestselling"])->products() as $product): ?>
         <div
           class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl h-[500px]">
           <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60 mx-auto">
@@ -81,9 +81,11 @@ use App\Models\Tag;
             </div>
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-              <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
-              <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
-                onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+              <p class="font-semibold select-option-text hover:color-red-400"
+                onclick="addToCart('<?php echo $product->id ?>')">Add to Cart</p>
+              <i class="<?php if (Wishlist::findOne(['product_id' => $product->id]))
+                echo "bg-red-400 text-white" ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                  onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>
           </div>
         </div>
@@ -102,10 +104,10 @@ use App\Models\Tag;
 
         <?php foreach (array_slice(Product::all(), 0, 24) as $product): ?>
           <div
-            class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
-            <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
+            class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl h-[500px]">
+            <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60 mx-auto">
               <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
-                <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
+                <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full " />
               </a>
             </div>
             <div
@@ -123,9 +125,10 @@ use App\Models\Tag;
               </div>
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
-                <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
-                  onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+                <p class="font-semibold select-option-text hover:color-red-400 ">Add to Cart</p>
+                <i class="<?php if (Wishlist::findOne(['product_id' => $product->id]))
+                  echo "bg-red-400 text-white" ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                    onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
               </div>
             </div>
           </div>
@@ -219,4 +222,61 @@ use App\Models\Tag;
     });
   };
 
+  document.addToCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
+
+  document.removeFromWishList = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/remove' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
+
+  document.removeFromCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/remove' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
+
+  document.querySelectorAll('.wishlist-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+      if (icon.classList.contains('bg-red-400')) {
+        icon.classList.remove('bg-red-400');
+        icon.classList.add('bg-white');
+        icon.classList.remove('text-white');
+        icon.classList.add('text-red-400');
+      } else {
+        icon.classList.add('bg-red-400');
+        icon.classList.remove('bg-white');
+        icon.classList.add('text-white');
+        icon.classList.remove('text-red-400');
+      }
+    });
+  });
 </script>
