@@ -109,10 +109,12 @@ $products = $pagination['products'];
       </div>
       <div class="my-5">
         <div id="pagination" class="flex items-center justify-center gap-5 text-center pagination">
-          <div
-            class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-            <a onclick="openPage(<?php echo $pagination['page'] - 1 ?>)">Previous</a>
-          </div>
+          <?php if ($pagination['page'] > 1): ?>
+            <div
+              class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
+              <a onclick="openPage(<?php echo $pagination['page'] - 1 ?>)">Previous</a>
+            </div>
+          <?php endif; ?>
           <?php for ($i = 1; $i <= $pagination['totalPages']; $i++): ?>
             <div
               class="p-2 <?php echo $i == $pagination['page'] ? 'bg-[#52938d] text-white font-semibold' : 'bg-gray-100 text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all'; ?> rounded-full">
@@ -121,10 +123,12 @@ $products = $pagination['products'];
               </a>
             </div>
           <?php endfor; ?>
-          <div
-            class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-            <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)">Next</a>
-          </div>
+          <?php if ($pagination['page'] < $pagination['totalPages']): ?>
+            <div
+              class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
+              <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)">Next</a>
+            </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>
