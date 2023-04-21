@@ -1,4 +1,8 @@
 <?php
+use Core\Application;
+
+$auth = Application::getInstance()->getAuthentication();
+$user = $auth->getUser();
 
 $cartItems = $params["cartItems"];
 $totalMoney = 0;
@@ -19,22 +23,15 @@ $grandTotal = $totalMoney + $shipping + $tax;
           Billing Address
         </h2>
         <form action="//" class="px-5 sm:w-full md:w-full ">
-          <div class="flex full-name md:flex-nowrap sm:flex-wrap">
-            <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 md:mr-10 sm:mr-0 w-full">
-              <legend class="px-1">First Name</legend>
-              <input type="text" name="" id="" placeholder="Your first name"
-                class="w-full px-2 py-1 focus:outline-none focus:border-0" />
-            </fieldset>
-            <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full">
-              <legend class="px-1">Last Name</legend>
-              <input type="text" name="" id="" placeholder="Your last name"
-                class="w-full px-2 py-1 focus:outline-none focus:border-0" />
-            </fieldset>
-          </div>
+          <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
+            <legend class="px-1">Name</legend>
+            <input type="text" name="name" placeholder="Your name"
+              class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->name ?>" />
+          </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Email Address</legend>
             <input type="email" name="" id="" placeholder="Your Email"
-              class="w-full px-2 py-1 focus:outline-none focus:border-0" />
+              class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->email ?>" />
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md px-2 py-1 mt-3">
             <legend class="px-1">Street Address</legend>
@@ -50,7 +47,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full">
               <legend class="px-1">Phone</legend>
               <input type="number" name="" id="" placeholder="Your phone"
-                class="w-full px-2 py-1 focus:outline-none focus:border-0" />
+                class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->phone ?>" />
             </fieldset>
           </div>
           <div class="flex items-center mt-3 checkForAddress">
