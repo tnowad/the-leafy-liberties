@@ -165,10 +165,26 @@ CREATE TABLE
 CREATE TABLE
     orders (
         id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+        name varchar(255) NOT NULL,
+        email varchar(255) NOT NULL,
+        address text NOT NULL,
+        phone varchar(255) NOT NULL,
+        shipping_method_id int NOT NULL,
+        description text DEFAULT NULL,
+
+        payment_method_type tinyint NOT NULL,
+        card_number varchar(255) DEFAULT NULL,
+        expired_date varchar(255) DEFAULT NULL,
+        cvv varchar(255) DEFAULT NULL,
+
         user_id int NOT NULL,
         total_price decimal(10, 2) NOT NULL,
         status tinyint NOT NULL DEFAULT "0",
+        create_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
         deleted_at datetime DEFAULT NULL,
+
+        FOREIGN KEY (shipping_method_id) REFERENCES shipping_methods (id),
         FOREIGN KEY (user_id) REFERENCES users (id)
     );
 

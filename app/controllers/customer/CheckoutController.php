@@ -28,11 +28,15 @@ class CheckoutController extends Controller
 
   public function confirm(Request $request, Response $response)
   {
+    dd($request->getParams());
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->isAuthenticated()) {
       return $response->redirect(BASE_URI . "/login");
     }
 
-    dd($request->getParams());
+    $cartItems = Cart::findAll(["user_id" => $auth->getUser()->id]);
+    if (empty($cartItems)) {
+      return $response->redirect(BASE_URI . "/checkout");
+    }
   }
 }

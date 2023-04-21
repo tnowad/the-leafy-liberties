@@ -1,28 +1,13 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\ShippingMethod;
 use Core\Application;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
 
-$shippingMethods = [
-  [
-    "id" => 1,
-    "name" => "Standard",
-    "price" => 2.99,
-  ],
-  [
-    "id" => 2,
-    "name" => "Express",
-    "price" => 5.99,
-  ],
-  [
-    "id" => 3,
-    "name" => "Premium",
-    "price" => 9.99,
-  ]
-];
+$shippingMethods = ShippingMethod::findAll(["status" => 1]);
 
 $tax = 0;
 $setting = Setting::findOne(["name" => "tax"]);
@@ -84,15 +69,15 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           <?php foreach ($shippingMethods as $shippingMethod): ?>
             <div
               class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
-              onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
-              <input type="radio" name="shipping-method" required
-                id="shipping-method-<?php echo $shippingMethod['id']; ?>" value="<?php echo $shippingMethod['id'] ?>" class="accent-[#315854]" />
-              <label for="shipping-method-<?php echo $shippingMethod['id']; ?>"
+              onclick="document.getElementById('shipping-method-<?php echo $shippingMethod->id ?>').checked = true;">
+              <input type="radio" name="shipping-method" required id="shipping-method-<?php echo $shippingMethod->id ?>"
+                value="<?php echo $shippingMethod->id ?>" class="accent-[#315854]" />
+              <label for="shipping-method-<?php echo $shippingMethod->id ?>"
                 class="ml-2 text-lg font-bold cursor-pointer">
-                <?php echo $shippingMethod["price"] ?>$
+                <?php echo $shippingMethod->price ?>$
               </label>
               <p class="ml-6">
-                <?php echo $shippingMethod["name"] ?>
+                <?php echo $shippingMethod->name ?>
               </p>
             </div>
           <?php endforeach; ?>
