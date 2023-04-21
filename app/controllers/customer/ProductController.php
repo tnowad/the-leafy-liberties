@@ -16,18 +16,12 @@ class ProductController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    try {
-      $products = Product::all();
-      $authors = Author::all();
-    } catch (\Exception $e) {
-      dd($e->getMessage());
-    }
+    $products = Product::all();
     $response->setStatusCode(200);
     $response->setBody(
       View::renderWithLayout(new View("pages/products"), [
         "title" => "Shop",
         "products" => $products,
-        "authors" => $authors,
       ])
     );
   }
