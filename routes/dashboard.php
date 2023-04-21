@@ -104,9 +104,10 @@ $router->post("/dashboard/permission", [PermissionController::class, "create"]);
 $router->post("/dashboard/permission/update", [PermissionController::class, "update"]);
 $router->post("/dashboard/permission/delete", [PermissionController::class, "delete"]);
 
-// settings
+// setting
 
 $router->get("/dashboard/setting", [SettingController::class, "index"]);
 $router->post("/dashboard/setting", [SettingController::class, "create"]);
+$router->get("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/delete", [SettingController::class, "delete"]);

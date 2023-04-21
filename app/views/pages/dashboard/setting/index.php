@@ -1,7 +1,8 @@
+
 <div class="w-full my-0 mx-auto">
     <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
         <div class="flex justify-between">
-            <h1 class="text-xl font-bold">Users</h1>
+            <h1 class="text-xl font-bold">Settings</h1>
         </div>
         <div class="table-customer-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
             <div class="relative">
@@ -9,6 +10,10 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <?php
+
+                            use App\Models\Role;
+                            use App\Models\Setting;
+
                             $name = [
                                 "ID",
                                 "Name",
@@ -24,24 +29,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
-                            <td class="px-5 py-3">
-                                1
-                            </td>
-                            <td class="px-5 py-3">
-                                Page
-                            </td>
-                            <td class="px-5 py-3">
-                                1
-                            </td>
-                            <td class="px-5 py-3 w-44">
-                                <div class="button flex justify-center items-center gap-4">
-                                    <a href="" class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>  
+                        <?php
+                        $settings = Setting::all();
+                        if (count($settings) > 0) : ?>
+                            <?php foreach ($settings as $setting) : ?>
+                                <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
+                                    <td class="px-5 py-3">
+                                        <?php echo $setting->id; ?>
+                                    </td>
+                                    <td class="px-5 py-3">
+                                        <?php echo $setting->name; ?>
+                                    </td>
+                                    <td class="px-5 py-3">
+                                        <?php echo $setting->value; ?>
+                                    </td>
+                                    <td class="px-5 py-3 w-44">
+                                        <div class="button flex justify-center items-center gap-4">
+                                            <a href="<?php echo BASE_URI .
+                                                            "/dashboard/setting/update" .
+                                                            "?id=" .
+                                                            $setting->id; ?>" class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <button class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif;
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -50,7 +68,7 @@
             <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
                 <h2 class="text-xl font-bold mb-4">Add Customer</h2>
                 <form class="flex flex-col" action="<?php echo BASE_URI .
-                                                        "/dashboard/user/update"; ?>" method="POST">
+                                                        "/dashboard/setting/update"; ?>" method="POST">
                     <label for="image" class="my-2">Image:</label>
                     <input type="file" name="image" />
                     <label for="entered" class="my-2">Email:</label>
@@ -81,7 +99,7 @@
     </div>
 </div>
 <script>
-    let btn = document.querySelector(".add-user")
+    let btn = document.querySelector(".add-setting")
     btn.addEventListener("click", () => {
         document.querySelector(".add-form").classList.add("flex");
         document.querySelector(".add-form").classList.remove("hidden");
