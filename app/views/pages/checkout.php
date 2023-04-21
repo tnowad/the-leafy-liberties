@@ -4,6 +4,26 @@ use Core\Application;
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
 
+$shippingMethods = [
+  [
+    "id" => 1,
+    "name" => "Standard",
+    "price" => 2.99,
+  ],
+  [
+    "id" => 2,
+    "name" => "Express",
+    "price" => 5.99,
+  ],
+  [
+    "id" => 3,
+    "name" => "Premium",
+    "price" => 9.99,
+  ]
+];
+
+
+
 $cartItems = $params["cartItems"];
 $totalMoney = 0;
 foreach ($cartItems as $cartItem) {
@@ -22,7 +42,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
         <h2 class="mb-5 text-xl font-bold bill-header">
           Billing Address
         </h2>
-        <form action="//" class="px-5 sm:w-full md:w-full ">
+        <form action="" class="px-5 sm:w-full md:w-full ">
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Name</legend>
             <input type="text" name="name" placeholder="Your name"
@@ -87,22 +107,39 @@ $grandTotal = $totalMoney + $shipping + $tax;
         </h2>
         <div class="flex flex-col justify-between gap-5 px-5 choice">
           <div
-            class="payment-choice paypal-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer transition-all">
-            <input type="radio" name="pay-option" id="option-one" class="accent-[#315854]" />
-            <span class="ml-2 text-lg font-bold">Paypal</span>
-            <p class="ml-6">
-              You will be redirected to the PayPal website after submitting
-              your order
-            </p>
+            class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer transition-all">
+            <input type="radio" name="pay-option" id="cash" class="accent-[#315854]" value="cash" />
+            <label for="cash" class="ml-2 text-lg font-bold">Cash on delivery
+              <span class="ml-6 text-sm font-normal ">
+                You will pay when your order is delivered</span>
+            </label>
           </div>
           <div
-            class="payment-choice momo-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer">
-            <input type="radio" name="pay-option" id="option-two" class="accent-[#315854]" />
-            <span class="ml-2 text-lg font-bold">Momo</span>
-            <p class="ml-6">
-              You will be redirected to the Momo website after submitting
-              your order
-            </p>
+            class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
+            for="credit">
+            <input type="radio" name="pay-option" id="credit" class="accent-[#315854]" value="credit" />
+            <label for="credit" class="ml-2 text-lg font-bold">Credit
+              <span class="ml-6 text-sm font-normal">
+                You will pay with your credit card and your order will be delivered
+              </span>
+            </label>
+          </div>
+          <div id="credit-info" class="hidden mt-5">
+            <label for="card-number" class="block mb-2 font-medium">Card Number:</label>
+            <input type="text" name="card-number" id="card-number"
+              class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <label for="expiry-date" class="block mb-2 font-medium">Expiration Date:</label>
+            <input type="text" name="expiry-date" id="expiry-date"
+              class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+            <label for="cvv" class="block mb-2 font-medium">CVV:</label>
+            <input type="text" name="cvv" id="cvv"
+              class="block w-full px-4 py-2 mb-4 leading-tight bg-white border border-gray-400 rounded shadow-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
+          </div>
+
+          <div class="flex flex-col items-center justify-center w-full mt-5">
+            <button class="w-full px-5 py-2 text-white bg-[#315854] rounded-md">
+              Place order
+            </button>
           </div>
         </div>
       </div>
@@ -208,25 +245,17 @@ $grandTotal = $totalMoney + $shipping + $tax;
   </div>
 </div>
 <script>
-  let paypal_choice = document.querySelector(".paypal-choice");
-  let payment_input = document.querySelector('input[id="option-one"]');
-  paypal_choice.addEventListener("click", () => {
-    payment_input.checked = true;
+  const cashOnDelivery = document.getElementById("cash");
+  const creditCard = document.getElementById("credit");
+
+  const creditInfo = document.getElementById("credit-info");
+
+  // Add an event listener to the credit card radio button
+  creditCard.addEventListener("click", function () {
+    creditInfo.classList.remove("hidden");
   });
 
-  let paypal_choice2 = document.querySelector(".momo-choice");
-  let payment_input2 = document.querySelector('input[id="option-two"]');
-  paypal_choice2.addEventListener("click", () => {
-    payment_input2.checked = true;
-  });
-  let ship_input = document.querySelector('input[id="ship-one"]');
-  let ship_input2 = document.querySelector('input[id="ship-two"]');
-  let ship_choice = document.querySelector(".first-choice");
-  let ship2_choice = document.querySelector(".second-choice");
-  ship_choice.addEventListener("click", () => {
-    ship_input.checked = true;
-  });
-  ship2_choice.addEventListener("click", () => {
-    ship_input2.checked = true;
+  cashOnDelivery.addEventListener("click", function () {
+    creditInfo.classList.add("hidden");
   });
 </script>
