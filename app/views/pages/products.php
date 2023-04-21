@@ -14,7 +14,7 @@ $products = $pagination['products'];
       <div class="fixed">
         <h1 class="mb-2 text-2xl font-bold">Filter</h1>
         <div class="grid justify-around grid-cols-3 lg:block">
-          <form class="w-full" method="GET" action="<?php echo BASE_URI . '/products' ?>">
+          <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/products' ?>">
             <input type="hidden" name="page" value="1">
             <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>">
             <input type="hidden" name="keywords" value="<?php echo $filter['keywords'] ?>">
@@ -108,25 +108,35 @@ $products = $pagination['products'];
         <?php endforeach; ?>
       </div>
       <div class="my-5">
-        <ul id="pagination" class="flex items-center justify-center gap-5 text-center pagination">
-          <li
+        <div id="pagination" class="flex items-center justify-center gap-5 text-center pagination">
+          <div
             class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-            <button>Previous</button>
-          </li>
-          <?php ?>
-          <li
+            <a onclick="openPage(<?php echo $pagination['page'] - 1 ?>)">Previous</a>
+          </div>
+          <?php for ($i = 1; $i <= $pagination['totalPages']; $i++): ?>
+            <div
+              class="p-2 <?php echo $i == $pagination['page'] ? 'bg-[#52938d] text-white font-semibold' : 'bg-gray-100 text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all'; ?> rounded-full">
+              <a onclick="openPage(<?php echo $i ?>)">
+                <?php echo $i; ?>
+              </a>
+            </div>
+          <?php endfor; ?>
+          <div
             class="pagination-items p-2 bg-gray-100 rounded-full text-[#52938d] font-semibold hover:text-white hover:bg-[#2e524e] transition-all">
-            <button>Next</button>
-          </li>
-        </ul>
+            <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)">Next</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<script src="resources/js/pages/product.js">
-</script>
+<script>
+  const filterForm = document.getElementById('filter-form');
+  document.openPage = (page) => {
+    if (filterForm.page.value === page || page < 1 || page > <?php echo $pagination['totalPages'] ?>) return;
+    filterForm.page.value = page;
+    filterForm.submit();
+  }
 
-<script src="resources/js/pages/search-p
-roduct.js">
 </script>
