@@ -11,6 +11,7 @@ use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Utils\Pagination;
 
 class ProductController extends Controller
 {
@@ -32,8 +33,17 @@ class ProductController extends Controller
       "page" => $request->getQuery("page") ?? 1,
       "limit" => $request->getQuery("limit") ?? 24,
     ];
-
     $products = Product::filterAdvanced($filter);
+
+    $pagination["total"] = count($products);
+
+    $pagination["totalPages"] = ceil($pagination["total"] / $pagination["limit"]);
+
+    $pagination["products"] = Pagination::paginate(
+      $products,
+      $pagination["page"],
+      $pagination["limit"]
+    );
 
     $response->setStatusCode(200);
     $response->setBody(
@@ -42,6 +52,7 @@ class ProductController extends Controller
         "products" => $products,
         "filter" => $filter,
         "pagination" => $pagination,
+        "footer" => ""
       ])
     );
   }

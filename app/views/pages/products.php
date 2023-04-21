@@ -3,20 +3,20 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Tag;
 
-$products = $params['products'];
 $filter = $params['filter'];
 $pagination = $params['pagination'];
-// dd($filter);
-// dd($pagination);
+$products = $pagination['products'];
+
 ?>
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[200px,auto] 2xl:grid-cols-[250px,auto]">
-    <div class="min-h-[400px] box-border mx-2 ">
+    <div class="box-border mx-2 min-h-max ">
       <div class="fixed">
         <h1 class="mb-2 text-2xl font-bold">Filter</h1>
         <div class="grid justify-around grid-cols-3 lg:block">
           <form class="w-full" method="GET" action="<?php echo BASE_URI . '/products' ?>">
             <input type="hidden" name="page" value="1">
+            <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>">
             <input type="hidden" name="keywords" value="<?php echo $filter['keywords'] ?>">
             <h1 class="mt-2 mb-2 text-xl font-bold">Category</h1>
             <ul class="ml-2">
@@ -38,7 +38,6 @@ $pagination = $params['pagination'];
                 </li>
               <?php endforeach; ?>
             </ul>
-            <!-- tags -->
             <h1 class="mt-2 mb-2 text-xl font-bold">Tags</h1>
             <ul class="ml-2">
               <?php foreach (Tag::all() as $tag): ?>
