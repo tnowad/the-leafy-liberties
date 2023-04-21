@@ -38,8 +38,8 @@ foreach ($cartItems as $cartItem) {
 }
 
 $shipping = 2.99;
-$tax = 0.1 * $totalMoney;
-$grandTotal = $totalMoney + $shipping + $tax;
+$taxMoney = $totalMoney * $tax;
+$grandTotal = $totalMoney + $shipping + $taxMoney;
 
 ?>
 <div class="flex items-center justify-center w-full mt-10">
@@ -62,8 +62,8 @@ $grandTotal = $totalMoney + $shipping + $tax;
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md px-2 py-1 mt-3">
             <legend class="px-1">Street Address</legend>
-            <input type="text" name="" id="" class="w-full p-2 focus:outline-none focus:border-0"
-              placeholder="12 Wall Street,. . . . ." />
+            <input type="text" name="" id="" value="<?php echo $user->address ?>"
+              class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
           </fieldset>
           <div class="flex justify-center mt-3 city md:flex-nowrap sm:flex-wrap">
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 md:mr-10 sm:mr-0 w-full">
@@ -90,22 +90,21 @@ $grandTotal = $totalMoney + $shipping + $tax;
           Shipping Method
         </h2>
         <div class="flex flex-col justify-between gap-5 px-5 choice">
-          <div
-            class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer">
-            <input type="radio" name="ship-options" id="ship-one" class="accent-[#315854]" />
-            <span class="ml-2 text-lg font-bold">$2.99</span>
-            <p class="ml-6">
-              USPS 1st Class With Tracking (5 - 13 days) COVID19 Delay
-            </p>
-          </div>
-          <div
-            class="second-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer">
-            <input type="radio" name="ship-options" id="ship-two" class="accent-[#315854]" />
-            <span class="ml-2 text-lg font-bold">$9.00</span>
-            <p class="ml-6">
-              USPS 1st Class With Tracking (3 - 5 days) COVID19 Delay
-            </p>
-          </div>
+          <?php foreach ($shippingMethods as $shippingMethod): ?>
+            <div
+              class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
+              onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
+              <input type="radio" name="shipping-method" id="shipping-method-<?php echo $shippingMethod['id']; ?>"
+                class="accent-[#315854]" />
+              <label for="shipping-method-<?php echo $shippingMethod['id']; ?>"
+                class="ml-2 text-lg font-bold cursor-pointer">
+                <?php echo $shippingMethod["price"] ?>$
+              </label>
+              <p class="ml-6">
+                <?php echo $shippingMethod["name"] ?>
+              </p>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
       <div class="w-full p-5 mt-5 mb-10 border-0 shadow-lg payment-container rounded-2xl shadow-gray-300">
@@ -255,7 +254,6 @@ $grandTotal = $totalMoney + $shipping + $tax;
 
   const creditInfo = document.getElementById("credit-info");
 
-  // Add an event listener to the credit card radio button
   creditCard.addEventListener("click", function () {
     creditInfo.classList.remove("hidden");
   });
