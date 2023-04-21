@@ -227,7 +227,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
             </fieldset>
             <div
               class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
-              <button class="text-xl">
+              <button type="submit" class="text-xl">
                 Pay $
                 <?php echo $grandTotal ?>
               </button>
