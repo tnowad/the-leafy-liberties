@@ -56,13 +56,12 @@ use App\Models\Slide;
       </a>
     </div>
     <div class="relative flex w-full gap-6 overflow-hidden bestselling-products">
-
       <?php foreach (array_slice(Product::all(), 0, 6) as $product): ?>
         <div
-          class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
-          <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
+          class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl h-[500px]">
+          <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60 mx-auto">
             <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
-              <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
+              <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full " />
             </a>
           </div>
           <div
@@ -87,7 +86,6 @@ use App\Models\Slide;
           </div>
         </div>
       <?php endforeach; ?>
-
     </div>
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Popular Books</h2>
@@ -186,8 +184,7 @@ use App\Models\Slide;
               "/products?author=" .
               $author->id; ?>">
               <div class="mb-3 rounded-full author-face w-44 h-44">
-                <img src="<?php echo BASE_URI . $author->image; ?>"
-                  class='object-cover w-full h-full rounded-full' />
+                <img src="<?php echo BASE_URI . $author->image; ?>" class='object-cover w-full h-full rounded-full' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">
                 <?php echo $author->name; ?>
@@ -200,6 +197,7 @@ use App\Models\Slide;
     </div>
   </div>
 </div>
+
 
 <script type="module">
   import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';

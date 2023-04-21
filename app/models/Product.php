@@ -36,7 +36,6 @@ class Product extends Model
   {
     return Publisher::find($this->publisher_id);
   }
-
   public function tags()
   {
     $productTags = ProductTag::findAll(["product_id" => $this->id]);
@@ -46,7 +45,6 @@ class Product extends Model
     }
     return $tags;
   }
-
   public function addTag($tag)
   {
     ProductTag::create([

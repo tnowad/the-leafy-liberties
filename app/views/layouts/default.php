@@ -17,7 +17,7 @@
     "/resources/css/all.css"; ?>">
   <link rel="stylesheet" href="<?php echo BASE_URI .
     "/resources/css/reset.css"; ?>">
-
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <script src="<?php echo BASE_URI .
     "/resources/js/tailwindcss.js"; ?>"></script>
   <script src="<?php echo BASE_URI . "/resources/js/flowbite.js"; ?>"></script>
@@ -59,6 +59,14 @@
   <?php $params["footer"] ?? (require_once __DIR__ . "/default/footer.php"); ?>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+  integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"
+  integrity="sha512-KgffulL3mxrOsDicgQWA11O6q6oKeWcV00VxgfJw4TcM8XRQT8Df9EsrYxDf7tpVpfl3qcYD96BpyPvA4d1FDQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="resources/js/slider.js"></script>
 <script type="module">
   import {
     parseUrlParameters
@@ -74,5 +82,6 @@
     new Toast(toast);
   }
 </script>
+
 
 </html>
