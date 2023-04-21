@@ -35,7 +35,6 @@ $grandTotal = $totalMoney + $shipping + $tax;
 
 ?>
 <div class="flex items-center justify-center w-full mt-10">
-
   <form class="container flex flex-wrap xl:flex-nowrap">
     <div class="flex flex-col w-full left-container">
       <div class="w-full p-5 border-0 shadow-lg bill-container rounded-2xl shadow-gray-300">
@@ -238,8 +237,6 @@ $grandTotal = $totalMoney + $shipping + $tax;
         </div>
       </div>
   </form>
-</div>
-</div>
 </div>
 <script>
   const cashOnDelivery = document.getElementById("cash");
