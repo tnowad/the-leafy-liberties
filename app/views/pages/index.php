@@ -104,22 +104,14 @@ use App\Models\Slide;
           <div
             class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
             <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
-              <a href="<?php echo BASE_URI .
-                "/product" .
-                "?id=" .
-                $product->id; ?>">
-                <img src="<?php echo BASE_URI .
-                  "/" .
-                  $product->image; ?>" alt="" class="object-cover w-full h-full" />
+              <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
+                <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
               </a>
             </div>
             <div
               class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
               <div class="product-name">
-                <a href="<?php echo BASE_URI .
-                  "/product" .
-                  "?id=" .
-                  $product->id; ?>">
+                <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
                   <?php echo $product->name; ?>
                 </a>
               </div>
@@ -171,7 +163,7 @@ use App\Models\Slide;
             $category->id; ?>">
             <div class="w-full h-56 overflow-hidden img rounded-3xl">
               <img
-                src="<?php echo $category->image ? BASE_URI . "/" . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
+                src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
                 alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
             <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
@@ -194,7 +186,7 @@ use App\Models\Slide;
               "/products?author=" .
               $author->id; ?>">
               <div class="mb-3 rounded-full author-face w-44 h-44">
-                <img src="<?php echo BASE_URI . "/" . $author->image; ?>" alt=""
+                <img src="<?php echo BASE_URI . $author->image; ?>"
                   class='object-cover w-full h-full rounded-full' />
               </div>
               <p class="text-lg font-medium author-name whitespace-nowrap ">

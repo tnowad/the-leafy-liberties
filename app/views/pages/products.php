@@ -4,8 +4,8 @@ use App\Models\Category;
 $products = $params['products'];
 $filter = $params['filter'];
 $pagination = $params['pagination'];
-dd($filter);
-dd($pagination);
+// dd($filter);
+// dd($pagination);
 ?>
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[200px,auto] 2xl:grid-cols-[250px,auto]">
@@ -77,35 +77,33 @@ dd($pagination);
       <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         <?php foreach ($products as $product): ?>
           <div
-            class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
-            <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
-              <a href="<?php echo BASE_URI . "/product" . "?id=" .
-                $product->id; ?>">
-                <img src="<?php echo BASE_URI . "/" . $product->image; ?>" alt="" class="object-cover w-full h-full" />
+          class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
+          <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
+            <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
+              <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
+            </a>
+          </div>
+          <div
+            class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+            <div class="product-name">
+              <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
+                <?php echo $product->name; ?>
               </a>
             </div>
+            <div class="text-sm text-gray-500 product-author">
+              <?php echo $product->author()->name; ?>
+            </div>
+            <div class="p-0 font-semibold product-price text-primary-900">
+              <?php echo $product->price; ?>$
+            </div>
             <div
-              class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
-              <div class="product-name">
-                <a href="<?php echo BASE_URI .
-                  "/product?id=" . $product->id; ?>">
-                  <?php echo $product->name; ?>
-                </a>
-              </div>
-              <div class="text-sm text-gray-500 product-author">
-                <?php echo $product->author()->name ?>
-              </div>
-              <div class="p-0 font-semibold product-price text-primary-900">
-                <?php echo $product->price ?>$
-              </div>
-              <div
-                class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
-                <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
-                  onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
-              </div>
+              class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+              <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
+              <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>
           </div>
+        </div>
         <?php endforeach; ?>
       </div>
       <div class="my-5">
