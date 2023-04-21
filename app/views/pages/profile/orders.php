@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\OrderProduct;
 use App\Models\Product;
 
@@ -15,13 +16,24 @@ $orders = $params['orders'];
           <table class="w-full h-64 overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
-                <th scope="col" class="px-16 py-3">
-
-                </th>
+                <?php
+                $tableName = [
+                  "ID",
+                  "Name",
+                  "Total price",
+                  "Start",
+                  "Action",
+                ];
+                for ($i = 1; $i <= count($tableName); $i++) { ?>
+                  <th scope="col" class="px-6 py-3">
+                    <?php echo $tableName[$i - 1]; ?>
+                  </th>
+                <?php }
+                ?>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($orders as $order): ?>
+              <?php foreach ($orders as $order) : ?>
                 <tr class="py-3">
                   <td class="">
                     <?php echo $order->id; ?>
@@ -32,10 +44,9 @@ $orders = $params['orders'];
                   <td class="">
                     <?php echo $order->email; ?>
                   </td>
-
                   <td>
                     <ul>
-                      <?php foreach (array_slice(OrderProduct::findAll(['order_id' => $order->id]), 0, 3) as $orderProduct): ?>
+                      <?php foreach (array_slice(OrderProduct::findAll(['order_id' => $order->id]), 0, 3) as $orderProduct) : ?>
                         <li>
                           <?php echo $orderProduct->product()->name ?>
                         </li>
@@ -48,17 +59,17 @@ $orders = $params['orders'];
                   </td>
                   <td class="">
                     <!-- if status is 0 is pending, 1 is accept, 2 is shipping, 3 is successful, 4 is cancel, 5 is reject -->
-                    <?php if ($order->status == 0): ?>
+                    <?php if ($order->status == 0) : ?>
                       <i class="text-yellow-500 fas fa-clock"></i>
-                    <?php elseif ($order->status == 1): ?>
+                    <?php elseif ($order->status == 1) : ?>
                       <i class="text-blue-500 fas fa-check-circle"></i>
-                    <?php elseif ($order->status == 2): ?>
+                    <?php elseif ($order->status == 2) : ?>
                       <i class="text-blue-600 fas fa-truck"></i>
-                    <?php elseif ($order->status == 3): ?>
+                    <?php elseif ($order->status == 3) : ?>
                       <i class="text-green-500 fas fa-check"></i>
-                    <?php elseif ($order->status == 4): ?>
+                    <?php elseif ($order->status == 4) : ?>
                       <i class="text-red-500 fas fa-times-circle"></i>
-                    <?php elseif ($order->status == 5): ?>
+                    <?php elseif ($order->status == 5) : ?>
                       <i class="text-red-500 fas fa-times"></i>
                     <?php endif; ?>
                   </td>
@@ -67,6 +78,11 @@ $orders = $params['orders'];
                     <a href="<?php echo BASE_URI . '/profile/orders?id=' . $order->id ?>">
                       <i class="text-blue-500 fas fa-eye"></i>
                     </a>
+                  </td>
+                  <td>
+                    <button class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
+                      <i class="fa-solid fa-times"></i>
+                    </button>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -77,3 +93,8 @@ $orders = $params['orders'];
     </div>
   </div>
 </div>
+
+<script>
+  // if order status is pending, the button is show else hidden
+  
+</script>
