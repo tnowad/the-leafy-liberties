@@ -1,28 +1,13 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\ShippingMethod;
 use Core\Application;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
 
-$shippingMethods = [
-  [
-    "id" => 1,
-    "name" => "Standard",
-    "price" => 2.99,
-  ],
-  [
-    "id" => 2,
-    "name" => "Express",
-    "price" => 5.99,
-  ],
-  [
-    "id" => 3,
-    "name" => "Premium",
-    "price" => 9.99,
-  ]
-];
+$shippingMethods = ShippingMethod::findAll(["status" => 1]);
 
 $tax = 0;
 $setting = Setting::findOne(["name" => "tax"]);
@@ -84,15 +69,16 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           <?php foreach ($shippingMethods as $shippingMethod): ?>
             <div
               class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
-              onclick="document.getElementById('shipping-method-<?php echo $shippingMethod['id']; ?>').checked = true;">
-              <input type="radio" name="shipping-method" required
-                id="shipping-method-<?php echo $shippingMethod['id']; ?>" value="<?php echo $shippingMethod['id'] ?>" class="accent-[#315854]" />
-              <label for="shipping-method-<?php echo $shippingMethod['id']; ?>"
+              onclick="document.getElementById('shipping-method-<?php echo $shippingMethod->id ?>').checked = true;">
+              <input type="radio" name="shipping-method-id" required
+                id="shipping-method-<?php echo $shippingMethod->id ?>" value="<?php echo $shippingMethod->id ?>"
+                class="accent-[#315854]" />
+              <label for="shipping-method-<?php echo $shippingMethod->id ?>"
                 class="ml-2 text-lg font-bold cursor-pointer">
-                <?php echo $shippingMethod["price"] ?>$
+                <?php echo $shippingMethod->price ?>$
               </label>
               <p class="ml-6">
-                <?php echo $shippingMethod["name"] ?>
+                <?php echo $shippingMethod->name ?>
               </p>
             </div>
           <?php endforeach; ?>
@@ -105,7 +91,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
         <div class="flex flex-col justify-between gap-5 px-5 choice">
           <div
             class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer transition-all">
-            <input type="radio" name="pay-option" id="cash" required class="accent-[#315854]" value="cash" />
+            <input type="radio" name="payment-method-type" id="cash" required class="accent-[#315854]" value="cash" />
             <label for="cash" class="ml-2 text-lg font-bold">Cash on delivery
               <span class="ml-6 text-sm font-normal ">
                 You will pay when your order is delivered</span>
@@ -114,7 +100,8 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           <div
             class="payment-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
             for="credit">
-            <input type="radio" name="pay-option" id="credit" required class="accent-[#315854]" value="credit" />
+            <input type="radio" name="payment-method-type" id="credit" required class="accent-[#315854]"
+              value="credit" />
             <label for="credit" class="ml-2 text-lg font-bold">Credit
               <span class="ml-6 text-sm font-normal">
                 You will pay with your credit card and your order will be delivered
@@ -221,10 +208,9 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
               </div>
             </div>
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-1 mr-10 w-full h-auto mt-4">
-              <legend class="px-2">Order Comment</legend>
-              <textarea type="text" name="comment" id="comment" required placeholder="Type here..." rows="7"
-                class="w-full p-1 text-lg focus:outline-none focus:border-0">
-              </textarea>
+              <legend class="px-2">Description</legend>
+              <textarea type="text" name="description" required placeholder="Type here..." rows="7"
+                class="w-full p-1 text-lg focus:outline-none focus:border-0"></textarea>
             </fieldset>
             <div
               class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">

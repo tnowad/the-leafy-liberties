@@ -161,14 +161,35 @@ CREATE TABLE
     );
 
 -- Order
+CREATE TABLE
+    shipping_methods (
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      name text NOT NULL,
+      price decimal(10, 2) NOT NULL,
+      description text NOT NULL,
+      status int NOT NULL DEFAULT "1",
+      deleted_at datetime DEFAULT NULL
+    );
 
 CREATE TABLE
     orders (
         id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        name varchar(255) NOT NULL,
+        email varchar(255) NOT NULL,
+        address text NOT NULL,
+        phone varchar(255) NOT NULL,
+        shipping_method_id int NOT NULL,
+        description text DEFAULT NULL,
+        payment_method_type varchar(255) NOT NULL,
+        card_number varchar(255) DEFAULT NULL,
+        expired_date varchar(255) DEFAULT NULL,
+        cvv varchar(255) DEFAULT NULL,
         user_id int NOT NULL,
         total_price decimal(10, 2) NOT NULL,
         status tinyint NOT NULL DEFAULT "0",
+        create_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
         deleted_at datetime DEFAULT NULL,
+        FOREIGN KEY (shipping_method_id) REFERENCES shipping_methods (id),
         FOREIGN KEY (user_id) REFERENCES users (id)
     );
 
@@ -178,6 +199,7 @@ CREATE TABLE
         order_id int NOT NULL,
         product_id int NOT NULL,
         quantity int NOT NULL,
+        price decimal(10, 2) NOT NULL,
         FOREIGN KEY (order_id) REFERENCES orders (id),
         FOREIGN KEY (product_id) REFERENCES products (id)
     );
@@ -211,12 +233,3 @@ CREATE TABLE
       FOREIGN KEY (product_id) REFERENCES products (id)
     );
 
-CREATE TABLE
-    shipping_methods (
-      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      name text NOT NULL,
-      price decimal(10, 2) NOT NULL,
-      description text NOT NULL,
-      status int NOT NULL DEFAULT "1",
-      deleted_at datetime DEFAULT NULL
-    );
