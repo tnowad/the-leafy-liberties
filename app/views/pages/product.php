@@ -8,7 +8,7 @@
         $product->image; ?>" alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
-      <p class="p-1 mb-2 md:mb-6 text-[11px] sm:text-sm text-green-400 bg-gray-200 inline-block">
+      <p class="p-1 mb-2 md:mb-6 text-[11px] sm:text-sm text-primary-700 font-medium inline-block">
         IN STOCK
       </p>
       <br />
@@ -38,8 +38,7 @@
         <div class="flex w-full justify-start gap-3  items-center mt-4">
           <div
             class="cursor-pointer flex justify-between items-center bg-gray-50 border border-gray-300 py-2 px-3 rounded-full text-lg gap-2 hover:bg-primary-500 hover:text-gray-700 transition-all group"
-            onclick="addToCart(<?php echo $product->id; ?>)"
-            >
+            onclick="addToCart(<?php echo $product->id; ?>)">
             <i
               class="fa-brands fa-opencart group-hover:text-white transition-all p-2 group-hover:bg-primary-400 rounded-full"></i>
             <button src="" alt="" class="font-medium text-sm sm:text-base md:text-lg">
@@ -48,8 +47,7 @@
           </div>
           <div
             class="cursor-pointer flex justify-between items-center bg-gray-50 border border-gray-300 py-2 px-3 rounded-full text-lg gap-2 hover:bg-primary-500 hover:text-gray-700 transition-all group"
-            onclick="addToWishList(<?php echo $product->id; ?>)"
-            >
+            onclick="addToWishList(<?php echo $product->id; ?>)">
             <i
               class="fa-regular fa-heart group-hover:text-white transition-all p-2 group-hover:bg-red-400 rounded-full"></i>
             <button type="submit" src="" alt="" class="text-sm sm:text-base md:text-lg font-medium add-to-wishlist">
@@ -58,22 +56,32 @@
           </div>
         </div>
       </div>
+
+      <p class="inline-block mt-5 text-gray-400">Category: </p>
       <a href="<?php echo BASE_URI .
         "/products" .
         "?category=" .
-        $category->id; ?>">
+        $category->id; ?>" class="hover:underline font-medium text-primary">
 
-        <p class="inline-block mt-5 text-gray-400">Category: </p>
-        <p class="inline-block ml-1">
-
-          <?php echo $category->name; ?>
-        </p>
-        <br />
-        <p class="inline-block text-gray-400">Tags :</p>
-        <p class="inline-block ml-1">
-          Books, Fiction, Romance - Contemporary
-        </p>
+        <?php echo $category->name; ?>
       </a>
+      <br />
+      <p class="inline-block text-gray-400">Tags :</p>
+      <p class="inline-block ml-1">
+        <?php
+        $tags = $product->tags();
+        $count = count($tags);
+        foreach ($tags as $i => $tag) { ?>
+          <a href="<?php echo BASE_URI . '/' ?>" class="hover:underline font-medium text-primary">
+            <?php echo $tag->name ?>
+          </a>
+          <?php
+          if ($i != $count - 1) {
+            echo ', ';
+          }
+        }
+        ?>
+      </p>
 
       <div class="flex justify-start mt-10 items-center gap-4">
         <i

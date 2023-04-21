@@ -38,12 +38,12 @@ class Tag extends Model
     }
   }
 
-  public function delete()
-  {
-    $productTags = ProductTag::findAll(["tag_id" => $this->id]);
-    foreach ($productTags as $productTag) {
-      $productTag->delete();
-    }
-    parent::delete();
-  }
+  // public function delete()
+  // {
+  //   $productTags = ProductTag::findAll(["tag_id" => $this->id]);
+  //   foreach ($productTags as $productTag) {
+  //     $productTag->delete();
+  //   }
+  //   parent::delete();
+  // }
 }
