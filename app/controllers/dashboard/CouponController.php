@@ -21,7 +21,7 @@ class CouponController extends Controller
       View::renderWithDashboardLayout(
         new View("pages/dashboard/coupon/index"),
         [
-          "title" => "Coupons",
+          "title" => "Dashboard",
           "coupons" => $coupons,
         ]
       )

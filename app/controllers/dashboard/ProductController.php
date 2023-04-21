@@ -27,7 +27,7 @@ class ProductController extends Controller
       View::renderWithDashboardLayout(
         new View("pages/dashboard/product/index"),
         [
-          "title" => "Products",
+          "title" => "Dashboard",
           "products" => $products,
         ]
       )
@@ -132,15 +132,15 @@ class ProductController extends Controller
 
   public function update(Request $request, Response $response)
   {
-    $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('products.update')) {
-      return $response->redirect(BASE_URI . '/dashboard', 200, [
-        'toast' => [
-          'type' => 'error',
-          'message' => 'You do not have permission to access this page.'
-        ]
-      ]);
-    }
+    // $auth = Application::getInstance()->getAuthentication();
+    // if (!$auth->hasPermission('products.update')) {
+    //   return $response->redirect(BASE_URI . '/dashboard', 200, [
+    //     'toast' => [
+    //       'type' => 'error',
+    //       'message' => 'You do not have permission to access this page.'
+    //     ]
+    //   ]);
+    // }
     switch ($request->getMethod()) {
       case "GET":
         $product = Product::findOne(["id" => $request->getQuery("id")]);

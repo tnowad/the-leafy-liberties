@@ -8,7 +8,7 @@
     </div>
     <div onclick="document.querySelector('#upload-image').click()" class="absolute text-4xl cursor-pointer">
     <!-- upload -->
-      <i class="fa-regular fa-camera rounded-full p-16 hover:bg-gray-200 transition-all opacity-0 hover:opacity-100 "></i>
+      <i class="fa-regular fa-camera rounded-full p-16 hover:bg-gray-200 hover:backdrop-blur-xl transition-all opacity-0 hover:opacity-100 "></i>
     </div>
   </div>
   <div class="box-border flex flex-col items-start justify-center px-6">
