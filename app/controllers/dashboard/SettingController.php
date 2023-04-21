@@ -75,7 +75,6 @@ class SettingController extends Controller
             )
           );
         } else {
-          // dd($product);
           $setting->name = $request->getParam("name");
           $setting->value = $request->getParam("value");
           $setting->save();

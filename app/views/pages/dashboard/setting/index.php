@@ -1,4 +1,3 @@
-
 <div class="w-full my-0 mx-auto">
     <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
         <div class="flex justify-between">
@@ -64,7 +63,7 @@
                 </table>
             </div>
         </div>
-        <div class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[300]">
+        <!-- <div class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[300]">
             <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
                 <h2 class="text-xl font-bold mb-4">Add Customer</h2>
                 <form class="flex flex-col" action="<?php echo BASE_URI .
@@ -95,7 +94,7 @@
                     </button>
                 </form>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <script>

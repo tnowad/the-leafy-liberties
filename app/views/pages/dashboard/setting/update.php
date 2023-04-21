@@ -11,7 +11,7 @@
             <input type="text" value="<?php echo $setting->name; ?>" name="name" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
             <label for="expired" class="my-2">Value:</label>
-            <input type="number" value="<?php echo $setting->value; ?>" name="email" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+            <input type="number" value="<?php echo $setting->value; ?>" name="value" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
             <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded" type="submit">
                 Submit
