@@ -21,12 +21,6 @@ $products = $pagination['products'];
             <h1 class="mt-2 mb-2 text-xl font-bold">Category</h1>
             <ul class="ml-2">
               <li>
-                <label>
-                  <input type="checkbox" name="categories[]" value="all" <?php echo in_array('all', $filter['categories']) ? 'checked' : '' ?>>
-                  <span class="ml-2">
-                    All
-                  </span>
-                </label>
                 <?php foreach (Category::all() as $category): ?>
                 <li>
                   <label>
