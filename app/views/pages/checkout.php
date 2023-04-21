@@ -42,7 +42,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
         <h2 class="mb-5 text-xl font-bold bill-header">
           Billing Address
         </h2>
-        <form action="" class="px-5 sm:w-full md:w-full ">
+        <div class="px-5 sm:w-full md:w-full ">
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full mt-3">
             <legend class="px-1">Name</legend>
             <input type="text" name="name" placeholder="Your name"
@@ -76,7 +76,7 @@ $grandTotal = $totalMoney + $shipping + $tax;
               My billing and shipping address are the same
             </span>
           </div>
-        </form>
+        </div>
       </div>
       <div class="w-full p-5 mt-5 border-0 shadow-lg shipping-container rounded-2xl shadow-gray-300 ">
         <h2 class="mb-5 text-xl font-bold bill-header">
