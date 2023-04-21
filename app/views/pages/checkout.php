@@ -104,7 +104,6 @@ $grandTotal = $totalMoney + $shipping + $tax;
               </span>
             </label>
           </div>
-          <!-- if choose payment with credit, show enter card number, expire and cvv -->
           <div id="credit-info" class="hidden mt-5">
             <label for="card-number" class="block mb-2 font-medium">Card Number:</label>
             <input type="text" name="card-number" id="card-number"

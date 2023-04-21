@@ -194,6 +194,13 @@ CREATE TABLE
     );
 
 CREATE TABLE
+    settings (
+        id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        name varchar(50) NOT NULL,
+        value varchar(255) NOT NULL,
+    );
+
+CREATE TABLE
     reviews (
         ID INT PRIMARY KEY,
         isbn INT NOT NULL,
@@ -201,3 +208,4 @@ CREATE TABLE
         general_comments VARCHAR(255),
         review_score INT
     );
+
