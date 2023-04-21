@@ -4,7 +4,8 @@ use App\Models\Category;
 $products = $params['products'];
 $filter = $params['filter'];
 $pagination = $params['pagination'];
-
+dd($filter);
+dd($pagination);
 ?>
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[200px,auto] 2xl:grid-cols-[250px,auto]">
