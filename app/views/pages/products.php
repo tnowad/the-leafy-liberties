@@ -6,7 +6,7 @@ use App\Models\Tag;
 $products = $params['products'];
 $filter = $params['filter'];
 $pagination = $params['pagination'];
-dd($filter);
+// dd($filter);
 // dd($pagination);
 ?>
 <div class="flex justify-center my-10">
@@ -22,7 +22,7 @@ dd($filter);
             <ul class="ml-2">
               <li>
                 <label>
-                  <input type="checkbox" name="category[]" value="all" <?php echo in_array('all', $filter['categories']) ? 'checked' : '' ?>>
+                  <input type="checkbox" name="categories[]" value="all" <?php echo in_array('all', $filter['categories']) ? 'checked' : '' ?>>
                   <span class="ml-2">
                     All
                   </span>
@@ -30,7 +30,7 @@ dd($filter);
                 <?php foreach (Category::all() as $category): ?>
                 <li>
                   <label>
-                    <input type="checkbox" name="category[]" value="<?php echo $category->id ?>" <?php echo in_array($category->id, $filter['categories']) ? 'checked' : '' ?>>
+                    <input type="checkbox" name="categories[]" value="<?php echo $category->id ?>" <?php echo in_array($category->id, $filter['categories']) ? 'checked' : '' ?>>
                     <span class="ml-2">
                       <?php echo $category->name ?>
                     </span>
@@ -44,7 +44,7 @@ dd($filter);
               <?php foreach (Tag::all() as $tag): ?>
                 <li>
                   <label>
-                    <input type="checkbox" name="tag[]" value="<?php echo $tag->id ?>" <?php echo in_array($tag->id, $filter['tags']) ? 'checked' : '' ?>>
+                    <input type="checkbox" name="tags[]" value="<?php echo $tag->id ?>" <?php echo in_array($tag->id, $filter['tags']) ? 'checked' : '' ?>>
                     <span class="ml-2">
                       <?php echo $tag->name ?>
                     </span>
