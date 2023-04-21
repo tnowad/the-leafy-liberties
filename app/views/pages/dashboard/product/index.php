@@ -2,6 +2,7 @@
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Pagination;
+
 ?>
 
 <div class="w-full mx-auto my-0">
@@ -33,8 +34,6 @@ use App\Models\Pagination;
                 "Image",
                 "Title",
                 "Price",
-                "Isbn",
-                "Description",
                 "Quantity",
                 "Action",
               ];
@@ -72,12 +71,6 @@ use App\Models\Pagination;
                   <td class="px-5 py-3">
                     <?php echo $product->price; ?>
                   </td>
-                  <td class="px-5 py-3">
-                    <?php echo $product->isbn; ?>
-                  </td>
-                  <td class="px-5 py-3">
-                    <?php echo $product->description; ?>
-                  </td>
                   <td class="p-2">
                     <?php echo $product->quantity; ?>
                   </td>
@@ -110,8 +103,7 @@ use App\Models\Pagination;
       <div class="bg-white p-8 rounded-md shadow-lg w-[550px] ">
         <h2 class="mb-4 text-xl font-bold">Add Product</h2>
         <form class="flex flex-col" action="<?php BASE_URI .
-          "/dashboard/product"; ?>" method="POST"
-          enctype="multipart/form-data">
+          "/dashboard/product"; ?>" method="POST" enctype="multipart/form-data">
           <label for="title" class="my-2">Title:</label>
           <input type="text" value="" name="name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
 
