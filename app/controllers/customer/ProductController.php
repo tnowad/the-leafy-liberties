@@ -18,8 +18,8 @@ class ProductController extends Controller
   {
 
     $filter = [
-      "categories" => $request->getQuery("categories"),
-      /* array */
+      "categories" => $request->getQuery("categories") ?? [],
+      "tags" => $request->getQuery("tags") ?? [],
       "author" => $request->getQuery("author"),
       "price" => [
         "min" => $request->getQuery("min-price"),
