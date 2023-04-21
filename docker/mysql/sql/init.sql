@@ -1,5 +1,3 @@
--- Active: 1681623675640@@127.0.0.1@3306@bookstore
-
 DROP DATABASE bookstore;
 
 CREATE DATABASE bookstore;
@@ -197,7 +195,7 @@ CREATE TABLE
     settings (
         id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         name varchar(50) NOT NULL,
-        value varchar(255) NOT NULL,
+        value varchar(255) NOT NULL
     );
 
 CREATE TABLE

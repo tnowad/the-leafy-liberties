@@ -9,7 +9,6 @@ class Setting extends Model
   protected $table = "settings";
 
   protected $fillable = [
-    "id",
     "name",
     "value",
   ];
