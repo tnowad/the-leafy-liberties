@@ -23,7 +23,6 @@ $shippingMethods = [
 ];
 
 
-
 $cartItems = $params["cartItems"];
 $totalMoney = 0;
 foreach ($cartItems as $cartItem) {
@@ -36,7 +35,8 @@ $grandTotal = $totalMoney + $shipping + $tax;
 
 ?>
 <div class="flex items-center justify-center w-full mt-10">
-  <div class="container flex flex-wrap xl:flex-nowrap">
+
+  <form class="container flex flex-wrap xl:flex-nowrap">
     <div class="flex flex-col justify-center w-full left-container">
       <div class="w-full p-5 border-0 shadow-lg bill-container rounded-2xl shadow-gray-300">
         <h2 class="mb-5 text-xl font-bold bill-header">
@@ -241,8 +241,9 @@ $grandTotal = $totalMoney + $shipping + $tax;
           </div>
         </div>
       </div>
-    </div>
-  </div>
+  </form>
+</div>
+</div>
 </div>
 <script>
   const cashOnDelivery = document.getElementById("cash");
