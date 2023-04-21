@@ -4,6 +4,26 @@ use Core\Application;
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
 
+$shippingMethods = [
+  [
+    "id" => 1,
+    "name" => "Standard",
+    "price" => 2.99,
+  ],
+  [
+    "id" => 2,
+    "name" => "Express",
+    "price" => 5.99,
+  ],
+  [
+    "id" => 3,
+    "name" => "Premium",
+    "price" => 9.99,
+  ]
+];
+
+
+
 $cartItems = $params["cartItems"];
 $totalMoney = 0;
 foreach ($cartItems as $cartItem) {
