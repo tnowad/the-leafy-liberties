@@ -5,7 +5,7 @@
                                                 "/dashboard/setting/update"; ?>" method="POST">
 
             <label for="id" class="my-2">ID:</label>
-            <input type="text" value="<?php echo $setting->id; ?>" name="id" class="bg-gray-100 p-3 focus:outline-none rounded-lg" disabled />
+            <input type="text" value="<?php echo $setting->id; ?>" name="id" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
             <label for="name" class="my-2">Name:</label>
             <input type="text" value="<?php echo $setting->name; ?>" name="name" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
