@@ -40,6 +40,7 @@ foreach ($cartItems as $cartItem) {
 $shipping = 2.99;
 $taxMoney = $totalMoney * $tax;
 $grandTotal = $totalMoney + $shipping + $taxMoney;
+
 ?>
 <div class="flex items-center justify-center w-full mt-10">
   <form class="container flex flex-wrap xl:flex-nowrap">
@@ -61,8 +62,8 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           </fieldset>
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md px-2 py-1 mt-3">
             <legend class="px-1">Street Address</legend>
-            <input type="text" name="" id="" class="w-full p-2 focus:outline-none focus:border-0"
-              placeholder="12 Wall Street,. . . . ." />
+            <input type="text" name="" id="" value="<?php echo $user->address ?>"
+              class="w-full p-2 focus:outline-none focus:border-0" placeholder="12 Wall Street,. . . . ." />
           </fieldset>
           <div class="flex justify-center mt-3 city md:flex-nowrap sm:flex-wrap">
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 md:mr-10 sm:mr-0 w-full">
@@ -253,7 +254,6 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
 
   const creditInfo = document.getElementById("credit-info");
 
-  // Add an event listener to the credit card radio button
   creditCard.addEventListener("click", function () {
     creditInfo.classList.remove("hidden");
   });
