@@ -194,8 +194,8 @@ CREATE TABLE
 CREATE TABLE
     settings (
         id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        name varchar(50) NOT NULL,
-        value varchar(255) NOT NULL
+        name text NOT NULL,
+        value text NOT NULL
     );
 
 CREATE TABLE
