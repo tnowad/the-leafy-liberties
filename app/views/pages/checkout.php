@@ -66,7 +66,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
 
           <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-2 w-full">
             <legend class="px-1">Phone</legend>
-            <input type="number" name="phone" id="phone" require placeholder="Your phone" class="w-full px-2 py-1 focus:outline-none focus:border-0" value="<?php echo $user->phone ?>" />
+            <input type="number" name="phone" id="phone" require placeholder="Your phone" class="w-full px-2 py-1 focus:outline-none focus:border-0" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" value="<?php echo $user->phone ?>" />
           </fieldset>
         </div>
       </div>
