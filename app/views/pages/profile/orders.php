@@ -77,16 +77,3 @@ $orders = $params['orders'];
     </div>
   </div>
 </div>
-<script>
-  async function getUser() {
-    let d1 = await fetch("http://localhost/the-leafy-liberties/profile")
-    let d2 = await d1.json()
-    console.log(d2)
-    // document.getElementById("name").value = d2.name;
-    // document.getElementById("gender").value = d2.gender;
-    // document.getElementById("birthday").value = d2.birthday;
-    // document.getElementById("password").value = d2.password;
-  }
-  console.log(1)
-  getUser()
-</script>
