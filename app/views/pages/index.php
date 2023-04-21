@@ -10,6 +10,7 @@ use App\Models\Slide;
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
+
         <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
             <img src="<?php echo BASE_URI . $slide->image; ?>"
@@ -17,15 +18,16 @@ use App\Models\Slide;
               alt="<?php echo $slide->name; ?>">
           </div>
         <?php endforeach; ?>
-      </div>
 
+      </div>
       <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
+
         <?php for ($i = 0; $i < 5; $i++): ?>
           <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
             data-carousel-slide-to="<?php echo $i; ?>"></button>
         <?php endfor; ?>
-      </div>
 
+      </div>
       <button type="button"
         class="absolute top-0 left-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
         data-carousel-prev>
@@ -42,7 +44,6 @@ use App\Models\Slide;
           <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
         </span>
       </button>
-
     </div>
   </div>
   <div class="container mx-auto">
@@ -60,22 +61,14 @@ use App\Models\Slide;
         <div
           class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
           <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
-            <a href="<?php echo BASE_URI .
-              "/product" .
-              "?id=" .
-              $product->id; ?>">
-              <img src="<?php echo BASE_URI .
-                "/" .
-                $product->image; ?>" alt="" class="object-cover w-full h-full" />
+            <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
+              <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
             </a>
           </div>
           <div
             class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
             <div class="product-name">
-              <a href="<?php echo BASE_URI .
-                "/product" .
-                "?id=" .
-                $product->id; ?>">
+              <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
                 <?php echo $product->name; ?>
               </a>
             </div>
@@ -137,11 +130,11 @@ use App\Models\Slide;
                 <?php echo $product->price; ?>$
               </div>
               <div
-              class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-              <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
-              <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
-                onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
-            </div>
+                class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
+                <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                  onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+              </div>
             </div>
           </div>
         <?php endforeach; ?>
@@ -177,11 +170,9 @@ use App\Models\Slide;
             "/products?categories[]=" .
             $category->id; ?>">
             <div class="w-full h-56 overflow-hidden img rounded-3xl">
-              <img src="<?php echo $category->image
-                ? BASE_URI . "/" . $category->image
-                : BASE_URI .
-                "/resources/images/categories/placeholder.png"; ?>" alt=""
-                class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
+              <img
+                src="<?php echo $category->image ? BASE_URI . "/" . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
+                alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
             <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
               <?php echo $category->name; ?>
