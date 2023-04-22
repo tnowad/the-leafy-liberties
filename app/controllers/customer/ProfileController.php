@@ -44,26 +44,20 @@ class ProfileController extends Controller
     $user->email = Validation::validateEmail($request->getParam('email'));
     $user->phone = $request->getParam("phone");
     $user->address = $request->getParam("address");
-    if($request->getParam("gender")=="male") {
-      $user->gender =1 ;
-    }
-    else if($request->getParam("gender")=="female") {
-      $user->gender =2 ;
-    }
-    else {
-      $user->gender =0 ;
+    if ($request->getParam("gender") == "male") {
+      $user->gender = 1;
+    } else if ($request->getParam("gender") == "female") {
+      $user->gender = 2;
+    } else {
+      $user->gender = 0;
     }
     // $user->birthday = $request->getParam("birthday");
-    if ($user->password == Validation::validatePassword($request->getParam('current-password'))) {
-      // Validate password
-      $user->password = Validation::validatePassword($request->getParam('new-password'));
-    }
-    // else {
-    //   $response->redirect(BASE_URI . "/login");
+    // if ($user->password == Validation::validatePassword($request->getParam('current-password'))) {
+    //   // Validate password
+    //   $user->password = Validation::validatePassword($request->getParam('new-password'));
     // }
     $user->save();
     $response->redirect(BASE_URI . "/profile");
-
   }
 
   public function settings(Request $request, Response $response)
