@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Customer;
 
+use App\Models\Order;
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
@@ -117,5 +118,64 @@ class ProfileController extends Controller
         "user" => $user,
       ])
     );
+  }
+
+  public function orderDetail(Request $request, Response $response)
+  {
+      switch ($request->getMethod()) {
+        case "GET":
+          $user = User::findOne(["id" => $request->getQuery("id")]);
+          $order = Order::findOne(["id" => $request->getQuery("id")]);
+          // dd($user->id);
+          $response->setStatusCode(200);
+          return $response->setBody(
+            View::renderWithLayout(
+              new View("pages/profile/orderDetail"),
+              [
+                "title" => "Order Detail Update",
+                "user" => $user,
+                "order" => $order,
+              ]
+            )
+          );
+        case "POST":
+          dd($request->getParam("id"));   
+          $user = User::find($request->getParam("id"));
+          $order = Order::find($request->getParam("id"));
+          if (!$user) {
+            return $response->setBody(
+              View::renderWithDashboardLayout(
+                new View("pages/profile/orders"),
+                [
+                  "title" => "Users",
+                  "toast" => [
+                    "type" => "error",
+                    "message" => "Edit account fail!",
+                  ],
+                ]
+              )
+            );
+          } 
+        default:
+          break;
+      }
+    // $auth = Application::getInstance()->getAuthentication();
+
+    // if (!$auth->isAuthenticated()) {
+    //   $response->redirect(BASE_URI . "/login");
+    // }
+    // $user = Application::getInstance()
+    //   ->getAuthentication()
+    //   ->getUser();
+
+    // $orders = $user->orders();
+
+    // $response->setStatusCode(200);
+    // $response->setBody(
+    //   View::renderWithLayout(new View("pages/profile/orderDetail"), [
+    //     "orders" => $orders,
+    //     "user" => $user,
+    //   ])
+    // );
   }
 }

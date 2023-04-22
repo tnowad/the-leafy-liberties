@@ -33,6 +33,10 @@ $router->post("/profile/update", [ProfileController::class, "update"]);
 $router->get("/profile/settings", [ProfileController::class, "settings"]);
 $router->get("/profile/payments", [ProfileController::class, "payments"]);
 $router->get("/profile/orders", [ProfileController::class, "orders"]);
+$router->get("/profile/orders/orderDetail", [ProfileController::class, "orderDetail"]);
+$router->post("/profile/orderDetail", [ProfileController::class, "orderDetail"]);
+
+
 
 $router->get("/login", [LoginController::class, "index"]);
 $router->post("/login", [LoginController::class, "login"]);
