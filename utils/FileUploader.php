@@ -47,7 +47,7 @@ class FileUploader
       $newFileName = uniqid() . "." . $fileExt;
       $destination = $this->uploadPath . $newFileName;
       if (move_uploaded_file($fileTmpName, $destination)) {
-        return $destination;
+        return '/' . $destination;
       } else {
         $errors[] = "An error occurred while uploading the file.";
       }

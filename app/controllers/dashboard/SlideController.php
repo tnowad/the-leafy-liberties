@@ -12,6 +12,15 @@ class SlideController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission("slide.access")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
     $slides = Slide::all();
 
     // filter and pagination
@@ -32,7 +41,7 @@ class SlideController extends Controller
   public function update(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('slides.update')) {
+    if (!$auth->hasPermission('slide.update')) {
       return $response->redirect(BASE_URI . '/dashboard', 200, [
         'toast' => [
           'type' => 'error',
