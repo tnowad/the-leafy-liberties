@@ -1,3 +1,21 @@
+<?php
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Models\User;
+
+$successfulOrder = Order::findAll(["status" => "3"]);
+// $product_id = OrderProduct::findOne([]);
+$sum = 0;
+$products_sale = 0;
+$customer = count(User::all());
+$orders = count(Order::all());
+foreach ($successfulOrder as $order) {
+  $sum += $order->total_price;
+  $products_sale += count($order->products());
+}
+?>
+
 <div class="w-full bg-neutral-100">
   <div class="w-full mx-auto my-0 overflow-x-hidden">
     <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
@@ -8,12 +26,10 @@
       </div>
       <div class="box-border grid top-wrap 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
         <?php
-        use App\Models\Order;
-
         $text = ["Sales", "Total Revenues", "New Customer", "New Orders"];
-        $quantity = ["$20.4K", "100K", "203", "15"];
+        $quantity = [$sum, "100K", $customer, $orders];
         $desc = [
-          "We have sold 1105 items",
+          "We have sold " . $products_sale . " items",
           "Available to pay out",
           "More customer more money",
           "New things coming' up",
@@ -38,7 +54,6 @@
               </p>
               <p class="text-lg font-bold">
                 <?php echo $quantity[$i - 1]; ?>
-
               </p>
               <p class="text-gray-500 break-words">
                 <?php echo $desc[$i - 1]; ?>
@@ -59,7 +74,9 @@
           <div class="flex items-center justify-between top-content">
             <div class="total-revuenes">
               <p class="text-2xl font-semibold">Total Revuenes</p>
-              <p class="mt-2 text-lg font-bold">$50.4K</p>
+              <p class="mt-2 text-lg font-bold">
+                <?php echo $sum ?> $
+              </p>
             </div>
             <div class="chart-type p-2 bg-[#8cbfba] rounded-xl">
               <label for="chart-type" class="font-medium text-black">Choose a type:</label>
@@ -76,9 +93,20 @@
           </div>
         </div>
         <div class="most-sold-items xl:w-[31.5%] py-4 px-4 bg-white rounded-2xl shadow-lg sm:w-full sm:mt-5 2xl:mt-0">
-          <p class="mb-5 text-2xl font-bold">Most Sold Items</p>
+          <p class="mb-5 text-2xl font-bold">Most Sold By Category</p>
           <div class="flex flex-col gap-4">
             <?php
+            $colors = ["red","blue","green","yellow","pink","orange","purple"];
+
+            foreach (array_slice(Category::all(), 0, 6) as $category): ?>
+              <div class="text-lg font-medium ">
+                <?php echo $category->name ?>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                <div class="bg-<?php echo $colors[$category->id] ?>-600 h-2.5 rounded-full" style="width: <?php echo rand(10,100) ?>%"></div>
+              </div>
+            <?php endforeach ?>
+            <!-- <?php
             $title = ["Blue", "Black", "Yellow", "White", "Red", "Green"];
             for ($i = 1; $i <= 6; $i++) { ?>
               <div class="text-lg font-medium ">
@@ -88,7 +116,7 @@
                 <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
               </div>
             <?php }
-            ?>
+            ?> -->
           </div>
         </div>
       </div>
@@ -126,7 +154,7 @@
                     <?php echo $order->name ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo  $order->create_at ?>
+                    <?php echo $order->create_at ?>
                   </td>
                   <td class="px-5 py-3 font-medium <?php echo ($order->status == 0) ? 'text-red-900' : 'text-primary' ?>">
                     <?php
