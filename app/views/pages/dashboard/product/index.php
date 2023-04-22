@@ -19,7 +19,7 @@ use App\Models\Pagination;
           </button>
         </form>
       </div>
-      <a class="w-5 h-5 text-2xl add-product" href="<?php BASE_URI . "/dashboard/product/create"; ?>">
+      <a class="w-5 h-5 text-2xl add-product" href="<?php echo BASE_URI . "/dashboard/product/create"; ?>">
         +
       </a>
     </div>
@@ -55,9 +55,7 @@ use App\Models\Pagination;
                     <?php echo $product->id; ?>
                   </td>
                   <td class="w-32 h-24 p-3">
-                    <img src="<?php echo BASE_URI .
-                      "/" .
-                      $product->image; ?>" alt="" />
+                    <img src="<?php echo BASE_URI . $product->image; ?>" alt="" />
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $product->name; ?>
