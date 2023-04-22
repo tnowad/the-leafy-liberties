@@ -43,4 +43,36 @@ class Validation
     }
     throw new Exception('Invalid credit card number');
   }
+
+  public static function validateCreditCardExpiry($expiry)
+  {
+    if (preg_match('/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/', $expiry)) {
+      return $expiry;
+    }
+    throw new Exception('Invalid credit card expiry');
+  }
+
+  public static function validateCreditCardCvv($cvv)
+  {
+    if (preg_match('/^[0-9]{3,4}$/', $cvv)) {
+      return $cvv;
+    }
+    throw new Exception('Invalid credit card cvv');
+  }
+
+  public static function validateCreditCardName($name)
+  {
+    if (preg_match('/^[a-zA-Z ]{2,30}$/', $name)) {
+      return $name;
+    }
+    throw new Exception('Invalid credit card name');
+  }
+
+  public static function isInteger($number)
+  {
+    if (preg_match('/^[0-9]+$/', $number)) {
+      return $number;
+    }
+    throw new Exception('Invalid number');
+  }
 }

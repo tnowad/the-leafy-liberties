@@ -20,7 +20,9 @@ class CartController extends Controller
     if (!$auth->isAuthenticated()) {
       return $response->redirect(BASE_URI . "/login");
     }
+
     $cartItems = Cart::findAll(["user_id" => $auth->getUser()->id]);
+
     return $response->setBody(
       View::renderWithLayout(new View("pages/cart"), [
         "title" => "Cart",
@@ -38,11 +40,9 @@ class CartController extends Controller
       ]);
       return;
     }
-
     $user = $auth->getUser();
 
     $product = Product::find($request->getBody()["id"]);
-
     if (!$product) {
       $response->jsonResponse([
         "type" => "error",
@@ -57,24 +57,34 @@ class CartController extends Controller
     ]);
 
     if ($cart) {
-      // $cart->delete();/
       $response->jsonResponse([
         "type" => "info",
         "message" => "Product is already in cart",
       ]);
       return;
     }
+    Database::getInstance()->beginTransaction();
 
     $cart = new Cart();
     $cart->user_id = $user->id;
     $cart->product_id = $product->id;
     $cart->quantity = 1;
     $cart->save();
-    // dd($wishlist);
+
+    if (!$cart->id) {
+      Database::getInstance()->rollbackTransaction();
+      return $response->jsonResponse([
+        "type" => "error",
+        "message" => "Failed to add product to cart",
+      ]);
+    }
+
     $response->jsonResponse([
       "type" => "success",
       "message" => "Product added to cart",
     ]);
+
+    Database::getInstance()->commitTransaction();
   }
   public function remove(Request $request, Response $response)
   {
@@ -86,17 +96,15 @@ class CartController extends Controller
       ]);
       return;
     }
-
     $user = $auth->getUser();
 
     $product = Product::find($request->getBody()["id"]);
 
     if (!$product) {
-      $response->jsonResponse([
+      return $response->jsonResponse([
         "type" => "error",
         "message" => "Product not found",
       ]);
-      return;
     }
 
     $cart = Cart::findOne([
@@ -113,6 +121,14 @@ class CartController extends Controller
     }
 
     $cart->delete();
+
+    if (Cart::findOne(["id" => $cart->id])) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "Failed to remove product from cart",
+      ]);
+      return;
+    }
 
     $response->jsonResponse([
       "type" => "success",
@@ -143,6 +159,59 @@ class CartController extends Controller
     $response->jsonResponse([
       "type" => "success",
       "message" => "Cart emptied",
+    ]);
+  }
+
+  public function update(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $product = Product::find($request->getBody()["id"]);
+
+    if (!$product) {
+      return $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product not found",
+      ]);
+    }
+
+    $cart = Cart::findOne([
+      "product_id" => $product->id,
+      "user_id" => $user->id,
+    ]);
+
+    if (!$cart) {
+      $response->jsonResponse([
+        "type" => "info",
+        "message" => "Product not in cart",
+      ]);
+      return;
+    }
+
+    $cart->quantity = $request->getBody()["quantity"];
+
+    if ($cart->quantity < 1) {
+      $cart->quantity = 1;
+    }
+
+    if ($cart->quantity > $product->quantity) {
+      $cart->quantity = $product->quantity;
+    }
+
+    $cart->save();
+
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Cart updated",
     ]);
   }
 }
