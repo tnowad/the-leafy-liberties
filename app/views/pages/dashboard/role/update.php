@@ -54,7 +54,7 @@ foreach ($allPermissions as $key => $permission) {
     Update
   </button>
 
-  <table class="w-full h-64 mt-5 text-sm text-center text-gray-500 rounded-2xl" width="100%">
+  <table class="w-full mt-5 text-sm text-center text-gray-500 rounded-2xl" width="100%">
     <thead class="p-2 text-gray-700 uppercase text-md bg-gray-50">
       <tr>
         <th class="px-4 py-3" width="50%">Permissions</th>

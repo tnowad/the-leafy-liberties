@@ -3,9 +3,7 @@
   <div class="bg-white rounded-md shadow-lg w-full p-5 m-5 h-full">
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/coupon/update"; ?>" method="POST">
-
-      <label for="id" class="my-2">ID:</label>
-      <input type="text" value="<?php echo $coupon->id; ?>" name="id"
+      <input type="hidden" value="<?php echo $coupon->id; ?>" name="id"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
       <label for="code" class="my-2">Code:</label>

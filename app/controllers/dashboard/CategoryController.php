@@ -12,7 +12,7 @@ class CategoryController extends Controller
   {
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/category/index"), [
-          "title" => "Dashboard",
+          "title" => "Categories",
       ])
   );
   }

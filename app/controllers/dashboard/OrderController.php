@@ -12,7 +12,7 @@ class OrderController extends Controller
   {
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/order/index"), [
-          "title" => "Dashboard",
+          "title" => "Orders",
       ])
   );
   }
