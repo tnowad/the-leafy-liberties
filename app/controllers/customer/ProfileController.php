@@ -9,6 +9,7 @@ use Core\Controller;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Exception;
 use Utils\Validation;
 
 class ProfileController extends Controller
@@ -53,10 +54,11 @@ class ProfileController extends Controller
       $user->gender = 0;
     }
     // $user->birthday = $request->getParam("birthday");
-    // if ($user->password == Validation::validatePassword($request->getParam('current-password'))) {
-    //   // Validate password
-    //   $user->password = Validation::validatePassword($request->getParam('new-password'));
-    // }
+
+    if ($user->password = password_hash(Validation::validatePassword($request->getparam('current-password')), PASSWORD_DEFAULT)) {
+      $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
+    }
+
     $user->save();
     $response->redirect(BASE_URI . "/profile");
   }
@@ -122,43 +124,43 @@ class ProfileController extends Controller
 
   public function orderDetail(Request $request, Response $response)
   {
-      switch ($request->getMethod()) {
-        case "GET":
-          $user = User::findOne(["id" => $request->getQuery("id")]);
-          $order = Order::findOne(["id" => $request->getQuery("id")]);
-          // dd($user->id);
-          $response->setStatusCode(200);
+    switch ($request->getMethod()) {
+      case "GET":
+        $user = User::findOne(["id" => $request->getQuery("id")]);
+        $order = Order::findOne(["id" => $request->getQuery("id")]);
+        // dd($user->id);
+        $response->setStatusCode(200);
+        return $response->setBody(
+          View::renderWithLayout(
+            new View("pages/profile/orderDetail"),
+            [
+              "title" => "Order Detail Update",
+              "user" => $user,
+              "order" => $order,
+            ]
+          )
+        );
+      case "POST":
+        dd($request->getParam("id"));
+        $user = User::find($request->getParam("id"));
+        $order = Order::find($request->getParam("id"));
+        if (!$user) {
           return $response->setBody(
-            View::renderWithLayout(
-              new View("pages/profile/orderDetail"),
+            View::renderWithDashboardLayout(
+              new View("pages/profile/orders"),
               [
-                "title" => "Order Detail Update",
-                "user" => $user,
-                "order" => $order,
+                "title" => "Users",
+                "toast" => [
+                  "type" => "error",
+                  "message" => "Edit account fail!",
+                ],
               ]
             )
           );
-        case "POST":
-          dd($request->getParam("id"));   
-          $user = User::find($request->getParam("id"));
-          $order = Order::find($request->getParam("id"));
-          if (!$user) {
-            return $response->setBody(
-              View::renderWithDashboardLayout(
-                new View("pages/profile/orders"),
-                [
-                  "title" => "Users",
-                  "toast" => [
-                    "type" => "error",
-                    "message" => "Edit account fail!",
-                  ],
-                ]
-              )
-            );
-          } 
-        default:
-          break;
-      }
+        }
+      default:
+        break;
+    }
     // $auth = Application::getInstance()->getAuthentication();
 
     // if (!$auth->isAuthenticated()) {
