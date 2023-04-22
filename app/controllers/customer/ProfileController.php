@@ -54,7 +54,7 @@ class ProfileController extends Controller
       $user->gender =0 ;
     }
     // $user->birthday = $request->getParam("birthday");
-    if ($user->password == Validation::validateEmail($request->getParam('current-password'))) {
+    if ($user->password == Validation::validatePassword($request->getParam('current-password'))) {
       // Validate password
       $user->password = Validation::validatePassword($request->getParam('new-password'));
     }
