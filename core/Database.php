@@ -119,7 +119,13 @@ class Database
     }
     $this->transactionDepth++;
   }
-
+  public function rollbackTransaction()
+  {
+    $this->transactionDepth--;
+    if ($this->transactionDepth == 0) {
+      $this->mysqli->rollback();
+    }
+  }
   public function commitTransaction()
   {
     $this->transactionDepth--;

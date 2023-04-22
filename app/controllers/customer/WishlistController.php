@@ -54,7 +54,6 @@ class WishlistController extends Controller
     }
 
     $user = $auth->getUser();
-
     $product = Product::find($request->getBody()["id"]);
 
     if (!$product) {
@@ -173,7 +172,6 @@ class WishlistController extends Controller
     }
 
     $user = $auth->getUser();
-
     $product = Product::find($request->getBody()["id"]);
 
     if (!$product) {
@@ -223,5 +221,47 @@ class WishlistController extends Controller
       "message" => "Product added to cart",
     ]);
   }
-}
 
+  public function moveAllToCart(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $wishlists = Wishlist::findAll([
+      "user_id" => $user->id,
+    ]);
+
+    foreach ($wishlists as $wishlist) {
+      $cart = Cart::findOne([
+        "product_id" => $wishlist->product_id,
+        "user_id" => $user->id,
+      ]);
+
+      if ($cart) {
+        $wishlist->delete();
+        continue;
+      }
+
+      $cart = new Cart();
+      $cart->product_id = $wishlist->product_id;
+      $cart->user_id = $user->id;
+      $cart->quantity = 1;
+      $cart->save();
+
+      $wishlist->delete();
+    }
+
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "All products moved to cart",
+    ]);
+  }
+}
