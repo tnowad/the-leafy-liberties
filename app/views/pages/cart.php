@@ -75,12 +75,20 @@ $cartItems = $params["cartItems"];
         </a>
       </div>
     </div>
-    <div class="flex my-8 coupon-code">
-      <input type="text" name="" id="" placeholder="Enter coupon code"
-        class="px-3 py-2 border-gray-400 border-solid border-[1px] rounded-xl focus:outline-none" />
-      <button
-        class="ml-5 px-5 py-2 bg-[#315854] rounded-xl text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
-        Apply
+    <div class="flex justify-between items-center w-[65%]">
+      <div class="flex my-8 coupon-code">
+        <input type="text" name="" id="" placeholder="Enter coupon code"
+          class="px-5 py-3 border-gray-400 border-solid border-[1px] rounded-md focus:outline-none" />
+        <button
+          class="ml-5 px-4 py-3 bg-[#315854] rounded-md text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+          Apply
+        </button>
+      </div>
+      <!-- remove all product in wishlist -->
+      <button class="px-4 py-3 font-bold text-black transition-all border-2 hover:bg-red-400 hover:text-white hover:border-red-600 h-fit rounded-sm"
+        onclick="removeAllFromCart()">
+        <i class="fa-solid fa-trash"></i>
+        Remove all
       </button>
     </div>
   </div>
@@ -98,4 +106,17 @@ $cartItems = $params["cartItems"];
       span.textContent = quantity;
     });
   });
+  document.removeAllFromCart = () => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/cart/empty"; ?>').then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('All products deleted from cart');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
 </script>

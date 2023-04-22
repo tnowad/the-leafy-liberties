@@ -119,4 +119,30 @@ class CartController extends Controller
       "message" => "Product removed from cart",
     ]);
   }
+  public function empty(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->isAuthenticated()) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "You are not authenticated",
+      ]);
+      return;
+    }
+
+    $user = $auth->getUser();
+
+    $carts = Cart::findAll([
+      "user_id" => $user->id,
+    ]);
+
+    foreach ($carts as $cart) {
+      $cart->delete();
+    }
+
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Cart emptied",
+    ]);
+  }
 }

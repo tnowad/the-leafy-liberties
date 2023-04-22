@@ -84,12 +84,18 @@
       </p>
 
       <div class="flex justify-start mt-10 items-center gap-4">
-        <i
-          class="text-2xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
-        <i
-          class="text-2xl transition-all cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
-        <i
-          class="text-2xl transition-all cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
+        <a href="https://www.facebook.com/jack.willam2003/">
+          <i
+            class="text-2xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
+        </a>
+        <a href="https://www.facebook.com/jack.willam2003/">
+          <i
+            class="text-2xl transition-all cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
+        </a>
+        <a href="https://www.facebook.com/jack.willam2003/">
+          <i
+            class="text-2xl transition-all cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -107,13 +113,13 @@
     </ul>
     <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
       id="description">
-      <p class="mt-3 text-lg sm:mt-8 text-center">
+      <p class=" text-lg text-center">
         <?php echo $product->description; ?>
       </p>
     </div>
     <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20 hidden"
       id="review">
-      <p class="mt-3 text-lg sm:mt-8 text-center">
+      <p class=" text-lg text-center">
         Sản phẩm chất cmn lượng
       </p>
     </div>
