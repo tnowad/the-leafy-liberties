@@ -16,15 +16,15 @@ INSERT INTO `authors` (`id`, `image`, `name`, `deleted_at`) VALUES
 (9, '/resources/images/authors/ernesthemingway.jpg', 'Ernest Hemingway', NULL);
 
 INSERT INTO `categories` (`id`, `image`, `name`, `deleted_at`) VALUES
-(1, NULL, 'Fiction', NULL),
-(2, NULL, 'Non-Fiction', NULL),
-(3, NULL, 'Mystery', NULL),
-(4, NULL, 'Romance', NULL),
-(5, NULL, 'Science Fiction', NULL),
-(6, NULL, 'Biography', NULL),
-(7, NULL, 'History', NULL),
-(8, NULL, 'Thriller', NULL),
-(9, NULL, 'Horror', NULL);
+(1,'/resources/images/categories/fiction.png', 'Fiction', NULL),
+(2,'/resources/images/categories/non-fiction.png', 'Non-Fiction', NULL),
+(3,'/resources/images/categories/mystery.png', 'Mystery', NULL),
+(4,'/resources/images/categories/romance.png', 'Romance', NULL),
+(5,'/resources/images/categories/science-fiction.png', 'Science Fiction', NULL),
+(6,'/resources/images/categories/biography.png', 'Biography', NULL),
+(7,'/resources/images/categories/history.jpg', 'History', NULL),
+(8,'/resources/images/categories/thriller.png', 'Thriller', NULL),
+(9,'/resources/images/categories/horror.png', 'Horror', NULL);
 
 INSERT INTO `coupons` (`id`, `code`, `quantity`, `expired`, `description`, `deleted_at`) VALUES
 (1, 'SAVE10', 50, '2023-05-31', 'Save 10% on your purchase', NULL),

@@ -158,9 +158,8 @@ use App\Models\Wishlist;
       </a>
     </div>
     <div class="relative w-full mb-5">
-      <div class="grid grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
-
-        <?php foreach (array_slice(Category::all(), 0, 4) as $category): ?>
+      <div class="flex category_slide">
+        <?php foreach (Category::all()as $category): ?>
           <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit" href="<?php echo BASE_URI .
             "/products?categories[]=" .
             $category->id; ?>">
@@ -169,7 +168,7 @@ use App\Models\Wishlist;
                 src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
                 alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
-            <p class="absolute font-normal text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
+            <p class="absolute font-medium text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
               <?php echo $category->name; ?>
             </p>
           </a>
