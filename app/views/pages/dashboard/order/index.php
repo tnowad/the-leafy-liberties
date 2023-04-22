@@ -72,7 +72,7 @@ use App\Models\Pagination;
                     } else if ($order->status == 2) {
                       echo "Shipping";
                     } else if ($order->status == 3) {
-                      echo "Delivered";
+                      echo "Successful";
                     } else if ($order->status == 4) {
                       echo "Cancel";
                     } else {

@@ -43,20 +43,22 @@ $filter = $params["filter"];
                   <!-- <input type="checkbox" name="status" id="" class="w-6 h-6" <?php echo ($slide->status == 1) ? 'checked' : '' ?> > -->
                 </td>
                 <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
-                  <a href="<?php echo BASE_URI .
-                    "/dashboard/slide/update" .
-                    "?id=" .
-                    $slide->id; ?>"
-                    class="edit-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all block">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </a>
-                  <a id="deleteButton" href="<?php echo BASE_URI .
-                    "/dashboard/slide/delete" .
-                    "?id=" .
-                    $slide->id; ?>"
-                    class="delete-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all">
-                    <i class="fa-solid fa-trash"></i>
-                  </a>
+                  <div class="button flex justify-center items-center gap-4">
+                    <a href="<?php echo BASE_URI .
+                      "/dashboard/slide/update" .
+                      "?id=" .
+                      $slide->id; ?>"
+                      class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a href="<?php echo BASE_URI .
+                      "/dashboard/slide/delete" .
+                      "?id=" .
+                      $slide->id; ?>"
+                      class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                      <i class="fa-solid fa-trash"></i>
+                    </a>
+                  </div>
                 </td>
               </tr>
             <?php endforeach; ?>

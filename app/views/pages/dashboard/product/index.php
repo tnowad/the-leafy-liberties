@@ -75,20 +75,22 @@ use App\Models\Pagination;
                     <?php echo $product->quantity; ?>
                   </td>
                   <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
-                    <a href="<?php echo BASE_URI .
-                      "/dashboard/product/update" .
-                      "?id=" .
-                      $product->id; ?>"
-                      class="edit-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all block">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a id="deleteButton" href="<?php echo BASE_URI .
-                      "/dashboard/product/delete" .
-                      "?id=" .
-                      $product->id; ?>"
-                      class="delete-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all">
-                      <i class="fa-solid fa-trash"></i>
-                    </a>
+                    <div class="button flex justify-center items-center gap-4">
+                      <a href="<?php echo BASE_URI .
+                        "/dashboard/product/update" .
+                        "?id=" .
+                        $product->id; ?>"
+                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+                      <a href="<?php echo BASE_URI .
+                        "/dashboard/product/delete" .
+                        "?id=" .
+                        $product->id; ?>"
+                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                        <i class="fa-solid fa-trash"></i>
+                      </a>
+                    </div>
                   </td>
                 </tr>
               <?php endforeach; ?>

@@ -29,7 +29,7 @@ class RoleController extends Controller
 
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/role/index"), [
-        "title" => "Dashboard",
+        "title" => "Roles",
         "roles" => $role,
       ])
     );

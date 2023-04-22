@@ -67,20 +67,19 @@ use App\Models\Pagination;
                     <?php echo $category->name; ?>
                   </td>
                   <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
-                    <a href="<?php echo BASE_URI .
-                      "/dashboard/category/update" .
-                      "?id=" .
-                      $category->id; ?>"
-                      class="edit-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all block">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a id="deleteButton" href="<?php echo BASE_URI .
-                      "/dashboard/category/delete" .
-                      "?id=" .
-                      $category->id; ?>"
-                      class="delete-button py-2 px-3 bg-[#315854] text-white rounded-xl hover:bg-[#6cada6] transition-all">
-                      <i class="fa-solid fa-trash"></i>
-                    </a>
+                    <div class="button flex justify-center items-center gap-4">
+                      <a href="<?php echo BASE_URI .
+                        "/dashboard/category/update" .
+                        "?id=" .
+                        $category->id; ?>"
+                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+                      <button
+                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               <?php endforeach; ?>
