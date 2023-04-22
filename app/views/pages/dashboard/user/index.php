@@ -59,10 +59,11 @@
                   <td class="px-5 py-3">
                     <?php
                     $role = Role::find($user->role_id);
-                    echo $role->name;
+                    echo ucfirst($role->name);
                     ?>
                   </td>
-                  <td class="px-5 py-3 <?php echo ($user->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
+                  <td
+                    class="px-5 py-3 <?php echo ($user->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
                     <?php
                     if ($user->status == 1) {
                       echo "Active";
@@ -77,11 +78,11 @@
                         "/dashboard/user/update" .
                         "?id=" .
                         $user->id; ?>"
-                        class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
+                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                       <button
-                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
+                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>

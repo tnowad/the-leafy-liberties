@@ -4,7 +4,8 @@
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/user/update"; ?>" method="POST">
 
-      <input type="hidden" name="id" value="<?php echo $user->id; ?>"  class="bg-gray-100 p-3 focus:outline-none rounded-lg"/>
+      <input type="hidden" name="id" value="<?php echo $user->id; ?>"
+        class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
       <label for="name" class="my-2">Name:</label>
       <input type="text" value="<?php echo $user->name; ?>" name="name"
@@ -15,11 +16,10 @@
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
       <label for="expired" class="my-2">Password:</label>
-      <input type="password" value="<?php echo $user->password; ?>" name="password"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
-      <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[43.5%] right-20 cursor-pointer"
+      <input type="password" name="password" class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+      <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[34.5%] right-20 cursor-pointer"
         aria-hidden="true"></i>
-      <i id="show-icon-password" class="fa fa-eye absolute hidden top-[43.5%] right-20 cursor-pointer"
+      <i id="show-icon-password" class="fa fa-eye absolute hidden top-[34.5%] right-20 cursor-pointer"
         aria-hidden="true"></i>
 
       <label for="expired" class="my-2">Phone:</label>
@@ -33,13 +33,19 @@
         <option value="female">Female</option>
         <option value="other">Other</option>
       </select>
-
+      <label for="role" class="my-2">Select role:</label>
+      <select value="" name="gender" class="bg-gray-100 p-3 focus:outline-none rounded-lg">
+        <option value="">Select role</option>
+        <option value="1">Customer</option>
+        <option value="2">Admin</option>
+        <option value="3">Moderator</option>
+      </select>
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
       </button>
       <a class="cancel-edit-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-center"
-        href="<?php echo BASE_URI . "/dashboard/customer"; ?>">
+        href="<?php echo BASE_URI . "/dashboard/user"; ?>">
         Cancel
       </a>
     </form>
