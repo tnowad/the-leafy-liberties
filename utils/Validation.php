@@ -8,7 +8,7 @@ class Validation
   public static function validateEmail($email)
   {
     if (preg_match('/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/', $email)) {
-      $email;
+      return $email;
     }
     throw new Exception('Invalid email');
   }

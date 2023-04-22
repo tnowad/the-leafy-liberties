@@ -12,6 +12,7 @@ use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Utils\Validation;
 
 class CheckoutController extends Controller
 {
@@ -49,24 +50,31 @@ class CheckoutController extends Controller
       $totalPrice += $orderItem->price * $orderItem->quantity;
       $orderItems[] = $orderItem;
     }
-
     $order = new Order();
-    $order->user_id = $auth->getUser()->id;
-    $order->name = $request->getParam('name');
-    $order->email = $request->getParam('email');
-    $order->address = $request->getParam('address');
-    $order->phone = $request->getParam('phone');
-    $order->shipping_method_id = ShippingMethod::findOne(['id' => $request->getParam('shipping-method-id')])->id;
-    $order->payment_method_type = $request->getParam('payment-method-type');
-    $order->description = $request->getParam('description');
-    $order->total_price = $totalPrice;
-    if ($order->payment_method_type == 'credit') {
-      $order->card_number = $request->getParam('card-number');
-      $order->expired_date = $request->getParam('expired-date');
-      $order->cvv = $request->getParam('cvv');
-    }
+    try {
 
-    $order->save();
+      $order->user_id = $auth->getUser()->id;
+      $order->name = $request->getParam('name');
+      // Validate email
+      $order->email = Validation::validateEmail($request->getParam('email'));
+
+      $order->address = $request->getParam('address');
+      $order->phone = $request->getParam('phone');
+      $order->shipping_method_id = ShippingMethod::findOne(['id' => $request->getParam('shipping-method-id')])->id;
+      $order->payment_method_type = $request->getParam('payment-method-type');
+      $order->description = $request->getParam('description');
+      $order->total_price = $totalPrice;
+      if ($order->payment_method_type == 'credit') {
+        $order->card_number = $request->getParam('card-number');
+        $order->expired_date = $request->getParam('expired-date');
+        $order->cvv = $request->getParam('cvv');
+      }
+
+      $order->save();
+    } catch (\Exception $e) {
+      Database::getInstance()->rollbackTransaction();
+      return $response->redirect(BASE_URI . "/checkout");
+    }
     foreach ($orderItems as $orderItem) {
       $orderItem->order_id = $order->id;
       $orderItem->save();
