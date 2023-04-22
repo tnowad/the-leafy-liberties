@@ -8,6 +8,7 @@ use Core\Controller;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Utils\Validation;
 
 class ProfileController extends Controller
 {
@@ -38,10 +39,31 @@ class ProfileController extends Controller
       $response->redirect("/login");
     }
     $user = $auth->getUser();
-
     $user->name = $request->getParam("name");
+    // Validate email
+    $user->email = Validation::validateEmail($request->getParam('email'));
+    $user->phone = $request->getParam("phone");
+    $user->address = $request->getParam("address");
+    if($request->getParam("gender")=="male") {
+      $user->gender =1 ;
+    }
+    else if($request->getParam("gender")=="female") {
+      $user->gender =2 ;
+    }
+    else {
+      $user->gender =0 ;
+    }
+    // $user->birthday = $request->getParam("birthday");
+    if ($user->password == Validation::validateEmail($request->getParam('current-password'))) {
+      // Validate password
+      $user->password = Validation::validatePassword($request->getParam('new-password'));
+    }
+    // else {
+    //   $response->redirect(BASE_URI . "/login");
+    // }
     $user->save();
     $response->redirect(BASE_URI . "/profile");
+
   }
 
   public function settings(Request $request, Response $response)

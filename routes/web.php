@@ -29,7 +29,7 @@ $router->get("/products/filter", [ProductController::class, "filter"]);
 
 // profile
 $router->get("/profile", [ProfileController::class, "index"]);
-$router->post("/profile/index", [ProfileController::class, "update"]);
+$router->post("/profile/update", [ProfileController::class, "update"]);
 $router->get("/profile/settings", [ProfileController::class, "settings"]);
 $router->get("/profile/payments", [ProfileController::class, "payments"]);
 $router->get("/profile/orders", [ProfileController::class, "orders"]);

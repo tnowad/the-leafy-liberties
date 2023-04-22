@@ -6,7 +6,7 @@
       <!-- content -->
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col gap-1" action="<?php echo BASE_URI .
-          "/profile"; ?>" method="post">
+          "/profile/update"; ?>" method="POST">
           <input type="file" name="image" id="upload-image" class="hidden" >
 
           <label>Name</label>
@@ -16,7 +16,7 @@
           <label>Phone number</label>
           <input name="phone" value="<?php echo $user->phone; ?>" type="tel" class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
           <label>Address</label>
-          <input name="address" value="<?php echo $user->phone; ?>" type="tel" class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow" ></input>
+          <input name="address" value="<?php echo $user->address; ?>" type="tel" class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow" ></input>
           <label>Gender</label>
           <div class="relative inline-block">
             <select name="gender" id="gender" class="block w-full px-2 py-2 pr-8 leading-tight duration-300 bg-white border border-gray-300 rounded shadow appearance-none hover:shadow-sm focus:outline-none focus:shadow-outline">
@@ -41,7 +41,7 @@
             <label for="password">
               Current password (leave blank to leave unchanged)
             </label>
-            <input name="password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
+            <input name="current-password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
             <label for="new-password">Confirm new password</label>
             <input name="new-password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
           </div>
@@ -51,12 +51,3 @@
     </div>
   </div>
 </div>
-<!-- <script>
-  async function getUser() {
-    let d1 = await fetch("http://localhost/the-leafy-liberties/getUsers")
-    let d2 = await d1.json()
-    console.log(d2)
-  }
-  console.log(1)
-  getUser()
-</script> -->
