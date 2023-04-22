@@ -54,7 +54,6 @@ class WishlistController extends Controller
     }
 
     $user = $auth->getUser();
-
     $product = Product::find($request->getBody()["id"]);
 
     if (!$product) {
@@ -173,7 +172,6 @@ class WishlistController extends Controller
     }
 
     $user = $auth->getUser();
-
     $product = Product::find($request->getBody()["id"]);
 
     if (!$product) {
@@ -224,4 +222,3 @@ class WishlistController extends Controller
     ]);
   }
 }
-

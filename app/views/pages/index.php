@@ -11,7 +11,7 @@ use App\Models\Wishlist;
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
-      <div class="relative h-56 overflow-hidden carousel sm:h-64 xl:h-80 2xl:h-96 -z-10 hidden md:block">
+      <div class="relative hidden h-56 overflow-hidden carousel sm:h-64 xl:h-80 2xl:h-96 -z-10 md:block">
 
         <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
@@ -159,11 +159,11 @@ use App\Models\Wishlist;
     </div>
     <div class="relative w-full mb-5">
       <div class="flex category_slide">
-        <?php foreach (Category::all()as $category): ?>
+        <?php foreach (Category::all() as $category): ?>
           <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit" href="<?php echo BASE_URI .
             "/products?categories[]=" .
             $category->id; ?>">
-            <div class="w-full h-56 overflow-hidden img rounded-3xl shadow-lg">
+            <div class="w-full h-56 overflow-hidden shadow-lg img rounded-3xl">
               <img
                 src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
                 alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
@@ -182,14 +182,14 @@ use App\Models\Wishlist;
           <p>Popular Authors</p>
         </div>
         <div class="flex items-center justify-between author_slide">
-          <?php foreach(Author::all() as $author): ?>
+          <?php foreach (Author::all() as $author): ?>
             <a class="flex flex-col items-center justify-between w-full mb-4 author-card" href="<?php echo BASE_URI .
               "/products?author=" .
               $author->id; ?>">
-              <div class="mb-3 rounded-full author-face w-44 h-44 mx-auto">
+              <div class="mx-auto mb-3 rounded-full author-face w-44 h-44">
                 <img src="<?php echo BASE_URI . $author->image; ?>" class='object-cover w-full h-full rounded-full' />
               </div>
-              <p class="text-lg font-medium author-name whitespace-nowrap text-center ">
+              <p class="text-lg font-medium text-center author-name whitespace-nowrap ">
                 <?php echo $author->name; ?>
               </p>
             </a>
@@ -207,56 +207,32 @@ use App\Models\Wishlist;
 
   const BASE_URI = '<?php echo BASE_URI; ?>';
 
-  const handleApiCall = (endpoint, method = 'GET', data = {}) => {
-    const headers = {
-      'Content-Type': 'application/json'
-    }
-
-    FetchXHR.request(method, endpoint, data, headers)
-      .then(response => {
-        const data = response.data;
-        new Toast({
-          message: data.message,
-          type: data.type
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
-
   document.addToWishList = (id) => {
-    handleApiCall(`${BASE_URI}/api/wishlist/add`, 'POST', { id });
+    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
   };
-
   document.addToCart = (id) => {
-    handleApiCall(`${BASE_URI}/api/cart/add`, 'POST', { id });
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
   };
-
-  document.removeFromWishList = (id) => {
-    handleApiCall(`${BASE_URI}/api/wishlist/remove`, 'POST', { id });
-  };
-
-  document.removeFromCart = (id) => {
-    handleApiCall(`${BASE_URI}/api/cart/remove`, 'POST', { id });
-  };
-
-  document.removeWishList = () => {
-    handleApiCall(`${BASE_URI}/api/wishlist/remove`, 'POST');
-  };
-
-  document.removeCart = () => {
-    handleApiCall(`${BASE_URI}/api/cart/remove`, 'POST');
-  };
-
-  document.getWishList = () => {
-    handleApiCall(`${BASE_URI}/api/wishlist`);
-  };
-
-  document.getCart = () => {
-    handleApiCall(`${BASE_URI}/api/cart`);
-  };
-
 
   document.querySelectorAll('.wishlist-icon').forEach(icon => {
     icon.addEventListener('click', () => {
