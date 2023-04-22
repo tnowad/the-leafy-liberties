@@ -10,10 +10,10 @@
       <input type="text" value="<?php echo $product->name; ?>" name="name"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
-      <label for="image" class="my-2">Image:</label>
+      <label for="img" class="my-2">Image:</label>
       <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
       <p>Preview Image:</p>
-      <img id="output" class="w-80 h-56"/>
+      <img id="output" class="w-80 h-56 object-contain"/>
 
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="<?php echo $product->isbn; ?>" name="isbn"

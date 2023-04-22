@@ -28,10 +28,15 @@ class UserController extends Controller
 
   public function create(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.create')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('user.create')) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
 
     $uploader = new FileUploader([
       "allowedExtensions" => ["jpeg", "jpg", "png"],
@@ -77,8 +82,13 @@ class UserController extends Controller
   public function store(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("users.create")) {
-      return $response->redirect(BASE_URI . "/dashboard/user");
+    if (!$auth->hasPermission("user.create")) {
+      return $response->redirect(BASE_URI . "/dashboard/user", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
     }
     $user = new User();
     // get from request
@@ -89,8 +99,13 @@ class UserController extends Controller
   public function show(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("users.access")) {
-      return $response->redirect(BASE_URI . "/dashboard/user");
+    if (!$auth->hasPermission("user.access")) {
+      return $response->redirect(BASE_URI . "/dashboard/user", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
     }
     $user = User::find($request->getQuery("id"));
     if (!$user) {
@@ -106,6 +121,15 @@ class UserController extends Controller
 
   public function update(Request $request, Response $response)
   {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('user.update')) {
+      return $response->redirect(BASE_URI . "/dashboard/user", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
     switch ($request->getMethod()) {
       case "GET":
         $user = User::findOne(["id" => $request->getQuery("id")]);
@@ -121,7 +145,7 @@ class UserController extends Controller
           )
         );
       case "POST":
-        dd($request->getParam("id"));   
+        dd($request->getParam("id"));
         $user = User::find($request->getParam("id"));
         if (!$user) {
           return $response->setBody(
@@ -161,34 +185,24 @@ class UserController extends Controller
       default:
         break;
     }
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.update')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
-    // $product = Product::find($request->getQuery('id'));
-    // dd($product);
-    // if (!$product) {
-    //   return $response->redirect(BASE_URI . '/dashboard/product');
-    // }
-    // // get from request
-
-    // $product->save();
-    // return $response->redirect(BASE_URI . '/dashboard/product');
   }
 
   public function delete(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.delete')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
-    // dd($request->getQuery('id'));
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('user.delete')) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
     $user = User::find($request->getQuery("id"));
-    dd($user);
     if (!$user) {
       return $response->redirect(BASE_URI . "pages/dashboard/user/index");
     }
-    // $user->delete();
+    $user->delete();
     return $response->redirect(BASE_URI . "pages/dashboard/user/index");
   }
 }

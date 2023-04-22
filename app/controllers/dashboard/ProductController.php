@@ -27,7 +27,7 @@ class ProductController extends Controller
       View::renderWithDashboardLayout(
         new View("pages/dashboard/product/index"),
         [
-          "title" => "Dashboard",
+          "title" => "Products",
           "products" => $products,
         ]
       )
@@ -164,6 +164,27 @@ class ProductController extends Controller
             ],
           ]);
         } else {
+          $uploader = new FileUploader([
+            "allowedExtensions" => ["jpeg", "jpg", "png"],
+            "maxFileSize" => 2097152,
+            "uploadPath" => "resources/images/products/",
+          ]);
+
+          $result = $uploader->upload($_FILES["image"]);
+
+          if ($result) {
+            $request->setParam("image", $result);
+          } else {
+            return $response->setBody(
+              View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
+                "title" => "Products",
+                "toast" => [
+                  "type" => "error",
+                  "message" => "Add product failed!",
+                ],
+              ])
+            );
+          }
           $product->name = $request->getParam("name");
           $product->image = $request->getParam("image");
           $product->isbn = $request->getParam("isbn");

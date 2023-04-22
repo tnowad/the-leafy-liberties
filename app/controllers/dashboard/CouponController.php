@@ -12,10 +12,15 @@ class CouponController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.access')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('coupon.access')) {
+      return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
     $coupons = Coupon::all();
     return $response->setBody(
       View::renderWithDashboardLayout(
@@ -30,10 +35,15 @@ class CouponController extends Controller
 
   public function create(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.create')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('coupon.create')) {
+      return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
     $product = new Coupon();
     $product->code = strtoupper($request->getParam("code"));
     $product->expired = $request->getParam("expired");
@@ -57,8 +67,13 @@ class CouponController extends Controller
   public function store(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("coupons.create")) {
-      return $response->redirect(BASE_URI . "/dashboard/coupon/index");
+    if (!$auth->hasPermission("coupon.create")) {
+      return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
     }
     $product = new Coupon();
     // get from request
@@ -69,8 +84,13 @@ class CouponController extends Controller
   public function show(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("coupons.access")) {
-      return $response->redirect(BASE_URI . "/dashboard/coupon/index");
+    if (!$auth->hasPermission("coupon.access")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
     }
     $coupon = Coupon::find($request->getQuery("id"));
     if (!$coupon) {
@@ -78,7 +98,7 @@ class CouponController extends Controller
     }
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/coupon/show"), [
-        "title" => "Show Product",
+        "title" => "Show Coupon",
         "coupon" => $coupon,
       ])
     );
@@ -86,6 +106,15 @@ class CouponController extends Controller
 
   public function update(Request $request, Response $response)
   {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission("coupon.update")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
     switch ($request->getMethod()) {
       case "GET":
         $coupon = Coupon::findOne(["id" => $request->getQuery("id")]);
@@ -123,43 +152,29 @@ class CouponController extends Controller
             ],
           ]);
         }
-      // return $response->setBody(View::renderWithDashboardLayout(new View('pages/dashboard/coupon/index'), [
-      //   'title' => 'Coupon Dashboard',
-      //   'toast' => [
-      //     'type' => 'success',
-      //     'message' => "Edit coupon successful!",
-      //   ]
-      // ]));
+
       default:
         break;
     }
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.update')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
-    // $product = Product::find($request->getQuery('id'));
-    // dd($product);
-    // if (!$product) {
-    //   return $response->redirect(BASE_URI . '/dashboard/product');
-    // }
-    // // get from request
-
-    // $product->save();
-    // return $response->redirect(BASE_URI . '/dashboard/product');
   }
 
   public function delete(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.delete')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission("coupon.delete")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
     // dd($request->getQuery('id'));
     $coupon = Coupon::find($request->getQuery("id"));
     // dd($product);
-    // if (!$product) {
-    //   return $response->redirect(BASE_URI . 'pages/dashboard/product/index');
-    // }
+    if (!$coupon) {
+      return $response->redirect(BASE_URI . 'pages/dashboard/coupon/index');
+    }
     $coupon->delete();
     return $response->redirect(BASE_URI . "pages/dashboard/coupon/index");
   }
@@ -172,7 +187,7 @@ class CouponController extends Controller
           View::renderWithDashboardLayout(
             new View("pages/dashboard/coupon/index"),
             [
-              "title" => "Coupon Dashboard",
+              "title" => "Coupons",
             ]
           )
         );
@@ -182,7 +197,7 @@ class CouponController extends Controller
           View::renderWithDashboardLayout(
             new View("pages/dashboard/coupon/index"),
             [
-              "title" => "Coupon Dashboard",
+              "title" => "Coupons",
             ]
           )
         );
