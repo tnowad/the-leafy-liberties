@@ -8,6 +8,8 @@
       </div>
       <div class="box-border grid top-wrap 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
         <?php
+        use App\Models\Order;
+
         $text = ["Sales", "Total Revenues", "New Customer", "New Orders"];
         $quantity = ["$20.4K", "100K", "203", "15"];
         $desc = [
@@ -92,21 +94,18 @@
       </div>
       <div class="my-8 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl">
         <div class="relative">
-          table for new order 
-          <!-- <table class="w-full h-64 overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
+          <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <?php
                 $name = [
-                  "Product",
                   "Order ID",
-                  "Date",
                   "Customer Name",
+                  "Date",
                   "Status",
                   "Amount",
-                  "Action",
                 ];
-                for ($i = 1; $i <= 7; $i++) { ?>
+                for ($i = 1; $i <= count($name); $i++) { ?>
                   <th scope="col" class="px-6 py-3">
                     <?php echo $name[$i - 1]; ?>
                   </th>
@@ -115,32 +114,38 @@
               </tr>
             </thead>
             <tbody>
-              <?php for ($i = 1; $i <= 6; $i++) { ?>
+              <?php
+              $orders = Order::all();
+              foreach ($orders as $order):
+                ?>
                 <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    My Dearest Darkest
+                    <?php echo $order->id ?>
                   </td>
-                  <td class="px-5 py-3">#1</td>
-                  <td class="px-5 py-3">Jun 29,2023</td>
-                  <td class="px-5 py-3">Jack Phat</td>
-                  <td class="px-5 py-3">Delivered</td>
-                  <td class="px-5 py-3">1</td>
-                  <td class="px-5 py-4 w-44">
-                    <div class="flex items-center justify-center gap-4 button">
-                      <button
-                        class="edit-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-blue-500 transition-all">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                      </button>
-                      <button
-                        class="delete-button py-2 px-3 bg-[#8cbfba] text-white rounded-xl hover:text-red-600 transition-all">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
+                  <td class="px-5 py-3">
+                    <?php echo $order->name ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php echo  $order->create_at ?>
+                  </td>
+                  <td class="px-5 py-3 font-medium <?php echo ($order->status == 0) ? 'text-red-900' : 'text-primary' ?>">
+                    <?php
+                    if ($order->status == 0) {
+                      echo "Pending";
+                    } else {
+                      echo "Delivered";
+                    }
+                    ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <?php
+                    echo count($order->products());
+                    ?>
                   </td>
                 </tr>
-              <?php } ?>
+              <?php endforeach ?>
             </tbody>
-          </table> -->
+          </table>
         </div>
       </div>
     </div>

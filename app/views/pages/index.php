@@ -182,21 +182,19 @@ use App\Models\Wishlist;
         <div class="p-3 mb-6 text-4xl text-center border-0 border-b-2 border-solid header-table whitespace-nowrap">
           <p>Popular Authors</p>
         </div>
-        <div class="flex items-center justify-between gap-7">
-
-          <?php foreach (array_slice(Author::all(), 0, 7) as $author): ?>
+        <div class="flex items-center justify-between author_slide">
+          <?php foreach(Author::all() as $author): ?>
             <a class="flex flex-col items-center justify-between w-full mb-4 author-card" href="<?php echo BASE_URI .
               "/products?author=" .
               $author->id; ?>">
-              <div class="mb-3 rounded-full author-face w-44 h-44">
+              <div class="mb-3 rounded-full author-face w-44 h-44 mx-auto">
                 <img src="<?php echo BASE_URI . $author->image; ?>" class='object-cover w-full h-full rounded-full' />
               </div>
-              <p class="text-lg font-medium author-name whitespace-nowrap ">
+              <p class="text-lg font-medium author-name whitespace-nowrap text-center ">
                 <?php echo $author->name; ?>
               </p>
             </a>
           <?php endforeach; ?>
-
         </div>
       </div>
     </div>
