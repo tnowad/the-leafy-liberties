@@ -1,4 +1,3 @@
-<?php $user = $params["user"]; ?>
 <div class="w-full min-h-screen ">
   <div class="bg-white rounded-md shadow-lg w-full p-5 my-5">
     <form class="flex flex-col" action="<?php echo BASE_URI .

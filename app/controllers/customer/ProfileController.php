@@ -3,6 +3,7 @@
 namespace App\Controllers\Customer;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
@@ -126,7 +127,10 @@ class ProfileController extends Controller
   {
     switch ($request->getMethod()) {
       case "GET":
-        $user = User::findOne(["id" => $request->getQuery("id")]);
+        $user = Application::getInstance()
+          ->getAuthentication()
+          ->getUser();
+
         $order = Order::findOne(["id" => $request->getQuery("id")]);
         // dd($user->id);
         $response->setStatusCode(200);
@@ -161,23 +165,25 @@ class ProfileController extends Controller
       default:
         break;
     }
-    // $auth = Application::getInstance()->getAuthentication();
+  }
+  public function delete(Request $request, Response $response)
+  {
+    $order = Order::find($request->getQuery("id"));
+    if (!$order) {
+      return $response->redirect(BASE_URI . "/profile");
+    }
 
-    // if (!$auth->isAuthenticated()) {
-    //   $response->redirect(BASE_URI . "/login");
-    // }
-    // $user = Application::getInstance()
-    //   ->getAuthentication()
-    //   ->getUser();
-
-    // $orders = $user->orders();
-
-    // $response->setStatusCode(200);
-    // $response->setBody(
-    //   View::renderWithLayout(new View("pages/profile/orderDetail"), [
-    //     "orders" => $orders,
-    //     "user" => $user,
-    //   ])
-    // );
+    switch ($request->getMethod()) {
+      case "GET":
+        $response->setStatusCode(200);
+        $order_products = OrderProduct::all();
+        foreach ($order_products as $order_product) {
+          if ($order_product->order_id == $order->id) {
+            $order_product->delete();
+          }
+        }
+        $order->delete();
+        return $response->redirect(BASE_URI . "/profile/orders");
+    }
   }
 }

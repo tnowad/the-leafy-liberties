@@ -35,6 +35,8 @@ $router->get("/profile/payments", [ProfileController::class, "payments"]);
 $router->get("/profile/orders", [ProfileController::class, "orders"]);
 $router->get("/profile/orders/orderDetail", [ProfileController::class, "orderDetail"]);
 $router->post("/profile/orderDetail", [ProfileController::class, "orderDetail"]);
+$router->get("/profile/orders/orderDetail/delete", [ProfileController::class, "delete"]);
+$router->post("/profile/orders/orderDetail/delete", [ProfileController::class, "delete",]);
 
 
 
