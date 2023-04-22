@@ -12,9 +12,26 @@ class Validation
     }
     throw new Exception('Invalid email');
   }
+
+  public static function validateName($name)
+  {
+    if (preg_match('/^[a-zA-Z ]{2,30}$/', $name)) {
+      return $name;
+    }
+    throw new Exception('Invalid name');
+  }
+
+  public static function validatePhone($phone)
+  {
+    if (preg_match('/^[0-9]{10}$/', $phone)) {
+      return $phone;
+    }
+    throw new Exception('Invalid phone number');
+  }
+
   public static function validatePassword($password)
   {
-    if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
+    if (preg_match('/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};\'\\:"|<,\.>\/?]{8,30}$/', $password)) {
       return $password;
     }
     throw new Exception('Invalid password');
