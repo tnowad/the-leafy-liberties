@@ -11,8 +11,9 @@
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
 
       <label for="image" class="my-2">Image:</label>
-      <input type="file" name="image" id="imgInp" />
-      <div class="preview-img w-full h-44 hidden object-contain"></div>
+      <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
+      <p>Preview Image:</p>
+      <img id="output" class="w-80 h-56"/>
 
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="<?php echo $product->isbn; ?>" name="isbn"
@@ -46,4 +47,11 @@
   cancel.addEventListener("click", (event) => {
     // event.preventDefault();
   })
+  var loadFile = function (event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function () {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
 </script>

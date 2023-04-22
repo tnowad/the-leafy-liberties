@@ -34,7 +34,7 @@ $user = $auth->getUser();
           </li>
           <li class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600">
             <a href="<?php echo BASE_URI .
-              "/dashboard/profile#password"; ?>">Change password</a>
+              "/dashboard/profile/password"; ?>">Change password</a>
           </li>
           <li class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600">
             <a href="<?php echo BASE_URI . "/logout"; ?> ">Logout</a>

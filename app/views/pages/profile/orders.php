@@ -73,14 +73,12 @@ $orders = $params['orders'];
                       <?php endif; ?>
                   </td>
                   <td>
-                    <a href="<?php echo BASE_URI . '/profile/orders?id=' . $order->id ?>"
-                      class="edit-button p-2 rounded-md text-center">
                       <!-- <i class="fa-solid fa-pen-to-square"></i> -->
                       <a href="<?php echo BASE_URI .
                         "/profile/orders/orderDetail" .
                         "?id=" .
                         $order->id; ?>"
-                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all"
+                        class="edit-button py-2 px-3 rounded-md"
                         >
                         <i class="fa-solid fa-circle-info text-black text-xl hover:text-orange-600 transition-colors"></i>
                       </a>

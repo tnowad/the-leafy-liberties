@@ -54,7 +54,6 @@
 <script>
   const password = document.querySelector("input[type=password]");
   // console.log(password)
-
   const hideIconPassword = document.getElementById("hide-icon-password");
   const showIconPassword = document.getElementById("show-icon-password");
 

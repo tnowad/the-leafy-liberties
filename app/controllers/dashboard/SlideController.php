@@ -19,7 +19,7 @@ class SlideController extends Controller
 
     $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/slide/index"), [
-        'title' => 'Dashboard',
+        'title' => 'Slides',
         "slides" => $slides,
         "filter" => $filter,
       ])
@@ -31,15 +31,15 @@ class SlideController extends Controller
   }
   public function update(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('slides.update')) {
-    //   return $response->redirect(BASE_URI . '/dashboard', 200, [
-    //     'toast' => [
-    //       'type' => 'error',
-    //       'message' => 'You do not have permission to access this page.'
-    //     ]
-    //   ]);
-    // }
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('slides.update')) {
+      return $response->redirect(BASE_URI . '/dashboard', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'You do not have permission to access this page.'
+        ]
+      ]);
+    }
     switch ($request->getMethod()) {
       case "GET":
         $slide = Slide::findOne(["id" => $request->getQuery("id")]);
