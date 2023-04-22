@@ -17,6 +17,7 @@ class FetchXHR {
             data: responseData,
           });
         } catch (e) {
+          console.log(xhr.status, xhr.statusText, xhr.response);
           reject(e);
         }
       };

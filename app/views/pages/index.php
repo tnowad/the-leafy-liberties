@@ -208,15 +208,11 @@ use App\Models\Wishlist;
   const BASE_URI = '<?php echo BASE_URI; ?>';
 
   const handleApiCall = (endpoint, method = 'GET', data = {}) => {
-    const options = {
-      method,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: method === 'GET' ? null : JSON.stringify(data)
-    };
+    const headers = {
+      'Content-Type': 'application/json'
+    }
 
-    FetchXHR(endpoint, options)
+    FetchXHR.request(method, endpoint, data, headers)
       .then(response => {
         const data = response.data;
         new Toast({
@@ -229,35 +225,35 @@ use App\Models\Wishlist;
       });
   };
 
-  const addToWishList = (id) => {
+  document.addToWishList = (id) => {
     handleApiCall(`${BASE_URI}/api/wishlist/add`, 'POST', { id });
   };
 
-  const addToCart = (id) => {
+  document.addToCart = (id) => {
     handleApiCall(`${BASE_URI}/api/cart/add`, 'POST', { id });
   };
 
-  const removeFromWishList = (id) => {
+  document.removeFromWishList = (id) => {
     handleApiCall(`${BASE_URI}/api/wishlist/remove`, 'POST', { id });
   };
 
-  const removeFromCart = (id) => {
+  document.removeFromCart = (id) => {
     handleApiCall(`${BASE_URI}/api/cart/remove`, 'POST', { id });
   };
 
-  const removeWishList = () => {
+  document.removeWishList = () => {
     handleApiCall(`${BASE_URI}/api/wishlist/remove`, 'POST');
   };
 
-  const removeCart = () => {
+  document.removeCart = () => {
     handleApiCall(`${BASE_URI}/api/cart/remove`, 'POST');
   };
 
-  const getWishList = () => {
+  document.getWishList = () => {
     handleApiCall(`${BASE_URI}/api/wishlist`);
   };
 
-  const getCart = () => {
+  document.getCart = () => {
     handleApiCall(`${BASE_URI}/api/cart`);
   };
 
