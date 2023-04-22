@@ -50,7 +50,7 @@ function abc() {
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     infinite: true,
     prevArrow: `<button type="button" class="slick-prev pull-left absolute top-[30%] z-10 ">
     <i class="fa-solid fa-chevron-left bg-gray-300 p-3 w-10 h-10 text-white rounded-full hover:bg-primary-600 transition-all"></i>
@@ -93,7 +93,7 @@ function abc() {
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4500,
     infinite: true,
     prevArrow: `<button type="button" class="slick-prev pull-left absolute top-[45%] z-10 ">
     <i class="fa-solid fa-chevron-left bg-gray-300 p-3 w-10 h-10 text-white rounded-full hover:bg-primary-600 transition-all"></i>
