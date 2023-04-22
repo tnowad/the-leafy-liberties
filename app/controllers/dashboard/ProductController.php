@@ -107,7 +107,7 @@ class ProductController extends Controller
   public function show(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("products.access")) {
+    if (!$auth->hasPermission("product.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -132,15 +132,15 @@ class ProductController extends Controller
 
   public function update(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.update')) {
-    //   return $response->redirect(BASE_URI . '/dashboard', 200, [
-    //     'toast' => [
-    //       'type' => 'error',
-    //       'message' => 'You do not have permission to access this page.'
-    //     ]
-    //   ]);
-    // }
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('product.update')) {
+      return $response->redirect(BASE_URI . '/dashboard', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'You do not have permission to access this page.'
+        ]
+      ]);
+    }
     switch ($request->getMethod()) {
       case "GET":
         $product = Product::findOne(["id" => $request->getQuery("id")]);
@@ -149,7 +149,7 @@ class ProductController extends Controller
           View::renderWithDashboardLayout(
             new View("pages/dashboard/product/update"),
             [
-              "title" => "Product Dashboard",
+              "title" => "Products",
               "product" => $product,
             ]
           )
@@ -196,7 +196,7 @@ class ProductController extends Controller
     }
     $product = Product::find($request->getQuery("id"));
     if (!$product) {
-      return $response->redirect(BASE_URI . "/dashboard/products");
+      return $response->redirect(BASE_URI . "/dashboard/product");
     }
 
     switch ($request->getMethod()) {
@@ -205,10 +205,14 @@ class ProductController extends Controller
         $product->delete();
         return $response->setBody(
           View::renderWithDashboardLayout(
-            new View("pages/dashboard/product/delete"),
+            new View("pages/dashboard/product/index"),
             [
               "title" => "Delete Product",
               "product" => $product,
+              "toast" => [
+                'type' => 'success',
+                'message' => 'Delete Product Successfully'
+              ]
             ]
           )
         );
