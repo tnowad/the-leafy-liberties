@@ -209,7 +209,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             </div>
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-1 mr-10 w-full h-auto mt-4">
               <legend class="px-2">Description</legend>
-              <textarea type="text" name="description" required placeholder="Type here..." rows="7"
+              <textarea type="text" name="description" placeholder="Type here..." rows="7"
                 class="w-full p-1 text-lg focus:outline-none focus:border-0"></textarea>
             </fieldset>
             <div

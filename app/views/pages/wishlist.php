@@ -44,7 +44,7 @@ $products = $params["products"]; ?>
                 </button>
               </td>
               <td class="p-3 w-36 h-36">
-                <img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>"
+                <img src="<?php echo BASE_URI . $product->image; ?>" alt="<?php echo $product->name; ?>"
                   class="w-full h-full mx-auto object-contain" />
               </td>
               <td>

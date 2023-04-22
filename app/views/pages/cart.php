@@ -21,7 +21,7 @@ $cartItems = $params["cartItems"];
                       class="w-full h-full object-contain" />
                   </div>
                   <div class="text">
-                    <p class="mb-2 text-2xl book-name">
+                    <p class="mb-2 text-2xl book-name break-words w-40">
                       <?php echo $product->name; ?>
                     </p>
                     <p class="text-base book-author">
