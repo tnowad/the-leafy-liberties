@@ -1,24 +1,24 @@
 <?php
 $products = $params["products"]; ?>
 <div class="container mx-auto">
-  <div class="flex justify-start items-center my-8 md:my-14">
-    <h1 class="text-xl text-primary-700 md:text-3xl uppercase tracking-widest">wishlist</h1>
+  <div class="flex items-center justify-start my-8 md:my-14">
+    <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">wishlist</h1>
   </div>
   <div class="w-full h-[765px] overflow-y-scroll px-8">
     <?php if (count($products) == 0): ?>
       <div class="flex flex-col justify-center items-center h-[60%]">
         <i class="fa-solid fa-heart-pulse text-[100px] text-gray-400"></i>
-        <h1 class="uppercase text-6xl text-gray-400 tracking-widest">Wishlist is
+        <h1 class="text-6xl tracking-widest text-gray-400 uppercase">Wishlist is
           empty</h1>
       </div>
     <?php else: ?>
       <table class="w-full border-collapse border-0 border-solid border-b-[1px]">
-        <thead class="w-full rounded-sm text-gray-600 sticky top-0 border-b border-gray-300 m-3">
-          <tr class="text-left uppercase font-normal">
+        <thead class="sticky top-0 w-full m-3 text-gray-600 border-b border-gray-300 rounded-sm">
+          <tr class="font-normal text-left uppercase">
             <th>
 
             </th>
-            <th class="px-9 py-2">
+            <th class="py-2 px-9">
               Product
             </th>
             <th class="py-2">
@@ -38,14 +38,14 @@ $products = $params["products"]; ?>
           <?php foreach ($products as $product): ?>
             <tr class="border-0 border-solid border-b-[1px]">
               <td class="text-right">
-                <button class="px-4 py-2 font-bold text-gray-800 hover:text-black transition-all"
+                <button class="px-4 py-2 font-bold text-gray-800 transition-all hover:text-black"
                   onclick="removeFromWishlist(<?php echo $product->id; ?>)">
                   <i class="fa-solid fa-x"></i>
                 </button>
               </td>
               <td class="p-3 w-36 h-36">
                 <img src="<?php echo BASE_URI . $product->image; ?>" alt="<?php echo $product->name; ?>"
-                  class="w-full h-full mx-auto object-contain" />
+                  class="object-contain w-full h-full mx-auto" />
               </td>
               <td>
                 <?php echo $product->name; ?>
@@ -57,7 +57,7 @@ $products = $params["products"]; ?>
                 <?php echo $product->price; ?>
               </td>
               <td class="px-1 py-2">
-                <button class="px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700 w-full"
+                <button class="w-full px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700"
                   onclick="addToCart(<?php echo $product->id; ?>)">
                   <i class="fa-solid fa-cart-plus"></i>
                   Add to cart
@@ -69,7 +69,7 @@ $products = $params["products"]; ?>
       </table>
     <?php endif ?>
   </div>
-  <div class="flex justify-end mt-4 gap-3">
+  <div class="flex justify-end gap-3 mt-4">
     <!-- move all product in wishlist to cart -->
 
     <button class="px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700"
@@ -127,15 +127,16 @@ $products = $params["products"]; ?>
 
   document.moveAllToCart = () => {
     FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/move-all-to-cart"; ?>').then(response => {
-      if (response.type === 'error') {
-        alert(response.message);
-      } else if (response.type === 'info') {
-        alert(response.message);
-      } else {
-        alert('All products added to cart');
-      }
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type,
+      });
     }).catch(error => {
-      alert('Something went wrong');
+      new Toast({
+        message: 'Something went wrong',
+        type: 'error',
+      });
     });
   }
 

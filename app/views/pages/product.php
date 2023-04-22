@@ -1,6 +1,6 @@
 <div class="box-border p-5 pt-3 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
   <!-- // ? option  -->
-  <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
+  <div class="grid grid-cols-1 gap-3 xl:grid-cols-2">
     <div
       class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
       <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI .
@@ -16,41 +16,41 @@
         <?php echo $product->name; ?>
       </label>
       <br />
-      <div class="author-tag my-3">
+      <div class="my-3 author-tag">
         <span class="">
           Author:
         </span>
-        <span class="font-bold text-primary hover:underline cursor-pointer">
+        <span class="font-bold cursor-pointer text-primary hover:underline">
           <?php echo $author->name; ?>
         </span>
       </div>
       <div class="isbn-tag">
         <span>ISBN:</span>
-        <span class="font-bold text-primary hover:underline cursor-pointer">
+        <span class="font-bold cursor-pointer text-primary hover:underline">
           <?php echo $product->isbn; ?>
         </span>
       </div>
-      <div class="box-border border border-gray-400 border-solid border-x-0 py-3">
-        <span class="text-2xl text-green-800 sm:text-3xl font-semibold">
+      <div class="box-border py-3 border border-gray-400 border-solid border-x-0">
+        <span class="text-2xl font-semibold text-green-800 sm:text-3xl">
           <?php echo $product->price; ?>$
         </span>
 
-        <div class="flex w-full justify-start gap-3  items-center mt-4">
+        <div class="flex items-center justify-start w-full gap-3 mt-4">
           <div
-            class="cursor-pointer flex justify-between items-center bg-gray-50 border border-gray-300 py-2 px-3 rounded-full text-lg gap-2 hover:bg-primary-500 hover:text-gray-700 transition-all group"
+            class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToCart(<?php echo $product->id; ?>)">
             <i
-              class="fa-brands fa-opencart group-hover:text-white transition-all p-2 group-hover:bg-primary-400 rounded-full"></i>
-            <button src="" alt="" class="font-medium text-sm sm:text-base md:text-lg">
+              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400"></i>
+            <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
               Add to cart
             </button>
           </div>
           <div
-            class="cursor-pointer flex justify-between items-center bg-gray-50 border border-gray-300 py-2 px-3 rounded-full text-lg gap-2 hover:bg-primary-500 hover:text-gray-700 transition-all group"
+            class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToWishList(<?php echo $product->id; ?>)">
             <i
-              class="fa-regular fa-heart group-hover:text-white transition-all p-2 group-hover:bg-red-400 rounded-full"></i>
-            <button type="submit" src="" alt="" class="text-sm sm:text-base md:text-lg font-medium add-to-wishlist">
+              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400"></i>
+            <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               Add to wishlist
             </button>
           </div>
@@ -58,11 +58,8 @@
       </div>
 
       <p class="inline-block mt-5 text-gray-400">Category: </p>
-      <a href="<?php echo BASE_URI .
-        "/products" .
-        "?category=" .
-        $category->id; ?>" class="hover:underline font-medium text-primary">
-
+      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>"
+        class="font-medium hover:underline text-primary">
         <?php echo $category->name; ?>
       </a>
       <br />
@@ -72,7 +69,7 @@
         $tags = $product->tags();
         $count = count($tags);
         foreach ($tags as $i => $tag) { ?>
-          <a href="<?php echo BASE_URI . '/' ?>" class="hover:underline font-medium text-primary">
+          <a href="<?php echo BASE_URI . '/' ?>" class="font-medium hover:underline text-primary">
             <?php echo $tag->name ?>
           </a>
           <?php
@@ -83,18 +80,18 @@
         ?>
       </p>
 
-      <div class="flex justify-start mt-10 items-center gap-4">
+      <div class="flex items-center justify-start gap-4 mt-10">
         <a href="https://www.facebook.com/jack.willam2003/">
           <i
-            class="text-2xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
+            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
           <i
-            class="text-2xl transition-all cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
+            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
           <i
-            class="text-2xl transition-all cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500 p-2 border border-gray-300 rounded-full w-12 h-12 text-center"></i>
+            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500"></i>
         </a>
       </div>
     </div>
@@ -102,40 +99,36 @@
   <!-- //? info detail  -->
   <div class="mt-20">
     <ul class="box-content flex justify-center">
-      <li class="p-2 rounded mb-5 mr-10 cursor-pointer hover:bg-primary hover:text-white transition-all"
+      <li class="p-2 mb-5 mr-10 transition-all rounded cursor-pointer hover:bg-primary hover:text-white"
         onclick="showDescription()">
         Description
       </li>
-      <li class="p-2 rounded mb-2 mr-5 sm:mr-10 sm:mb-5 cursor-pointer hover:bg-primary hover:text-white transition-all"
-        onclick="showReveiw()">
+      <li class="p-2 mb-2 mr-5 transition-all rounded cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white"
+        onclick="showReview()">
         Review
       </li>
     </ul>
     <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
       id="description">
-      <p class=" text-lg text-center">
+      <p class="text-lg text-center ">
         <?php echo $product->description; ?>
       </p>
     </div>
-    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20 hidden"
+    <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
       id="review">
-      <p class=" text-lg text-center">
+      <p class="text-lg text-center ">
         Sản phẩm chất cmn lượng
       </p>
     </div>
   </div>
 </div>
 <script>
-  function addToCart(id) {
-    alert(id);
-  }
-
   function showDescription() {
     document.getElementById("description").style.display = "block"
     document.getElementById("review").style.display = "none"
   }
 
-  function showReveiw() {
+  function showReview() {
     console.log(1)
     document.getElementById("review").style.display = "block";
     document.getElementById("description").style.display = "none"

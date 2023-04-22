@@ -23,7 +23,7 @@ class CheckoutController extends Controller
     }
     $cartItems = Cart::findAll(["user_id" => $auth->getUser()->id]);
     return $response->setBody(
-      View::renderWithLayout(new View("pages/checkout"), [
+      View::renderWithLayout(new View("pages/checkout/index"), [
         "title" => "Checkout",
         "cartItems" => $cartItems,
       ])
@@ -32,7 +32,6 @@ class CheckoutController extends Controller
 
   public function confirm(Request $request, Response $response)
   {
-    dd($request->getParams());
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->isAuthenticated()) {
       return $response->redirect(BASE_URI . "/login");
@@ -78,7 +77,13 @@ class CheckoutController extends Controller
 
     Database::getInstance()->commitTransaction();
 
-    return $response->redirect(BASE_URI . "/checkout/success");
+    $response->setBody(
+      View::renderWithLayout(new View("pages/checkout/success"), [
+        "title" => "Checkout",
+        "order" => $order,
+        "orderItems" => $orderItems,
+      ])
+    );
 
   }
 }
