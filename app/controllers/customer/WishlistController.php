@@ -71,10 +71,10 @@ class WishlistController extends Controller
     ]);
 
     if ($wishlist) {
-      $wishlist->delete();
+      // $wishlist->delete();
       $response->jsonResponse([
-        "type" => "success",
-        "message" => "Product removed from wishlist",
+        "type" => "info",
+        "message" => "Product is already in wishlist",
       ]);
       return;
     }
@@ -83,7 +83,7 @@ class WishlistController extends Controller
     $wishlist->product_id = $product->id;
     $wishlist->user_id = $user->id;
     $wishlist->save();
-
+    // dd($wishlist);
     $response->jsonResponse([
       "type" => "success",
       "message" => "Product added to wishlist",
@@ -224,3 +224,4 @@ class WishlistController extends Controller
     ]);
   }
 }
+

@@ -152,4 +152,17 @@
       console.error(error);
     });
   };
+  document.addToCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
 </script>

@@ -57,10 +57,10 @@ class CartController extends Controller
     ]);
 
     if ($cart) {
-      $cart->delete();
+      // $cart->delete();/
       $response->jsonResponse([
-        "type" => "success",
-        "message" => "Product removed from cart",
+        "type" => "info",
+        "message" => "Product is already in cart",
       ]);
       return;
     }
@@ -68,6 +68,7 @@ class CartController extends Controller
     $cart = new Cart();
     $cart->user_id = $user->id;
     $cart->product_id = $product->id;
+    $cart->quantity = 1;
     $cart->save();
     // dd($wishlist);
     $response->jsonResponse([

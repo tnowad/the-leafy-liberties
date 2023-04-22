@@ -1,4 +1,5 @@
 <?php
+use App\Controllers\Customer\CartController;
 use App\Controllers\Customer\WishlistController;
 use Core\Application;
 
@@ -9,3 +10,7 @@ $router->post("/api/wishlist/remove", [WishlistController::class, "remove"]);
 $router->post("/api/wishlist/empty", [WishlistController::class, "empty"]);
 $router->post("/api/wishlist/add-to-cart", [WishlistController::class, "addToCart"]);
 $router->post("/api/wishlist/move-all-to-cart", [WishlistController::class, "moveAllToCart"]);
+
+$router->post("/api/cart/add", [CartController::class, "add"]);
+$router->post("/api/cart/remove", [CartController::class, "remove"]);
+$router->post("/api/cart/empty", [CartController::class, "empty"]);
