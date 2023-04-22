@@ -15,14 +15,14 @@ class Validation
   public static function validatePassword($password)
   {
     if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
-      $password;
+      return $password;
     }
     throw new Exception('Invalid password');
   }
   public static function validateCreditCardNumber($cardNumber)
   {
     if (preg_match('/^4[0-9]{12}(?:[0-9]{3})?$/', $cardNumber)) {
-      $cardNumber;
+      return $cardNumber;
     }
     throw new Exception('Invalid credit card number');
   }
