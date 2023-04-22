@@ -11,7 +11,7 @@ use App\Models\Wishlist;
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
-      <div class="relative h-56 overflow-hidden rounded-lg carousel sm:h-64 xl:h-80 2xl:h-96 -z-10">
+      <div class="relative h-56 overflow-hidden carousel sm:h-64 xl:h-80 2xl:h-96 -z-10 hidden md:block">
 
         <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
@@ -163,7 +163,7 @@ use App\Models\Wishlist;
           <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit" href="<?php echo BASE_URI .
             "/products?categories[]=" .
             $category->id; ?>">
-            <div class="w-full h-56 overflow-hidden img rounded-3xl">
+            <div class="w-full h-56 overflow-hidden img rounded-3xl shadow-lg">
               <img
                 src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
                 alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
