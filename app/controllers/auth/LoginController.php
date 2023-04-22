@@ -8,6 +8,7 @@ use Core\Request;
 use Core\Response;
 use Core\View;
 use Exception;
+use Utils\Validation;
 
 class LoginController extends Controller
 {
@@ -24,16 +25,21 @@ class LoginController extends Controller
 
   public function login(Request $request, Response $response)
   {
-    $email = $request->getParam("email");
-    $password = $request->getParam("password");
     try {
-      $users = User::findAll(["email" => $email]);
-      $user = $users ? $users[0] : null;
+      $email = Validation::validateEmail($request->getParam("email"));
+      $password = Validation::validatePassword($request->getParam("password"));
     } catch (Exception $e) {
-      $user = null;
+      return $response->redirect(BASE_URI . "/login", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => $e->getMessage(),
+        ],
+      ]);
     }
+
+    $user = User::findOne(["email" => $email]);
+
     if ($user && password_verify($password, $user->password)) {
-      $response->setStatusCode(200);
       Application::getInstance()
         ->getAuthentication()
         ->setUser($user);
@@ -43,15 +49,15 @@ class LoginController extends Controller
           "message" => "Login success",
         ],
       ]);
-    } else {
-      $response->setStatusCode(200);
-      $response->redirect(BASE_URI . "/login", 200, [
-        "toast" => [
-          "type" => "error",
-          "message" => "Login failed",
-        ],
-      ]);
     }
+
+    $response->redirect(BASE_URI . "/login", 200, [
+      "toast" => [
+        "type" => "error",
+        "message" => "Login failed",
+      ],
+    ]);
+
   }
 
   public function logout(Request $request, Response $response)
@@ -59,7 +65,6 @@ class LoginController extends Controller
     Application::getInstance()
       ->getSession()
       ->destroy();
-    $response->setStatusCode(200);
     $response->redirect(BASE_URI . "/", 200, [
       "toast" => [
         "type" => "success",
