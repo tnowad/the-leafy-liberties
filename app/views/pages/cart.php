@@ -7,15 +7,14 @@ $cartItems = $params["cartItems"];
       <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Cart</h1>
     </div>
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
-      <div class="cart-list w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl"
-        total="<?php echo count($cartItems) ?>">
-        <?php if (count($cartItems) == 0): ?>
+      <div class="cart-list w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl" total="<?php echo count($cartItems) ?>">
+        <?php if (count($cartItems) == 0) : ?>
           <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
             <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
             <h1 class="text-5xl tracking-wider text-gray-400 uppercase">Cart is empty</h1>
           </div>
-        <?php else: ?>
-          <?php foreach ($cartItems as $cartItem): ?>
+        <?php else : ?>
+          <?php foreach ($cartItems as $cartItem) : ?>
             <?php $product = $cartItem->product() ?>
             <div class="w-full">
               <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
@@ -40,12 +39,9 @@ $cartItems = $params["cartItems"];
                   <div>
                     <form class="flex items-center justify-center mx-auto product-quantity w-fit h-fit">
                       <input type="hidden" name="id" value="<?php echo $product->id; ?>">
-                      <input type="submit" value="-" name="minus"
-                        class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
-                      <input type="number" name="quantity" class="w-10 text-lg text-count text-center"
-                        value="<?php echo $cartItem->quantity; ?>" />
-                      <input type="submit" value="+" name="plus"
-                        class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                      <input type="submit" value="-" name="minus" class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                      <input type="number" name="quantity" class="w-10 text-lg text-count text-center" value="<?php echo $cartItem->quantity; ?>" />
+                      <input type="submit" value="+" name="plus" class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                     </form>
                   </div>
                   <p class="text-xl counter-price">
@@ -65,7 +61,8 @@ $cartItems = $params["cartItems"];
           <span class="text-xl text-bill">Total:</span>
           <span class="text-xl money-bill">
             <?php
-            $total = 0; foreach ($cartItems as $cartItem) {
+            $total = 0;
+            foreach ($cartItems as $cartItem) {
               $product = $cartItem->product();
               $total += $product->price * $cartItem->quantity;
             }
@@ -73,25 +70,20 @@ $cartItems = $params["cartItems"];
             $
           </span>
         </div>
-        <a href="<?php echo BASE_URI . "/checkout"; ?>"
-          class="btn-checkout px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+        <a href="<?php echo BASE_URI . "/checkout"; ?>" class="btn-checkout px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out
         </a>
       </div>
     </div>
     <div class="flex justify-between items-center w-[65%]">
       <div class="flex my-8 coupon-code">
-        <input type="text" name="" id="" placeholder="Enter coupon code"
-          class="px-5 py-3 border-gray-400 border-solid border-[1px] rounded-md focus:outline-none" />
-        <button
-          class="ml-5 px-4 py-3 bg-[#315854] rounded-md text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+        <input type="text" name="" id="" placeholder="Enter coupon code" class="px-5 py-3 border-gray-400 border-solid border-[1px] rounded-md focus:outline-none" />
+        <button class="ml-5 px-4 py-3 bg-[#315854] rounded-md text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Apply
         </button>
       </div>
       <!-- remove all product in wishlist -->
-      <button
-        class="px-4 py-3 font-bold text-black transition-all border-2 rounded-sm hover:bg-red-400 hover:text-white hover:border-red-600 h-fit"
-        onclick="removeAllFromCart()">
+      <button class="px-4 py-3 font-bold text-black transition-all border-2 rounded-sm hover:bg-red-400 hover:text-white hover:border-red-600 h-fit" onclick="removeAllFromCart()">
         <i class="fa-solid fa-trash"></i>
         Remove all
       </button>
@@ -103,19 +95,25 @@ $cartItems = $params["cartItems"];
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
   document.removeFromCart = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/cart/remove"; ?>', { id }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      if (response.type === 'error') {
-        alert(response.message);
-      } else if (response.type === 'info') {
-        alert(response.message);
-      } else {
-        alert('Product deleted from cart');
-      }
-    }).catch(error => {
-      alert('Something went wrong');
-    });
+    const result = confirm("Delete this cart?");
+    if (result) {
+
+      FetchXHR.post('<?php echo BASE_URI . "/api/cart/remove"; ?>', {
+        id
+      }, {
+        'Content-Type': 'application/json'
+      }).then(response => {
+        if (response.type === 'error') {
+          alert(response.message);
+        } else if (response.type === 'info') {
+          alert(response.message);
+        } else {
+          alert('Product deleted from cart');
+        }
+      }).catch(error => {
+        alert('Something went wrong');
+      });
+    }
   }
 
   document.removeAllFromCart = () => {
@@ -153,7 +151,10 @@ $cartItems = $params["cartItems"];
   });
 
   document.updateQuantity = (id, quantity) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/cart/update' ?>', { id, quantity }, {
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/update' ?>', {
+      id,
+      quantity
+    }, {
       'Content-Type': 'application/json'
     }).then(response => {
       const data = response.data;
