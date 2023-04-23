@@ -93,11 +93,12 @@ class ProfileController extends Controller
     $user = Application::getInstance()
       ->getAuthentication()
       ->getUser();
+    $orders = $user->orders();
     $response->setStatusCode(200);
     $response->setBody(
       View::renderWithLayout(new View("pages/profile/purchaseHistory"), [
         "user" => $user,
-        "footer" => "",
+        "orders" => $orders,
       ])
     );
   }

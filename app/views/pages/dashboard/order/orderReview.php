@@ -9,40 +9,30 @@
 
             <div class="w-full mx-auto my-0">
                 <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
+
                     <div class="flex justify-between">
                         <h1 class="text-xl font-bold">Order information</h1>
                         <div class="box-border w-1/2 px-10">
                         </div>
-                        <!-- <?php
-                                if ($order->status == 0) {
-                                ?>
-                            <a href="<?php echo BASE_URI .
-                                            "/dashboard/orders/order_review/update" .
-                                            "?id=" .
-                                            $order->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
-                                Cancel order
-                                <i class="fas fa-shopping-cart"></i>
-                            </a>
-                        <?php
-                                }
-                        ?> -->
+
                         <ul>
                             <li>
-                                <?php if ($order->status == 1) : ?>
-                                    <a href="<?php echo BASE_URI . "/dashboard/orders/order_review/update?id=" . $order->id; ?>" class="accept-button py-2 px-3 bg-green-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                <?php if ($order->status == 1) :
+                                ?>
+                                    <span class="accept-button py-2 px-3 bg-green-400 text-white rounded-xl hover:text-blue-500 transition-all">
                                         Accepted
                                         <i class="fas fa-check-circle"></i>
-                                    </a>
+                                    </span>
                                 <?php elseif ($order->status == 2) : ?>
-                                    <a href="<?php echo BASE_URI . "/dashboard/orders/order_review/update?id=" . $order->id; ?>" class="reject-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="reject-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                                         Rejected
                                         <i class="fas fa-times-circle"></i>
-                                    </a>
+                                    </span>
                                 <?php elseif ($order->status == 0) : ?>
-                                    <a href="<?php echo BASE_URI . "/dashboard/orders/order_review/update?id=" . $order->id; ?>" class="pending-button py-2 px-3 bg-yellow-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="pending-button py-2 px-3 bg-yellow-400 text-white rounded-xl hover:text-blue-500 transition-all">
                                         Pending
                                         <i class="fas fa-clock"></i>
-                                    </a>
+                                    </span>
                                 <?php endif; ?>
                             </li>
                         </ul>
@@ -105,6 +95,22 @@
                             </table>
                         </div>
                     </div>
+                    <?php if ($order->status == 0) {
+                    ?>
+                        <form class="flex flex-col" action="<?php echo BASE_URI .
+                                                                "/dashboard/order/order_review" .
+                                                                "?id=" .
+                                                                $order->id; ?>" method="POST">
+                            <select name="status" class="p-2 rounded-lg border-gray-300 border">
+                                <option value="1">Accepted</option>
+                                <option value="2">Rejected</option>
+                                <option value="0">Pending</option>
+                            </select>
+                            <button type="submit" class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded">Submit</button>
+                        </form>
+                    <?php
+
+                    } ?>
                 </div>
             </div>
         </div>

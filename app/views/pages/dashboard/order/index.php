@@ -4,7 +4,6 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Pagination;
-
 ?>
 
 <div class="w-full mx-auto my-0">
@@ -63,22 +62,14 @@ use App\Models\Pagination;
                   <td class="px-5 py-3">
                     <?php echo $order->create_at ?>
                   </td>
-                  <td class="px-5 py-3 font-medium <?php echo ($order->status == 0) ? 'text-red-900' : 'text-primary' ?>">
-                    <?php
-                    if ($order->status == 0) {
-                      echo "Pending";
-                    } else if ($order->status == 1) {
-                      echo "Accept";
-                    } else if ($order->status == 2) {
-                      echo "Shipping";
-                    } else if ($order->status == 3) {
-                      echo "Successful";
-                    } else if ($order->status == 4) {
-                      echo "Cancel";
-                    } else {
-                      echo "Reject";
-                    }
-                    ?>
+                  <td class="px-5 py-3 font-medium ">
+                    <?php if ($order->status == 0) : ?>
+                      <p class="font-medium text-primary">Pending</p>
+                    <?php elseif ($order->status == 1) : ?>
+                      <p class="font-medium text-green-800">Accept</p>
+                    <?php else : ?>
+                      <p class="font-medium text-red-800">Reject</p>
+                    <?php endif; ?>
                   </td>
                   <td class="px-5 py-3">
                     <?php
