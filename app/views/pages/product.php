@@ -97,11 +97,11 @@
   <!-- //? info detail  -->
   <div class="mt-20">
     <ul class="box-content flex justify-center">
-      <li class="p-2 mb-5 mr-10 transition-all rounded cursor-pointer hover:bg-primary hover:text-white"
+      <li id="description-tab" class="p-2 mb-5 mr-10 transition-all rounded cursor-pointer hover:bg-primary hover:text-white  border border-white border-b-primary-800"
         onclick="showDescription()">
         Description
       </li>
-      <li class="p-2 mb-2 mr-5 transition-all rounded cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white"
+      <li id="review-tab" class="p-2 mb-2 mr-5 transition-all rounded cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white border border-white"
         onclick="showReview()">
         Review
       </li>
@@ -124,12 +124,16 @@
   function showDescription() {
     document.getElementById("description").style.display = "block"
     document.getElementById("review").style.display = "none"
+    document.getElementById("description-tab").classList.add("border-b-primary-800")
+    document.getElementById("review-tab").classList.remove("border-b-primary-800")
   }
 
   function showReview() {
-    console.log(1)
     document.getElementById("review").style.display = "block";
     document.getElementById("description").style.display = "none"
+    document.getElementById("review-tab").classList.add("border-b-primary-800")
+    document.getElementById("description-tab").classList.remove("border-b-primary-800")
+
   }
 </script>
 <script type="module">
