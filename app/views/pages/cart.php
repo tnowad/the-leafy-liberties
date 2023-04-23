@@ -36,7 +36,7 @@ $cartItems = $params["cartItems"];
                       <input type="hidden" name="id" value="<?php echo $product->id; ?>">
                       <input type="submit" value="-" name="minus"
                         class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
-                      <input type="number" name="quantity" class="w-6 m-5 text-lg text-count"
+                      <input type="number" name="quantity" class="w-6 m-5 text-lg text-count text-center"
                         value="<?php echo $cartItem->quantity; ?>" />
                       <input type="submit" value="+" name="plus"
                         class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
