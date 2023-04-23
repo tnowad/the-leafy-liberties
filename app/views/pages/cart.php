@@ -4,7 +4,7 @@ $cartItems = $params["cartItems"];
 <div class="w-full my-10">
   <div class="container mx-auto">
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
-      <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
+      <div class="cart-list w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php if (count($cartItems) == 0): ?>
           <div class="flex flex-col items-center justify-center h-full gap-2">
             <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
