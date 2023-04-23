@@ -3,9 +3,7 @@
   <div class="grid grid-cols-1 gap-3 xl:grid-cols-2">
     <div
       class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
-      <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI .
-        "/" .
-        $product->image; ?>" alt="Book info" />
+      <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI . $product->image; ?>" alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
       <p class="p-1 mb-2 md:mb-6 text-[11px] sm:text-sm text-primary-700 font-medium inline-block">
@@ -42,14 +40,14 @@
             <i
               class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400"></i>
             <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
-              Add to cart
+              <?php $wishlist ?>
             </button>
           </div>
           <div
             class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToWishList(<?php echo $product->id; ?>)">
             <i
-              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400"></i>
+              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               Add to wishlist
             </button>
@@ -117,7 +115,7 @@
     <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
       id="review">
       <p class="text-lg text-center ">
-        Sản phẩm chất cmn lượng
+        Sản phẩm chất lượng
       </p>
     </div>
   </div>
@@ -164,4 +162,17 @@
       console.error(error);
     });
   };
+  document.querySelector('.wishlist-icon').addEventListener('click', (event) => {
+    if (event.target.classList.contains('bg-red-400')) {
+      event.target.classList.remove('bg-red-400');
+      event.target.classList.add('bg-white');
+      event.target.classList.remove('text-white');
+      event.target.classList.add('text-red-400');
+    } else {
+      event.target.classList.add('bg-red-400');
+      event.target.classList.remove('bg-white');
+      event.target.classList.add('text-white');
+      event.target.classList.remove('text-red-400');
+    }
+  });
 </script>

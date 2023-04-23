@@ -17,7 +17,7 @@ $cartItems = $params["cartItems"];
               <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
                 <div class="flex items-center justify-between item-detail">
                   <div class="item-img w-36 h-36">
-                    <img src="<?php echo BASE_URI . '/' . $product->image; ?>" alt=""
+                    <img src="<?php echo BASE_URI .  $product->image; ?>" alt=""
                       class="object-contain w-full h-full" />
                   </div>
                   <div class="text">

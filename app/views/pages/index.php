@@ -11,7 +11,7 @@ use App\Models\Wishlist;
 <div className="flex justify-center w-full flex-col items-center -z-10">
   <div class="wrapper">
     <div id="default-carousel" class="relative" data-carousel="slide">
-      <div class="relative hidden h-56 overflow-hidden carousel sm:h-64 xl:h-80 2xl:h-96 -z-10 md:block">
+      <div class="relative hidden overflow-hidden carousel sm:h-64 xl:h-80 2xl:h-[420px] -z-10 md:block">
 
         <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
@@ -82,7 +82,7 @@ use App\Models\Wishlist;
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
               <p class="font-semibold select-option-text hover:color-red-400"
-                onclick="addToCart('<?php echo $product->id ?>')">Add to Cart</p>
+                onclick="addToCart('<?php echo $product->id ?>')">Add to wishlist</p>
               <i class="<?php if (Wishlist::findOne(['product_id' => $product->id]))
                 echo "bg-red-400 text-white" ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                   onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
@@ -125,7 +125,7 @@ use App\Models\Wishlist;
               </div>
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                <p class="font-semibold select-option-text hover:color-red-400 ">Add to Cart</p>
+                <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
                 <i class="<?php if (Wishlist::findOne(['product_id' => $product->id]))
                   echo "bg-red-400 text-white" ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                     onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>

@@ -124,6 +124,21 @@ $products = $params["products"]; ?>
       });
     });
   }
+  document.removeFromWishlist = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/remove"; ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('Product deleted from wishlist');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
 
   document.moveAllToCart = () => {
     FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/move-all-to-cart"; ?>').then(response => {
@@ -140,21 +155,6 @@ $products = $params["products"]; ?>
     });
   }
 
-  document.removeFromWishlist = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/remove"; ?>', {
-      id: id,
-    }).then(response => {
-      if (response.type === 'error') {
-        alert(response.message);
-      } else if (response.type === 'info') {
-        alert(response.message);
-      } else {
-        alert('Product deleted from wishlist');
-      }
-    }).catch(error => {
-      alert('Something went wrong');
-    });
-  }
 
   document.removeAllFromWishlist = () => {
     FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/empty"; ?>').then(response => {
