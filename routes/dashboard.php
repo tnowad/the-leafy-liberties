@@ -51,12 +51,22 @@ $router->post("/dashboard/product", [
 
 //coupon
 $router->get("/dashboard/coupon", [CouponController::class, "index"]);
-$router->post("/dashboard/coupon", [CouponController::class, "create"]);
 $router->post("/dashboard/coupon", [CouponController::class, "filterCoupon"]);
 
 //coupon function
 $router->get("/dashboard/coupon/update", [CouponController::class, "update"]);
 $router->post("/dashboard/coupon/update", [CouponController::class, "update"]);
+$router->get("/dashboard/coupon/create", [CouponController::class, "create"]);
+$router->post("/dashboard/coupon/create", [
+  CouponController::class,
+  "create",
+]);
+$router->get("/dashboard/coupon/delete", [CouponController::class, "delete"]);
+$router->post("/dashboard/coupon/delete", [
+  CouponController::class,
+  "delete",
+]);
+
 
 // slide
 $router->get("/dashboard/slide", [SlideController::class, "index"]);
@@ -99,6 +109,23 @@ $router->post("/dashboard/order/order_review", [OrderController::class, "update"
 
 // categories
 $router->get("/dashboard/category", [CategoryController::class, "index"]);
+//categories function
+$router->get("/dashboard/category/create", [CategoryController::class, "create"]);
+$router->post("/dashboard/category/create", [
+  CategoryController::class,
+  "create",
+]);
+$router->get("/dashboard/category/update", [CategoryController::class, "update"]);
+$router->post("/dashboard/category/update", [
+  CategoryController::class,
+  "update",
+]);
+$router->get("/dashboard/category/delete", [CategoryController::class, "delete"]);
+$router->post("/dashboard/category/delete", [
+  CategoryController::class,
+  "delete",
+]);
+
 
 // permission
 

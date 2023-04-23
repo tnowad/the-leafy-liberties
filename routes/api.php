@@ -14,3 +14,4 @@ $router->post("/api/wishlist/move-all-to-cart", [WishlistController::class, "mov
 $router->post("/api/cart/add", [CartController::class, "add"]);
 $router->post("/api/cart/remove", [CartController::class, "remove"]);
 $router->post("/api/cart/empty", [CartController::class, "empty"]);
+$router->post("/api/cart/update", [CartController::class, "update"]);

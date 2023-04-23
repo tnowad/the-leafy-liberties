@@ -174,7 +174,6 @@ class CartController extends Controller
     }
 
     $user = $auth->getUser();
-
     $product = Product::find($request->getBody()["id"]);
 
     if (!$product) {
@@ -212,6 +211,7 @@ class CartController extends Controller
     $response->jsonResponse([
       "type" => "success",
       "message" => "Cart updated",
+      "quantity" => $cart->quantity,
     ]);
   }
 }

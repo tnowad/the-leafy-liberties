@@ -16,9 +16,9 @@ echo $text;
           </button>
         </form>
       </div>
-      <button class="add-coupon w-5 h-5 text-2xl">
+      <a href="<?php echo BASE_URI . '/dashboard/coupon/create' ?>" class="add-coupon w-5 h-5 text-2xl">
         +
-      </button>
+      </a>
     </div>
     <div class="table-coupon-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
       <div class="relative">
@@ -79,10 +79,13 @@ echo $text;
                         class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button
+                      <a href="<?php echo BASE_URI .
+                        "/dashboard/coupon/delete" .
+                        "?id=" .
+                        $coupon->id; ?>"
                         class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-trash"></i>
-                      </button>
+                      </a>
                     </div>
                   </td>
                 </tr>
@@ -93,48 +96,9 @@ echo $text;
         </table>
       </div>
     </div>
-    <div
-      class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[300]">
-      <div class="bg-white p-8 rounded-md shadow-lg w-[600px]">
-        <h2 class="text-xl font-bold mb-4">Add Coupon</h2>
-        <form class="flex flex-col" method="POST" action="<?php BASE_URI .
-          "/dashboard/coupon"; ?>">
-          <label for="image" class="my-2">Code:</label>
-          <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="code" />
-          <label for="category" class="my-2">Description:</label>
-          <textarea name="description" class="bg-gray-100 p-3 focus:outline-none rounded-lg"></textarea>
-          <!-- <script>
-            CKEDITOR.replace('description');
-          </script> -->
-          <label for="expired" class="my-2">Expired:</label>
-          <input type="date" value="" id="task_date" class="bg-gray-100 p-3 focus:outline-none rounded-lg"
-            name="expired" onchange="return CheckExpired();" />
-          <label for="remaining" class="my-2">Quantity:</label>
-          <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="quantity" />
-          <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
-            type="submit">
-            Submit
-          </button>
-          <button id="cancel" class="my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-            Cancel
-          </button>
-        </form>
-      </div>
-    </div>
   </div>
 </div>
 <script>
-  let btn = document.querySelector(".add-coupon")
-  btn.addEventListener("click", () => {
-    document.querySelector(".add-form").classList.add("flex");
-    document.querySelector(".add-form").classList.remove("hidden");
-
-  })
-  let cancel = document.querySelector("#cancel");
-  cancel.addEventListener("click", (event) => {
-    event.preventDefault();
-    document.querySelector(".add-form").classList.add("hidden")
-  })
   function CheckExpired() {
     var current = new Date(document.getElementById('task_date').value);
     var today = new Date();

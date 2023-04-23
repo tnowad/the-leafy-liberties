@@ -6,9 +6,9 @@ $cartItems = $params["cartItems"];
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
       <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
         <?php if (count($cartItems) == 0): ?>
-          <div class="flex justify-center items-center h-full flex-col gap-2">
+          <div class="flex flex-col items-center justify-center h-full gap-2">
             <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
-            <h1 class="text-5xl uppercase tracking-wider text-gray-400">Cart is empty</h1>
+            <h1 class="text-5xl tracking-wider text-gray-400 uppercase">Cart is empty</h1>
           </div>
         <?php else: ?>
           <?php foreach ($cartItems as $cartItem): ?>
@@ -18,10 +18,10 @@ $cartItems = $params["cartItems"];
                 <div class="flex items-center justify-between item-detail">
                   <div class="item-img w-36 h-36">
                     <img src="<?php echo BASE_URI . '/' . $product->image; ?>" alt=""
-                      class="w-full h-full object-contain" />
+                      class="object-contain w-full h-full" />
                   </div>
                   <div class="text">
-                    <p class="mb-2 text-2xl book-name break-words w-40">
+                    <p class="w-40 mb-2 text-2xl break-words book-name">
                       <?php echo $product->name; ?>
                     </p>
                     <p class="text-base book-author">
@@ -32,17 +32,15 @@ $cartItems = $params["cartItems"];
                     <?php echo $product->price; ?>
                   </p>
                   <div>
-                    <div class="flex items-center justify-center mx-auto w-fit h-fit">
-                      <button class="minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
-                        <i class="fa-solid fa-minus"></i>
-                      </button>
-                      <span class="m-5 text-lg text-count">
-                        <?php echo $cartItem->quantity; ?>
-                      </span>
-                      <button class="plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all">
-                        <i class="fa-solid fa-plus"></i>
-                      </button>
-                    </div>
+                    <form class="flex items-center justify-center mx-auto product-quantity w-fit h-fit">
+                      <input type="hidden" name="id" value="<?php echo $product->id; ?>">
+                      <input type="submit" value="-" name="minus"
+                        class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                      <input type="number" name="quantity" class="w-6 m-5 text-lg text-count"
+                        value="<?php echo $cartItem->quantity; ?>" />
+                      <input type="submit" value="+" name="plus"
+                        class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                    </form>
                   </div>
                   <p class="text-xl counter-price">
                     <?php echo $product->price * $cartItem->quantity; ?>$
@@ -85,7 +83,8 @@ $cartItems = $params["cartItems"];
         </button>
       </div>
       <!-- remove all product in wishlist -->
-      <button class="px-4 py-3 font-bold text-black transition-all border-2 hover:bg-red-400 hover:text-white hover:border-red-600 h-fit rounded-sm"
+      <button
+        class="px-4 py-3 font-bold text-black transition-all border-2 rounded-sm hover:bg-red-400 hover:text-white hover:border-red-600 h-fit"
         onclick="removeAllFromCart()">
         <i class="fa-solid fa-trash"></i>
         Remove all
@@ -93,19 +92,10 @@ $cartItems = $params["cartItems"];
     </div>
   </div>
 </div>
-<script>
-  document.querySelectorAll('.plus, .minus').forEach(button => {
-    button.addEventListener('click', event => {
-      const span = event.currentTarget.parentElement.querySelector('.text-count');
-      let quantity = parseInt(span.textContent);
-      if (event.currentTarget.classList.contains('plus')) {
-        quantity++;
-      } else if (event.currentTarget.classList.contains('minus') && quantity > 0) {
-        quantity--;
-      }
-      span.textContent = quantity;
-    });
-  });
+<script type="module">
+  import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
+
   document.removeAllFromCart = () => {
     FetchXHR.post('<?php echo BASE_URI . "/api/cart/empty"; ?>').then(response => {
       if (response.type === 'error') {
@@ -119,4 +109,39 @@ $cartItems = $params["cartItems"];
       alert('Something went wrong');
     });
   }
+
+  document.querySelectorAll('.product-quantity').forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const id = form.querySelector('input[name="id"]').value;
+      let quantity = form.querySelector('input[name="quantity"]').value;
+
+      // base the value of the button to update the quantity of the product
+      const button = event.submitter;
+      if (button.name === 'plus') {
+        quantity = parseInt(quantity) + 1;
+      } else if (button.name === 'minus') {
+        quantity = parseInt(quantity) - 1;
+      }
+      // update the quantity of the product
+      document.updateQuantity(id, quantity);
+      // reload the page
+      location.reload();
+    });
+  });
+
+  document.updateQuantity = (id, quantity) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/update' ?>', { id, quantity }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
+
 </script>
