@@ -96,7 +96,7 @@ if ($user != null) {
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
               <p class="font-semibold select-option-text hover:color-red-400"
-                onclick="addToCart('<?php echo $product->id ?>')">Add to wishlist</p>
+                onclick="addToCart('<?php echo $product->id ?>')">Add to cart</p>
               <i class="<?php echo ($flagwl) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                 onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>

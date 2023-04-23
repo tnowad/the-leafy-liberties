@@ -89,9 +89,9 @@ if ($user != null) {
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
               if ($flagwl) {
-                echo "Added to wishlist";
+                echo "Added to cart";
               } else {
-                echo "Add to wishlist";
+                echo "Add to cart";
               }
               ?>
             </button>
