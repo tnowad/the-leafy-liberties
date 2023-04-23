@@ -3,10 +3,14 @@ $cartItems = $params["cartItems"];
 ?>
 <div class="w-full my-10">
   <div class="container mx-auto">
+    <div class="flex items-center justify-start my-8 md:my-14">
+      <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Cart</h1>
+    </div>
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
-      <div class="cart-list w-[65%] h-[800px] overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
+      <div class="cart-list w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl"
+        total="<?php echo count($cartItems) ?>">
         <?php if (count($cartItems) == 0): ?>
-          <div class="flex flex-col items-center justify-center h-full gap-2">
+          <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
             <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
             <h1 class="text-5xl tracking-wider text-gray-400 uppercase">Cart is empty</h1>
           </div>
@@ -16,9 +20,11 @@ $cartItems = $params["cartItems"];
             <div class="w-full">
               <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
                 <div class="flex items-center justify-between item-detail">
+                  <div onclick="removeFromCart(<?php echo $product->id ?>)">
+                    <i class="fa-solid fa-times text-xl cursor-pointer"></i>
+                  </div>
                   <div class="item-img w-36 h-36">
-                    <img src="<?php echo BASE_URI .  $product->image; ?>" alt=""
-                      class="object-contain w-full h-full" />
+                    <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-contain w-full h-full" />
                   </div>
                   <div class="text">
                     <p class="w-40 mb-2 text-2xl break-words book-name">
@@ -36,7 +42,7 @@ $cartItems = $params["cartItems"];
                       <input type="hidden" name="id" value="<?php echo $product->id; ?>">
                       <input type="submit" value="-" name="minus"
                         class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
-                      <input type="number" name="quantity" class="w-6 m-5 text-lg text-count"
+                      <input type="number" name="quantity" class="w-10 text-lg text-count text-center"
                         value="<?php echo $cartItem->quantity; ?>" />
                       <input type="submit" value="+" name="plus"
                         class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
@@ -68,7 +74,7 @@ $cartItems = $params["cartItems"];
           </span>
         </div>
         <a href="<?php echo BASE_URI . "/checkout"; ?>"
-          class="px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+          class="btn-checkout px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out
         </a>
       </div>
@@ -95,6 +101,22 @@ $cartItems = $params["cartItems"];
 <script type="module">
   import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
+
+  document.removeFromCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/cart/remove"; ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('Product deleted from cart');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
 
   document.removeAllFromCart = () => {
     FetchXHR.post('<?php echo BASE_URI . "/api/cart/empty"; ?>').then(response => {
@@ -143,5 +165,15 @@ $cartItems = $params["cartItems"];
       console.error(error);
     });
   };
-
+</script>
+<script>
+  let counts = document.querySelector(".cart-list");
+  let btn = document.querySelector(".btn-checkout");
+  const total = counts.getAttribute("total");
+  btn.addEventListener("click", (event) => {
+    if (total == 0) {
+      alert("There are no products in cart");
+      event.preventDefault();
+    }
+  })
 </script>

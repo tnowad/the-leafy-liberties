@@ -15,8 +15,8 @@
         endif;
       endforeach;
       if (!$hasOrder) :
-        echo '<div class="flex flex-col justify-center items-center h-[70vh]">';
-        echo '<i class="fa-solid fa-cart-circle-plus text-5xl text-gray-400 mb-4"></i>';
+        echo '<div class="flex flex-col justify-center items-center h-[70vh] w-full">';
+        echo '<i class="fa-solid fa-cart-circle-plus text-5xl text-gray-400 mb-5"></i>';
         echo '<h1 class="text-5xl font-medium tracking-widest uppercase text-gray-400">Don\'t have any purchase history yet</h1>';
         echo '</div>';
       else :

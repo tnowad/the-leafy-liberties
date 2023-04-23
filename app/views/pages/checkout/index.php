@@ -140,9 +140,11 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             <?php $product = $CartItem->product(); ?>
             <div class="flex items-center justify-between mt-5">
               <div class="flex items-center">
-                <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
-                  class="object-cover w-20 h-24 rounded-md">
-                <div class="ml-4">
+                <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
+                  <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
+                    class="object-cover w-20 h-24 rounded-md">
+                </a>
+                <div class="ml-4 cursor-pointer">
                   <h3 class="font-medium text-gray-700">
                     <?php echo $product->name ?>
                   </h3>
@@ -151,12 +153,12 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
                   </div>
                   <div class="mt-1 text-sm font-medium text-gray-700">
                     <?php echo $cartItem->quantity ?> x
-                    <?php echo $product->price ?>
+                    <?php echo $product->price ?> $
                   </div>
                 </div>
               </div>
               <div class="text-gray-600">
-                <?php echo $product->price * $cartItem->quantity ?>
+                <?php echo $product->price * $cartItem->quantity ?> $
               </div>
             </div>
           <?php endforeach; ?>
