@@ -54,20 +54,25 @@ class OrderController extends Controller
           )
         );
       case "POST":
-        $order = Order::find($request->getParam("id"));
+        $order = Order::findOne(["id" => $request->getQuery("id")]);
+        // $order = Order::find(25);
+        // $order = Order::find($request->getParam("id"));
         if (!$order) {
-          return $response->setBody(
-            View::renderWithDashboardLayout(
-              new View("pages/dashboard/order"),
-              [
-                "title" => "Order",
-                "toast" => [
-                  "type" => "error",
-                  "message" => "Edit account fail!",
-                ],
-              ]
-            )
-          );
+          return $response->redirect(BASE_URI . "/dashboard/order", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "Edit product fail",
+            ],
+          ]);
+        } else {
+          $order->status = $request->getParam("status");
+          $order->save();
+          return $response->redirect(BASE_URI . "/dashboard/order", 200, [
+            "toast" => [
+              "type" => "success",
+              "message" => "Check order successful",
+            ],
+          ]);
         }
       default:
         break;

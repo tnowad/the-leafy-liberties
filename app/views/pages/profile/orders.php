@@ -69,13 +69,7 @@ $orders = $params['orders'];
                         <p class="font-medium text-primary">Pending</p>
                       <?php elseif ($order->status == 1) : ?>
                         <p class="font-medium text-green-800">Accept</p>
-                      <?php elseif ($order->status == 2) : ?>
-                        <p class="font-medium text-yellow-800">Shipping</p>
-                      <?php elseif ($order->status == 3) : ?>
-                        <p class="font-medium text-green-800">Successful</p>
-                      <?php elseif ($order->status == 4) : ?>
-                        <p class="font-medium text-pink-800">Cancel</p>
-                      <?php elseif ($order->status == 5) : ?>
+                      <?php else : ?>
                         <p class="font-medium text-red-800">Reject</p>
                       <?php endif; ?>
                     </td>
