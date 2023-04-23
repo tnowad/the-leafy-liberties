@@ -5,7 +5,21 @@ use App\Models\Product;
 use App\Models\Slide;
 use App\Models\Tag;
 use App\Models\Wishlist;
+use Core\Application;
+use App\Models\Cart;
 
+$auth = Application::getInstance()->getAuthentication();
+$user = $auth->getUser();
+$flagwl = false;
+if ($user != null) {
+  $wishlists = Wishlist::findAll(["user_id" => $user->id]);
+  foreach ($wishlists as $wishlistItem) {
+    if ($product->id == $wishlistItem->product_id) {
+      $flagwl = true;
+      break;
+    }
+  }
+}
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
@@ -83,9 +97,8 @@ use App\Models\Wishlist;
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
               <p class="font-semibold select-option-text hover:color-red-400"
                 onclick="addToCart('<?php echo $product->id ?>')">Add to wishlist</p>
-              <i class="<?php if (Wishlist::findOne(['product_id' => $product->id]))
-                echo "bg-red-400 text-white" ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
-                  onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+              <i class="<?php echo ($flagwl) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>
           </div>
         </div>
@@ -126,9 +139,8 @@ use App\Models\Wishlist;
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
                 <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
-                <i class="<?php if (Wishlist::findOne(['product_id' => $product->id]))
-                  echo "bg-red-400 text-white" ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
-                    onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+                <i class="<?php echo ($flagwl) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                  onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
               </div>
             </div>
           </div>

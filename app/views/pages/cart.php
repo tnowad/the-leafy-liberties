@@ -20,6 +20,9 @@ $cartItems = $params["cartItems"];
             <div class="w-full">
               <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
                 <div class="flex items-center justify-between item-detail">
+                  <div onclick="removeFromCart(<?php echo $product->id ?>)">
+                    <i class="fa-solid fa-times text-xl cursor-pointer"></i>
+                  </div>
                   <div class="item-img w-36 h-36">
                     <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-contain w-full h-full" />
                   </div>
@@ -99,6 +102,22 @@ $cartItems = $params["cartItems"];
   import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
+  document.removeFromCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . "/api/cart/remove"; ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      if (response.type === 'error') {
+        alert(response.message);
+      } else if (response.type === 'info') {
+        alert(response.message);
+      } else {
+        alert('Product deleted from cart');
+      }
+    }).catch(error => {
+      alert('Something went wrong');
+    });
+  }
+
   document.removeAllFromCart = () => {
     FetchXHR.post('<?php echo BASE_URI . "/api/cart/empty"; ?>').then(response => {
       if (response.type === 'error') {
@@ -152,7 +171,7 @@ $cartItems = $params["cartItems"];
   let btn = document.querySelector(".btn-checkout");
   const total = counts.getAttribute("total");
   btn.addEventListener("click", (event) => {
-    if(total == 0){
+    if (total == 0) {
       alert("There are no products in cart");
       event.preventDefault();
     }
