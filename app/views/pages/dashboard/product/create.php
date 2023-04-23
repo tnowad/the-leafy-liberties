@@ -1,15 +1,13 @@
 <div
-  class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[500]">
-  <div class="bg-white p-8 rounded-md shadow-lg w-[550px] ">
+  class="add-form min-h-screen w-full justify-center items-center bg-opacity-75 z-[500] my-5">
+  <div class="bg-white p-8 rounded-md shadow-lg w-full ">
     <h2 class="mb-4 text-xl font-bold">Add Product</h2>
-    <form class="flex flex-col" action="<?php BASE_URI . "/dashboard/product/create"; ?>" method="POST"
-      enctype="multipart/form-data">
+    <form class="flex flex-col" action="<?php echo  BASE_URI . "/dashboard/product/create"; ?>" method="POST" enctype="multipart/form-data">
       <label for="title" class="my-2">Title:</label>
       <input type="text" value="" name="name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
 
       <label for="image" class="my-2">Image:</label>
-      <input type="file" name="image" id="imgInp" />
-      <!-- <img id="blah" src="#" class="object-contain h-40 mx-auto bg-gray-100 w-fit" /> -->
+      <input type="file" name="image"/>
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="" name="isbn" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
 
@@ -26,9 +24,9 @@
         type="submit">
         Submit
       </button>
-      <button class="px-4 py-2 my-1 font-bold text-white bg-gray-500 rounded cancel-button hover:bg-gray-700">
+      <a class="px-4 py-2 my-1 font-bold text-white bg-gray-500 rounded cancel-button hover:bg-gray-700" href="<?php echo BASE_URI . '/dashboard/product' ?>" >
         Cancel
-      </button>
+      </a>
     </form>
   </div>
 </div>

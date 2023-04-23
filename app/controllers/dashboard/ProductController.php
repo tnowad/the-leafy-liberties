@@ -45,52 +45,64 @@ class ProductController extends Controller
         ],
       ]);
     }
+    switch ($request->getMethod()) {
+      case 'GET':
+        $response->setStatusCode(200);
+        return $response->setBody(
+          View::renderWithDashboardLayout(
+            new View("pages/dashboard/product/create"),
+            [
+              "title" => "Add Product",
+            ]
+          )
+        );
+      case 'POST':
+        $uploader = new FileUploader([
+          "allowedExtensions" => ["jpeg", "jpg", "png"],
+          "maxFileSize" => 2097152,
+          "uploadPath" => "resources/images/products/",
+        ]);
 
-    $uploader = new FileUploader([
-      "allowedExtensions" => ["jpeg", "jpg", "png"],
-      "maxFileSize" => 2097152,
-      "uploadPath" => "resources/images/products/",
-    ]);
+        $result = $uploader->upload($_FILES["image"]);
 
-    $result = $uploader->upload($_FILES["image"]);
+        if ($result) {
+          $request->setParam("image", $result);
+        } else {
+          return $response->setBody(
+            View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
+              "title" => "Products",
+              "toast" => [
+                "type" => "error",
+                "message" => "Add product failed!",
+              ],
+            ])
+          );
+        }
+        $product = new Product();
+        $product->name = $request->getParam("name");
+        $product->image = $request->getParam("image");
+        $product->isbn = $request->getParam("isbn");
+        $product->price = $request->getParam("price");
+        $product->description = $request->getParam("description");
+        $product->quantity = $request->getParam("quantity");
+        $product->save();
+        return $response->setBody(
+          View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
+            "title" => "Products",
+            "toast" => [
+              "type" => "success",
+              "message" => "Add product successful!",
+            ],
+          ])
+        );
 
-    if ($result) {
-      $request->setParam("image", $result);
-    } else {
-      return $response->setBody(
-        View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
-          "title" => "Products",
-          "toast" => [
-            "type" => "error",
-            "message" => "Add product failed!",
-          ],
-        ])
-      );
     }
-
-    $product = new Product();
-    $product->name = $request->getParam("name");
-    $product->image = $request->getParam("image");
-    $product->isbn = $request->getParam("isbn");
-    $product->price = $request->getParam("price");
-    $product->description = $request->getParam("description");
-    $product->quantity = $request->getParam("quantity");
-    $product->save();
-    return $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
-        "title" => "Products",
-        "toast" => [
-          "type" => "success",
-          "message" => "Add product successful!",
-        ],
-      ])
-    );
   }
 
   public function store(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("products.create")) {
+    if (!$auth->hasPermission("product.create")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -180,7 +192,7 @@ class ProductController extends Controller
                 "title" => "Products",
                 "toast" => [
                   "type" => "error",
-                  "message" => "Add product failed!",
+                  "message" => "Edit product failed!",
                 ],
               ])
             );
