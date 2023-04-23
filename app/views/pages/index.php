@@ -102,7 +102,7 @@ use App\Models\Wishlist;
     <div class="flex gap-4">
       <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
 
-        <?php foreach (array_slice(Product::all(), 0, 24) as $product): ?>
+        <?php foreach (array_slice(Product::all(), 0, 16) as $product): ?>
           <div
             class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl h-[500px]">
             <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60 mx-auto">

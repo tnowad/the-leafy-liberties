@@ -5,21 +5,22 @@ use App\Models\Cart;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
-$carts = Cart::findAll(["user_id" => $user->id]);
-$wishlists = Wishlist::findAll(["user_id" => $user->id]);
 $flag = false;
 $flagwl = false;
-
-foreach ($carts as $cartItem) {
-  if ($product->id == $cartItem->product_id) {
-    $flag = true;
-    break;
+if ($user != null) {
+  $carts = Cart::findAll(["user_id" => $user->id]);
+  $wishlists = Wishlist::findAll(["user_id" => $user->id]);
+  foreach ($carts as $cartItem) {
+    if ($product->id == $cartItem->product_id) {
+      $flag = true;
+      break;
+    }
   }
-}
-foreach ($wishlists as $wishlistItem) {
-  if ($product->id == $wishlistItem->product_id) {
-    $flagwl = true;
-    break;
+  foreach ($wishlists as $wishlistItem) {
+    if ($product->id == $wishlistItem->product_id) {
+      $flagwl = true;
+      break;
+    }
   }
 }
 ?>
