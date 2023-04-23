@@ -18,7 +18,7 @@
                         if ($order->status == 0) {
                         ?>
                             <a href="<?php echo BASE_URI .
-                                            "/profile/orders/orderDetail/delete" .
+                                            "/profile/orders/order_detail/delete" .
                                             "?id=" .
                                             $order->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                                 Cancel order

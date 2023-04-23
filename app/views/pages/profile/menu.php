@@ -24,16 +24,16 @@
       <h3 class="cursor-pointer">Account settings</h3>
     </a>
     <a href="<?php echo BASE_URI .
-      "/profile/payments"; ?>"
-      class="w-40 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
-      <i class="flex items-center fa fa-check mr-2"></i>
-      <h3 class="cursor-pointer">Payments</h3>
-    </a>
-    <a href="<?php echo BASE_URI .
       "/profile/orders"; ?>"
       class="w-40 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
       <i class="flex items-center fa fa-bag-shopping mr-2"></i>
-      <h3 class="cursor-pointer">Order</h3>
+      <h3 class="cursor-pointer">My Order</h3>
+    </a>
+    <a href="<?php echo BASE_URI .
+      "/profile/purchase_history"; ?>"
+      class="w-40 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
+      <i class="flex items-center fa fa-check mr-2"></i>
+      <h3 class="cursor-pointer">Purchase history</h3>
     </a>
   </div>
 </div>

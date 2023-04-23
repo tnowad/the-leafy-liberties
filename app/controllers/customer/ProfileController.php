@@ -83,7 +83,7 @@ class ProfileController extends Controller
     );
   }
 
-  public function payments(Request $request, Response $response)
+  public function purchaseHistory(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
 
@@ -95,7 +95,7 @@ class ProfileController extends Controller
       ->getUser();
     $response->setStatusCode(200);
     $response->setBody(
-      View::renderWithLayout(new View("pages/profile/payments"), [
+      View::renderWithLayout(new View("pages/profile/purchaseHistory"), [
         "user" => $user,
         "footer" => "",
       ])
