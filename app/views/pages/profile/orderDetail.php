@@ -68,7 +68,7 @@
                                                 <?php echo $orderProduct->product()->price; ?>$
                                             </td>
                                             <td class="p-2">
-                                                <?php echo $orderProduct->product()->quantity; ?>
+                                                <?php echo $orderProduct->quantity; ?>
                                             </td>
                                             <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
                                                 <div class="button flex justify-center items-center gap-4">
