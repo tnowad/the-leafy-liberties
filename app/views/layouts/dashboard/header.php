@@ -30,11 +30,7 @@ $user = $auth->getUser();
           onmouseover="showMenu()" onmouseout="hideMenuDelayed()">
           <li class=" whitespace-nowrap hover:bg-[#cee4e1] transition-all cursor-pointer p-2 text-left text-gray-600">
             <a href="<?php echo BASE_URI .
-              "/dashboard/profile"; ?>">User Setting</a>
-          </li>
-          <li class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600">
-            <a href="<?php echo BASE_URI .
-              "/dashboard/profile/password"; ?>">Change password</a>
+              "/dashboard/user/update" . '?id=' . $user->id ?>">User Setting</a>
           </li>
           <li class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600">
             <a href="<?php echo BASE_URI . "/logout"; ?> ">Logout</a>

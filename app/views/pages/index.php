@@ -22,7 +22,7 @@ use App\Models\Wishlist;
         <?php endforeach; ?>
 
       </div>
-      <div class="absolute flex space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0">
+      <div class="absolute space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0 hidden md:flex">
 
         <?php for ($i = 0; $i < 5; $i++): ?>
           <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
@@ -31,7 +31,7 @@ use App\Models\Wishlist;
 
       </div>
       <button type="button"
-        class="absolute top-0 left-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        class="absolute top-0 left-0 hidden md:flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
         data-carousel-prev>
         <span
           class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
@@ -39,7 +39,7 @@ use App\Models\Wishlist;
         </span>
       </button>
       <button type="button"
-        class="absolute top-0 right-0 flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        class="absolute top-0 right-0 hidden md:flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
         data-carousel-next>
         <span
           class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 0 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
@@ -153,7 +153,7 @@ use App\Models\Wishlist;
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Category Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
-      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/">
+      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/products">
         View All
       </a>
     </div>
@@ -168,7 +168,7 @@ use App\Models\Wishlist;
                 src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
                 alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
-            <p class="absolute font-medium text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl md:top-2/3">
+            <p class="absolute font-medium text-pink-300 xl:top-3/4 left-10 xl:text-3xl sm:text-2xl sm:top-2/3">
               <?php echo $category->name; ?>
             </p>
           </a>
@@ -177,7 +177,7 @@ use App\Models\Wishlist;
       </div>
     </div>
     <div class="flex my-10 lg:gap-0 sm:gap-3 lg:flex-row sm:flex-col">
-      <div class="w-full overflow-hidden bg-orange-50 lg:p-5 rounded-2xl md:p-2 lg:overflow-x-hidden">
+      <div class="w-full overflow-hidden bg-orange-50 lg:p-5 rounded-2xl md:p-2 lg:overflow-x-hidden shadow-lg">
         <div class="p-3 mb-6 text-4xl text-center border-0 border-b-2 border-solid header-table whitespace-nowrap">
           <p>Popular Authors</p>
         </div>
