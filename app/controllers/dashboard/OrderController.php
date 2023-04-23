@@ -44,7 +44,7 @@ class OrderController extends Controller
         $order = Order::findOne(["id" => $request->getQuery("id")]);
         $response->setStatusCode(200);
         return $response->setBody(
-          View::renderWithLayout(
+          View::renderWithDashboardLayout(
             new View("pages/dashboard/order/orderReview"),
             [
               "title" => "Order Review",
