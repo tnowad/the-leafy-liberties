@@ -7,9 +7,10 @@ $cartItems = $params["cartItems"];
       <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Cart</h1>
     </div>
     <div class="wrapper flex justify-between items-start gap-[2.5%]">
-      <div class="cart-list w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl">
+      <div class="cart-list w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl"
+        total="<?php echo count($cartItems) ?>">
         <?php if (count($cartItems) == 0): ?>
-          <div class="flex flex-col items-center justify-center h-full gap-2">
+          <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
             <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
             <h1 class="text-5xl tracking-wider text-gray-400 uppercase">Cart is empty</h1>
           </div>
@@ -70,7 +71,7 @@ $cartItems = $params["cartItems"];
           </span>
         </div>
         <a href="<?php echo BASE_URI . "/checkout"; ?>"
-          class="px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+          class="btn-checkout px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out
         </a>
       </div>
@@ -145,5 +146,15 @@ $cartItems = $params["cartItems"];
       console.error(error);
     });
   };
-
+</script>
+<script>
+  let counts = document.querySelector(".cart-list");
+  let btn = document.querySelector(".btn-checkout");
+  const total = counts.getAttribute("total");
+  btn.addEventListener("click", (event) => {
+    if(total == 0){
+      alert("There are no products in cart");
+      event.preventDefault();
+    }
+  })
 </script>

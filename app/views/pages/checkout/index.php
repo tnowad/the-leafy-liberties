@@ -151,12 +151,12 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
                   </div>
                   <div class="mt-1 text-sm font-medium text-gray-700">
                     <?php echo $cartItem->quantity ?> x
-                    <?php echo $product->price ?>
+                    <?php echo $product->price ?> $
                   </div>
                 </div>
               </div>
               <div class="text-gray-600">
-                <?php echo $product->price * $cartItem->quantity ?>
+                <?php echo $product->price * $cartItem->quantity ?> $
               </div>
             </div>
           <?php endforeach; ?>

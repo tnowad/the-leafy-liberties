@@ -1,3 +1,29 @@
+<?php
+use App\Models\Wishlist;
+use Core\Application;
+use App\Models\Cart;
+
+$auth = Application::getInstance()->getAuthentication();
+$user = $auth->getUser();
+$carts = Cart::findAll(["user_id" => $user->id]);
+$wishlists = Wishlist::findAll(["user_id" => $user->id]);
+$flag = false;
+$flagwl = false;
+
+foreach ($carts as $cartItem) {
+  if ($product->id == $cartItem->product_id) {
+    $flag = true;
+    break;
+  }
+}
+foreach ($wishlists as $wishlistItem) {
+  if ($product->id == $wishlistItem->product_id) {
+    $flagwl = true;
+    break;
+  }
+}
+?>
+
 <div class="box-border p-5 pt-3 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
   <!-- // ? option  -->
   <div class="grid grid-cols-1 gap-3 xl:grid-cols-2">
@@ -38,18 +64,30 @@
             class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToCart(<?php echo $product->id; ?>)">
             <i
-              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400"></i>
+              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($flag == true) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
-              <?php $wishlist ?>
+              <?php
+              if ($flag) {
+                echo "Added to cart";
+              } else {
+                echo "Add to cart";
+              }
+              ?>
             </button>
           </div>
           <div
             class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToWishList(<?php echo $product->id; ?>)">
             <i
-              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon"></i>
+              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($flagwl == true) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
-              Add to wishlist
+              <?php
+              if ($flagwl) {
+                echo "Added to wishlist";
+              } else {
+                echo "Add to wishlist";
+              }
+              ?>
             </button>
           </div>
         </div>
@@ -97,11 +135,13 @@
   <!-- //? info detail  -->
   <div class="mt-20">
     <ul class="box-content flex justify-center">
-      <li id="description-tab" class="p-2 mb-5 mr-10 transition-all rounded cursor-pointer hover:bg-primary hover:text-white  border border-white border-b-primary-800"
+      <li id="description-tab"
+        class="p-2 mb-5 mr-10 transition-all rounded cursor-pointer hover:bg-primary hover:text-white  border border-white border-b-primary-800"
         onclick="showDescription()">
         Description
       </li>
-      <li id="review-tab" class="p-2 mb-2 mr-5 transition-all rounded cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white border border-white"
+      <li id="review-tab"
+        class="p-2 mb-2 mr-5 transition-all rounded cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white border border-white"
         onclick="showReview()">
         Review
       </li>

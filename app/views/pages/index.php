@@ -234,19 +234,19 @@ use App\Models\Wishlist;
     });
   };
 
-  document.querySelectorAll('.wishlist-icon').forEach(icon => {
-    icon.addEventListener('click', () => {
-      if (icon.classList.contains('bg-red-400')) {
-        icon.classList.remove('bg-red-400');
-        icon.classList.add('bg-white');
-        icon.classList.remove('text-white');
-        icon.classList.add('text-red-400');
-      } else {
-        icon.classList.add('bg-red-400');
-        icon.classList.remove('bg-white');
-        icon.classList.add('text-white');
-        icon.classList.remove('text-red-400');
-      }
-    });
-  });
+  // document.querySelectorAll('.wishlist-icon').forEach(icon => {
+  //   icon.addEventListener('click', () => {
+  //     if (icon.classList.contains('bg-red-400')) {
+  //       icon.classList.remove('bg-red-400');
+  //       icon.classList.add('bg-white');
+  //       icon.classList.remove('text-white');
+  //       icon.classList.add('text-red-400');
+  //     } else {
+  //       icon.classList.add('bg-red-400');
+  //       icon.classList.remove('bg-white');
+  //       icon.classList.add('text-white');
+  //       icon.classList.remove('text-red-400');
+  //     }
+  //   });
+  // });
 </script>
