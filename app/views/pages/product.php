@@ -49,7 +49,7 @@
             <i
               class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
-              Add to wishlist
+              Add to cart
             </button>
           </div>
         </div>
