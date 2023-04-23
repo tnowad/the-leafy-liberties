@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 
@@ -13,87 +14,87 @@ $orders = $params['orders'];
       <!-- content -->
       <div class="my-5 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl w-full mx-4">
         <div class="relative w-full">
-          <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl" width="100%">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-              <tr>
-                <?php
-                $tableName = [
-                  "Name",
-                  "Email",
-                  "Order",
-                  "Total price",
-                  "Status",
-                  "Action",
-                  ""
-                ];
-                for ($i = 1; $i <= count($tableName); $i++) { ?>
-                  <th scope="col" class="px-6 py-3">
-                    <?php echo $tableName[$i - 1]; ?>
-                  </th>
-                <?php }
-                ?>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($orders as $order): ?>
-                <tr class="px-5 py-3">
-                  <td class="px-5 py-3">
-                    <?php echo $order->name; ?>
-                  </td>
-                  <td class="px-5 py-3">
-                    <?php echo $order->email; ?>
-                  </td>
-                  <td class="px-5 py-3" width="50%">
-                    <ul>
-                      <?php foreach (array_slice(OrderProduct::findAll(['order_id' => $order->id]), 0, 3) as $orderProduct): ?>
-                        <li>
-                          <?php echo $orderProduct->product()->name ?>
-                        </li>
-                      <?php endforeach; ?>
-                    </ul>
-                  </td>
+          <?php if (count(Order::all()) == 0) : ?>
+            <div class="flex flex-col justify-center items-center h-[70vh]">
+              <i class="fa-solid fa-cart-circle-plus text-5xl text-gray-400 mb-4"></i>
+              <h1 class="text-5xl font-medium tracking-widest uppercase text-gray-400">Don't have any orders yet</h1>
+            </div>
+          <?php else : ?>
+            <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl" width="100%">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <?php
+                  $tableName = [
+                    "Name",
+                    "Email",
+                    "Order",
+                    "Total price",
+                    "Status",
+                    "Action",
+                    ""
+                  ];
+                  for ($i = 1; $i <= count($tableName); $i++) { ?>
+                    <th scope="col" class="px-6 py-3">
+                      <?php echo $tableName[$i - 1]; ?>
+                    </th>
+                  <?php }
+                  ?>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($orders as $order) : ?>
+                  <tr class="px-5 py-3">
+                    <td class="px-5 py-3">
+                      <?php echo $order->name; ?>
+                    </td>
+                    <td class="px-5 py-3">
+                      <?php echo $order->email; ?>
+                    </td>
+                    <td class="px-5 py-3" width="50%">
+                      <ul>
+                        <?php foreach (array_slice(OrderProduct::findAll(['order_id' => $order->id]), 0, 3) as $orderProduct) : ?>
+                          <li>
+                            <?php echo $orderProduct->product()->name ?>
+                          </li>
+                        <?php endforeach; ?>
+                      </ul>
+                    </td>
 
-                  <td class="px-5 py-3" width="15%">
-                    <?php echo $order->total_price; ?>
-                  </td>
-                  <td class="px-5 py-3">
-                    <!-- if status is 0 is pending, 1 is accept, 2 is shipping, 3 is successful, 4 is cancel, 5 is reject -->
-                    <?php if ($order->status == 0): ?>
-                    <p class="font-medium text-primary">Pending</p>
-                      <?php elseif ($order->status == 1): ?>
-                      <p class="font-medium text-green-800">Accept</p>
-                      <?php elseif ($order->status == 2): ?>
-                      <p class="font-medium text-yellow-800">Shipping</p>
-                      <?php elseif ($order->status == 3): ?>
-                      <p class="font-medium text-green-800">Successful</p>
-                      <?php elseif ($order->status == 4): ?>
-                      <p class="font-medium text-pink-800">Cancel</p>
-                      <?php elseif ($order->status == 5): ?>
-                      <p class="font-medium text-red-800">Reject</p>
+                    <td class="px-5 py-3" width="15%">
+                      <?php echo $order->total_price; ?>
+                    </td>
+                    <td class="px-5 py-3">
+                      <!-- if status is 0 is pending, 1 is accept, 2 is shipping, 3 is successful, 4 is cancel, 5 is reject -->
+                      <?php if ($order->status == 0) : ?>
+                        <p class="font-medium text-primary">Pending</p>
+                      <?php elseif ($order->status == 1) : ?>
+                        <p class="font-medium text-green-800">Accept</p>
+                      <?php elseif ($order->status == 2) : ?>
+                        <p class="font-medium text-yellow-800">Shipping</p>
+                      <?php elseif ($order->status == 3) : ?>
+                        <p class="font-medium text-green-800">Successful</p>
+                      <?php elseif ($order->status == 4) : ?>
+                        <p class="font-medium text-pink-800">Cancel</p>
+                      <?php elseif ($order->status == 5) : ?>
+                        <p class="font-medium text-red-800">Reject</p>
                       <?php endif; ?>
-                  </td>
-                  <td>
+                    </td>
+                    <td>
                       <!-- <i class="fa-solid fa-pen-to-square"></i> -->
                       <a href="<?php echo BASE_URI .
-                        "/profile/orders/orderDetail" .
-                        "?id=" .
-                        $order->id; ?>"
-                        class="edit-button py-2 px-3 rounded-md"
-                        >
+                                  "/profile/orders/order_detail" .
+                                  "?id=" .
+                                  $order->id; ?>" class="edit-button py-2 px-3 rounded-md">
                         <i class="fa-solid fa-circle-info text-black text-xl hover:text-orange-600 transition-colors"></i>
                       </a>
-                    </a>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          <?php endif ?>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  // if order status is pending, the button is show else hidden
-</script>

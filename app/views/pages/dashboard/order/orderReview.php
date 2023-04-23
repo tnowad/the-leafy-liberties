@@ -1,8 +1,7 @@
 <div class="flex justify-center w-full bg-white">
     <div class="container">
         <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row relative">
-            <?php include "menu.php"; ?>
-            <!-- content -->
+
             <?php
 
             use App\Models\OrderProduct;
@@ -14,19 +13,39 @@
                         <h1 class="text-xl font-bold">Order information</h1>
                         <div class="box-border w-1/2 px-10">
                         </div>
-                        <?php
-                        if ($order->status == 0) {
-                        ?>
+                        <!-- <?php
+                                if ($order->status == 0) {
+                                ?>
                             <a href="<?php echo BASE_URI .
-                                            "/profile/orders/order_detail/delete" .
+                                            "/dashboard/orders/order_review/update" .
                                             "?id=" .
                                             $order->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                                 Cancel order
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                         <?php
-                        }
-                        ?>
+                                }
+                        ?> -->
+                        <ul>
+                            <li>
+                                <?php if ($order->status == 1) : ?>
+                                    <a href="<?php echo BASE_URI . "/dashboard/orders/order_review/update?id=" . $order->id; ?>" class="accept-button py-2 px-3 bg-green-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Accepted
+                                        <i class="fas fa-check-circle"></i>
+                                    </a>
+                                <?php elseif ($order->status == 2) : ?>
+                                    <a href="<?php echo BASE_URI . "/dashboard/orders/order_review/update?id=" . $order->id; ?>" class="reject-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Rejected
+                                        <i class="fas fa-times-circle"></i>
+                                    </a>
+                                <?php elseif ($order->status == 0) : ?>
+                                    <a href="<?php echo BASE_URI . "/dashboard/orders/order_review/update?id=" . $order->id; ?>" class="pending-button py-2 px-3 bg-yellow-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Pending
+                                        <i class="fas fa-clock"></i>
+                                    </a>
+                                <?php endif; ?>
+                            </li>
+                        </ul>
                     </div>
                     <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
                         <div class="relative">
@@ -91,7 +110,3 @@
         </div>
     </div>
 </div>
-
-<script>
-
-</script>

@@ -93,6 +93,7 @@ $router->get("/dashboard/review", [ReviewController::class, "index"]);
 
 // order
 $router->get("/dashboard/order", [OrderController::class, "index"]);
+$router->get("/dashboard/order/order_review", [OrderController::class, "update"]);
 
 // categories
 $router->get("/dashboard/category", [CategoryController::class, "index"]);

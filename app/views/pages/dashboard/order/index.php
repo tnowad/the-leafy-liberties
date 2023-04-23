@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
@@ -11,22 +12,20 @@ use App\Models\Pagination;
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Order</h1>
       <div class="box-border w-1/2 px-10">
-        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input"
-          action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
-          <input type="text" name="searchQuery"
-            class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
+        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input" action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
+          <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
           <button class="flex items-center justify-center w-10 h-10">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </div>
     </div>
-    <?php if (count(Order::all()) == 0): ?>
+    <?php if (count(Order::all()) == 0) : ?>
       <div class="flex flex-col justify-center items-center h-[70vh]">
         <i class="fa-solid fa-cart-circle-plus text-5xl text-gray-400 mb-4"></i>
         <h1 class="text-5xl font-medium tracking-widest uppercase text-gray-400">Don't have any orders yet</h1>
       </div>
-    <?php else: ?>
+    <?php else : ?>
       <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
         <div class="relative">
           <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
@@ -39,6 +38,7 @@ use App\Models\Pagination;
                   "Date",
                   "Status",
                   "Amount",
+                  "Action",
                 ];
                 for ($i = 1; $i <= count($name); $i++) { ?>
                   <th scope="col" class="px-6 py-3">
@@ -51,8 +51,8 @@ use App\Models\Pagination;
             <tbody>
               <?php
               $orders = Order::all();
-              foreach ($orders as $order):
-                ?>
+              foreach ($orders as $order) :
+              ?>
                 <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">
                     <?php echo $order->id ?>
@@ -84,6 +84,14 @@ use App\Models\Pagination;
                     <?php
                     echo count($order->products());
                     ?>
+                  </td>
+                  <td class="px-5 py-3">
+                    <a href="<?php echo BASE_URI .
+                                "/dashboard/order/order_review" .
+                                "?id=" .
+                                $order->id; ?>" class="edit-button py-2 px-3 rounded-md">
+                      <i class="fa-solid fa-circle-info text-black text-xl hover:text-orange-600 transition-colors"></i>
+                    </a>
                   </td>
                 </tr>
               <?php endforeach ?>

@@ -3,6 +3,7 @@
 namespace App\Controllers\Customer;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
@@ -82,7 +83,7 @@ class ProfileController extends Controller
     );
   }
 
-  public function payments(Request $request, Response $response)
+  public function purchaseHistory(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
 
@@ -94,7 +95,7 @@ class ProfileController extends Controller
       ->getUser();
     $response->setStatusCode(200);
     $response->setBody(
-      View::renderWithLayout(new View("pages/profile/payments"), [
+      View::renderWithLayout(new View("pages/profile/purchaseHistory"), [
         "user" => $user,
         "footer" => "",
       ])
@@ -126,9 +127,11 @@ class ProfileController extends Controller
   {
     switch ($request->getMethod()) {
       case "GET":
-        $user = User::findOne(["id" => $request->getQuery("id")]);
+        $user = Application::getInstance()
+          ->getAuthentication()
+          ->getUser();
+
         $order = Order::findOne(["id" => $request->getQuery("id")]);
-        // dd($user->id);
         $response->setStatusCode(200);
         return $response->setBody(
           View::renderWithLayout(
@@ -142,9 +145,8 @@ class ProfileController extends Controller
         );
       case "POST":
         dd($request->getParam("id"));
-        $user = User::find($request->getParam("id"));
         $order = Order::find($request->getParam("id"));
-        if (!$user) {
+        if (!$order) {
           return $response->setBody(
             View::renderWithDashboardLayout(
               new View("pages/profile/orders"),
@@ -161,23 +163,25 @@ class ProfileController extends Controller
       default:
         break;
     }
-    // $auth = Application::getInstance()->getAuthentication();
+  }
+  public function delete(Request $request, Response $response)
+  {
+    $order = Order::find($request->getQuery("id"));
+    if (!$order) {
+      return $response->redirect(BASE_URI . "/profile");
+    }
 
-    // if (!$auth->isAuthenticated()) {
-    //   $response->redirect(BASE_URI . "/login");
-    // }
-    // $user = Application::getInstance()
-    //   ->getAuthentication()
-    //   ->getUser();
-
-    // $orders = $user->orders();
-
-    // $response->setStatusCode(200);
-    // $response->setBody(
-    //   View::renderWithLayout(new View("pages/profile/orderDetail"), [
-    //     "orders" => $orders,
-    //     "user" => $user,
-    //   ])
-    // );
+    switch ($request->getMethod()) {
+      case "GET":
+        $response->setStatusCode(200);
+        $order_products = OrderProduct::all();
+        foreach ($order_products as $order_product) {
+          if ($order_product->order_id == $order->id) {
+            $order_product->delete();
+          }
+        }
+        $order->delete();
+        return $response->redirect(BASE_URI . "/profile/orders");
+    }
   }
 }
