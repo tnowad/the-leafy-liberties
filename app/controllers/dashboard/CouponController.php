@@ -36,32 +36,40 @@ class CouponController extends Controller
   public function create(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('coupon.create')) {
-      return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
+    if (!$auth->hasPermission("coupon.create")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
           "message" => "You do not have permission to access this page.",
         ],
       ]);
     }
-    $product = new Coupon();
-    $product->code = strtoupper($request->getParam("code"));
-    $product->expired = $request->getParam("expired");
-    $product->quantity = $request->getParam("quantity");
-    $product->description = $request->getParam("description");
-    $product->save();
-    return $response->setBody(
-      View::renderWithDashboardLayout(
-        new View("pages/dashboard/coupon/index"),
-        [
-          "title" => "Coupons",
+    switch ($request->getMethod()) {
+      case 'GET':
+        $response->setStatusCode(200);
+        return $response->setBody(
+          View::renderWithDashboardLayout(
+            new View("pages/dashboard/coupon/create"),
+            [
+              "title" => "Add Coupon",
+            ]
+          )
+        );
+      case 'POST':
+        $coupon = new Coupon();
+        $coupon->code = strtoupper($request->getParam("code"));
+        $coupon->description = strtoupper($request->getParam("description"));
+        $coupon->expired = $request->getParam("expired");
+        $coupon->quantity = $request->getParam("quantity");
+        $coupon->save();
+        return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
           "toast" => [
             "type" => "success",
-            "message" => "Add coupon successful!",
+            "message" => "Add coupon successful",
           ],
-        ]
-      )
-    );
+        ]);
+
+    }
   }
 
   public function store(Request $request, Response $response)
@@ -140,10 +148,10 @@ class CouponController extends Controller
           ]);
         } else {
           // dd($coupon);
-          $coupon->code = $request->getParam("code");
+          $coupon->code = strtoupper($request->getParam("code"));
           $coupon->expired = $request->getParam("expired");
           $coupon->quantity = $request->getParam("quantity");
-          $coupon->description = $request->getParam("description");
+          $coupon->description = strtoupper($request->getParam("description"));
           $coupon->save();
           return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
             "toast" => [
@@ -169,14 +177,34 @@ class CouponController extends Controller
         ],
       ]);
     }
-    // dd($request->getQuery('id'));
     $coupon = Coupon::find($request->getQuery("id"));
-    // dd($product);
     if (!$coupon) {
-      return $response->redirect(BASE_URI . 'pages/dashboard/coupon/index');
+      return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "Delete coupon failed",
+        ],
+      ]);
     }
-    $coupon->delete();
-    return $response->redirect(BASE_URI . "pages/dashboard/coupon/index");
+
+    switch ($request->getMethod()) {
+      case "GET":
+        $response->setStatusCode(200);
+        $coupon->delete();
+        return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
+          "toast" => [
+            'type' => 'success',
+            'message' => 'Delete coupon Successfully'
+          ]
+        ]);
+      case "POST":
+        return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
+          "toast" => [
+            'type' => 'success',
+            'message' => 'Delete coupon Successfully'
+          ]
+        ]);
+    }
   }
   public function filterCoupon(Request $request, Response $response)
   {

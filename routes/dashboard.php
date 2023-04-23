@@ -57,6 +57,17 @@ $router->post("/dashboard/coupon", [CouponController::class, "filterCoupon"]);
 //coupon function
 $router->get("/dashboard/coupon/update", [CouponController::class, "update"]);
 $router->post("/dashboard/coupon/update", [CouponController::class, "update"]);
+$router->get("/dashboard/coupon/create", [CouponController::class, "create"]);
+$router->post("/dashboard/coupon/create", [
+  CouponController::class,
+  "create",
+]);
+$router->get("/dashboard/coupon/delete", [CouponController::class, "delete"]);
+$router->post("/dashboard/coupon/delete", [
+  CouponController::class,
+  "delete",
+]);
+
 
 // slide
 $router->get("/dashboard/slide", [SlideController::class, "index"]);

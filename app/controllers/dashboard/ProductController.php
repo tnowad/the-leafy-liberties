@@ -68,15 +68,12 @@ class ProductController extends Controller
         if ($result) {
           $request->setParam("image", $result);
         } else {
-          return $response->setBody(
-            View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
-              "title" => "Products",
-              "toast" => [
-                "type" => "error",
-                "message" => "Add product failed!",
-              ],
-            ])
-          );
+          return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "Add product failed",
+            ],
+          ]);
         }
         $product = new Product();
         $product->name = $request->getParam("name");
@@ -86,15 +83,12 @@ class ProductController extends Controller
         $product->description = $request->getParam("description");
         $product->quantity = $request->getParam("quantity");
         $product->save();
-        return $response->setBody(
-          View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
-            "title" => "Products",
-            "toast" => [
-              "type" => "success",
-              "message" => "Add product successful!",
-            ],
-          ])
-        );
+        return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Add product successful",
+          ],
+        ]);
 
     }
   }
@@ -229,28 +223,31 @@ class ProductController extends Controller
     }
     $product = Product::find($request->getQuery("id"));
     if (!$product) {
-      return $response->redirect(BASE_URI . "/dashboard/product");
+      return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "Delete product failed",
+        ],
+      ]);
     }
 
     switch ($request->getMethod()) {
       case "GET":
         $response->setStatusCode(200);
         $product->delete();
-        return $response->setBody(
-          View::renderWithDashboardLayout(
-            new View("pages/dashboard/product/index"),
-            [
-              "title" => "Delete Product",
-              "product" => $product,
-              "toast" => [
-                'type' => 'success',
-                'message' => 'Delete Product Successfully'
-              ]
-            ]
-          )
-        );
+        return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+          "toast" => [
+            'type' => 'success',
+            'message' => 'Delete product successfully'
+          ]
+        ]);
       case "POST":
-        return $response->redirect(BASE_URI . "/dashboard/products");
+        return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+          "toast" => [
+            'type' => 'success',
+            'message' => 'Delete product successfully'
+          ]
+        ]);
     }
   }
   public function filterProduct(Request $request, Response $response)
