@@ -140,9 +140,11 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             <?php $product = $CartItem->product(); ?>
             <div class="flex items-center justify-between mt-5">
               <div class="flex items-center">
-                <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
-                  class="object-cover w-20 h-24 rounded-md">
-                <div class="ml-4">
+                <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
+                  <img src="<?php echo BASE_URI . $product->image ?>" alt="<?php echo $product->name ?>"
+                    class="object-cover w-20 h-24 rounded-md">
+                </a>
+                <div class="ml-4 cursor-pointer">
                   <h3 class="font-medium text-gray-700">
                     <?php echo $product->name ?>
                   </h3>

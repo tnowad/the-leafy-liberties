@@ -68,10 +68,15 @@ if ($user != null) {
               class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($flag == true) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
               <?php
-              if ($flag) {
-                echo "Added to cart";
+              if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")) {
+                echo "Update Product";
               } else {
-                echo "Add to cart";
+
+                if ($flag) {
+                  echo "Added to cart";
+                } else {
+                  echo "Add to cart";
+                }
               }
               ?>
             </button>
