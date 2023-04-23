@@ -38,12 +38,11 @@ class LoginController extends Controller
     }
 
     $user = User::findOne(["email" => $email]);
-
     if ($user && password_verify($password, $user->password)) {
       Application::getInstance()
         ->getAuthentication()
         ->setUser($user);
-      $response->redirect(BASE_URI . "/", 200, [
+      return $response->redirect(BASE_URI . "/", 200, [
         "toast" => [
           "type" => "success",
           "message" => "Login success",
