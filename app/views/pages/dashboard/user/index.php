@@ -2,6 +2,14 @@
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Users</h1>
+      <div class="box-border w-1/2 px-10">
+        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input" action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
+          <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
+          <button class="flex items-center justify-center w-10 h-10">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
       <button class="add-user w-5 h-5 text-2xl">
         +
       </button>
@@ -12,6 +20,7 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
+
               use App\Models\Role;
               use App\Models\User;
 
@@ -36,16 +45,14 @@
           <tbody>
             <?php
             $users = User::all();
-            if (count($users) > 0): ?>
-              <?php foreach ($users as $user): ?>
+            if (count($users) > 0) : ?>
+              <?php foreach ($users as $user) : ?>
                 <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
                   <td class="px-5 py-3">
                     <?php echo $user->id; ?>
                   </td>
                   <td class="px-5 py-3 w-32">
-                    <img
-                      src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>"
-                      alt="" class="w-full h-full object-contain">
+                    <img src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>" alt="" class="w-full h-full object-contain">
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $user->email; ?>
@@ -62,8 +69,7 @@
                     echo ucfirst($role->name);
                     ?>
                   </td>
-                  <td
-                    class="px-5 py-3 <?php echo ($user->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
+                  <td class="px-5 py-3 <?php echo ($user->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
                     <?php
                     if ($user->status == 1) {
                       echo "Active";
@@ -75,14 +81,12 @@
                   <td class="px-5 py-3 w-44">
                     <div class="button flex justify-center items-center gap-4">
                       <a href="<?php echo BASE_URI .
-                        "/dashboard/user/update" .
-                        "?id=" .
-                        $user->id; ?>"
-                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                                  "/dashboard/user/update" .
+                                  "?id=" .
+                                  $user->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button
-                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                      <button class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all" onclick="removeUserConfirm()">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>
@@ -95,12 +99,11 @@
         </table>
       </div>
     </div>
-    <div
-      class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[300]">
+    <div class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[300]">
       <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
         <h2 class="text-xl font-bold mb-4">Add Customer</h2>
         <form class="flex flex-col" action="<?php echo BASE_URI .
-          "/dashboard/user/update"; ?>" method="POST">
+                                              "/dashboard/user/update"; ?>" method="POST">
           <label for="image" class="my-2">Image:</label>
           <input type="file" name="image" />
           <label for="entered" class="my-2">Email:</label>
@@ -119,12 +122,10 @@
             <option value="other">Other</option>
           </select>
 
-          <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
-            type="submit">
+          <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded" type="submit">
             Submit
           </button>
-          <button class="cancel-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-            type="button">
+          <button class="cancel-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" type="button">
             Cancel
           </button>
         </form>
@@ -144,4 +145,21 @@
     event.preventDefault();
     document.querySelector(".add-form").classList.add("hidden");
   })
+
+  document.removeUserConfirm = () => {
+    const result = confirm("Delete this user?");
+    if (result) {
+      FetchXHR.post('<?php echo BASE_URI . "/dashboard/user/delete"; ?>').then(response => {
+        if (response.type === 'error') {
+          alert(response.message);
+        } else if (response.type === 'info') {
+          alert(response.message);
+        } else {
+          alert('This product has been removed');
+        }
+      }).catch(error => {
+        alert('Something went wrong');
+      });
+    }
+  }
 </script>

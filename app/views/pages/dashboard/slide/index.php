@@ -6,6 +6,14 @@ $filter = $params["filter"];
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Slide</h1>
+      <div class="box-border w-1/2 px-10">
+        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input" action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
+          <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
+          <button class="flex items-center justify-center w-10 h-10">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
     </div>
     <div class="my-8 bg-white shadow-lg cursor-pointer table-slider-statistics rounded-2xl">
       <div class="relative">
@@ -23,7 +31,7 @@ $filter = $params["filter"];
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($slides as $slide): ?>
+            <?php foreach ($slides as $slide) : ?>
               <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                 <td class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
                   <?php echo $slide->name; ?>
@@ -31,8 +39,7 @@ $filter = $params["filter"];
                 <td class="w-64 px-5 py-3">
                   <img src="<?php echo BASE_URI . $slide->image; ?>" alt="" />
                 </td>
-                <td
-                  class="<?php echo ($slide->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
+                <td class="<?php echo ($slide->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
                   <?php
                   if ($slide->status == 1) {
                     echo "Active";
@@ -45,17 +52,15 @@ $filter = $params["filter"];
                 <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
                   <div class="button flex justify-center items-center gap-4">
                     <a href="<?php echo BASE_URI .
-                      "/dashboard/slide/update" .
-                      "?id=" .
-                      $slide->id; ?>"
-                      class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                                "/dashboard/slide/update" .
+                                "?id=" .
+                                $slide->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
                     <a href="<?php echo BASE_URI .
-                      "/dashboard/slide/delete" .
-                      "?id=" .
-                      $slide->id; ?>"
-                      class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                "/dashboard/slide/delete" .
+                                "?id=" .
+                                $slide->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                       <i class="fa-solid fa-trash"></i>
                     </a>
                   </div>

@@ -148,7 +148,7 @@ const renderProducts = async (products) => {
               ${product.price}
               </div>
               <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                  <p class="p-2 hover:bg-primary hover:text-white rounded-sm font-semibold select-option-text cursor-pointer transition-all">Add to wishlist</p>
+                  <p class="p-2 hover:bg-primary hover:text-white rounded-sm font-semibold select-option-text cursor-pointer transition-all">Add to cart</p>
                   <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"></i>
               </div>
               </div>

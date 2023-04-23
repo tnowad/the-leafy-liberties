@@ -2,6 +2,14 @@
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Settings</h1>
+      <div class="box-border w-1/2 px-10">
+        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input" action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
+          <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
+          <button class="flex items-center justify-center w-10 h-10">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
     </div>
     <div class="table-customer-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
       <div class="relative">
@@ -30,8 +38,8 @@
           <tbody>
             <?php
             $settings = Setting::all();
-            if (count($settings) > 0): ?>
-              <?php foreach ($settings as $setting): ?>
+            if (count($settings) > 0) : ?>
+              <?php foreach ($settings as $setting) : ?>
                 <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
                   <td class="px-5 py-3">
                     <?php echo $setting->id; ?>
@@ -45,10 +53,9 @@
                   <td class="px-5 py-3 w-44">
                     <div class="button flex justify-center items-center gap-4">
                       <a href="<?php echo BASE_URI .
-                        "/dashboard/setting/update" .
-                        "?id=" .
-                        $setting->id; ?>"
-                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                                  "/dashboard/setting/update" .
+                                  "?id=" .
+                                  $setting->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                     </div>
@@ -65,7 +72,7 @@
             <div class="bg-white p-8 rounded-md shadow-lg w-[550px]">
                 <h2 class="text-xl font-bold mb-4">Add Customer</h2>
                 <form class="flex flex-col" action="<?php echo BASE_URI .
-                  "/dashboard/setting/update"; ?>" method="POST">
+                                                      "/dashboard/setting/update"; ?>" method="POST">
                     <label for="image" class="my-2">Image:</label>
                     <input type="file" name="image" />
                     <label for="entered" class="my-2">Email:</label>
