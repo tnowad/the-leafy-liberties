@@ -54,9 +54,10 @@ $user = $auth->getUser() ?? null;
     </div>
     <div class="relative flex-row justify-between hidden gap-2 md:flex">
       <?php
-      $user = Application::getInstance()->getAuthentication()->getUser();
-      $wishlist = Wishlist::findAll(["user_id" => $user->id]);
-      $cart = Cart::findAll(["user_id" => $user->id]);
+      if ($user != null) {
+        $wishlist = Wishlist::findAll(["user_id" => $user->id]);
+        $cart = Cart::findAll(["user_id" => $user->id]);
+      }
       if ($user != null && !$auth->hasPermission("dashboard.access")): ?>
         <a href="<?php echo BASE_URI . "/wishlist"; ?>"
           class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10 relative">

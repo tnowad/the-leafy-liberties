@@ -4,9 +4,9 @@ $products = $params["products"]; ?>
   <div class="flex items-center justify-start my-8 md:my-14">
     <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">wishlist</h1>
   </div>
-  <div class="w-full h-[765px] overflow-y-scroll px-8">
+  <div class="w-full h-fit overflow-y-scroll px-8 bg-white shadow-lg rounded-2xl">
     <?php if (count($products) == 0): ?>
-      <div class="flex flex-col justify-center items-center h-[60%]">
+      <div class="flex flex-col justify-center items-center h-full my-8">
         <i class="fa-solid fa-heart-pulse text-[100px] text-gray-400"></i>
         <h1 class="text-6xl tracking-widest text-gray-400 uppercase">Wishlist is
           empty</h1>
@@ -69,7 +69,7 @@ $products = $params["products"]; ?>
       </table>
     <?php endif ?>
   </div>
-  <div class="flex justify-end gap-3 mt-4">
+  <div class="flex justify-end gap-3 mt-4 px-9">
     <!-- move all product in wishlist to cart -->
 
     <button class="px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700"
