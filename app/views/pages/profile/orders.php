@@ -87,7 +87,6 @@ $orders = $params['orders'];
                                   $order->id; ?>" class="edit-button py-2 px-3 rounded-md">
                         <i class="fa-solid fa-circle-info text-black text-xl hover:text-orange-600 transition-colors"></i>
                       </a>
-                      </a>
                     </td>
                   </tr>
                 <?php endforeach; ?>

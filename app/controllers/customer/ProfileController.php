@@ -132,7 +132,6 @@ class ProfileController extends Controller
           ->getUser();
 
         $order = Order::findOne(["id" => $request->getQuery("id")]);
-        // dd($user->id);
         $response->setStatusCode(200);
         return $response->setBody(
           View::renderWithLayout(
@@ -146,9 +145,8 @@ class ProfileController extends Controller
         );
       case "POST":
         dd($request->getParam("id"));
-        $user = User::find($request->getParam("id"));
         $order = Order::find($request->getParam("id"));
-        if (!$user) {
+        if (!$order) {
           return $response->setBody(
             View::renderWithDashboardLayout(
               new View("pages/profile/orders"),
