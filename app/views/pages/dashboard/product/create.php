@@ -4,25 +4,25 @@
     <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/product/create"; ?>" method="POST"
       enctype="multipart/form-data">
       <label for="title" class="my-2">Title:</label>
-      <input type="text" value="" name="name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+      <input type="text" value="" name="name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="image" class="my-2">Image:</label>
-      <input type="file" name="image" onchange="loadFile(event)" />
+      <input type="file" name="image" onchange="loadFile(event)" required />
       <p>Preview Image:</p>
       <img id="output1" class="object-contain h-56 w-80"/>
 
       <label for="entered" class="my-2">ISBN:</label>
-      <input type="number" value="" name="isbn" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+      <input type="number" value="" name="isbn" class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="price" class="my-2">Price:</label>
-      <input type="number" value="" step="0.01" name="price" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+      <input type="number" value="" step="0.01" name="price" class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="category" class="my-2">Description:</label>
       <textarea name="description" id="" cols="30" rows="4"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none"></textarea>
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required></textarea>
 
       <label for="quantity" class="my-2">Quantity:</label>
-      <input type="text" value="" name="quantity" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+      <input type="text" value="" name="quantity" class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit

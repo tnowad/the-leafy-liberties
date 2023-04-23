@@ -19,9 +19,9 @@ use App\Models\Pagination;
           </button>
         </form>
       </div>
-      <button class="w-5 h-5 text-2xl add-category">
+      <a class="w-5 h-5 text-2xl add-category" href="<?php echo BASE_URI . '/dashboard/category/create' ?>">
         +
-      </button>
+      </a>
     </div>
     <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
       <div class="relative">
@@ -59,15 +59,13 @@ use App\Models\Pagination;
                     <?php echo $category->id; ?>
                   </td>
                   <td class="w-32 h-24 p-3">
-                    <img src="<?php echo BASE_URI .
-                      "/" .
-                      $category->image; ?>" alt="" />
+                    <img src="<?php echo BASE_URI . $category->image; ?>" alt="" />
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $category->name; ?>
                   </td>
                   <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
-                    <div class="button flex justify-center items-center gap-4">
+                  <div class="button flex justify-center items-center gap-4">
                       <a href="<?php echo BASE_URI .
                         "/dashboard/category/update" .
                         "?id=" .
@@ -75,10 +73,13 @@ use App\Models\Pagination;
                         class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button
+                      <a href="<?php echo BASE_URI .
+                        "/dashboard/category/delete" .
+                        "?id=" .
+                        $category->id; ?>"
                         class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-trash"></i>
-                      </button>
+                      </a>
                     </div>
                   </td>
                 </tr>
@@ -87,28 +88,6 @@ use App\Models\Pagination;
             ?>
           </tbody>
         </table>
-      </div>
-    </div>
-    <div
-      class="add-form fixed top-0 left-0 h-full w-full hidden justify-center items-center bg-gray-400 bg-opacity-75 z-[500]">
-      <div class="bg-white p-8 rounded-md shadow-lg w-[550px] ">
-        <h2 class="mb-4 text-xl font-bold">Add Category</h2>
-        <form class="flex flex-col" action="<?php BASE_URI .
-          "/dashboard/product"; ?>" method="POST" enctype="multipart/form-data">
-
-          <label for="image" class="my-2">Image:</label>
-          <input type="file" name="image" id="imgInp" />
-          <!-- <img id="blah" src="#" class="object-contain h-40 mx-auto bg-gray-100 w-fit" /> -->
-          <label for="entered" class="my-2">Name:</label>
-          <input type="text" value="" name="name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
-          <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
-            type="submit">
-            Submit
-          </button>
-          <button class="px-4 py-2 my-1 font-bold text-white bg-gray-500 rounded cancel-button hover:bg-gray-700">
-            Cancel
-          </button>
-        </form>
       </div>
     </div>
   </div>
