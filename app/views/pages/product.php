@@ -142,12 +142,12 @@ if ($user != null) {
   <div class="mt-20">
     <ul class="box-content flex justify-center">
       <li id="description-tab"
-        class="p-2 mb-5 mr-10 transition-all rounded cursor-pointer hover:bg-primary hover:text-white  border border-white border-b-primary-800"
+        class="p-2 mb-5 mr-10 transition-all cursor-pointer hover:bg-primary hover:text-white  border-2 border-white border-b-primary-800"
         onclick="showDescription()">
         Description
       </li>
       <li id="review-tab"
-        class="p-2 mb-2 mr-5 transition-all rounded cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white border border-white"
+        class="p-2 mb-2 mr-5 transition-all cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white border-2 border-white"
         onclick="showReview()">
         Review
       </li>

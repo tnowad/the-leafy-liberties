@@ -11,15 +11,16 @@ use App\Models\Cart;
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
 $flagwl = false;
-if ($user != null) {
-  $wishlists = Wishlist::findAll(["user_id" => $user->id]);
-  foreach ($wishlists as $wishlistItem) {
-    if ($product->id == $wishlistItem->product_id) {
-      $flagwl = true;
-      break;
-    }
-  }
-}
+// if ($user != null) {
+//   $wishlists = Wishlist::findAll(["user_id" => $user->id]);
+//   $productss = Product::all();
+//   foreach ($wishlists as $wishlistItem) {
+//     if ($product->id == $wishlistItem->product_id) {
+//       $flagwl = true;
+//       break;
+//     }
+//   }
+// }
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
@@ -95,8 +96,7 @@ if ($user != null) {
             </div>
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-              <p class="font-semibold select-option-text hover:color-red-400"
-                onclick="addToCart('<?php echo $product->id ?>')">Add to wishlist</p>
+              <p class="font-semibold select-option-text hover:color-red-400">Add to wishlist</p>
               <i class="<?php echo ($flagwl) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                 onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>
@@ -139,7 +139,7 @@ if ($user != null) {
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
                 <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
-                <i class="<?php echo ($flagwl) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                <i class="wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                   onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
               </div>
             </div>
@@ -180,7 +180,7 @@ if ($user != null) {
                 src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
                 alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
             </div>
-            <p class="absolute font-medium text-pink-300 xl:top-3/4 left-10 xl:text-3xl sm:text-2xl sm:top-2/3">
+            <p class="absolute font-medium text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl sm:top-2/3">
               <?php echo $category->name; ?>
             </p>
           </a>
@@ -246,19 +246,19 @@ if ($user != null) {
     });
   };
 
-  // document.querySelectorAll('.wishlist-icon').forEach(icon => {
-  //   icon.addEventListener('click', () => {
-  //     if (icon.classList.contains('bg-red-400')) {
-  //       icon.classList.remove('bg-red-400');
-  //       icon.classList.add('bg-white');
-  //       icon.classList.remove('text-white');
-  //       icon.classList.add('text-red-400');
-  //     } else {
-  //       icon.classList.add('bg-red-400');
-  //       icon.classList.remove('bg-white');
-  //       icon.classList.add('text-white');
-  //       icon.classList.remove('text-red-400');
-  //     }
-  //   });
-  // });
+  document.querySelectorAll('.wishlist-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+      if (icon.classList.contains('bg-red-400')) {
+        icon.classList.remove('bg-red-400');
+        icon.classList.add('bg-white');
+        icon.classList.remove('text-white');
+        icon.classList.add('text-red-400');
+      } else {
+        icon.classList.add('bg-red-400');
+        icon.classList.remove('bg-white');
+        icon.classList.add('text-white');
+        icon.classList.remove('text-red-400');
+      }
+    });
+  });
 </script>
