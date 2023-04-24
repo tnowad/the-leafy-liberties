@@ -7,11 +7,11 @@ use App\Models\User;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
+
+dd($newComment);
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
-if ($auth->isAuthenticated()) {
-  echo $user->email;
-}
+
 
 // I don't think use flag is a good idea
 // You can only use Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the cart
@@ -216,13 +216,13 @@ if ($user != null) {
         endforeach;
         ?>
         <div class="mt-20 border-t-2 border-gray-300 pt-14">
-          <form action="" class="flex flex-row">
+          <form action="<?php echo BASE_URI . "/product/comment" ?>" method="POST" class="flex flex-row">
             <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
             <div class="ml-10">
               <h1 class="mb-2 font-bold">
                 <?php echo $user->name; ?>
               </h1>
-              <input type="text" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')">
+              <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')">
               <div class="flex items-center mt-4 mb-4">
                 <span class="mr-2">Rating : </span>
                 <div class="flex">

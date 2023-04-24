@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Review;
+use Core\Application;
 use Core\Controller;
 use Core\Database;
 use Core\Request;
@@ -63,9 +64,9 @@ class ProductController extends Controller
       $product = Product::find($request->getQuery("id"));
       $author = Author::find($product->author_id);
       $product_category = ProductCategory::find($product->id);
-       $reviews = Review::findAll([
-            "product_id" => $product->id,
-        ]);
+      $reviews = Review::findAll([
+        "product_id" => $product->id,
+      ]);
       $category = Category::find($product_category->category_id);
     } catch (\Exception $e) {
       dd($e->getMessage());
@@ -139,5 +140,25 @@ class ProductController extends Controller
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
+  }
+
+  public function comment(Request $request, Response $response)
+  {
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
+    $product = Product::find($request->getQuery("id"));
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+    $newComment = new Review();
+    $newComment->user_id = $user->id;
+    $newComment->product_id = 2;
+    $newComment->content = trim($request->getParam("new-comment"));
+    $newComment->rating = trim($request->getParam("rating"));
+    if (!$newComment->content) {
+      return $response->redirect(BASE_URI . "/product" . "?id=" . 2);
+    }
+    $newComment->save();
+    return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
   }
 }
