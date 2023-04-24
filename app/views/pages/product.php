@@ -16,23 +16,9 @@ if ($auth->isAuthenticated()) {
 // I don't think use flag is a good idea
 // You can only use Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the cart
 // Same for wishlist, you can use Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the wishlist
-$flag = false;
-$flagwl = false;
 if ($user != null) {
-  $carts = Cart::findAll(["user_id" => $user->id]);
-  $wishlists = Wishlist::findAll(["user_id" => $user->id]);
-  foreach ($carts as $cartItem) {
-    if ($product->id == $cartItem->product_id) {
-      $flag = true;
-      break;
-    }
-  }
-  foreach ($wishlists as $wishlistItem) {
-    if ($product->id == $wishlistItem->product_id) {
-      $flagwl = true;
-      break;
-    }
-  }
+  $cartItem = Cart::findOne(["user_id" => $user->id,"product_id" => $product->id]);
+  $wishlistItem = Wishlist::findAll(["user_id" => $user->id,"product_id" => $product->id]);
 }
 ?>
 
@@ -76,14 +62,14 @@ if ($user != null) {
             class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToCart(<?php echo $product->id; ?>)">
             <i
-              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($flag == true) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
+              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartItem) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
               <?php
               if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")) {
                 echo "Update Product";
               } else {
 
-                if ($flag) {
+                if ($cartItem) {
                   echo "Added to cart";
                 } else {
                   echo "Add to cart";
@@ -96,10 +82,10 @@ if ($user != null) {
             class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToWishList(<?php echo $product->id; ?>)">
             <i
-              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($flagwl == true) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
+              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistItem) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
-              if ($flagwl) {
+              if ($wishlistItem) {
                 echo "Added to wishlist";
               } else {
                 echo "Add to wishlist";
@@ -210,7 +196,7 @@ if ($user != null) {
                   // echo '<br/>' .  $review_time;
                   $time_diff = $current_time - $review_time;
                   // echo '<br/>' .  $time_diff;
-              
+
                   $days = floor($time_diff / (60 * 60 * 24));
                   $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
                   $minutes = floor(($time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60)) / 60);
@@ -227,7 +213,7 @@ if ($user != null) {
                   }
 
                   // echo date('Y-m-d H:i:s', strtotime($review->created_at));
-              
+
 
                   ?>
                 </h4>
