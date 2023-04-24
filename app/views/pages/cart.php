@@ -106,7 +106,7 @@ $cartItems = $params["cartItems"];
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
   document.removeFromCart = (id) => {
-    const result = confirm("Delete this cart?");
+    const result = confirm("Delete this products?");
     if (result) {
 
       FetchXHR.post('<?php echo BASE_URI . "/api/cart/remove"; ?>', {
