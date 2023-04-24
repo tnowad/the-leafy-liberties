@@ -124,6 +124,9 @@ $cartItems = $params["cartItems"];
       }).catch(error => {
         alert('Something went wrong');
       });
+      setTimeout(() => {
+      window.location.reload();
+    }, 1000);
     }
   }
 
@@ -139,6 +142,9 @@ $cartItems = $params["cartItems"];
     }).catch(error => {
       alert('Something went wrong');
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   document.querySelectorAll('.product-quantity').forEach(form => {

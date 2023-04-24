@@ -126,6 +126,10 @@ $products = $params["products"]; ?>
         type: 'error',
       });
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   }
   document.removeFromWishlist = (id) => {
     FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/remove"; ?>', { id }, {
@@ -141,6 +145,10 @@ $products = $params["products"]; ?>
     }).catch(error => {
       alert('Something went wrong');
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   }
 
   document.moveAllToCart = () => {
@@ -156,6 +164,10 @@ $products = $params["products"]; ?>
         type: 'error',
       });
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   }
 
 
@@ -171,6 +183,10 @@ $products = $params["products"]; ?>
     }).catch(error => {
       alert('Something went wrong');
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   }
 </script>
 <script>

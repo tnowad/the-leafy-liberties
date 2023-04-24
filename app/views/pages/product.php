@@ -198,6 +198,9 @@ if ($user != null) {
     }).catch(error => {
       console.error(error);
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
   document.addToCart = (id) => {
     FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
@@ -211,7 +214,11 @@ if ($user != null) {
     }).catch(error => {
       console.error(error);
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
+
   document.querySelector('.wishlist-icon').addEventListener('click', (event) => {
     if (event.target.classList.contains('bg-red-400')) {
       event.target.classList.remove('bg-red-400');
