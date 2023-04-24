@@ -6,8 +6,13 @@ use App\Models\Cart;
 use App\Models\User;
 
 $auth = Application::getInstance()->getAuthentication();
-$user = $auth->getUser();
-echo $user->email;
+// !Important: About the $user variable, you must check if the user is authenticated or not before using it
+// And code about working on user must be in the if block below to avoid error
+if ($auth->isAuthenticated()) {
+  $user = $auth->getUser();
+  echo $user->email;
+}
+
 // I don't think use flag is a good idea
 // You can only use Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the cart
 // Same for wishlist, you can use Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the wishlist
