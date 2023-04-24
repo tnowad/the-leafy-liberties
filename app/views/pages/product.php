@@ -8,7 +8,6 @@ use App\Models\User;
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
 
-dd($newComment);
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
 
