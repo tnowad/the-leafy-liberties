@@ -82,16 +82,16 @@ if ($user != null) {
             </button>
           </div>
           <div
-            class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
+            class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToWishList(<?php echo $product->id; ?>)">
             <i
               class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($flagwl == true) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
               if ($flagwl) {
-                echo "Added to cart";
+                echo "Added to wishlist";
               } else {
-                echo "Add to cart";
+                echo "Add to wishlist";
               }
               ?>
             </button>

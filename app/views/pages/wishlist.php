@@ -4,7 +4,8 @@ $products = $params["products"]; ?>
   <div class="flex items-center justify-start my-8 md:my-14">
     <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">wishlist</h1>
   </div>
-  <div class="w-full h-fit overflow-y-scroll px-8 bg-white shadow-lg rounded-2xl wishlist-list" total="<?php echo count($products) ?>">
+  <div class="w-full h-fit overflow-y-scroll px-8 bg-white shadow-lg rounded-2xl wishlist-list"
+    total="<?php echo count($products) ?>">
     <?php if (count($products) == 0): ?>
       <div class="flex flex-col justify-center items-center h-full my-8">
         <i class="fa-solid fa-heart-pulse text-[100px] text-gray-400"></i>
@@ -44,8 +45,10 @@ $products = $params["products"]; ?>
                 </button>
               </td>
               <td class="p-3 w-36 h-36">
-                <img src="<?php echo BASE_URI . $product->image; ?>" alt="<?php echo $product->name; ?>"
-                  class="object-contain w-full h-full mx-auto" />
+                <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
+                  <img src="<?php echo BASE_URI . $product->image; ?>" alt="<?php echo $product->name; ?>"
+                    class="object-contain w-full h-full mx-auto" />
+                </a>
               </td>
               <td>
                 <?php echo $product->name; ?>
@@ -69,7 +72,7 @@ $products = $params["products"]; ?>
       </table>
     <?php endif ?>
   </div>
-  <div class="flex justify-end gap-3 mt-4 px-9">
+  <div class="flex justify-end gap-3 mt-4">
     <!-- move all product in wishlist to cart -->
 
     <button class="move-all-to-cart px-4 py-2 font-bold text-white transition-all bg-primary hover:bg-primary-700"
@@ -172,10 +175,10 @@ $products = $params["products"]; ?>
 </script>
 <script>
   let btnMoveAllToCart = document.querySelector(".move-all-to-cart");
-  let totals =document.querySelector(".wishlist-list");
-  const count =totals.getAttribute("total");
+  let totals = document.querySelector(".wishlist-list");
+  const count = totals.getAttribute("total");
   btnMoveAllToCart.addEventListener("click", (event) => {
-    if(count == 0){
+    if (count == 0) {
       alert("There are nothing in wishlist");
       event.preventDefault();
     }

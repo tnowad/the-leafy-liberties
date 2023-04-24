@@ -68,7 +68,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
         <div class="flex flex-col justify-between gap-5 px-5 choice">
           <?php foreach ($shippingMethods as $shippingMethod): ?>
             <div
-              class="first-choice border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
+              class="shipping-choices border-[1px] border-gray-500 p-3 border-solid rounded-lg flex items-center justify-start cursor-pointer"
               onclick="document.getElementById('shipping-method-<?php echo $shippingMethod->id ?>').checked = true;">
               <input type="radio" name="shipping-method-id" required
                 id="shipping-method-<?php echo $shippingMethod->id ?>" value="<?php echo $shippingMethod->id ?>"
@@ -157,7 +157,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
                   </div>
                 </div>
               </div>
-              <div class="text-gray-600">
+              <div class="text-gray-600 whitespace-nowrap">
                 <?php echo $product->price * $cartItem->quantity ?> $
               </div>
             </div>
@@ -203,9 +203,10 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             </div>
           </div>
           <div class="mt-5 bottom-summary">
-            <div class="flex items-center justify-between total-money">
-              <h2 class="text-lg font-bold grand-total">Grand Total</h2>
-              <div class="font-bold grand-money">$
+            <div class="flex items-center justify-between total-money px-5">
+              <h2 class="text-lg font-medium grand-total">Grand Total</h2>
+              <div class="font-bold grand-money">
+                $
                 <?php echo $grandTotal ?>
               </div>
             </div>
@@ -258,4 +259,18 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
     document.getElementById("expiry-date").required = false
     document.getElementById("cvv").required = false
   }
+
+  let shipping_money = document.querySelector(".shipping-money");
+  let ship_method = ["5.99", "14.99", "29.99", "24.99"];
+  let money = 0;
+  let choices = document.querySelectorAll(".shipping-choices");
+  console.log(choices);
+  choices.forEach((element, index) => {
+    element.addEventListener("click", () => {
+      let option = document.querySelectorAll("input[name=shipping-method-id]")[index];
+      if(option.checked == true){
+        shipping_money.innerHTML = "$ " + ship_method[index];
+      }
+    })
+  });
 </script>
