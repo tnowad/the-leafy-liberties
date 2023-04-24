@@ -222,7 +222,8 @@ if ($user != null) {
               <h1 class="mb-2 font-bold">
                 <?php echo $user->name; ?>
               </h1>
-              <input type="text" placeholder="Add a comment..." class="border-b-2 border-gray-300 w-96">
+              <!-- <input type="text" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96"> -->
+              <input type="text" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')">
               <div class="flex items-center mt-4 mb-4">
                 <span class="mr-2">Rating : </span>
                 <div class="flex">
