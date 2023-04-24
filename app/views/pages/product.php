@@ -17,8 +17,8 @@ if ($auth->isAuthenticated()) {
 // You can only use Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the cart
 // Same for wishlist, you can use Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the wishlist
 if ($user != null) {
-  $cartItem = Cart::findOne(["user_id" => $user->id,"product_id" => $product->id]);
-  $wishlistItem = Wishlist::findAll(["user_id" => $user->id,"product_id" => $product->id]);
+  $cartCheck = Cart::findOne(["user_id" => $user->id,"product_id" => $product->id]);
+  $wishlistCheck = Wishlist::findAll(["user_id" => $user->id,"product_id" => $product->id]);
 }
 ?>
 
@@ -62,14 +62,14 @@ if ($user != null) {
             class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToCart(<?php echo $product->id; ?>)">
             <i
-              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartItem) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
+              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartCheck) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
               <?php
               if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")) {
                 echo "Update Product";
               } else {
 
-                if ($cartItem) {
+                if (isset($cartCheck)) {
                   echo "Added to cart";
                 } else {
                   echo "Add to cart";
@@ -82,10 +82,10 @@ if ($user != null) {
             class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
             onclick="addToWishList(<?php echo $product->id; ?>)">
             <i
-              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistItem) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
+              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
-              if ($wishlistItem) {
+              if (isset($wishlistCheck)) {
                 echo "Added to wishlist";
               } else {
                 echo "Add to wishlist";
