@@ -4,7 +4,9 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\User;
 
-$successfulOrder = Order::findAll(["status" => "3"]);
+$successfulOrder = Order::findAll(["status" => "1"]);
+$pendingOrders = Order::findAll(["status" => "0"]);
+
 // $product_id = OrderProduct::findOne([]);
 $sum = 0;
 $products_sale = 0;
@@ -26,11 +28,11 @@ foreach ($successfulOrder as $order) {
       </div>
       <div class="box-border grid top-wrap 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
         <?php
-        $text = ["Sales", "Total Revenues", "New Customer", "New Orders"];
-        $quantity = [$sum, "100K", $customer, $orders];
+        $text = ["Sales", "Pending", "New Customer", "New Orders"];
+        $quantity = [$sum, count($pendingOrders), $customer, $orders];
         $desc = [
           "We have sold " . $products_sale . " items",
-          "Available to pay out",
+          "Wait for accept",
           "More customer more money",
           "New things coming' up",
         ];

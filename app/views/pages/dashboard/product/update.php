@@ -4,24 +4,24 @@
     <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/product/update"; ?>" method="POST"
       enctype="multipart/form-data">
       <input type="hidden" value="<?php echo $product->id; ?>" name="id"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required/>
 
       <label for="title" class="my-2">Title:</label>
       <input type="text" value="<?php echo $product->name; ?>" name="name"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required/>
 
       <label for="img" class="my-2">Image:</label>
-      <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
+      <input type="file" name="image" id="imgInp" onchange="loadFile(event)"/>
       <p>Preview Image:</p>
-      <img id="output" class="object-contain h-56 w-80" />
+      <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $product->image ?>"/>
 
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="<?php echo $product->isbn; ?>" name="isbn"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="price" class="my-2">Price:</label>
       <input type="number" value="<?php echo $product->price; ?>" name="price"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="category" class="my-2">Description:</label>
       <textarea name="description" id="" cols="30" rows="6" class="p-3 bg-gray-100 rounded-lg focus:outline-none"><?php echo $product->description; ?>
@@ -29,7 +29,7 @@
 
       <label for="quantity" class="my-2">Quantity:</label>
       <input type="text" value="<?php echo $product->quantity; ?>" name="quantity"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
@@ -43,10 +43,6 @@
   </div>
 </div>
 <script>
-  let cancel = document.querySelector(".cancel-edit-button");
-  cancel.addEventListener("click", (event) => {
-    // event.preventDefault();
-  })
   var loadFile = function (event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);

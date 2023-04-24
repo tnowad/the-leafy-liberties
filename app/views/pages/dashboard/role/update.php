@@ -73,7 +73,7 @@ foreach ($allPermissions as $key => $permission) {
           </td>
           <?php foreach ($groupPermission as $permission): ?>
             <td>
-              <input
+              <input 
                 class="w-4 h-4 mr-3 text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 type="checkbox" name="permissions[]" id="<?php echo $permission[
                   "name"
