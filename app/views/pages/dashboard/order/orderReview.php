@@ -16,7 +16,7 @@
                         </div>
 
                         <ul>
-                            <li>
+                            <!-- <li>
                                 <?php if ($order->status == 1) :
                                 ?>
                                     <span class="accept-button py-2 px-3 bg-green-400 text-white rounded-xl hover:text-blue-500 transition-all">
@@ -34,7 +34,41 @@
                                         <i class="fas fa-clock"></i>
                                     </span>
                                 <?php endif; ?>
+                            </li> -->
+                            <li>
+                                <?php if ($order->status == 1) : ?>
+                                    <span class="accept-button py-2 px-3 bg-green-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Accepted
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                <?php elseif ($order->status == 2) : ?>
+                                    <span class="reject-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Rejected
+                                        <i class="fas fa-times-circle"></i>
+                                    </span>
+                                <?php elseif ($order->status == 0) : ?>
+                                    <span class="pending-button py-2 px-3 bg-yellow-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Pending
+                                        <i class="fas fa-clock"></i>
+                                    </span>
+                                <?php elseif ($order->status == 3) : ?>
+                                    <span class="cancel-button py-2 px-3 bg-gray-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Cancelled
+                                        <i class="fas fa-ban"></i>
+                                    </span>
+                                <?php elseif ($order->status == 4) : ?>
+                                    <span class="shipping-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Shipping
+                                        <i class="fas fa-truck"></i>
+                                    </span>
+                                <?php elseif ($order->status == 5) : ?>
+                                    <span class="success-button py-2 px-3 bg-green-600 text-white rounded-xl hover:text-blue-500 transition-all">
+                                        Successful
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                <?php endif; ?>
                             </li>
+
                         </ul>
                     </div>
                     <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
@@ -95,7 +129,7 @@
                             </table>
                         </div>
                     </div>
-                    <?php if ($order->status == 0) {
+                    <?php if ($order->status == 0 || $order->status == 4) {
                     ?>
                         <form class="flex flex-col" action="<?php echo BASE_URI .
                                                                 "/dashboard/order/order_review" .
@@ -105,6 +139,9 @@
                                 <option value="1">Accepted</option>
                                 <option value="2">Rejected</option>
                                 <option value="0">Pending</option>
+                                <option value="3">Cancelled</option>
+                                <option value="4">Shipping</option>
+                                <option value="5">Successful</option>
                             </select>
                             <button type="submit" class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded">Submit</button>
                         </form>
