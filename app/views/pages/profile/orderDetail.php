@@ -8,7 +8,7 @@
             use App\Models\OrderProduct;
             ?>
 
-            <div class="w-full mx-auto my-0">
+            <div class="w-[75%] mx-auto my-0">
                 <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
                     <div class="flex justify-between">
                         <h1 class="text-xl font-bold">Order information</h1>
