@@ -161,7 +161,6 @@ if ($user != null) {
           </div>
           <div class="comment-body">
             <h5><?php echo $review->content ?></h5>
-            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac sem massa. Vivamus interdum risus vitae erat pulvinar tincidunt. Fusce vestibulum nulla nec ex placerat fermentum. Sed blandit tincidunt molestie. Donec auctor diam justo, non pretium neque bibendum euismod.</p> -->
           </div>
           <div class="comment-footer">
             <ul class="rating">
