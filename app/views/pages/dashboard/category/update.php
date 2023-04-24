@@ -12,7 +12,7 @@
       <label for="img" class="my-2">Image:</label>
       <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
       <p>Preview Image:</p>
-      <img id="output" class="object-contain h-56 w-80" />
+      <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $category->image ?>"/>
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
@@ -25,10 +25,6 @@
   </div>
 </div>
 <script>
-  let cancel = document.querySelector(".cancel-edit-button");
-  cancel.addEventListener("click", (event) => {
-    // event.preventDefault();
-  })
   var loadFile = function (event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);

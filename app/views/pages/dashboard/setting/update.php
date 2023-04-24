@@ -4,15 +4,15 @@
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/setting/update"; ?>" method="POST">
       <input type="hidden" value="<?php echo $setting->id; ?>" name="id"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required/>
 
       <label for="name" class="my-2">Name:</label>
       <input type="text" value="<?php echo $setting->name; ?>" name="name"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required/>
 
       <label for="expired" class="my-2">Value:</label>
       <input type="number" value="<?php echo $setting->value; ?>" name="value"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" />
+        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required/>
 
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
