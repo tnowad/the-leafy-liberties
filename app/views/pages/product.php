@@ -155,7 +155,7 @@ if ($user != null) {
 
         <div class="comment">
           <div class="comment-header">
-            <img src="path/to/image.jpg" alt="Avatar">
+            <img src="" alt="Avatar">
             <h4> <?php echo date('Y-m-d H:i:s', strtotime($review->created_at));
                   ?> </h4>
           </div>
@@ -164,11 +164,13 @@ if ($user != null) {
           </div>
           <div class="comment-footer">
             <ul class="rating">
-              <li><i class="fa fa-star"></i></li>
-              <li><i class="fa fa-star"></i></li>
-              <li><i class="fa fa-star"></i></li>
-              <li><i class="fa fa-star"></i></li>
-              <li><i class="fa fa-star"></i></li>
+              <?php
+              for ($i = 0; $i < $review->rating; $i++) {
+              ?>
+                <li><i class="fa fa-star"></i></li>
+              <?php
+              }
+              ?>
             </ul>
           </div>
         </div>
