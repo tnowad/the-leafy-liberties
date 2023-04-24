@@ -1,12 +1,13 @@
 <?php
+
 use App\Models\Wishlist;
 use Core\Application;
 use App\Models\Cart;
 
-dd($reviews);
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
+echo $user->email;
 $flag = false;
 $flagwl = false;
 if ($user != null) {
@@ -30,8 +31,7 @@ if ($user != null) {
 <div class="box-border p-5 pt-3 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
   <!-- // ? option  -->
   <div class="grid grid-cols-1 gap-3 xl:grid-cols-2">
-    <div
-      class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
+    <div class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
       <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI . $product->image; ?>" alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
@@ -63,11 +63,8 @@ if ($user != null) {
         </span>
 
         <div class="flex items-center justify-start w-full gap-3 mt-4">
-          <div
-            class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
-            onclick="addToCart(<?php echo $product->id; ?>)">
-            <i
-              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($flag == true) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
+          <div class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group" onclick="addToCart(<?php echo $product->id; ?>)">
+            <i class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($flag == true) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
               <?php
               if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")) {
@@ -83,11 +80,8 @@ if ($user != null) {
               ?>
             </button>
           </div>
-          <div
-            class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
-            onclick="addToWishList(<?php echo $product->id; ?>)">
-            <i
-              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($flagwl == true) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
+          <div class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group" onclick="addToWishList(<?php echo $product->id; ?>)">
+            <i class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($flagwl == true) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
               if ($flagwl) {
@@ -102,8 +96,7 @@ if ($user != null) {
       </div>
 
       <p class="inline-block mt-5 text-gray-400">Category: </p>
-      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>"
-        class="font-medium hover:underline text-primary">
+      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>" class="font-medium hover:underline text-primary">
         <?php echo $category->name; ?>
       </a>
       <br />
@@ -116,7 +109,7 @@ if ($user != null) {
           <a href="<?php echo BASE_URI . '/' ?>" class="font-medium hover:underline text-primary">
             <?php echo $tag->name ?>
           </a>
-          <?php
+        <?php
           if ($i != $count - 1) {
             echo ', ';
           }
@@ -126,16 +119,13 @@ if ($user != null) {
 
       <div class="flex items-center justify-start gap-4 mt-10">
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i
-            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500"></i>
+          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i
-            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500"></i>
+          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i
-            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500"></i>
+          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500"></i>
         </a>
       </div>
     </div>
@@ -143,28 +133,50 @@ if ($user != null) {
   <!-- //? info detail  -->
   <div class="mt-20">
     <ul class="box-content flex justify-center">
-      <li id="description-tab"
-        class="p-2 mb-5 mr-10 transition-all cursor-pointer hover:bg-primary hover:text-white  border-2 border-white border-b-primary-800"
-        onclick="showDescription()">
+      <li id="description-tab" class="p-2 mb-5 mr-10 transition-all cursor-pointer hover:bg-primary hover:text-white  border-2 border-white border-b-primary-800" onclick="showDescription()">
         Description
       </li>
-      <li id="review-tab"
-        class="p-2 mb-2 mr-5 transition-all cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white border-2 border-white"
-        onclick="showReview()">
+      <li id="review-tab" class="p-2 mb-2 mr-5 transition-all cursor-pointer sm:mr-10 sm:mb-5 hover:bg-primary hover:text-white border-2 border-white" onclick="showReview()">
         Review
       </li>
     </ul>
-    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
-      id="description">
+    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="description">
       <p class="text-lg text-center ">
         <?php echo $product->description; ?>
       </p>
     </div>
-    <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
-      id="review">
-      <p class="text-lg text-center ">
-        Sản phẩm chất lượng
-      </p>
+    <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="review">
+      <p class="text-lg text-center "></p>
+      <?php
+      foreach ($reviews as $review) :
+        echo $review->content;
+      ?>
+
+
+        <div class="comment">
+          <div class="comment-header">
+            <img src="path/to/image.jpg" alt="Avatar">
+            <h4> <?php echo date('Y-m-d H:i:s', strtotime($review->created_at));
+                  ?> </h4>
+          </div>
+          <div class="comment-body">
+            <h5><?php echo $review->content ?></h5>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac sem massa. Vivamus interdum risus vitae erat pulvinar tincidunt. Fusce vestibulum nulla nec ex placerat fermentum. Sed blandit tincidunt molestie. Donec auctor diam justo, non pretium neque bibendum euismod.</p> -->
+          </div>
+          <div class="comment-footer">
+            <ul class="rating">
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star"></i></li>
+            </ul>
+          </div>
+        </div>
+
+      <?php
+      endforeach;
+      ?>
     </div>
   </div>
 </div>
@@ -189,7 +201,9 @@ if ($user != null) {
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
   document.addToWishList = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', { id }, {
+    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', {
+      id
+    }, {
       'Content-Type': 'application/json'
     }).then(response => {
       const data = response.data;
@@ -205,7 +219,9 @@ if ($user != null) {
     }, 1000);
   };
   document.addToCart = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', {
+      id
+    }, {
       'Content-Type': 'application/json'
     }).then(response => {
       const data = response.data;
