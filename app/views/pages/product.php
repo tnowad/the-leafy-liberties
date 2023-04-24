@@ -121,15 +121,11 @@ if ($user != null) {
         <?php
         $tags = $product->tags();
         $count = count($tags);
-        foreach ($tags as $i => $tag) { ?>
-          <a href="<?php echo BASE_URI . '/' ?>" class="font-medium hover:underline text-primary">
-            <?php echo $tag->name ?>
-          </a>
-          <?php
-          if ($i != $count - 1) {
-            echo ', ';
-          }
+        $tagNames = [];
+        foreach ($tags as $tag) {
+          $tagNames[] = '<a href="' . BASE_URI . '/" class="font-medium hover:underline text-primary">' . $tag->name . '</a>';
         }
+        echo implode(', ', $tagNames);
         ?>
       </p>
 
@@ -214,7 +210,7 @@ if ($user != null) {
                   // echo '<br/>' .  $review_time;
                   $time_diff = $current_time - $review_time;
                   // echo '<br/>' .  $time_diff;
-
+              
                   $days = floor($time_diff / (60 * 60 * 24));
                   $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
                   $minutes = floor(($time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60)) / 60);
@@ -231,7 +227,7 @@ if ($user != null) {
                   }
 
                   // echo date('Y-m-d H:i:s', strtotime($review->created_at));
-
+              
 
                   ?>
                 </h4>
