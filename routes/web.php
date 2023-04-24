@@ -37,7 +37,9 @@ $router->post("/profile/order_detail", [ProfileController::class, "orderDetail"]
 $router->get("/profile/orders/order_detail/delete", [ProfileController::class, "delete"]);
 $router->post("/profile/orders/order_detail/delete", [ProfileController::class, "delete",]);
 
+// reviews
 
+// $router->get("/product", [ReviewController::class, "index"]);
 
 $router->get("/login", [LoginController::class, "index"]);
 $router->post("/login", [LoginController::class, "login"]);

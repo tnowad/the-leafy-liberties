@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Review;
 use Core\Controller;
 use Core\Database;
 use Core\Request;
@@ -62,6 +63,9 @@ class ProductController extends Controller
       $product = Product::find($request->getQuery("id"));
       $author = Author::find($product->author_id);
       $product_category = ProductCategory::find($product->id);
+       $reviews = Review::findAll([
+            "product_id" => $product->id,
+        ]);
       $category = Category::find($product_category->category_id);
     } catch (\Exception $e) {
       dd($e->getMessage());
@@ -72,6 +76,7 @@ class ProductController extends Controller
         "product" => $product,
         "author" => $author,
         "category" => $category,
+        "reviews" => $reviews,
       ])
     );
   }

@@ -3,6 +3,8 @@ use App\Models\Wishlist;
 use Core\Application;
 use App\Models\Cart;
 
+dd($reviews);
+
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
 $flag = false;
