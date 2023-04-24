@@ -6,10 +6,10 @@ use App\Models\Cart;
 use App\Models\User;
 
 $auth = Application::getInstance()->getAuthentication();
+$user = $auth->getUser();
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
 if ($auth->isAuthenticated()) {
-  $user = $auth->getUser();
   echo $user->email;
 }
 
@@ -214,7 +214,7 @@ if ($user != null) {
                   // echo '<br/>' .  $review_time;
                   $time_diff = $current_time - $review_time;
                   // echo '<br/>' .  $time_diff;
-              
+
                   $days = floor($time_diff / (60 * 60 * 24));
                   $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
                   $minutes = floor(($time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60)) / 60);
@@ -231,7 +231,7 @@ if ($user != null) {
                   }
 
                   // echo date('Y-m-d H:i:s', strtotime($review->created_at));
-              
+
 
                   ?>
                 </h4>
