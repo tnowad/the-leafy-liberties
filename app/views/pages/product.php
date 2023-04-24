@@ -215,13 +215,13 @@ if ($user != null) {
         endforeach;
         ?>
         <div class="mt-20 border-t-2 border-gray-300 pt-14">
-          <form action="<?php echo BASE_URI . "/product/comment" ?>" method="POST" class="flex flex-row">
+          <form action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>" method="POST" class="flex flex-row">
             <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
             <div class="ml-10">
               <h1 class="mb-2 font-bold">
                 <?php echo $user->name; ?>
               </h1>
-              <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')">
+              <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
               <div class="flex items-center mt-4 mb-4">
                 <span class="mr-2">Rating : </span>
                 <div class="flex">

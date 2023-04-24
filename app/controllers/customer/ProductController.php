@@ -152,11 +152,11 @@ class ProductController extends Controller
 
     $newComment = new Review();
     $newComment->user_id = $user->id;
-    $newComment->product_id = 2;
+    $newComment->product_id =  $product->id;
     $newComment->content = trim($request->getParam("new-comment"));
     $newComment->rating = trim($request->getParam("rating"));
     if (!$newComment->content) {
-      return $response->redirect(BASE_URI . "/product" . "?id=" . 2);
+      return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id);
     }
     $newComment->save();
     return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
