@@ -146,112 +146,120 @@ if ($user != null) {
       </p>
     </div>
     <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="review">
-      <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
+      <!--  -->
+      <?php
+      if (count($reviews) == 0) :
+      ?>
+        <p class="text-lg text-center">Don't have review</p>
+      <?php else : ?>
+        <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
+          <?php
+          echo count($reviews) . ' reviews for ' . $product->name;
+          ?>
+        </h1>
         <?php
-        echo count($reviews) . ' reviews for ' . $product->name;
+        foreach ($reviews as $review) :
+          $user_review = User::find($review->user_id);
         ?>
-      </h1>
-      <?php
-      foreach ($reviews as $review) :
-        $user_review = User::find($review->user_id);
-      ?>
-        <!-- <div class="review flex flex-row justify-start"> -->
-        <div class="review flex flex-row <?php if ($user_review->id != $user->id) {
-                                            echo "justify-start";
-                                          } else {
-                                            echo "justify-end";
-                                          } ?>">
-
-          <div class="review-header">
-            <img src="<?php echo BASE_URI . $user_review->image; ?>" alt="Avatar" class="h-10 w-10 rounded-full cursor-pointer">
-          </div>
-          <div class="ml-5 mr-5 review-body">
-
-            <div class="mb-2 flex flex-row">
-              <h3 class="mr-2 inline-block font-bold"><?php echo $user_review->name ?></h3>
-              -
-              <h4 class="ml-2 text-gray-400">
-                <?php
-
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $current_time = time();
-                // echo $current_time;
-                $review_time = strtotime($review->created_at);
-                // echo '<br/>' .  $review_time;
-                $time_diff = $current_time - $review_time;
-                // echo '<br/>' .  $time_diff;
-
-                $days = floor($time_diff / (60 * 60 * 24));
-                $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
-                $minutes = floor(($time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60)) / 60);
-                $seconds = $time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60) - ($minutes * 60);
-
-                if ($days > 0) {
-                  echo  $days == 1 ?  'about ' . $days . ' day ago' :  'about ' . $days . ' days ago';
-                } else if ($hours > 0) {
-                  echo  $hours == 1 ?  'about ' . $hours . ' hour ago' : 'about ' . $hours . ' hours ago';
-                } else if ($minutes > 0) {
-                  echo  $minutes == 1 ? 'about ' . $minutes . ' minute ago' : 'about ' . $minutes . ' minutes ago';
-                } else {
-                  echo  $seconds == 1 ? 'about ' . $seconds . ' second ago' : 'about ' . $seconds . ' seconds ago';
-                }
-
-                // echo date('Y-m-d H:i:s', strtotime($review->created_at));
-
-
-                ?> </h4>
+          <!-- <div class="review flex flex-row justify-start"> -->
+          <div class="review flex flex-row <?php if ($user_review->id != $user->id) {
+                                              echo "justify-start";
+                                            } else {
+                                              echo "justify-end";
+                                            } ?>">
+            <div class="review-header">
+              <img src="<?php echo BASE_URI . $user_review->image; ?>" alt="Avatar" class="h-10 w-10 rounded-full cursor-pointer">
             </div>
-            <h5 class="w-52"><?php echo $review->content ?></h5>
-          </div>
-          <div class="review-footer">
-            <ul class="rating flex flex-row">
-              <?php
-              $norating = 5 - $review->rating;
-              for ($i = 0; $i < $review->rating; $i++) {
-              ?>
-                <li><i class="fa fa-star text-primary"></i></li>
-              <?php
-              }
-              for ($i = 0; $i < $norating; $i++) {
-              ?>
-                <li><i class="fa fa-star text-gray-400"></i></li>
-              <?php
-              }
-              ?>
-            </ul>
-          </div>
-        </div>
+            <div class="ml-5 mr-5 review-body">
 
-      <?php
-      endforeach;
-      ?>
-      <div class="mt-20 pt-14 border-t-2 border-gray-300">
-        <form action="" class="flex flex-row">
-          <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="h-10 w-10 rounded-full cursor-pointer">
-          <div class="ml-10">
-            <h1 class="mb-2 font-bold"><?php echo $user->name; ?></h1>
-            <input type="text" placeholder="Add a comment..." class="w-96 border-b-2 border-gray-300">
-            <div class="mt-4 mb-4 flex items-center">
-              <span class="mr-2">Rating : </span>
-              <div class="flex">
-                <label id="startLabel1" for="star1" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
-                <input type="radio" id="star1" name="rating" value="1" class="hidden" />
-                <label id="startLabel2" for="star2" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
-                <input type="radio" id="star2" name="rating" value="2" class="hidden" />
-                <label id="startLabel3" for="star3" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
-                <input type="radio" id="star3" name="rating" value="3" class="hidden" />
-                <label id="startLabel4" for="star4" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
-                <input type="radio" id="star4" name="rating" value="4" class="hidden" />
-                <label id="startLabel5" for="star5" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
-                <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+              <div class="mb-2 flex flex-row">
+                <h3 class="mr-2 inline-block font-bold"><?php echo $user_review->name ?></h3>
+                -
+                <h4 class="ml-2 text-gray-400">
+                  <?php
+
+                  date_default_timezone_set('Asia/Ho_Chi_Minh');
+                  $current_time = time();
+                  // echo $current_time;
+                  $review_time = strtotime($review->created_at);
+                  // echo '<br/>' .  $review_time;
+                  $time_diff = $current_time - $review_time;
+                  // echo '<br/>' .  $time_diff;
+
+                  $days = floor($time_diff / (60 * 60 * 24));
+                  $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
+                  $minutes = floor(($time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60)) / 60);
+                  $seconds = $time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60) - ($minutes * 60);
+
+                  if ($days > 0) {
+                    echo  $days == 1 ?  'about ' . $days . ' day ago' :  'about ' . $days . ' days ago';
+                  } else if ($hours > 0) {
+                    echo  $hours == 1 ?  'about ' . $hours . ' hour ago' : 'about ' . $hours . ' hours ago';
+                  } else if ($minutes > 0) {
+                    echo  $minutes == 1 ? 'about ' . $minutes . ' minute ago' : 'about ' . $minutes . ' minutes ago';
+                  } else {
+                    echo  $seconds == 1 ? 'about ' . $seconds . ' second ago' : 'about ' . $seconds . ' seconds ago';
+                  }
+
+                  // echo date('Y-m-d H:i:s', strtotime($review->created_at));
+
+
+                  ?> </h4>
+              </div>
+              <h5 class="w-52"><?php echo $review->content ?></h5>
+            </div>
+            <div class="review-footer">
+              <ul class="rating flex flex-row">
+                <?php
+                $norating = 5 - $review->rating;
+                for ($i = 0; $i < $review->rating; $i++) {
+                ?>
+                  <li><i class="fa fa-star text-primary"></i></li>
+                <?php
+                }
+                for ($i = 0; $i < $norating; $i++) {
+                ?>
+                  <li><i class="fa fa-star text-gray-400"></i></li>
+                <?php
+                }
+                ?>
+              </ul>
+            </div>
+          </div>
+
+        <?php
+        endforeach;
+        ?>
+        <div class="mt-20 pt-14 border-t-2 border-gray-300">
+          <form action="" class="flex flex-row">
+            <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="h-10 w-10 rounded-full cursor-pointer">
+            <div class="ml-10">
+              <h1 class="mb-2 font-bold"><?php echo $user->name; ?></h1>
+              <input type="text" placeholder="Add a comment..." class="w-96 border-b-2 border-gray-300">
+              <div class="mt-4 mb-4 flex items-center">
+                <span class="mr-2">Rating : </span>
+                <div class="flex">
+                  <label id="startLabel1" for="star1" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
+                  <input type="radio" id="star1" name="rating" value="1" class="hidden" />
+                  <label id="startLabel2" for="star2" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
+                  <input type="radio" id="star2" name="rating" value="2" class="hidden" />
+                  <label id="startLabel3" for="star3" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
+                  <input type="radio" id="star3" name="rating" value="3" class="hidden" />
+                  <label id="startLabel4" for="star4" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
+                  <input type="radio" id="star4" name="rating" value="4" class="hidden" />
+                  <label id="startLabel5" for="star5" class="px-1 text-2xl cursor-pointer text-gray-300">&#9733;</label>
+                  <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="box-border">
-            <button type="submit" class="ml-5 mt-9 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-600 font-bold transition-all">Comment</button>
-          </div>
-        </form>
-      </div>
+            <div class="box-border">
+              <button type="submit" class="ml-5 mt-9 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-600 font-bold transition-all">Comment</button>
+            </div>
+          </form>
+        </div>
+      <?php
+      endif
+      ?>
     </div>
   </div>
 </div>
