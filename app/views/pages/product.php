@@ -243,21 +243,27 @@ if ($user != null) {
                   <?php echo $user->name; ?>
                 </h1>
                 <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
-                <div class="flex items-center mt-4 mb-4">
-                  <span class="mr-2">Rating : </span>
-                  <div class="flex">
-                    <label id="startLabel1" for="star1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                    <input type="radio" id="star1" name="rating" value="1" class="hidden" />
-                    <label id="startLabel2" for="star2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                    <input type="radio" id="star2" name="rating" value="2" class="hidden" />
-                    <label id="startLabel3" for="star3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                    <input type="radio" id="star3" name="rating" value="3" class="hidden" />
-                    <label id="startLabel4" for="star4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                    <input type="radio" id="star4" name="rating" value="4" class="hidden" />
-                    <label id="startLabel5" for="star5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                    <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+                <?php
+                if ($user->role_id != 3) :
+                ?>
+                  <div class="flex items-center mt-4 mb-4">
+                    <span class="mr-2">Rating : </span>
+                    <div class="flex">
+                      <label id="startLabel1" for="star1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                      <input type="radio" id="star1" name="rating" value="1" class="hidden" />
+                      <label id="startLabel2" for="star2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                      <input type="radio" id="star2" name="rating" value="2" class="hidden" />
+                      <label id="startLabel3" for="star3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                      <input type="radio" id="star3" name="rating" value="3" class="hidden" />
+                      <label id="startLabel4" for="star4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                      <input type="radio" id="star4" name="rating" value="4" class="hidden" />
+                      <label id="startLabel5" for="star5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                      <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+                    </div>
                   </div>
-                </div>
+                <?php
+                endif;
+                ?>
               </div>
               <div class="box-border">
                 <button type="submit" class="px-4 py-2 ml-5 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>

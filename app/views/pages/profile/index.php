@@ -5,7 +5,7 @@
       <!-- content -->
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col gap-1" action="<?php echo BASE_URI .
-                                                    "/profile/update"; ?>" method="POST">
+                                                    "/profile"; ?>" method="POST">
           <input type="file" name="image" id="upload-image" class="hidden">
 
           <label>Name</label>
