@@ -7,6 +7,7 @@ use App\Models\User;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
+
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
 if ($auth->isAuthenticated()) {
@@ -25,8 +26,7 @@ if ($user != null) {
 <div class="box-border p-5 pt-3 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
   <!-- // ? option  -->
   <div class="grid grid-cols-1 gap-3 xl:grid-cols-2">
-    <div
-      class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
+    <div class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
       <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI . $product->image; ?>" alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
@@ -58,11 +58,8 @@ if ($user != null) {
         </span>
 
         <div class="flex items-center justify-start w-full gap-3 mt-4">
-          <div
-            class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
-            onclick="addToCart(<?php echo $product->id; ?>)">
-            <i
-              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartCheck) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
+          <div class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group" onclick="addToCart(<?php echo $product->id; ?>)">
+            <i class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartCheck) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
               <?php
               if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")) {
@@ -78,11 +75,8 @@ if ($user != null) {
               ?>
             </button>
           </div>
-          <div
-            class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
-            onclick="addToWishList(<?php echo $product->id; ?>)">
-            <i
-              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
+          <div class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group" onclick="addToWishList(<?php echo $product->id; ?>)">
+            <i class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
               if (isset($wishlistCheck)){
@@ -97,8 +91,7 @@ if ($user != null) {
       </div>
 
       <p class="inline-block mt-5 text-gray-400">Category: </p>
-      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>"
-        class="font-medium hover:underline text-primary">
+      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>" class="font-medium hover:underline text-primary">
         <?php echo $category->name; ?>
       </a>
       <br />
@@ -117,16 +110,13 @@ if ($user != null) {
 
       <div class="flex items-center justify-start gap-4 mt-10">
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i
-            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500"></i>
+          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i
-            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500"></i>
+          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i
-            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500"></i>
+          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500"></i>
         </a>
       </div>
     </div>
@@ -134,56 +124,46 @@ if ($user != null) {
   <!-- //? info detail  -->
   <div class="mt-20">
     <ul class="box-content flex justify-center">
-      <li id="description-tab"
-        class="p-2 mb-5 mr-10 transition-all border-4 border-white cursor-pointer hover:border-b-primary-800 border-b-primary-800"
-        onclick="showDescription()">
+      <li id="description-tab" class="p-2 mb-5 mr-10 transition-all border-4 border-white cursor-pointer hover:border-b-primary-800 border-b-primary-800" onclick="showDescription()">
         Description
       </li>
-      <li id="review-tab"
-        class="p-2 mb-2 mr-5 transition-all border-4 border-white cursor-pointer sm:mr-10 sm:mb-5 hover:border-b-primary-800"
-        onclick="showReview()">
+      <li id="review-tab" class="p-2 mb-2 mr-5 transition-all border-4 border-white cursor-pointer sm:mr-10 sm:mb-5 hover:border-b-primary-800" onclick="showReview()">
         Review
         <?php echo "(" . count($reviews) . ")" ?>
       </li>
     </ul>
-    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
-      id="description">
+    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="description">
       <p class="text-lg text-center ">
         <?php echo $product->description; ?>
       </p>
     </div>
-    <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
-      id="review">
+    <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="review">
       <!--  -->
       <?php
-      if (count($reviews) == 0):
-        ?>
+      if (count($reviews) == 0) :
+      ?>
         <p class="text-lg text-center">Don't have review</p>
-      <?php else: ?>
+      <?php else : ?>
         <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
           <?php
           echo count($reviews) . ' reviews for ' . $product->name;
           ?>
         </h1>
         <?php
-        foreach ($reviews as $review):
-          $user_review = User::find($review->user_id);
-          ?>
+        foreach ($reviews as $review) :
+          $userReview = User::find($review->user_id);
+        ?>
           <!-- <div class="flex flex-row justify-start review"> -->
-          <div class="review flex flex-row <?php if ($user_review->id != $user->id) {
-            echo "justify-start";
-          } else {
-            echo "justify-end";
-          } ?>">
+          <div class="review flex flex-row <?php
+                                            echo  $userReview->id != $user->id ? "justify-start" : "justify-end"; ?>">
             <div class="review-header">
-              <img src="<?php echo BASE_URI . $user_review->image; ?>" alt="Avatar"
-                class="w-10 h-10 rounded-full cursor-pointer">
+              <img src="<?php echo BASE_URI . $userReview->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
             </div>
             <div class="ml-5 mr-5 review-body">
 
               <div class="flex flex-row mb-2">
                 <h3 class="inline-block mr-2 font-bold">
-                  <?php echo $user_review->name ?>
+                  <?php echo $userReview->name ?>
                 </h3>
                 -
                 <h4 class="ml-2 text-gray-400">
@@ -223,33 +203,25 @@ if ($user != null) {
             <div class="review-footer">
               <ul class="flex flex-row rating">
                 <?php
-                $norating = 5 - $review->rating;
-                for ($i = 0; $i < $review->rating; $i++) {
-                  ?>
-                  <li><i class="fa fa-star text-primary"></i></li>
-                  <?php
-                }
-                for ($i = 0; $i < $norating; $i++) {
-                  ?>
-                  <li><i class="text-gray-400 fa fa-star"></i></li>
-                  <?php
-                }
+                $stars = str_repeat('<li><i class="fa fa-star text-primary"></i></li>', $review->rating);
+                $stars .= str_repeat('<li><i class="text-gray-400 fa fa-star"></i></li>', 5 - $review->rating);
+                echo $stars;
                 ?>
               </ul>
             </div>
           </div>
 
-          <?php
+        <?php
         endforeach;
         ?>
         <div class="mt-20 border-t-2 border-gray-300 pt-14">
-          <form action="" class="flex flex-row">
+          <form action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>" method="POST" class="flex flex-row">
             <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
             <div class="ml-10">
               <h1 class="mb-2 font-bold">
                 <?php echo $user->name; ?>
               </h1>
-              <input type="text" placeholder="Add a comment..." class="border-b-2 border-gray-300 w-96">
+              <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
               <div class="flex items-center mt-4 mb-4">
                 <span class="mr-2">Rating : </span>
                 <div class="flex">
@@ -267,12 +239,11 @@ if ($user != null) {
               </div>
             </div>
             <div class="box-border">
-              <button type="submit"
-                class="px-4 py-2 ml-5 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+              <button type="submit" class="px-4 py-2 ml-5 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
             </div>
           </form>
         </div>
-        <?php
+      <?php
       endif ?>
     </div>
   </div>
@@ -350,17 +321,17 @@ if ($user != null) {
 
   const labels = document.querySelectorAll('label[for^="star"]');
 
-  for (let i = 0; i < labels.length; i++) {
-    const label = labels[i];
-    label.addEventListener('click', function () {
-      for (let j = 0; j <= i; j++) {
-        labels[j].classList.add('text-primary');
-        labels[j].classList.remove('text-gray-300');
-      }
-      for (let j = i + 1; j < labels.length; j++) {
-        labels[j].classList.add('text-gray-300');
-        labels[j].classList.remove('text-primary');
-      }
-    })
-  }
+  labels.forEach((label, i) => {
+    label.addEventListener('click', function() {
+      labels.forEach((l, j) => {
+        if (j <= i) {
+          l.classList.add('text-primary');
+          l.classList.remove('text-gray-300');
+        } else {
+          l.classList.add('text-gray-300');
+          l.classList.remove('text-primary');
+        }
+      });
+    });
+  });
 </script>
