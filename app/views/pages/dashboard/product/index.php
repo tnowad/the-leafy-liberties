@@ -11,8 +11,10 @@ use App\Models\Pagination;
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Product</h1>
       <div class="box-border w-1/2 px-10">
-        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input" action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
-          <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
+        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input"
+          action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
+          <input type="text" name="searchQuery"
+            class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
           <button class="flex items-center justify-center w-10 h-10">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
@@ -47,8 +49,8 @@ use App\Models\Pagination;
           <tbody>
             <?php
             $products = Product::all();
-            if (count($products) > 0) : ?>
-              <?php foreach ($products as $product) : ?>
+            if (count($products) > 0): ?>
+              <?php foreach ($products as $product): ?>
                 <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-3">
                     <?php echo $product->id; ?>
@@ -68,12 +70,14 @@ use App\Models\Pagination;
                   <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
                     <div class="button flex justify-center items-center gap-4">
                       <a href="<?php echo BASE_URI .
-                                  "/dashboard/product/update" .
-                                  "?id=" .
-                                  $product->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                        "/dashboard/product/update" .
+                        "?id=" .
+                        $product->id; ?>"
+                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button onclick="removeProductConfirm(<?php echo $product->id ?>)" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                      <button onclick="removeProductConfirm(<?php echo $product->id ?>)"
+                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>
@@ -93,11 +97,7 @@ use App\Models\Pagination;
   document.removeProductConfirm = (id) => {
     const result = confirm("Delete this product?");
     if (result) {
-      FetchXHR.post('<?php echo BASE_URI . "/dashboard/product/delete" ?>', {
-          id
-        }, {
-          'Content-Type': 'application/json'
-        })
+      FetchXHR.post('<?php echo BASE_URI . "/dashboard/product/delete" ?>', { id }, { 'Content-Type': 'application/json' })
         .then(response => {
           if (response.type === 'error') {
             alert(response.message);

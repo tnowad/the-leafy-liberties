@@ -221,7 +221,7 @@ class ProductController extends Controller
         ],
       ]);
     }
-    $product = Product::find($request->getQuery("id"));
+    $product = Product::find($request->getBody()["id"]);
     if (!$product) {
       return $response->redirect(BASE_URI . "/dashboard/product", 200, [
         "toast" => [
@@ -230,25 +230,14 @@ class ProductController extends Controller
         ],
       ]);
     }
-
-    switch ($request->getMethod()) {
-      case "GET":
-        $response->setStatusCode(200);
-        $product->delete();
-        return $response->redirect(BASE_URI . "/dashboard/product", 200, [
-          "toast" => [
-            'type' => 'success',
-            'message' => 'Delete product successfully'
-          ]
-        ]);
-      case "POST":
-        return $response->redirect(BASE_URI . "/dashboard/product", 200, [
-          "toast" => [
-            'type' => 'success',
-            'message' => 'Delete product successfully'
-          ]
-        ]);
-    }
+    // dd($product);
+    $product->delete();
+    return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+      "toast" => [
+        "type" => "success",
+        "message" => "Delete product successful",
+      ],
+    ]);
   }
   public function filterProduct(Request $request, Response $response)
   {
