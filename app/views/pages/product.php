@@ -18,8 +18,8 @@ if ($auth->isAuthenticated()) {
 // You can only use Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the cart
 // Same for wishlist, you can use Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the wishlist
 if ($user != null) {
-  $cartCheck = Cart::findOne(["user_id" => $user->id,"product_id" => $product->id]);
-  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id,"product_id" => $product->id]);
+  $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
 }
 ?>
 
@@ -79,7 +79,7 @@ if ($user != null) {
             <i class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
-              if (isset($wishlistCheck)){
+              if (isset($wishlistCheck)) {
                 echo "Added to wishlist";
               } else {
                 echo "Add to wishlist";
@@ -375,14 +375,7 @@ if ($user != null) {
           l.classList.remove('text-primary');
         }
       });
-
-      // lastSelected.classList.add('text-primary');
-      // lastSelected.classList.remove('text-gray-300');
     });
-
-    // label.addEventListener('click', function() {
-    //   lastSelected = this;
-    // });
   });
 
 
