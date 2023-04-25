@@ -228,7 +228,8 @@ CREATE TABLE
       product_id int NOT NULL,
       content text NOT NULL,
       rating int NULL,
-      created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      deleted_at DATETIME DEFAULT NULL,
       FOREIGN KEY (user_id) REFERENCES users (id),
       FOREIGN KEY (product_id) REFERENCES products (id)
     );
