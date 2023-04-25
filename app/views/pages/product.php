@@ -162,19 +162,17 @@ if ($user != null) {
 
                 <div class="flex flex-row mb-2">
                   <h3 class="inline-block mr-2 font-bold">
-                    <?php echo $userReview->name ?>
+                    <?php echo $userReview->name;
+                      echo $userReview->role_id==3?'<span class="text-red-500">(admin)</span>':''; 
+                    ?>
                   </h3>
-                  -
                   <h4 class="ml-2 text-gray-400">
                     <?php
 
                     date_default_timezone_set('Asia/Ho_Chi_Minh');
                     $current_time = time();
-                    // echo $current_time;
                     $review_time = strtotime($review->created_at);
-                    // echo '<br/>' .  $review_time;
                     $time_diff = $current_time - $review_time;
-                    // echo '<br/>' .  $time_diff;
 
                     $days = floor($time_diff / (60 * 60 * 24));
                     $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
@@ -191,7 +189,6 @@ if ($user != null) {
                       echo $seconds == 1 ? 'about ' . $seconds . ' second ago' : 'about ' . $seconds . ' seconds ago';
                     }
 
-                    // echo date('Y-m-d H:i:s', strtotime($review->created_at));
 
 
                     ?>
