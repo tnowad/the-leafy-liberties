@@ -163,7 +163,7 @@ if ($user != null) {
                 <div class="flex flex-row mb-2">
                   <h3 class="inline-block mr-2 font-bold">
                     <?php echo $userReview->name;
-                      echo $userReview->role_id==3?'<span class="text-red-500">(admin)</span>':''; 
+                    echo $userReview->role_id == 3 ? '<span class="text-red-500">(admin)</span>' : '';
                     ?>
                   </h3>
                   <h4 class="ml-2 text-gray-400">
@@ -188,9 +188,6 @@ if ($user != null) {
                     } else {
                       echo $seconds == 1 ? 'about ' . $seconds . ' second ago' : 'about ' . $seconds . ' seconds ago';
                     }
-
-
-
                     ?>
                   </h4>
                 </div>
@@ -198,15 +195,17 @@ if ($user != null) {
                   <?php echo $review->content ?>
                 </h5>
               </div>
-              <div class="review-footer">
-                <ul class="flex flex-row rating">
-                  <?php
-                  $stars = str_repeat('<li><i class="fa fa-star text-primary"></i></li>', $review->rating);
-                  $stars .= str_repeat('<li><i class="text-gray-400 fa fa-star"></i></li>', 5 - $review->rating);
-                  echo $stars;
-                  ?>
-                </ul>
-              </div>
+              <?php if ($userReview->role_id != 3) : ?>
+                <div class="review-footer">
+                  <ul class="flex flex-row rating">
+                    <?php
+                    $stars = str_repeat('<li><i class="fa fa-star text-primary"></i></li>', $review->rating);
+                    $stars .= str_repeat('<li><i class="text-gray-400 fa fa-star"></i></li>', 5 - $review->rating);
+                    echo $stars;
+                    ?>
+                  </ul>
+                </div>
+              <?php endif; ?>
             </div>
 
           <?php
