@@ -10,6 +10,9 @@
           </button>
         </form>
       </div>
+      <a href="<?php echo BASE_URI . '/dashboard/review/create' ?>" class="w-5 h-5 text-2xl">
+        +
+      </a>
     </div>
     <div class="my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
       <div class="relative">
@@ -18,7 +21,7 @@
             <tr>
               <?php
 
-    
+              use App\Models\Product;
               use App\Models\Review;
 
               $name = [
@@ -37,7 +40,14 @@
             </tr>
           </thead>
           <tbody>
-
+            <?php
+            if (isset($_POST["searchQuery"])) {
+              $text = $_POST["searchQuery"];
+              $coupons = Product::filterAdvancedCoupon($text);
+            } else {
+              $coupons = Product::all();
+            }
+            if (count($coupons) > 0) : ?>
               <?php foreach ($products as $product) :
               ?>
                 <?php
@@ -59,7 +69,7 @@
                   <td class="px-5 py-3 w-44">
                     <div class="button flex justify-center items-center gap-4">
                       <a href="<?php echo BASE_URI .
-                                  "/dashboard/review/update" .
+                                  "/dashboard/review/review_detail" .
                                   "?id=" .
                                   $product->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -74,7 +84,8 @@
                   </td>
                 </tr>
               <?php endforeach ?>
-          
+            <?php endif;
+            ?>
           </tbody>
         </table>
       </div>

@@ -140,12 +140,12 @@ if ($user != null) {
     </div>
     <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="review">
       <?php
-      if ($user->role_id == 3) :
+      if ($user && $user->role_id == 3) :
       ?>
         <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>" class="flex justify-end">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <?php
-            echo $review_status->status == 0 ? 'Turn on comment' : 'Turn of comment'
+            echo $review_status->status == 0 ? 'Turn on comment' : 'Turn off comment'
             ?>
           </button>
         </form>
@@ -174,12 +174,11 @@ if ($user != null) {
               foreach ($reviews as $review) :
                 $userReview = User::find($review->user_id);
               ?>
-                <div class="review flex flex-row <?php echo  $userReview->id != $user->id ? "justify-start" : "justify-end"; ?>">
+                <div class="review flex flex-row <?php echo $user ? ($userReview->id != $user->id ? "justify-start" : "justify-end") : "justify-start"; ?>">
                   <div class="review-header">
-                    <img src="<?php echo BASE_URI . $userReview->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
+                    <img src="<?php echo ($userReview->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $userReview->image ?>" alt="Avatar" class="w-20  object-contain h-full rounded-full cursor-pointer">
                   </div>
-                  <div class="ml-5 mr-5 review-body">
-
+                  <div class="w-72 ml-2 mr-2 review-body">
                     <div class="flex flex-row mb-2">
                       <h3 class="inline-block mr-2 font-bold">
                         <?php echo $userReview->name;
@@ -236,15 +235,15 @@ if ($user != null) {
           <?php
           endif ?>
           <div class="mt-20 border-t-2 border-gray-300 pt-14">
-            <form id="comment-form" action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>" method="POST" class="flex flex-row">
-              <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
-              <div class="ml-10">
+            <form id="comment-form" action="<?php echo $user ? (BASE_URI . "/product/comment" . "?id=" . $product->id) : BASE_URI . "/login" ?>" method="POST" class="flex flex-row">
+              <img src="<?php echo $user ?  (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> " alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
+              <div class="ml-5">
                 <h1 class="mb-2 font-bold">
-                  <?php echo $user->name; ?>
+                  <?php echo $user ? $user->name : 'User'; ?>
                 </h1>
                 <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
                 <?php
-                if ($user->role_id != 3) :
+                if ($user && $user->role_id != 3) :
                 ?>
                   <div class="flex items-center mt-4 mb-4">
                     <span class="mr-2">Rating : </span>
@@ -266,7 +265,7 @@ if ($user != null) {
                 ?>
               </div>
               <div class="box-border">
-                <button type="submit" class="px-4 py-2 ml-5 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+                <button type="submit" class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
               </div>
             </form>
           </div>
