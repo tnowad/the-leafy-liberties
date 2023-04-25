@@ -20,7 +20,8 @@ class User extends Model
     "image",
     "role_id",
     "status",
-    "deleted_at",
+    "address",
+    "birthday",
   ];
 
   public function setPassword($password)

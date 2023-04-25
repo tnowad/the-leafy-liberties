@@ -10,6 +10,7 @@ use Core\Controller;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use DateTime;
 use Exception;
 use Utils\Validation;
 
@@ -43,10 +44,10 @@ class ProfileController extends Controller
     }
     $user = $auth->getUser();
     $user->name = $request->getParam("name");
+    $user->address = $request->getParam("address");
     // Validate email
     $user->email = Validation::validateEmail($request->getParam('email'));
     $user->phone = $request->getParam("phone");
-    $user->address = $request->getParam("address");
     if ($request->getParam("gender") == "male") {
       $user->gender = 1;
     } else if ($request->getParam("gender") == "female") {
@@ -54,11 +55,21 @@ class ProfileController extends Controller
     } else {
       $user->gender = 0;
     }
-    // $user->birthday = $request->getParam("birthday");
+    // $user->deleted_at = $request->getParam("birthday");
 
-    if ($user->password = password_hash(Validation::validatePassword($request->getparam('current-password')), PASSWORD_DEFAULT)) {
-      $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
+    $birthday = $request->getParam("birthday");
+    $date = DateTime::createFromFormat('Y-m-d', $birthday);
+    if (!$date) {
+      // Invalid input
+      // Handle the error
+    } else {
+      $user->birthday = $date->format('Y-m-d H:i:s');
     }
+
+
+    // if ($user->password = password_hash(Validation::validatePassword($request->getparam('current-password')), PASSWORD_DEFAULT)) {
+    //   $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
+    // }
 
     $user->save();
     $response->redirect(BASE_URI . "/profile");
