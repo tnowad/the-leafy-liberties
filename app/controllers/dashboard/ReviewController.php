@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Dashboard;
 
+use App\Models\Product;
 use App\Models\Review;
 use Core\Application;
 use Core\Controller;
@@ -20,11 +21,13 @@ class ReviewController extends Controller
         //         "footer" => "",
         //     ])
         // );
-        // $review = Review::all();
+        $reviews = Review::all();
+        $products = Product::all();
         return $response->setBody(
             View::renderWithDashboardLayout(new View("pages/dashboard/review/index"), [
-                "title" => "Dashboard",
-                // "review" => $review,
+                "title" => "Review",
+                // "reviews" => $reviews,
+                "products" => $products,
             ])
         );
     }

@@ -16,6 +16,7 @@ class Review extends Model
     "content",
     "rating",
     "created_at",
+    "deleted_at",
   ];
 
   public function user()
