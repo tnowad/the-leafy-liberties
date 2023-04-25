@@ -236,7 +236,7 @@ if ($user != null) {
           <?php
           endif ?>
           <div class="mt-20 border-t-2 border-gray-300 pt-14">
-            <form id="comment-form" action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>" method="POST" class="flex flex-row">
+            <form id="comment-form" action="<?php echo $user ? (BASE_URI . "/product/comment" . "?id=" . $product->id) : BASE_URI . "/login" ?>" method="POST" class="flex flex-row">
               <img src="<?php echo $user ?  (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> " alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
               <div class="ml-10">
                 <h1 class="mb-2 font-bold">
