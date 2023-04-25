@@ -14,20 +14,25 @@ class ReviewController extends Controller
 {
     public function index(Request $request, Response $response)
     {
-        // $reveiw = Review::all();
-        // return $response->setBody(
-        //     View::renderWithDashboardLayout(new View("pages/dashboard/review/index"), [
-        //         "review" => $reveiw,
-        //         "footer" => "",
-        //     ])
-        // );
-        $reviews = Review::all();
+
         $products = Product::all();
         return $response->setBody(
             View::renderWithDashboardLayout(new View("pages/dashboard/review/index"), [
                 "title" => "Review",
-                // "reviews" => $reviews,
                 "products" => $products,
+            ])
+        );
+    }
+    public function reviewDetail(Request $request, Response $response)
+    {
+
+        $product = Product::find($request->getQuery("id"));
+        $reviews = Review::findAll(["product_id" => $product->id]);
+        return $response->setBody(
+            View::renderWithDashboardLayout(new View("pages/dashboard/review/reviewDetail"), [
+                "title" => "Review",
+                "product" => $product,
+                "reviews" => $reviews,
             ])
         );
     }
