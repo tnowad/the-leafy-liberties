@@ -111,7 +111,7 @@ CREATE TABLE
         role_id int DEFAULT NULL,
         status tinyint NOT NULL DEFAULT "1",
         address text DEFAULT NULL,
-        birthday datetime DEFAULT NULL,
+        deleted_at datetime DEFAULT NULL,
         -- key
         UNIQUE KEY email (email),
         FOREIGN KEY (role_id) REFERENCES roles (id)

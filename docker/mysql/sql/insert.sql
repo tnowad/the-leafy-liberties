@@ -399,9 +399,9 @@ INSERT INTO `tags` (`id`, `image`, `name`, `deleted_at`) VALUES
 (3, NULL, 'New', NULL),
 (4, NULL, 'Recommended', NULL);
 
-INSERT INTO `users` (`id`, `email`, `name`, `phone`, `password`, `gender`, `image`, `role_id`, `status`, `address`, `birthday`) VALUES
+INSERT INTO `users` (`id`, `email`, `name`, `phone`, `password`, `gender`, `image`, `role_id`, `status`, `address`, `deleted_at`) VALUES
 (1, 'customer@customer.com', 'Customer', '0123456789', '$2y$10$msjZCcmhGinMn7R8Mg9zbe29bbnF/wgeIpr/5eIwQugefkko7eiRK', 0, NULL, 1, 1, NULL, NULL),
-(2, 'moderator@moderator.com', 'Moderator', '0123456789', '$2y$10$msjZCcmhGinMn7R8Mg9zbe29bbnF/wgeIpr/5eIwQugefkko7eiRK', 0, NULL, 2, 1, NULL, NULL),
+(2, 'moderator@moderator.com', 'Moderator', '0123456789', '$2y$10$msjZCcmhGinMn7R8Mg9zbe29bbnF/wigeIpr/5eIwQugefkko7eiRK', 0, NULL, 2, 1, NULL, NULL),
 (3, 'administrator@administrator.com', 'Administrator', '0123456789', '$2y$10$msjZCcmhGinMn7R8Mg9zbe29bbnF/wgeIpr/5eIwQugefkko7eiRK', 0, NULL, 3, 1, NULL, NULL);
 
 INSERT INTO review_status (product_id, status) VALUES
