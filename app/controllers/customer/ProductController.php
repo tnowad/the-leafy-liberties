@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Review;
+use App\Models\ReviewStatus;
 use Core\Application;
 use Core\Controller;
 use Core\Database;
@@ -67,6 +68,7 @@ class ProductController extends Controller
       $reviews = Review::findAll([
         "product_id" => $product->id,
       ]);
+      $review_status = ReviewStatus::find($product->id);
       $category = Category::find($product_category->category_id);
     } catch (\Exception $e) {
       dd($e->getMessage());
@@ -78,6 +80,7 @@ class ProductController extends Controller
         "author" => $author,
         "category" => $category,
         "reviews" => $reviews,
+        "review_status" => $review_status,
       ])
     );
   }
@@ -159,6 +162,26 @@ class ProductController extends Controller
       return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id);
     }
     $newComment->save();
+    return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
+  }
+
+  public function commentStatus(Request $request, Response $response)
+  {
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
+    $product = Product::find($request->getQuery("id"));
+
+    $reviewStatus = ReviewStatus::find($product->id);
+    $reviewStatus->status == 0 ? $reviewStatus->status = 1 : $reviewStatus->status = 0;
+    // $newComment->user_id = $user->id;
+    // $newComment->product_id =  $product->id;
+    // $newComment->content = trim($request->getParam("new-comment"));
+    // $newComment->rating = trim($request->getParam("rating"));
+    // if (!$newComment->content) {
+    //   return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id);
+    // }
+    $reviewStatus->save();
     return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
   }
 }

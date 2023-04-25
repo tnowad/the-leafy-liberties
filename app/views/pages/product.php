@@ -132,118 +132,140 @@ if ($user != null) {
         <?php echo "(" . count($reviews) . ")" ?>
       </li>
     </ul>
+
     <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="description">
       <p class="text-lg text-center ">
         <?php echo $product->description; ?>
       </p>
     </div>
     <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="review">
+      <?php
+      if ($user->role_id == 3) :
+      ?>
+        <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>" class="flex justify-end">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <?php
+            echo $review_status->status == 0 ? 'Turn on comment' : 'Turn of comment'
+            ?>
+          </button>
+        </form>
+      <?php endif ?>
       <!--  -->
       <?php
-      if (count($reviews) == 0) :
+      if ($review_status->status == 0) :
       ?>
-        <p class="text-lg text-center">No comments yet!</p>
-      <?php else : ?>
-        <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
-          <?php
-          echo count($reviews) . ' reviews for ' . $product->name;
-          ?>
-        </h1>
-        <div class="overflow-y-auto max-h-[500px] bg-zinc-50 rounded-md shadow-md p-4">
-          <?php
-          foreach ($reviews as $review) :
-            $userReview = User::find($review->user_id);
-          ?>
-            <div class="review flex flex-row <?php echo  $userReview->id != $user->id ? "justify-start" : "justify-end"; ?>">
-              <div class="review-header">
-                <img src="<?php echo BASE_URI . $userReview->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
-              </div>
-              <div class="ml-5 mr-5 review-body">
-
-                <div class="flex flex-row mb-2">
-                  <h3 class="inline-block mr-2 font-bold">
-                    <?php echo $userReview->name;
-                    echo $userReview->role_id == 3 ? '<span class="text-red-500">(admin)</span>' : '';
-                    ?>
-                  </h3>
-                  <h4 class="ml-2 text-gray-400">
-                    <?php
-
-                    date_default_timezone_set('Asia/Ho_Chi_Minh');
-                    $current_time = time();
-                    $review_time = strtotime($review->created_at);
-                    $time_diff = $current_time - $review_time;
-
-                    $days = floor($time_diff / (60 * 60 * 24));
-                    $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
-                    $minutes = floor(($time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60)) / 60);
-                    $seconds = $time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60) - ($minutes * 60);
-
-                    if ($days > 0) {
-                      echo $days == 1 ? 'about ' . $days . ' day ago' : 'about ' . $days . ' days ago';
-                    } else if ($hours > 0) {
-                      echo $hours == 1 ? 'about ' . $hours . ' hour ago' : 'about ' . $hours . ' hours ago';
-                    } else if ($minutes > 0) {
-                      echo $minutes == 1 ? 'about ' . $minutes . ' minute ago' : 'about ' . $minutes . ' minutes ago';
-                    } else {
-                      echo $seconds == 1 ? 'about ' . $seconds . ' second ago' : 'about ' . $seconds . ' seconds ago';
-                    }
-                    ?>
-                  </h4>
-                </div>
-                <h5 class="w-52">
-                  <?php echo $review->content ?>
-                </h5>
-              </div>
-              <?php if ($userReview->role_id != 3) : ?>
-                <div class="review-footer">
-                  <ul class="flex flex-row rating">
-                    <?php
-                    $stars = str_repeat('<li><i class="fa fa-star text-primary"></i></li>', $review->rating);
-                    $stars .= str_repeat('<li><i class="text-gray-400 fa fa-star"></i></li>', 5 - $review->rating);
-                    echo $stars;
-                    ?>
-                  </ul>
-                </div>
-              <?php endif; ?>
-            </div>
-
-          <?php
-          endforeach;
-          ?>
-        </div>
-
+        <p class="text-lg text-center">Comment feature is locked</p>
       <?php
-      endif ?>
-      <div class="mt-20 border-t-2 border-gray-300 pt-14">
-        <form id="comment-form" action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>" method="POST" class="flex flex-row">
-          <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
-          <div class="ml-10">
-            <h1 class="mb-2 font-bold">
-              <?php echo $user->name; ?>
+      else :
+      ?>
+        <div>
+          <?php
+          if (count($reviews) == 0) :
+          ?>
+            <p class="text-lg text-center">No comments yet!</p>
+          <?php else : ?>
+            <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
+              <?php
+              echo count($reviews) . ' reviews for ' . $product->name;
+              ?>
             </h1>
-            <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
-            <div class="flex items-center mt-4 mb-4">
-              <span class="mr-2">Rating : </span>
-              <div class="flex">
-                <label id="startLabel1" for="star1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                <input type="radio" id="star1" name="rating" value="1" class="hidden" />
-                <label id="startLabel2" for="star2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                <input type="radio" id="star2" name="rating" value="2" class="hidden" />
-                <label id="startLabel3" for="star3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                <input type="radio" id="star3" name="rating" value="3" class="hidden" />
-                <label id="startLabel4" for="star4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                <input type="radio" id="star4" name="rating" value="4" class="hidden" />
-                <label id="startLabel5" for="star5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                <input type="radio" id="star5" name="rating" value="5" class="hidden" />
-              </div>
+            <div class="overflow-y-auto max-h-[500px] bg-zinc-50 rounded-md shadow-md p-4">
+              <?php
+              foreach ($reviews as $review) :
+                $userReview = User::find($review->user_id);
+              ?>
+                <div class="review flex flex-row <?php echo  $userReview->id != $user->id ? "justify-start" : "justify-end"; ?>">
+                  <div class="review-header">
+                    <img src="<?php echo BASE_URI . $userReview->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
+                  </div>
+                  <div class="ml-5 mr-5 review-body">
+
+                    <div class="flex flex-row mb-2">
+                      <h3 class="inline-block mr-2 font-bold">
+                        <?php echo $userReview->name;
+                        echo $userReview->role_id == 3 ? '<span class="text-red-500">(admin)</span>' : '';
+                        ?>
+                      </h3>
+                      <h4 class="ml-2 text-gray-400">
+                        <?php
+
+                        date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        $current_time = time();
+                        $review_time = strtotime($review->created_at);
+                        $time_diff = $current_time - $review_time;
+
+                        $days = floor($time_diff / (60 * 60 * 24));
+                        $hours = floor(($time_diff - ($days * 60 * 60 * 24)) / (60 * 60));
+                        $minutes = floor(($time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60)) / 60);
+                        $seconds = $time_diff - ($days * 60 * 60 * 24) - ($hours * 60 * 60) - ($minutes * 60);
+
+                        if ($days > 0) {
+                          echo $days == 1 ? 'about ' . $days . ' day ago' : 'about ' . $days . ' days ago';
+                        } else if ($hours > 0) {
+                          echo $hours == 1 ? 'about ' . $hours . ' hour ago' : 'about ' . $hours . ' hours ago';
+                        } else if ($minutes > 0) {
+                          echo $minutes == 1 ? 'about ' . $minutes . ' minute ago' : 'about ' . $minutes . ' minutes ago';
+                        } else {
+                          echo $seconds == 1 ? 'about ' . $seconds . ' second ago' : 'about ' . $seconds . ' seconds ago';
+                        }
+                        ?>
+                      </h4>
+                    </div>
+                    <h5 class="w-52">
+                      <?php echo $review->content ?>
+                    </h5>
+                  </div>
+                  <?php if ($userReview->role_id != 3) : ?>
+                    <div class="review-footer">
+                      <ul class="flex flex-row rating">
+                        <?php
+                        $stars = str_repeat('<li><i class="fa fa-star text-primary"></i></li>', $review->rating);
+                        $stars .= str_repeat('<li><i class="text-gray-400 fa fa-star"></i></li>', 5 - $review->rating);
+                        echo $stars;
+                        ?>
+                      </ul>
+                    </div>
+                  <?php endif; ?>
+                </div>
+
+              <?php
+              endforeach;
+              ?>
             </div>
+
+          <?php
+          endif ?>
+          <div class="mt-20 border-t-2 border-gray-300 pt-14">
+            <form id="comment-form" action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>" method="POST" class="flex flex-row">
+              <img src="<?php echo BASE_URI . $user->image; ?>" alt="Avatar" class="w-10 h-10 rounded-full cursor-pointer">
+              <div class="ml-10">
+                <h1 class="mb-2 font-bold">
+                  <?php echo $user->name; ?>
+                </h1>
+                <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
+                <div class="flex items-center mt-4 mb-4">
+                  <span class="mr-2">Rating : </span>
+                  <div class="flex">
+                    <label id="startLabel1" for="star1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                    <input type="radio" id="star1" name="rating" value="1" class="hidden" />
+                    <label id="startLabel2" for="star2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                    <input type="radio" id="star2" name="rating" value="2" class="hidden" />
+                    <label id="startLabel3" for="star3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                    <input type="radio" id="star3" name="rating" value="3" class="hidden" />
+                    <label id="startLabel4" for="star4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                    <input type="radio" id="star4" name="rating" value="4" class="hidden" />
+                    <label id="startLabel5" for="star5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                    <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+                  </div>
+                </div>
+              </div>
+              <div class="box-border">
+                <button type="submit" class="px-4 py-2 ml-5 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+              </div>
+            </form>
           </div>
-          <div class="box-border">
-            <button type="submit" class="px-4 py-2 ml-5 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
-          </div>
-        </form>
-      </div>
+        </div>
+      <?php endif ?>
     </div>
   </div>
 </div>
@@ -303,6 +325,27 @@ if ($user != null) {
       window.location.reload();
     }, 1000);
   };
+
+
+  document.toggleCommentStatus = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/product/review_status' ?>', {
+      id
+    }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
 
   document.querySelector('.wishlist-icon').addEventListener('click', (event) => {
     if (event.target.classList.contains('bg-red-400')) {

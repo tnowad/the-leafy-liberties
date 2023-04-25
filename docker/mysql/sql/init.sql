@@ -233,3 +233,8 @@ CREATE TABLE
       FOREIGN KEY (product_id) REFERENCES products (id)
     );
 
+CREATE TABLE review_status (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    status INT NOT NULL
+);
