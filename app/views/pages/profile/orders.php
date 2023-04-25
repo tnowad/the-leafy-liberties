@@ -66,11 +66,17 @@ $orders = $params['orders'];
                     <td class="px-5 py-3">
                       <!-- if status is 0 is pending, 1 is accept, 2 is shipping, 3 is successful, 4 is cancel, 5 is reject -->
                       <?php if ($order->status == 0) : ?>
-                        <p class="font-medium text-primary">Pending</p>
+                        <p class="font-medium text-yellow-400">Pending</p>
                       <?php elseif ($order->status == 1) : ?>
                         <p class="font-medium text-green-800">Accept</p>
-                      <?php else : ?>
+                      <?php elseif ($order->status == 2) : ?>
                         <p class="font-medium text-red-800">Reject</p>
+                      <?php elseif ($order->status == 3) : ?>
+                        <p class="font-medium text-gray-400">Cancelled</p>
+                      <?php elseif ($order->status == 4) : ?>
+                        <p class="font-medium text-blue-400">Shipping</p>
+                      <?php else : ?>
+                        <p class="font-medium text-green-400">Successfull</p>
                       <?php endif; ?>
                     </td>
                     <td>
