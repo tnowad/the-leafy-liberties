@@ -10,14 +10,16 @@ $user = $auth->getUser();
 
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
-
+if ($auth->isAuthenticated()) {
+  // echo $user->email;
+}
 
 // I don't think use flag is a good idea
 // You can only use Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the cart
 // Same for wishlist, you can use Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]) to check if the product is in the wishlist
 if ($user != null) {
-  $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-  $wishlistCheck = Wishlist::findAll(["user_id" => $user->id, "product_id" => $product->id]);
+  $cartCheck = Cart::findOne(["user_id" => $user->id,"product_id" => $product->id]);
+  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id,"product_id" => $product->id]);
 }
 ?>
 
@@ -77,7 +79,7 @@ if ($user != null) {
             <i class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
-              if (isset($wishlistCheck)) {
+              if (isset($wishlistCheck)){
                 echo "Added to wishlist";
               } else {
                 echo "Add to wishlist";
