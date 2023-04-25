@@ -145,7 +145,7 @@ if ($user != null) {
         <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>" class="flex justify-end">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <?php
-            echo $review_status->status == 0 ? 'Turn on comment' : 'Turn of comment'
+            echo $review_status->status == 0 ? 'Turn on comment' : 'Turn off comment'
             ?>
           </button>
         </form>
@@ -178,8 +178,7 @@ if ($user != null) {
                   <div class="review-header">
                     <img src="<?php echo ($userReview->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $userReview->image ?>" alt="Avatar" class="w-20  object-contain h-full rounded-full cursor-pointer">
                   </div>
-                  <div class="ml-5 mr-5 review-body">
-
+                  <div class="w-72 ml-2 mr-2 review-body">
                     <div class="flex flex-row mb-2">
                       <h3 class="inline-block mr-2 font-bold">
                         <?php echo $userReview->name;
@@ -238,7 +237,7 @@ if ($user != null) {
           <div class="mt-20 border-t-2 border-gray-300 pt-14">
             <form id="comment-form" action="<?php echo $user ? (BASE_URI . "/product/comment" . "?id=" . $product->id) : BASE_URI . "/login" ?>" method="POST" class="flex flex-row">
               <img src="<?php echo $user ?  (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> " alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
-              <div class="ml-10">
+              <div class="ml-5">
                 <h1 class="mb-2 font-bold">
                   <?php echo $user ? $user->name : 'User'; ?>
                 </h1>
@@ -266,7 +265,7 @@ if ($user != null) {
                 ?>
               </div>
               <div class="box-border">
-                <button type="submit" class="px-4 py-2 ml-5 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+                <button type="submit" class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
               </div>
             </form>
           </div>
