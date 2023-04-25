@@ -55,18 +55,6 @@ class ProfileController extends Controller
     } else {
       $user->gender = 0;
     }
-    // $user->deleted_at = $request->getParam("birthday");
-
-    $birthday = $request->getParam("birthday");
-    $date = DateTime::createFromFormat('Y-m-d', $birthday);
-    if (!$date) {
-      // Invalid input
-      // Handle the error
-    } else {
-      $user->birthday = $date->format('Y-m-d H:i:s');
-    }
-
-
     // if ($user->password = password_hash(Validation::validatePassword($request->getparam('current-password')), PASSWORD_DEFAULT)) {
     //   $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
     // }

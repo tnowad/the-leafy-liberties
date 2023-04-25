@@ -31,11 +31,11 @@
             </select>
           </div>
 
-          <label>Birthday</label>
-          <div class="flex justify-between items-center w-full h-8 border rounded-md px-2 py-5 border-gray-300 shadow">
-            <!-- <input name="birthday" type="date" value="<?php echo $user->deleted_at; ?>" /> -->
-            <input name="birthday" type="date" value="<?php echo date('Y-m-d', strtotime($user->birthday)); ?>" />
-          </div>
+          <!-- <label>Birthday</label> -->
+          <!-- <div class="flex justify-between items-center w-full h-8 border rounded-md px-2 py-5 border-gray-300 shadow"> -->
+          <!-- <input name="birthday" type="date" value="<?php echo $user->deleted_at; ?>" /> -->
+          <!-- <input name="birthday" type="date" value="<?php echo date('Y-m-d', strtotime($user->birthday)); ?>" /> -->
+          <!-- </div> -->
           <label>Password change</label>
           <div class="flex flex-col py-4 px-2 gap-1 border border-gray-300 border-solid rounded">
             <label for="password">
