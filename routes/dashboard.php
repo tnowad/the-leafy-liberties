@@ -38,12 +38,6 @@ $router->post("/dashboard/product/delete", [
 ]);
 
 //product function
-$router->get("/dashboard/product/update", [ProductController::class, "update"]);
-$router->post("/dashboard/product/update", [
-  ProductController::class,
-  "update",
-]);
-
 $router->post("/dashboard/product", [
   ProductController::class,
   "filterProduct",
