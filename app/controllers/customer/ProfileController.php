@@ -56,20 +56,29 @@ class ProfileController extends Controller
     }
 
 
-    $password = password_hash(Validation::validatePassword($request->getparam('current-password')), PASSWORD_DEFAULT);
-    if ($user && password_verify($password, $user->password)) {
-      $response->setStatusCode(200);
+    try {
+      $user->email = Validation::validateEmail($request->getParam('email'));
+      $password = Validation::validatePassword($request->getparam('current-password'));
+      if (!password_verify($password, $user->password)) {
+        $response->setStatusCode(200);
+        return $response->redirect(BASE_URI . "/profile", 200, [
+          "toast" => [
+            "type" => "error",
+            "message" => "Invalid current password",
+          ],
+        ]);
+      }
+    } catch (\Exception $e) {
       return $response->redirect(BASE_URI . "/profile", 200, [
         "toast" => [
           "type" => "error",
-          "message" => "Invalid current password",
+          "message" => $e->getMessage(),
         ],
       ]);
     }
 
     if ($request->getparam('new-password') != null) {
       try {
-        $user->email = Validation::validateEmail($request->getParam('email'));
         $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
       } catch (Exception $e) {
         return $response->redirect(BASE_URI . "/profile", 200, [
@@ -82,7 +91,6 @@ class ProfileController extends Controller
     }
 
     $user->save();
-    // $response->redirect(BASE_URI . "/profile");
     $response->redirect(BASE_URI . "/profile", 200, [
       "toast" => [
         "type" => "success",
@@ -90,43 +98,6 @@ class ProfileController extends Controller
       ],
     ]);
   }
-
-  //   public function update(Request $request, Response $response)
-  // {
-  //   $auth = Application::getInstance()->getAuthentication();
-
-  //   if (!$auth->isAuthenticated()) {
-  //     $response->redirect("/login");
-  //   }
-
-  //   try {
-  //     $user = $auth->getUser();
-  //     $user->name = $request->getParam("name");
-  //     $user->address = $request->getParam("address");
-  //     // Validate email
-  //     $user->email = Validation::validateEmail($request->getParam('email'));
-  //     $user->phone = $request->getParam("phone");
-  //     if ($request->getParam("gender") == "male") {
-  //       $user->gender = 1;
-  //     } else if ($request->getParam("gender") == "female") {
-  //       $user->gender = 2;
-  //     } else {
-  //       $user->gender = 0;
-  //     }
-
-  //     // if ($user->password = password_hash(Validation::validatePassword($request->getparam('current-password')), PASSWORD_DEFAULT)) {
-  //     //   $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
-  //     // }
-  //     $user->save();
-  //   } catch (Exception $e) {
-  //     return $response->redirect(BASE_URI . "/profile", 200, [
-  //       "toast" => [
-  //         "type" => "error",
-  //         "message" => $e->getMessage(),
-  //       ],
-  //     ]);
-  //   }
-  // }
 
   public function settings(Request $request, Response $response)
   {
