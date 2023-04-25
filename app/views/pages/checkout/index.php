@@ -185,14 +185,12 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           <div class="top-summary flex flex-col gap-5 border-0 border-solid border-gray-400 border-b-[1px] pb-5 px-5">
             <div class="flex items-center justify-between subtotal">
               <p class="f">Subtotal</p>
-              <div class="font-bold subtotal-money">$
-                <?php echo $totalMoney ?>
+              <div class="font-bold subtotal-money">$<?php echo $totalMoney ?>
               </div>
             </div>
             <div class="flex items-center justify-between shipping">
               <p>Shipping</p>
-              <div class="font-bold shipping-money">$
-                <?php echo $shipping ?>
+              <div class="font-bold shipping-money">$<?php echo $shipping ?>
               </div>
             </div>
             <div class="flex items-center justify-between tax">
@@ -204,10 +202,9 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           </div>
           <div class="mt-5 bottom-summary">
             <div class="flex items-center justify-between total-money px-5">
-              <h2 class="text-lg font-medium grand-total">Grand Total</h2>
+              <h2 class="text-lg font-medium">Grand Total</h2>
               <div class="font-bold grand-money">
-                $
-                <?php echo $grandTotal ?>
+                $<?php echo $grandTotal ?>
               </div>
             </div>
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-1 mr-10 w-full h-auto mt-4">
@@ -217,9 +214,8 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             </fieldset>
             <div
               class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
-              <button type="submit" class="text-xl">
-                Pay $
-                <?php echo $grandTotal ?>
+              <button type="submit" class="text-xl grand-total">
+                Pay $ <?php echo $grandTotal ?>
               </button>
             </div>
           </div>
@@ -262,31 +258,26 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
 
   let shipping_money = document.querySelector(".shipping-money");
   let ship_method = ["5.99", "14.99", "29.99", "24.99"];
-  let money = 0;
+  let tax = document.querySelector(".tax-money");
   let choices = document.querySelectorAll(".shipping-choices");
-  console.log(choices);
+
+  let grand_total =document.querySelector(".grand-total");
+  let grand_money =document.querySelector(".grand-money");
+  let subtotal =document.querySelector(".subtotal-money");
+  let taxMoney = 0,sum = 0
+  subtotal = subtotal.innerHTML.replace("$","");
   choices.forEach((element, index) => {
     element.addEventListener("click", () => {
       let option = document.querySelectorAll("input[name=shipping-method-id]")[index];
       if (option.checked == true) {
-        shipping_money.innerHTML = "$ " + ship_method[index];
-        document.updateShipping(ship_method[index]);
+        shipping_money.innerHTML = "$" + ship_method[index];
+        taxMoney = (tax.innerHTML * subtotal);
+        sum = (parseFloat(subtotal) + parseFloat(ship_method[index]) + parseFloat(taxMoney)).toFixed(2)
+        grand_money.innerHTML = "$ " + sum;
+        grand_total.innerHTML = "Pay $ " + sum;
       }
     })
   });
-</script>
-<script type="module">
-  document.updateShipping = (money) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/checkout/update' ?>', { money }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      const data = response.data;
-      new Toast({
-        message: data.message,
-        type: data.type
-      });
-    }).catch(error => {
-      console.error(error);
-    });
-  };
+
+
 </script>
