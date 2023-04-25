@@ -145,7 +145,7 @@ class UserController extends Controller
           )
         );
       case "POST":
-        dd($request->getParam("id"));
+        // dd($request->getParam("id"));
         $user = User::find($request->getParam("id"));
         if (!$user) {
           return $response->setBody(
@@ -168,19 +168,14 @@ class UserController extends Controller
           $user->email = $request->getParam("email");
           $user->gender = $request->getParam("gender");
           $user->password = $request->getParam("passowrd");
+          $user->role_id = $request->getParam("role");
           $user->save();
-          return $response->setBody(
-            View::renderWithDashboardLayout(
-              new View("pages/dashboard/user/index"),
-              [
-                "title" => "Dashboard",
-                "toast" => [
-                  "type" => "success",
-                  "message" => "Edit account successful!",
-                ],
-              ]
-            )
-          );
+          return $response->redirect(BASE_URI . "/dashboard/user", 200, [
+            "toast" => [
+              "type" => "success",
+              "message" => "Edit user successful.",
+            ],
+          ]);
         }
       default:
         break;

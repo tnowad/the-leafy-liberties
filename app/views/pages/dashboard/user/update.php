@@ -37,16 +37,16 @@ use App\Models\Role;
         <option value="other">Other</option>
       </select>
       <label for="role" class="my-2">Select role:</label>
-      <select value="" name="gender" class="bg-gray-100 p-3 focus:outline-none rounded-lg" required>
+      <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg">
         <option value="">
           <?php
           $role = Role::find($user->role_id);
           echo ucfirst($role->name);
           ?>
         </option>
-        <option value="1">Customer</option>
-        <option value="2">Admin</option>
-        <option value="3">Moderator</option>
+        <?php foreach(Role::all() as $role): ?>
+        <option value="<?php echo $role->id ?>"><?php echo ucfirst($role->name) ?></option>
+        <?php endforeach ?>
       </select>
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
