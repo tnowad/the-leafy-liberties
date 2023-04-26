@@ -27,7 +27,7 @@ use App\Models\Role;
       <label for="expired" class="my-2">Phone:</label>
       <input type="tel" value="<?php echo $user->phone; ?>" name="phone"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" required />
-
+    
       <label for="gender" class="my-2">Select gender:</label>
       <select value="" name="gender" class="bg-gray-100 p-3 focus:outline-none rounded-lg" required>
         <option value="">Select gender

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers\Dashboard;
 
+use App\Models\Author;
 use App\Models\Product;
 use Core\Application;
 use Core\Controller;
@@ -82,6 +83,16 @@ class ProductController extends Controller
         $product->price = $request->getParam("price");
         $product->description = $request->getParam("description");
         $product->quantity = $request->getParam("quantity");
+        if ($request->getParam("author") != null) {
+          $product->author_id = $request->getParam("author");
+        }
+        echo $request->getParam("author-name");
+        if ($request->getParam("author-name") != null) {
+          $author = new Author();
+          $author->name = $request->getParam("author-name");
+          $author->save();
+          $product->author_id = $author->id;
+        }
         $product->save();
         return $response->redirect(BASE_URI . "/dashboard/product", 200, [
           "toast" => [
@@ -197,6 +208,7 @@ class ProductController extends Controller
           $product->price = $request->getParam("price");
           $product->description = $request->getParam("description");
           $product->quantity = $request->getParam("quantity");
+          $product->author_id = $request->getParam("author");
           $product->save();
           return $response->redirect(BASE_URI . "/dashboard/product", 200, [
             "toast" => [
