@@ -12,6 +12,7 @@ use Core\Response;
 use Core\View;
 use DateTime;
 use Exception;
+use Utils\FileUploader;
 use Utils\Validation;
 
 class ProfileController extends Controller
@@ -42,7 +43,33 @@ class ProfileController extends Controller
     if (!$auth->isAuthenticated()) {
       $response->redirect("/login");
     }
+
     $user = $auth->getUser();
+
+
+
+    $uploader = new FileUploader([
+      "allowedExtensions" => ["jpeg", "jpg", "png"],
+      "maxFileSize" => 2097152,
+      "uploadPath" => "resources/images/user/",
+    ]);
+
+    $result = $uploader->upload($_FILES["avatar"]);
+
+    if ($result) {
+      $request->setParam("avatar", $result);
+    } else {
+      return $response->setBody(
+        View::renderWithDashboardLayout(new View("pages/profile"), [
+          "title" => "Profile",
+          "toast" => [
+            "type" => "error",
+            "message" => "Edit profile failed!",
+          ],
+        ])
+      );
+    }
+    $user->image = $request->getParam("avatar");
     $user->name = $request->getParam("name");
     $user->address = $request->getParam("address");
     // Validate email
