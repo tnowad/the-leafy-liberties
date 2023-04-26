@@ -7,6 +7,7 @@ use Core\Controller;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Utils\FileUploader;
 
 class SlideController extends Controller
 {
@@ -72,9 +73,30 @@ class SlideController extends Controller
             ],
           ]);
         } else {
+          $uploader = new FileUploader([
+            "allowedExtensions" => ["jpeg", "jpg", "png"],
+            "maxFileSize" => 2097152,
+            "uploadPath" => "resources/images/slides/",
+          ]);
+
+          $result = $uploader->upload($_FILES["image"]);
+
+          if ($result) {
+            $request->setParam("image", $result);
+          } else {
+            return $response->setBody(
+              View::renderWithDashboardLayout(new View("pages/dashboard/slide"), [
+                "title" => "Slides",
+                "toast" => [
+                  "type" => "error",
+                  "message" => "Edit slide failed!",
+                ],
+              ])
+            );
+          }
+
           $slide->title = $request->getParam("title");
           $slide->image = $request->getParam("image");
-          $slide->location = $request->getParam("locaiton");
           $slide->status = $request->getParam("status");
           $slide->save();
           return $response->redirect(BASE_URI . "/dashboard/slide", 200, [
