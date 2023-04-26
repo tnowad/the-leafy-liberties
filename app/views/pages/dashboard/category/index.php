@@ -64,7 +64,7 @@ use App\Models\Pagination;
                   <td class="px-5 py-3">
                     <?php echo $category->name; ?>
                   </td>
-                  <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
+                  <td class="gap-2 px-5 py-3">
                   <div class="button flex justify-center items-center gap-4">
                       <a href="<?php echo BASE_URI .
                         "/dashboard/category/update" .
