@@ -3,10 +3,18 @@
 use App\Models\Wishlist;
 use Core\Application;
 use App\Models\Cart;
+use App\Models\Review;
 use App\Models\User;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
+$reviewsActive = [];
+foreach ($reviews as $review) {
+  if ($review->deleted_at == null) {
+    $reviewsActive[] = $review;
+  }
+}
+
 
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
@@ -129,7 +137,7 @@ if ($user != null) {
       </li>
       <li id="review-tab" class="p-2 mb-2 mr-5 transition-all border-4 border-white cursor-pointer sm:mr-10 sm:mb-5 hover:border-b-primary-800" onclick="showReview()">
         Review
-        <?php echo "(" . count($reviews) . ")" ?>
+        <?php echo "(" . count($reviewsActive) . ")" ?>
       </li>
     </ul>
 
@@ -160,18 +168,18 @@ if ($user != null) {
       ?>
         <div>
           <?php
-          if (count($reviews) == 0) :
+          if (count($reviewsActive) == 0) :
           ?>
             <p class="text-lg text-center">No comments yet!</p>
           <?php else : ?>
             <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
               <?php
-              echo count($reviews) . ' reviews for ' . $product->name;
+              echo count($reviewsActive) . ' reviews for ' . $product->name;
               ?>
             </h1>
             <div class="overflow-y-auto max-h-[500px] bg-zinc-50 rounded-md shadow-md p-4">
               <?php
-              foreach ($reviews as $review) :
+              foreach ($reviewsActive as $review) :
                 $userReview = User::find($review->user_id);
               ?>
                 <div class="review flex flex-row <?php echo $user ? ($userReview->id != $user->id ? "justify-start" : "justify-end") : "justify-start"; ?>">
@@ -234,40 +242,48 @@ if ($user != null) {
 
           <?php
           endif ?>
-          <div class="mt-20 border-t-2 border-gray-300 pt-14">
-            <form id="comment-form" action="<?php echo $user ? (BASE_URI . "/product/comment" . "?id=" . $product->id) : BASE_URI . "/login" ?>" method="POST" class="flex flex-row">
-              <img src="<?php echo $user ?  (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> " alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
-              <div class="ml-5">
-                <h1 class="mb-2 font-bold">
-                  <?php echo $user ? $user->name : 'User'; ?>
-                </h1>
-                <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
-                <?php
-                if ($user && $user->role_id != 3) :
-                ?>
-                  <div class="flex items-center mt-4 mb-4">
-                    <span class="mr-2">Rating : </span>
-                    <div class="flex">
-                      <label id="startLabel1" for="star1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                      <input type="radio" id="star1" name="rating" value="1" class="hidden" />
-                      <label id="startLabel2" for="star2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                      <input type="radio" id="star2" name="rating" value="2" class="hidden" />
-                      <label id="startLabel3" for="star3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                      <input type="radio" id="star3" name="rating" value="3" class="hidden" />
-                      <label id="startLabel4" for="star4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                      <input type="radio" id="star4" name="rating" value="4" class="hidden" />
-                      <label id="startLabel5" for="star5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                      <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+          <div class="mt-20 ">
+            <?php
+
+            foreach ($reviewsActive as $review) {
+              $checkReviewContent = Review::find($user->id);
+            }
+            if (!isset($checkReviewContent) || $user->role_id == 3) :
+            ?>
+              <form id="comment-form" action="<?php echo $user ? (BASE_URI . "/product/comment" . "?id=" . $product->id) : BASE_URI . "/login" ?>" method="POST" class="flex flex-row border-t-2 border-gray-300 pt-14">
+                <img src="<?php echo $user ?  (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> " alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
+                <div class="ml-5">
+                  <h1 class="mb-2 font-bold">
+                    <?php echo $user ? $user->name : 'User'; ?>
+                  </h1>
+                  <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
+                  <?php
+                  if ($user && $user->role_id != 3) :
+                  ?>
+                    <div class="flex items-center mt-4 mb-4">
+                      <span class="mr-2">Rating : </span>
+                      <div class="flex">
+                        <label id="startLabel1" for="star1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1" class="hidden" />
+                        <label id="startLabel2" for="star2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2" class="hidden" />
+                        <label id="startLabel3" for="star3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3" class="hidden" />
+                        <label id="startLabel4" for="star4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4" class="hidden" />
+                        <label id="startLabel5" for="star5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                        <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+                      </div>
                     </div>
-                  </div>
-                <?php
-                endif;
-                ?>
-              </div>
-              <div class="box-border">
-                <button type="submit" class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
-              </div>
-            </form>
+                  <?php
+                  endif;
+                  ?>
+                </div>
+                <div class="box-border">
+                  <button type="submit" class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+                </div>
+              </form>
+            <?php endif ?>
           </div>
         </div>
       <?php endif ?>
