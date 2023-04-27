@@ -89,6 +89,8 @@ $router->post("/dashboard/role/delete", [RoleController::class, "delete"]);
 // reveiw
 $router->get("/dashboard/review", [ReviewController::class, "index"]);
 $router->get("/dashboard/review/review_detail", [ReviewController::class, "reviewDetail"]);
+$router->get("/dashboard/review/review_detail/delete", [ReviewController::class, "delete"]);
+$router->post("/dashboard/review/review_detail/delete", [ReviewController::class, "delete"]);
 
 // order
 $router->get("/dashboard/order", [OrderController::class, "index"]);

@@ -74,7 +74,7 @@ foreach ($menu as $key => $menuItem) {
     <ul id='menu-list' class="sticky top-0 flex flex-col py-4 space-y-1 list">
       <li class="block px-5">
         <a href="<?php echo BASE_URI .
-          "/dashboard"; ?>" class="flex items-center justify-center py-4">
+          "/"; ?>" class="flex items-center justify-center py-4">
           <img src="<?php echo BASE_URI .
             "/resources/images/logo.png"; ?>" alt="logo" />
         </a>

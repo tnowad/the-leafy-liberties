@@ -3,10 +3,39 @@
 use App\Models\Wishlist;
 use Core\Application;
 use App\Models\Cart;
+use App\Models\Review;
 use App\Models\User;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
+$reviewsActive = [];
+foreach ($reviews as $review) {
+  if ($review->deleted_at == null) {
+    $reviewsActive[] = $review;
+  }
+}
+
+
+// foreach ($reviewsActive as $review) {
+//   if ($user) {
+//     if ($user->id == $review->user_id) {
+//       $checkReviewContent = Review::find($review->user_id);
+//       break;
+//     }
+//   } else $checkReviewContent  = null;
+// }
+
+
+// $checkReviewContent = null;
+foreach ($reviewsActive as $review) {
+  if ($user && $user->id == $review->user_id) {
+    $checkReviewContent = $review;
+    break;
+  }
+}
+
+
+
 
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
@@ -129,7 +158,7 @@ if ($user != null) {
       </li>
       <li id="review-tab" class="p-2 mb-2 mr-5 transition-all border-4 border-white cursor-pointer sm:mr-10 sm:mb-5 hover:border-b-primary-800" onclick="showReview()">
         Review
-        <?php echo "(" . count($reviews) . ")" ?>
+        <?php echo "(" . count($reviewsActive) . ")" ?>
       </li>
     </ul>
 
@@ -160,18 +189,18 @@ if ($user != null) {
       ?>
         <div>
           <?php
-          if (count($reviews) == 0) :
+          if (count($reviewsActive) == 0) :
           ?>
             <p class="text-lg text-center">No comments yet!</p>
           <?php else : ?>
             <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
               <?php
-              echo count($reviews) . ' reviews for ' . $product->name;
+              echo count($reviewsActive) . ' reviews for ' . $product->name;
               ?>
             </h1>
             <div class="overflow-y-auto max-h-[500px] bg-zinc-50 rounded-md shadow-md p-4">
               <?php
-              foreach ($reviews as $review) :
+              foreach ($reviewsActive as $review) :
                 $userReview = User::find($review->user_id);
               ?>
                 <div class="review flex flex-row <?php echo $user ? ($userReview->id != $user->id ? "justify-start" : "justify-end") : "justify-start"; ?>">
@@ -210,7 +239,7 @@ if ($user != null) {
                         ?>
                       </h4>
                     </div>
-                    <h5 class="w-52">
+                    <h5 id="content<?php echo $review->id ?>" class="content w-52">
                       <?php echo $review->content ?>
                     </h5>
                   </div>
@@ -225,8 +254,44 @@ if ($user != null) {
                       </ul>
                     </div>
                   <?php endif; ?>
+                  <div class="">
+                    <i id="comment-edit" onclick="openEditForm(<?php echo $review->id ?>);" class="<?php echo $user ? ($userReview->id != $user->id ? "hidden" : "flex") : "hidden"; ?> comment-edit fa-solid fa-pen-to-square cursor-pointer mt-2 py-3 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all"></i>
+                  </div>
                 </div>
-
+                <form id="update-form<?php echo $review->id ?>" action="<?php echo $user ? (BASE_URI . "/product/comment/update" . "?id=" . $review->id) : BASE_URI . "/login" ?>" method="POST" class="mt-2 hidden justify-end flex-row update-form">
+                  <div class="">
+                    <input id="update-input<?php echo $review->id ?>" value="<?php echo $review->content ?>" type="text" name="update-comment" placeholder="Edit a comment..." required class="border-b-2 border-gray-300 w-[335px]" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
+                    <?php
+                    if ($user && $user->role_id != 3) :
+                    ?>
+                      <div class="flex items-center mt-4 mb-4">
+                        <span class="mr-2">Rating : </span>
+                        <div class="flex">
+                          <label id="startLabel1" for="star-update<?php echo $review->id ?>1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>1" name="update-rating<?php echo $review->id ?>" value="1" class="hidden" />
+                          <label id="startLabel2" for="star-update<?php echo $review->id ?>2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>2" name="update-rating<?php echo $review->id ?>" value="2" class="hidden" />
+                          <label id="startLabel3" for="star-update<?php echo $review->id ?>3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>3" name="update-rating<?php echo $review->id ?>" value="3" class="hidden" />
+                          <label id="startLabel4" for="star-update<?php echo $review->id ?>4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>4" name="update-rating<?php echo $review->id ?>" value="4" class="hidden" />
+                          <label id="startLabel5" for="star-update<?php echo $review->id ?>5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>5" name="update-rating<?php echo $review->id ?>" value="5" class="hidden" />
+                        </div>
+                      </div>
+                    <?php
+                    endif;
+                    ?>
+                    <div class="flex flex-row">
+                      <div class="box-border">
+                        <button type="submit" class="px-2 py-1 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+                      </div>
+                      <div class="box-border <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?>">
+                        <span id="new-comment-button" onclick="openNewComment(<?php echo $userReview->id ?>)" type="submit" class="mb-5 px-2 py-1 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600 cursor-pointer">New Comment</span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               <?php
               endforeach;
               ?>
@@ -234,14 +299,15 @@ if ($user != null) {
 
           <?php
           endif ?>
-          <div class="mt-20 border-t-2 border-gray-300 pt-14">
-            <form id="comment-form" action="<?php echo $user ? (BASE_URI . "/product/comment" . "?id=" . $product->id) : BASE_URI . "/login" ?>" method="POST" class="flex flex-row">
+          <div class="mt-20 ">
+
+            <form id="comment-form" action="<?php echo $user ? (BASE_URI . "/product/comment" . "?id=" . $product->id) : BASE_URI . "/login" ?>" method="POST" class=" <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?> flex-row border-t-2 border-gray-300 pt-14">
               <img src="<?php echo $user ?  (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> " alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
               <div class="ml-5">
                 <h1 class="mb-2 font-bold">
                   <?php echo $user ? $user->name : 'User'; ?>
                 </h1>
-                <input type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
+                <input id="new-comment-input" type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
                 <?php
                 if ($user && $user->role_id != 3) :
                 ?>
@@ -268,9 +334,12 @@ if ($user != null) {
                 <button type="submit" class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
               </div>
             </form>
+
+          <?php
+        endif
+          ?>
           </div>
         </div>
-      <?php endif ?>
     </div>
   </div>
 </div>
@@ -366,6 +435,119 @@ if ($user != null) {
     }
   });
 
+
+
+
+
+  document.commentUpdate = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', {
+      id
+    }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
+</script>
+<script>
+  let idReviewRating
+
+  function openEditForm(id) {
+    let forms = document.querySelectorAll('.update-form')
+    let contents = document.querySelectorAll('.content')
+    idReviewRating = id
+    for (let i = 0; i < forms.length; i++) {
+      forms[i].classList.add('hidden')
+      forms[i].classList.remove('flex')
+    }
+    for (let i = 0; i < contents.length; i++) {
+      contents[i].classList.add('inline-block')
+      contents[i].classList.remove('hidden')
+    }
+    document.getElementById(`content${id}`).classList.add('hidden');
+    document.getElementById(`update-form${id}`).classList.remove('hidden')
+    document.getElementById(`update-form${id}`).classList.add('flex')
+    document.getElementById(`update-input${id}`).focus()
+    document.getElementById("comment-form").classList.add('hidden')
+    document.getElementById("comment-form").classList.remove('flex')
+
+    const labelsUpdate = document.querySelectorAll(`label[for^="star-update${idReviewRating}"]`);
+
+    labelsUpdate.forEach((label, i) => {
+      label.addEventListener('click', function() {
+        labelsUpdate.forEach((l, j) => {
+          if (j <= i) {
+            l.classList.add('text-primary');
+            l.classList.remove('text-gray-300');
+          } else {
+            l.classList.add('text-gray-300');
+            l.classList.remove('text-primary');
+          }
+        });
+      });
+    });
+
+    // let lastSelected;
+
+    const inputsUpdate = document.querySelectorAll(`input[name="update-rating${idReviewRating}"]`)
+    console.log(idReviewRating)
+
+    labelsUpdate.forEach((label, i) => {
+      label.addEventListener('mouseover', function() {
+        labelsUpdate.forEach((l, j) => {
+          if (j <= i) {
+            l.classList.add('text-primary');
+            l.classList.remove('text-gray-300');
+          } else {
+            l.classList.add('text-gray-300');
+            l.classList.remove('text-primary');
+          }
+        });
+      });
+
+      label.addEventListener('mouseout', function() {
+        let selectedValue;
+        inputsUpdate.forEach(input => {
+          if (input.checked) {
+            selectedValue = input.value;
+          }
+        });
+        console.log(selectedValue);
+        labelsUpdate.forEach((l, j) => {
+          if (j < selectedValue) {
+            l.classList.add('text-primary')
+            l.classList.remove('text-gray-300')
+          } else {
+            l.classList.add('text-gray-300')
+            l.classList.remove('text-primary')
+          }
+        });
+      });
+    });
+
+  }
+  const openNewComment = (id) => {
+    let forms = document.querySelectorAll('.update-form')
+    for (let i = 0; i < forms.length; i++) {
+      forms[i].classList.add('hidden')
+      forms[i].classList.remove('flex');
+
+    }
+    document.getElementById("comment-form").classList.remove('hidden')
+    // document.getElementById(`update-form${id}`).classList.add('hidden')
+    // document.getElementById(`update-form${id}`).classList.remove('flex')
+    document.getElementById("new-comment-input").focus();
+  }
+
+
+
+
   const labels = document.querySelectorAll('label[for^="star"]');
 
   labels.forEach((label, i) => {
@@ -382,12 +564,8 @@ if ($user != null) {
     });
   });
 
-  let lastSelected;
 
   const inputs = document.querySelectorAll('input[name="rating"]');
-
-
-
 
   labels.forEach((label, i) => {
     label.addEventListener('mouseover', function() {
@@ -421,25 +599,4 @@ if ($user != null) {
       });
     });
   });
-
-
-
-  // document.addToComment = (id) => {
-  //   FetchXHR.post('<?php echo BASE_URI . '/product/comment' ?>', {
-  //     id
-  //   }, {
-  //     'Content-Type': 'application/json'
-  //   }).then(response => {
-  //     const data = response.data;
-  //     new Toast({
-  //       message: data.message,
-  //       type: data.type
-  //     });
-  //   }).catch(error => {
-  //     console.error(error);
-  //   });
-  //   setTimeout(() => {
-  //     window.location.reload();
-  //   }, 1000);
-  // };
 </script>
