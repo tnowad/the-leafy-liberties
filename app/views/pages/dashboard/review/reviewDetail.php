@@ -2,6 +2,9 @@
     <div class="container mx-auto py-8">
         <div class="flex flex-wrap justify-between items-center mb-8">
             <div class="w-1/3">
+                <?php
+                dd($reviewsValid);
+                ?>
                 <img src="<?php
 
                             use App\Models\Product;
@@ -41,31 +44,30 @@
         </div>
         <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
             <div class="relative">
-                <table class="w-full h-64 text-sm text-center text-gray-500 rounded-2xl">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                        <tr>
-                            <?php
-                            $name = [
-                                "ID",
-                                "Image",
-                                "Name",
-                                "Content",
-                                "Time",
-                                "Action",
-                            ];
-                            for ($i = 1; $i <= count($name); $i++) { ?>
-                                <th scope="col" class="px-6 py-3">
-                                    <?php echo $name[$i - 1]; ?>
-                                </th>
-                            <?php }
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // $products = Product::all();
-                        if (count($reviews) > 0) : ?>
-                            <?php foreach ($reviews as $review) :
+                <?php
+                if (count($reviewsValid) > 0) : ?>
+                    <table class="w-full h-64 text-sm text-center text-gray-500 rounded-2xl">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <?php
+                                $name = [
+                                    "ID",
+                                    "Image",
+                                    "Name",
+                                    "Content",
+                                    "Time",
+                                    "Action",
+                                ];
+                                for ($i = 1; $i <= count($name); $i++) { ?>
+                                    <th scope="col" class="px-6 py-3">
+                                        <?php echo $name[$i - 1]; ?>
+                                    </th>
+                                <?php }
+                                ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($reviewsValid as $review) :
                                 if (!$review->deleted_at) :
                                     $user = User::find($review->user_id);
                             ?>
@@ -97,14 +99,6 @@
                                                                 $product->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <!-- <a href="<?php echo BASE_URI .
-                                                                    "/dashboard/review/review_detail/delete" .
-                                                                    "?id=" .
-                                                                    $review->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
-                                                    Delete
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a> -->
-
                                                 <span onclick="removeReviewConfirm(<?php echo $review->id  ?>)" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                                                     Delete
                                                     <i class="fa-solid fa-pen-to-square"></i>
@@ -114,10 +108,12 @@
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                        <?php endif;
-                        ?>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p class="text-center text-gray-500">No reviews found</p>
+                <?php endif;
+                ?>
             </div>
         </div>
     </div>
@@ -126,29 +122,6 @@
 <script type="module">
     import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
     import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
-
-    // document.removeReviewConfirm = (id) => {
-    //     const result = confirm("Delete this review?");
-    //     if (result) {
-    //         console.log(<?php echo BASE_URI ?>)
-    //         FetchXHR.post('<?php echo BASE_URI . "/dashboard/review/review_detail/delete" ?>', {
-    //                 id
-    //             }, {
-    //                 'Content-Type': 'application/json'
-    //             })
-    //             .then(response => {
-    //                 if (response.type === 'error') {
-    //                     alert(response.message);
-    //                 } else if (response.type === 'info') {
-    //                     alert(response.message);
-    //                 } else {
-    //                     alert('This product has been removed');
-    //                 }
-    //             }).catch(error => {
-    //                 alert('Something went wrong');
-    //             });
-    //     }
-    // }
 
     document.removeReviewConfirm = (id) => {
         const result = confirm("Delete this comment?");

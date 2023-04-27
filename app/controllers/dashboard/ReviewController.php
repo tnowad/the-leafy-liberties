@@ -36,11 +36,17 @@ class ReviewController extends Controller
 
     $product = Product::find($request->getQuery("id"));
     $reviews = Review::findAll(["product_id" => $product->id]);
+    $reviewsValid = [];
+    foreach ($reviews as $review) {
+      if ($review->deleted_at == null) {
+        $reviewsValid[] = $review;
+      }
+    }
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/review/reviewDetail"), [
         "title" => "Review",
         "product" => $product,
-        "reviews" => $reviews,
+        "reviewsValid" => $reviewsValid,
       ])
     );
   }
@@ -63,7 +69,7 @@ class ReviewController extends Controller
         "message" => "Failed to remove review removed from table",
       ]);
     }
-    // dd($review);
+
     $review->delete();
     $response->jsonResponse([
       "type" => "success",
