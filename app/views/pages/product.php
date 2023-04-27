@@ -55,7 +55,8 @@ if ($user != null) {
 <div class="box-border p-5 pt-3 sm:p-12 md:p-25 md:pt-12 lg:p-36 lg:pt-20">
   <!-- // ? option  -->
   <div class="grid grid-cols-1 gap-3 xl:grid-cols-2">
-    <div class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
+    <div
+      class="box-border flex justify-center p-5 border border-gray-400 border-solid lg:mr-5 rounded-3xl w-full h-[600px] ">
       <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI . $product->image; ?>" alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
@@ -87,25 +88,33 @@ if ($user != null) {
         </span>
 
         <div class="flex items-center justify-start w-full gap-3 mt-4">
-          <div class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group" onclick="addToCart(<?php echo $product->id; ?>)">
-            <i class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartCheck) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
-            <button src="" alt="" class="text-sm font-medium sm:text-base md:text-lg">
-              <?php
-              if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")) {
-                echo "Update Product";
-              } else {
+          <div
+            class="flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
+            onclick="addToCart(<?php echo $product->id; ?>)">
+            <i
+              class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartCheck) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
 
-                if (isset($cartCheck)) {
-                  echo "Added to cart";
-                } else {
-                  echo "Add to cart";
-                }
-              }
-              ?>
-            </button>
+            <?php if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")): ?>
+              <button class="text-sm font-medium sm:text-base md:text-lg"
+                onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
+                Update Product
+              </button>
+            <?php elseif (isset($cartCheck)): ?>
+              <button alt="" class="text-sm font-medium sm:text-base md:text-lg">
+                Added to cart
+              </button>
+            <?php else: ?>
+              <button alt="" class="text-sm font-medium sm:text-base md:text-lg">
+                Add to cart
+              </button>
+            <?php endif ?>
+
           </div>
-          <div class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group" onclick="addToWishList(<?php echo $product->id; ?>)">
-            <i class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
+          <div
+            class="<?php echo ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access") ? 'hidden' : 'block') ?> flex items-center justify-between gap-2 px-3 py-2 text-lg transition-all border border-gray-300 rounded-full cursor-pointer bg-gray-50 hover:bg-primary-500 hover:text-gray-700 group"
+            onclick="addToWishList(<?php echo $product->id; ?>)">
+            <i
+              class="p-2 transition-all rounded-full fa-regular fa-heart group-hover:text-white group-hover:bg-red-400 wishlist-icon <?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-gray-50 text-black' ?>"></i>
             <button type="submit" src="" alt="" class="text-sm font-medium sm:text-base md:text-lg add-to-wishlist">
               <?php
               if (isset($wishlistCheck)) {
@@ -120,7 +129,8 @@ if ($user != null) {
       </div>
 
       <p class="inline-block mt-5 text-gray-400">Category: </p>
-      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>" class="font-medium hover:underline text-primary">
+      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>"
+        class="font-medium hover:underline text-primary">
         <?php echo $category->name; ?>
       </a>
       <br />
@@ -139,13 +149,16 @@ if ($user != null) {
 
       <div class="flex items-center justify-start gap-4 mt-10">
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500"></i>
+          <i
+            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-facebook-f hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500"></i>
+          <i
+            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-twitter hover:text-white hover:bg-blue-500"></i>
         </a>
         <a href="https://www.facebook.com/jack.willam2003/">
-          <i class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500"></i>
+          <i
+            class="w-12 h-12 p-2 text-2xl text-center transition-all border border-gray-300 rounded-full cursor-pointer fa-brands fa-instagram hover:text-white hover:bg-pink-500"></i>
         </a>
       </div>
     </div>
@@ -153,46 +166,53 @@ if ($user != null) {
   <!-- //? info detail  -->
   <div class="mt-20">
     <ul class="box-content flex justify-center">
-      <li id="description-tab" class="p-2 mb-5 mr-10 transition-all border-4 border-white cursor-pointer hover:border-b-primary-800 border-b-primary-800" onclick="showDescription()">
+      <li id="description-tab"
+        class="p-2 mb-5 mr-10 transition-all border-4 border-white cursor-pointer hover:border-b-primary-800 border-b-primary-800"
+        onclick="showDescription()">
         Description
       </li>
-      <li id="review-tab" class="p-2 mb-2 mr-5 transition-all border-4 border-white cursor-pointer sm:mr-10 sm:mb-5 hover:border-b-primary-800" onclick="showReview()">
+      <li id="review-tab"
+        class="p-2 mb-2 mr-5 transition-all border-4 border-white cursor-pointer sm:mr-10 sm:mb-5 hover:border-b-primary-800"
+        onclick="showReview()">
         Review
         <?php echo "(" . count($reviewsActive) . ")" ?>
       </li>
     </ul>
 
-    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="description">
+    <div class="box-border p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
+      id="description">
       <p class="text-lg text-center ">
         <?php echo $product->description; ?>
       </p>
     </div>
-    <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20" id="review">
+    <div class="box-border hidden p-2 border border-gray-400 border-solid rounded-3xl sm:h-auto sm:py-10 sm:px-20"
+      id="review">
       <?php
-      if ($user && $user->role_id == 3) :
-      ?>
-        <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>" class="flex justify-end">
+      if ($user && $user->role_id == 3):
+        ?>
+        <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>"
+          class="flex justify-end">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <?php
             echo $review_status->status == 0 ? 'Turn on comment' : 'Turn off comment'
-            ?>
+              ?>
           </button>
         </form>
       <?php endif ?>
       <!--  -->
       <?php
-      if ($review_status->status == 0) :
-      ?>
+      if ($review_status->status == 0):
+        ?>
         <p class="text-lg text-center">Comment feature is locked</p>
-      <?php
-      else :
-      ?>
+        <?php
+      else:
+        ?>
         <div>
           <?php
-          if (count($reviewsActive) == 0) :
-          ?>
+          if (count($reviewsActive) == 0):
+            ?>
             <p class="text-lg text-center">No comments yet!</p>
-          <?php else : ?>
+          <?php else: ?>
             <h1 class="p-10 mb-20 text-3xl border-b-2 border-gray-300 ">
               <?php
               echo count($reviewsActive) . ' reviews for ' . $product->name;
@@ -200,12 +220,15 @@ if ($user != null) {
             </h1>
             <div class="overflow-y-auto max-h-[500px] bg-zinc-50 rounded-md shadow-md p-4">
               <?php
-              foreach ($reviewsActive as $review) :
+              foreach ($reviewsActive as $review):
                 $userReview = User::find($review->user_id);
-              ?>
-                <div class="review flex flex-row <?php echo $user ? ($userReview->id != $user->id ? "justify-start" : "justify-end") : "justify-start"; ?>">
+                ?>
+                <div
+                  class="review flex flex-row <?php echo $user ? ($userReview->id != $user->id ? "justify-start" : "justify-end") : "justify-start"; ?>">
                   <div class="review-header">
-                    <img src="<?php echo ($userReview->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $userReview->image ?>" alt="Avatar" class="w-20  object-contain h-full rounded-full cursor-pointer">
+                    <img
+                      src="<?php echo ($userReview->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $userReview->image ?>"
+                      alt="Avatar" class="w-20  object-contain h-full rounded-full cursor-pointer">
                   </div>
                   <div class="w-72 ml-2 mr-2 review-body">
                     <div class="flex flex-row mb-2">
@@ -243,7 +266,7 @@ if ($user != null) {
                       <?php echo $review->content ?>
                     </h5>
                   </div>
-                  <?php if ($userReview->role_id != 3) : ?>
+                  <?php if ($userReview->role_id != 3): ?>
                     <div class="review-footer">
                       <ul class="flex flex-row rating">
                         <?php
@@ -255,62 +278,88 @@ if ($user != null) {
                     </div>
                   <?php endif; ?>
                   <div class="">
-                    <i id="comment-edit" onclick="openEditForm(<?php echo $review->id ?>);" class="<?php echo $user ? ($userReview->id != $user->id ? "hidden" : "flex") : "hidden"; ?> comment-edit fa-solid fa-pen-to-square cursor-pointer mt-2 py-3 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all"></i>
+                    <i id="comment-edit" onclick="openEditForm(<?php echo $review->id ?>);"
+                      class="<?php echo $user ? ($userReview->id != $user->id ? "hidden" : "flex") : "hidden"; ?> comment-edit fa-solid fa-pen-to-square cursor-pointer mt-2 py-3 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all"></i>
                   </div>
                 </div>
-                <form id="update-form<?php echo $review->id ?>" action="<?php echo $user ? (BASE_URI . "/product/comment/update" . "?id=" . $review->id) : BASE_URI . "/login" ?>" method="POST" class="mt-2 hidden justify-end flex-row update-form">
+                <form id="update-form<?php echo $review->id ?>"
+                  action="<?php echo $user ? (BASE_URI . "/product/comment/update" . "?id=" . $review->id) : BASE_URI . "/login" ?>"
+                  method="POST" class="mt-2 hidden justify-end flex-row update-form">
                   <div class="">
-                    <input id="update-input<?php echo $review->id ?>" value="<?php echo $review->content ?>" type="text" name="update-comment" placeholder="Edit a comment..." required class="border-b-2 border-gray-300 w-[335px]" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
+                    <input id="update-input<?php echo $review->id ?>" value="<?php echo $review->content ?>" type="text"
+                      name="update-comment" placeholder="Edit a comment..." required
+                      class="border-b-2 border-gray-300 w-[335px]"
+                      oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
                     <?php
-                    if ($user && $user->role_id != 3) :
-                    ?>
+                    if ($user && $user->role_id != 3):
+                      ?>
                       <div class="flex items-center mt-4 mb-4">
                         <span class="mr-2">Rating : </span>
                         <div class="flex">
-                          <label id="startLabel1" for="star-update<?php echo $review->id ?>1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update<?php echo $review->id ?>1" name="update-rating<?php echo $review->id ?>" value="1" class="hidden" />
-                          <label id="startLabel2" for="star-update<?php echo $review->id ?>2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update<?php echo $review->id ?>2" name="update-rating<?php echo $review->id ?>" value="2" class="hidden" />
-                          <label id="startLabel3" for="star-update<?php echo $review->id ?>3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update<?php echo $review->id ?>3" name="update-rating<?php echo $review->id ?>" value="3" class="hidden" />
-                          <label id="startLabel4" for="star-update<?php echo $review->id ?>4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update<?php echo $review->id ?>4" name="update-rating<?php echo $review->id ?>" value="4" class="hidden" />
-                          <label id="startLabel5" for="star-update<?php echo $review->id ?>5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update<?php echo $review->id ?>5" name="update-rating<?php echo $review->id ?>" value="5" class="hidden" />
+                          <label id="startLabel1" for="star-update<?php echo $review->id ?>1"
+                            class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>1"
+                            name="update-rating<?php echo $review->id ?>" value="1" class="hidden" />
+                          <label id="startLabel2" for="star-update<?php echo $review->id ?>2"
+                            class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>2"
+                            name="update-rating<?php echo $review->id ?>" value="2" class="hidden" />
+                          <label id="startLabel3" for="star-update<?php echo $review->id ?>3"
+                            class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>3"
+                            name="update-rating<?php echo $review->id ?>" value="3" class="hidden" />
+                          <label id="startLabel4" for="star-update<?php echo $review->id ?>4"
+                            class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>4"
+                            name="update-rating<?php echo $review->id ?>" value="4" class="hidden" />
+                          <label id="startLabel5" for="star-update<?php echo $review->id ?>5"
+                            class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>5"
+                            name="update-rating<?php echo $review->id ?>" value="5" class="hidden" />
                         </div>
                       </div>
-                    <?php
+                      <?php
                     endif;
                     ?>
                     <div class="flex flex-row">
                       <div class="box-border">
-                        <button type="submit" class="px-2 py-1 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+                        <button type="submit"
+                          class="px-2 py-1 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
                       </div>
-                      <div class="box-border <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?>">
-                        <span id="new-comment-button" onclick="openNewComment(<?php echo $userReview->id ?>)" type="submit" class="mb-5 px-2 py-1 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600 cursor-pointer">New Comment</span>
+                      <div
+                        class="box-border <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?>">
+                        <span id="new-comment-button" onclick="openNewComment(<?php echo $userReview->id ?>)" type="submit"
+                          class="mb-5 px-2 py-1 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600 cursor-pointer">New
+                          Comment</span>
                       </div>
                     </div>
                   </div>
                 </form>
-              <?php
+                <?php
               endforeach;
               ?>
             </div>
 
-          <?php
+            <?php
           endif ?>
           <div class="mt-20 ">
 
-            <form id="comment-form" action="<?php echo  BASE_URI . "/product/comment" . "?id=" . $product->id ?>" method="POST" class=" <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?> flex-row border-t-2 border-gray-300 pt-14">
-              <img src="<?php echo $user ?  (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> " alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
+            <form id="comment-form" action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>"
+              method="POST"
+              class=" <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?> flex-row border-t-2 border-gray-300 pt-14">
+              <img
+                src="<?php echo $user ? (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> "
+                alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
               <div class="ml-5">
                 <h1 class="mb-2 font-bold">
                   <?php echo $user ? $user->name : 'User'; ?>
                 </h1>
-                <input id="new-comment-input" type="text" name="new-comment" placeholder="Add a comment..." required class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')" oninput="setCustomValidity('')">
+                <input id="new-comment-input" type="text" name="new-comment" placeholder="Add a comment..." required
+                  class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')"
+                  oninput="setCustomValidity('')">
                 <?php
-                if ($user && $user->role_id != 3) :
-                ?>
+                if ($user && $user->role_id != 3):
+                  ?>
                   <div class="flex items-center mt-4 mb-4">
                     <span class="mr-2">Rating : </span>
                     <div class="flex">
@@ -326,20 +375,20 @@ if ($user != null) {
                       <input type="radio" id="star5" name="rating" value="5" class="hidden" />
                     </div>
                   </div>
-                <?php
+                  <?php
                 endif;
                 ?>
               </div>
               <div class="box-border">
-                <button type="submit" class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
+                <button type="submit"
+                  class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
               </div>
             </form>
 
-          <?php
-        endif
-          ?>
-          </div>
+            <?php
+      endif ?>
         </div>
+      </div>
     </div>
   </div>
 </div>
@@ -480,7 +529,7 @@ if ($user != null) {
     const labelsUpdate = document.querySelectorAll(`label[for^="star-update${idReviewRating}"]`);
 
     labelsUpdate.forEach((label, i) => {
-      label.addEventListener('click', function() {
+      label.addEventListener('click', function () {
         labelsUpdate.forEach((l, j) => {
           if (j <= i) {
             l.classList.add('text-primary');
@@ -499,7 +548,7 @@ if ($user != null) {
     console.log(idReviewRating)
 
     labelsUpdate.forEach((label, i) => {
-      label.addEventListener('mouseover', function() {
+      label.addEventListener('mouseover', function () {
         labelsUpdate.forEach((l, j) => {
           if (j <= i) {
             l.classList.add('text-primary');
@@ -511,7 +560,7 @@ if ($user != null) {
         });
       });
 
-      label.addEventListener('mouseout', function() {
+      label.addEventListener('mouseout', function () {
         let selectedValue;
         inputsUpdate.forEach(input => {
           if (input.checked) {
@@ -551,7 +600,7 @@ if ($user != null) {
   const labels = document.querySelectorAll('label[for^="star"]');
 
   labels.forEach((label, i) => {
-    label.addEventListener('click', function() {
+    label.addEventListener('click', function () {
       labels.forEach((l, j) => {
         if (j <= i) {
           l.classList.add('text-primary');
@@ -568,7 +617,7 @@ if ($user != null) {
   const inputs = document.querySelectorAll('input[name="rating"]');
 
   labels.forEach((label, i) => {
-    label.addEventListener('mouseover', function() {
+    label.addEventListener('mouseover', function () {
       labels.forEach((l, j) => {
         if (j <= i) {
           l.classList.add('text-primary');
@@ -580,7 +629,7 @@ if ($user != null) {
       });
     });
 
-    label.addEventListener('mouseout', function() {
+    label.addEventListener('mouseout', function () {
       let selectedValue;
       inputs.forEach(input => {
         if (input.checked) {

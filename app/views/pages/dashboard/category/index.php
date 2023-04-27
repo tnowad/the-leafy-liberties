@@ -52,8 +52,8 @@ use App\Models\Pagination;
                   <td class="px-5 py-3">
                     <?php echo $category->id; ?>
                   </td>
-                  <td class="w-32 h-24 p-3">
-                    <img src="<?php echo BASE_URI . $category->image; ?>" alt="" />
+                  <td class="w-44 h-24 p-3">
+                    <img src="<?php echo BASE_URI . $category->image; ?>" alt="" class="w-full h-full object-cover"/>
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $category->name; ?>

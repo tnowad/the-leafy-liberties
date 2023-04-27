@@ -79,4 +79,19 @@ class User extends Model
       "user_id" => $this->id,
     ]);
   }
+  public static function filterAdvanced($filter)
+  {
+    $users = User::all();
+    // Filter by keywords
+    if (!empty($filter['keywords'])) {
+      $filteredProducts = [];
+      foreach ($users as $user) {
+        if (strpos(strtolower($user->name), strtolower($filter['keywords'])) !== false) {
+          $filteredProducts[] = $user;
+        }
+      }
+      $users = $filteredProducts;
+    }
+    return $users;
+  }
 }
