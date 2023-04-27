@@ -167,13 +167,22 @@ class ProductController extends Controller
 
   public function commentUpdate(Request $request, Response $response)
   {
-    $review = Review::find($request->getQuery("id"));
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
+    $product = Product::find($request->getQuery("id"));
+    $reviews = Review::findAll(['product_id' => $product->id]);
+    foreach ($reviews as $review) {
+      if ($review->user_id == $user->id) {
+        $review = $review;
+      }
+    }
     $review->content = $request->getParam("update-comment");
     if ($request->getParam("update-rating")) {
       $review->rating = $request->getParam("rating");
     }
     $review->save();
-    $response->redirect(BASE_URI . "/product?id=$review->product()->id", 200, [
+    $response->redirect(BASE_URI . "/product?id=$product->id", 200, [
       "toast" => [
         "type" => "success",
         "message" => "Update successfully",
