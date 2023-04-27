@@ -3,7 +3,7 @@
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Slide</h1>
       <div class="box-border w-1/2 px-10">
-      <form action="<?php echo BASE_URI . '/dashboard/slide' ?>" method="GET"
+        <form action="<?php echo BASE_URI . '/dashboard/slide' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($slides as $slide) : ?>
+            <?php foreach ($slides as $slide): ?>
               <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                 <td class="px-5 py-3 font-medium text-gray-900 whitespace-nowrap">
                   <?php echo $slide->name; ?>
@@ -38,7 +38,8 @@
                 <td class="w-64 px-5 py-3">
                   <img src="<?php echo BASE_URI . $slide->image; ?>" alt="" />
                 </td>
-                <td class="<?php echo ($slide->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
+                <td
+                  class="<?php echo ($slide->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
                   <?php
                   if ($slide->status == 1) {
                     echo "Active";
@@ -51,17 +52,17 @@
                 <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
                   <div class="button flex justify-center items-center gap-4">
                     <a href="<?php echo BASE_URI .
-                                "/dashboard/slide/update" .
-                                "?id=" .
-                                $slide->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                      "/dashboard/slide/update" .
+                      "?id=" .
+                      $slide->id; ?>"
+                      class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
-                    <a href="<?php echo BASE_URI .
-                                "/dashboard/slide/delete" .
-                                "?id=" .
-                                $slide->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                    <button
+                      onclick="removeSlide(<?php echo $slide->id ?>)"
+                      class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                       <i class="fa-solid fa-trash"></i>
-                    </a>
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -72,3 +73,26 @@
     </div>
   </div>
 </div>
+<script type="module">
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
+  document.removeSlide = (id) => {
+    const result = confirm("Delete this slide?");
+    if (result) {
+      FetchXHR.post('<?php echo BASE_URI . "/dashboard/slide/delete" ?>', { id }, { 'Content-Type': 'application/json' })
+        .then(response => {
+          if (response.type === 'error') {
+            alert(response.message);
+          } else if (response.type === 'info') {
+            alert(response.message);
+          } else {
+            alert('This slide has been removed');
+          }
+        }).catch(error => {
+          alert('Something went wrong');
+        });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  }
+</script>

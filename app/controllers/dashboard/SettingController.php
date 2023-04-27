@@ -60,7 +60,7 @@ class SettingController extends Controller
           )
         );
       case "POST":
-        $setting = setting::find($request->getParam("id"));
+        $setting = Setting::find($request->getParam("id"));
         if (!$setting) {
           return $response->setBody(
             View::renderWithDashboardLayout(
@@ -98,5 +98,27 @@ class SettingController extends Controller
 
   public function delete(Request $request, Response $response)
   {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission("coupon.delete")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
+    $setting = Setting::find($request->getBody()["id"]);
+    if (!$setting) {
+      $response->jsonResponse([
+        "type" => "success",
+        "message" => "Failed to remove setting removed from table",
+      ]);
+    }
+    // dd($setting);
+    $setting->delete();
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Setting has been removed from table",
+    ]);
   }
 }

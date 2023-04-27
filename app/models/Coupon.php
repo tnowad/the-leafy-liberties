@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Core\Model;
+use Core\Traits\SoftDeletes;
 
 class Coupon extends Model
 {
+  use SoftDeletes;
   protected $table = "coupons";
 
-  protected $fillable = ["id", "code", "expired", "quantity", "description"];
+  protected $fillable = ["id", "code", "expired", "quantity", "description", "deleted_at"];
   public static function filterAdvanced($filter)
   {
     $coupons = Coupon::all();

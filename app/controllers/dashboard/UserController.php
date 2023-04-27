@@ -208,7 +208,7 @@ class UserController extends Controller
   public function delete(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('user.delete')) {
+    if (!$auth->hasPermission("coupon.delete")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -216,11 +216,18 @@ class UserController extends Controller
         ],
       ]);
     }
-    $user = User::find($request->getQuery("id"));
+    $user = User::find($request->getBody()["id"]);
     if (!$user) {
-      return $response->redirect(BASE_URI . "pages/dashboard/user/index");
+      $response->jsonResponse([
+        "type" => "success",
+        "message" => "Failed to remove user removed from table",
+      ]);
     }
+    // dd($user);
     $user->delete();
-    return $response->redirect(BASE_URI . "pages/dashboard/user/index");
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "user has been removed from table",
+    ]);
   }
 }

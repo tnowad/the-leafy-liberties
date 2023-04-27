@@ -86,7 +86,7 @@
                                   $user->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all" onclick="removeUserConfirm()">
+                      <button class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all" onclick="removeUser(<?php echo $user->id ?>)">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>
@@ -101,21 +101,26 @@
     </div>
   </div>
 </div>
-<script>
-  document.removeUserConfirm = () => {
+<script type="module">
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
+  document.removeUser = (id) => {
     const result = confirm("Delete this user?");
     if (result) {
-      FetchXHR.post('<?php echo BASE_URI . "/dashboard/user/delete"; ?>').then(response => {
-        if (response.type === 'error') {
-          alert(response.message);
-        } else if (response.type === 'info') {
-          alert(response.message);
-        } else {
-          alert('This product has been removed');
-        }
-      }).catch(error => {
-        alert('Something went wrong');
-      });
+      FetchXHR.post('<?php echo BASE_URI . "/dashboard/user/delete" ?>', { id }, { 'Content-Type': 'application/json' })
+        .then(response => {
+          if (response.type === 'error') {
+            alert(response.message);
+          } else if (response.type === 'info') {
+            alert(response.message);
+          } else {
+            alert('This user has been removed');
+          }
+        }).catch(error => {
+          alert('Something went wrong');
+        });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
   }
 </script>

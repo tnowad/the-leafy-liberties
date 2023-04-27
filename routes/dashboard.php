@@ -49,7 +49,6 @@ $router->post("/dashboard/coupon/create", [
   CouponController::class,
   "create",
 ]);
-$router->get("/dashboard/coupon/delete", [CouponController::class, "delete"]);
 $router->post("/dashboard/coupon/delete", [
   CouponController::class,
   "delete",
@@ -63,7 +62,6 @@ $router->get("/dashboard/slide/create", [SlideController::class, "create"]);
 $router->post("/dashboard/slide/create", [SlideController::class, "create"]);
 $router->get("/dashboard/slide/update", [SlideController::class, "update"]);
 $router->post("/dashboard/slide/update", [SlideController::class, "update"]);
-$router->get("/dashboard/slide/delete", [SlideController::class, "delete"]);
 $router->post("/dashboard/slide/delete", [SlideController::class, "delete"]);
 
 // user
@@ -73,7 +71,6 @@ $router->get("/dashboard/user/create", [UserController::class, "create"]);
 $router->post("/dashboard/user/create", [UserController::class, "create"]);
 $router->get("/dashboard/user/update", [UserController::class, "update"]);
 $router->post("/dashboard/user/update", [UserController::class, "update"]);
-$router->get("/dashboard/user/delete", [UserController::class, "delete"]);
 $router->post("/dashboard/user/delete", [UserController::class, "delete"]);
 
 //role
@@ -111,7 +108,6 @@ $router->post("/dashboard/category/update", [
   CategoryController::class,
   "update",
 ]);
-$router->get("/dashboard/category/delete", [CategoryController::class, "delete"]);
 $router->post("/dashboard/category/delete", [
   CategoryController::class,
   "delete",

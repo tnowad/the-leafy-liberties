@@ -210,7 +210,7 @@ class CategoryController extends Controller
   public function delete(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("category.delete")) {
+    if (!$auth->hasPermission("coupon.delete")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -218,33 +218,18 @@ class CategoryController extends Controller
         ],
       ]);
     }
-    $category = Category::find($request->getQuery("id"));
+    $category = Category::find($request->getBody()["id"]);
     if (!$category) {
-      return $response->redirect(BASE_URI . "/dashboard/category", 200, [
-        "toast" => [
-          "type" => "error",
-          "message" => "Delete category failed",
-        ],
+      $response->jsonResponse([
+        "type" => "success",
+        "message" => "Failed to remove category removed from table",
       ]);
     }
-
-    switch ($request->getMethod()) {
-      case "GET":
-        $response->setStatusCode(200);
-        $category->delete();
-        return $response->redirect(BASE_URI . "/dashboard/category", 200, [
-          "toast" => [
-            'type' => 'success',
-            'message' => 'Delete category successfully'
-          ]
-        ]);
-      case "POST":
-        return $response->redirect(BASE_URI . "/dashboard/category", 200, [
-          "toast" => [
-            'type' => 'success',
-            'message' => 'Delete category successfully'
-          ]
-        ]);
-    }
+    // dd($category);
+    $category->delete();
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Category has been removed from table",
+    ]);
   }
 }

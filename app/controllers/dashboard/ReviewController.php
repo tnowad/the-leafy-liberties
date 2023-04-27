@@ -47,23 +47,27 @@ class ReviewController extends Controller
 
   public function delete(Request $request, Response $response)
   {
-    $review = Review::find($request->getQuery("id"));
-    $product = Product::find($review->product_id);
-    if (!$review) {
-      return $response->redirect(BASE_URI . "/dashboard/review/review_detail?id=$product->id", 200, [
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission("product.delete")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
-          "message" => "Delete review failed",
+          "message" => "You do not have permission to access this page.",
         ],
       ]);
     }
-    $reviewId = $review->id;
-    $review->delete();
-    return $response->redirect(BASE_URI . "/dashboard/review/review_detail?id=$product->id", 200, [
-      "toast" => [
+    $review = Review::find($request->getBody()["id"]);
+    if (!$review) {
+      $response->jsonResponse([
         "type" => "success",
-        "message" => "Delete review successful",
-      ],
+        "message" => "Failed to remove review removed from table",
+      ]);
+    }
+    // dd($review);
+    $review->delete();
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Review removed from table",
     ]);
   }
 }

@@ -68,13 +68,10 @@
                         class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <a href="<?php echo BASE_URI .
-                        "/dashboard/coupon/delete" .
-                        "?id=" .
-                        $coupon->id; ?>"
+                      <button onclick="removeCoupon(<?php echo $coupon->id ?>)"
                         class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                         <i class="fa-solid fa-trash"></i>
-                      </a>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -97,6 +94,29 @@
     }
     else {
       return true;
+    }
+  }
+</script>
+<script type="module">
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
+  document.removeCoupon = (id) => {
+    const result = confirm("Delete this coupon?");
+    if (result) {
+      FetchXHR.post('<?php echo BASE_URI . "/dashboard/coupon/delete" ?>', { id }, { 'Content-Type': 'application/json' })
+        .then(response => {
+          if (response.type === 'error') {
+            alert(response.message);
+          } else if (response.type === 'info') {
+            alert(response.message);
+          } else {
+            alert('This coupon has been removed');
+          }
+        }).catch(error => {
+          alert('Something went wrong');
+        });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
   }
 </script>

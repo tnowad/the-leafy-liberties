@@ -26,9 +26,9 @@ class ProductController extends Controller
         ],
       ]);
     }
-    if(isset($filter)){
+    if (isset($filter)) {
       $products = Product::filterAdvanced($filter);
-    }else{
+    } else {
       $products = Product::all();
 
     }
@@ -244,20 +244,16 @@ class ProductController extends Controller
     }
     $product = Product::find($request->getBody()["id"]);
     if (!$product) {
-      return $response->redirect(BASE_URI . "/dashboard/product", 200, [
-        "toast" => [
-          "type" => "error",
-          "message" => "Delete product failed",
-        ],
+      $response->jsonResponse([
+        "type" => "success",
+        "message" => "Failed to remove Product removed from table",
       ]);
     }
     // dd($product);
     $product->delete();
-    return $response->redirect(BASE_URI . "/dashboard/product", 200, [
-      "toast" => [
-        "type" => "success",
-        "message" => "Delete product successful",
-      ],
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Product removed from table",
     ]);
   }
 }

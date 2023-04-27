@@ -4,7 +4,7 @@ use App\Models\Role; ?>
   <div class="bg-white p-8 rounded-md shadow-lg w-full my-8">
     <h2 class="text-xl font-bold mb-4">Add User</h2>
     <form class="flex flex-col" action="<?php echo BASE_URI .
-      "/dashboard/user/create"; ?>" method="POST">
+      "/dashboard/user/create"; ?>" method="POST" enctype="multipart/form-data">
       <label for="image" class="my-2">Image:</label>
       <input type="file" name="image" onchange="loadFile(event)" />
       <p>Preview Image:</p>
