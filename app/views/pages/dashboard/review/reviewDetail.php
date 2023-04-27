@@ -2,9 +2,6 @@
     <div class="container mx-auto py-8">
         <div class="flex flex-wrap justify-between items-center mb-8">
             <div class="w-1/3">
-                <?php
-                dd($reviewsValid);
-                ?>
                 <img src="<?php
 
                             use App\Models\Product;
