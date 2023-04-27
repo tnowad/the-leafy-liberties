@@ -27,15 +27,6 @@ use App\Models\Role;
       <label for="expired" class="my-2">Phone:</label>
       <input type="tel" value="<?php echo $user->phone; ?>" name="phone"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" required />
-    
-      <label for="gender" class="my-2">Select gender:</label>
-      <select value="" name="gender" class="bg-gray-100 p-3 focus:outline-none rounded-lg" required>
-        <option value="">Select gender
-        </option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
       <label for="role" class="my-2">Select role:</label>
       <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg">
         <option value="">
@@ -44,8 +35,8 @@ use App\Models\Role;
           echo ucfirst($role->name);
           ?>
         </option>
-        <?php foreach(Role::all() as $role): ?>
-        <option value="<?php echo $role->id ?>"><?php echo ucfirst($role->name) ?></option>
+        <?php foreach (Role::all() as $role): ?>
+          <option value="<?php echo $role->id ?>"><?php echo ucfirst($role->name) ?></option>
         <?php endforeach ?>
       </select>
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"

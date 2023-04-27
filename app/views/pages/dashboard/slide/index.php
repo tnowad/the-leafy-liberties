@@ -16,7 +16,7 @@
     </div>
     <div class="my-8 bg-white shadow-lg cursor-pointer table-slider-statistics rounded-2xl">
       <div class="relative">
-        <table class="w-full h-64 text-sm text-center text-gray-500 rounded-2xl">
+        <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php

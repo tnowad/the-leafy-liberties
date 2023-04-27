@@ -100,7 +100,7 @@ class SlideController extends Controller
             );
           }
 
-          $slide->title = $request->getParam("title");
+          $slide->name = $request->getParam("title");
           $slide->image = $request->getParam("image");
           $slide->status = $request->getParam("status");
           $slide->save();

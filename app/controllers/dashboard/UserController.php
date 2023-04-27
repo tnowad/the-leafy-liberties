@@ -13,15 +13,24 @@ class UserController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    // $auth = Application::getInstance()->getAuthentication();
-    // if (!$auth->hasPermission('products.access')) {
-    //   return $response->redirect(BASE_URI . '/dashboard');
-    // }
-    $users = User::all();
+    $filter = [
+      "keywords" => $request->getQuery("keywords"),
+    ];
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('user.access')) {
+      return $response->redirect(BASE_URI . '/dashboard');
+    }
+    if (isset($filter)) {
+      $users = User::filterAdvanced($filter);
+    } else {
+      $users = User::all();
+
+    }
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/user/index"), [
         "title" => "Users",
         "users" => $users,
+        "filter" => $filter
       ])
     );
   }
@@ -37,46 +46,60 @@ class UserController extends Controller
         ],
       ]);
     }
+    switch ($request->getMethod()) {
+      case 'GET':
+        $response->setStatusCode(200);
+        return $response->setBody(
+          View::renderWithDashboardLayout(
+            new View("pages/dashboard/user/create"),
+            [
+              "title" => "Add User",
+            ]
+          )
+        );
+      case 'POST':
+        $uploader = new FileUploader([
+          "allowedExtensions" => ["jpeg", "jpg", "png"],
+          "maxFileSize" => 2097152,
+          "uploadPath" => "resources/images/users/",
+        ]);
 
-    $uploader = new FileUploader([
-      "allowedExtensions" => ["jpeg", "jpg", "png"],
-      "maxFileSize" => 2097152,
-      "uploadPath" => "resources/images/users/",
-    ]);
+        $result = $uploader->upload($_FILES["image"]);
 
-    $result = $uploader->upload($_FILES["image"]);
+        if ($result) {
+          $request->setParam("image", $result);
+        } else {
+          return $response->setBody(
+            View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
+              "title" => "Users",
+              "toast" => [
+                "type" => "error",
+                "message" => "Add user failed!",
+              ],
+            ])
+          );
+        }
 
-    if ($result) {
-      $request->setParam("image", $result);
-    } else {
-      return $response->setBody(
-        View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
-          "title" => "Users",
-          "toast" => [
-            "type" => "error",
-            "message" => "Add user failed!",
-          ],
-        ])
-      );
+        $user = new User();
+        $user->email = $request->getParam("email");
+        $user->name = $request->getParam("name");
+        $user->image = $request->getParam("image");
+        $user->phone = $request->getParam("phone");
+        $user->password = password_hash($request->getParam("password"),PASSWORD_DEFAULT);
+        $user->role_id = $request->getParam("role");
+        $user->status = 1;
+        $user->save();
+        return $response->setBody(
+          View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
+            "title" => "Users",
+            "toast" => [
+              "type" => "success",
+              "message" => "Add user successful!",
+            ],
+          ])
+        );
     }
 
-    $user = new User();
-    $user->name = $request->getParam("name");
-    $user->image = $request->getParam("image");
-    $user->isbn = $request->getParam("isbn");
-    $user->price = $request->getParam("price");
-    $user->description = $request->getParam("description");
-    $user->quantity = $request->getParam("quantity");
-    $user->save();
-    return $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
-        "title" => "Users",
-        "toast" => [
-          "type" => "success",
-          "message" => "Add user successful!",
-        ],
-      ])
-    );
   }
 
   public function store(Request $request, Response $response)
@@ -167,7 +190,7 @@ class UserController extends Controller
           $user->phone = $request->getParam("phone");
           $user->email = $request->getParam("email");
           $user->gender = $request->getParam("gender");
-          $user->password = password_hash($request->getParam("password"),PASSWORD_DEFAULT);
+          $user->password = password_hash($request->getParam("password"), PASSWORD_DEFAULT);
           $user->role_id = $request->getParam("role");
           $user->save();
           return $response->redirect(BASE_URI . "/dashboard/user", 200, [

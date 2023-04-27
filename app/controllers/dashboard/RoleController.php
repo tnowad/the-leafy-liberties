@@ -14,9 +14,10 @@ use Utils\FileUploader;
 class RoleController extends Controller
 {
   public function index(Request $request, Response $response)
-  {$filter = [
-    "keywords" => $request->getQuery("keywords"),
-  ];
+  {
+    $filter = [
+      "keywords" => $request->getQuery("keywords"),
+    ];
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("role.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [

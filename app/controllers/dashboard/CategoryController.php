@@ -36,7 +36,7 @@ class CategoryController extends Controller
         new View("pages/dashboard/category/index"),
         [
           "title" => "Categories",
-          "categorys" => $categories,
+          "categories" => $categories,
           "filter" => $filter,
         ]
       )
