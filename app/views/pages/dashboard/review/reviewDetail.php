@@ -32,7 +32,7 @@
 <div class="w-full mx-auto my-0">
     <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
         <div class="flex justify-between">
-            <h1 class="text-xl font-bold">Product</h1>
+            <h1 class="text-xl font-bold">Reviews</h1>
             <div class="box-border w-1/2 px-10">
                 <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input" action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
                     <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
@@ -111,7 +111,10 @@
                         </tbody>
                     </table>
                 <?php else : ?>
-                    <p class="text-center text-gray-500">No reviews found</p>
+                    <div class="flex flex-col justify-center items-center h-full my-8">
+                        <i class="fa-solid fa-heart-pulse text-[100px] text-gray-400"></i>
+                        <h1 class="text-6xl tracking-widest text-gray-400 uppercase">No reviews found</h1>
+                    </div>
                 <?php endif;
                 ?>
             </div>
