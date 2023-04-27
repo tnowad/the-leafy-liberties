@@ -49,21 +49,21 @@ class ReviewController extends Controller
   {
     $review = Review::find($request->getQuery("id"));
     $product = Product::find($review->product_id);
-    if (!$review) {
-      return $response->redirect(BASE_URI . "/dashboard/review/review_detail?id=$product->id", 200, [
-        "toast" => [
-          "type" => "error",
-          "message" => "Delete review failed",
-        ],
-      ]);
-    }
+    // if (!$review) {
+    //   return $response->redirect(BASE_URI . "/dashboard/review/review_detail?id=$product->id", 200, [
+    //     "toast" => [
+    //       "type" => "error",
+    //       "message" => "Delete review failed",
+    //     ],
+    //   ]);
+    // }
     $reviewId = $review->id;
     $review->delete();
-    return $response->redirect(BASE_URI . "/dashboard/review/review_detail?id=$product->id", 200, [
-      "toast" => [
-        "type" => "success",
-        "message" => "Delete review successful",
-      ],
-    ]);
+    // return $response->redirect(BASE_URI . "/dashboard/review/review_detail?id=$product->id", 200, [
+    //   "toast" => [
+    //     "type" => "success",
+    //     "message" => "Delete review successful",
+    //   ],
+    // ]);
   }
 }
