@@ -4,7 +4,7 @@
       <?php include "menu.php"; ?>
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col" action="<?php echo BASE_URI .
-                                              "/profile"; ?>" method="post">
+                                              "/profile/settings/change_password"; ?>" method="post">
           <label>Password change</label>
           <div class="relative flex flex-col py-4 px-2 gap-1 border border-gray-300 border-solid rounded">
             <label for="password">

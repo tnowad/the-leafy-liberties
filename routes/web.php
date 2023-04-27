@@ -31,6 +31,7 @@ $router->get("/products/filter", [ProductController::class, "filter"]);
 $router->get("/profile", [ProfileController::class, "index"]);
 $router->post("/profile", [ProfileController::class, "update"]);
 $router->get("/profile/settings", [ProfileController::class, "settings"]);
+$router->post("/profile/settings/change_password", [ProfileController::class, "changePassword"]);
 $router->get("/profile/orders", [ProfileController::class, "orders"]);
 $router->get("/profile/orders/order_detail", [ProfileController::class, "orderDetail"]);
 $router->post("/profile/order_detail", [ProfileController::class, "orderDetail"]);
