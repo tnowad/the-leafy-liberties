@@ -1,17 +1,14 @@
-<!-- <?php
-$text = $_POST["searchQuery"];
-echo $text;
-?> -->
 <div class="w-full my-0 mx-auto">
   <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Coupon</h1>
       <div class="box-border w-1/2 px-10">
-        <form class="input flex items-center justify-center w-full h-10 bg-white rounded-full"
-          action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
-          <input type="text" name="searchQuery"
-            class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
-          <button class="flex items-center justify-center w-10 h-10">
+      <form action="<?php echo BASE_URI . '/dashboard/coupon' ?>" method="GET"
+          class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
+          <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
+            placeholder="Search.... "
+            value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
+          <button class="flex items-center justify-center w-10 h-10 bg-gray-100">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -22,13 +19,11 @@ echo $text;
     </div>
     <div class="table-coupon-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
       <div class="relative">
-        <table class="w-full text-sm text-center text-gray-500 rounded-2xl h-64">
+        <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
-              use App\Models\Coupon;
-
-              $name = [
+              $namess = [
                 "No",
                 "Code",
                 "Expired",
@@ -36,9 +31,9 @@ echo $text;
                 "Description",
                 "Action",
               ];
-              for ($i = 1; $i <= count($name); $i++) { ?>
+              for ($i = 1; $i <= count($namess); $i++) { ?>
                 <th scope="col" class="px-6 py-3">
-                  <?php echo $name[$i - 1]; ?>
+                  <?php echo $namess[$i - 1]; ?>
                 </th>
               <?php }
               ?>
@@ -46,12 +41,6 @@ echo $text;
           </thead>
           <tbody>
             <?php
-            if (isset($_POST["searchQuery"])) {
-              $text = $_POST["searchQuery"];
-              $coupons = Coupon::filterAdvancedCoupon($text);
-            } else {
-              $coupons = Coupon::all();
-            }
             if (count($coupons) > 0): ?>
               <?php foreach ($coupons as $coupon): ?>
                 <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">

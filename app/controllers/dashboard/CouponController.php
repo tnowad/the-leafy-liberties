@@ -12,6 +12,9 @@ class CouponController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $filter = [
+      "keywords" => $request->getQuery("keywords"),
+    ];
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission('coupon.access')) {
       return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
@@ -21,13 +24,19 @@ class CouponController extends Controller
         ],
       ]);
     }
-    $coupons = Coupon::all();
+    if(isset($filter)){
+      $coupons = Coupon::filterAdvanced($filter);
+    }else{
+      $coupons = Coupon::all();
+
+    }
     return $response->setBody(
       View::renderWithDashboardLayout(
         new View("pages/dashboard/coupon/index"),
         [
           "title" => "Coupons",
           "coupons" => $coupons,
+          "filter" => $filter
         ]
       )
     );
@@ -204,31 +213,6 @@ class CouponController extends Controller
             'message' => 'Delete coupon Successfully'
           ]
         ]);
-    }
-  }
-  public function filterCoupon(Request $request, Response $response)
-  {
-    switch ($request->getMethod()) {
-      case "GET":
-        $response->setStatusCode(200);
-        return $response->setBody(
-          View::renderWithDashboardLayout(
-            new View("pages/dashboard/coupon/index"),
-            [
-              "title" => "Coupons",
-            ]
-          )
-        );
-      case "POST":
-        // $coupons = Coupon::filterAdvancedCoupon($request->getQuery('searchQuery'));
-        return $response->setBody(
-          View::renderWithDashboardLayout(
-            new View("pages/dashboard/coupon/index"),
-            [
-              "title" => "Coupons",
-            ]
-          )
-        );
     }
   }
 }

@@ -37,14 +37,9 @@ $router->post("/dashboard/product/delete", [
 ]);
 
 //product function
-$router->post("/dashboard/product", [
-  ProductController::class,
-  "filterProduct",
-]);
 
 //coupon
 $router->get("/dashboard/coupon", [CouponController::class, "index"]);
-$router->post("/dashboard/coupon", [CouponController::class, "filterCoupon"]);
 
 //coupon function
 $router->get("/dashboard/coupon/update", [CouponController::class, "update"]);

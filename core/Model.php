@@ -179,28 +179,4 @@ class Model
     $this->attributes[$key] = $value;
   }
 
-  public static function filterAdvanced($input)
-  {
-    $table = (new static())->table;
-    $query = "SELECT * FROM $table WHERE name LIKE ?";
-    $params = ["%$input%"];
-    $result = self::$db->select($query, $params);
-    $models = [];
-    foreach ($result as $row) {
-      $models[] = new static($row);
-    }
-    return $models;
-  }
-  public static function filterAdvancedCoupon($input)
-  {
-    $table = (new static())->table;
-    $query = "SELECT * FROM $table WHERE code LIKE ?";
-    $params = ["%$input%"];
-    $result = self::$db->select($query, $params);
-    $models = [];
-    foreach ($result as $row) {
-      $models[] = new static($row);
-    }
-    return $models;
-  }
 }

@@ -14,6 +14,9 @@ class ProductController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $filter = [
+      "keywords" => $request->getQuery("keywords"),
+    ];
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("product.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
@@ -23,13 +26,19 @@ class ProductController extends Controller
         ],
       ]);
     }
-    $products = Product::all();
+    if(isset($filter)){
+      $products = Product::filterAdvanced($filter);
+    }else{
+      $products = Product::all();
+
+    }
     return $response->setBody(
       View::renderWithDashboardLayout(
         new View("pages/dashboard/product/index"),
         [
           "title" => "Products",
           "products" => $products,
+          "filter" => $filter,
         ]
       )
     );
@@ -250,29 +259,5 @@ class ProductController extends Controller
         "message" => "Delete product successful",
       ],
     ]);
-  }
-  public function filterProduct(Request $request, Response $response)
-  {
-    switch ($request->getMethod()) {
-      case "GET":
-        $response->setStatusCode(200);
-        return $response->setBody(
-          View::renderWithDashboardLayout(
-            new View("pages/dashboard/product/index"),
-            [
-              "title" => "Products",
-            ]
-          )
-        );
-      case "POST":
-        return $response->setBody(
-          View::renderWithDashboardLayout(
-            new View("pages/dashboard/product/index"),
-            [
-              "title" => "Products",
-            ]
-          )
-        );
-    }
   }
 }

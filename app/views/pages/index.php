@@ -10,17 +10,6 @@ use App\Models\Cart;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
-$flagwl = false;
-// if ($user != null) {
-//   $wishlists = Wishlist::findAll(["user_id" => $user->id]);
-//   $productss = Product::all();
-//   foreach ($wishlists as $wishlistItem) {
-//     if ($product->id == $wishlistItem->product_id) {
-//       $flagwl = true;
-//       break;
-//     }
-//   }
-// }
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
@@ -28,7 +17,7 @@ $flagwl = false;
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative hidden overflow-hidden carousel sm:h-64 xl:h-80 2xl:h-[420px] -z-10 md:block">
 
-        <?php foreach (array_slice(Slide::findAll(["status" => "1"]), 0, 5) as $slide): ?>
+        <?php foreach (Slide::findAll(["status" => "1"]) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
             <img src="<?php echo BASE_URI . $slide->image; ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
@@ -39,7 +28,7 @@ $flagwl = false;
       </div>
       <div class="absolute space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0 hidden md:flex">
 
-        <?php for ($i = 0; $i < 5; $i++): ?>
+        <?php for ($i = 0; $i < (count(Slide::findAll(["status" => "1"]))); $i++): ?>
           <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
             data-carousel-slide-to="<?php echo $i; ?>"></button>
         <?php endfor; ?>
