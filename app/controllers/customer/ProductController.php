@@ -159,7 +159,12 @@ class ProductController extends Controller
     $newComment->content = trim($request->getParam("new-comment"));
     $newComment->rating = trim($request->getParam("rating"));
     if (!$newComment->content) {
-      return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id);
+      return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id, 200, [
+        "toast" => [
+          "type" => "success",
+          "message" => "Comment successfully",
+        ],
+      ]);
     }
     $newComment->save();
     return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
@@ -167,19 +172,11 @@ class ProductController extends Controller
 
   public function commentUpdate(Request $request, Response $response)
   {
-    $user = Application::getInstance()
-      ->getAuthentication()
-      ->getUser();
-      $review = Review::find($request->getQuery("id"));
-      $product = Product::find($review->product_id);
-    // foreach ($reviews as $review) {
-    //   if ($review->user_id == $user->id) {
-    //     $review = $review;
-    //   }
-    // }
+    $review = Review::find($request->getQuery("id"));
+    $product = Product::find($review->product_id);
     $review->content = $request->getParam("update-comment");
-    if ($request->getParam("update-rating")) {
-      $review->rating = $request->getParam("rating");
+    if ($request->getParam("update-rating" . $review->id)) {
+      $review->rating = $request->getParam("update-rating" . $review->id);
     }
     $review->save();
     $response->redirect(BASE_URI . "/product?id=$product->id", 200, [
@@ -199,14 +196,12 @@ class ProductController extends Controller
 
     $reviewStatus = ReviewStatus::find($product->id);
     $reviewStatus->status == 0 ? $reviewStatus->status = 1 : $reviewStatus->status = 0;
-    // $newComment->user_id = $user->id;
-    // $newComment->product_id =  $product->id;
-    // $newComment->content = trim($request->getParam("new-comment"));
-    // $newComment->rating = trim($request->getParam("rating"));
-    // if (!$newComment->content) {
-    //   return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id);
-    // }
     $reviewStatus->save();
-    return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
+    return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id, 200, [
+      "toast" => [
+        "type" => "success",
+        "message" => $reviewStatus->status == 0 ? "Turn off successfully" : "Turn on successfully",
+      ],
+    ]);
   }
 }

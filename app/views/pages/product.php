@@ -267,16 +267,16 @@ if ($user != null) {
                       <div class="flex items-center mt-4 mb-4">
                         <span class="mr-2">Rating : </span>
                         <div class="flex">
-                          <label id="startLabel1" for="star-update1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update1" name="update-rating" value="1" class="hidden" />
-                          <label id="startLabel2" for="star-update2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update2" name="update-rating" value="2" class="hidden" />
-                          <label id="startLabel3" for="star-update3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update3" name="update-rating" value="3" class="hidden" />
-                          <label id="startLabel4" for="star-update4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update4" name="update-rating" value="4" class="hidden" />
-                          <label id="startLabel5" for="star-update5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
-                          <input type="radio" id="star-update5" name="update-rating" value="5" class="hidden" />
+                          <label id="startLabel1" for="star-update<?php echo $review->id ?>1" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>1" name="update-rating<?php echo $review->id ?>" value="1" class="hidden" />
+                          <label id="startLabel2" for="star-update<?php echo $review->id ?>2" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>2" name="update-rating<?php echo $review->id ?>" value="2" class="hidden" />
+                          <label id="startLabel3" for="star-update<?php echo $review->id ?>3" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>3" name="update-rating<?php echo $review->id ?>" value="3" class="hidden" />
+                          <label id="startLabel4" for="star-update<?php echo $review->id ?>4" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>4" name="update-rating<?php echo $review->id ?>" value="4" class="hidden" />
+                          <label id="startLabel5" for="star-update<?php echo $review->id ?>5" class="px-1 text-2xl text-gray-300 cursor-pointer">&#9733;</label>
+                          <input type="radio" id="star-update<?php echo $review->id ?>5" name="update-rating<?php echo $review->id ?>" value="5" class="hidden" />
                         </div>
                       </div>
                     <?php
@@ -438,6 +438,116 @@ if ($user != null) {
 
 
 
+
+  document.commentUpdate = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', {
+      id
+    }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
+</script>
+<script>
+  let idReviewRating
+
+  function openEditForm(id) {
+    let forms = document.querySelectorAll('.update-form')
+    let contents = document.querySelectorAll('.content')
+    idReviewRating = id
+    for (let i = 0; i < forms.length; i++) {
+      forms[i].classList.add('hidden')
+      forms[i].classList.remove('flex')
+    }
+    for (let i = 0; i < contents.length; i++) {
+      contents[i].classList.add('inline-block')
+      contents[i].classList.remove('hidden')
+    }
+    document.getElementById(`content${id}`).classList.add('hidden');
+    document.getElementById(`update-form${id}`).classList.remove('hidden')
+    document.getElementById(`update-form${id}`).classList.add('flex')
+    document.getElementById(`update-input${id}`).focus()
+    document.getElementById("comment-form").classList.add('hidden')
+    document.getElementById("comment-form").classList.remove('flex')
+
+    const labelsUpdate = document.querySelectorAll(`label[for^="star-update${idReviewRating}"]`);
+
+    labelsUpdate.forEach((label, i) => {
+      label.addEventListener('click', function() {
+        labelsUpdate.forEach((l, j) => {
+          if (j <= i) {
+            l.classList.add('text-primary');
+            l.classList.remove('text-gray-300');
+          } else {
+            l.classList.add('text-gray-300');
+            l.classList.remove('text-primary');
+          }
+        });
+      });
+    });
+
+    // let lastSelected;
+
+    const inputsUpdate = document.querySelectorAll(`input[name="update-rating${idReviewRating}"]`)
+    console.log(idReviewRating)
+
+    labelsUpdate.forEach((label, i) => {
+      label.addEventListener('mouseover', function() {
+        labelsUpdate.forEach((l, j) => {
+          if (j <= i) {
+            l.classList.add('text-primary');
+            l.classList.remove('text-gray-300');
+          } else {
+            l.classList.add('text-gray-300');
+            l.classList.remove('text-primary');
+          }
+        });
+      });
+
+      label.addEventListener('mouseout', function() {
+        let selectedValue;
+        inputsUpdate.forEach(input => {
+          if (input.checked) {
+            selectedValue = input.value;
+          }
+        });
+        console.log(selectedValue);
+        labelsUpdate.forEach((l, j) => {
+          if (j < selectedValue) {
+            l.classList.add('text-primary')
+            l.classList.remove('text-gray-300')
+          } else {
+            l.classList.add('text-gray-300')
+            l.classList.remove('text-primary')
+          }
+        });
+      });
+    });
+
+  }
+  const openNewComment = (id) => {
+    let forms = document.querySelectorAll('.update-form')
+    for (let i = 0; i < forms.length; i++) {
+      forms[i].classList.add('hidden')
+      forms[i].classList.remove('flex');
+
+    }
+    document.getElementById("comment-form").classList.remove('hidden')
+    // document.getElementById(`update-form${id}`).classList.add('hidden')
+    // document.getElementById(`update-form${id}`).classList.remove('flex')
+    document.getElementById("new-comment-input").focus();
+  }
+
+
+
+
   const labels = document.querySelectorAll('label[for^="star"]');
 
   labels.forEach((label, i) => {
@@ -489,104 +599,4 @@ if ($user != null) {
       });
     });
   });
-
-  const labelsUpdate = document.querySelectorAll('label[for^="star-update"]');
-
-  labelsUpdate.forEach((label, i) => {
-    label.addEventListener('click', function() {
-      labelsUpdate.forEach((l, j) => {
-        if (j <= i) {
-          l.classList.add('text-primary');
-          l.classList.remove('text-gray-300');
-        } else {
-          l.classList.add('text-gray-300');
-          l.classList.remove('text-primary');
-        }
-      });
-    });
-  });
-
-  // let lastSelected;
-
-  const inputsUpdate = document.querySelectorAll('input[name="update-rating"]');
-
-  labelsUpdate.forEach((label, i) => {
-    label.addEventListener('mouseover', function() {
-      labelsUpdate.forEach((l, j) => {
-        if (j <= i) {
-          l.classList.add('text-primary');
-          l.classList.remove('text-gray-300');
-        } else {
-          l.classList.add('text-gray-300');
-          l.classList.remove('text-primary');
-        }
-      });
-    });
-
-    label.addEventListener('mouseout', function() {
-      let selectedValue;
-      inputsUpdate.forEach(input => {
-        if (input.checked) {
-          selectedValue = input.value;
-        }
-      });
-      console.log(selectedValue);
-      labelsUpdate.forEach((l, j) => {
-        if (j < selectedValue) {
-          l.classList.add('text-primary');
-          l.classList.remove('text-gray-300');
-        } else {
-          l.classList.add('text-gray-300');
-          l.classList.remove('text-primary');
-        }
-      });
-    });
-  });
-
-  document.commentUpdate = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', {
-      id
-    }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      const data = response.data;
-      new Toast({
-        message: data.message,
-        type: data.type
-      });
-    }).catch(error => {
-      console.error(error);
-    });
-  };
-</script>
-<script>
-  function openEditForm(id) {
-    let forms = document.querySelectorAll('.update-form');
-    let contents = document.querySelectorAll('.content');
-    for (let i = 0; i < forms.length; i++) {
-      forms[i].classList.add('hidden')
-      forms[i].classList.remove('flex');
-    }
-    for (let i = 0; i < contents.length; i++) {
-      contents[i].classList.add('inline-block')
-      contents[i].classList.remove('hidden');
-    }
-    document.getElementById(`content${id}`).classList.add('hidden');
-    document.getElementById(`update-form${id}`).classList.remove('hidden')
-    document.getElementById(`update-form${id}`).classList.add('flex')
-    document.getElementById(`update-input${id}`).focus()
-    document.getElementById("comment-form").classList.add('hidden')
-    document.getElementById("comment-form").classList.remove('flex')
-  }
-  const openNewComment = (id) => {
-    let forms = document.querySelectorAll('.update-form');
-    for (let i = 0; i < forms.length; i++) {
-      forms[i].classList.add('hidden')
-      forms[i].classList.remove('flex');
-    }
-    document.getElementById("comment-form").classList.remove('hidden')
-    // document.getElementById(`update-form${id}`).classList.add('hidden')
-    // document.getElementById(`update-form${id}`).classList.remove('flex')
-    document.getElementById("new-comment-input").focus();
-  }
 </script>
