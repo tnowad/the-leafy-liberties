@@ -1,4 +1,5 @@
 <?php
+
 namespace Utils;
 
 use Exception;
@@ -13,9 +14,19 @@ class Validation
     throw new Exception('Invalid email');
   }
 
+  // public static function validateName($name)
+  // {
+  //   if (preg_match('/^[a-zA-Z ]{2,30}$/', $name)) {
+  //     return $name;
+  //   }
+  //   throw new Exception('Invalid name');
+  // }
+
+
+
   public static function validateName($name)
   {
-    if (preg_match('/^[a-zA-Z ]{2,30}$/', $name)) {
+    if (preg_match(' /^[\p{L}\s]{2,30}$/u', $name)) {
       return $name;
     }
     throw new Exception('Invalid name');

@@ -63,9 +63,7 @@ class ProfileController extends Controller
       );
     }
     $user->image = $request->getParam("avatar");
-    $user->name = $request->getParam("name");
     $user->address = $request->getParam("address");
-    $user->phone = $request->getParam("phone");
     if ($request->getParam("gender") == "male") {
       $user->gender = 1;
     } else if ($request->getParam("gender") == "female") {
@@ -74,6 +72,8 @@ class ProfileController extends Controller
       $user->gender = 0;
     }
     try {
+      $user->phone = Validation::validatePhone($request->getParam("phone"));
+      $user->name = Validation::validateName($request->getParam("name"));
       $user->email = Validation::validateEmail($request->getParam('email'));
       $password = Validation::validatePassword($request->getparam('current-password'));
       if (!password_verify($password, $user->password)) {
