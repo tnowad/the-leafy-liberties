@@ -200,7 +200,7 @@ class ProductController extends Controller
     return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id, 200, [
       "toast" => [
         "type" => "success",
-        "message" => $reviewStatus->status == 0 ? "Turn off successfully" : "Turn on successfully",
+        "message" => $reviewStatus->status == 0 ? "Turn off comment successfully" : "Turn on comment successfully",
       ],
     ]);
   }
