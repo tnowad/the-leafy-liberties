@@ -39,23 +39,16 @@ class ProfileController extends Controller
   public function update(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-
     if (!$auth->isAuthenticated()) {
       $response->redirect("/login");
     }
-
     $user = $auth->getUser();
-
-
-
     $uploader = new FileUploader([
       "allowedExtensions" => ["jpeg", "jpg", "png"],
       "maxFileSize" => 2097152,
       "uploadPath" => "resources/images/user/",
     ]);
-
     $result = $uploader->upload($_FILES["avatar"]);
-
     if ($result) {
       $request->setParam("avatar", $result);
     } else {
@@ -72,7 +65,6 @@ class ProfileController extends Controller
     $user->image = $request->getParam("avatar");
     $user->name = $request->getParam("name");
     $user->address = $request->getParam("address");
-    // Validate email
     $user->phone = $request->getParam("phone");
     if ($request->getParam("gender") == "male") {
       $user->gender = 1;
@@ -81,8 +73,6 @@ class ProfileController extends Controller
     } else {
       $user->gender = 0;
     }
-
-
     try {
       $user->email = Validation::validateEmail($request->getParam('email'));
       $password = Validation::validatePassword($request->getparam('current-password'));
@@ -91,7 +81,7 @@ class ProfileController extends Controller
         return $response->redirect(BASE_URI . "/profile", 200, [
           "toast" => [
             "type" => "error",
-            "message" => "Invalid current password",
+            "message" => "Current password is wrong",
           ],
         ]);
       }
@@ -104,24 +94,24 @@ class ProfileController extends Controller
       ]);
     }
 
-    if ($request->getparam('new-password') != null) {
-      try {
-        $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
-      } catch (Exception $e) {
-        return $response->redirect(BASE_URI . "/profile", 200, [
-          "toast" => [
-            "type" => "error",
-            "message" => $e->getMessage(),
-          ],
-        ]);
-      }
-    }
+    // if ($request->getparam('new-password') != null) {
+    //   try {
+    //     $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
+    //   } catch (Exception $e) {
+    //     return $response->redirect(BASE_URI . "/profile", 200, [
+    //       "toast" => [
+    //         "type" => "error",
+    //         "message" => $e->getMessage(),
+    //       ],
+    //     ]);
+    //   }
+    // }
 
     $user->save();
     $response->redirect(BASE_URI . "/profile", 200, [
       "toast" => [
         "type" => "success",
-        "message" => "Update successfully",
+        "message" => "Update profile successfully",
       ],
     ]);
   }
@@ -143,6 +133,68 @@ class ProfileController extends Controller
         "footer" => "",
       ])
     );
+  }
+
+  public function changePassword(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+
+    if (!$auth->isAuthenticated()) {
+      $response->redirect(BASE_URI . "/login");
+    }
+    $user = Application::getInstance()
+      ->getAuthentication()
+      ->getUser();
+
+    try {
+      $password = Validation::validatePassword($request->getparam('current-password'));
+      if (!password_verify($password, $user->password)) {
+        $response->setStatusCode(200);
+        return $response->redirect(BASE_URI . "/profile", 200, [
+          "toast" => [
+            "type" => "error",
+            "message" => "Current password is wrong",
+          ],
+        ]);
+      } else {
+        $newPassword = Validation::validatePassword($request->getparam('new-password'));
+        $confirmPassword = Validation::validatePassword($request->getparam('confirm-new-password'));
+        if ($newPassword!= $confirmPassword) {
+          $response->setStatusCode(200);
+          return $response->redirect(BASE_URI. "/profile", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "New password and confirm password do not match",
+            ],
+          ]);
+        }
+        $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
+        $user->save();
+        $response->setStatusCode(200);
+        return $response->redirect(BASE_URI . "/profile", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Update password successfully",
+          ],
+        ]);
+      }
+    } catch (\Exception $e) {
+      return $response->redirect(BASE_URI . "/profile", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => $e->getMessage(),
+        ],
+      ]);
+    }
+    $password = $request->getParam("password");
+    $user->password = password_hash($password, PASSWORD_DEFAULT);
+    $user->save();
+    $response->redirect(BASE_URI . "/profile", 200, [
+      "toast" => [
+        "type" => "success",
+        "message" => "Update successfully",
+      ],
+    ]);
   }
   public function orders(Request $request, Response $response)
   {

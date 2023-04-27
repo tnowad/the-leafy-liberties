@@ -13,17 +13,17 @@
   </div>
   <div class="box-border flex flex-col items-start justify-center px-6">
     <a href="<?php echo BASE_URI .
-                "/profile"; ?>" class="w-40 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
+                "/profile"; ?>" class="w-44 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
       <i class="flex items-center fa fa-home mr-2"></i>
-      <h3 class="text-xl cursor-pointer">Overview</h3>
+      <h3 class="text-xl cursor-pointer">Profile settings</h3>
     </a>
     <a href="<?php echo BASE_URI .
-                "/profile/settings"; ?>" class="w-40 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
+                "/profile/settings"; ?>" class="w-44 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
       <i class="flex items-center fa fa-user mr-2"></i>
       <h3 class="cursor-pointer">Account settings</h3>
     </a>
     <a href="<?php echo BASE_URI .
-                "/profile/orders"; ?>" class="w-40 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
+                "/profile/orders"; ?>" class="w-44 flex mt-5 p-2 hover:bg-primary-600 hover:text-white rounded-lg transition-all">
       <i class="flex items-center fa fa-bag-shopping mr-2"></i>
       <h3 class="cursor-pointer">My Order</h3>
     </a>

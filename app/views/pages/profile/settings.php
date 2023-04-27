@@ -1,44 +1,26 @@
-<?php $user = $params["user"]; ?>
 <div class="flex justify-center w-full bg-white">
   <div class="container">
     <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row">
       <?php include "menu.php"; ?>
       <div class="w-full p-2 md:w-3/4">
         <form class="flex flex-col" action="<?php echo BASE_URI .
-          "/profile"; ?>" method="post">
-          <label>Name</label>
-          <input name="name" value="<?php echo $user->name; ?>" type="text" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
-          <label>Email</label>
-          <input name="email" value=" <?php echo $user->email; ?>" type="email" required class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" />
-          <label>Phone number</label>
-          <input name="phone" value="<?php echo $user->phone; ?>" type="tel" class="w-full p-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm" pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
-          <label>Gender</label>
-          <div class="relative inline-block">
-            <select name="gender" id="gender" class="block w-full px-4 py-2 pr-8 leading-tight duration-300 bg-white border border-gray-400 rounded shadow appearance-none hover:shadow-sm focus:outline-none focus:shadow-outline">
-              <option value="male" <?php if ($user->gender == "1") {
-                echo "selected";
-              } ?>>Male</option>
-              <option value="female" <?php if ($user->gender == "2") {
-                echo "selected";
-              } ?>>Female</option>
-              <option value="other" <?php if ($user->gender == "0") {
-                echo "selected";
-              } ?>>Other</option>
-            </select>
-          </div>
-
-          <label>Birthday</label>
-          <div class="flex justify-between w-full h-8 md:h-10 md:w-2/4">
-            <input name="birthday" type="date" value="<?php echo $user->birthday; ?>" />
-          </div>
+                                              "/profile/settings/change_password"; ?>" method="post">
           <label>Password change</label>
-          <div class="flex flex-col p-2 border border-gray-300 border-solid rounded">
+          <div class="relative flex flex-col py-4 px-2 gap-1 border border-gray-300 border-solid rounded">
             <label for="password">
-              Current password (leave blank to leave unchanged)
+              Current password
             </label>
-            <input name="password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
-            <label for="new-password">Confirm new password</label>
-            <input name="new-password" type="text" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
+            <input id="current-password" name="current-password" type="password" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
+            <i id="hide-icon" class="fa fa-eye-slash absolute top-[23%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <i id="show-icon" class="fa fa-eye absolute hidden top-[23%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <label for="new-password">New password</label>
+            <input id="new-password" name="new-password" type="password" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
+            <i id="hide-icon-new" class="fa fa-eye-slash absolute top-[53%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <i id="show-icon-new" class="fa fa-eye absolute hidden top-[53%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <label for="confirm-new-password">Confirm new password</label>
+            <input id="confirm-new-password" name="confirm-new-password" type="password" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
+            <i id="hide-icon-confirm-new" class="fa fa-eye-slash absolute top-[82%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <i id="show-icon-confirm-new" class="fa fa-eye absolute hidden top-[82%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
           <input type="submit" value="Save changes" class="w-3/6 p-2 mt-5 text-white transition-all bg-teal-800 border cursor-pointer sm:w-1/6 rounded-2xl" />
         </form>
@@ -46,3 +28,62 @@
     </div>
   </div>
 </div>
+
+<script>
+  const passwordInput = document.getElementById("current-password");
+  const hideIcon = document.getElementById("hide-icon");
+  const showIcon = document.getElementById("show-icon");
+
+  hideIcon.addEventListener("click", function() {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      hideIcon.style.display = "none";
+      showIcon.style.display = "block";
+    }
+  });
+  showIcon.addEventListener("click", function() {
+    if (passwordInput.type === "text") {
+      passwordInput.type = "password";
+      hideIcon.style.display = "block";
+      showIcon.style.display = "none";
+    }
+  });
+
+  const newPasswordInput = document.getElementById("new-password");
+  const hideIconNewPassword = document.getElementById("hide-icon-new");
+  const showIconNewPassword = document.getElementById("show-icon-new");
+
+  hideIconNewPassword.addEventListener("click", function() {
+    if (newPasswordInput.type === "password") {
+      newPasswordInput.type = "text";
+      hideIconNewPassword.style.display = "none";
+      showIconNewPassword.style.display = "block";
+    }
+  });
+  showIconNewPassword.addEventListener("click", function() {
+    if (newPasswordInput.type === "text") {
+      newPasswordInput.type = "password";
+      hideIconNewPassword.style.display = "block";
+      showIconNewPassword.style.display = "none";
+    }
+  });
+
+  const newConfirmPasswordInput = document.getElementById("confirm-new-password");
+  const hideConfirmIconNewPassword = document.getElementById("hide-icon-confirm-new");
+  const showConfirmIconNewPassword = document.getElementById("show-icon-confirm-new");
+
+  hideConfirmIconNewPassword.addEventListener("click", function() {
+    if (newConfirmPasswordInput.type === "password") {
+      newConfirmPasswordInput.type = "text";
+      hideConfirmIconNewPassword.style.display = "none";
+      showConfirmIconNewPassword.style.display = "block";
+    }
+  });
+  showConfirmIconNewPassword.addEventListener("click", function() {
+    if (newConfirmPasswordInput.type === "text") {
+      newConfirmPasswordInput.type = "password";
+      hideConfirmIconNewPassword.style.display = "block";
+      showConfirmIconNewPassword.style.display = "none";
+    }
+  });
+</script>
