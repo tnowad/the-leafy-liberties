@@ -10,15 +10,15 @@
             <label for="password">
               Current password
             </label>
-            <input id="current-password" name="current-password" type="password" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
+            <input id="current-password" name="current-password" type="password" required class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
             <i id="hide-icon" class="fa fa-eye-slash absolute top-[23%] right-4 cursor-pointer" aria-hidden="true"></i>
             <i id="show-icon" class="fa fa-eye absolute hidden top-[23%] right-4 cursor-pointer" aria-hidden="true"></i>
             <label for="new-password">New password</label>
-            <input id="new-password" name="new-password" type="password" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
+            <input id="new-password" name="new-password" type="password" required class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" />
             <i id="hide-icon-new" class="fa fa-eye-slash absolute top-[53%] right-4 cursor-pointer" aria-hidden="true"></i>
             <i id="show-icon-new" class="fa fa-eye absolute hidden top-[53%] right-4 cursor-pointer" aria-hidden="true"></i>
             <label for="confirm-new-password">Confirm new password</label>
-            <input id="confirm-new-password" name="confirm-new-password" type="password" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
+            <input id="confirm-new-password" name="confirm-new-password" type="password" required class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
             <i id="hide-icon-confirm-new" class="fa fa-eye-slash absolute top-[82%] right-4 cursor-pointer" aria-hidden="true"></i>
             <i id="show-icon-confirm-new" class="fa fa-eye absolute hidden top-[82%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>

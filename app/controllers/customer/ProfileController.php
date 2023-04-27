@@ -94,19 +94,6 @@ class ProfileController extends Controller
       ]);
     }
 
-    // if ($request->getparam('new-password') != null) {
-    //   try {
-    //     $user->password = password_hash(Validation::validatePassword($request->getparam('new-password')), PASSWORD_DEFAULT);
-    //   } catch (Exception $e) {
-    //     return $response->redirect(BASE_URI . "/profile", 200, [
-    //       "toast" => [
-    //         "type" => "error",
-    //         "message" => $e->getMessage(),
-    //       ],
-    //     ]);
-    //   }
-    // }
-
     $user->save();
     $response->redirect(BASE_URI . "/profile", 200, [
       "toast" => [
@@ -159,9 +146,9 @@ class ProfileController extends Controller
       } else {
         $newPassword = Validation::validatePassword($request->getparam('new-password'));
         $confirmPassword = Validation::validatePassword($request->getparam('confirm-new-password'));
-        if ($newPassword!= $confirmPassword) {
+        if ($newPassword != $confirmPassword) {
           $response->setStatusCode(200);
-          return $response->redirect(BASE_URI. "/profile", 200, [
+          return $response->redirect(BASE_URI . "/profile", 200, [
             "toast" => [
               "type" => "error",
               "message" => "New password and confirm password do not match",
