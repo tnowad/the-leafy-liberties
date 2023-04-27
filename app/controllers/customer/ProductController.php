@@ -151,6 +151,12 @@ class ProductController extends Controller
       ->getAuthentication()
       ->getUser();
     $product = Product::find($request->getQuery("id"));
+    if (!$user)  return $response->redirect(BASE_URI . "/login", 200, [
+      "toast" => [
+        "type" => "error",
+        "message" => "You are not logged in",
+      ],
+    ]);
     date_default_timezone_set('Asia/Ho_Chi_Minh');
 
     $newComment = new Review();
