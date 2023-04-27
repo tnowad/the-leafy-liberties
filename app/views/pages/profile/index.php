@@ -30,20 +30,13 @@
                                     } ?>>Other</option>
             </select>
           </div>
-
-          <!-- <label>Birthday</label> -->
-          <!-- <div class="flex justify-between items-center w-full h-8 border rounded-md px-2 py-5 border-gray-300 shadow"> -->
-          <!-- <input name="birthday" type="date" value="<?php echo $user->deleted_at; ?>" /> -->
-          <!-- <input name="birthday" type="date" value="<?php echo date('Y-m-d', strtotime($user->birthday)); ?>" /> -->
-          <!-- </div> -->
-          <label>Password change</label>
+          <label for="password">
+            Confirm password
+          </label>
           <div class="relative flex flex-col py-4 px-2 gap-1 border border-gray-300 border-solid rounded">
-            <label for="password">
-              Confirm password
-            </label>
             <input name="current-password" type="password" class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" id="current-password" />
-            <i id="hide-icon" class="fa fa-eye-slash absolute top-[56%] right-4 cursor-pointer" aria-hidden="true"></i>
-            <i id="show-icon" class="fa fa-eye absolute hidden top-[56%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <i id="hide-icon" class="fa fa-eye-slash absolute top-[40%] right-4 cursor-pointer" aria-hidden="true"></i>
+            <i id="show-icon" class="fa fa-eye absolute hidden top-[40%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
           <input type="submit" value="Save changes" class="w-3/6 p-2 mt-5 text-white  bg-primary-800 hover:bg-teal-700 border cursor-pointer sm:w-1/6 rounded-lg transition-all" />
         </form>
