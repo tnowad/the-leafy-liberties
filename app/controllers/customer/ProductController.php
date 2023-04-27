@@ -189,11 +189,7 @@ class ProductController extends Controller
 
   public function commentStatus(Request $request, Response $response)
   {
-    $user = Application::getInstance()
-      ->getAuthentication()
-      ->getUser();
     $product = Product::find($request->getQuery("id"));
-
     $reviewStatus = ReviewStatus::find($product->id);
     $reviewStatus->status == 0 ? $reviewStatus->status = 1 : $reviewStatus->status = 0;
     $reviewStatus->save();
