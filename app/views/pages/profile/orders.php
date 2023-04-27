@@ -4,7 +4,6 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 
-$orders = $params['orders'];
 ?>
 
 <div class="flex justify-center w-full bg-white">
@@ -14,7 +13,7 @@ $orders = $params['orders'];
       <!-- content -->
       <div class="my-5 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl w-[70%] mx-4">
         <div class="relative w-full">
-          <?php if (count(Order::all()) == 0) : ?>
+          <?php if (count($orders) == 0) : ?>
             <div class="flex flex-col justify-center items-center h-[70vh]">
               <i class="fa-solid fa-cart-circle-plus text-5xl text-gray-400 mb-4"></i>
               <h1 class="text-5xl font-medium tracking-widest uppercase text-gray-400">Don't have any orders yet</h1>
