@@ -95,14 +95,11 @@
                                         <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
                                             <div class="button flex justify-center items-center gap-4">
                                                 <a href="<?php echo BASE_URI .
-                                                                "/dashboard/product/update" .
+                                                                "/product" .
                                                                 "?id=" .
                                                                 $product->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <!-- <button onclick="removeReview(<?php echo $review->id ?>)" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button> -->
                                                 <a href="<?php echo BASE_URI .
                                                                 "/dashboard/review/review_detail/delete" .
                                                                 "?id=" .

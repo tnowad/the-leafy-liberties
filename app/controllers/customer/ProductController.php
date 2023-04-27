@@ -170,13 +170,13 @@ class ProductController extends Controller
     $user = Application::getInstance()
       ->getAuthentication()
       ->getUser();
-    $product = Product::find($request->getQuery("id"));
-    $reviews = Review::findAll(['product_id' => $product->id]);
-    foreach ($reviews as $review) {
-      if ($review->user_id == $user->id) {
-        $review = $review;
-      }
-    }
+      $review = Review::find($request->getQuery("id"));
+      $product = Product::find($review->product_id);
+    // foreach ($reviews as $review) {
+    //   if ($review->user_id == $user->id) {
+    //     $review = $review;
+    //   }
+    // }
     $review->content = $request->getParam("update-comment");
     if ($request->getParam("update-rating")) {
       $review->rating = $request->getParam("rating");
