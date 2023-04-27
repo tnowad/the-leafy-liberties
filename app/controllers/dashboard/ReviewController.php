@@ -14,20 +14,20 @@ class ReviewController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    $filter = [
-      "keywords" => $request->getQuery("keywords"),
-    ];
-    if (isset($filter)) {
-      $reviews = Review::filterAdvanced($filter);
-    } else {
-      $reviews = Review::all();
+    // $filter = [
+    //   "keywords" => $request->getQuery("keywords"),
+    // ];
+    // if (isset($filter)) {
+    //   $reviews = Review::filterAdvanced($filter);
+    // } else {
+    //   $reviews = Review::all();
 
-    }
+    // }
+    $products = Product::all();
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/review/index"), [
         "title" => "Review",
-        "reviews" => $reviews,
-        "filter" => $filter
+        "products" => $products,
       ])
     );
   }
