@@ -167,7 +167,7 @@ class UserController extends Controller
           $user->phone = $request->getParam("phone");
           $user->email = $request->getParam("email");
           $user->gender = $request->getParam("gender");
-          $user->password = $request->getParam("passowrd");
+          $user->password = password_hash($request->getParam("password"),PASSWORD_DEFAULT);
           $user->role_id = $request->getParam("role");
           $user->save();
           return $response->redirect(BASE_URI . "/dashboard/user", 200, [

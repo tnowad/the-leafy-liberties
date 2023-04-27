@@ -108,17 +108,6 @@ foreach ($successfulOrder as $order) {
                 <div class="bg-<?php echo $colors[$category->id] ?>-600 h-2.5 rounded-full" style="width: <?php echo rand(10,100) ?>%"></div>
               </div>
             <?php endforeach ?>
-            <!-- <?php
-            $title = ["Blue", "Black", "Yellow", "White", "Red", "Green"];
-            for ($i = 1; $i <= 6; $i++) { ?>
-              <div class="text-lg font-medium ">
-                <?php echo $title[$i - 1]; ?>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
-              </div>
-            <?php }
-            ?> -->
           </div>
         </div>
       </div>
