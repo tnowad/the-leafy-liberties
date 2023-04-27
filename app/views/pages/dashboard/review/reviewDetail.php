@@ -4,27 +4,39 @@
             <div class="w-1/3">
                 <img src="<?php
 
-                            use App\Models\Product;
+                            use App\Models\Author;
                             use App\Models\User;
 
+                            $author = Author::find($product->id);
                             echo BASE_URI . $product->image; ?>" alt="Book Image" class="w-full object-cover rounded-lg shadow-lg">
             </div>
             <div class="w-2/3 px-4">
-                <h1 class="text-3xl font-bold mb-2">Book Title</h1>
-                <p class="text-lg text-gray-600 mb-4">Author: Book Author</p>
+                <h1 class="text-3xl font-bold mb-2"><?php echo $product->name ?></h1>
+                <p class="text-lg text-gray-600 mb-4">Author : <?php echo $author->name  ?></p>
                 <div class="flex items-center mb-2">
-                    <span class="text-lg text-gray-600 mr-2">Rating:</span>
-                    <div class="flex items-center">
-                        <span class="text-xl text-gray-600 mr-2">5</span>
-                        <span class="text-xl text-gray-600">5</span>
-                    </div>
-                    <span class="text-xl text-gray-600">5</span>
+                    <span class="text-lg text-gray-600 mr-2">Average rating :
+                    </span>
+                    <?php if (count($reviewsValid) > 0) : ?>
+                        <div>
+                            <span class="text-xl text-gray-600 mr-2">
+                                <?php
+                                $averageRating = 0;
+                                foreach ($reviewsValid as $review) {
+                                    $averageRating += $review->rating;
+                                }
+                                echo $averageRating
+                                ?>
+                            </span>
+                            <span><i class="fa fa-star text-primary"></i></span>
+                        </div>
+                    <?php else : ?>
+                        <p>There are no reviews yet</p>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="w-full mx-auto my-0">
     <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
