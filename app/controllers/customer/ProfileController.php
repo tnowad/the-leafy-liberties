@@ -224,7 +224,12 @@ class ProfileController extends Controller
           }
         }
         $order->delete();
-        return $response->redirect(BASE_URI . "/profile/orders");
+        return $response->redirect(BASE_URI . "/profile/orders", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Successfully removed from order ",
+          ],
+        ]);
     }
   }
 }

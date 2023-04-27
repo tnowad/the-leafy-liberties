@@ -159,15 +159,15 @@ class ProductController extends Controller
     $newComment->content = trim($request->getParam("new-comment"));
     $newComment->rating = trim($request->getParam("rating"));
     if (!$newComment->content) {
-      return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id, 200, [
-        "toast" => [
-          "type" => "success",
-          "message" => "Comment successfully",
-        ],
-      ]);
+      return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id);
     }
     $newComment->save();
-    return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
+    return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id, 200, [
+      "toast" => [
+        "type" => "success",
+        "message" => "Comment successfully",
+      ],
+    ]);
   }
 
   public function commentUpdate(Request $request, Response $response)
