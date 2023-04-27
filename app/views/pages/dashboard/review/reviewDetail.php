@@ -38,9 +38,6 @@
                     </button>
                 </form>
             </div>
-            <a class="w-5 h-5 text-2xl add-product" href="<?php echo BASE_URI . "/dashboard/product/create"; ?>">
-                +
-            </a>
         </div>
         <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
             <div class="relative">
@@ -100,13 +97,18 @@
                                                                 $product->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <a href="<?php echo BASE_URI .
-                                                                "/dashboard/review/review_detail/delete" .
-                                                                "?id=" .
-                                                                $review->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                                <!-- <a href="<?php echo BASE_URI .
+                                                                    "/dashboard/review/review_detail/delete" .
+                                                                    "?id=" .
+                                                                    $review->id; ?>" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
                                                     Delete
                                                     <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
+                                                </a> -->
+
+                                                <span onclick="removeReviewConfirm(<?php echo $review->id  ?>)" class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                                    Delete
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </span>
                                             </div>
                                         </td>
                                     </tr>
@@ -122,48 +124,54 @@
 </div>
 
 <script type="module">
-    // import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
-    // import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
-
-    // // const BASE_URI = '<?php echo BASE_URI; ?>';
-    // // console.log(BASE_URI)
-
-    // document.removeReview = (id) => {
-    //     FetchXHR.post('<?php echo BASE_URI . '//dashboard/review/review_detail/delete' ?>', {
-    //         id
-    //     }, {
-    //         'Content-Type': 'application/json'
-    //     }).then(response => {
-    //         const data = response.data;
-    //         new Toast({
-    //             message: data.message,
-    //             type: data.type
-    //         });
-    //     }).catch(error => {
-    //         console.error(error);
-    //     });
-    // };
-
+    import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
     import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
-    document.removeReview = (id) => {
-        const result = confirm("Delete this review?");
+
+    // document.removeReviewConfirm = (id) => {
+    //     const result = confirm("Delete this review?");
+    //     if (result) {
+    //         console.log(<?php echo BASE_URI ?>)
+    //         FetchXHR.post('<?php echo BASE_URI . "/dashboard/review/review_detail/delete" ?>', {
+    //                 id
+    //             }, {
+    //                 'Content-Type': 'application/json'
+    //             })
+    //             .then(response => {
+    //                 if (response.type === 'error') {
+    //                     alert(response.message);
+    //                 } else if (response.type === 'info') {
+    //                     alert(response.message);
+    //                 } else {
+    //                     alert('This product has been removed');
+    //                 }
+    //             }).catch(error => {
+    //                 alert('Something went wrong');
+    //             });
+    //     }
+    // }
+
+    document.removeReviewConfirm = (id) => {
+        const result = confirm("Delete this comment?");
         if (result) {
-            FetchXHR.post('<?php echo BASE_URI . "/dashboard/review/review_detail/delete" ?>', {
-                    id
-                }, {
-                    'Content-Type': 'application/json'
-                })
-                .then(response => {
-                    if (response.type === 'error') {
-                        alert(response.message);
-                    } else if (response.type === 'info') {
-                        alert(response.message);
-                    } else {
-                        alert('This product has been removed');
-                    }
-                }).catch(error => {
-                    alert('Something went wrong');
-                });
+
+            FetchXHR.post('<?php echo BASE_URI . "/dashboard/review/review_detail/delete"; ?>', {
+                id
+            }, {
+                'Content-Type': 'application/json'
+            }).then(response => {
+                if (response.type === 'error') {
+                    alert(response.message);
+                } else if (response.type === 'info') {
+                    alert(response.message);
+                } else {
+                    alert('Comment deleted from review');
+                }
+            }).catch(error => {
+                alert('Something went wrong');
+            });
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }
     }
 </script>
