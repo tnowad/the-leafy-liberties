@@ -13,6 +13,9 @@ class SlideController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $filter = [
+      "keywords" => $request->getQuery("keywords"),
+    ];
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("slide.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
@@ -22,10 +25,12 @@ class SlideController extends Controller
         ],
       ]);
     }
-    $slides = Slide::all();
+    if (isset($filter)) {
+      $slides = Slide::filterAdvanced($filter);
+    } else {
+      $slides = Slide::all();
 
-    // filter and pagination
-    $filter = [];
+    }
 
     $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/slide/index"), [

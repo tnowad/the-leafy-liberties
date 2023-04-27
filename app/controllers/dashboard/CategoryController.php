@@ -13,6 +13,9 @@ class CategoryController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $filter = [
+      "keywords" => $request->getQuery("keywords"),
+    ];
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("product.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
@@ -22,13 +25,19 @@ class CategoryController extends Controller
         ],
       ]);
     }
-    $categorys = Category::all();
+    if (isset($filter)) {
+      $categories = Category::filterAdvanced($filter);
+    } else {
+      $categories = Category::all();
+
+    }
     return $response->setBody(
       View::renderWithDashboardLayout(
         new View("pages/dashboard/category/index"),
         [
           "title" => "Categories",
-          "categorys" => $categorys,
+          "categorys" => $categories,
+          "filter" => $filter,
         ]
       )
     );

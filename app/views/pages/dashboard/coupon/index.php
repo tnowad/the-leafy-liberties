@@ -3,7 +3,7 @@
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Coupon</h1>
       <div class="box-border w-1/2 px-10">
-      <form action="<?php echo BASE_URI . '/dashboard/coupon' ?>" method="GET"
+        <form action="<?php echo BASE_URI . '/dashboard/coupon' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
@@ -60,7 +60,7 @@
                     <?php echo $coupon->description; ?>
                   </td>
                   <td class="px-5 py-3 w-44">
-                  <div class="button flex justify-center items-center gap-4">
+                    <div class="button flex justify-center items-center gap-4">
                       <a href="<?php echo BASE_URI .
                         "/dashboard/coupon/update" .
                         "?id=" .

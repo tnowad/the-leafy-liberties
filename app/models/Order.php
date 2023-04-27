@@ -52,4 +52,19 @@ class Order extends Model
       "cvv" => $this->cvv,
     ]);
   }
+  public static function filterAdvanced($filter)
+  {
+    $orders = Order::all();
+    // Filter by keywords
+    if (!empty($filter['keywords'])) {
+      $filteredProducts = [];
+      foreach ($orders as $order) {
+        if (strpos(strtolower($order->name), strtolower($filter['keywords'])) !== false) {
+          $filteredProducts[] = $order;
+        }
+      }
+      $orders = $filteredProducts;
+    }
+    return $orders;
+  }
 }

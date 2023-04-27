@@ -14,7 +14,9 @@ use Utils\FileUploader;
 class RoleController extends Controller
 {
   public function index(Request $request, Response $response)
-  {
+  {$filter = [
+    "keywords" => $request->getQuery("keywords"),
+  ];
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("role.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
@@ -24,13 +26,18 @@ class RoleController extends Controller
         ],
       ]);
     }
+    if (isset($filter)) {
+      $role = Role::filterAdvanced($filter);
+    } else {
+      $role = Role::all();
 
-    $role = Role::all();
+    }
 
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/role/index"), [
         "title" => "Roles",
         "roles" => $role,
+        "filter" => $filter
       ])
     );
   }

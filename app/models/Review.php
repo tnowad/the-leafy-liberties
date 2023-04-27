@@ -28,4 +28,19 @@ class Review extends Model
   {
     return Product::findOne(["id" => $this->product_id]);
   }
+  public static function filterAdvanced($filter)
+  {
+    $reviews = Review::all();
+    // Filter by keywords
+    if (!empty($filter['keywords'])) {
+      $filteredProducts = [];
+      foreach ($reviews as $review) {
+        if (strpos(strtolower($review->user_id), strtolower($filter['keywords'])) !== false) {
+          $filteredProducts[] = $review;
+        }
+      }
+      $reviews = $filteredProducts;
+    }
+    return $reviews;
+  }
 }

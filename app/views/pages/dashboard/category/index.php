@@ -10,11 +10,12 @@ use App\Models\Pagination;
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Category</h1>
       <div class="box-border w-1/2 px-10">
-        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input"
-          action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
-          <input type="text" name="searchQuery"
-            class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
-          <button class="flex items-center justify-center w-10 h-10">
+      <form action="<?php echo BASE_URI . '/dashboard/category' ?>" method="GET"
+          class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
+          <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
+            placeholder="Search.... "
+            value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
+          <button class="flex items-center justify-center w-10 h-10 bg-gray-100">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -45,13 +46,6 @@ use App\Models\Pagination;
           </thead>
           <tbody>
             <?php
-            if (isset($_POST["searchQuery"])) {
-              $text = $_POST["searchQuery"];
-              // dd($text);
-              $categories = Category::filterAdvanced($text);
-            } else {
-              $categories = Category::all();
-            }
             if (count($categories) > 0): ?>
               <?php foreach ($categories as $category): ?>
                 <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
@@ -92,23 +86,3 @@ use App\Models\Pagination;
     </div>
   </div>
 </div>
-<script>
-  let btn = document.querySelector(".add-category")
-  btn.addEventListener("click", () => {
-    document.querySelector(".add-form").classList.add("flex");
-    document.querySelector(".add-form").classList.remove("hidden");
-
-  })
-  let cancel = document.querySelector(".cancel-button")
-  cancel.addEventListener("click", (event) => {
-    event.preventDefault();
-    document.querySelector(".add-form").classList.add("hidden")
-  })
-  imgInp.onchange = evt => {
-    const [file] = imgInp.files
-    if (file) {
-      blah.src = URL.createObjectURL(file)
-    }
-  }
-
-</script>

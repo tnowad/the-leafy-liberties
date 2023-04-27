@@ -33,4 +33,19 @@ class Role extends Model
     ]);
     $rolePermission->delete();
   }
+  public static function filterAdvanced($filter)
+  {
+    $roles = Role::all();
+    // Filter by keywords
+    if (!empty($filter['keywords'])) {
+      $filteredProducts = [];
+      foreach ($roles as $role) {
+        if (strpos(strtolower($role->name), strtolower($filter['keywords'])) !== false) {
+          $filteredProducts[] = $role;
+        }
+      }
+      $roles = $filteredProducts;
+    }
+    return $roles;
+  }
 }

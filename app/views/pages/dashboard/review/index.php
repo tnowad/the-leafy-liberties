@@ -3,9 +3,12 @@
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Reviews</h1>
       <div class="box-border w-1/2 px-10">
-        <form class="input flex items-center justify-center w-full h-10 bg-white rounded-full" action="<?php BASE_URI . "/dashboard/review"; ?>" method="POST">
-          <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
-          <button class="flex items-center justify-center w-10 h-10">
+      <form action="<?php echo BASE_URI . '/dashboard/review' ?>" method="GET"
+          class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
+          <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
+            placeholder="Search.... "
+            value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
+          <button class="flex items-center justify-center w-10 h-10 bg-gray-100">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
