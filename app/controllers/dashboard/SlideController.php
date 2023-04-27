@@ -115,4 +115,29 @@ class SlideController extends Controller
         break;
     }
   }
+  public function delete(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission("coupon.delete")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
+    $slide = Slide::find($request->getBody()["id"]);
+    if (!$slide) {
+      $response->jsonResponse([
+        "type" => "success",
+        "message" => "Failed to remove slide removed from table",
+      ]);
+    }
+    // dd($slide);
+    $slide->delete();
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Slide has been removed from table",
+    ]);
+  }
 }

@@ -24,9 +24,9 @@ class CouponController extends Controller
         ],
       ]);
     }
-    if(isset($filter)){
+    if (isset($filter)) {
       $coupons = Coupon::filterAdvanced($filter);
-    }else{
+    } else {
       $coupons = Coupon::all();
 
     }
@@ -92,9 +92,9 @@ class CouponController extends Controller
         ],
       ]);
     }
-    $product = new Coupon();
+    $coupon = new Coupon();
     // get from request
-    $product->save();
+    $coupon->save();
     return $response->redirect(BASE_URI . "/dashboard/coupon/index");
   }
 
@@ -186,33 +186,18 @@ class CouponController extends Controller
         ],
       ]);
     }
-    $coupon = Coupon::find($request->getQuery("id"));
+    $coupon = Coupon::find($request->getBody()["id"]);
     if (!$coupon) {
-      return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
-        "toast" => [
-          "type" => "error",
-          "message" => "Delete coupon failed",
-        ],
+      $response->jsonResponse([
+        "type" => "success",
+        "message" => "Failed to remove coupon removed from table",
       ]);
     }
-
-    switch ($request->getMethod()) {
-      case "GET":
-        $response->setStatusCode(200);
-        $coupon->delete();
-        return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
-          "toast" => [
-            'type' => 'success',
-            'message' => 'Delete coupon Successfully'
-          ]
-        ]);
-      case "POST":
-        return $response->redirect(BASE_URI . "/dashboard/coupon", 200, [
-          "toast" => [
-            'type' => 'success',
-            'message' => 'Delete coupon Successfully'
-          ]
-        ]);
-    }
+    // dd($coupon);
+    $coupon->delete();
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Coupon removed from table",
+    ]);
   }
 }

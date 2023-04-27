@@ -6,9 +6,11 @@ use App\Models\Permission;
 use App\Models\Role;
 use Core\Database;
 use Core\Model;
+use Core\Traits\SoftDeletes;
 
 class User extends Model
 {
+  use SoftDeletes;
   protected $table = "users";
 
   protected $fillable = [
@@ -22,6 +24,7 @@ class User extends Model
     "status",
     "address",
     "birthday",
+    "deleted_at"
   ];
 
   public function setPassword($password)
