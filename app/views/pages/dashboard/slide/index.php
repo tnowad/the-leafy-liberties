@@ -49,7 +49,7 @@
                   ?>
                   <!-- <input type="checkbox" name="status" id="" class="w-6 h-6" <?php echo ($slide->status == 1) ? 'checked' : '' ?> > -->
                 </td>
-                <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
+                <td class="px-5 py-3">
                   <div class="button flex justify-center items-center gap-4">
                     <a href="<?php echo BASE_URI .
                       "/dashboard/slide/update" .

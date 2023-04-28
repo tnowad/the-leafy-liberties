@@ -8,6 +8,7 @@ use Core\Request;
 use Core\Response;
 use Core\View;
 use Utils\FileUploader;
+use Utils\Validation;
 
 class UserController extends Controller
 {
@@ -185,12 +186,12 @@ class UserController extends Controller
           );
         } else {
           // dd($product);
-          $user->name = $request->getParam("name");
+          $user->name = Validation::validateName($request->getParam("name"));
           $user->image = $request->getParam("image");
-          $user->phone = $request->getParam("phone");
-          $user->email = $request->getParam("email");
+          $user->phone = Validation::validatePhone($request->getParam("phone"));
+          $user->email = Validation::validateEmail($request->getParam("email"));
           $user->gender = $request->getParam("gender");
-          $user->password = password_hash($request->getParam("password"), PASSWORD_DEFAULT);
+          $user->password = password_hash(Validation::validatePassword($request->getParam("password")), PASSWORD_DEFAULT);
           $user->role_id = $request->getParam("role");
           $user->save();
           return $response->redirect(BASE_URI . "/dashboard/user", 200, [

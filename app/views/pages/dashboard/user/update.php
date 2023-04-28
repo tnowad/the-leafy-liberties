@@ -29,10 +29,10 @@ use App\Models\Role;
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" required />
       <label for="role" class="my-2">Select role:</label>
       <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg">
-        <option value="">
+        <?php $roless = Role::find($user->role_id); ?>
+        <option value="<?php echo $roless->id ?>">
           <?php
-          $role = Role::find($user->role_id);
-          echo ucfirst($role->name);
+          echo ucfirst($roless->name);
           ?>
         </option>
         <?php foreach (Role::all() as $role): ?>

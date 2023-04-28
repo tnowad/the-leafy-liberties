@@ -19,7 +19,7 @@ use App\Models\Slide;?>
       </div>
       <label for="role" class="my-2">Select status:</label>
       <select value="" name="status" class="bg-gray-100 p-3 focus:outline-none rounded-lg">
-        <option value="">
+        <option value="<?php $slide->status ?>">
           <?php
           echo ($slide->status == 1) ? 'Active' : 'Banned';
           ?>
