@@ -5,9 +5,11 @@ use App\Models\OrderProduct;
 use App\Models\ShippingMethod;
 use App\Models\User;
 use Core\Model;
+use Core\Traits\SoftDeletes;
 
 class Order extends Model
 {
+  use SoftDeletes;
   protected $table = "orders";
   protected $fillable = [
     'user_id',
@@ -37,7 +39,6 @@ class Order extends Model
   {
     return OrderProduct::findAll(["order_id" => $this->id]);
   }
-
   public function shippingMethod()
   {
     return ShippingMethod::find($this->shipping_method_id);

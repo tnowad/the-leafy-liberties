@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gray-100">
+<div class="min-h-screen bg-white">
   <div class="p-6 bg-white md:mx-auto">
     <svg viewBox="0 0 24 24" class="w-16 h-16 mx-auto my-6 text-primary-600">
       <path fill="currentColor"

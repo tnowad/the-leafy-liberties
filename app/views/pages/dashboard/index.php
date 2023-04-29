@@ -4,9 +4,8 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\User;
 
-$successfulOrder = Order::findAll(["status" => "1"]);
+$successfulOrder = Order::findAll(["status" => "5"]);
 $pendingOrders = Order::findAll(["status" => "0"]);
-
 // $product_id = OrderProduct::findOne([]);
 $sum = 0;
 $products_sale = 0;
@@ -15,6 +14,11 @@ $orders = count(Order::all());
 foreach ($successfulOrder as $order) {
   $sum += $order->total_price;
   $products_sale += count($order->products());
+  $detail_order = OrderProduct::findAll(["order_id" => $order->id]);
+  foreach($detail_order as $item){
+    dd($item->product()->categories());
+    // echo count($item->product()->categories());
+  }
 }
 ?>
 
@@ -98,14 +102,14 @@ foreach ($successfulOrder as $order) {
           <p class="mb-5 text-2xl font-bold">Most Sold By Category</p>
           <div class="flex flex-col gap-4">
             <?php
-            $colors = ["red","blue","green","yellow","pink","orange","purple"];
-
+            $colors = ["red", "blue", "green", "yellow", "pink", "orange", "purple"];
             foreach (array_slice(Category::all(), 0, 6) as $category): ?>
               <div class="text-lg font-medium ">
                 <?php echo $category->name ?>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                <div class="bg-<?php echo $colors[$category->id] ?>-600 h-2.5 rounded-full" style="width: <?php echo rand(10,100) ?>%"></div>
+                <div class="bg-<?php echo $colors[$category->id] ?>-600 h-2.5 rounded-full"
+                  style="width: <?php echo rand(10, 100) ?>%"></div>
               </div>
             <?php endforeach ?>
           </div>

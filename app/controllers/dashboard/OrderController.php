@@ -61,7 +61,7 @@ class OrderController extends Controller
           return $response->redirect(BASE_URI . "/dashboard/order", 200, [
             "toast" => [
               "type" => "error",
-              "message" => "Edit product fail",
+              "message" => "Edit order fail",
             ],
           ]);
         } else {
