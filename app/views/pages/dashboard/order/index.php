@@ -16,7 +16,7 @@ use App\Models\Pagination;
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-          <button class="flex items-center justify-center w-10 h-10 bg-gray-100">
+            <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -69,7 +69,7 @@ use App\Models\Pagination;
                     <?php if ($order->status == 0) : ?>
                       <p class="font-medium text-yellow-400">Pending</p>
                     <?php elseif ($order->status == 1) : ?>
-                      <p class="font-medium text-green-800">Accept</p>
+                      <p class="font-medium text-primary-800">Accept</p>
                     <?php elseif ($order->status == 2) : ?>
                       <p class="font-medium text-red-800">Reject</p>
                     <?php elseif ($order->status == 3) : ?>
@@ -77,7 +77,7 @@ use App\Models\Pagination;
                     <?php elseif ($order->status == 4) : ?>
                       <p class="font-medium text-blue-400">Shipping</p>
                     <?php else : ?>
-                      <p class="font-medium text-green-400">Successfull</p>
+                      <p class="font-medium text-primary-400">Successfull</p>
                     <?php endif; ?>
                   </td>
                   <td class="px-5 py-3">

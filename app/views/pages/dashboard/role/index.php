@@ -11,7 +11,7 @@ $roles = $params["roles"]; ?>
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-          <button class="flex items-center justify-center w-10 h-10 bg-gray-100">
+          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -22,7 +22,7 @@ $roles = $params["roles"]; ?>
     </div>
     <div class="my-8 cursor-pointer role-statistics rounded-2xl bg-transparent flex flex-col gap-5">
       <?php foreach ($roles as $role): ?>
-        <div class="relative bg-white rounded-2xl shadow-lg">
+        <div class="relative bg-white rounded-md shadow-lg">
           <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
             <a class="text-lg font-semibold" href="<?php echo BASE_URI .
               "/dashboard/role/show?id=" .

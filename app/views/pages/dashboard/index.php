@@ -16,7 +16,7 @@ foreach ($successfulOrder as $order) {
   $products_sale += count($order->products());
   $detail_order = OrderProduct::findAll(["order_id" => $order->id]);
   foreach($detail_order as $item){
-    dd($item->product()->categories());
+    // dd($item->product()->categories());
     // echo count($item->product()->categories());
   }
 }
@@ -38,7 +38,7 @@ foreach ($successfulOrder as $order) {
           "We have sold " . $products_sale . " items",
           "Wait for accept",
           "More customer more money",
-          "New things coming' up",
+          "New things comin' up",
         ];
         $icon = [
           "fa-solid fa-arrow-trend-up",
@@ -151,12 +151,12 @@ foreach ($successfulOrder as $order) {
                   <td class="px-5 py-3">
                     <?php echo $order->create_at ?>
                   </td>
-                  <td class="px-5 py-3 font-medium <?php echo ($order->status == 0) ? 'text-red-900' : 'text-primary' ?>">
+                  <td class="px-5 py-3 font-medium <?php echo ($order->status == 0) ? 'text-red-900' : 'text-primary-400' ?>">
                     <?php
                     if ($order->status == 0) {
                       echo "Pending";
                     } else {
-                      echo "Delivered";
+                      echo "Successful";
                     }
                     ?>
                   </td>

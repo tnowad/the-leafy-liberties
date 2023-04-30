@@ -37,32 +37,32 @@
                             </li> -->
                             <li>
                                 <?php if ($order->status == 1) : ?>
-                                    <span class="accept-button py-2 px-3 bg-green-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="cursor-pointer accept-button py-2 px-3 bg-primary-400 text-white rounded-md hover:text-blue-300 transition-all">
                                         Accepted
                                         <i class="fas fa-check-circle"></i>
                                     </span>
                                 <?php elseif ($order->status == 2) : ?>
-                                    <span class="reject-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="cursor-pointer reject-button py-2 px-3 bg-red-400 text-white rounded-md hover:text-blue-300 transition-all">
                                         Rejected
                                         <i class="fas fa-times-circle"></i>
                                     </span>
                                 <?php elseif ($order->status == 0) : ?>
-                                    <span class="pending-button py-2 px-3 bg-yellow-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="cursor-pointer pending-button py-2 px-3 bg-yellow-400 text-white rounded-md hover:text-blue-300 transition-all">
                                         Pending
                                         <i class="fas fa-clock"></i>
                                     </span>
                                 <?php elseif ($order->status == 3) : ?>
-                                    <span class="cancel-button py-2 px-3 bg-gray-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="cursor-pointer cancel-button py-2 px-3 bg-gray-400 text-white rounded-md hover:text-blue-300 transition-all">
                                         Cancelled
                                         <i class="fas fa-ban"></i>
                                     </span>
                                 <?php elseif ($order->status == 4) : ?>
-                                    <span class="shipping-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="cursor-pointer shipping-button py-2 px-3 bg-blue-400 text-white rounded-md hover:text-blue-300 transition-all">
                                         Shipping
                                         <i class="fas fa-truck"></i>
                                     </span>
                                 <?php elseif ($order->status == 5) : ?>
-                                    <span class="success-button py-2 px-3 bg-green-600 text-white rounded-xl hover:text-blue-500 transition-all">
+                                    <span class="cursor-pointer success-button py-2 px-3 bg-primary-600 text-white rounded-md hover:text-blue-300 transition-all">
                                         Successful
                                         <i class="fas fa-check-circle"></i>
                                     </span>
@@ -146,7 +146,6 @@
                             <button type="submit" class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded">Submit</button>
                         </form>
                     <?php
-
                     } ?>
                 </div>
             </div>

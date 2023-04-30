@@ -15,7 +15,7 @@ use App\Models\Pagination;
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-          <button class="flex items-center justify-center w-10 h-10 bg-gray-100">
+            <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>

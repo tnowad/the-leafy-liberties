@@ -35,7 +35,7 @@ class Review extends Model
     if (!empty($filter['keywords'])) {
       $filteredProducts = [];
       foreach ($reviews as $review) {
-        if (strpos(strtolower($review->user_id), strtolower($filter['keywords'])) !== false) {
+        if (strpos(strtolower($review->content), strtolower($filter['keywords'])) !== false) {
           $filteredProducts[] = $review;
         }
       }

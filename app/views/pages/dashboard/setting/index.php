@@ -5,7 +5,7 @@
       <div class="box-border w-1/2 px-10">
         <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input" action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
           <input type="text" name="searchQuery" class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />
-          <button class="flex items-center justify-center w-10 h-10">
+          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
