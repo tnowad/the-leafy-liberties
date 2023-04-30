@@ -15,10 +15,6 @@ foreach ($successfulOrder as $order) {
   $sum += $order->total_price;
   $products_sale += count($order->products());
   $detail_order = OrderProduct::findAll(["order_id" => $order->id]);
-  foreach($detail_order as $item){
-    // dd($item->product()->categories());
-    // echo count($item->product()->categories());
-  }
 }
 ?>
 
@@ -117,7 +113,7 @@ foreach ($successfulOrder as $order) {
       </div>
       <div class="my-8 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl">
         <div class="relative">
-          <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl">
+          <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl table-auto">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <?php

@@ -19,7 +19,7 @@
     </div>
     <div class="table-customer-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
       <div class="relative">
-        <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
+        <table class="min-w-full text-sm text-center text-gray-500 rounded-2xl table-auto">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <?php
@@ -30,7 +30,6 @@
                 "Image",
                 "Email",
                 "Name",
-                "Phone",
                 "Role",
                 "Status",
                 "Action",
@@ -59,9 +58,6 @@
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $user->name; ?>
-                  </td>
-                  <td class="px-5 py-3">
-                    <?php echo $user->phone; ?>
                   </td>
                   <td class="px-5 py-3">
                     <?php

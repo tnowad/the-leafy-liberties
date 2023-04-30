@@ -53,8 +53,7 @@ class ProductController extends Controller
         "title" => "Shop",
         "products" => $products,
         "filter" => $filter,
-        "pagination" => $pagination,
-        "footer" => ""
+        "pagination" => $pagination
       ])
     );
   }

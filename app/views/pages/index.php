@@ -10,6 +10,10 @@ use App\Models\Cart;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
+if ($user != null) {
+  $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+}
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
@@ -83,9 +87,23 @@ $user = $auth->getUser();
             <div class="p-0 font-semibold product-price text-primary-900">
               <?php echo $product->price; ?>$
             </div>
+            <?php
+            if ($user != null) {
+              $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+              $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+            }
+            ?>
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-              <p class="font-semibold select-option-text hover:color-red-400">Add to wishlist</p>
+              <p class="font-semibold select-option-text hover:color-red-400 uppercase border-0 hover:border-b border-black transition-all cursor-pointer"
+                onclick="addToCart(`<?php echo $product->id; ?>`)">
+                <?php
+                if (isset($cartCheck))
+                  echo "Added to cart";
+                else
+                  echo "Add to cart";
+                ?>
+              </p>
               <i class="<?php echo ($flagwl) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                 onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>
@@ -125,9 +143,23 @@ $user = $auth->getUser();
               <div class="p-0 font-semibold product-price text-primary-900">
                 <?php echo $product->price; ?>$
               </div>
+              <?php
+              if ($user != null) {
+                $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+                $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+              }
+              ?>
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                <p class="font-semibold select-option-text hover:color-red-400 ">Add to wishlist</p>
+                <p class="font-semibold select-option-text hover:color-red-400 uppercase border-0 hover:border-b border-black transition-all cursor-pointer"
+                  onclick="addToCart(`<?php echo $product->id; ?>`)">
+                  <?php
+                  if (isset($cartCheck))
+                    echo "Added to cart";
+                  else
+                    echo "Add to cart";
+                  ?>
+                </p>
                 <i class="wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                   onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
               </div>
@@ -154,25 +186,28 @@ $user = $auth->getUser();
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Category Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
-      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" href="/products">
+      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" h
+        href="<?php echo BASE_URI . "/products"; ?>">
         View All
       </a>
     </div>
     <div class="relative w-full mb-5">
       <div class="flex category_slide">
         <?php foreach (Category::all() as $category): ?>
-          <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit" href="<?php echo BASE_URI .
-            "/products?categories[]=" .
-            $category->id; ?>">
-            <div class="w-full h-56 overflow-hidden shadow-lg img rounded-3xl">
-              <img
-                src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
-                alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
-            </div>
-            <p class="absolute font-medium text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl sm:top-2/3">
-              <?php echo $category->name; ?>
-            </p>
-          </a>
+          <?php if ($category->image != null): ?>
+            <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit" href="<?php echo BASE_URI .
+              "/products?categories[]=" .
+              $category->id; ?>">
+              <div class="w-full h-56 overflow-hidden shadow-lg img rounded-3xl">
+                <img
+                  src="<?php echo $category->image ? BASE_URI . $category->image : BASE_URI . "/resources/images/categories/placeholder.png"; ?>"
+                  alt="" class="object-cover w-full h-full transition-transform rounded-3xl hover:scale-105" />
+              </div>
+              <p class="absolute font-medium text-white xl:top-3/4 left-10 xl:text-3xl sm:text-2xl sm:top-2/3">
+                <?php echo $category->name; ?>
+              </p>
+            </a>
+          <?php endif ?>
         <?php endforeach; ?>
 
       </div>
@@ -220,6 +255,9 @@ $user = $auth->getUser();
     }).catch(error => {
       console.error(error);
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
   document.addToCart = (id) => {
     FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
@@ -233,6 +271,9 @@ $user = $auth->getUser();
     }).catch(error => {
       console.error(error);
     });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   document.querySelectorAll('.wishlist-icon').forEach(icon => {

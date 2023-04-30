@@ -18,7 +18,7 @@ $user = $auth->getUser() ?? null;
       <img src="<?php echo BASE_URI . "/resources/images/logo.png"; ?>" alt="HeaderLogo" />
     </a>
     <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center">
-      <button class="bg-[#315854] px-3 py-2 rounded-xl text-white font-semibold hover:bg-[#52938d] transition-all">
+      <button class="bg-[#315854] px-3 py-2 rounded-md text-white font-semibold hover:bg-[#52938d] transition-all">
         <i class="mr-1 fa-solid fa-bars"></i>
         Categories
       </button>
@@ -60,7 +60,7 @@ $user = $auth->getUser() ?? null;
       }
       if ($user != null && !$auth->hasPermission("dashboard.access")): ?>
         <a href="<?php echo BASE_URI . "/wishlist"; ?>"
-          class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10 relative">
+          class="border-[1px] border-solid px-3 py-2 rounded-md hover:bg-[#315854] transition-all hover:text-white w-10 relative">
           <i class="fa-regular fa-heart"></i>
           <span
             class="absolute w-6 h-6 bg-primary-600 -top-2 -right-2 rounded-full text-center text-white <?php echo (count($wishlist) == 0 ? 'hidden' : 'block'); ?>">
@@ -69,7 +69,7 @@ $user = $auth->getUser() ?? null;
         </a>
 
         <a href="<?php echo BASE_URI . "/cart"; ?>"
-          class="border-[1px] border-solid px-2 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10 relative">
+          class="border-[1px] border-solid px-2 py-2 rounded-md hover:bg-[#315854] transition-all hover:text-white w-10 relative">
           <i class="fa-brands fa-opencart"></i>
           <span
             class="absolute w-6 h-6 bg-primary-600 -top-2 -right-2 rounded-full text-center text-white <?php echo (count($cart) == 0 ? 'hidden' : 'block'); ?>">
@@ -78,7 +78,7 @@ $user = $auth->getUser() ?? null;
         </a>
       <?php endif; ?>
       <button type="button"
-        class="border-[1px] border-solid px-3 py-2 rounded-xl hover:bg-[#315854] transition-all hover:text-white w-10"
+        class="border-[1px] border-solid px-3 py-2 rounded-md hover:bg-[#315854] transition-all hover:text-white w-10"
         data-dropdown-toggle="dropdownHover" data-dropdown-trigger="click" id="dropdownHoverButton">
         <i class="fa-regular fa-user"></i>
       </button>
