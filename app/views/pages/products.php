@@ -5,7 +5,10 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Wishlist;
+use Core\Application;
 
+$auth = Application::getInstance()->getAuthentication();
+$user = $auth->getUser();
 $filter = $params['filter'];
 $pagination = $params['pagination'];
 $products = $pagination['products'];
@@ -117,12 +120,13 @@ $products = $pagination['products'];
               <?php
               if ($user != null) {
                 $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-                $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+
               }
               ?>
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                <p class="font-semibold select-option-text hover:color-red-400 uppercase border-0 hover:border-b border-black transition-all cursor-pointer"
+                <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-28 before:transition-all"
                   onclick="addToCart(`<?php echo $product->id; ?>`)">
                   <?php
                   if (isset($cartCheck))
@@ -131,7 +135,7 @@ $products = $pagination['products'];
                     echo "Add to cart";
                   ?>
                 </p>
-                <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white <?php echo isset($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-white text-black' ?>"
                   onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
               </div>
             </div>
@@ -164,7 +168,46 @@ $products = $pagination['products'];
     </div>
   </div>
 </div>
+<script type="module">
+  import Toast from '<?php echo BASE_URI . "/resources/js/toast.js"; ?>';
+  import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
+  const BASE_URI = '<?php echo BASE_URI; ?>';
+
+  document.addToCart = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/cart/add' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
+  document.addToWishList = (id) => {
+    FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', { id }, {
+      'Content-Type': 'application/json'
+    }).then(response => {
+      const data = response.data;
+      new Toast({
+        message: data.message,
+        type: data.type
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+</script>
 <script>
   const filterForm = document.getElementById('filter-form');
   document.openPage = (page) => {
@@ -187,7 +230,7 @@ $products = $pagination['products'];
   let tag_icon = document.querySelector(".open-tags");
   let tag_list = document.querySelector(".tags-list");
   tag_icon.addEventListener("click", () => {
-    if (icon.classList.contains("fa-plus")) {
+    if (tag_icon.classList.contains("fa-plus")) {
       tag_icon.classList.remove("fa-plus")
       tag_icon.classList.add("fa-minus")
     } else {

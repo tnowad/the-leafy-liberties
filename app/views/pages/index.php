@@ -10,10 +10,6 @@ use App\Models\Cart;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
-if ($user != null) {
-  $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-}
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
@@ -90,12 +86,11 @@ if ($user != null) {
             <?php
             if ($user != null) {
               $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-              $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
             }
             ?>
             <div
               class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-              <p class="font-semibold select-option-text hover:color-red-400 uppercase border-0 hover:border-b border-black transition-all cursor-pointer"
+              <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-28 before:transition-all"
                 onclick="addToCart(`<?php echo $product->id; ?>`)">
                 <?php
                 if (isset($cartCheck))
@@ -151,7 +146,7 @@ if ($user != null) {
               ?>
               <div
                 class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                <p class="font-semibold select-option-text hover:color-red-400 uppercase border-0 hover:border-b border-black transition-all cursor-pointer"
+                <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-28 before:transition-all"
                   onclick="addToCart(`<?php echo $product->id; ?>`)">
                   <?php
                   if (isset($cartCheck))
