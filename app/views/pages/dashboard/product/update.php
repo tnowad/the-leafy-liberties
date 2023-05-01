@@ -1,5 +1,6 @@
 <?php $product = $params["product"];
-use App\Models\Author; ?>
+use App\Models\Author;
+use App\Models\Publisher; ?>
 <div class="w-full min-h-screen">
   <div class="w-full h-full p-5 m-5 bg-white rounded-md shadow-lg">
     <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/product/update"; ?>" method="POST"
@@ -31,6 +32,17 @@ use App\Models\Author; ?>
         <?php foreach (Author::all() as $authorItem): ?>
           <option value="<?php echo $authorItem->id ?>">
             <?php echo $authorItem->name ?>
+          </option>
+        <?php endforeach ?>
+      </select>
+      <label for="gender" class="my-2">Publisher:</label>
+      <select value="" name="publisher" class="bg-gray-100 p-3 focus:outline-none rounded-lg w-full appearance-none">
+        <option value="<?php echo $product->publisher()->id ?>">
+          <?php echo $product->publisher()->name ?>
+        </option>
+        <?php foreach (Publisher::all() as $publish): ?>
+          <option value="<?php echo $publish->id ?>">
+            <?php echo $publish->name ?>
           </option>
         <?php endforeach ?>
       </select>

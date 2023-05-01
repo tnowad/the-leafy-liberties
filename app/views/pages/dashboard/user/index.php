@@ -18,9 +18,9 @@
       </a>
     </div>
     <div class="table-customer-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
-      <div class="relative">
-        <table class="min-w-full text-sm text-center text-gray-500 rounded-2xl table-auto">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+      <div class="relative overflow-x-scroll md:overflow-hidden">
+        <table class="min-w-full text-sm text-center text-gray-500 rounded-2xl table-auto overflow-x-scroll">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
               <?php
               use App\Models\Role;

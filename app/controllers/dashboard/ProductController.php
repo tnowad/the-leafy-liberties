@@ -102,6 +102,7 @@ class ProductController extends Controller
           $author->save();
           $product->author_id = $author->id;
         }
+        $product->publisher_id = $request->getParam("publisher");
         $product->save();
         return $response->redirect(BASE_URI . "/dashboard/product", 200, [
           "toast" => [
@@ -218,6 +219,7 @@ class ProductController extends Controller
           $product->description = $request->getParam("description");
           $product->quantity = $request->getParam("quantity");
           $product->author_id = $request->getParam("author");
+          $product->publisher_id = $request->getParam("publisher");
           $product->save();
           return $response->redirect(BASE_URI . "/dashboard/product", 200, [
             "toast" => [

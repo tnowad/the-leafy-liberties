@@ -14,9 +14,9 @@ $pagination = $params['pagination'];
 $products = $pagination['products'];
 ?>
 <div class="flex justify-center my-10">
-  <div class="container grid lg:grid-cols-[220px,auto] 2xl:grid-cols-[300px,auto]">
-    <div class="box-border mx-5 min-h-max">
-      <div class="border border-gray-200 shadow-sm">
+  <div class="container grid lg:grid-cols-[260px,auto] 2xl:grid-cols-[300px,auto]">
+    <div class="box-border mx-0 mb-2 lg:mb-0 lg:mx-5 min-h-max">
+      <div class="border border-gray-200 shadow-sm w-full">
         <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/products' ?>">
           <input type="hidden" name="page" value="1">
           <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>">
@@ -67,7 +67,7 @@ $products = $pagination['products'];
 
             <div class="px-4 py-2">
               <h1 class="mt-2 mb-2 text-xl font-medium">Author</h1>
-              <select name="author" id="" class="w-full px-3 py-1 border border-gray-300 rounded-sm">
+              <select name="author" id="" class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
                 <option value="">All</option>
                 <?php foreach (Author::all() as $author): ?>
                   <option value="<?php echo $author->id ?>" <?php echo $filter['author'] == $author->id ? 'selected' : '' ?>>

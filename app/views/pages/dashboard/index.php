@@ -28,7 +28,7 @@ foreach ($successfulOrder as $order) {
       </div>
       <div class="box-border grid top-wrap 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
         <?php
-        $text = ["Sales", "Pending", "New Customer", "New Orders"];
+        $text = ["Sales", "Pending", "New Users", "New Orders"];
         $quantity = [$sum, count($pendingOrders), $customer, $orders];
         $desc = [
           "We have sold " . $products_sale . " items",
@@ -113,7 +113,7 @@ foreach ($successfulOrder as $order) {
       </div>
       <div class="my-8 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl">
         <div class="relative">
-          <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl table-auto">
+          <table class="w-full overflow-x-scroll text-sm text-center text-gray-500 rounded-2xl table-auto">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <?php

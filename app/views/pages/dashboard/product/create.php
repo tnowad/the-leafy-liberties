@@ -1,5 +1,6 @@
 <?php
 use App\Models\Author;
+use App\Models\Publisher;
 
 ?>
 <div class="add-form min-h-screen w-full justify-center items-center bg-opacity-75 z-[500] my-5">
@@ -31,12 +32,23 @@ use App\Models\Author;
             </option>
           <?php endforeach ?>
         </select>
-        <i class="fa-solid fa-plus plus-icon p-2 bg-primary text-white rounded-full animate-bounce"></i>
+        <i class="fa-solid fa-plus plus-icon p-2 bg-primary text-white rounded-full"></i>
       </div>
       <div class="hidden flex-col author-add">
-        <input type="hidden" name="author-id"/>
+        <input type="hidden" name="author-id" />
         <label for="title" class="my-2">Add new author name:</label>
-        <input type="text" value="" name="author-name" class="p-3 bg-gray-100 rounded-lg focus:outline-none"/>
+        <input type="text" value="" name="author-name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+      </div>
+      <label for="gender" class="my-2">Publisher:</label>
+      <div class="flex justify-between items-center gap-4">
+        <select value="" name="publisher" class="bg-gray-100 p-3 focus:outline-none rounded-lg w-full appearance-none">
+          <option value=""></option>
+          <?php foreach (Publisher::all() as $publish): ?>
+            <option value="<?php echo $publish->id ?>">
+              <?php echo $publish->name ?>
+            </option>
+          <?php endforeach ?>
+        </select>
       </div>
       <label for="category" class="my-2">Description:</label>
       <textarea name="description" id="" cols="30" rows="4" class="p-3 bg-gray-100 rounded-lg focus:outline-none"
