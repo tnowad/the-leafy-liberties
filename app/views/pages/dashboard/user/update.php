@@ -28,7 +28,7 @@ use App\Models\Role;
       <input type="tel" value="<?php echo $user->phone; ?>" name="phone"
         class="bg-gray-100 p-3 focus:outline-none rounded-lg" required />
       <label for="role" class="my-2">Select role:</label>
-      <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg">
+      <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg appearance-none">
         <?php $roless = Role::find($user->role_id); ?>
         <option value="<?php echo $roless->id ?>">
           <?php

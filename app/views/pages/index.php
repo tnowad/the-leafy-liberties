@@ -56,9 +56,11 @@ $user = $auth->getUser();
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Bestselling Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
-      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl"
+      <a class="w-32 text-base shadow-md hover:text-white font-medium transition-all duration-[400ms] tracking-wide text-primary p-2 rounded-md relative group"
         href="<?php echo BASE_URI . "/products"; ?>">
         View All
+        <span
+          class="absolute bg-primary inset-0 rounded-md w-0 group-hover:w-full duration-[400ms] text-white -z-10"></span>
       </a>
     </div>
     <div class="relative flex w-full gap-6 overflow-hidden bestselling-products">
@@ -86,6 +88,7 @@ $user = $auth->getUser();
             <?php
             if ($user != null) {
               $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+              $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
             }
             ?>
             <div
@@ -99,7 +102,7 @@ $user = $auth->getUser();
                   echo "Add to cart";
                 ?>
               </p>
-              <i class="<?php echo ($flagwl) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+              <i class="<?php echo ($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-white text-black' ?> wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
                 onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
             </div>
           </div>
@@ -109,9 +112,11 @@ $user = $auth->getUser();
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Popular Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
-      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl"
+      <a class="w-32 text-base shadow-md hover:text-white font-medium transition-all duration-[400ms] tracking-wide text-primary p-2 rounded-md relative group"
         href="<?php echo BASE_URI . "/products"; ?>">
         View All
+        <span
+          class="absolute bg-primary inset-0 rounded-md w-0 group-hover:w-full duration-[400ms] text-white -z-10"></span>
       </a>
     </div>
     <div class="flex gap-4">
@@ -181,9 +186,10 @@ $user = $auth->getUser();
     <div class="flex items-center justify-between gap-2 my-4 text-center">
       <h2 class="my-4 whitespace-nowrap xl:text-3xl sm:text-xl">Category Books</h2>
       <span class="w-full h-px mx-2 bg-gray-600"></span>
-      <a class="w-32 text-base bg-[#315854] hover:bg-[#2e524e] text-white p-2 rounded-3xl" h
+      <a class="w-32 text-base shadow-md hover:text-white font-medium transition-all duration-[400ms] tracking-wide text-primary p-2 rounded-md relative group"
         href="<?php echo BASE_URI . "/products"; ?>">
         View All
+        <span class="absolute bg-primary inset-0 rounded-md w-0 group-hover:w-full duration-[400ms] text-white -z-10"></span>
       </a>
     </div>
     <div class="relative w-full mb-5">
@@ -204,7 +210,6 @@ $user = $auth->getUser();
             </a>
           <?php endif ?>
         <?php endforeach; ?>
-
       </div>
     </div>
     <div class="flex my-10 lg:gap-0 sm:gap-3 lg:flex-row sm:flex-col">

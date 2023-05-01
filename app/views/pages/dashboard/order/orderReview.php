@@ -135,7 +135,7 @@
                                                                 "/dashboard/order/order_review" .
                                                                 "?id=" .
                                                                 $order->id; ?>" method="POST">
-                            <select name="status" class="p-2 rounded-lg border-gray-300 border">
+                            <select name="status" class="p-2 rounded-lg border-gray-300 border appearance-none">
                                 <option value="1">Accepted</option>
                                 <option value="2">Rejected</option>
                                 <option value="0">Pending</option>

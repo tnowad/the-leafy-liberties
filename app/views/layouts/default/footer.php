@@ -20,11 +20,11 @@
           E-commerce Website Designed by Tuan, Phat, Chinh, Bao</p>
       </div>
       <div class="w-full h-12 pl-3 my-6">
-        <div class="flex justify-evenly">
-          <i class="text-4xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-blue-500"></i>
-          <i class="text-4xl transition-all cursor-pointer fa-brands fa-youtube hover:text-red-500"></i>
-          <i class="text-4xl transition-all cursor-pointer fa-brands fa-instagram hover:text-pink-500"></i>
-          <i class="text-4xl transition-all cursor-pointer fa-brands fa-twitter hover:text-blue-600"></i>
+        <div class="flex justify-start gap-10">
+          <i class="text-2xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-blue-500"></i>
+          <i class="text-2xl transition-all cursor-pointer fa-brands fa-youtube hover:text-red-500"></i>
+          <i class="text-2xl transition-all cursor-pointer fa-brands fa-instagram hover:text-pink-500"></i>
+          <i class="text-2xl transition-all cursor-pointer fa-brands fa-twitter hover:text-blue-600"></i>
         </div>
       </div>
     </div>

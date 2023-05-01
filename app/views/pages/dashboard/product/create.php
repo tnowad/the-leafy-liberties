@@ -23,7 +23,7 @@ use App\Models\Author;
         required />
       <label for="gender" class="my-2">Author:</label>
       <div class="flex justify-between items-center gap-4">
-        <select value="" name="author" class="bg-gray-100 p-3 focus:outline-none rounded-lg w-full">
+        <select value="" name="author" class="bg-gray-100 p-3 focus:outline-none rounded-lg w-full appearance-none">
           <option value=""></option>
           <?php foreach (Author::all() as $author): ?>
             <option value="<?php echo $author->id ?>">

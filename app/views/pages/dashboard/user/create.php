@@ -27,7 +27,7 @@ use App\Models\Role; ?>
       <input type="tel" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="phone" />
 
       <label for="role" class="my-2">Select role:</label>
-      <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg">
+      <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg appearance-none">
         <?php foreach (Role::all() as $role): ?>
           <option value="<?php echo $role->id ?>"><?php echo ucfirst($role->name) ?></option>
         <?php endforeach ?>
