@@ -13,7 +13,7 @@ class Tag extends Model
     $productTags = ProductTag::findAll(["tag_id" => $this->id]);
     $products = [];
     foreach ($productTags as $productTag) {
-      $products[] = Product::find($productTag->product_id);
+      $products[] = Product::findOne(["id" => $productTag->product_id,"deleted_at" => "null"]);
     }
     return $products;
   }

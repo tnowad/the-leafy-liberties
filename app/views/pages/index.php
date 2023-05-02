@@ -10,6 +10,8 @@ use App\Models\Cart;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
+
+// dd(Product::findAll(["deleted_at" => "is null"]))
 ?>
 
 <div className="flex justify-center w-full flex-col items-center -z-10">
@@ -132,7 +134,7 @@ $user = $auth->getUser();
     <div class="flex gap-4">
       <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
 
-        <?php foreach (array_slice(Product::all(), 0, 16) as $product): ?>
+        <?php foreach (array_slice(Product::findAll(["deleted_at" => "null"]), 0, 16) as $product): ?>
           <div
             class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl h-[500px]">
             <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60 mx-auto">

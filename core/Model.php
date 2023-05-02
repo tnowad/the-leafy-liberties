@@ -36,8 +36,12 @@ class Model
     $query = "SELECT * FROM $table WHERE ";
     $values = [];
     foreach ($params as $key => $value) {
-      $query .= "$key = ? AND ";
-      $values[] = $value;
+      if ($value === 'null') {
+        $query .= "$key IS NULL AND ";
+      } else {
+        $query .= "$key = ? AND ";
+        $values[] = $value;
+      }
     }
     $query = rtrim($query, " AND ");
     $result = self::$db->select($query, $values);
@@ -53,8 +57,12 @@ class Model
     $query = "SELECT * FROM $table WHERE ";
     $values = [];
     foreach ($params as $key => $value) {
-      $query .= "$key = ? AND ";
-      $values[] = $value;
+      if ($value === 'null') {
+        $query .= "$key IS NULL AND ";
+      } else {
+        $query .= "$key = ? AND ";
+        $values[] = $value;
+      }
     }
     $query = rtrim($query, " AND ");
     $result = self::$db->select($query, $values);
@@ -64,6 +72,7 @@ class Model
     }
     return $models;
   }
+
 
   public static function where($conditions = [])
   {

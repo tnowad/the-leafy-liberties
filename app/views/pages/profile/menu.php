@@ -16,19 +16,19 @@
   <div class="box-border flex flex-col items-start justify-center px-6">
     <a href="<?php echo BASE_URI .
       "/profile"; ?>"
-      class="flex p-2 mt-5 transition-all rounded-lg w-44 hover:bg-primary-600 hover:text-white">
+      class="flex p-2 mt-5 transition-all rounded-lg w-44 hover:bg-primary-600 hover:text-white whitespace-nowrap">
       <i class="flex items-center mr-2 fa fa-home"></i>
       <h3 class="text-xl cursor-pointer">Profile settings</h3>
     </a>
     <a href="<?php echo BASE_URI .
       "/profile/settings"; ?>"
-      class="flex p-2 mt-5 transition-all rounded-lg w-44 hover:bg-primary-600 hover:text-white">
+      class="flex p-2 mt-5 transition-all rounded-lg w-44 hover:bg-primary-600 hover:text-white whitespace-nowrap">
       <i class="flex items-center mr-2 fa fa-user"></i>
       <h3 class="cursor-pointer">Account settings</h3>
     </a>
     <a href="<?php echo BASE_URI .
       "/profile/orders"; ?>"
-      class="flex p-2 mt-5 transition-all rounded-lg w-44 hover:bg-primary-600 hover:text-white">
+      class="flex p-2 mt-5 transition-all rounded-lg w-44 hover:bg-primary-600 hover:text-white whitespace-nowrap">
       <i class="flex items-center mr-2 fa fa-bag-shopping"></i>
       <h3 class="cursor-pointer">My Order</h3>
     </a>

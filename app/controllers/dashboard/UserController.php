@@ -191,7 +191,9 @@ class UserController extends Controller
           $user->phone = Validation::validatePhone($request->getParam("phone"));
           $user->email = Validation::validateEmail($request->getParam("email"));
           $user->gender = $request->getParam("gender");
-          $user->password = password_hash(Validation::validatePassword($request->getParam("password")), PASSWORD_DEFAULT);
+          if ($request->getParam("password") != null) {
+            $user->password = password_hash(Validation::validatePassword($request->getParam("password")), PASSWORD_DEFAULT);
+          }
           $user->role_id = $request->getParam("role");
           $user->save();
           return $response->redirect(BASE_URI . "/dashboard/user", 200, [

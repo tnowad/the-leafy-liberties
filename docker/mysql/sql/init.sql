@@ -1,3 +1,4 @@
+-- Active: 1680850809935@@127.0.0.1@3306@bookstore
 DROP DATABASE IF EXISTS bookstore;
 
 CREATE DATABASE bookstore;

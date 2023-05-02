@@ -11,7 +11,7 @@ use App\Models\Product;
     <div class="box-border flex flex-col w-full mt-10 border border-b-2 border-gray-300 md:flex-row">
       <?php include "menu.php"; ?>
       <!-- content -->
-      <div class="my-5 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl w-[70%] mx-4">
+      <div class="my-5 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl w-[95%] md:w-[70%] mx-4">
         <div class="relative w-full">
           <?php if (count($orders) == 0) : ?>
             <div class="flex flex-col justify-center items-center h-[70vh]">

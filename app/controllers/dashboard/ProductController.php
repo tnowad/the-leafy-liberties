@@ -2,7 +2,10 @@
 namespace App\Controllers\Dashboard;
 
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\ProductTag;
 use Core\Application;
 use Core\Controller;
 use Core\Request;
@@ -213,7 +216,9 @@ class ProductController extends Controller
             );
           }
           $product->name = $request->getParam("name");
-          $product->image = $request->getParam("image");
+          if ($request->getParam("image") != null) {
+            $product->image = $request->getParam("image");
+          }
           $product->isbn = $request->getParam("isbn");
           $product->price = $request->getParam("price");
           $product->description = $request->getParam("description");
@@ -245,6 +250,8 @@ class ProductController extends Controller
       ]);
     }
     $product = Product::find($request->getBody()["id"]);
+    $tags = ProductTag::findAll(["product_id" => $product->id]);
+    $categories = ProductCategory::findAll(["product_id" => $product->id]);
     if (!$product) {
       $response->jsonResponse([
         "type" => "success",
@@ -252,6 +259,12 @@ class ProductController extends Controller
       ]);
     }
     // dd($product);
+    foreach ($categories as $category) {
+      $category->delete();
+    }
+    foreach ($tags as $tag) {
+      $tag->delete();
+    }
     $product->delete();
     $response->jsonResponse([
       "type" => "success",

@@ -124,7 +124,7 @@ foreach ($successfulOrder as $order) {
                 <div class="bg-<?php echo $colors[$name->id] ?>-600 h-2.5 rounded-full"
                   style="width: <?php echo (($item["num_orders"]) ? $item["num_orders"] : 0)*10 ?>%"></div>
               </div>
-            <?php endforeach ?> 
+            <?php endforeach ?>
           </div>
         </div>
       </div>
@@ -152,7 +152,7 @@ foreach ($successfulOrder as $order) {
             <tbody>
               <?php
               $orders = Order::all();
-              foreach ($orders as $order):
+              foreach ( array_slice($orders,0,4) as $order):
                 ?>
                 <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">
