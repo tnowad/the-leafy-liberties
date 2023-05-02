@@ -31,7 +31,6 @@ class ProfileController extends Controller
     $response->setBody(
       View::renderWithLayout(new View("pages/profile/index"), [
         "user" => $user,
-        "footer" => "",
       ])
     );
   }
@@ -117,7 +116,6 @@ class ProfileController extends Controller
     $response->setBody(
       View::renderWithLayout(new View("pages/profile/settings"), [
         "user" => $user,
-        "footer" => "",
       ])
     );
   }

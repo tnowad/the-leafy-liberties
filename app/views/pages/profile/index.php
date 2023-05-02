@@ -39,6 +39,7 @@
             <i id="show-icon" class="fa fa-eye absolute hidden top-[40%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
           <input type="submit" value="Save changes" class="w-3/6 p-2 mt-5 text-white  bg-primary-800 hover:bg-teal-700 border cursor-pointer sm:w-1/6 rounded-lg transition-all" />
+          
         </form>
       </div>
     </div>

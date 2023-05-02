@@ -15,6 +15,9 @@ foreach ($successfulOrder as $order) {
   $sum += $order->total_price;
   $products_sale += count($order->products());
   $detail_order = OrderProduct::findAll(["order_id" => $order->id]);
+  foreach($detail_order as $item){
+    
+  }
 }
 ?>
 

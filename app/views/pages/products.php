@@ -120,24 +120,33 @@ $products = $pagination['products'];
               <?php
               if ($user != null) {
                 $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-
+                $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
               }
               ?>
-              <div
-                class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-28 before:transition-all"
-                  onclick="addToCart(`<?php echo $product->id; ?>`)">
-                  <?php
-                  if (isset($cartCheck))
-                    echo "Added to cart";
-                  else
-                    echo "Add to cart";
-                  ?>
-                </p>
-                <i class="p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white <?php echo isset($wishlistCheck) ? 'bg-red-400 text-white' : 'bg-white text-black' ?>"
-                  onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
-              </div>
+              <?php if ($auth->hasPermission("dashboard.access")): ?>
+                <div
+                  class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                  <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
+                    onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
+                    Update Product
+                  </p>
+                </div>
+              <?php else: ?>
+                <div
+                  class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                  <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
+                    onclick="addToCart(`<?php echo $product->id; ?>`)">
+                    <?php
+                    if (isset($cartCheck))
+                      echo "Added to cart";
+                    else
+                      echo "Add to cart";
+                    ?>
+                  </p>
+                  <i class="wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                    onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+                </div>
+              <?php endif ?>
             </div>
           </div>
         <?php endforeach; ?>

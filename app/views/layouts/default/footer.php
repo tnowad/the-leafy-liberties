@@ -34,47 +34,47 @@
 
         </button>
         <ul class="flex flex-col items-center w-full h-full text-gray-600">
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>About us</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Site map</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Bookmarks</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Pricing table</a>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>About us</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Site map</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Bookmarks</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Pricing table</a>
           </li>
         </ul>
       </div>
       <div class="our-services">
         <button class="mb-2 text-xl font-medium">Our services</button>
         <ul class="flex flex-col items-center w-full h-full text-gray-600">
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Help center</a>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Help center</a>
           </li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Product recalls</a>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Product recalls</a>
           </li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Accessibility</a>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Accessibility</a>
           </li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Store pickup</a>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Store pickup</a>
           </li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Membership</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Membership</a></li>
         </ul>
       </div>
       <div class="categories">
         <button class="mb-2 text-xl font-medium">Categories</button>
         <ul class="flex flex-col items-center w-full h-full text-gray-600">
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Action</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Comedy</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Horror</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Kids</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>Drama</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Action</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Comedy</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Horror</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Kids</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>Drama</a></li>
         </ul>
       </div>
       <div class="contact">
         <button class="mb-2 text-xl font-medium">Get Contact</button>
         <ul class="flex flex-col items-center w-full h-full text-gray-600">
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>SGU University</a>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>SGU University</a>
           </li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>HCM City,
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>HCM City,
               VietNam</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>0123456789</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>0123456789</a></li>
-          <li class="h-12 flex items-center hover:text-[#2e524e]"><a>sgu@edu.vn</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>0123456789</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>0123456789</a></li>
+          <li class="h-12 flex items-center cursor-pointer hover:text-[#2e524e]"><a>sgu@edu.vn</a></li>
         </ul>
       </div>
     </div>
