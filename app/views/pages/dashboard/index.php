@@ -3,20 +3,32 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\User;
+use Core\Database;
+
+$db = Database::getInstance();
+$categorySold = $db->select("SELECT c.id AS category_id, COUNT(DISTINCT o.id) AS num_orders
+FROM categories c
+JOIN products_categories pc ON pc.category_id = c.id
+JOIN products p ON p.id = pc.product_id
+JOIN orders_products op ON op.product_id = p.id
+JOIN orders o ON o.id = op.order_id
+WHERE o.status = 5
+GROUP BY c.id
+ORDER BY num_orders DESC", []);
+
 
 $successfulOrder = Order::findAll(["status" => "5"]);
 $pendingOrders = Order::findAll(["status" => "0"]);
 // $product_id = OrderProduct::findOne([]);
 $sum = 0;
+$sumCategory = 0;
 $products_sale = 0;
 $customer = count(User::all());
 $orders = count(Order::all());
 foreach ($successfulOrder as $order) {
   $sum += $order->total_price;
-  $products_sale += count($order->products());
-  $detail_order = OrderProduct::findAll(["order_id" => $order->id]);
-  foreach ($detail_order as $item) {
-
+  foreach ($order->products() as $prd) {
+    $products_sale += $prd->quantity;
   }
 }
 ?>
@@ -89,7 +101,6 @@ foreach ($successfulOrder as $order) {
                 <option value="bar">Bar Chart</option>
                 <option value="line">Line Chart</option>
                 <option value="area">Area Chart</option>
-                <option value="radar">Radar Chart</option>
               </select>
             </div>
           </div>
@@ -102,15 +113,18 @@ foreach ($successfulOrder as $order) {
           <div class="flex flex-col gap-4">
             <?php
             $colors = ["red", "blue", "green", "yellow", "pink", "orange", "purple"];
-            foreach (array_slice(Category::all(), 0, 6) as $category): ?>
+            ?>
+            <?php foreach ($categorySold as $item):
+              $name = Category::findOne(["id" => $item["category_id"]]);
+              ?>
               <div class="text-lg font-medium ">
-                <?php echo $category->name ?>
+                <?php echo $name->name ?>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                <div class="bg-<?php echo $colors[$category->id] ?>-600 h-2.5 rounded-full"
-                  style="width: <?php echo rand(10, 100) ?>%"></div>
+                <div class="bg-<?php echo $colors[$name->id] ?>-600 h-2.5 rounded-full"
+                  style="width: <?php echo (($item["num_orders"]) ? $item["num_orders"] : 0)*10 ?>%"></div>
               </div>
-            <?php endforeach ?>
+            <?php endforeach ?> 
           </div>
         </div>
       </div>
@@ -177,9 +191,6 @@ foreach ($successfulOrder as $order) {
 <script>
   var series = [{
     name: 'Net Profit', data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-  }, {
-    name: 'Revenue',
-    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
   }];
   var plotOptions = {
     bar: {
@@ -197,41 +208,6 @@ foreach ($successfulOrder as $order) {
     series: series,
     chart: {
       type: 'bar',
-      height: 350,
-      width: '100%',
-    },
-    plotOptions: plotOptions,
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      // colors: ['transparent']
-    },
-    xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-    },
-    yaxis: {
-      title: {
-        text: '$(thousands)'
-      }
-    },
-    fill: {
-      opacity: 1
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return "$ " + val + " thousands"
-        }
-      }
-    }
-  };
-  var radar_options = {
-    series: series,
-    chart: {
-      type: 'radar',
       height: 350,
       width: '100%',
     },
@@ -352,11 +328,6 @@ foreach ($successfulOrder as $order) {
     }
     if (chartType.value == 'area') {
       chart = new ApexCharts(document.getElementById("chart"), area_options);
-      chart.render();
-
-    }
-    if (chartType.value == 'radar') {
-      chart = new ApexCharts(document.getElementById("chart"), radar_options);
       chart.render();
 
     }
