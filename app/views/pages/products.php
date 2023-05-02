@@ -16,18 +16,18 @@ $products = $pagination['products'];
 <div class="flex justify-center my-10">
   <div class="container grid lg:grid-cols-[260px,auto] 2xl:grid-cols-[300px,auto]">
     <div class="box-border mx-0 mb-2 lg:mb-0 lg:mx-5 min-h-max">
-      <div class="border border-gray-200 shadow-sm w-full">
+      <div class="w-full border border-gray-200 shadow-sm">
         <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/products' ?>">
           <input type="hidden" name="page" value="1">
           <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>">
           <input type="hidden" name="keywords" value="<?php echo $filter['keywords'] ?>">
           <div class="border-b border-gray-200">
-            <div class="px-4 py-2 relative">
-              <div class="flex justify-between items-center">
+            <div class="relative px-4 py-2">
+              <div class="flex items-center justify-between">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Categories</h1>
-                <i class="open-category fa-solid fa-plus cursor-pointer"></i>
+                <i class="cursor-pointer open-category fa-solid fa-plus"></i>
               </div>
-              <ul class="category-list ml-2 h-0 overflow-hidden">
+              <ul class="h-0 ml-2 overflow-hidden category-list">
                 <li>
                   <?php foreach (Category::all() as $category): ?>
                   <li>
@@ -45,11 +45,11 @@ $products = $pagination['products'];
 
           <div class="border-b border-gray-200">
             <div class="px-4 py-2">
-              <div class="flex justify-between items-center">
+              <div class="flex items-center justify-between">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Tags</h1>
-                <i class="open-tags fa-solid fa-plus cursor-pointer"></i>
+                <i class="cursor-pointer open-tags fa-solid fa-plus"></i>
               </div>
-              <ul class="tags-list ml-2 h-0 overflow-hidden">
+              <ul class="h-0 ml-2 overflow-hidden tags-list">
                 <?php foreach (Tag::all() as $tag): ?>
                   <li>
                     <label>
@@ -143,7 +143,7 @@ $products = $pagination['products'];
                       echo "Add to cart";
                     ?>
                   </p>
-                  <i class="wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                  <i class="p-2 transition-all rounded-full cursor-pointer wishlist-icon fa-regular fa-heart hover:bg-red-400 hover:text-white"
                     onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
                 </div>
               <?php endif ?>
@@ -168,7 +168,7 @@ $products = $pagination['products'];
           <?php endfor; ?>
           <?php if ($pagination['page'] < $pagination['totalPages']): ?>
             <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)"
-              class="cursor-pointer pagination-items p-2 shadow-md border border-gray-300 text-primary font-semibold hover:text-white hover:bg-primary-700 transition-all">
+              class="p-2 font-semibold transition-all border border-gray-300 shadow-md cursor-pointer pagination-items text-primary hover:text-white hover:bg-primary-700">
               Next
             </a>
           <?php endif; ?>

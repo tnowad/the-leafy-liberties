@@ -18,23 +18,23 @@ foreach ($allPermissions as $key => $permission) {
 $allPermissions = array_values($allPermissions);
 ?>
 
-<form class="my-6 w-full h-full">
+<form class="w-full h-full my-6">
   <div class="mb-4">
     <label class="block font-bold text-gray-700" for="name">
       Name
     </label>
     <input
-      class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 p-2"
+      class="block w-full p-2 mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
       type="text" name="name" id="name" placeholder="Role name">
   </div>
 
   <!-- submit -->
   <button type="submit"
-    class="py-2 px-4 bg-blue-500 hover:bg-blue-600 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md">
+    class="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:ring-blue-500 focus:ring-offset-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
     Update
   </button>
-  <table class="w-full mt-5 text-sm text-center text-gray-500  rounded-2xl" width="100%">
-    <thead class="p-2 text-gray-700 uppercase text-md bg-gray-100">
+  <table class="w-full mt-5 text-sm text-center text-gray-500 rounded-2xl" width="100%">
+    <thead class="p-2 text-gray-700 uppercase bg-gray-100 text-md">
       <tr>
         <th class="px-4 py-3" width="50%">Permissions</th>
         <th class="px-4 py-3">Access</th>
@@ -62,7 +62,7 @@ $allPermissions = array_values($allPermissions);
     </tbody>
   </table>
   <a href="<?php echo BASE_URI . '/dashboard/role' ?>"
-    class="py-2 px-4 my-10 bg-blue-500 hover:bg-blue-600 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full block transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md">
+    class="block w-full px-4 py-2 my-10 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:ring-blue-500 focus:ring-offset-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
     Cancel
   </a>
 </form>

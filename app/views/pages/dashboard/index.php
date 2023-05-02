@@ -15,8 +15,8 @@ foreach ($successfulOrder as $order) {
   $sum += $order->total_price;
   $products_sale += count($order->products());
   $detail_order = OrderProduct::findAll(["order_id" => $order->id]);
-  foreach($detail_order as $item){
-    
+  foreach ($detail_order as $item) {
+
   }
 }
 ?>
@@ -150,7 +150,8 @@ foreach ($successfulOrder as $order) {
                   <td class="px-5 py-3">
                     <?php echo $order->create_at ?>
                   </td>
-                  <td class="px-5 py-3 font-medium <?php echo ($order->status == 0) ? 'text-red-900' : 'text-primary-400' ?>">
+                  <td
+                    class="px-5 py-3 font-medium <?php echo ($order->status == 0) ? 'text-red-900' : 'text-primary-400' ?>">
                     <?php
                     if ($order->status == 0) {
                       echo "Pending";

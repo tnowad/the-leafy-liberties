@@ -1,7 +1,8 @@
 <?php $category = $params["category"]; ?>
 <div class="w-full min-h-screen">
   <div class="w-full h-full p-5 m-5 bg-white rounded-md shadow-lg">
-    <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/category/update"; ?>" method="POST" enctype="multipart/form-data">
+    <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/category/update"; ?>" method="POST"
+      enctype="multipart/form-data">
       <input type="hidden" value="<?php echo $category->id; ?>" name="id"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
 
@@ -12,7 +13,7 @@
       <label for="img" class="my-2">Image:</label>
       <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
       <p>Preview Image:</p>
-      <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $category->image ?>"/>
+      <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $category->image ?>" />
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit

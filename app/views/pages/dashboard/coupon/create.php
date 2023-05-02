@@ -1,25 +1,25 @@
-<div class="add-form min-h-screen w-full justify-center items-center my-8">
-  <div class="bg-white p-8 rounded-md shadow-lg">
-    <h2 class="text-xl font-bold mb-4">Add Coupon</h2>
+<div class="items-center justify-center w-full min-h-screen my-8 add-form">
+  <div class="p-8 bg-white rounded-md shadow-lg">
+    <h2 class="mb-4 text-xl font-bold">Add Coupon</h2>
     <form class="flex flex-col" method="POST" action="<?php BASE_URI .
       "/dashboard/coupon/create"; ?>">
       <label for="image" class="my-2">Code:</label>
-      <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="code" />
+      <input type="text" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="code" />
       <label for="category" class="my-2">Description:</label>
-      <textarea name="description" class="bg-gray-100 p-3 focus:outline-none rounded-lg" rows="4"></textarea>
+      <textarea name="description" class="p-3 bg-gray-100 rounded-lg focus:outline-none" rows="4"></textarea>
       <!-- <script>
             CKEDITOR.replace('description');
           </script> -->
       <label for="expired" class="my-2">Expired:</label>
-      <input type="date" value="" id="task_date" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="expired"
+      <input type="date" value="" id="task_date" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="expired"
         onchange="return CheckExpired();" />
       <label for="remaining" class="my-2">Quantity:</label>
-      <input type="number" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="quantity" />
+      <input type="number" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="quantity" />
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
       </button>
-      <button id="cancel" class="my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+      <button id="cancel" class="px-4 py-2 my-1 font-bold text-white bg-gray-500 rounded hover:bg-gray-700">
         Cancel
       </button>
     </form>

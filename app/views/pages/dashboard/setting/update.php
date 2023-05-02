@@ -1,24 +1,24 @@
 <?php $setting = $params["setting"]; ?>
 <div class="w-full min-h-screen ">
-  <div class="bg-white rounded-md shadow-lg w-full p-5 my-5">
+  <div class="w-full p-5 my-5 bg-white rounded-md shadow-lg">
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/setting/update"; ?>" method="POST">
       <input type="hidden" value="<?php echo $setting->id; ?>" name="id"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required/>
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="name" class="my-2">Name:</label>
       <input type="text" value="<?php echo $setting->name; ?>" name="name"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required/>
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="expired" class="my-2">Value:</label>
       <input type="number" value="<?php echo $setting->value; ?>" name="value"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required/>
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
       </button>
-      <a class="cancel-edit-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-center"
+      <a class="px-4 py-2 my-1 font-bold text-center text-white bg-gray-500 rounded cancel-edit-button hover:bg-gray-700"
         href="<?php echo BASE_URI . "/dashboard/customer"; ?>">
         Cancel
       </a>

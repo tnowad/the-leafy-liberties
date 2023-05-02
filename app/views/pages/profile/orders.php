@@ -15,8 +15,8 @@ use App\Models\Product;
         <div class="relative w-full">
           <?php if (count($orders) == 0) : ?>
             <div class="flex flex-col justify-center items-center h-[70vh]">
-              <i class="fa-solid fa-cart-circle-plus text-5xl text-gray-400 mb-4"></i>
-              <h1 class="text-5xl font-medium tracking-widest uppercase text-gray-400">Don't have any orders yet</h1>
+              <i class="mb-4 text-5xl text-gray-400 fa-solid fa-cart-circle-plus"></i>
+              <h1 class="text-5xl font-medium tracking-widest text-gray-400 uppercase">Don't have any orders yet</h1>
             </div>
           <?php else : ?>
             <table class="w-full overflow-y-scroll text-sm text-center text-gray-500 rounded-2xl" width="100%">
@@ -83,8 +83,8 @@ use App\Models\Product;
                       <a href="<?php echo BASE_URI .
                                   "/profile/orders/order_detail" .
                                   "?id=" .
-                                  $order->id; ?>" class="edit-button py-2 px-3 rounded-md">
-                        <i class="fa-solid fa-circle-info text-black text-xl hover:text-orange-600 transition-colors"></i>
+                                  $order->id; ?>" class="px-3 py-2 rounded-md edit-button">
+                        <i class="text-xl text-black transition-colors fa-solid fa-circle-info hover:text-orange-600"></i>
                       </a>
                     </td>
                   </tr>

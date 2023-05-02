@@ -86,7 +86,7 @@ class UserController extends Controller
         $user->name = $request->getParam("name");
         $user->image = $request->getParam("image");
         $user->phone = $request->getParam("phone");
-        $user->password = password_hash($request->getParam("password"),PASSWORD_DEFAULT);
+        $user->password = password_hash($request->getParam("password"), PASSWORD_DEFAULT);
         $user->role_id = $request->getParam("role");
         $user->status = 1;
         $user->save();

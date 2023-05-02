@@ -150,21 +150,22 @@ class ProductController extends Controller
       ->getAuthentication()
       ->getUser();
     $product = Product::find($request->getQuery("id"));
-    if (!$user)  return $response->redirect(BASE_URI . "/login", 200, [
-      "toast" => [
-        "type" => "error",
-        "message" => "You are not logged in",
-      ],
-    ]);
+    if (!$user)
+      return $response->redirect(BASE_URI . "/login", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You are not logged in",
+        ],
+      ]);
     date_default_timezone_set('Asia/Ho_Chi_Minh');
 
     $newComment = new Review();
     $newComment->user_id = $user->id;
-    $newComment->product_id =  $product->id;
+    $newComment->product_id = $product->id;
     $newComment->content = trim($request->getParam("new-comment"));
     $newComment->rating = trim($request->getParam("rating"));
     if (!$newComment->content) {
-      return $response->redirect(BASE_URI . "/product" . "?id=" .  $product->id);
+      return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id);
     }
     $newComment->save();
     return $response->redirect(BASE_URI . "/product" . "?id=" . $product->id, 200, [

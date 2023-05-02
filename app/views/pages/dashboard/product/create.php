@@ -4,7 +4,7 @@ use App\Models\Publisher;
 
 ?>
 <div class="add-form min-h-screen w-full justify-center items-center bg-opacity-75 z-[500] my-5">
-  <div class="bg-white p-8 rounded-md shadow-lg w-full ">
+  <div class="w-full p-8 bg-white rounded-md shadow-lg ">
     <h2 class="mb-4 text-xl font-bold">Add Product</h2>
     <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/product/create"; ?>" method="POST"
       enctype="multipart/form-data">
@@ -23,8 +23,8 @@ use App\Models\Publisher;
       <input type="number" value="" step="0.01" name="price" class="p-3 bg-gray-100 rounded-lg focus:outline-none"
         required />
       <label for="gender" class="my-2">Author:</label>
-      <div class="flex justify-between items-center gap-4">
-        <select value="" name="author" class="bg-gray-100 p-3 focus:outline-none rounded-lg w-full appearance-none">
+      <div class="flex items-center justify-between gap-4">
+        <select value="" name="author" class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none">
           <option value=""></option>
           <?php foreach (Author::all() as $author): ?>
             <option value="<?php echo $author->id ?>">
@@ -32,16 +32,16 @@ use App\Models\Publisher;
             </option>
           <?php endforeach ?>
         </select>
-        <i class="fa-solid fa-plus plus-icon p-2 bg-primary text-white rounded-full"></i>
+        <i class="p-2 text-white rounded-full fa-solid fa-plus plus-icon bg-primary"></i>
       </div>
-      <div class="hidden flex-col author-add">
+      <div class="flex-col hidden author-add">
         <input type="hidden" name="author-id" />
         <label for="title" class="my-2">Add new author name:</label>
         <input type="text" value="" name="author-name" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
       </div>
       <label for="gender" class="my-2">Publisher:</label>
-      <div class="flex justify-between items-center gap-4">
-        <select value="" name="publisher" class="bg-gray-100 p-3 focus:outline-none rounded-lg w-full appearance-none">
+      <div class="flex items-center justify-between gap-4">
+        <select value="" name="publisher" class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none">
           <option value=""></option>
           <?php foreach (Publisher::all() as $publish): ?>
             <option value="<?php echo $publish->id ?>">
@@ -60,7 +60,7 @@ use App\Models\Publisher;
         type="submit">
         Submit
       </button>
-      <a class="px-4 py-2 my-1 font-bold text-white bg-gray-500 rounded cancel-button hover:bg-gray-700 text-center"
+      <a class="px-4 py-2 my-1 font-bold text-center text-white bg-gray-500 rounded cancel-button hover:bg-gray-700"
         href="<?php echo BASE_URI . '/dashboard/product' ?>">
         Cancel
       </a>

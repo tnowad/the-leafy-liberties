@@ -1,30 +1,31 @@
-<div class="w-full my-0 mx-auto">
-  <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
+<div class="w-full mx-auto my-0">
+  <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Users</h1>
       <div class="box-border w-1/2 px-10">
-      <form action="<?php echo BASE_URI . '/dashboard/user' ?>" method="GET"
+        <form action="<?php echo BASE_URI . '/dashboard/user' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-            <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
+          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-tr-full rounded-br-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </div>
-      <a class="add-user w-5 h-5 text-2xl" href="<?php echo BASE_URI . '/dashboard/user/create' ?>">
+      <a class="w-5 h-5 text-2xl add-user" href="<?php echo BASE_URI . '/dashboard/user/create' ?>">
         +
       </a>
     </div>
-    <div class="table-customer-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
+    <div class="my-8 bg-white shadow-lg cursor-pointer table-customer-statistics rounded-2xl">
       <div class="relative overflow-x-scroll md:overflow-hidden">
-        <table class="min-w-full text-sm text-center text-gray-500 rounded-2xl table-auto overflow-x-scroll">
+        <table class="min-w-full overflow-x-scroll text-sm text-center text-gray-500 table-auto rounded-2xl">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
               <?php
               use App\Models\Role;
               use App\Models\User;
+
               $name = [
                 "ID",
                 "Image",
@@ -44,14 +45,16 @@
           </thead>
           <tbody>
             <?php
-            if (count($users) > 0) : ?>
-              <?php foreach ($users as $user) : ?>
-                <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
+            if (count($users) > 0): ?>
+              <?php foreach ($users as $user): ?>
+                <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-3">
                     <?php echo $user->id; ?>
                   </td>
-                  <td class="px-5 py-3 w-32">
-                    <img src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>" alt="" class="w-full h-full object-contain">
+                  <td class="w-32 px-5 py-3">
+                    <img
+                      src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>"
+                      alt="" class="object-contain w-full h-full">
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $user->email; ?>
@@ -65,7 +68,8 @@
                     echo ucfirst($role->name);
                     ?>
                   </td>
-                  <td class="px-5 py-3 <?php echo ($user->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
+                  <td
+                    class="px-5 py-3 <?php echo ($user->status == 1) ? 'text-primary-700 font-medium' : 'text-red-700 font-medium' ?>">
                     <?php
                     if ($user->status == 1) {
                       echo "Active";
@@ -75,14 +79,17 @@
                     ?>
                   </td>
                   <td class="px-5 py-3 w-44">
-                    <div class="button flex justify-center items-center gap-4">
+                    <div class="flex items-center justify-center gap-4 button">
                       <a href="<?php echo BASE_URI .
-                                  "/dashboard/user/update" .
-                                  "?id=" .
-                                  $user->id; ?>" class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                        "/dashboard/user/update" .
+                        "?id=" .
+                        $user->id; ?>"
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all" onclick="removeUser(<?php echo $user->id ?>)">
+                      <button
+                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500"
+                        onclick="removeUser(<?php echo $user->id ?>)">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>

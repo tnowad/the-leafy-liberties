@@ -25,7 +25,7 @@ use App\Models\Publisher; ?>
       <input type="number" value="<?php echo $product->price; ?>" name="price"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
       <label for="gender" class="my-2">Author:</label>
-      <select value="" name="author" class="bg-gray-100 p-3 focus:outline-none rounded-lg appearance-none" required>
+      <select value="" name="author" class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none" required>
         <option value="<?php echo $product->author()->id ?>">
           <?php echo $product->author()->name ?>
         </option>
@@ -36,7 +36,7 @@ use App\Models\Publisher; ?>
         <?php endforeach ?>
       </select>
       <label for="gender" class="my-2">Publisher:</label>
-      <select value="" name="publisher" class="bg-gray-100 p-3 focus:outline-none rounded-lg w-full appearance-none">
+      <select value="" name="publisher" class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none">
         <option value="<?php echo $product->publisher()->id ?>">
           <?php echo $product->publisher()->name ?>
         </option>

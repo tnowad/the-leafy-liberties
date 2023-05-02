@@ -1,4 +1,3 @@
-
 <footer
   class="flex justify-center w-full flex-col items-center border-0 border-solid border-t-[1px] border-gray-400 mt-4">
   <div class="container sm:grid sm:m-auto lg:flex">

@@ -26,7 +26,7 @@ $user = $auth->getUser();
         <?php endforeach; ?>
 
       </div>
-      <div class="absolute space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0 hidden md:flex">
+      <div class="absolute hidden space-x-3 -translate-x-1/2 bottom-5 left-1/2 -z-0 md:flex">
 
         <?php for ($i = 0; $i < (count(Slide::findAll(["status" => "1"]))); $i++): ?>
           <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1"
@@ -35,7 +35,7 @@ $user = $auth->getUser();
 
       </div>
       <button type="button"
-        class="absolute top-0 left-0 hidden md:flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        class="absolute top-0 left-0 items-center justify-center hidden h-full px-4 cursor-pointer md:flex -z-0 group focus:outline-none"
         data-carousel-prev>
         <span
           class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
@@ -43,7 +43,7 @@ $user = $auth->getUser();
         </span>
       </button>
       <button type="button"
-        class="absolute top-0 right-0 hidden md:flex items-center justify-center h-full px-4 cursor-pointer -z-0 group focus:outline-none"
+        class="absolute top-0 right-0 items-center justify-center hidden h-full px-4 cursor-pointer md:flex -z-0 group focus:outline-none"
         data-carousel-next>
         <span
           class="inline-flex items-center justify-center w-8 h-8 text-white bg-gray-400 rounded-full sm:w-10 sm:h-10 0 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
@@ -111,7 +111,7 @@ $user = $auth->getUser();
                     echo "Add to cart";
                   ?>
                 </p>
-                <i class="wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                <i class="p-2 transition-all rounded-full cursor-pointer wishlist-icon fa-regular fa-heart hover:bg-red-400 hover:text-white"
                   onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
               </div>
             <?php endif ?>
@@ -179,7 +179,7 @@ $user = $auth->getUser();
                       echo "Add to cart";
                     ?>
                   </p>
-                  <i class="wishlist-icon p-2 transition-all rounded-full cursor-pointer fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                  <i class="p-2 transition-all rounded-full cursor-pointer wishlist-icon fa-regular fa-heart hover:bg-red-400 hover:text-white"
                     onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
                 </div>
               <?php endif ?>
@@ -234,7 +234,7 @@ $user = $auth->getUser();
       </div>
     </div>
     <div class="flex my-10 lg:gap-0 sm:gap-3 lg:flex-row sm:flex-col">
-      <div class="w-full overflow-hidden bg-orange-50 lg:p-5 rounded-2xl md:p-2 lg:overflow-x-hidden shadow-lg">
+      <div class="w-full overflow-hidden shadow-lg bg-orange-50 lg:p-5 rounded-2xl md:p-2 lg:overflow-x-hidden">
         <div class="p-3 mb-6 text-4xl text-center border-0 border-b-2 border-solid header-table whitespace-nowrap">
           <p>Popular Authors</p>
         </div>

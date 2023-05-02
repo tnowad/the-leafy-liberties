@@ -1,5 +1,5 @@
-<div class="w-full my-0 mx-auto">
-  <div class="mt-10 min-h-screen box-border w-full px-10 sm:px-5">
+<div class="w-full mx-auto my-0">
+  <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Coupon</h1>
       <div class="box-border w-1/2 px-10">
@@ -8,16 +8,16 @@
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-            <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
+          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-tr-full rounded-br-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </div>
-      <a href="<?php echo BASE_URI . '/dashboard/coupon/create' ?>" class="add-coupon w-5 h-5 text-2xl">
+      <a href="<?php echo BASE_URI . '/dashboard/coupon/create' ?>" class="w-5 h-5 text-2xl add-coupon">
         +
       </a>
     </div>
-    <div class="table-coupon-statistics my-8 shadow-lg cursor-pointer rounded-2xl bg-white">
+    <div class="my-8 bg-white shadow-lg cursor-pointer table-coupon-statistics rounded-2xl">
       <div class="relative">
         <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -43,7 +43,7 @@
             <?php
             if (count($coupons) > 0): ?>
               <?php foreach ($coupons as $coupon): ?>
-                <tr class="bg-white border-b hover:bg-gray-200 transition-opacity even:bg-gray-100 text-center">
+                <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-3">
                     <?php echo $coupon->id; ?>
                   </td>
@@ -60,16 +60,16 @@
                     <?php echo $coupon->description; ?>
                   </td>
                   <td class="px-5 py-3 w-44">
-                    <div class="button flex justify-center items-center gap-4">
+                    <div class="flex items-center justify-center gap-4 button">
                       <a href="<?php echo BASE_URI .
                         "/dashboard/coupon/update" .
                         "?id=" .
                         $coupon->id; ?>"
-                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                       <button onclick="removeCoupon(<?php echo $coupon->id ?>)"
-                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>

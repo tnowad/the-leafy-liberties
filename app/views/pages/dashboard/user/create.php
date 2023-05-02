@@ -1,8 +1,8 @@
 <?php
 use App\Models\Role; ?>
 <div class="add-form min-h-screen w-full justify-center items-center bg-opacity-75 z-[300]">
-  <div class="bg-white p-8 rounded-md shadow-lg w-full my-8">
-    <h2 class="text-xl font-bold mb-4">Add User</h2>
+  <div class="w-full p-8 my-8 bg-white rounded-md shadow-lg">
+    <h2 class="mb-4 text-xl font-bold">Add User</h2>
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/user/create"; ?>" method="POST" enctype="multipart/form-data">
       <label for="image" class="my-2">Image:</label>
@@ -10,13 +10,13 @@ use App\Models\Role; ?>
       <p>Preview Image:</p>
       <img id="output" class="object-contain h-56 w-80" />
       <label for="entered" class="my-2">Email:</label>
-      <input type="email" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="email" />
+      <input type="email" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="email" />
 
       <label for="category" class="my-2">Name:</label>
-      <input type="text" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="name" />
+      <input type="text" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="name" />
 
       <label for="remaining" class="my-2">Password:</label>
-      <input type="password" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="password" />
+      <input type="password" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="password" />
       <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[74%] right-20 cursor-pointer"
         aria-hidden="true"></i>
       <i id="show-icon-password" class="fa fa-eye absolute hidden top-[74%] right-20 cursor-pointer"
@@ -24,10 +24,10 @@ use App\Models\Role; ?>
 
 
       <label for="remaining" class="my-2">Phone:</label>
-      <input type="tel" value="" class="bg-gray-100 p-3 focus:outline-none rounded-lg" name="phone" />
+      <input type="tel" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="phone" />
 
       <label for="role" class="my-2">Select role:</label>
-      <select value="" name="role" class="bg-gray-100 p-3 focus:outline-none rounded-lg appearance-none">
+      <select value="" name="role" class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none">
         <?php foreach (Role::all() as $role): ?>
           <option value="<?php echo $role->id ?>"><?php echo ucfirst($role->name) ?></option>
         <?php endforeach ?>
@@ -36,7 +36,7 @@ use App\Models\Role; ?>
         type="submit">
         Submit
       </button>
-      <button class="cancel-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+      <button class="px-4 py-2 my-1 font-bold text-white bg-gray-500 rounded cancel-button hover:bg-gray-700"
         type="button">
         Cancel
       </button>

@@ -10,7 +10,8 @@
       <p class="my-2 text-gray-600">Thank you for completing your secure online payment.</p>
       <p> Have a great day! </p>
       <div class="py-10 text-center">
-        <a href="<?php echo BASE_URI . '/' ?>" class="px-12 py-3 font-semibold text-white bg-indigo-600 hover:bg-indigo-500">
+        <a href="<?php echo BASE_URI . '/' ?>"
+          class="px-12 py-3 font-semibold text-white bg-indigo-600 hover:bg-indigo-500">
           GO BACK
         </a>
       </div>

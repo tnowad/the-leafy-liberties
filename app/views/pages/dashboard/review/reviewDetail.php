@@ -1,6 +1,6 @@
 <div class="bg-gray-100">
-  <div class="container mx-auto py-8">
-    <div class="flex flex-wrap justify-between items-center mb-8">
+  <div class="container py-8 mx-auto">
+    <div class="flex flex-wrap items-center justify-between mb-8">
       <div class="w-1/3">
         <img src="<?php
 
@@ -8,21 +8,21 @@
         use App\Models\User;
 
         $author = Author::find($product->id);
-        echo BASE_URI . $product->image; ?>" alt="Book Image" class="w-full object-cover rounded-lg shadow-lg">
+        echo BASE_URI . $product->image; ?>" alt="Book Image" class="object-cover w-full rounded-lg shadow-lg">
       </div>
       <div class="w-2/3 px-4">
-        <h1 class="text-3xl font-bold mb-2">
+        <h1 class="mb-2 text-3xl font-bold">
           <?php echo $product->name ?>
         </h1>
-        <p class="text-lg text-gray-600 mb-4">Author :
+        <p class="mb-4 text-lg text-gray-600">Author :
           <?php echo $author->name ?>
         </p>
         <div class="flex items-center mb-2">
-          <span class="text-lg text-gray-600 mr-2">Average rating :
+          <span class="mr-2 text-lg text-gray-600">Average rating :
           </span>
           <?php if (count($reviewsValid) > 0): ?>
             <div>
-              <span class="text-xl text-gray-600 mr-2">
+              <span class="mr-2 text-xl text-gray-600">
                 <?php
                 $averageRating = 0;
                 foreach ($reviewsValid as $review) {
@@ -91,10 +91,10 @@
                     <td class="px-5 py-3">
                       <?php echo $review->id; ?>
                     </td>
-                    <td class="px-5 py-3 w-32">
+                    <td class="w-32 px-5 py-3">
                       <img
                         src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>"
-                        alt="" class="w-full h-full object-contain">
+                        alt="" class="object-contain w-full h-full">
                     </td>
                     <td class="px-5 py-3">
                       <?php echo $user->name; ?>
@@ -110,16 +110,16 @@
                       ?>
                     </td>
                     <td class="gap-2 px-5 py-3">
-                      <div class="button flex justify-center items-center gap-4">
+                      <div class="flex items-center justify-center gap-4 button">
                         <a href="<?php echo BASE_URI .
                           "/product" .
                           "?id=" .
                           $product->id; ?>"
-                          class="edit-button py-2 px-3 bg-blue-400 text-white rounded-md hover:text-pink-300 transition-all">
+                          class="px-3 py-2 text-white transition-all bg-blue-400 rounded-md edit-button hover:text-pink-300">
                           <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                         <span onclick="removeReviewConfirm(<?php echo $review->id ?>)"
-                          class="delete-button py-2 px-3 bg-red-400 text-white rounded-md hover:text-blue-300 transition-all">
+                          class="px-3 py-2 text-white transition-all bg-red-400 rounded-md delete-button hover:text-blue-300">
                           Delete
                           <i class="fa-solid fa-pen-to-square"></i>
                         </span>
@@ -131,7 +131,7 @@
             </tbody>
           </table>
         <?php else: ?>
-          <div class="flex flex-col justify-center items-center h-full my-8">
+          <div class="flex flex-col items-center justify-center h-full my-8">
             <i class="fa-solid fa-heart-pulse text-[100px] text-gray-400"></i>
             <h1 class="text-6xl tracking-widest text-gray-400 uppercase">No reviews found</h1>
           </div>

@@ -21,7 +21,7 @@ $cartItems = $params["cartItems"];
               <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
                 <div class="flex items-center justify-between item-detail">
                   <div onclick="removeFromCart(<?php echo $product->id ?>)">
-                    <i class="fa-solid fa-times text-xl cursor-pointer"></i>
+                    <i class="text-xl cursor-pointer fa-solid fa-times"></i>
                   </div>
                   <div class="item-img w-36 h-36">
                     <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
@@ -45,13 +45,13 @@ $cartItems = $params["cartItems"];
                       <input type="hidden" name="id" value="<?php echo $product->id; ?>">
                       <input type="submit" value="-" name="minus"
                         class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
-                      <input type="number" name="quantity" class="w-10 text-lg text-count text-center"
+                      <input type="number" name="quantity" class="w-10 text-lg text-center text-count"
                         value="<?php echo $cartItem->quantity; ?>" />
                       <input type="submit" value="+" name="plus"
                         class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                     </form>
                   </div>
-                  <p class="text-xl counter-price font-bold">
+                  <p class="text-xl font-bold counter-price">
                     <?php echo $product->price * $cartItem->quantity; ?>$
                   </p>
                 </div>
@@ -125,8 +125,8 @@ $cartItems = $params["cartItems"];
         alert('Something went wrong');
       });
       setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+        window.location.reload();
+      }, 1000);
     }
   }
 

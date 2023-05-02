@@ -10,12 +10,12 @@ use App\Models\Pagination;
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Category</h1>
       <div class="box-border w-1/2 px-10">
-      <form action="<?php echo BASE_URI . '/dashboard/category' ?>" method="GET"
+        <form action="<?php echo BASE_URI . '/dashboard/category' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-            <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
+          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-tr-full rounded-br-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -52,23 +52,23 @@ use App\Models\Pagination;
                   <td class="px-5 py-3">
                     <?php echo $category->id; ?>
                   </td>
-                  <td class="w-44 h-24 p-3">
-                    <img src="<?php echo BASE_URI . $category->image; ?>" alt="" class="w-full h-full object-cover"/>
+                  <td class="h-24 p-3 w-44">
+                    <img src="<?php echo BASE_URI . $category->image; ?>" alt="" class="object-cover w-full h-full" />
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $category->name; ?>
                   </td>
                   <td class="gap-2 px-5 py-3">
-                  <div class="button flex justify-center items-center gap-4">
+                    <div class="flex items-center justify-center gap-4 button">
                       <a href="<?php echo BASE_URI .
                         "/dashboard/category/update" .
                         "?id=" .
                         $category->id; ?>"
-                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                       <button onclick="removeCategory(<?php echo $category->id ?>)"
-                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>

@@ -1,24 +1,24 @@
 <?php $slide = $params["slide"];
-use App\Models\Slide;?>
+use App\Models\Slide; ?>
 <div class="w-full min-h-screen">
-  <div class="bg-white rounded-md shadow-lg w-full p-5 m-5 h-full">
+  <div class="w-full h-full p-5 m-5 bg-white rounded-md shadow-lg">
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/slide/update"; ?>" method="POST" enctype="multipart/form-data">
       <input type="hidden" value="<?php echo $slide->id; ?>" name="id"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
 
       <label for="title" class="my-2">Title:</label>
       <input type="text" value="<?php echo $slide->name; ?>" name="title"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
       <label for="title" class="my-2">Image:</label>
       <input type="file" value="<?php echo $slide->image; ?>" name="image"
-        class="bg-gray-100 p-3 focus:outline-none rounded-lg" onchange="loadFile(event)" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" onchange="loadFile(event)" />
       <div class="">
         <p>Preview Image:</p>
         <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $slide->image ?>" />
       </div>
       <label for="role" class="my-2">Select status:</label>
-      <select value="" name="status" class="bg-gray-100 p-3 focus:outline-none rounded-lg appearance-none">
+      <select value="" name="status" class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none">
         <option value="<?php $slide->status ?>">
           <?php
           echo ($slide->status == 1) ? 'Active' : 'Banned';
@@ -33,7 +33,7 @@ use App\Models\Slide;?>
         type="submit">
         Submit
       </button>
-      <a class="cancel-edit-button my-1 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-center"
+      <a class="px-4 py-2 my-1 font-bold text-center text-white bg-gray-500 rounded cancel-edit-button hover:bg-gray-700"
         href="<?php echo BASE_URI . "/dashboard/slide"; ?>">
         Cancel
       </a>

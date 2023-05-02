@@ -6,12 +6,12 @@ $roles = $params["roles"]; ?>
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Role</h1>
       <div class="box-border w-1/2 px-10">
-      <form action="<?php echo BASE_URI . '/dashboard/role' ?>" method="GET"
+        <form action="<?php echo BASE_URI . '/dashboard/role' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
+          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-tr-full rounded-br-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -20,29 +20,29 @@ $roles = $params["roles"]; ?>
         <i class="fa-solid fa-plus"></i>
       </a>
     </div>
-    <div class="my-8 cursor-pointer role-statistics rounded-2xl bg-transparent flex flex-col gap-5">
+    <div class="flex flex-col gap-5 my-8 bg-transparent cursor-pointer role-statistics rounded-2xl">
       <?php foreach ($roles as $role): ?>
         <div class="relative bg-white rounded-md shadow-lg">
-          <div class="user-role flex justify-between items-center py-3 px-4 relative peer">
+          <div class="relative flex items-center justify-between px-4 py-3 user-role peer">
             <a class="text-lg font-semibold" href="<?php echo BASE_URI .
               "/dashboard/role/show?id=" .
               $role->id; ?>">
               <?php echo ucfirst($role->name); ?>
             </a>
             <!-- Icon edit or delete -->
-            <div class="button flex justify-center items-center gap-4">
+            <div class="flex items-center justify-center gap-4 button">
               <a href="<?php echo BASE_URI .
                 "/dashboard/role/update" .
                 "?id=" .
                 $role->id; ?>"
-                class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
                 <i class="fa-solid fa-pen-to-square"></i>
               </a>
               <a href="<?php echo BASE_URI .
                 "/dashboard/role/delete" .
                 "?id=" .
                 $role->id; ?>"
-                class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
                 <i class="fa-solid fa-trash"></i>
               </a>
             </div>

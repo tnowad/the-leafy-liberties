@@ -192,7 +192,7 @@ if ($user != null) {
         ?>
         <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>"
           class="flex justify-end">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
             <?php
             echo $review_status->status == 0 ? 'Turn on comment' : 'Turn off comment'
               ?>
@@ -228,9 +228,9 @@ if ($user != null) {
                   <div class="review-header">
                     <img
                       src="<?php echo ($userReview->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $userReview->image ?>"
-                      alt="Avatar" class="w-20  object-contain h-full rounded-full cursor-pointer">
+                      alt="Avatar" class="object-contain w-20 h-full rounded-full cursor-pointer">
                   </div>
-                  <div class="w-72 ml-2 mr-2 review-body">
+                  <div class="ml-2 mr-2 w-72 review-body">
                     <div class="flex flex-row mb-2">
                       <h3 class="inline-block mr-2 font-bold">
                         <?php echo $userReview->name;
@@ -284,7 +284,7 @@ if ($user != null) {
                 </div>
                 <form id="update-form<?php echo $review->id ?>"
                   action="<?php echo $user ? (BASE_URI . "/product/comment/update" . "?id=" . $review->id) : BASE_URI . "/login" ?>"
-                  method="POST" class="mt-2 hidden justify-end flex-row update-form">
+                  method="POST" class="flex-row justify-end hidden mt-2 update-form">
                   <div class="">
                     <input id="update-input<?php echo $review->id ?>" value="<?php echo $review->content ?>" type="text"
                       name="update-comment" placeholder="Edit a comment..." required
@@ -329,7 +329,7 @@ if ($user != null) {
                       <div
                         class="box-border <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?>">
                         <span id="new-comment-button" onclick="openNewComment(<?php echo $userReview->id ?>)" type="submit"
-                          class="mb-5 px-2 py-1 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600 cursor-pointer">New
+                          class="px-2 py-1 mb-5 ml-2 font-bold text-white transition-all rounded-md cursor-pointer mt-9 bg-primary hover:bg-primary-600">New
                           Comment</span>
                       </div>
                     </div>
@@ -349,7 +349,7 @@ if ($user != null) {
               class=" <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?> flex-row border-t-2 border-gray-300 pt-14">
               <img
                 src="<?php echo $user ? (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> "
-                alt="Avatar" class="w-32 h-full object-contain rounded-full cursor-pointer">
+                alt="Avatar" class="object-contain w-32 h-full rounded-full cursor-pointer">
               <div class="ml-5">
                 <h1 class="mb-2 font-bold">
                   <?php echo $user ? $user->name : 'User'; ?>

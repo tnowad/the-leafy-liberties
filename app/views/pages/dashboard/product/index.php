@@ -18,7 +18,7 @@ $filter = $params['filter'];
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
             value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-            <button class="flex items-center justify-center w-10 h-10 bg-white rounded-br-full rounded-tr-full">
+          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-tr-full rounded-br-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -71,16 +71,16 @@ $filter = $params['filter'];
                     <?php echo $product->quantity; ?>
                   </td>
                   <td class="flex items-center justify-center h-full gap-2 px-5 py-3">
-                    <div class="button flex justify-center items-center gap-4">
+                    <div class="flex items-center justify-center gap-4 button">
                       <a href="<?php echo BASE_URI .
                         "/dashboard/product/update" .
                         "?id=" .
                         $product->id; ?>"
-                        class="edit-button py-2 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all">
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                       <button onclick="removeProductConfirm(<?php echo $product->id ?>)"
-                        class="delete-button py-2 px-3 bg-red-400 text-white rounded-xl hover:text-blue-500 transition-all">
+                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>
