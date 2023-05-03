@@ -201,7 +201,6 @@ class ProductController extends Controller
           ]);
 
           $result = $uploader->upload($_FILES["image"]);
-
           if ($result) {
             $request->setParam("image", $result);
           } else {
@@ -216,7 +215,9 @@ class ProductController extends Controller
             );
           }
           $product->name = $request->getParam("name");
-          if ($request->getParam("image") != null) {
+          if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
+            $product->image = $request->getParam("old_img");
+          } else {
             $product->image = $request->getParam("image");
           }
           $product->isbn = $request->getParam("isbn");

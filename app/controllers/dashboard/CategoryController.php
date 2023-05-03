@@ -86,7 +86,11 @@ class CategoryController extends Controller
         }
         $category = new Category();
         $category->name = $request->getParam("name");
-        $category->image = $request->getParam("image");
+        if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
+          $category->image = $request->getParam("old_img");
+        } else {
+          $category->image = $request->getParam("image");
+        }
         $category->save();
         return $response->redirect(BASE_URI . "/dashboard/category", 200, [
           "toast" => [
@@ -193,7 +197,11 @@ class CategoryController extends Controller
             ]);
           }
           $category->name = $request->getParam("name");
-          $category->image = $request->getParam("image");
+          if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
+            $category->image = $request->getParam("old_img");
+          } else {
+            $category->image = $request->getParam("image");
+          }
           $category->save();
           return $response->redirect(BASE_URI . "/dashboard/category", 200, [
             "toast" => [

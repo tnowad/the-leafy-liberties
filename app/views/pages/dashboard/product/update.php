@@ -17,6 +17,8 @@ use App\Models\Publisher; ?>
       <p>Preview Image:</p>
       <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $product->image ?>" />
 
+      <input type="text" value="<?php echo $product->image; ?>" name="old_img" class="opacity-0"/>
+
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="<?php echo $product->isbn; ?>" name="isbn"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />

@@ -4,10 +4,17 @@ use App\Models\Role;
 ?>
 <div class="w-full min-h-screen ">
   <div class="w-full p-5 my-5 bg-white rounded-md shadow-lg">
-    <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/user/update"; ?>" method="POST">
+    <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/user/update"; ?>" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="<?php echo $user->id; ?>"/>
 
-      <input type="hidden" name="id" value="<?php echo $user->id; ?>"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
+      <label for="title" class="my-2">Image:</label>
+      <input type="file" name="image"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none" onchange="loadFile(event)" />
+      <div class="">
+        <p>Preview Image:</p>
+        <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $user->image ?>" alt="null"/>
+      </div>
+      <input type="text" value="<?php echo $user->image; ?>" name="old_img" class="opacity-100" />
 
       <label for="name" class="my-2">Name:</label>
       <input type="text" value="<?php echo $user->name; ?>" name="name"
@@ -19,9 +26,9 @@ use App\Models\Role;
 
       <label for="expired" class="my-2">Password:</label>
       <input type="password" name="password" class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
-      <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[34.5%] right-20 cursor-pointer"
+      <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[72%] right-20 cursor-pointer"
         aria-hidden="true"></i>
-      <i id="show-icon-password" class="fa fa-eye absolute hidden top-[34.5%] right-20 cursor-pointer"
+      <i id="show-icon-password" class="fa fa-eye absolute hidden top-[72%] right-20 cursor-pointer"
         aria-hidden="true"></i>
 
       <label for="expired" class="my-2">Phone:</label>
@@ -50,6 +57,15 @@ use App\Models\Role;
     </form>
   </div>
 </div>
+<script>
+  var loadFile = function (event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function () {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>
 <script>
   const password = document.querySelector("input[type=password]");
   // console.log(password)

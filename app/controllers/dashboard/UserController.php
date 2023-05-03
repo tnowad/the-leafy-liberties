@@ -62,7 +62,7 @@ class UserController extends Controller
         $uploader = new FileUploader([
           "allowedExtensions" => ["jpeg", "jpg", "png"],
           "maxFileSize" => 2097152,
-          "uploadPath" => "resources/images/users/",
+          "uploadPath" => "resources/images/user/",
         ]);
 
         $result = $uploader->upload($_FILES["image"]);
@@ -179,15 +179,38 @@ class UserController extends Controller
                 "title" => "Users",
                 "toast" => [
                   "type" => "error",
-                  "message" => "Edit account fail!",
+                  "message" => "Edit user fail!",
                 ],
               ]
             )
           );
         } else {
-          // dd($product);
+          $uploader = new FileUploader([
+            "allowedExtensions" => ["jpeg", "jpg", "png"],
+            "maxFileSize" => 2097152,
+            "uploadPath" => "resources/images/user/",
+          ]);
+          $result = $uploader->upload($_FILES["image"]);
+          if ($result) {
+            $request->setParam("image", $result);
+          } else {
+            return $response->setBody(
+              View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
+                "title" => "Users",
+                "toast" => [
+                  "type" => "error",
+                  "message" => "Edit user failed!",
+                ],
+              ])
+            );
+          }
+
           $user->name = Validation::validateName($request->getParam("name"));
-          $user->image = $request->getParam("image");
+          if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
+            $user->image = $request->getParam("old_img");
+          } else {
+            $user->image = $request->getParam("image");
+          }
           $user->phone = Validation::validatePhone($request->getParam("phone"));
           $user->email = Validation::validateEmail($request->getParam("email"));
           $user->gender = $request->getParam("gender");

@@ -14,6 +14,7 @@
       <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
       <p>Preview Image:</p>
       <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $category->image ?>" />
+      <input type="text" value="<?php echo $category->image; ?>" name="old_img" class="opacity-0" />
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit

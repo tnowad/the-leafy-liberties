@@ -17,6 +17,8 @@ use App\Models\Slide; ?>
         <p>Preview Image:</p>
         <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $slide->image ?>" />
       </div>
+      <input type="text" value="<?php echo $slide->image; ?>" name="old_img" class="opacity-0" />
+
       <label for="role" class="my-2">Select status:</label>
       <select value="" name="status" class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none">
         <option value="<?php $slide->status ?>">

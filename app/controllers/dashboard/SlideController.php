@@ -101,7 +101,11 @@ class SlideController extends Controller
           }
 
           $slide->name = $request->getParam("title");
-          $slide->image = $request->getParam("image");
+          if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
+            $slide->image = $request->getParam("old_img");
+          } else {
+            $slide->image = $request->getParam("image");
+          }
           $slide->status = $request->getParam("status");
           $slide->save();
           return $response->redirect(BASE_URI . "/dashboard/slide", 200, [
