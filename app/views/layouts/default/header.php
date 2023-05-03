@@ -17,15 +17,18 @@ $user = $auth->getUser() ?? null;
     <a class="w-48" href="<?php echo BASE_URI . "/"; ?>">
       <img src="<?php echo BASE_URI . "/resources/images/logo.png"; ?>" alt="HeaderLogo" />
     </a>
-    <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center">
-      <button class="bg-[#315854] px-3 py-2 rounded-md text-white font-semibold hover:bg-[#52938d] transition-all">
+    <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center relative">
+      <button
+        class="shadow-lg px-3 py-2 rounded-md text-primary font-semibold hover:text-white transition-all tracking-wide relative overflow-hidden group-hover:text-white">
         <i class="mr-1 fa-solid fa-bars"></i>
         Categories
+        <span
+          class="absolute bg-primary inset-0 rounded-md w-full h-0 overflow-hidden group-hover:h-full rotate-90 group-hover:rotate-0 duration-[400ms] text-white -z-10"></span>
       </button>
       <!-- show options -->
       <?php if (count($categories) > 0): ?>
         <div
-          class="absolute hidden transition-all translate-y-10 bg-white border border-gray-200 rounded-md shadow-lg outline-none opacity-0 w-52 top-24 mt-7 group-hover:block group-hover:top-20 group-hover:opacity-100 group-hover:translate-y-0">
+          class="absolute h-0 overflow-hidden transition-all translate-y-7 bg-white border duration-300 border-gray-200 rounded-md shadow-lg outline-none opacity-0 w-52 top-24 mt-7 group-hover:h-fit group-hover:top-16 group-hover:opacity-100 group-hover:translate-y-0">
           <div class="px-1 py-1">
             <?php foreach ($categories as $category): ?>
               <span

@@ -3,7 +3,7 @@
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Settings</h1>
       <div class="box-border w-1/2 px-10">
-        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input"
+        <form class="flex items-center justify-center w-full h-10 bg-white rounded-full input shadow-lg"
           action="<?php BASE_URI . "/dashboard/product"; ?>" method="POST">
           <input type="text" name="searchQuery"
             class="w-full h-full pl-5 bg-transparent rounded-tl-full rounded-bl-full" placeholder="Search.... " />

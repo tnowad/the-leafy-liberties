@@ -14,9 +14,28 @@ class OrderController extends Controller
 {
   public function index(Request $request, Response $response)
   {
+    $filter = [
+      "keywords" => $request->getQuery("keywords"),
+    ];
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission("order.access")) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
+    if (isset($filter)) {
+      $orders = Order::filterAdvanced($filter);
+    } else {
+      $orders = Order::all();
+    }
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/order/index"), [
         "title" => "Orders",
+        "orders" => $orders,
+        "filter" => $filter,
       ])
     );
   }

@@ -61,7 +61,7 @@ foreach ($successfulOrder as $order) {
       <div class="box-border grid top-wrap 2xl:grid-cols-4 xl:gap-5 lg:grid-cols-2 lg:gap-2">
         <?php
         $text = ["Sales", "Pending", "New Users", "New Orders"];
-        $quantity = [$sum, count($pendingOrders), $customer, $orders];
+        $quantity = [$sum . " $", count($pendingOrders), $customer, $orders];
         $desc = [
           "We have sold " . $products_sale . " items",
           "Wait for accept",
@@ -208,7 +208,7 @@ foreach ($successfulOrder as $order) {
   let test = <?php echo $test ?>;
   console.log(test);
   var series = [{
-    name: 'Net Profit', data: test.map(function (item) {
+    name: 'Quantity', data: test.map(function (item) {
       return item.total_quantity;
     })
   }];
@@ -299,22 +299,23 @@ foreach ($successfulOrder as $order) {
         style: {
           fontSize: '10px',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          whiteSpace: 'wrap',
+          whiteSpace: 'nowrap',
         },
       }
     },
     yaxis: {
       title: {
-        text: '$(thousands)'
+        text: 'Quantity'
       }
     },
     fill: {
-      opacity: 1
+      opacity: 1,
+      colors: colors // set fill colors to use the same colors as bars
     },
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$ " + val + " thousands"
+          return val + " items"
         }
       }
     }
@@ -341,26 +342,27 @@ foreach ($successfulOrder as $order) {
       }),
       labels: {
         rotate: 0,
-        maxWidth: 100,
+        maxWidth: 50,
         style: {
-          fontSize: '12px',
+          fontSize: '10px',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          whiteSpace: 'wrap',
+          whiteSpace: 'nowrap',
         },
       }
     },
     yaxis: {
       title: {
-        text: '$(thousands)'
+        text: 'Quantity'
       }
     },
     fill: {
-      opacity: 1
+      opacity: 1,
+      colors: colors // set fill colors to use the same colors as bars
     },
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$ " + val + " thousands"
+          return val + " items"
         }
       }
     }
