@@ -60,8 +60,14 @@ if ($user != null) {
       <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI . $product->image; ?>" alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
-      <p class="p-1 mb-2 md:mb-6 text-[11px] sm:text-sm text-primary-700 font-medium inline-block">
-        IN STOCK
+      <p class="<?php echo ($product->quantity != 0) ? 'text-primary-700' : 'text-red-700' ?> p-1 mb-2 md:mb-6 text-[11px] sm:text-sm font-medium inline-block uppercase">
+        <?php
+          if($product->quantity == 0){
+            echo "Out of stock";
+          }else{
+            echo "in stock";
+          }
+        ?>
       </p>
       <br />
       <label class="text-2xl md:text-3xl lg:text-4xl">

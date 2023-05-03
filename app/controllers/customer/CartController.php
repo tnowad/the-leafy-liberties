@@ -106,7 +106,13 @@ class CartController extends Controller
         "message" => "Product not found",
       ]);
     }
-
+    if ($product->quantity == 0) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product is out of stock",
+      ]);
+      return;
+    }
     $cart = Cart::findOne([
       "product_id" => $product->id,
       "user_id" => $user->id,

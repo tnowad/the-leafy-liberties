@@ -111,7 +111,6 @@ class WishlistController extends Controller
       ]);
       return;
     }
-
     $wishlist = Wishlist::findOne([
       "product_id" => $product->id,
       "user_id" => $user->id,
@@ -181,7 +180,13 @@ class WishlistController extends Controller
       ]);
       return;
     }
-
+    if ($product->quantity == 0) {
+      $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product is out of stock",
+      ]);
+      return;
+    }
     $wishlist = Wishlist::findOne([
       "product_id" => $product->id,
       "user_id" => $user->id,
