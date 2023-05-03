@@ -109,9 +109,11 @@ foreach ($successfulOrder as $order) {
             <div class="total-revuenes">
               <p class="text-2xl font-semibold">Top 5 most selling products</p>
             </div>
-            <div class="chart-type p-2 bg-[#8cbfba] rounded-xl">
+            <div class="chart-type p-2 bg-primary-300 rounded-md">
               <label for="chart-type" class="font-medium text-black">Choose a type:</label>
-              <select name="chart-ttype" id="c-type" class="" onchange="ChangeChart(this)">
+              <select name="chart-ttype" id="c-type"
+                class="appearance-none px-4 py-1 focus:ring-2 focus:ring-primary-600 bg-gray-50 rounded-md"
+                onchange="ChangeChart(this)">
                 <option value="bar">Bar Chart</option>
                 <option value="line">Line Chart</option>
                 <option value="area">Area Chart</option>
@@ -222,6 +224,7 @@ foreach ($successfulOrder as $order) {
       }
     }
   }
+  var colors = ['#85B3AF', '#546E7A', '#d4526e', '#13d8aa', '#A5978B'];
   var bar_options = {
     series: series,
     chart: {
@@ -236,19 +239,19 @@ foreach ($successfulOrder as $order) {
     stroke: {
       show: true,
       width: 2,
-      // colors: ['transparent']
     },
+    colors: colors,
     xaxis: {
       categories: test.map(function (item) {
         return item.name
       }),
       labels: {
         rotate: 0,
-        maxWidth:50,
+        maxWidth: 50,
         style: {
           fontSize: '10px',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          whiteSpace: 'wrap',
+          whiteSpace: 'nowrap',
         },
       }
     },
@@ -258,7 +261,8 @@ foreach ($successfulOrder as $order) {
       }
     },
     fill: {
-      opacity: 1
+      opacity: 1,
+      colors: colors // set fill colors to use the same colors as bars
     },
     tooltip: {
       y: {
@@ -268,6 +272,7 @@ foreach ($successfulOrder as $order) {
       }
     }
   };
+
   var line_options = {
     series: series,
     chart: {
@@ -290,7 +295,7 @@ foreach ($successfulOrder as $order) {
       }),
       labels: {
         rotate: 0,
-        maxWidth:50,
+        maxWidth: 50,
         style: {
           fontSize: '10px',
           fontFamily: 'Helvetica, Arial, sans-serif',
@@ -336,9 +341,9 @@ foreach ($successfulOrder as $order) {
       }),
       labels: {
         rotate: 0,
-        maxWidth:50,
+        maxWidth: 100,
         style: {
-          fontSize: '10px',
+          fontSize: '12px',
           fontFamily: 'Helvetica, Arial, sans-serif',
           whiteSpace: 'wrap',
         },
