@@ -31,7 +31,7 @@ JOIN orders o ON o.id = op.order_id
 WHERE o.status = 5
 GROUP BY c.id
 ORDER BY num_orders DESC
-LIMIT 5;
+LIMIT 7;
 ", []);
 
 $successfulOrder = Order::findAll(["status" => "5"]);
