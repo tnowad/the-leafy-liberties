@@ -51,10 +51,10 @@
                   <td class="px-5 py-3">
                     <?php echo $user->id; ?>
                   </td>
-                  <td class="w-32 px-5 py-3">
+                  <td class="w-28 px-5 py-3">
                     <img
                       src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>"
-                      alt="" class="object-contain w-full h-full rounded-full">
+                      alt="" class="object-cover w-full h-full rounded-full">
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $user->email; ?>

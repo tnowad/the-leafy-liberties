@@ -5,14 +5,14 @@ use App\Models\Slide; ?>
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/slide/update"; ?>" method="POST" enctype="multipart/form-data">
       <input type="hidden" value="<?php echo $slide->id; ?>" name="id"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <label for="title" class="my-2">Title:</label>
       <input type="text" value="<?php echo $slide->name; ?>" name="title"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
       <label for="title" class="my-2">Image:</label>
       <input type="file" value="<?php echo $slide->image; ?>" name="image"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" onchange="loadFile(event)" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" onchange="loadFile(event)" />
       <div class="">
         <p>Preview Image:</p>
         <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $slide->image ?>" />

@@ -4,11 +4,11 @@
     <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/category/update"; ?>" method="POST"
       enctype="multipart/form-data">
       <input type="hidden" value="<?php echo $category->id; ?>" name="id"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
 
       <label for="title" class="my-2">Title:</label>
       <input type="text" value="<?php echo $category->name; ?>" name="name"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
 
       <label for="img" class="my-2">Image:</label>
       <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />

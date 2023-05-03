@@ -4,25 +4,25 @@
     <form class="flex flex-col" action="<?php echo BASE_URI .
       "/dashboard/coupon/update"; ?>" method="POST">
       <input type="hidden" value="<?php echo $coupon->id; ?>" name="id"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <label for="code" class="my-2">Code:</label>
       <input type="text" value="<?php echo $coupon->code; ?>" name="code"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <label for="expired" class="my-2">Expired:</label>
       <input type="date" value="<?php echo $coupon->expired; ?>" name="expired"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" id="task_date" onchange="return CheckExpired();"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" id="task_date" onchange="return CheckExpired();"
         required />
 
       <label for="description" class="my-2">Description:</label>
-      <textarea name="description" id="" cols="30" rows="6" class="p-3 bg-gray-100 rounded-lg focus:outline-none"
+      <textarea name="description" id="" cols="30" rows="6" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
         required><?php echo $coupon->description; ?>
       </textarea>
 
       <label for="quantity" class="my-2">Quantity:</label>
       <input type="text" value="<?php echo $coupon->quantity; ?>" name="quantity"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">

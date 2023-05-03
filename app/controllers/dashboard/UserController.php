@@ -71,7 +71,7 @@ class UserController extends Controller
           $request->setParam("image", $result);
         } else {
           return $response->setBody(
-            View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
+            View::renderWithDashboardLayout(new View("pages/dashboard/user/index"), [
               "title" => "Users",
               "toast" => [
                 "type" => "error",
@@ -91,7 +91,7 @@ class UserController extends Controller
         $user->status = 1;
         $user->save();
         return $response->setBody(
-          View::renderWithDashboardLayout(new View("pages/dashboard/user"), [
+          View::renderWithDashboardLayout(new View("pages/dashboard/user/index"), [
             "title" => "Users",
             "toast" => [
               "type" => "success",
@@ -205,15 +205,14 @@ class UserController extends Controller
             );
           }
 
-          $user->name = Validation::validateName($request->getParam("name"));
           if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
             $user->image = $request->getParam("old_img");
           } else {
             $user->image = $request->getParam("image");
           }
+          $user->name = Validation::validateName($request->getParam("name"));
           $user->phone = Validation::validatePhone($request->getParam("phone"));
           $user->email = Validation::validateEmail($request->getParam("email"));
-          $user->gender = $request->getParam("gender");
           if ($request->getParam("password") != null) {
             $user->password = password_hash(Validation::validatePassword($request->getParam("password")), PASSWORD_DEFAULT);
           }

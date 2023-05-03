@@ -10,17 +10,17 @@
 
           <label>Name</label>
           <input name="name" value="<?php echo $user->name; ?>" type="text" required
-            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow" />
+            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400" />
           <label>Email</label>
           <input name="email" value=" <?php echo $user->email; ?>" type="email" required
-            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow" />
+            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400" />
           <label>Phone number</label>
           <input name="phone" value="<?php echo $user->phone; ?>" type="tel"
-            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow"
+            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400"
             pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
           <label>Address</label>
           <input name="address" value="<?php echo $user->address; ?>" type="tel"
-            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow"></input>
+            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400"></input>
           <label>Gender</label>
           <div class="relative inline-block">
             <select name="gender" id="gender"
