@@ -6,6 +6,22 @@ use App\Models\User;
 use Core\Database;
 
 $db = Database::getInstance();
+//top 5 product sold in one month
+$top5prdSold = $db->select("SELECT p.id, p.name, SUM(op.quantity) AS total_quantity
+FROM products p
+JOIN orders_products op ON op.product_id = p.id
+JOIN orders o ON o.id = op.order_id
+WHERE o.status = 5
+AND YEAR(o.create_at) = YEAR(CURRENT_DATE)
+AND MONTH(o.create_at) = MONTH(CURRENT_DATE)
+GROUP BY p.id, p.name
+ORDER BY total_quantity DESC
+LIMIT 5;
+", []);
+
+$test = json_encode($top5prdSold);
+
+//most sold by category query
 $categorySold = $db->select("SELECT c.id AS category_id, COUNT(DISTINCT o.id) AS num_orders
 FROM categories c
 JOIN products_categories pc ON pc.category_id = c.id
@@ -14,8 +30,9 @@ JOIN orders_products op ON op.product_id = p.id
 JOIN orders o ON o.id = op.order_id
 WHERE o.status = 5
 GROUP BY c.id
-ORDER BY num_orders DESC", []);
-
+ORDER BY num_orders DESC
+LIMIT 5;
+", []);
 
 $successfulOrder = Order::findAll(["status" => "5"]);
 $pendingOrders = Order::findAll(["status" => "0"]);
@@ -88,12 +105,9 @@ foreach ($successfulOrder as $order) {
       </div>
       <div class="flex flex-wrap items-start justify-between w-full my-8 body-wrap">
         <div class="chart-layout xl:w-[65.5%] px-6 py-7 bg-white rounded-2xl shadow-lg sm:w-full h-full">
-          <div class="flex items-center justify-between top-content">
+          <div class="flex items-center justify-between top-content mb-3">
             <div class="total-revuenes">
-              <p class="text-2xl font-semibold">Total Revuenes</p>
-              <p class="mt-2 text-lg font-bold">
-                <?php echo $sum ?> $
-              </p>
+              <p class="text-2xl font-semibold">Top 5 most selling products</p>
             </div>
             <div class="chart-type p-2 bg-[#8cbfba] rounded-xl">
               <label for="chart-type" class="font-medium text-black">Choose a type:</label>
@@ -122,7 +136,7 @@ foreach ($successfulOrder as $order) {
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                 <div class="bg-<?php echo $colors[$name->id] ?>-600 h-2.5 rounded-full"
-                  style="width: <?php echo (($item["num_orders"]) ? $item["num_orders"] : 0)*10 ?>%"></div>
+                  style="width: <?php echo (($item["num_orders"]) ? $item["num_orders"] : 0) * 10 ?>%"></div>
               </div>
             <?php endforeach ?>
           </div>
@@ -152,7 +166,7 @@ foreach ($successfulOrder as $order) {
             <tbody>
               <?php
               $orders = Order::all();
-              foreach ( array_slice($orders,0,4) as $order):
+              foreach (array_slice($orders, 0, 4) as $order):
                 ?>
                 <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -189,8 +203,12 @@ foreach ($successfulOrder as $order) {
   </div>
 </div>
 <script>
+  let test = <?php echo $test ?>;
+  console.log(test);
   var series = [{
-    name: 'Net Profit', data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+    name: 'Net Profit', data: test.map(function (item) {
+      return item.total_quantity;
+    })
   }];
   var plotOptions = {
     bar: {
@@ -221,11 +239,22 @@ foreach ($successfulOrder as $order) {
       // colors: ['transparent']
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      categories: test.map(function (item) {
+        return item.name
+      }),
+      labels: {
+        rotate: 0,
+        maxWidth:50,
+        style: {
+          fontSize: '10px',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          whiteSpace: 'wrap',
+        },
+      }
     },
     yaxis: {
       title: {
-        text: '$(thousands)'
+        text: 'Quantity'
       }
     },
     fill: {
@@ -234,7 +263,7 @@ foreach ($successfulOrder as $order) {
     tooltip: {
       y: {
         formatter: function (val) {
-          return "$ " + val + " thousands"
+          return val + " items"
         }
       }
     }
@@ -256,7 +285,18 @@ foreach ($successfulOrder as $order) {
       // colors: ['transparent']
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      categories: test.map(function (item) {
+        return item.name
+      }),
+      labels: {
+        rotate: 0,
+        maxWidth:50,
+        style: {
+          fontSize: '10px',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          whiteSpace: 'wrap',
+        },
+      }
     },
     yaxis: {
       title: {
@@ -291,7 +331,18 @@ foreach ($successfulOrder as $order) {
       // colors: ['transparent']
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      categories: test.map(function (item) {
+        return item.name
+      }),
+      labels: {
+        rotate: 0,
+        maxWidth:50,
+        style: {
+          fontSize: '10px',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          whiteSpace: 'wrap',
+        },
+      }
     },
     yaxis: {
       title: {
