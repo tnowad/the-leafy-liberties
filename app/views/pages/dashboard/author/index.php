@@ -27,7 +27,7 @@ $filter = $params['filter'];
         +
       </a>
     </div>
-    <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
+    <div class="my-8 bg-white shadow-lg cursor-pointer table-author-statistics rounded-2xl">
       <div class="relative">
         <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -37,6 +37,7 @@ $filter = $params['filter'];
                 "ID",
                 "Image",
                 "Name",
+                "Product Quantity",
                 "Action",
               ];
               for ($i = 1; $i <= count($namess); $i++) { ?>
@@ -49,7 +50,6 @@ $filter = $params['filter'];
           </thead>
           <tbody>
             <?php
-            // $products = Product::all();
             if (count($authors) > 0): ?>
               <?php foreach ($authors as $author): ?>
                 <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
@@ -65,6 +65,9 @@ $filter = $params['filter'];
                     <?php echo $author->name; ?>
                   </td>
                   <td class="px-5 py-3">
+                    <?php echo count($author->products()) ?>
+                  </td>
+                  <td class="px-5 py-3">
                     <div class="flex items-center justify-center gap-4 button">
                       <a href="<?php echo BASE_URI .
                         "/dashboard/author/update" .
@@ -73,7 +76,7 @@ $filter = $params['filter'];
                         class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button onclick="removeAuthorConfirm(<?php echo $author->id ?>)"
+                      <button onclick="removeAuthor(<?php echo $author->id; ?>)"
                         class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
                         <i class="fa-solid fa-trash"></i>
                       </button>
@@ -91,7 +94,7 @@ $filter = $params['filter'];
 </div>
 <script type="module">
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
-  document.removeAuthorConfirm = (id) => {
+  document.removeAuthor = (id) => {
     const result = confirm("Delete this author?");
     if (result) {
       FetchXHR.post('<?php echo BASE_URI . "/dashboard/author/delete" ?>', { id }, { 'Content-Type': 'application/json' })

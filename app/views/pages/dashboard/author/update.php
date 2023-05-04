@@ -17,8 +17,40 @@ use App\Models\Publisher;
       <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
       <p>Preview Image:</p>
       <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $author->image ?>" />
-      <input type="text" value="<?php echo $product->image; ?>" name="old_img" class="opacity-0" />
-
+      <input type="text" value="<?php echo $author->image; ?>" name="old_img" class="opacity-0" />
+      <!-- <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <?php
+            $namess = [
+              "ID",
+              "Image",
+              "Title",
+            ];
+            for ($i = 1; $i <= count($namess); $i++) { ?>
+              <th scope="col" class="px-6 py-3">
+                <?php echo $namess[$i - 1]; ?>
+              </th>
+            <?php }
+            ?>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($author->products() as $product): ?>
+            <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
+              <td class="px-5 py-3">
+                <?php echo $product->id; ?>
+              </td>
+              <td class="w-32 h-24 p-3">
+                <img src="<?php echo BASE_URI . $product->image; ?>" alt="" />
+              </td>
+              <td class="px-5 py-3">
+                <?php echo $product->name; ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table> -->
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit

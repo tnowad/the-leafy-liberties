@@ -114,6 +114,12 @@ $router->post("/dashboard/category/delete", [
   "delete",
 ]);
 
+//author
+$router->get("/dashboard/author", [AuthorController::class, "index"]);
+$router->get("/dashboard/author/update", [AuthorController::class, "update"]);
+$router->post("/dashboard/author/update", [AuthorController::class, "update"]);
+$router->post("/dashboard/author/delete", [AuthorController::class, "delete"]);
+
 
 // permission
 
@@ -130,8 +136,3 @@ $router->get("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/delete", [SettingController::class, "delete"]);
 
-//author
-$router->get("/dashboard/author", [AuthorController::class, "index"]);
-$router->get("/dashboard/author/update", [AuthorController::class, "update"]);
-$router->post("/dashboard/author/update", [AuthorController::class, "update"]);
-$router->post("/dashboard/author/delete", [AuthorController::class, "delete"]);

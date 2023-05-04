@@ -239,7 +239,6 @@ class AuthorController extends Controller
     }
     $products = Product::findAll(["author_id" => $author->id]);
     foreach ($products as $product) {
-      $product->delete();
       $tags = ProductTag::findAll(["product_id" => $product->id]);
       $categories = ProductCategory::findAll(["product_id" => $product->id]);
       foreach ($categories as $category) {
@@ -248,6 +247,7 @@ class AuthorController extends Controller
       foreach ($tags as $tag) {
         $tag->delete();
       }
+      $product->delete();
     }
     $author->delete();
     $response->jsonResponse([
