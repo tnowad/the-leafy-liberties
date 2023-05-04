@@ -42,7 +42,7 @@ foreach ($allPermissions as $key => $permission) {
       Name
     </label>
     <input
-      class="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0 p-2"
+      class="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-primary p-2"
       type="text" name="name" id="name" value="<?php echo $role->name; ?>">
   </div>
 

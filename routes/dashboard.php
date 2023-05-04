@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\Customer\DashboardController;
+use App\Controllers\Dashboard\AuthorController;
 use App\Controllers\Dashboard\CategoryController;
 use App\Controllers\Dashboard\ReviewController;
 use App\Controllers\Dashboard\CouponController;
@@ -128,3 +129,9 @@ $router->post("/dashboard/setting", [SettingController::class, "create"]);
 $router->get("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/delete", [SettingController::class, "delete"]);
+
+//author
+$router->get("/dashboard/author", [AuthorController::class, "index"]);
+$router->get("/dashboard/author/update", [AuthorController::class, "update"]);
+$router->post("/dashboard/author/update", [AuthorController::class, "update"]);
+$router->post("/dashboard/author/delete", [AuthorController::class, "delete"]);

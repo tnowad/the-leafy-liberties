@@ -216,15 +216,20 @@ foreach ($successfulOrder as $order) {
     bar: {
       horizontal: false,
       columnWidth: '55%',
-      endingShape: 'rounded'
+      endingShape: 'rounded',
+      distributed: true
     },
     line: {
       markers: {
         size: 6
-      }
+      },
+      distributed: true
+    },
+    area: {
+      distributed: true
     }
   }
-  var colors = ['#85B3AF', '#546E7A', '#d4526e', '#13d8aa', '#A5978B'];
+  var colors = ['#85B3AF', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', "#f9a3a4", "#f48024"];
   var bar_options = {
     series: series,
     chart: {
@@ -232,6 +237,10 @@ foreach ($successfulOrder as $order) {
       height: 350,
       width: '100%',
     },
+    // title: {
+    //   text: 'Top 5 most selling products',
+    //   align: 'left'
+    // }
     plotOptions: plotOptions,
     dataLabels: {
       enabled: false
@@ -249,7 +258,7 @@ foreach ($successfulOrder as $order) {
         rotate: 0,
         maxWidth: 50,
         style: {
-          fontSize: '10px',
+          fontSize: '0px',
           fontFamily: 'Helvetica, Arial, sans-serif',
           whiteSpace: 'nowrap',
         },
@@ -326,6 +335,15 @@ foreach ($successfulOrder as $order) {
       type: 'area',
       height: 350,
       width: '100%',
+      stacked: true,
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.2
+      }
     },
     plotOptions: plotOptions,
     dataLabels: {
@@ -333,8 +351,14 @@ foreach ($successfulOrder as $order) {
     },
     stroke: {
       show: true,
-      width: 2,
-      // colors: ['transparent']
+      width: 4,
+      curve: 'smooth',
+      lineCap: 'butt',
+      colors: ["#52938D"],
+    },
+    legend: {
+      show: true,
+      // showForSingleSeries: true
     },
     xaxis: {
       categories: test.map(function (item) {
@@ -350,14 +374,25 @@ foreach ($successfulOrder as $order) {
         },
       }
     },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.7,
+        opacityTo: 0.9,
+      },
+      colors: ["#52938D"]
+    },
+    markers: {
+      size: 5,
+      colors: ["#52938D"],
+      strokeColor: "#A9C9C7",
+      strokeWidth: 3
+    },
     yaxis: {
       title: {
         text: 'Quantity'
       }
-    },
-    fill: {
-      opacity: 1,
-      colors: colors // set fill colors to use the same colors as bars
     },
     tooltip: {
       y: {
@@ -369,8 +404,6 @@ foreach ($successfulOrder as $order) {
   };
   let chart = new ApexCharts(document.getElementById("chart"), bar_options);
   chart.render();
-  // chart.destroy();
-  // let new_options = options;
   function ChangeChart(chartType) {
     console.log(chartType.value);
     chart.destroy();

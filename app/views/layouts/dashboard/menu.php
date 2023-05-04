@@ -20,6 +20,11 @@ $menu = [
     "icon" => "fa-bag-shopping",
     "url" => BASE_URI . "/dashboard/product",
   ],
+  "author.access" => [
+    "name" => "Authors",
+    "icon" => "fa-user-pen",
+    "url" => BASE_URI . "/dashboard/author",
+  ],
   "review.access" => [
     "name" => "Reviews",
     "icon" => "fa-message",

@@ -217,7 +217,7 @@ $user = $auth->getUser();
     </div>
     <div class="relative w-full mb-5">
       <div class="flex category_slide">
-        <?php foreach (Category::all() as $category): ?>
+        <?php foreach (Category::findAll(["deleted_at" => "null"]) as $category): ?>
           <?php if ($category->image != null): ?>
             <a class="relative mr-2 overflow-hidden cursor-pointer genres-detail rounded-3xl w-fit" href="<?php echo BASE_URI .
               "/products?categories[]=" .
@@ -241,7 +241,7 @@ $user = $auth->getUser();
           <p>Popular Authors</p>
         </div>
         <div class="flex items-center justify-between author_slide">
-          <?php foreach (Author::all() as $author): ?>
+          <?php foreach (Author::findAll(["deleted_at" => "null"]) as $author): ?>
             <a class="flex flex-col items-center justify-between w-full mb-4 author-card" href="<?php echo BASE_URI .
               "/products?author=" .
               $author->id; ?>">

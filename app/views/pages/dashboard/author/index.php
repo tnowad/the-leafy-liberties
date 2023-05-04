@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Category;
+use App\Models\Author;
 use App\Models\Product;
 use App\Models\Pagination;
 
@@ -11,9 +11,9 @@ $filter = $params['filter'];
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
-      <h1 class="text-xl font-bold">Product</h1>
+      <h1 class="text-xl font-bold">Author</h1>
       <div class="box-border w-1/2 px-10">
-        <form action="<?php echo BASE_URI . '/dashboard/product' ?>" method="GET"
+        <form action="<?php echo BASE_URI . '/dashboard/author' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full shadow-lg">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
             placeholder="Search.... "
@@ -23,7 +23,7 @@ $filter = $params['filter'];
           </button>
         </form>
       </div>
-      <a class="w-5 h-5 text-2xl add-product" href="<?php echo BASE_URI . "/dashboard/product/create"; ?>">
+      <a class="w-5 h-5 text-2xl add-product" href="<?php echo BASE_URI . "/dashboard/author/create"; ?>">
         +
       </a>
     </div>
@@ -36,9 +36,7 @@ $filter = $params['filter'];
               $namess = [
                 "ID",
                 "Image",
-                "Title",
-                "Price",
-                "Quantity",
+                "Name",
                 "Action",
               ];
               for ($i = 1; $i <= count($namess); $i++) { ?>
@@ -52,34 +50,30 @@ $filter = $params['filter'];
           <tbody>
             <?php
             // $products = Product::all();
-            if (count($products) > 0): ?>
-              <?php foreach ($products as $product): ?>
+            if (count($authors) > 0): ?>
+              <?php foreach ($authors as $author): ?>
                 <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-3">
-                    <?php echo $product->id; ?>
+                    <?php echo $author->id; ?>
                   </td>
-                  <td class="w-32 h-24 p-3">
-                    <img src="<?php echo BASE_URI . $product->image; ?>" alt="" />
+                  <td class="w-40 h-40 px-5 py-3">
+                    <img
+                      src="<?php echo ($author->image == NULL) ? BASE_URI . '/resources/images/authors/placeholder.png' : BASE_URI . $author->image ?>"
+                      alt="" class="object-cover w-full h-full rounded-full">
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $product->name; ?>
-                  </td>
-                  <td class="px-5 py-3">
-                    <?php echo $product->price; ?>
-                  </td>
-                  <td class="p-2">
-                    <?php echo $product->quantity; ?>
+                    <?php echo $author->name; ?>
                   </td>
                   <td class="px-5 py-3">
                     <div class="flex items-center justify-center gap-4 button">
                       <a href="<?php echo BASE_URI .
-                        "/dashboard/product/update" .
+                        "/dashboard/author/update" .
                         "?id=" .
-                        $product->id; ?>"
+                        $author->id; ?>"
                         class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
-                      <button onclick="removeProductConfirm(<?php echo $product->id ?>)"
+                      <button onclick="removeAuthorConfirm(<?php echo $author->id ?>)"
                         class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
                         <i class="fa-solid fa-trash"></i>
                       </button>
@@ -97,17 +91,17 @@ $filter = $params['filter'];
 </div>
 <script type="module">
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
-  document.removeProductConfirm = (id) => {
-    const result = confirm("Delete this product?");
+  document.removeAuthorConfirm = (id) => {
+    const result = confirm("Delete this author?");
     if (result) {
-      FetchXHR.post('<?php echo BASE_URI . "/dashboard/product/delete" ?>', { id }, { 'Content-Type': 'application/json' })
+      FetchXHR.post('<?php echo BASE_URI . "/dashboard/author/delete" ?>', { id }, { 'Content-Type': 'application/json' })
         .then(response => {
           if (response.type === 'error') {
             alert(response.message);
           } else if (response.type === 'info') {
             alert(response.message);
           } else {
-            alert('This product has been removed');
+            alert('This author has been removed');
           }
         }).catch(error => {
           alert('Something went wrong');
