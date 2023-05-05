@@ -216,6 +216,7 @@ class UserController extends Controller
           $user->name = Validation::validateName($request->getParam("name"));
           $user->phone = Validation::validatePhone($request->getParam("phone"));
           $user->email = Validation::validateEmail($request->getParam("email"));
+          $user->status = $request->getParam("status");
           if ($request->getParam("password") != null) {
             $user->password = password_hash(Validation::validatePassword($request->getParam("password")), PASSWORD_DEFAULT);
           }

@@ -193,15 +193,6 @@ $user = $auth->getUser();
       <div class="hidden 2xl:block 2xl:w-1/3">
         <div class="sticky w-full h-auto top-32">
           <img src="resources/images/bestOffer.png" alt="" class="w-full h-full rounded-2xl" />
-          <div class="absolute flex flex-col items-center w-full text-center top-3/4">
-            <p class="text-lg font-normal text-white xl:text-base">
-              Best Offer
-            </p>
-            <p class="text-4xl text-white xl:text-3xl">Save 100%</p>
-            <button class="w-32 p-2 mt-3 text-lg font-bold text-pink-400 bg-white rounded-full ">
-              See more
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -265,7 +256,7 @@ $user = $auth->getUser();
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
   const BASE_URI = '<?php echo BASE_URI; ?>';
-  
+
   document.addToWishList = (id) => {
     FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', { id }, {
       'Content-Type': 'application/json'

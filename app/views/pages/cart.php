@@ -44,11 +44,12 @@ $cartItems = $params["cartItems"];
                     <form class="flex items-center justify-center mx-auto product-quantity w-fit h-fit">
                       <input type="hidden" name="id" value="<?php echo $product->id; ?>">
                       <input type="submit" value="-" name="minus"
-                        class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                        class="cursor-pointer fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                       <input type="number" name="quantity" class="w-10 text-lg text-center text-count"
-                        value="<?php echo $cartItem->quantity; ?>" />
+                        value="<?php echo $cartItem->quantity; ?>" onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;"
+/>
                       <input type="submit" value="+" name="plus"
-                        class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                        class="cursor-pointer fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                     </form>
                   </div>
                   <p class="text-xl font-bold counter-price">

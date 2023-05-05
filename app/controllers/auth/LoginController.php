@@ -42,6 +42,14 @@ class LoginController extends Controller
       Application::getInstance()
         ->getAuthentication()
         ->setUser($user);
+      if ($user->status != 1) {
+        $response->redirect(BASE_URI . "/login", 200, [
+          "toast" => [
+            "type" => "error",
+            "message" => "You have been banned",
+          ],
+        ]);
+      }
       return $response->redirect(BASE_URI . "/", 200, [
         "toast" => [
           "type" => "success",
@@ -49,7 +57,6 @@ class LoginController extends Controller
         ],
       ]);
     }
-
     $response->redirect(BASE_URI . "/login", 200, [
       "toast" => [
         "type" => "error",

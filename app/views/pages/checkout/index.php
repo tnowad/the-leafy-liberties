@@ -23,8 +23,8 @@ foreach ($cartItems as $cartItem) {
   $totalMoney += $cartItem->quantity * $cartItem->product()->price;
 }
 
-$shipping = 2.99;
-$taxMoney = $totalMoney * $tax;
+$shipping = 0;
+$taxMoney = number_format(($totalMoney * $tax) / 100,2);
 $grandTotal = $totalMoney + $shipping + $taxMoney;
 
 ?>
@@ -136,8 +136,8 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           </div>
         </div>
         <div class="w-full" id="order-preview-list">
-          <?php foreach ($cartItems as $CartItem): ?>
-            <?php $product = $CartItem->product(); ?>
+          <?php foreach ($cartItems as $cartItem): ?>
+            <?php $product = $cartItem->product(); ?>
             <div class="flex items-center justify-between mt-5">
               <div class="flex items-center">
                 <a href="<?php echo BASE_URI . '/product' . '?id=' . $product->id ?>">
@@ -198,7 +198,8 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             <div class="flex items-center justify-between tax">
               <p>Tax</p>
               <div class="font-bold tax-money">
-                <?php echo $tax ?>
+              $
+                <?php echo $taxMoney ?>
               </div>
             </div>
           </div>
@@ -217,7 +218,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             </fieldset>
             <div
               class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
-              <button type="submit" class="text-xl grand-total">
+              <button type="submit" class="text-xl grand-total w-full h-full">
                 Pay $
                 <?php echo $grandTotal ?>
               </button>
@@ -275,13 +276,11 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
       let option = document.querySelectorAll("input[name=shipping-method-id]")[index];
       if (option.checked == true) {
         shipping_money.innerHTML = "$" + ship_method[index];
-        taxMoney = (tax.innerHTML * subtotal);
+        taxMoney = tax.innerHTML.replace("$","") ;
         sum = (parseFloat(subtotal) + parseFloat(ship_method[index]) + parseFloat(taxMoney)).toFixed(2)
         grand_money.innerHTML = "$ " + sum;
         grand_total.innerHTML = "Pay $ " + sum;
       }
     })
   });
-
-
 </script>

@@ -16,12 +16,11 @@ AND YEAR(o.create_at) = YEAR(CURRENT_DATE)
 AND MONTH(o.create_at) = MONTH(CURRENT_DATE)
 GROUP BY p.id, p.name
 ORDER BY total_quantity DESC
-LIMIT 5;
-", []);
+LIMIT 5;", []);
 
 $test = json_encode($top5prdSold);
 
-//most sold by category query
+// //most sold by category query
 $categorySold = $db->select("SELECT c.id AS category_id, COUNT(DISTINCT o.id) AS num_orders
 FROM categories c
 JOIN products_categories pc ON pc.category_id = c.id
@@ -31,12 +30,10 @@ JOIN orders o ON o.id = op.order_id
 WHERE o.status = 5
 GROUP BY c.id
 ORDER BY num_orders DESC
-LIMIT 7;
-", []);
+LIMIT 5;", []);
 
 $successfulOrder = Order::findAll(["status" => "5"]);
 $pendingOrders = Order::findAll(["status" => "0"]);
-// $product_id = OrderProduct::findOne([]);
 $sum = 0;
 $sumCategory = 0;
 $products_sale = 0;

@@ -117,13 +117,13 @@
           input.style.border = "1px solid #d1d5db";
         }
       }
-      if (input.type === "password") {
-        if (!input.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/g)) {
-          input.style.border = "1px solid red";
-        } else {
-          input.style.border = "1px solid #d1d5db";
-        }
-      }
+      // if (input.type === "password") {
+      //   if (!input.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/g)) {
+      //     input.style.border = "1px solid red";
+      //   } else {
+      //     input.style.border = "1px solid #d1d5db";
+      //   }
+      // }
     });
   });
 
