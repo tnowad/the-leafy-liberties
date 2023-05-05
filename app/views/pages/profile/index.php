@@ -17,8 +17,8 @@
           <label>Phone number</label>
           <input name="phone" value="<?php echo $user->phone; ?>" type="tel"
             class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400"
-            pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required
-            oninvalid="this.setCustomValidity('Please enter a valid phone number')" onvalid="this.setCustomValidity('')" />
+            pattern="^[0-9]{10}$" required oninvalid="this.setCustomValidity('Please enter a valid phone number')"
+            onvalid="this.setCustomValidity('')" />
           <label>Address</label>
           <input name="address" value="<?php echo $user->address; ?>" type="text"
             class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400" />

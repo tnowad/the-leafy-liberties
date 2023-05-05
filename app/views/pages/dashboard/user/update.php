@@ -29,7 +29,7 @@ use App\Models\User;
 
       <label for="expired" class="my-2">Password:</label>
       <input type="password" name="password"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
       <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[72%] right-20 cursor-pointer"
         aria-hidden="true"></i>
       <i id="show-icon-password" class="fa fa-eye absolute hidden top-[72%] right-20 cursor-pointer"
@@ -37,7 +37,9 @@ use App\Models\User;
 
       <label for="expired" class="my-2">Phone:</label>
       <input type="tel" value="<?php echo $user->phone; ?>" name="phone"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        pattern="^[0-9]{10}$" required oninvalid="this.setCustomValidity('Please enter a valid phone number')"
+        onvalid="this.setCustomValidity('')" />
       <label for="role" class="my-2">Select role:</label>
       <select value="" name="role"
         class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
@@ -56,15 +58,15 @@ use App\Models\User;
         class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
         <option value="<?php echo $user->status ?>">
           <?php
-            if($user->status == 1){
-              echo "Active";
-            }else{
-              echo "Banned";
-            }
+          if ($user->status == 1) {
+            echo "Active";
+          } else {
+            echo "Banned";
+          }
           ?>
-      </option>
-      <option value="1">Active</option>
-      <option value="0">Banned</option>
+        </option>
+        <option value="1">Active</option>
+        <option value="0">Banned</option>
       </select>
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">

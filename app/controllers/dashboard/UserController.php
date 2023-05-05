@@ -84,7 +84,19 @@ class UserController extends Controller
         }
 
         $user = new User();
-        $user->email = $request->getParam("email");
+        $users = User::all();
+        foreach ($users as $item) {
+          if ($item->email == $user->email) {
+            return $response->redirect(BASE_URI . "/dashboard/user/create", 200, [
+              "toast" => [
+                "type" => "error",
+                "message" => "This email had already existed.",
+              ],
+            ]);
+          } else {
+            $user->email = $request->getParam("email");
+          }
+        }
         $user->name = $request->getParam("name");
         if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
           $user->image = NULL;

@@ -38,24 +38,25 @@ class LoginController extends Controller
     }
 
     $user = User::findOne(["email" => $email]);
-    if ($user && password_verify($password, $user->password)) {
-      Application::getInstance()
-        ->getAuthentication()
-        ->setUser($user);
-      if ($user->status != 1) {
-        $response->redirect(BASE_URI . "/login", 200, [
+    if ($user->status == 0 && $user) {
+      return $response->redirect(BASE_URI . "/login", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You have been banned",
+        ],
+      ]);
+    } else {
+      if ($user && password_verify($password, $user->password)) {
+        Application::getInstance()
+          ->getAuthentication()
+          ->setUser($user);
+        return $response->redirect(BASE_URI . "/", 200, [
           "toast" => [
-            "type" => "error",
-            "message" => "You have been banned",
+            "type" => "success",
+            "message" => "Login success",
           ],
         ]);
       }
-      return $response->redirect(BASE_URI . "/", 200, [
-        "toast" => [
-          "type" => "success",
-          "message" => "Login success",
-        ],
-      ]);
     }
     $response->redirect(BASE_URI . "/login", 200, [
       "toast" => [
