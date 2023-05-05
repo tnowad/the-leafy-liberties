@@ -13,7 +13,9 @@ use App\Models\Role; ?>
       <input type="email" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="email" required />
 
       <label for="category" class="my-2">Name:</label>
-      <input type="text" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="name" required />
+      <input type="text" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="name" required
+        pattern="[a-zA-Z]+" oninvalid="this.setCustomValidity('Please enter alphabets only')"
+        onvalid="this.setCustomValidity('')" />
 
       <label for="remaining" class="my-2">Password:</label>
       <input type="password" value="" class="p-3 bg-gray-100 rounded-lg focus:outline-none" name="password" required />

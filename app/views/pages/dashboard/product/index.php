@@ -23,6 +23,7 @@ $filter = $params['filter'];
           <button class="flex items-center justify-center w-10 h-10 bg-white rounded-tr-full rounded-br-full">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
+          
         </form>
       </div>
       <a class="w-5 h-5 text-2xl add-product" href="<?php echo BASE_URI . "/dashboard/product/create"; ?>">

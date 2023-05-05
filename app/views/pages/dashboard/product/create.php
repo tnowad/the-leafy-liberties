@@ -10,10 +10,14 @@ use App\Models\Publisher;
       enctype="multipart/form-data">
       <label for="title" class="my-2">Title:</label>
       <input type="text" value="" name="name"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        pattern="[a-zA-Z]+"
+        oninvalid="this.setCustomValidity('Please enter alphabets only')"
+        onvalid="this.setCustomValidity('')"
+        />
 
       <label for="image" class="my-2">Image:</label>
-      <input type="file" name="image" onchange="loadFile(event)" required accept="image/*"/>
+      <input type="file" name="image" onchange="loadFile(event)" required accept="image/*" />
       <p>Preview Image:</p>
       <img id="output1" class="object-contain h-56 w-80" />
 

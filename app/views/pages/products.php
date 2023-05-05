@@ -19,8 +19,19 @@ $products = $pagination['products'];
       <div class="w-full border border-gray-200 shadow-sm">
         <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/products' ?>">
           <input type="hidden" name="page" value="1">
-          <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>">
+          <!-- <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>"> -->
           <input type="hidden" name="keywords" value="<?php echo $filter['keywords'] ?>">
+          <div class="border-b border-gray-200">
+            <div class="relative px-4 py-2">
+              <div class="flex items-center justify-between">
+                <h1 class="mt-2 mb-2 text-xl font-medium">Show products Per Page</h1>
+              </div>
+              <input type="number" name="limit" value="<?php echo $pagination['limit'] ?>"
+              class="w-full px-3 py-1 border border-gray-300 rounded-sm"
+              onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;"
+              >
+            </div>
+          </div>
           <div class="border-b border-gray-200">
             <div class="relative px-4 py-2">
               <div class="flex items-center justify-between">

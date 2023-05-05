@@ -21,7 +21,9 @@ use App\Models\User;
 
       <label for="name" class="my-2">Name:</label>
       <input type="text" value="<?php echo $user->name; ?>" name="name"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        pattern="[a-zA-Z]+" oninvalid="this.setCustomValidity('Please enter alphabets only')"
+        onvalid="this.setCustomValidity('')" />
 
       <label for="expired" class="my-2">Email:</label>
       <input type="email" value="<?php echo $user->email; ?>" name="email"
