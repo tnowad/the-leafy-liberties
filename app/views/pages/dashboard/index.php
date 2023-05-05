@@ -40,7 +40,7 @@ $pendingOrders = Order::findAll(["status" => "0"]);
 $sum = 0;
 $sumCategory = 0;
 $products_sale = 0;
-$customer = count(User::all());
+$customer = count(User::findAll(["deleted_at" => "null"]));
 $orders = count(Order::all());
 foreach ($successfulOrder as $order) {
   $sum += $order->total_price;
