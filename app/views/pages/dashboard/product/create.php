@@ -9,7 +9,8 @@ use App\Models\Publisher;
     <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/product/create"; ?>" method="POST"
       enctype="multipart/form-data">
       <label for="title" class="my-2">Title:</label>
-      <input type="text" value="" name="name" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+      <input type="text" value="" name="name"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <label for="image" class="my-2">Image:</label>
       <input type="file" name="image" onchange="loadFile(event)" required />
@@ -17,14 +18,16 @@ use App\Models\Publisher;
       <img id="output1" class="object-contain h-56 w-80" />
 
       <label for="entered" class="my-2">ISBN:</label>
-      <input type="number" value="" name="isbn" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+      <input type="number" value="" name="isbn"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <label for="price" class="my-2">Price:</label>
-      <input type="number" value="" step="0.01" name="price" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
-        required />
+      <input type="number" value="" step="0.01" name="price"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
       <label for="gender" class="my-2">Author:</label>
       <div class="flex items-center justify-between gap-4">
-        <select value="" name="author" class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
+        <select value="" name="author"
+          class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
           <option value=""></option>
           <?php foreach (Author::all() as $author): ?>
             <option value="<?php echo $author->id ?>">
@@ -37,11 +40,13 @@ use App\Models\Publisher;
       <div class="flex-col hidden author-add">
         <input type="hidden" name="author-id" />
         <label for="title" class="my-2">Add new author name:</label>
-        <input type="text" value="" name="author-name" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
+        <input type="text" value="" name="author-name"
+          class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
       </div>
       <label for="gender" class="my-2">Publisher:</label>
       <div class="flex items-center justify-between gap-4">
-        <select value="" name="publisher" class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
+        <select value="" name="publisher"
+          class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
           <option value=""></option>
           <?php foreach (Publisher::all() as $publish): ?>
             <option value="<?php echo $publish->id ?>">
@@ -51,11 +56,12 @@ use App\Models\Publisher;
         </select>
       </div>
       <label for="category" class="my-2">Description:</label>
-      <textarea name="description" id="" cols="30" rows="4" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
-        required></textarea>
+      <textarea name="description" id="" cols="30" rows="4"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required></textarea>
 
       <label for="quantity" class="my-2">Quantity:</label>
-      <input type="text" value="" name="quantity" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+      <input type="text" value="" name="quantity"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
@@ -92,4 +98,55 @@ use App\Models\Publisher;
     }
 
   })
+  let button = document.querySelector("button[type='submit']");
+  let inputName = document.querySelector("input[name='name']");
+  let inputImage = document.querySelector("input[name='image']");
+  let inputIsbn = document.querySelector("input[name='isbn']");
+  let inputPrice = document.querySelector("input[name='price']");
+  let inputDescription = document.querySelector("input[name='description']");
+  let inputQuantity = document.querySelector("input[name='quantity']");
+  let inputAuthor = document.querySelector("select[name='description']");
+  let inputPublisher = document.querySelector("select[name='description']");
+  button.addEventListener("click", () => {
+    if (inputName.value.trim() === '') {
+      alert('Please enter a name');
+      return;
+    }
+    if (inputImage.value.trim() === '') {
+      alert('Please select an image');
+      return;
+    }
+    if (inputIsbn.value.trim() === '') {
+      alert('Please enter an ISBN');
+      // console.log(typeof inputIsbn.value);
+      return;
+    }
+    if (inputPrice.value.trim() === '') {
+      alert('Please enter a price');
+      return;
+    }
+    if (inputPrice.value < 0) {
+      alert("Please enter a number greater than 0")
+    }
+    if (inputDescription.value.trim() === '') {
+      alert('Please enter a description');
+      return;
+    }
+    if (inputQuantity.value.trim() === '') {
+      alert('Please enter a quantity');
+      return;
+    }
+    if (inputQuantity.value < 0) {
+      alert("Please enter a number greater than 0")
+    }
+    if (inputAuthor.value.trim() === '') {
+      alert('Please select an author');
+      return;
+    }
+    if (inputPublisher.value.trim() === '') {
+      alert('Please select a publisher');
+      return;
+    }
+  });
+
 </script>

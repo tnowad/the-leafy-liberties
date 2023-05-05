@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers\Dashboard;
 
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
@@ -249,6 +251,14 @@ class UserController extends Controller
       ]);
     }
     // dd($user);
+    $orders = Order::findAll(["user_id" => $user->id]);
+    foreach ($orders as $order) {
+      $ordProducts = OrderProduct::findAll(["order_id" => $order->id]);
+      foreach ($ordProducts as $ordProduct) {
+        $ordProduct->delete();
+      }
+      $order->delete();
+    }
     $user->delete();
     $response->jsonResponse([
       "type" => "success",

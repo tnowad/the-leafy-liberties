@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Pagination;
 
@@ -68,7 +70,23 @@ $filter = $params['filter'];
                     <?php echo $product->price; ?>
                   </td>
                   <td class="p-2">
-                    <?php echo $product->quantity; ?>
+                    <?php
+                    $sum = 0;
+                    $orders = Order::findAll(["status" => "5"]);
+                    foreach ($orders as $order) {
+                      $ordProducts = OrderProduct::findAll(["order_id" => $order->id]);
+                      foreach ($ordProducts as $ordProduct) {
+                        if ($ordProduct->product_id == $product->id) {
+                          $sum = $product->quantity - $ordProduct->quantity;
+                          break;
+                        } else {
+                          continue;
+                        }
+                      }
+                    }
+                    echo ($sum) ? $sum : $product->quantity;
+                    ?>
+
                   </td>
                   <td class="px-5 py-3">
                     <div class="flex items-center justify-center gap-4 button">

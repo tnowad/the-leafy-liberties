@@ -121,7 +121,6 @@ foreach ($successfulOrder as $order) {
             </div>
           </div>
           <div id="chart">
-
           </div>
         </div>
         <div class="most-sold-items xl:w-[31.5%] py-4 px-4 bg-white rounded-2xl shadow-lg sm:w-full sm:mt-5 2xl:mt-0">
