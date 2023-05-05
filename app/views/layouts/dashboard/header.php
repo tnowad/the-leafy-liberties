@@ -28,12 +28,14 @@ $user = $auth->getUser();
         <ul id="menu"
           class="absolute right-0 flex-col hidden gap-2 p-2 transition-all bg-white rounded-lg shadow-lg top-full"
           onmouseover="showMenu()" onmouseout="hideMenuDelayed()">
-          <li class=" whitespace-nowrap hover:bg-[#cee4e1] transition-all cursor-pointer p-2 text-left text-gray-600">
+          <li
+            class=" whitespace-nowrap hover:bg-[#cee4e1] transition-all cursor-pointer p-2 text-left text-gray-600 w-full h-full">
             <a href="<?php echo BASE_URI .
-              "/dashboard/user/update" . '?id=' . $user->id ?>">User Setting</a>
+              "/dashboard/user/update" . '?id=' . $user->id ?>" class="block w-full h-full">User Setting</a>
           </li>
-          <li class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600">
-            <a href="<?php echo BASE_URI . "/logout"; ?> ">Logout</a>
+          <li
+            class="whitespace-nowrap cursor-pointer hover:bg-[#cee4e1] transition-all p-2 text-left text-gray-600 w-full h-full">
+            <a href="<?php echo BASE_URI . "/logout"; ?> " class="block w-full h-full">Logout</a>
           </li>
         </ul>
       </div>

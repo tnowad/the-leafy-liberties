@@ -89,9 +89,22 @@ class ProductController extends Controller
           ]);
         }
         $product = new Product();
+        $products = Product::all();
+        foreach ($products as $item) {
+          if ($item->isbn == $product->isbn) {
+            return $response->redirect(BASE_URI . "/dashboard/product/create", 200, [
+              "toast" => [
+                "type" => "error",
+                "message" => "This ISBN number is already exist!",
+              ],
+            ]);
+          }else{
+            $product->isbn = $request->getParam("isbn");
+            break;
+          }
+        }
         $product->name = $request->getParam("name");
         $product->image = $request->getParam("image");
-        $product->isbn = $request->getParam("isbn");
         $product->price = $request->getParam("price");
         $product->description = $request->getParam("description");
         $product->quantity = $request->getParam("quantity");

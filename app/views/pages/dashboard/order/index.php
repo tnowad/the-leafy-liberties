@@ -11,7 +11,7 @@ use App\Models\Pagination;
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Order</h1>
-      <div class="box-border w-1/2 px-10">
+      <div class="box-border w-1/2">
         <form action="<?php echo BASE_URI . '/dashboard/order' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full shadow-lg">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"

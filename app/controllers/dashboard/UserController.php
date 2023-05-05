@@ -95,6 +95,7 @@ class UserController extends Controller
             ]);
           } else {
             $user->email = $request->getParam("email");
+            break;
           }
         }
         $user->name = $request->getParam("name");
