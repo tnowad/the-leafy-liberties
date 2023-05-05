@@ -1,3 +1,8 @@
+<?php
+$users = $params['users'];
+// dd($users);
+?>
+
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">

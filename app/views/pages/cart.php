@@ -68,7 +68,8 @@ $cartItems = $params["cartItems"];
           <span class="text-xl text-bill">Total:</span>
           <span class="text-xl money-bill">
             <?php
-            $total = 0; foreach ($cartItems as $cartItem) {
+            $total = 0;
+            foreach ($cartItems as $cartItem) {
               $product = $cartItem->product();
               $total += $product->price * $cartItem->quantity;
             }
@@ -82,15 +83,7 @@ $cartItems = $params["cartItems"];
         </a>
       </div>
     </div>
-    <div class="flex justify-between items-center w-[65%]">
-      <div class="flex my-8 coupon-code">
-        <input type="text" name="" id="" placeholder="Enter coupon code"
-          class="px-5 py-3 border-gray-400 border-solid border-[1px] rounded-md focus:outline-none" />
-        <button
-          class="ml-5 px-4 py-3 bg-[#315854] rounded-md text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
-          Apply
-        </button>
-      </div>
+    <div class="flex justify-end items-center w-[65%] mt-5">
       <!-- remove all product in wishlist -->
       <button
         class="px-4 py-3 font-bold text-black transition-all border-2 rounded-sm hover:bg-red-400 hover:text-white hover:border-red-600 h-fit"

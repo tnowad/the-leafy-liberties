@@ -17,7 +17,7 @@ $user = $auth->getUser() ?? null;
     <a class="w-48" href="<?php echo BASE_URI . "/"; ?>">
       <img src="<?php echo BASE_URI . "/resources/images/logo.png"; ?>" alt="HeaderLogo" />
     </a>
-    <div class="hidden sm:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center relative">
+    <div class="hidden md:flex w-full max-w-[140px] group h-full mx-auto justify-center items-center relative">
       <button
         class="shadow-lg px-3 py-2 rounded-md text-primary font-semibold hover:text-white transition-all tracking-wide relative overflow-hidden group-hover:text-white">
         <i class="mr-1 fa-solid fa-bars"></i>
@@ -56,7 +56,7 @@ $user = $auth->getUser() ?? null;
         </button>
       </form>
     </div>
-    <div class="relative flex-row justify-between hidden gap-2 md:flex">
+    <div class="relative flex-row justify-between gap-2 flex">
       <?php
       if ($user != null) {
         $wishlist = Wishlist::findAll(["user_id" => $user->id]);

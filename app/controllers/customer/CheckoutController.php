@@ -69,7 +69,7 @@ class CheckoutController extends Controller
         $order->expired_date = $request->getParam('expired-date');
         $order->cvv = $request->getParam('cvv');
       }
-
+      
       $order->save();
     } catch (\Exception $e) {
       Database::getInstance()->rollbackTransaction();

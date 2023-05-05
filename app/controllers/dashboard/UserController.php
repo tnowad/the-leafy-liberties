@@ -86,21 +86,22 @@ class UserController extends Controller
         $user = new User();
         $user->email = $request->getParam("email");
         $user->name = $request->getParam("name");
-        $user->image = $request->getParam("image");
+        if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
+          $user->image = NULL;
+        } else {
+          $user->image = $request->getParam("image");
+        }
         $user->phone = $request->getParam("phone");
         $user->password = password_hash($request->getParam("password"), PASSWORD_DEFAULT);
         $user->role_id = $request->getParam("role");
         $user->status = 1;
         $user->save();
-        return $response->setBody(
-          View::renderWithDashboardLayout(new View("pages/dashboard/user/index"), [
-            "title" => "Users",
-            "toast" => [
-              "type" => "success",
-              "message" => "Add user successful!",
-            ],
-          ])
-        );
+        return $response->redirect(BASE_URI . '/dashboard/user', 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Add user successful!"
+          ]
+        ]);
     }
 
   }

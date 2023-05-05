@@ -1,4 +1,5 @@
 -- Active: 1680850809935@@127.0.0.1@3306@bookstore
+
 DROP DATABASE IF EXISTS bookstore;
 
 CREATE DATABASE bookstore;
@@ -162,14 +163,15 @@ CREATE TABLE
     );
 
 -- Order
+
 CREATE TABLE
     shipping_methods (
-      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      name text NOT NULL,
-      price decimal(10, 2) NOT NULL,
-      description text NOT NULL,
-      status int NOT NULL DEFAULT "1",
-      deleted_at datetime DEFAULT NULL
+        id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        name text NOT NULL,
+        price decimal(10, 2) NOT NULL,
+        description text NOT NULL,
+        status int NOT NULL DEFAULT "1",
+        deleted_at datetime DEFAULT NULL
     );
 
 CREATE TABLE
@@ -210,6 +212,7 @@ CREATE TABLE
         id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         code VARCHAR(50) NOT NULL,
         quantity int NOT NULL,
+        required int(11) NOT NULL,
         expired date NOT NULL,
         description VARCHAR(255) NOT NULL,
         deleted_at DATETIME DEFAULT NULL
@@ -224,19 +227,20 @@ CREATE TABLE
 
 CREATE TABLE
     reviews (
-      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      user_id int NOT NULL,
-      product_id int NOT NULL,
-      content text NOT NULL,
-      rating int NULL,
-      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      deleted_at DATETIME DEFAULT NULL,
-      FOREIGN KEY (user_id) REFERENCES users (id),
-      FOREIGN KEY (product_id) REFERENCES products (id)
+        id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        user_id int NOT NULL,
+        product_id int NOT NULL,
+        content text NOT NULL,
+        rating int NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        deleted_at DATETIME DEFAULT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (id),
+        FOREIGN KEY (product_id) REFERENCES products (id)
     );
 
-CREATE TABLE review_status (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    product_id INT NOT NULL,
-    status INT NOT NULL
-);
+CREATE TABLE
+    review_status (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        product_id INT NOT NULL,
+        status INT NOT NULL
+    );

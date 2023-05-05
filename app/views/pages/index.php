@@ -265,7 +265,7 @@ $user = $auth->getUser();
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
 
   const BASE_URI = '<?php echo BASE_URI; ?>';
-
+  
   document.addToWishList = (id) => {
     FetchXHR.post('<?php echo BASE_URI . '/api/wishlist/add' ?>', { id }, {
       'Content-Type': 'application/json'
@@ -279,7 +279,7 @@ $user = $auth->getUser();
       console.error(error);
     });
     setTimeout(() => {
-      window.location.reload();
+      location.reload();
     }, 1000);
   };
   document.addToCart = (id) => {
@@ -295,7 +295,7 @@ $user = $auth->getUser();
       console.error(error);
     });
     setTimeout(() => {
-      window.location.reload();
+      location.reload();
     }, 1000);
   };
 
