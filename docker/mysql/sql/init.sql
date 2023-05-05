@@ -244,3 +244,24 @@ CREATE TABLE
         product_id INT NOT NULL,
         status INT NOT NULL
     );
+
+CREATE TABLE
+    import (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        user_id INT NOT NULL,
+        total_price INT NOT NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        deleted_at DATETIME DEFAULT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (id),
+    );
+
+CREATE TABLE
+    imports_products (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        import_id INT NOT NULL,
+        product_id INT NOT NULL,
+        quantity INT NOT NULL,
+        price INT NOT NULL,
+        FOREIGN KEY (import_id) REFERENCES import (id),
+        FOREIGN KEY (product_id) REFERENCES products (id)
+    );
