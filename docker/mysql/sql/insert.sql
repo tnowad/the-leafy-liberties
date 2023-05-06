@@ -122,6 +122,7 @@ INSERT INTO
         code,
         quantity,
         required,
+        percent,
         expired,
         description
     )
@@ -130,6 +131,7 @@ VALUES (
         'SUMMERSALE',
         5,
         100,
+        10,
         '2023-08-31',
         'Summer Sale! Get 10% off orders over $100.'
     ), (
@@ -137,6 +139,7 @@ VALUES (
         'FALLSALE',
         7,
         100,
+        15,
         '2023-11-30',
         'Fall Sale! Get 15% off orders over $150.'
     ), (
@@ -144,6 +147,7 @@ VALUES (
         'WINTERSALE',
         7,
         200,
+        20,
         '2024-02-28',
         'Winter Sale! Get 20% off orders over $200.'
     ), (
@@ -151,6 +155,7 @@ VALUES (
         'SPRINGSALE',
         10,
         100,
+        5,
         '2024-05-31',
         'Spring Sale! Get 5% off orders over $100.'
     ), (
@@ -158,6 +163,7 @@ VALUES (
         'NEWCUSTOMER',
         50,
         0,
+        10,
         '2023-12-31',
         'New Customer Discount! Get 10% off your first order.'
     ), (
@@ -165,22 +171,25 @@ VALUES (
         'RETURNINGCUSTOMER',
         5,
         100,
+        10,
         '2023-12-31',
         'Returning Customer Discount! Get 10% off orders over $100.'
     ), (
         7,
-        'FREEGIFT',
+        'SPECIALGIFT',
         4,
+        500,
         50,
         '2023-12-31',
-        'Free Gift with Purchase! Get a free gift with orders over $50.'
+        'Free Gift with Purchase! Get 50% off with orders over $500.'
     ), (
         8,
         'FREESHIPPING',
         3,
         75,
+        7,
         '2023-12-31',
-        'Free Shipping! Get free shipping on orders over $75.'
+        'Free Shipping! Get 7% off with orders over $75.'
     );
 
 INSERT INTO

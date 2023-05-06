@@ -3,6 +3,7 @@
 namespace App\Controllers\Customer;
 
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\ShippingMethod;
@@ -39,8 +40,11 @@ class CheckoutController extends Controller
     }
     Database::getInstance()->beginTransaction();
 
+    $sum = 0;
     $cartItems = Cart::findAll(["user_id" => $auth->getUser()->id]);
     $orderItems = [];
+    $ship = ShippingMethod::find($request->getParam("shipping-method-id"));
+    $discount = Coupon::find($request->getParam("discount"));
     $totalPrice = 0;
     foreach ($cartItems as $cartItem) {
       $orderItem = new OrderProduct();
@@ -51,6 +55,7 @@ class CheckoutController extends Controller
       $orderItems[] = $orderItem;
     }
     $order = new Order();
+    $sum = ($totalPrice + $ship->price) - ($totalPrice * ($ship->percent / 100));
     try {
 
       $order->user_id = $auth->getUser()->id;
@@ -63,13 +68,13 @@ class CheckoutController extends Controller
       $order->shipping_method_id = ShippingMethod::findOne(['id' => $request->getParam('shipping-method-id')])->id;
       $order->payment_method_type = $request->getParam('payment-method-type');
       $order->description = $request->getParam('description');
-      $order->total_price = $totalPrice;
+      $order->total_price = $sum;
       if ($order->payment_method_type == 'credit') {
         $order->card_number = $request->getParam('card-number');
         $order->expired_date = $request->getParam('expired-date');
         $order->cvv = $request->getParam('cvv');
       }
-      
+
       $order->save();
     } catch (\Exception $e) {
       Database::getInstance()->rollbackTransaction();

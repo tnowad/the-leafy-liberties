@@ -3,6 +3,7 @@
 use App\Models\Setting;
 use App\Models\ShippingMethod;
 use Core\Application;
+use Core\Database;
 
 $auth = Application::getInstance()->getAuthentication();
 $user = $auth->getUser();
@@ -24,12 +25,19 @@ foreach ($cartItems as $cartItem) {
 }
 
 $shipping = 0;
-$taxMoney = number_format(($totalMoney * $tax) / 100,2);
-$grandTotal = $totalMoney + $shipping + $taxMoney;
+$taxMoney = number_format(($totalMoney * $tax) / 10, 2);
+$grandTotal = ($totalMoney + $shipping + $taxMoney);
 
+$db = Database::getInstance();
+$coupons = $db->select("SELECT * FROM coupons c
+WHERE $totalMoney >= c.required AND c.deleted_at IS NULL AND c.expired >= CURRENT_DATE
+ORDER BY c.required DESC
+LIMIT 1;
+", []);
+// dd($coupons)
 ?>
 <div class="flex items-center justify-center w-full mt-10">
-  <form action="<?php echo BASE_URI . '/checkout/confirm' ?>" method="POST" action
+  <form action="<?php echo BASE_URI . '/checkout/confirm' ?>" method="POST"
     class="container flex flex-wrap xl:flex-nowrap">
     <div class="flex flex-col w-full left-container">
       <div class="w-full p-5 border-0 shadow-lg bill-container rounded-2xl shadow-gray-300">
@@ -164,17 +172,35 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
           <?php endforeach; ?>
         </div>
       </div>
-      <?php if (isset($coupon)): ?>
-        <div
-          class="flex items-start justify-between w-full p-5 mt-5 border-0 shadow-lg discount-container rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
-          <div class="mb-5 text-xl font-bold discount-code">
-            <h2>Discount Codes</h2>
-          </div>
-          <div class="w-3 h-3 right">
-            <i class="cursor-pointer fa-solid fa-chevron-down"></i>
-          </div>
+      <div
+        class="flex items-start justify-between flex-col w-full p-5 mt-5 border-0 shadow-lg discount-container rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
+        <div class="mb-5 text-xl font-bold discount-code">
+          <h2>Discount Codes</h2>
+
         </div>
-      <?php endif; ?>
+        <?php if (isset($coupons)): ?>
+          <div class="flex justify-between items-center w-full px-5">
+            <p class="discount-code">
+              <?php echo $coupons[0]['code']; ?>
+            </p>
+            <input type="hidden" name="discount" value="<?php $coupons[0]['id'] ?>">
+            <p class="discount-money font-bold">
+              $
+              <?php
+              $sumDiscount = $totalMoney * ($coupons[0]['percent'] / 100);
+              echo number_format($sumDiscount, 2);
+              ?>
+            </p>
+          </div>
+        <?php else: ?>
+          <div class="flex justify-between items-center w-full px-5">
+            <p class="discount-code text-gray-500 font-bold">
+              No discount avaiable
+            </p>
+            <i class="fa-solid fa-x text-md"></i>
+          </div>
+        <?php endif; ?>
+      </div>
       <div class="w-full p-5 mt-5 border-0 shadow-lg billing-summary rounded-2xl shadow-gray-300 md:w-full xl:w-3/4">
         <div class="flex items-start justify-between header">
           <div class="mb-5 text-xl font-bold">
@@ -198,7 +224,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
             <div class="flex items-center justify-between tax">
               <p>Tax</p>
               <div class="font-bold tax-money">
-              $
+                $
                 <?php echo $taxMoney ?>
               </div>
             </div>
@@ -208,7 +234,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
               <h2 class="text-lg font-medium">Grand Total</h2>
               <div class="font-bold grand-money">
                 $
-                <?php echo $grandTotal ?>
+                <?php echo number_format($grandTotal - $sumDiscount,2)  ?>
               </div>
             </div>
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-1 mr-10 w-full h-auto mt-4">
@@ -220,7 +246,7 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
               class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
               <button type="submit" class="text-xl grand-total w-full h-full">
                 Pay $
-                <?php echo $grandTotal ?>
+                <?php echo number_format($grandTotal - $sumDiscount,2)  ?>
               </button>
             </div>
           </div>
@@ -265,21 +291,22 @@ $grandTotal = $totalMoney + $shipping + $taxMoney;
   let ship_method = ["5.99", "14.99", "29.99", "24.99"];
   let tax = document.querySelector(".tax-money");
   let choices = document.querySelectorAll(".shipping-choices");
-
+  let discount = document.querySelector(".discount-money");
   let grand_total = document.querySelector(".grand-total");
   let grand_money = document.querySelector(".grand-money");
   let subtotal = document.querySelector(".subtotal-money");
-  let taxMoney = 0, sum = 0
+  let taxMoney = 0, sum = 0, discountMoney = 0
   subtotal = subtotal.innerHTML.replace("$", "");
   choices.forEach((element, index) => {
     element.addEventListener("click", () => {
       let option = document.querySelectorAll("input[name=shipping-method-id]")[index];
       if (option.checked == true) {
         shipping_money.innerHTML = "$" + ship_method[index];
-        taxMoney = tax.innerHTML.replace("$","") ;
+        taxMoney = tax.innerHTML.replace("$", "");
+        discountMoney = discount.innerHTML.replace("$","")
         sum = (parseFloat(subtotal) + parseFloat(ship_method[index]) + parseFloat(taxMoney)).toFixed(2)
-        grand_money.innerHTML = "$ " + sum;
-        grand_total.innerHTML = "Pay $ " + sum;
+        grand_money.innerHTML = "$ " + (sum - discountMoney);
+        grand_total.innerHTML = "Pay $ " + (sum - discountMoney);
       }
     })
   });
