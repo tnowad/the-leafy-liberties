@@ -46,8 +46,8 @@ $cartItems = $params["cartItems"];
                       <input type="submit" value="-" name="minus"
                         class="cursor-pointer fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                       <input type="number" name="quantity" class="w-10 text-lg text-center text-count"
-                        value="<?php echo $cartItem->quantity; ?>" onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;"
-/>
+                        value="<?php echo $cartItem->quantity; ?>"
+                        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
                       <input type="submit" value="+" name="plus"
                         class="cursor-pointer fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                     </form>

@@ -24,12 +24,12 @@ use App\Models\Publisher;
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="" name="isbn"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
-        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;" />
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
 
       <label for="price" class="my-2">Price:</label>
       <input type="number" value="" step="0.01" name="price"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
-        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;" />
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
       <label for="gender" class="my-2">Author:</label>
       <div class="flex items-center justify-between gap-4">
         <select value="" name="author"

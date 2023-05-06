@@ -16,9 +16,6 @@ $filter = $params['filter'];
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="w-full border border-gray-200 shadow-lg mb-5">
       <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/dashboard/product' ?>">
-        <input type="hidden" name="page" value="1">
-        <!-- <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>"> -->
-        <input type="hidden" name="keywords" value="<?php echo $filter['keywords'] ?>">
         <div class="border-b border-gray-200 ">
           <div class="relative px-4 py-2 flex flex-col">
             <div class="flex items-center justify-between cursor-pointer">
@@ -74,16 +71,16 @@ $filter = $params['filter'];
             <div class="flex items-center justify-start gap-2 py-3">
               <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
                 class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;">
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
               <span class="text-lg"> - </span>
               <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
                 class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;">
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
             </div>
           </div>
         </div>
         <input type="submit" value="Filter"
-          class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 mx-4 hover:bg-primary-700 transition-all cursor-pointer" />
+          class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-md my-5 mx-4 hover:bg-primary-600 transition-all cursor-pointer" />
       </form>
     </div>
     <div class="flex justify-between">

@@ -131,38 +131,55 @@ class RoleController extends Controller
         ],
       ]);
     }
-
-    if ($request->getMethod() === "GET") {
-      $role = Role::find($request->getQuery("id"));
-      if (!$role || !$role instanceof Role) {
-        return $response->redirect("/dashboard/roles");
-      }
-
-      $rolePermissions = (function () use ($role) {
-        $permissions = [];
-        foreach ($role->permissions() as $rolePermission) {
-          if ($rolePermission->status == "1") {
-            $permissions[] = $rolePermission->permission();
-          }
+    switch ($request->getMethod()) {
+      case "GET":
+        $role = Role::find($request->getQuery("id"));
+        if (!$role || !$role instanceof Role) {
+          return $response->redirect("/dashboard/roles");
         }
-        return $permissions;
-      })();
 
-      $permissions = Permission::all();
-      return $response->setBody(
-        View::renderWithDashboardLayout(
-          new View("pages/dashboard/role/update"),
-          [
-            "title" => "Update Role",
-            "role" => $role,
-            "permissions" => $permissions,
-            "rolePermissions" => $rolePermissions,
-          ]
-        )
-      );
-    }
-    if ($request->getMethod() === "POST") {
-      return $response->redirect("/dashboard/roles");
+        $rolePermissions = (function () use ($role) {
+          $permissions = [];
+          foreach ($role->permissions() as $rolePermission) {
+            if ($rolePermission->status == "1") {
+              $permissions[] = $rolePermission->permission();
+            }
+          }
+          return $permissions;
+        })();
+
+        $permissions = Permission::all();
+        return $response->setBody(
+          View::renderWithDashboardLayout(
+            new View("pages/dashboard/role/update"),
+            [
+              "title" => "Update Role",
+              "role" => $role,
+              "permissions" => $permissions,
+              "rolePermissions" => $rolePermissions,
+            ]
+          )
+        );
+      case "POST":
+      // $permissions = Permission::all();
+      // $updateRoles = [];
+      // $roless = $request->getQuery("permissions") ?? [];
+      // if (!empty($roless)) {
+      //   foreach ($permissions as $permission) {
+      //     foreach ($roless as $roles) {
+      //       if (!in_array($roles, $permissions)) {
+      //         $updateRoles[] = $roles;
+      //       }
+      //     }
+      //   }
+      //   $permissions = $updateRoles;
+      // }
+      // return $response->redirect(BASE_URI . '/dashboard/role', [
+      //   "toast" => [
+      //     "type" => "success",
+      //     "message" => "Update role successful!!"
+      //   ]
+      // ]);
     }
   }
 

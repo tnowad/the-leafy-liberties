@@ -23,12 +23,12 @@ use App\Models\Publisher; ?>
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="<?php echo $product->isbn; ?>" name="isbn"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
-        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;" />
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
 
       <label for="price" class="my-2">Price:</label>
       <input type="number" value="<?php echo $product->price; ?>" name="price"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
-        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;" />
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
       <label for="author" class="my-2">Author:</label>
       <select value="" name="author"
         class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400"
