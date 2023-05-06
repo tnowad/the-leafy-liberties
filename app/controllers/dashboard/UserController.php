@@ -220,7 +220,6 @@ class UserController extends Controller
               ])
             );
           }
-
           if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
             $user->image = $request->getParam("old_img");
           } else {

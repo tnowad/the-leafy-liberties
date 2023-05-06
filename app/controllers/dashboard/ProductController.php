@@ -98,7 +98,7 @@ class ProductController extends Controller
                 "message" => "This ISBN number is already exist!",
               ],
             ]);
-          }else{
+          } else {
             $product->isbn = $request->getParam("isbn");
             break;
           }
@@ -229,7 +229,12 @@ class ProductController extends Controller
           }
           $product->name = $request->getParam("name");
           if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
-            $product->image = $request->getParam("old_img");
+            return $response->redirect(BASE_URI . "/dashboard/product/create", 200, [
+              "toast" => [
+                "type" => "error",
+                "message" => "Please choose a jpeg, jpg, png file!!.",
+              ],
+            ]);
           } else {
             $product->image = $request->getParam("image");
           }
