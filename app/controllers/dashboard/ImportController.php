@@ -3,6 +3,7 @@ namespace App\Controllers\Dashboard;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Import;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTag;
@@ -13,23 +14,16 @@ use Core\Response;
 use Core\View;
 use Utils\FileUploader;
 
-class ProductController extends Controller
+class ImportController extends Controller
 {
   public function index(Request $request, Response $response)
   {
     $filter = [
-      "categories" => $request->getQuery("categories") ?? [],
-      "tags" => $request->getQuery("tags") ?? [],
-      "author" => $request->getQuery("author"),
-      "price" => [
-        "min" => $request->getQuery("min-price"),
-        "max" => $request->getQuery("max-price"),
-      ],
       "keywords" => $request->getQuery("keywords"),
     ];
 
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("product.access")) {
+    if (!$auth->hasPermission("import.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -38,17 +32,17 @@ class ProductController extends Controller
       ]);
     }
     if (isset($filter)) {
-      $products = Product::filterAdvanced($filter);
+      $imports = Import::filterAdvanced($filter);
     } else {
-      $products = Product::all();
+      $imports = Import::all();
 
     }
     return $response->setBody(
       View::renderWithDashboardLayout(
-        new View("pages/dashboard/product/index"),
+        new View("pages/dashboard/import/index"),
         [
-          "title" => "Products",
-          "products" => $products,
+          "title" => "Import",
+          "imports" => $imports,
           "filter" => $filter,
         ]
       )
@@ -58,7 +52,7 @@ class ProductController extends Controller
   public function create(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("product.create")) {
+    if (!$auth->hasPermission("import.create")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -71,67 +65,18 @@ class ProductController extends Controller
         $response->setStatusCode(200);
         return $response->setBody(
           View::renderWithDashboardLayout(
-            new View("pages/dashboard/product/create"),
+            new View("pages/dashboard/import/create"),
             [
-              "title" => "Add Product",
+              "title" => "Import Product",
             ]
           )
         );
       case 'POST':
-        $uploader = new FileUploader([
-          "allowedExtensions" => ["jpeg", "jpg", "png"],
-          "maxFileSize" => 2097152,
-          "uploadPath" => "resources/images/products/",
-        ]);
-
-        $result = $uploader->upload($_FILES["image"]);
-
-        if ($result) {
-          $request->setParam("image", $result);
-        } else {
-          return $response->redirect(BASE_URI . "/dashboard/product", 200, [
-            "toast" => [
-              "type" => "error",
-              "message" => "Add product failed",
-            ],
-          ]);
-        }
-        $product = new Product();
-        $products = Product::all();
-        foreach ($products as $item) {
-          if ($item->isbn == $product->isbn) {
-            return $response->redirect(BASE_URI . "/dashboard/product/create", 200, [
-              "toast" => [
-                "type" => "error",
-                "message" => "This ISBN number is already exist!",
-              ],
-            ]);
-          } else {
-            $product->isbn = $request->getParam("isbn");
-            break;
-          }
-        }
-        $product->name = $request->getParam("name");
-        $product->image = $request->getParam("image");
-        $product->price = $request->getParam("price");
-        $product->description = $request->getParam("description");
-        $product->quantity = $request->getParam("quantity");
-        if ($request->getParam("author") != null) {
-          $product->author_id = $request->getParam("author");
-        }
-        echo $request->getParam("author-name");
-        if ($request->getParam("author-name") != null) {
-          $author = new Author();
-          $author->name = $request->getParam("author-name");
-          $author->save();
-          $product->author_id = $author->id;
-        }
-        $product->publisher_id = $request->getParam("publisher");
-        $product->save();
-        return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+        //Viết hàm thêm import trong này
+        return $response->redirect(BASE_URI . "/dashboard/import", 200, [
           "toast" => [
             "type" => "success",
-            "message" => "Add product successful",
+            "message" => "Import successful",
           ],
         ]);
 
@@ -141,7 +86,7 @@ class ProductController extends Controller
   public function store(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("product.create")) {
+    if (!$auth->hasPermission("import.create")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -152,13 +97,13 @@ class ProductController extends Controller
     $product = new Product();
     // get from request
     $product->save();
-    return $response->redirect(BASE_URI . "/dashboard/products");
+    return $response->redirect(BASE_URI . "/dashboard/import");
   }
 
   public function show(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("product.access")) {
+    if (!$auth->hasPermission("import.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
         "toast" => [
           "type" => "error",
@@ -168,11 +113,11 @@ class ProductController extends Controller
     }
     $product = Product::find($request->getQuery("id"));
     if (!$product) {
-      return $response->redirect(BASE_URI . "/dashboard/products");
+      return $response->redirect(BASE_URI . "/dashboard/import");
     }
     return $response->setBody(
       View::renderWithDashboardLayout(
-        new View("pages/dashboard/product/show"),
+        new View("pages/dashboard/import/show"),
         [
           "title" => "Show Product",
           "product" => $product,
@@ -184,7 +129,7 @@ class ProductController extends Controller
   public function update(Request $request, Response $response)
   {
     $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission('product.update')) {
+    if (!$auth->hasPermission('import.update')) {
       return $response->redirect(BASE_URI . '/dashboard', 200, [
         'toast' => [
           'type' => 'error',
@@ -194,108 +139,39 @@ class ProductController extends Controller
     }
     switch ($request->getMethod()) {
       case "GET":
-        $product = Product::findOne(["id" => $request->getQuery("id")]);
+        $import = Import::findOne(["id" => $request->getQuery("id")]);
         $response->setStatusCode(200);
         return $response->setBody(
           View::renderWithDashboardLayout(
-            new View("pages/dashboard/product/update"),
+            new View("pages/dashboard/import/update"),
             [
-              "title" => "Products",
-              "product" => $product,
+              "title" => "Import Update",
+              "import" => $import,
             ]
           )
         );
       case "POST":
-        $product = Product::find($request->getParam("id"));
-        if (!$product) {
-          return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+        $import = Import::find($request->getParam("id"));
+        if (!$import) {
+          return $response->redirect(BASE_URI . "/dashboard/import", 200, [
             "toast" => [
               "type" => "error",
-              "message" => "Edit product fail",
+              "message" => "Edit import bill fail",
             ],
           ]);
         } else {
-          $uploader = new FileUploader([
-            "allowedExtensions" => ["jpeg", "jpg", "png"],
-            "maxFileSize" => 2097152,
-            "uploadPath" => "resources/images/products/",
-          ]);
+          //Viết hàm import trong này
 
-          $result = $uploader->upload($_FILES["image"]);
-          if ($result) {
-            $request->setParam("image", $result);
-          } else {
-            return $response->setBody(
-              View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
-                "title" => "Products",
-                "toast" => [
-                  "type" => "error",
-                  "message" => "Edit product failed!",
-                ],
-              ])
-            );
-          }
-          $product->name = $request->getParam("name");
-          if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
-            return $response->redirect(BASE_URI . "/dashboard/product/create", 200, [
-              "toast" => [
-                "type" => "error",
-                "message" => "Please choose a jpeg, jpg, png file!!.",
-              ],
-            ]);
-          } else {
-            $product->image = $request->getParam("image");
-          }
-          $product->isbn = $request->getParam("isbn");
-          $product->price = $request->getParam("price");
-          $product->description = $request->getParam("description");
-          $product->quantity = $request->getParam("quantity");
-          $product->author_id = $request->getParam("author");
-          $product->publisher_id = $request->getParam("publisher");
-          $product->save();
-          return $response->redirect(BASE_URI . "/dashboard/product", 200, [
+
+          return $response->redirect(BASE_URI . "/dashboard/import", 200, [
             "toast" => [
               "type" => "success",
-              "message" => "Edit product successful",
+              "message" => "Edit import bill successful",
             ],
           ]);
         }
       default:
         break;
     }
-  }
-
-  public function delete(Request $request, Response $response)
-  {
-    $auth = Application::getInstance()->getAuthentication();
-    if (!$auth->hasPermission("product.delete")) {
-      return $response->redirect(BASE_URI . "/dashboard", 200, [
-        "toast" => [
-          "type" => "error",
-          "message" => "You do not have permission to access this page.",
-        ],
-      ]);
-    }
-    $product = Product::find($request->getBody()["id"]);
-    $tags = ProductTag::findAll(["product_id" => $product->id]);
-    $categories = ProductCategory::findAll(["product_id" => $product->id]);
-    if (!$product) {
-      $response->jsonResponse([
-        "type" => "success",
-        "message" => "Failed to remove Product removed from table",
-      ]);
-    }
-    // dd($product);
-    foreach ($categories as $category) {
-      $category->delete();
-    }
-    foreach ($tags as $tag) {
-      $tag->delete();
-    }
-    $product->delete();
-    $response->jsonResponse([
-      "type" => "success",
-      "message" => "Product removed from table",
-    ]);
   }
 }

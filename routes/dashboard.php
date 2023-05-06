@@ -3,6 +3,7 @@
 use App\Controllers\Customer\DashboardController;
 use App\Controllers\Dashboard\AuthorController;
 use App\Controllers\Dashboard\CategoryController;
+use App\Controllers\Dashboard\ImportController;
 use App\Controllers\Dashboard\ReviewController;
 use App\Controllers\Dashboard\CouponController;
 use App\Controllers\Dashboard\OrderController;
