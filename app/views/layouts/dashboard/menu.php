@@ -35,15 +35,25 @@ $menu = [
     "icon" => "fa-shopping-cart",
     "url" => BASE_URI . "/dashboard/order",
   ],
-  "category.access" => [
-    "name" => "Categories",
-    "icon" => "fa-list",
-    "url" => BASE_URI . "/dashboard/category",
-  ],
   "permission.access" => [
     "name" => "Permissions",
     "icon" => "fa-user-lock",
     "url" => BASE_URI . "/dashboard/permission",
+  ],
+  "role.access" => [
+    "name" => "Roles",
+    "icon" => "fa-user-plus",
+    "url" => BASE_URI . "/dashboard/role",
+  ],
+  "import.access" => [
+    "name" => "Import",
+    "icon" => "fa-file-import",
+    "url" => BASE_URI . "/dashboard/import",
+  ],
+  "category.access" => [
+    "name" => "Categories",
+    "icon" => "fa-list",
+    "url" => BASE_URI . "/dashboard/category",
   ],
   "coupon.access" => [
     "name" => "Coupons",
@@ -55,20 +65,10 @@ $menu = [
     "icon" => "fa-sliders",
     "url" => BASE_URI . "/dashboard/slide",
   ],
-  "role.access" => [
-    "name" => "Roles",
-    "icon" => "fa-user-plus",
-    "url" => BASE_URI . "/dashboard/role",
-  ],
   "setting.access" => [
     "name" => "Settings",
     "icon" => "fa-cog",
     "url" => BASE_URI . "/dashboard/setting",
-  ],
-  "import.access" => [
-    "name" => "Import",
-    "icon" => "fa-file-import",
-    "url" => BASE_URI . "/dashboard/import",
   ]
 ];
 

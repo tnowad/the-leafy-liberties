@@ -25,7 +25,6 @@
               <?php
               use App\Models\Role;
               use App\Models\User;
-
               $name = [
                 "ID",
                 "Image",

@@ -8,9 +8,13 @@ use Core\Traits\SoftDeletes;
 class Import extends Model
 {
   use SoftDeletes;
-  protected $table = "imports";
+  protected $table = "import";
 
   protected $fillable = ["id", "user_id", "total_price", "created_at", "deleted_at"];
+  public function user()
+  {
+    return User::find($this->user_id);
+  }
   public static function filterAdvanced($filter)
   {
     $imports = Import::all();

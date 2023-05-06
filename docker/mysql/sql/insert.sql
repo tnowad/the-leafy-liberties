@@ -819,6 +819,10 @@ INSERT INTO
 VALUES (1, NULL, 'Bestselling', NULL), (2, NULL, 'Popular', NULL), (3, NULL, 'New', NULL), (4, NULL, 'Recommended', NULL);
 
 INSERT INTO
+    import (user_id, total_price)
+VALUES (3, 150), (3, 300), (3, 500);
+
+INSERT INTO
     `users` (
         `id`,
         `email`,

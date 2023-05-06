@@ -7,6 +7,7 @@ use App\Models\Import;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTag;
+use App\Models\User;
 use Core\Application;
 use Core\Controller;
 use Core\Request;
@@ -72,7 +73,16 @@ class ImportController extends Controller
           )
         );
       case 'POST':
-        //Viết hàm thêm import trong này
+        $import = new Import();
+        $user = User::find($request->getParam("user_id"));
+        if ($request->getParam("user_id") != 3) {
+          return $response->redirect(BASE_URI . "/dashboard/import/create", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "This user don't have permission!",
+            ],
+          ]);
+        }
         return $response->redirect(BASE_URI . "/dashboard/import", 200, [
           "toast" => [
             "type" => "success",

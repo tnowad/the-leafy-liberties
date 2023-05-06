@@ -51,7 +51,6 @@ class User extends Model
       "user_id" => $this->id,
     ]);
   }
-
   public function addPermission(Permission $permission)
   {
     $userPermission = new UserPermission();
