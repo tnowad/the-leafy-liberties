@@ -65,6 +65,11 @@ $menu = [
     "icon" => "fa-cog",
     "url" => BASE_URI . "/dashboard/setting",
   ],
+  "import.access" => [
+    "name" => "Import",
+    "icon" => "fa-file-import",
+    "url" => BASE_URI . "/dashboard/import",
+  ]
 ];
 
 foreach ($menu as $key => $menuItem) {
@@ -114,10 +119,10 @@ foreach ($menu as $key => $menuItem) {
   var links = document.getElementsByTagName("a");
   for (var i = 1; i < links.length; i++) {
     if (links[i].getAttribute("href") === currentPath) {
-      links[i].parentElement.classList.add("bg-primary", "text-white","border-[#add1ce]");
+      links[i].parentElement.classList.add("bg-primary", "text-white", "border-[#add1ce]");
       console.log(links[i].classList)
     } else {
-      links[i].parentElement.classList.remove("bg-primary", "text-white","border-[#add1ce]");
+      links[i].parentElement.classList.remove("bg-primary", "text-white", "border-[#add1ce]");
     }
   }
 </script>

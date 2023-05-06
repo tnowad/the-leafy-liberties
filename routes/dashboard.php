@@ -136,3 +136,8 @@ $router->get("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/delete", [SettingController::class, "delete"]);
 
+$router->get("/dashboard/import", [ImportController::class, "index"]);
+$router->post("/dashboard/import", [ImportController::class, "create"]);
+$router->get("/dashboard/import/update", [ImportController::class, "update"]);
+$router->post("/dashboard/import/update", [ImportController::class, "update"]);
+$router->post("/dashboard/import/delete", [ImportController::class, "delete"]);
