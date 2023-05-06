@@ -18,8 +18,16 @@ class ProductController extends Controller
   public function index(Request $request, Response $response)
   {
     $filter = [
+      "categories" => $request->getQuery("categories") ?? [],
+      "tags" => $request->getQuery("tags") ?? [],
+      "author" => $request->getQuery("author"),
+      "price" => [
+        "min" => $request->getQuery("min-price"),
+        "max" => $request->getQuery("max-price"),
+      ],
       "keywords" => $request->getQuery("keywords"),
     ];
+
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("product.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
