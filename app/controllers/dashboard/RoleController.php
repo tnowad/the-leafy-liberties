@@ -98,7 +98,7 @@ class RoleController extends Controller
         $role->name = $request->getParam("name");
         $role->save();
 
-        $permissions = $request->getParam("permissions");
+        $permissions = $request->getParam("permissions") ?? [];
         if (is_array($permissions)) {
           foreach ($permissions as $permission) {
             $role->addPermission($permission);
@@ -241,13 +241,22 @@ class RoleController extends Controller
         $role = Role::find($request->getParam("id"));
         $rolepermissions = RolePermission::all();
         $roless = $request->getParam("permissions") ?? [];
-        dd($roless);
-      // return $response->redirect(BASE_URI . "/dashboard/role", 200, [
-      //   "toast" => [
-      //     "type" => "success",
-      //     "message" => "Delete role successfull",
-      //   ],
-      // ]);
+        if (!empty($roless)) {
+          $updateRoles = [];
+          foreach ($roless as $roles) {
+            if (!in_array($roles, $rolepermissions)) {
+              $updateRoles[] = $roles;
+            }
+          }
+          $rolepermissions = $updateRoles;
+        }
+        dd($rolepermissions);
+        return $response->redirect(BASE_URI . "/dashboard/role", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Delete role successfull",
+          ],
+        ]);
     }
   }
 }
