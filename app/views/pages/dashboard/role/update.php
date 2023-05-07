@@ -36,7 +36,7 @@ foreach ($allPermissions as $key => $permission) {
 }
 ?>
 
-<form class="min-h-screen mt-6">
+<form class="min-h-screen mt-6" action="<?php echo BASE_URI . '/dashboard/role/update' ?>" method="POST">
   <div class="mb-4">
     <label class="block font-bold text-gray-700" for="name">
       Name
