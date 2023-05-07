@@ -238,8 +238,16 @@ class RoleController extends Controller
           )
         );
       case "POST":
-        
-        break;
+        $role = Role::find($request->getParam("id"));
+        $rolepermissions = RolePermission::all();
+        $roless = $request->getParam("permissions") ?? [];
+        dd($roless);
+      // return $response->redirect(BASE_URI . "/dashboard/role", 200, [
+      //   "toast" => [
+      //     "type" => "success",
+      //     "message" => "Delete role successfull",
+      //   ],
+      // ]);
     }
   }
 }
