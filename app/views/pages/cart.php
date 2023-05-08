@@ -4,7 +4,7 @@ $cartItems = $params["cartItems"];
 <div class="w-full my-10">
   <div class="container mx-auto">
     <div class="flex items-center justify-start my-8 md:my-14">
-      <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Home → Cart</h1>
+      <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Cart</h1>
     </div>
     <div class="wrapper flex justify-between items-start gap-[2.5%] flex-col lg:flex-row">
       <div class="cart-list w-full mb-4 lg:mb-0 lg:w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl" total="<?php echo count($cartItems) ?>">
