@@ -53,20 +53,7 @@ class RegisterController extends Controller
     Database::getInstance()->beginTransaction();
 
     $user = new User();
-    $users = User::all();
-    foreach ($users as $item) {
-      if ($item->email == $user->email) {
-        return $response->redirect(BASE_URI . "/register", 200, [
-          "toast" => [
-            "type" => "error",
-            "message" => "The email is already exist",
-          ],
-        ]);
-      } else {
-        $user->email = $email;
-        break;
-      }
-    }
+    $user->email = $email;
     $user->name = $name;
     $user->phone = $phone;
     $user->password = password_hash($password, PASSWORD_DEFAULT);

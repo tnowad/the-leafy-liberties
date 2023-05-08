@@ -85,19 +85,16 @@ class UserController extends Controller
 
         $user = new User();
         $users = User::all();
-        foreach ($users as $item) {
-          if ($item->email == $user->email) {
-            return $response->redirect(BASE_URI . "/dashboard/user/create", 200, [
-              "toast" => [
-                "type" => "error",
-                "message" => "This email had already existed.",
-              ],
-            ]);
-          } else {
-            $user->email = $request->getParam("email");
-            break;
-          }
+        if (User::findOne(["email" => $request->getParam("email")])) {
+          $response->setStatusCode(200);
+          return $response->redirect(BASE_URI . "/register", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "Email already exists",
+            ],
+          ]);
         }
+        $user->email = $request->getParam("email");
         $user->name = $request->getParam("name");
         if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
           $user->image = NULL;
@@ -225,9 +222,18 @@ class UserController extends Controller
           } else {
             $user->image = $request->getParam("image");
           }
+          if (User::findOne(["email" => $request->getParam("email")])) {
+            $response->setStatusCode(200);
+            return $response->redirect(BASE_URI . "/dashboard/user/update?id=" . $user->id, 200, [
+              "toast" => [
+                "type" => "error",
+                "message" => "Email already exists",
+              ],
+            ]);
+          }
+          $user->email = $request->getParam("email");
           $user->name = Validation::validateName($request->getParam("name"));
           $user->phone = Validation::validatePhone($request->getParam("phone"));
-          $user->email = Validation::validateEmail($request->getParam("email"));
           $user->status = $request->getParam("status");
           if ($request->getParam("password") != null) {
             $user->password = password_hash(Validation::validatePassword($request->getParam("password")), PASSWORD_DEFAULT);

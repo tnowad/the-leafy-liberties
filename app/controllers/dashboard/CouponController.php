@@ -66,6 +66,14 @@ class CouponController extends Controller
         );
       case 'POST':
         $coupon = new Coupon();
+        if (Coupon::findOne(["code" => $request->getParam("code")])) {
+          return $response->redirect(BASE_URI . '/dashboard/coupon/create', 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "This code is already exist!!"
+            ]
+          ]);
+        }
         $coupon->code = strtoupper($request->getParam("code"));
         $coupon->description = strtoupper($request->getParam("description"));
         $coupon->expired = $request->getParam("expired");
@@ -157,6 +165,14 @@ class CouponController extends Controller
           ]);
         } else {
           // dd($coupon);
+          if (Coupon::findOne(["code" => strtoupper($request->getParam("code"))])) {
+            return $response->redirect(BASE_URI . '/dashboard/coupon/update?id=' . $coupon->id, 200, [
+              "toast" => [
+                "type" => "error",
+                "message" => "This code is already exist!!"
+              ]
+            ]);
+          }
           $coupon->code = strtoupper($request->getParam("code"));
           $coupon->expired = $request->getParam("expired");
           $coupon->quantity = $request->getParam("quantity");

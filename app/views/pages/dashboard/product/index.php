@@ -22,7 +22,7 @@ $filter = $params['filter'];
               <h1 class="mt-2 mb-2 text-xl font-medium">Search</h1>
             </div>
             <div class="flex border border-gray-300">
-              <input type="text" name="keywords" class="w-full h-10 px-3 py-2 " placeholder="Search.... "
+              <input type="text" name="keywords" class="w-full h-10 px-3 py-2 " placeholder="Anything you want.... "
                 value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
               <button class="flex items-center justify-center w-10 h-10 bg-white ">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -209,19 +209,6 @@ $filter = $params['filter'];
       icon.classList.remove("fa-minus")
     }
     list.classList.toggle("h-0");
-  })
-  let tag_icon = document.querySelector(".open-tags");
-  let tag_list = document.querySelector(".tags-list");
-  let tags = document.querySelector(".dropdown-tag")
-  tags.addEventListener("click", () => {
-    if (tag_icon.classList.contains("fa-plus")) {
-      tag_icon.classList.remove("fa-plus")
-      tag_icon.classList.add("fa-minus")
-    } else {
-      tag_icon.classList.add("fa-plus")
-      tag_icon.classList.remove("fa-minus")
-    }
-    tag_list.classList.toggle("h-0");
   })
 
 </script>

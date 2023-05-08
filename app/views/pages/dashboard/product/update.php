@@ -88,22 +88,16 @@ use App\Models\Publisher; ?>
 <script>
   let button = document.querySelector("button[type='submit']");
   let inputName = document.querySelector("input[name='name']");
-  let inputImage = document.querySelector("input[name='image']");
   let inputIsbn = document.querySelector("input[name='isbn']");
   let inputPrice = document.querySelector("input[name='price']");
   let inputDescription = document.querySelector("input[name='description']");
   let inputQuantity = document.querySelector("input[name='quantity']");
-  let inputAuthor = document.querySelector("select[name='description']");
-  let inputPublisher = document.querySelector("select[name='description']");
+  let inputAuthor = document.querySelector("select[name='author']");
+  let inputPublisher = document.querySelector("select[name='publisher']");
   button.addEventListener("click", () => {
     if (inputName.value.trim() === '') {
       alert('Please enter a name');
       inputName.focus()
-      return;
-    }
-    if (inputImage.value.trim() === '') {
-      alert('Please select an image');
-      inputImage.focus()
       return;
     }
     if (inputIsbn.value.trim() === '') {

@@ -88,6 +88,14 @@ class AuthorController extends Controller
             ],
           ]);
         }
+        if(Author::findOne(["name" => strtolower($request->getParam("name"))])){
+          return $response->redirect(BASE_URI . '/dashboard/author/create',200,[
+            "toast" => [
+              "type" => "error",
+              "message" => "This author is already exist!"
+            ]
+          ]);
+        }
         $author = new Author();
         $author->name = $request->getParam("name");
         $author->image = $request->getParam("image");
