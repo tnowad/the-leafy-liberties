@@ -165,6 +165,18 @@ CREATE TABLE
 -- Order
 
 CREATE TABLE
+    coupons (
+        id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        code VARCHAR(50) NOT NULL,
+        quantity int NOT NULL,
+        required int(11) NOT NULL,
+        percent int(3) NOT NULL,
+        expired date NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        deleted_at DATETIME DEFAULT NULL
+    );
+
+CREATE TABLE
     shipping_methods (
         id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         name text NOT NULL,
@@ -182,6 +194,7 @@ CREATE TABLE
         address text NOT NULL,
         phone varchar(255) NOT NULL,
         shipping_method_id int NOT NULL,
+        coupon_id int NOT NULL,
         description text DEFAULT NULL,
         payment_method_type varchar(255) NOT NULL,
         card_number varchar(255) DEFAULT NULL,
@@ -193,6 +206,7 @@ CREATE TABLE
         create_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
         deleted_at datetime DEFAULT NULL,
         FOREIGN KEY (shipping_method_id) REFERENCES shipping_methods (id),
+        FOREIGN KEY (coupon_id) REFERENCES coupons (id),
         FOREIGN KEY (user_id) REFERENCES users (id)
     );
 
@@ -205,18 +219,6 @@ CREATE TABLE
         price decimal(10, 2) NOT NULL,
         FOREIGN KEY (order_id) REFERENCES orders (id),
         FOREIGN KEY (product_id) REFERENCES products (id)
-    );
-
-CREATE TABLE
-    coupons (
-        id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        code VARCHAR(50) NOT NULL,
-        quantity int NOT NULL,
-        required int(11) NOT NULL,
-        percent int(3) NOT NULL,
-        expired date NOT NULL,
-        description VARCHAR(255) NOT NULL,
-        deleted_at DATETIME DEFAULT NULL
     );
 
 CREATE TABLE
