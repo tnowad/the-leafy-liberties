@@ -198,7 +198,7 @@ if ($user != null) {
         ?>
         <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>"
           class="flex justify-end">
-          <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button class="px-4 py-2 font-bold text-white bg-primary rounded hover:bg-primary-600 transition-all">
             <?php
             echo $review_status->status == 0 ? 'Turn on comment' : 'Turn off comment'
               ?>
