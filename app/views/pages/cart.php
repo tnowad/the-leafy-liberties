@@ -4,18 +4,17 @@ $cartItems = $params["cartItems"];
 <div class="w-full my-10">
   <div class="container mx-auto">
     <div class="flex items-center justify-start my-8 md:my-14">
-      <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Cart</h1>
+      <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Home → Cart</h1>
     </div>
     <div class="wrapper flex justify-between items-start gap-[2.5%] flex-col lg:flex-row">
-      <div class="cart-list w-full mb-4 lg:mb-0 lg:w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl"
-        total="<?php echo count($cartItems) ?>">
-        <?php if (count($cartItems) == 0): ?>
+      <div class="cart-list w-full mb-4 lg:mb-0 lg:w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl" total="<?php echo count($cartItems) ?>">
+        <?php if (count($cartItems) == 0) : ?>
           <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
             <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
             <h1 class="text-5xl tracking-wider text-gray-400 uppercase">Cart is empty</h1>
           </div>
-        <?php else: ?>
-          <?php foreach ($cartItems as $cartItem): ?>
+        <?php else : ?>
+          <?php foreach ($cartItems as $cartItem) : ?>
             <?php $product = $cartItem->product() ?>
             <div class="w-full">
               <div class="item p-4 border-0 border-solid border-b-[1px] border-gray-200">
@@ -43,13 +42,9 @@ $cartItems = $params["cartItems"];
                   <div class="w-[150px]">
                     <form class="flex items-center justify-center mx-auto product-quantity w-fit h-fit">
                       <input type="hidden" name="id" value="<?php echo $product->id; ?>">
-                      <input type="submit" value="-" name="minus"
-                        class="cursor-pointer fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
-                      <input type="number" name="quantity" class="w-10 text-lg text-center text-count"
-                        value="<?php echo $cartItem->quantity; ?>"
-                        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
-                      <input type="submit" value="+" name="plus"
-                        class="cursor-pointer fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                      <input type="submit" value="-" name="minus" class="cursor-pointer fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                      <input type="number" name="quantity" class="w-10 text-lg text-center text-count" value="<?php echo $cartItem->quantity; ?>" onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
+                      <input type="submit" value="+" name="plus" class="cursor-pointer fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                     </form>
                   </div>
                   <p class="text-xl font-bold counter-price">
@@ -78,17 +73,14 @@ $cartItems = $params["cartItems"];
             $
           </span>
         </div>
-        <a href="<?php echo BASE_URI . "/checkout"; ?>"
-          class="btn-checkout px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
+        <a href="<?php echo BASE_URI . "/checkout"; ?>" class="btn-checkout px-5 py-2 bg-[#315854] rounded-lg text-white text-lg font-semibold hover:bg-[#6cada6] hover:text-white transition-all">
           Check out
         </a>
       </div>
     </div>
     <div class="flex justify-end items-center w-full lg:w-[65%] mt-5">
       <!-- remove all product in wishlist -->
-      <button
-        class="px-4 py-3 font-bold text-black transition-all border-2 rounded-sm hover:bg-red-400 hover:text-white hover:border-red-600 h-fit"
-        onclick="removeAllFromCart()">
+      <button class="px-4 py-3 font-bold text-black transition-all border-2 rounded-sm hover:bg-red-400 hover:text-white hover:border-red-600 h-fit" onclick="removeAllFromCart()">
         <i class="fa-solid fa-trash"></i>
         Remove all
       </button>
@@ -125,21 +117,24 @@ $cartItems = $params["cartItems"];
   }
 
   document.removeAllFromCart = () => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/cart/empty"; ?>').then(response => {
-      if (response.type === 'error') {
-        alert(response.message);
-      } else if (response.type === 'info') {
-        alert(response.message);
-      } else {
-        alert('All products deleted from cart');
-      }
-    }).catch(error => {
-      alert('Something went wrong');
-    });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    if (confirm('Do you want to remove all products from cart?')) {
+      FetchXHR.post('<?php echo BASE_URI . "/api/cart/empty"; ?>').then(response => {
+        if (response.type === 'error') {
+          alert(response.message);
+        } else if (response.type === 'info') {
+          alert(response.message);
+        } else {
+          alert('All products deleted from cart');
+        }
+      }).catch(error => {
+        alert('Something went wrong');
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   }
+
 
   document.querySelectorAll('.product-quantity').forEach(form => {
     form.addEventListener('submit', event => {
