@@ -1,31 +1,37 @@
 <?php
 use App\Models\Role;
+use App\Models\User;
 
 ?>
 <div class="w-full min-h-screen ">
   <div class="w-full p-5 my-5 bg-white rounded-md shadow-lg">
-    <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/user/update"; ?>" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="id" value="<?php echo $user->id; ?>"/>
+    <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/user/update"; ?>" method="POST"
+      enctype="multipart/form-data">
+      <input type="hidden" name="id" value="<?php echo $user->id; ?>" />
 
       <label for="title" class="my-2">Image:</label>
       <input type="file" name="image"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" onchange="loadFile(event)" />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
+        onchange="loadFile(event)" />
       <div class="">
         <p>Preview Image:</p>
-        <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $user->image ?>" alt="null"/>
+        <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $user->image ?>" alt="null" />
       </div>
       <input type="text" value="<?php echo $user->image; ?>" name="old_img" class="opacity-100" />
 
       <label for="name" class="my-2">Name:</label>
       <input type="text" value="<?php echo $user->name; ?>" name="name"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        pattern="[a-zA-Z]+" oninvalid="this.setCustomValidity('Please enter alphabets only')"
+        onvalid="this.setCustomValidity('')" />
 
       <label for="expired" class="my-2">Email:</label>
       <input type="email" value="<?php echo $user->email; ?>" name="email"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <label for="expired" class="my-2">Password:</label>
-      <input type="password" name="password" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
+      <input type="password" name="password"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
       <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[72%] right-20 cursor-pointer"
         aria-hidden="true"></i>
       <i id="show-icon-password" class="fa fa-eye absolute hidden top-[72%] right-20 cursor-pointer"
@@ -33,9 +39,12 @@ use App\Models\Role;
 
       <label for="expired" class="my-2">Phone:</label>
       <input type="tel" value="<?php echo $user->phone; ?>" name="phone"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        pattern="^[0-9]{10}$" required oninvalid="this.setCustomValidity('Please enter a valid phone number')"
+        onvalid="this.setCustomValidity('')" />
       <label for="role" class="my-2">Select role:</label>
-      <select value="" name="role" class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
+      <select value="" name="role"
+        class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
         <?php $roless = Role::find($user->role_id); ?>
         <option value="<?php echo $roless->id ?>">
           <?php
@@ -45,6 +54,21 @@ use App\Models\Role;
         <?php foreach (Role::all() as $role): ?>
           <option value="<?php echo $role->id ?>"><?php echo ucfirst($role->name) ?></option>
         <?php endforeach ?>
+      </select>
+      <label for="status" class="my-2">Select status:</label>
+      <select value="" name="status"
+        class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
+        <option value="<?php echo $user->status ?>">
+          <?php
+          if ($user->status == 1) {
+            echo "Active";
+          } else {
+            echo "Banned";
+          }
+          ?>
+        </option>
+        <option value="1">Active</option>
+        <option value="0">Banned</option>
       </select>
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">

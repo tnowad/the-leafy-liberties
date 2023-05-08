@@ -12,17 +12,18 @@
 
       <label for="expired" class="my-2">Expired:</label>
       <input type="date" value="<?php echo $coupon->expired; ?>" name="expired"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" id="task_date" onchange="return CheckExpired();"
-        required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" id="task_date"
+        onchange="return CheckExpired();" required />
 
       <label for="description" class="my-2">Description:</label>
-      <textarea name="description" id="" cols="30" rows="6" class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400"
-        required><?php echo $coupon->description; ?>
+      <textarea name="description" id="" cols="30" rows="6"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required><?php echo $coupon->description; ?>
       </textarea>
 
       <label for="quantity" class="my-2">Quantity:</label>
       <input type="text" value="<?php echo $coupon->quantity; ?>" name="quantity"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
 
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">

@@ -6,8 +6,8 @@ $cartItems = $params["cartItems"];
     <div class="flex items-center justify-start my-8 md:my-14">
       <h1 class="text-xl tracking-widest uppercase text-primary-700 md:text-3xl">Cart</h1>
     </div>
-    <div class="wrapper flex justify-between items-start gap-[2.5%]">
-      <div class="cart-list w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl"
+    <div class="wrapper flex justify-between items-start gap-[2.5%] flex-col lg:flex-row">
+      <div class="cart-list w-full mb-4 lg:mb-0 lg:w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl"
         total="<?php echo count($cartItems) ?>">
         <?php if (count($cartItems) == 0): ?>
           <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
@@ -30,7 +30,7 @@ $cartItems = $params["cartItems"];
                     </a>
                   </div>
                   <div class="text">
-                    <p class="w-40 mb-2 text-2xl break-words book-name">
+                    <p class="w-40 mb-2 text-xl break-words book-name">
                       <?php echo $product->name; ?>
                     </p>
                     <p class="text-base book-author">
@@ -44,11 +44,12 @@ $cartItems = $params["cartItems"];
                     <form class="flex items-center justify-center mx-auto product-quantity w-fit h-fit">
                       <input type="hidden" name="id" value="<?php echo $product->id; ?>">
                       <input type="submit" value="-" name="minus"
-                        class="fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                        class="cursor-pointer fa-solid fa-minus minus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                       <input type="number" name="quantity" class="w-10 text-lg text-center text-count"
-                        value="<?php echo $cartItem->quantity; ?>" />
+                        value="<?php echo $cartItem->quantity; ?>"
+                        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
                       <input type="submit" value="+" name="plus"
-                        class="fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
+                        class="cursor-pointer fa-solid fa-plus text-white bg-[#40736d] px-4 py-2 rounded hover:bg-[#6cada6] transition-all" />
                     </form>
                   </div>
                   <p class="text-xl font-bold counter-price">
@@ -60,7 +61,7 @@ $cartItems = $params["cartItems"];
           <?php endforeach; ?>
         <?php endif ?>
       </div>
-      <div class="cart-bill w-[30%] p-5 bg-white shadow-lg rounded-2xl">
+      <div class="cart-bill w-full lg:w-[30%] p-5 bg-white shadow-lg rounded-2xl">
         <p class="cart-bill-header text-2xl text-left py-3 border-0 border-b-[1px] border-solid border-gray-300 ">
           Cart Totals
         </p>
@@ -83,7 +84,7 @@ $cartItems = $params["cartItems"];
         </a>
       </div>
     </div>
-    <div class="flex justify-end items-center w-[65%] mt-5">
+    <div class="flex justify-end items-center w-full lg:w-[65%] mt-5">
       <!-- remove all product in wishlist -->
       <button
         class="px-4 py-3 font-bold text-black transition-all border-2 rounded-sm hover:bg-red-400 hover:text-white hover:border-red-600 h-fit"

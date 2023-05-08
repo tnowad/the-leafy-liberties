@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Pagination;
+use App\Models\Tag;
 
 $filter = $params['filter'];
 // dd($filter);
@@ -12,19 +14,77 @@ $filter = $params['filter'];
 
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
+    <div class="w-full border border-gray-200 shadow-lg mb-5">
+      <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/dashboard/product' ?>">
+        <div class="border-b border-gray-200 ">
+          <div class="relative px-4 py-2 flex flex-col">
+            <div class="flex items-center justify-between cursor-pointer">
+              <h1 class="mt-2 mb-2 text-xl font-medium">Search</h1>
+            </div>
+            <div class="flex border border-gray-300">
+              <input type="text" name="keywords" class="w-full h-10 px-3 py-2 " placeholder="Search.... "
+                value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
+              <button class="flex items-center justify-center w-10 h-10 bg-white ">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <div class="border-b border-gray-200">
+          <div class="relative px-4 py-2">
+            <div class="dropdown-category flex items-center justify-between cursor-pointer">
+              <h1 class="mt-2 mb-2 text-xl font-medium">Categories</h1>
+              <i class="cursor-pointer open-category fa-solid fa-plus"></i>
+            </div>
+            <ul class="h-0 ml-2 overflow-hidden category-list">
+              <li>
+                <?php foreach (Category::all() as $category): ?>
+                <li>
+                  <label>
+                    <input type="checkbox" name="categories[]" value="<?php echo $category->id ?>" <?php echo in_array($category->id, $filter['categories']) ? 'checked' : '' ?>>
+                    <span class="ml-2">
+                      <?php echo $category->name ?>
+                    </span>
+                  </label>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </div>
+        <div class="border-b border-gray-200">
+          <div class="px-4 py-2">
+            <h1 class="mt-2 mb-2 text-xl font-medium">Author</h1>
+            <select name="author" id="" class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
+              <option value="">All</option>
+              <?php foreach (Author::all() as $author): ?>
+                <option value="<?php echo $author->id ?>" <?php echo $filter['author'] == $author->id ? 'selected' : '' ?>>
+                  <?php echo $author->name ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <div class="border-b border-gray-200">
+          <div class="px-4 py-2">
+            <h1 class="text-xl font-medium">Price range</h1>
+            <div class="flex items-center justify-start gap-2 py-3">
+              <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
+                class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+              <span class="text-lg"> - </span>
+              <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
+                class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+            </div>
+          </div>
+        </div>
+        <input type="submit" value="Filter"
+          class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-md my-5 mx-4 hover:bg-primary-600 transition-all cursor-pointer" />
+      </form>
+    </div>
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Product</h1>
-      <div class="box-border w-1/2 px-10">
-        <form action="<?php echo BASE_URI . '/dashboard/product' ?>" method="GET"
-          class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full shadow-lg">
-          <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
-            placeholder="Search.... "
-            value="<?php echo isset($params['filter']['keywords']) ? $params['filter']['keywords'] : '' ?>" />
-          <button class="flex items-center justify-center w-10 h-10 bg-white rounded-tr-full rounded-br-full">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-      </div>
       <a class="w-5 h-5 text-2xl add-product" href="<?php echo BASE_URI . "/dashboard/product/create"; ?>">
         +
       </a>
@@ -135,4 +195,33 @@ $filter = $params['filter'];
       }, 1000);
     }
   }
+</script>
+<script>
+  let icon = document.querySelector(".open-category");
+  let list = document.querySelector(".category-list");
+  let categories = document.querySelector(".dropdown-category")
+  categories.addEventListener("click", () => {
+    if (icon.classList.contains("fa-plus")) {
+      icon.classList.remove("fa-plus")
+      icon.classList.add("fa-minus")
+    } else {
+      icon.classList.add("fa-plus")
+      icon.classList.remove("fa-minus")
+    }
+    list.classList.toggle("h-0");
+  })
+  let tag_icon = document.querySelector(".open-tags");
+  let tag_list = document.querySelector(".tags-list");
+  let tags = document.querySelector(".dropdown-tag")
+  tags.addEventListener("click", () => {
+    if (tag_icon.classList.contains("fa-plus")) {
+      tag_icon.classList.remove("fa-plus")
+      tag_icon.classList.add("fa-minus")
+    } else {
+      tag_icon.classList.add("fa-plus")
+      tag_icon.classList.remove("fa-minus")
+    }
+    tag_list.classList.toggle("h-0");
+  })
+
 </script>

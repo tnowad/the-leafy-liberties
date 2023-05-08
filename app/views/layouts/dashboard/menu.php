@@ -35,15 +35,25 @@ $menu = [
     "icon" => "fa-shopping-cart",
     "url" => BASE_URI . "/dashboard/order",
   ],
-  "category.access" => [
-    "name" => "Categories",
-    "icon" => "fa-list",
-    "url" => BASE_URI . "/dashboard/category",
-  ],
   "permission.access" => [
     "name" => "Permissions",
     "icon" => "fa-user-lock",
     "url" => BASE_URI . "/dashboard/permission",
+  ],
+  "role.access" => [
+    "name" => "Roles",
+    "icon" => "fa-user-plus",
+    "url" => BASE_URI . "/dashboard/role",
+  ],
+  "import.access" => [
+    "name" => "Import",
+    "icon" => "fa-file-import",
+    "url" => BASE_URI . "/dashboard/import",
+  ],
+  "category.access" => [
+    "name" => "Categories",
+    "icon" => "fa-list",
+    "url" => BASE_URI . "/dashboard/category",
   ],
   "coupon.access" => [
     "name" => "Coupons",
@@ -55,16 +65,11 @@ $menu = [
     "icon" => "fa-sliders",
     "url" => BASE_URI . "/dashboard/slide",
   ],
-  "role.access" => [
-    "name" => "Roles",
-    "icon" => "fa-user-plus",
-    "url" => BASE_URI . "/dashboard/role",
-  ],
   "setting.access" => [
     "name" => "Settings",
     "icon" => "fa-cog",
     "url" => BASE_URI . "/dashboard/setting",
-  ],
+  ]
 ];
 
 foreach ($menu as $key => $menuItem) {
@@ -114,10 +119,10 @@ foreach ($menu as $key => $menuItem) {
   var links = document.getElementsByTagName("a");
   for (var i = 1; i < links.length; i++) {
     if (links[i].getAttribute("href") === currentPath) {
-      links[i].parentElement.classList.add("bg-primary", "text-white", "border-l-2", "border-[#add1ce]");
+      links[i].parentElement.classList.add("bg-primary", "text-white", "border-[#add1ce]");
       console.log(links[i].classList)
     } else {
-      links[i].parentElement.classList.remove("bg-primary", "text-white", "border-l-2", "border-[#add1ce]");
+      links[i].parentElement.classList.remove("bg-primary", "text-white", "border-[#add1ce]");
     }
   }
 </script>

@@ -10,24 +10,31 @@ use App\Models\Publisher;
       enctype="multipart/form-data">
       <label for="title" class="my-2">Title:</label>
       <input type="text" value="" name="name"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        pattern="[a-zA-Z]+"
+        oninvalid="this.setCustomValidity('Please enter alphabets only')"
+        onvalid="this.setCustomValidity('')"
+        />
 
       <label for="image" class="my-2">Image:</label>
-      <input type="file" name="image" onchange="loadFile(event)" required />
+      <input type="file" name="image" onchange="loadFile(event)" required accept="image/*" />
       <p>Preview Image:</p>
       <img id="output1" class="object-contain h-56 w-80" />
 
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="" name="isbn"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
 
       <label for="price" class="my-2">Price:</label>
       <input type="number" value="" step="0.01" name="price"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
       <label for="gender" class="my-2">Author:</label>
       <div class="flex items-center justify-between gap-4">
         <select value="" name="author"
-          class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
+          class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400"
+          required>
           <option value=""></option>
           <?php foreach (Author::all() as $author): ?>
             <option value="<?php echo $author->id ?>">
@@ -46,7 +53,8 @@ use App\Models\Publisher;
       <label for="gender" class="my-2">Publisher:</label>
       <div class="flex items-center justify-between gap-4">
         <select value="" name="publisher"
-          class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400">
+          class="w-full p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400"
+          required>
           <option value=""></option>
           <?php foreach (Publisher::all() as $publish): ?>
             <option value="<?php echo $publish->id ?>">
@@ -60,8 +68,9 @@ use App\Models\Publisher;
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required></textarea>
 
       <label for="quantity" class="my-2">Quantity:</label>
-      <input type="text" value="" name="quantity"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
+      <input type="number" value="" name="quantity"
+        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;" />
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
@@ -110,19 +119,26 @@ use App\Models\Publisher;
   button.addEventListener("click", () => {
     if (inputName.value.trim() === '') {
       alert('Please enter a name');
+      inputName.focus()
       return;
     }
     if (inputImage.value.trim() === '') {
       alert('Please select an image');
+      inputImage.focus()
+
       return;
     }
     if (inputIsbn.value.trim() === '') {
       alert('Please enter an ISBN');
+      inputIsbn.focus()
+
       // console.log(typeof inputIsbn.value);
       return;
     }
     if (inputPrice.value.trim() === '') {
       alert('Please enter a price');
+      inputPrice.focus()
+
       return;
     }
     if (inputPrice.value < 0) {
@@ -130,10 +146,13 @@ use App\Models\Publisher;
     }
     if (inputDescription.value.trim() === '') {
       alert('Please enter a description');
+      inputDescription.focus()
+
       return;
     }
     if (inputQuantity.value.trim() === '') {
       alert('Please enter a quantity');
+      inputQuantity.focus()
       return;
     }
     if (inputQuantity.value < 0) {
@@ -141,10 +160,13 @@ use App\Models\Publisher;
     }
     if (inputAuthor.value.trim() === '') {
       alert('Please select an author');
+      inputAuthor.focus()
+
       return;
     }
     if (inputPublisher.value.trim() === '') {
       alert('Please select a publisher');
+      inputPublisher.focus()
       return;
     }
   });

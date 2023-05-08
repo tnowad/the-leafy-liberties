@@ -31,7 +31,7 @@ $allPermissions = array_values($allPermissions);
   <!-- submit -->
   <button type="submit"
     class="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:ring-blue-500 focus:ring-offset-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
-    Update
+    Create
   </button>
   <table class="w-full mt-5 text-sm text-center text-gray-500 rounded-2xl" width="100%">
     <thead class="p-2 text-gray-700 uppercase bg-gray-100 text-md">
@@ -54,7 +54,7 @@ $allPermissions = array_values($allPermissions);
             <td>
               <input
                 class="w-4 h-4 mr-3 text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                type="checkbox" name="permissions[]" id="<?php echo $permission["name"]; ?>">
+                type="checkbox" name="permissions[]" id="<?php echo $permission["name"]; ?>" value="<?php echo $permission["id"]; ?>">
             </td>
           <?php endforeach; ?>
         </tr>

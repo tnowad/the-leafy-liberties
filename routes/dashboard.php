@@ -3,6 +3,7 @@
 use App\Controllers\Customer\DashboardController;
 use App\Controllers\Dashboard\AuthorController;
 use App\Controllers\Dashboard\CategoryController;
+use App\Controllers\Dashboard\ImportController;
 use App\Controllers\Dashboard\ReviewController;
 use App\Controllers\Dashboard\CouponController;
 use App\Controllers\Dashboard\OrderController;
@@ -136,3 +137,9 @@ $router->get("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/update", [SettingController::class, "update"]);
 $router->post("/dashboard/setting/delete", [SettingController::class, "delete"]);
 
+$router->get("/dashboard/import", [ImportController::class, "index"]);
+$router->get("/dashboard/import/create", [ImportController::class, "create"]);
+$router->post("/dashboard/import/create", [ImportController::class, "create"]);
+$router->get("/dashboard/import/update", [ImportController::class, "update"]);
+$router->post("/dashboard/import/update", [ImportController::class, "update"]);
+$router->post("/dashboard/import/delete", [ImportController::class, "delete"]);

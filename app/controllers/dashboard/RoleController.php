@@ -4,6 +4,7 @@ namespace App\Controllers\Dashboard;
 use App\Models\Permission;
 use App\Models\Product;
 use App\Models\Role;
+use App\Models\RolePermission;
 use Core\Application;
 use Core\Controller;
 use Core\Request;
@@ -97,7 +98,7 @@ class RoleController extends Controller
         $role->name = $request->getParam("name");
         $role->save();
 
-        $permissions = $request->getParam("permissions");
+        $permissions = $request->getParam("permissions") ?? [];
         if (is_array($permissions)) {
           foreach ($permissions as $permission) {
             $role->addPermission($permission);
@@ -131,38 +132,67 @@ class RoleController extends Controller
         ],
       ]);
     }
+    switch ($request->getMethod()) {
+      case "GET":
+        $role = Role::find($request->getQuery("id"));
+        if (!$role || !$role instanceof Role) {
+          return $response->redirect("/dashboard/roles");
+        }
 
-    if ($request->getMethod() === "GET") {
-      $role = Role::find($request->getQuery("id"));
-      if (!$role || !$role instanceof Role) {
-        return $response->redirect("/dashboard/roles");
-      }
+        $rolePermissions = (function () use ($role) {
+          $permissions = [];
+          foreach ($role->permissions() as $rolePermission) {
+            if ($rolePermission->status == "1") {
+              $permissions[] = $rolePermission->permission();
+            }
+          }
+          return $permissions;
+        })();
 
-      $rolePermissions = (function () use ($role) {
-        $permissions = [];
-        foreach ($role->permissions() as $rolePermission) {
-          if ($rolePermission->status == "1") {
-            $permissions[] = $rolePermission->permission();
+        $permissions = Permission::all();
+        return $response->setBody(
+          View::renderWithDashboardLayout(
+            new View("pages/dashboard/role/update"),
+            [
+              "title" => "Update Role",
+              "role" => $role,
+              "permissions" => $permissions,
+              "rolePermissions" => $rolePermissions,
+            ]
+          )
+        );
+      case "POST":
+        $role = Role::find($request->getParam("id"));
+        dd($role);
+        $rolepermissions = RolePermission::all();
+        $roless = $request->getParam("permissions") ?? [];
+        dd($roless);
+        if (!empty($roless)) {
+          $updateRoles = [];
+          foreach ($roless as $roles) {
+            if (!in_array($roles, $rolepermissions)) {
+              $updateRoles[] = $roles;
+            }
+          }
+          $rolepermissions = $updateRoles;
+        }
+        dd($rolepermissions);
+        foreach ($rolepermissions as $item) {
+          if ($item == "") {
+            continue;
+          } else {
+            $userPermission = new RolePermission();
+            $userPermission->role_id = $role->id;
+            $userPermission->permission_id = (int) $item;
+            $userPermission->save();
           }
         }
-        return $permissions;
-      })();
-
-      $permissions = Permission::all();
-      return $response->setBody(
-        View::renderWithDashboardLayout(
-          new View("pages/dashboard/role/update"),
-          [
-            "title" => "Update Role",
-            "role" => $role,
-            "permissions" => $permissions,
-            "rolePermissions" => $rolePermissions,
-          ]
-        )
-      );
-    }
-    if ($request->getMethod() === "POST") {
-      return $response->redirect("/dashboard/roles");
+        return $response->redirect(BASE_URI . "/dashboard/role", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Update role successfull",
+          ],
+        ]);
     }
   }
 
@@ -179,24 +209,54 @@ class RoleController extends Controller
     }
 
     switch ($request->getMethod()) {
-      case "POST":
-        break;
       case "GET":
         $role = Role::find($request->getQuery("id"));
         if (!$role || !$role instanceof Role) {
-          return $response->redirect("/dashboard/roles");
+          return $response->redirect("/dashboard/role");
         }
+
+        $rolePermissions = (function () use ($role) {
+          $permissions = [];
+          foreach ($role->permissions() as $rolePermission) {
+            if ($rolePermission->status == "1") {
+              $permissions[] = $rolePermission->permission();
+            }
+          }
+          return $permissions;
+        })();
+
+        $permissions = Permission::all();
         return $response->setBody(
           View::renderWithDashboardLayout(
             new View("pages/dashboard/role/delete"),
             [
               "title" => "Delete Role",
               "role" => $role,
+              "permissions" => $permissions,
+              "rolePermissions" => $rolePermissions,
             ]
           )
         );
-      default:
-        break;
+      case "POST":
+        $role = Role::find($request->getParam("id"));
+        $rolepermissions = RolePermission::all();
+        $roless = $request->getParam("permissions") ?? [];
+        if (!empty($roless)) {
+          $updateRoles = [];
+          foreach ($roless as $roles) {
+            if (!in_array($roles, $rolepermissions)) {
+              $updateRoles[] = $roles;
+            }
+          }
+          $rolepermissions = $updateRoles;
+        }
+        dd($rolepermissions);
+        return $response->redirect(BASE_URI . "/dashboard/role", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Delete role successfull",
+          ],
+        ]);
     }
   }
 }

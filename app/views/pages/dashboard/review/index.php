@@ -2,7 +2,7 @@
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-bold">Reviews</h1>
-      <div class="box-border w-1/2 px-10">
+      <div class="box-border w-1/2">
         <form action="<?php echo BASE_URI . '/dashboard/review' ?>" method="GET"
           class="flex items-center justify-center w-full h-10 bg-gray-100 rounded-full shadow-lg">
           <input type="text" name="keywords" class="w-full h-full pl-5 rounded-tl-full rounded-bl-full"
@@ -13,9 +13,6 @@
           </button>
         </form>
       </div>
-      <a href="<?php echo BASE_URI . '/dashboard/review/create' ?>" class="w-5 h-5 text-2xl">
-        +
-      </a>
     </div>
     <div class="my-8 bg-white shadow-lg cursor-pointer rounded-2xl">
       <div class="relative">
@@ -55,7 +52,8 @@
                 ?>
                 <?php
                 $reviewsValid = [];
-                $reviews = Review::findAll(["product_id" => $product->id]); foreach ($reviews as $review) {
+                $reviews = Review::findAll(["product_id" => $product->id]);
+                foreach ($reviews as $review) {
                   if ($review->deleted_at == null) {
                     $reviewsValid[] = $review;
                   }

@@ -83,7 +83,7 @@ $products = $params["products"]; ?>
 
     <!-- remove all product in wishlist -->
 
-    <button class="px-4 py-2 font-bold text-white transition-all bg-red-500 hover:bg-red-400"
+    <button class="remove-all px-4 py-2 font-bold text-white transition-all bg-red-500 hover:bg-red-400"
       onclick="removeAllFromWishlist()">
       <i class="fa-solid fa-trash"></i>
       Remove all
@@ -191,9 +191,16 @@ $products = $params["products"]; ?>
 </script>
 <script>
   let btnMoveAllToCart = document.querySelector(".move-all-to-cart");
+  let btnRemoveAll = document.querySelector(".remove-all");
   let totals = document.querySelector(".wishlist-list");
   const count = totals.getAttribute("total");
   btnMoveAllToCart.addEventListener("click", (event) => {
+    if (count == 0) {
+      alert("There are nothing in wishlist");
+      event.preventDefault();
+    }
+  })
+  btnRemoveAll.addEventListener("click", (event) => {
     if (count == 0) {
       alert("There are nothing in wishlist");
       event.preventDefault();

@@ -19,11 +19,21 @@ $products = $pagination['products'];
       <div class="w-full border border-gray-200 shadow-sm">
         <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/products' ?>">
           <input type="hidden" name="page" value="1">
-          <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>">
+          <!-- <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>"> -->
           <input type="hidden" name="keywords" value="<?php echo $filter['keywords'] ?>">
           <div class="border-b border-gray-200">
             <div class="relative px-4 py-2">
               <div class="flex items-center justify-between">
+                <h1 class="mt-2 mb-2 text-xl font-medium">Show products Per Page</h1>
+              </div>
+              <input type="number" name="limit" value="<?php echo $pagination['limit'] ?>"
+                class="w-full px-3 py-1 border border-gray-300 rounded-sm"
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+            </div>
+          </div>
+          <div class="border-b border-gray-200">
+            <div class="relative px-4 py-2">
+              <div class="dropdown-category flex items-center justify-between cursor-pointer">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Categories</h1>
                 <i class="cursor-pointer open-category fa-solid fa-plus"></i>
               </div>
@@ -45,7 +55,7 @@ $products = $pagination['products'];
 
           <div class="border-b border-gray-200">
             <div class="px-4 py-2">
-              <div class="flex items-center justify-between">
+              <div class="dropdown-tag flex items-center justify-between cursor-pointer">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Tags</h1>
                 <i class="cursor-pointer open-tags fa-solid fa-plus"></i>
               </div>
@@ -82,10 +92,12 @@ $products = $pagination['products'];
               <h1 class="text-xl font-medium">Price range</h1>
               <div class="flex items-center justify-start gap-2 py-3">
                 <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
-                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm">
+                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
                 <span class="text-lg"> - </span>
                 <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
-                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm">
+                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
               </div>
             </div>
           </div>
@@ -226,7 +238,8 @@ $products = $pagination['products'];
   }
   let icon = document.querySelector(".open-category");
   let list = document.querySelector(".category-list");
-  icon.addEventListener("click", () => {
+  let categories = document.querySelector(".dropdown-category")
+  categories.addEventListener("click", () => {
     if (icon.classList.contains("fa-plus")) {
       icon.classList.remove("fa-plus")
       icon.classList.add("fa-minus")
@@ -238,7 +251,8 @@ $products = $pagination['products'];
   })
   let tag_icon = document.querySelector(".open-tags");
   let tag_list = document.querySelector(".tags-list");
-  tag_icon.addEventListener("click", () => {
+  let tags = document.querySelector(".dropdown-tag")
+  tags.addEventListener("click", () => {
     if (tag_icon.classList.contains("fa-plus")) {
       tag_icon.classList.remove("fa-plus")
       tag_icon.classList.add("fa-minus")

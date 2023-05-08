@@ -213,6 +213,7 @@ CREATE TABLE
         code VARCHAR(50) NOT NULL,
         quantity int NOT NULL,
         required int(11) NOT NULL,
+        percent int(3) NOT NULL,
         expired date NOT NULL,
         description VARCHAR(255) NOT NULL,
         deleted_at DATETIME DEFAULT NULL
@@ -252,7 +253,7 @@ CREATE TABLE
         total_price INT NOT NULL,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         deleted_at DATETIME DEFAULT NULL,
-        FOREIGN KEY (user_id) REFERENCES users (id),
+        FOREIGN KEY (user_id) REFERENCES users (id)
     );
 
 CREATE TABLE

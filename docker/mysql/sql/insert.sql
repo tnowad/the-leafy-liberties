@@ -122,6 +122,7 @@ INSERT INTO
         code,
         quantity,
         required,
+        percent,
         expired,
         description
     )
@@ -130,6 +131,7 @@ VALUES (
         'SUMMERSALE',
         5,
         100,
+        10,
         '2023-08-31',
         'Summer Sale! Get 10% off orders over $100.'
     ), (
@@ -137,6 +139,7 @@ VALUES (
         'FALLSALE',
         7,
         100,
+        15,
         '2023-11-30',
         'Fall Sale! Get 15% off orders over $150.'
     ), (
@@ -144,6 +147,7 @@ VALUES (
         'WINTERSALE',
         7,
         200,
+        20,
         '2024-02-28',
         'Winter Sale! Get 20% off orders over $200.'
     ), (
@@ -151,6 +155,7 @@ VALUES (
         'SPRINGSALE',
         10,
         100,
+        5,
         '2024-05-31',
         'Spring Sale! Get 5% off orders over $100.'
     ), (
@@ -158,6 +163,7 @@ VALUES (
         'NEWCUSTOMER',
         50,
         0,
+        10,
         '2023-12-31',
         'New Customer Discount! Get 10% off your first order.'
     ), (
@@ -165,27 +171,30 @@ VALUES (
         'RETURNINGCUSTOMER',
         5,
         100,
+        10,
         '2023-12-31',
         'Returning Customer Discount! Get 10% off orders over $100.'
     ), (
         7,
-        'FREEGIFT',
+        'SPECIALGIFT',
         4,
+        500,
         50,
         '2023-12-31',
-        'Free Gift with Purchase! Get a free gift with orders over $50.'
+        'Free Gift with Purchase! Get 50% off with orders over $500.'
     ), (
         8,
         'FREESHIPPING',
         3,
         75,
+        7,
         '2023-12-31',
-        'Free Shipping! Get free shipping on orders over $75.'
+        'Free Shipping! Get 7% off with orders over $75.'
     );
 
 INSERT INTO
     `permissions` (`id`, `name`, `deleted_at`)
-VALUES (1, 'dashboard.access', NULL), (2, 'author.access', NULL), (3, 'author.create', NULL), (4, 'author.delete', NULL), (5, 'author.show', NULL), (6, 'author.update', NULL), (7, 'cart.access', NULL), (8, 'cart.create', NULL), (9, 'cart.delete', NULL), (10, 'cart.show', NULL), (11, 'cart.update', NULL), (12, 'category.access', NULL), (13, 'category.create', NULL), (14, 'category.delete', NULL), (15, 'category.show', NULL), (16, 'category.update', NULL), (17, 'coupon.access', NULL), (18, 'coupon.create', NULL), (19, 'coupon.delete', NULL), (20, 'coupon.show', NULL), (21, 'coupon.update', NULL), (22, 'order.access', NULL), (23, 'order.create', NULL), (24, 'order.delete', NULL), (25, 'order.show', NULL), (26, 'order.update', NULL), (27, 'permission.access', NULL), (28, 'permission.create', NULL), (29, 'permission.delete', NULL), (30, 'permission.show', NULL), (31, 'permission.update', NULL), (32, 'product.access', NULL), (33, 'product.create', NULL), (34, 'product.delete', NULL), (35, 'product.show', NULL), (36, 'product.update', NULL), (37, 'publisher.access', NULL), (38, 'publisher.create', NULL), (39, 'publisher.delete', NULL), (40, 'publisher.show', NULL), (41, 'publisher.update', NULL), (42, 'review.access', NULL), (43, 'review.create', NULL), (44, 'review.delete', NULL), (45, 'review.show', NULL), (46, 'review.update', NULL), (47, 'role.access', NULL), (48, 'role.create', NULL), (49, 'role.delete', NULL), (50, 'role.show', NULL), (51, 'role.update', NULL), (52, 'setting.access', NULL), (53, 'setting.create', NULL), (54, 'setting.delete', NULL), (55, 'setting.show', NULL), (56, 'setting.update', NULL), (57, 'slide.access', NULL), (58, 'slide.create', NULL), (59, 'slide.delete', NULL), (60, 'slide.show', NULL), (61, 'slide.update', NULL), (62, 'tag.access', NULL), (63, 'tag.create', NULL), (64, 'tag.delete', NULL), (65, 'tag.show', NULL), (66, 'tag.update', NULL), (67, 'user.access', NULL), (68, 'user.create', NULL), (69, 'user.delete', NULL), (70, 'user.show', NULL), (71, 'user.update', NULL), (72, 'wishlist.access', NULL), (73, 'wishlist.create', NULL), (74, 'wishlist.delete', NULL), (75, 'wishlist.show', NULL), (76, 'wishlist.update', NULL);
+VALUES (1, 'dashboard.access', NULL), (2, 'author.access', NULL), (3, 'author.create', NULL), (4, 'author.delete', NULL), (5, 'author.show', NULL), (6, 'author.update', NULL), (7, 'cart.access', NULL), (8, 'cart.create', NULL), (9, 'cart.delete', NULL), (10, 'cart.show', NULL), (11, 'cart.update', NULL), (12, 'category.access', NULL), (13, 'category.create', NULL), (14, 'category.delete', NULL), (15, 'category.show', NULL), (16, 'category.update', NULL), (17, 'coupon.access', NULL), (18, 'coupon.create', NULL), (19, 'coupon.delete', NULL), (20, 'coupon.show', NULL), (21, 'coupon.update', NULL), (22, 'order.access', NULL), (23, 'order.create', NULL), (24, 'order.delete', NULL), (25, 'order.show', NULL), (26, 'order.update', NULL), (27, 'permission.access', NULL), (28, 'permission.create', NULL), (29, 'permission.delete', NULL), (30, 'permission.show', NULL), (31, 'permission.update', NULL), (32, 'product.access', NULL), (33, 'product.create', NULL), (34, 'product.delete', NULL), (35, 'product.show', NULL), (36, 'product.update', NULL), (37, 'import.access', NULL), (38, 'import.create', NULL), (39, 'import.delete', NULL), (40, 'import.show', NULL), (41, 'import.update', NULL), (42, 'review.access', NULL), (43, 'review.create', NULL), (44, 'review.delete', NULL), (45, 'review.show', NULL), (46, 'review.update', NULL), (47, 'role.access', NULL), (48, 'role.create', NULL), (49, 'role.delete', NULL), (50, 'role.show', NULL), (51, 'role.update', NULL), (52, 'setting.access', NULL), (53, 'setting.create', NULL), (54, 'setting.delete', NULL), (55, 'setting.show', NULL), (56, 'setting.update', NULL), (57, 'slide.access', NULL), (58, 'slide.create', NULL), (59, 'slide.delete', NULL), (60, 'slide.show', NULL), (61, 'slide.update', NULL), (62, 'tag.access', NULL), (63, 'tag.create', NULL), (64, 'tag.delete', NULL), (65, 'tag.show', NULL), (66, 'tag.update', NULL), (67, 'user.access', NULL), (68, 'user.create', NULL), (69, 'user.delete', NULL), (70, 'user.show', NULL), (71, 'user.update', NULL), (72, 'wishlist.access', NULL), (73, 'wishlist.create', NULL), (74, 'wishlist.delete', NULL), (75, 'wishlist.show', NULL), (76, 'wishlist.update', NULL);
 
 INSERT INTO
     `products` (
@@ -808,6 +817,10 @@ INSERT INTO
         `deleted_at`
     )
 VALUES (1, NULL, 'Bestselling', NULL), (2, NULL, 'Popular', NULL), (3, NULL, 'New', NULL), (4, NULL, 'Recommended', NULL);
+
+INSERT INTO
+    import (user_id, total_price)
+VALUES (3, 150), (3, 300), (3, 500);
 
 INSERT INTO
     `users` (

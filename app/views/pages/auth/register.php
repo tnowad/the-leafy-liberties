@@ -30,9 +30,10 @@
           <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">
             Phone
           </label>
-          <input type="tel" name="phone" pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
+          <input type="tel" name="phone" pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" required
+            oninvalid="this.setCustomValidity('Please enter a valid phone number')" onvalid="this.setCustomValidity('')"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
-            placeholder="Enter your phone here" required />
+            placeholder="Enter your phone here" />
         </div>
         <!-- Password -->
         <div class='relative'>
@@ -40,6 +41,7 @@
             Password
           </label>
           <input type="password" name="password" placeholder="••••••••" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            oninvalid="this.setCustomValidity('Please enter a valid password.Ex:John123@')" onvalid="this.setCustomValidity('')"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
             required />
           <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer"
@@ -100,31 +102,15 @@
   });
 
   // validate all input when mouse out if not match pattern then show error
-  const inputs = document.querySelectorAll("input");
-  inputs.forEach((input) => {
-    input.addEventListener("blur", function () {
-      if (input.type === "email") {
-        if (!input.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-          input.style.border = "1px solid red";
-        } else {
-          input.style.border = "1px solid #d1d5db";
-        }
-      }
-      if (input.type === "tel") {
-        if (!input.value.match(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g)) {
-          input.style.border = "1px solid red";
-        } else {
-          input.style.border = "1px solid #d1d5db";
-        }
-      }
-      if (input.type === "password") {
-        if (!input.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/g)) {
-          input.style.border = "1px solid red";
-        } else {
-          input.style.border = "1px solid #d1d5db";
-        }
-      }
-    });
-  });
-
+  let btnSubmit = document.querySelector("button[type='submit']")
+  let inputEmail = document.querySelector("input[type='email']")
+  btnSubmit.addEventListener("click", () => {
+    let parts = inputEmail.value.split("@");
+    if (parts[0] === '') {
+      alert("The mail address must not be empty")
+    }
+    if (!isNaN(parts[0])) {
+      alert("The email must contain one alphabet!!!")
+    }
+  })
 </script>

@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->getParam("name");
         if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
-          $category->image = $request->getParam("old_img");
+          $category->image = NULL;
         } else {
           $category->image = $request->getParam("image");
         }

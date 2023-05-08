@@ -73,5 +73,15 @@
       showIcon.style.display = "none";
     }
   });
-
+  let btnSubmit = document.querySelector("button[type='submit']")
+  let inputEmail = document.querySelector("input[type='email']")
+  btnSubmit.addEventListener("click", () => {
+    let parts = inputEmail.value.split("@");
+    if (parts[0] === '') {
+      alert("The mail address must not be empty")
+    }
+    if (!isNaN(parts[0])) {
+      alert("The email must contain one alphabet!!!")
+    }
+  })
 </script>

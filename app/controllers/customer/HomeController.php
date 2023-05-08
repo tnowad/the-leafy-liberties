@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    $slides = Slide::findAll(["status" => 1]);
+    $slides = Slide::findAll(["status" => 1, "deleted_at" => "null"]);
 
     $response->setStatusCode(200);
     $response->setBody(
@@ -80,60 +80,6 @@ class HomeController extends Controller
     $response->setBody(
       View::renderWithLayout(new View("pages/checkout"), [
         "title" => "Checkout",
-      ])
-    );
-  }
-  public function dashboard(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/dashboard"), [
-        "title" => "Dashboard",
-      ])
-    );
-  }
-  public function customerDashboard(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/customer"), [
-        "title" => "Customer Dashboard",
-      ])
-    );
-  }
-  public function productDashboard(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/product"), [
-        "title" => "Product Dashboard",
-      ])
-    );
-  }
-  public function couponDashboard(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/coupon"), [
-        "title" => "Coupon Dashboard",
-      ])
-    );
-  }
-  public function sliderDashboard(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/slider"), [
-        "title" => "Slider Dashboard",
-      ])
-    );
-  }
-  public function commentDashboard(Request $request, Response $response)
-  {
-    $response->setStatusCode(200);
-    $response->setBody(
-      View::renderWithDashboardLayout(new View("pages/dashboard/comment"), [
-        "title" => "Comment Dashboard",
       ])
     );
   }

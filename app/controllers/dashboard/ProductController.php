@@ -18,8 +18,16 @@ class ProductController extends Controller
   public function index(Request $request, Response $response)
   {
     $filter = [
+      "categories" => $request->getQuery("categories") ?? [],
+      "tags" => $request->getQuery("tags") ?? [],
+      "author" => $request->getQuery("author"),
+      "price" => [
+        "min" => $request->getQuery("min-price"),
+        "max" => $request->getQuery("max-price"),
+      ],
       "keywords" => $request->getQuery("keywords"),
     ];
+
     $auth = Application::getInstance()->getAuthentication();
     if (!$auth->hasPermission("product.access")) {
       return $response->redirect(BASE_URI . "/dashboard", 200, [
@@ -89,9 +97,22 @@ class ProductController extends Controller
           ]);
         }
         $product = new Product();
+        $products = Product::all();
+        foreach ($products as $item) {
+          if ($item->isbn == $product->isbn) {
+            return $response->redirect(BASE_URI . "/dashboard/product/create", 200, [
+              "toast" => [
+                "type" => "error",
+                "message" => "This ISBN number is already exist!",
+              ],
+            ]);
+          } else {
+            $product->isbn = $request->getParam("isbn");
+            break;
+          }
+        }
         $product->name = $request->getParam("name");
         $product->image = $request->getParam("image");
-        $product->isbn = $request->getParam("isbn");
         $product->price = $request->getParam("price");
         $product->description = $request->getParam("description");
         $product->quantity = $request->getParam("quantity");
@@ -216,7 +237,12 @@ class ProductController extends Controller
           }
           $product->name = $request->getParam("name");
           if (($request->getParam("image") == "Extension not allowed, please choose a jpeg, jpg, png file.") == false) {
-            $product->image = $request->getParam("old_img");
+            return $response->redirect(BASE_URI . "/dashboard/product/create", 200, [
+              "toast" => [
+                "type" => "error",
+                "message" => "Please choose a jpeg, jpg, png file!!.",
+              ],
+            ]);
           } else {
             $product->image = $request->getParam("image");
           }

@@ -17,6 +17,7 @@ class PermissionController extends Controller
       View::renderWithDashboardLayout(
         new View("pages/dashboard/permission/index"),
         [
+          "title" => "Permissions",
           "permissions" => $permissions,
         ]
       )

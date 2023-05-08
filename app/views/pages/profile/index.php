@@ -12,15 +12,16 @@
           <input name="name" value="<?php echo $user->name; ?>" type="text" required
             class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400" />
           <label>Email</label>
-          <input name="email" value=" <?php echo $user->email; ?>" type="email" required
+          <input name="email" value=" <?php echo $user->email; ?>" type="email" required pattern="[^@\s]+@[^@\s]+"
             class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400" />
           <label>Phone number</label>
           <input name="phone" value="<?php echo $user->phone; ?>" type="tel"
             class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400"
-            pattern="^(\+84|0)(1\d{9}|3\d{8}|5\d{8}|7\d{8}|8\d{8}|9\d{8})$" required></input>
+            pattern="^[0-9]{10}$" required oninvalid="this.setCustomValidity('Please enter a valid phone number')"
+            onvalid="this.setCustomValidity('')" />
           <label>Address</label>
-          <input name="address" value="<?php echo $user->address; ?>" type="tel"
-            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400"></input>
+          <input name="address" value="<?php echo $user->address; ?>" type="text"
+            class="w-full px-2 py-5 duration-300 border border-gray-300 border-solid rounded-md h-9 hover:shadow-sm shadow focus:ring-2 focus:ring-primary-400" />
           <label>Gender</label>
           <div class="relative inline-block">
             <select name="gender" id="gender"
@@ -46,7 +47,7 @@
             <i id="show-icon" class="fa fa-eye absolute hidden top-[40%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
           <input type="submit" value="Save changes"
-            class="w-3/6 p-2 mt-5 text-white  bg-primary-800 hover:bg-teal-700 border cursor-pointer sm:w-1/6 rounded-lg transition-all" />
+            class="w-3/6 p-2 mt-5 text-white  bg-primary-800 hover:bg-primary-700 border cursor-pointer sm:w-1/6 rounded-lg transition-all" />
 
         </form>
       </div>
