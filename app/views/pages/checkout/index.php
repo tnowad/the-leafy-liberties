@@ -183,7 +183,7 @@ LIMIT 1;
             <p class="discount-code">
               <?php echo $coupons[0]['code']; ?>
             </p>
-            <input type="hidden" name="discount" value="<?php $coupons[0]['id'] ?>">
+            <input type="hidden" name="discount" value="<?php echo $coupons[0]['id'] ?>">
             <p class="discount-money font-bold">
               $
               <?php
@@ -234,7 +234,7 @@ LIMIT 1;
               <h2 class="text-lg font-medium">Grand Total</h2>
               <div class="font-bold grand-money">
                 $
-                <?php echo number_format($grandTotal - $sumDiscount,2)  ?>
+                <?php echo number_format($grandTotal - $sumDiscount + $taxMoney, 2) ?>
               </div>
             </div>
             <fieldset class="border-[1px] border-gray-600 border-solid rounded-md p-1 mr-10 w-full h-auto mt-4">
@@ -246,7 +246,7 @@ LIMIT 1;
               class="btn-pay w-full bg-[#2e524e] text-center p-2 text-white rounded-lg mt-5 cursor-pointer hover:bg-[#52938d] hover:transition-all">
               <button type="submit" class="text-xl grand-total w-full h-full">
                 Pay $
-                <?php echo number_format($grandTotal - $sumDiscount,2)  ?>
+                <?php echo number_format($grandTotal - $sumDiscount + $taxMoney, 2) ?>
               </button>
             </div>
           </div>
@@ -303,10 +303,12 @@ LIMIT 1;
       if (option.checked == true) {
         shipping_money.innerHTML = "$" + ship_method[index];
         taxMoney = tax.innerHTML.replace("$", "");
-        discountMoney = discount.innerHTML.replace("$","")
+        console.log(taxMoney)
+        discountMoney = discount.innerHTML.replace("$", "")
+        console.log(discountMoney);
         sum = (parseFloat(subtotal) + parseFloat(ship_method[index]) + parseFloat(taxMoney)).toFixed(2)
-        grand_money.innerHTML = "$ " + (sum - discountMoney);
-        grand_total.innerHTML = "Pay $ " + (sum - discountMoney);
+        grand_money.innerHTML = "$ " + parseFloat(sum - discountMoney).toFixed(2);
+        grand_total.innerHTML = "Pay $ " + parseFloat(sum - discountMoney).toFixed(2);
       }
     })
   });

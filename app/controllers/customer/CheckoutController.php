@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Setting;
 use App\Models\ShippingMethod;
 use Core\Application;
 use Core\Controller;
@@ -43,6 +44,7 @@ class CheckoutController extends Controller
     $sum = 0;
     $cartItems = Cart::findAll(["user_id" => $auth->getUser()->id]);
     $orderItems = [];
+    $taxMoney = Setting::findOne(["name" => "tax"]);
     $ship = ShippingMethod::find($request->getParam("shipping-method-id"));
     $discount = Coupon::find($request->getParam("discount"));
     $totalPrice = 0;
@@ -55,9 +57,8 @@ class CheckoutController extends Controller
       $orderItems[] = $orderItem;
     }
     $order = new Order();
-    $sum = ($totalPrice + $ship->price) - ($totalPrice * ($ship->percent / 100));
+    $sum = ($totalPrice + $ship->price) - ($totalPrice * ($discount->percent / 100)) + number_format((((int) $taxMoney->value / 100) * $totalPrice) / 10, 2);
     try {
-
       $order->user_id = $auth->getUser()->id;
       $order->name = $request->getParam('name');
       // Validate email
@@ -66,6 +67,10 @@ class CheckoutController extends Controller
       $order->address = $request->getParam('address');
       $order->phone = $request->getParam('phone');
       $order->shipping_method_id = ShippingMethod::findOne(['id' => $request->getParam('shipping-method-id')])->id;
+
+      $order->coupon_id = Coupon::findOne(["id" => $request->getParam("discount")])->id;
+
+
       $order->payment_method_type = $request->getParam('payment-method-type');
       $order->description = $request->getParam('description');
       $order->total_price = $sum;

@@ -18,6 +18,7 @@ class Order extends Model
     "address",
     "phone",
     "shipping_method_id",
+    "coupon_id",
     "description",
     "payment_method_type",
     "card_number",

@@ -1,3 +1,9 @@
+<?php
+use App\Models\Order;
+use App\Models\OrderProduct;
+
+?>
+
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
@@ -54,7 +60,20 @@
                     <?php echo $coupon->expired; ?>
                   </td>
                   <td class="px-5 py-3">
-                    <?php echo $coupon->quantity; ?>
+                    <?php
+                    $sum = 0;
+                    $count = 0;
+                    $orders = Order::findAll(["status" => "5"]);
+                    foreach ($orders as $order) {
+                      if ($order->coupon_id == $coupon->id) {
+                        $count++;
+                      } else {
+                        continue;
+                      }
+                    }
+                    $sum = $coupon->quantity - $count;
+                    echo ($sum) ? $sum : $coupon->quantity;
+                    ?>
                   </td>
                   <td class="px-5 py-3">
                     <?php echo $coupon->description; ?>
