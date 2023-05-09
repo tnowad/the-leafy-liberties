@@ -165,6 +165,7 @@ $products = Product::all();
 
     Object.keys(products).forEach((productId) => {
       const product = products[productId];
+
       const productIdInput = document.createElement("input");
       productIdInput.name = "product-id[]";
       productIdInput.value = productId;

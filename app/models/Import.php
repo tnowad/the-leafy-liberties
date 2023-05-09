@@ -29,6 +29,8 @@ class Import extends Model
       "quantity" => $quantity,
       "price" => $price,
     ]);
+    $product->quantity += $quantity;
+    $product->save();
     $this->total_price += $price * $quantity;
     $this->save();
     return $importProduct;

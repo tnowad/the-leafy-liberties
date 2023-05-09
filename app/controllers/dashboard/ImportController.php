@@ -10,6 +10,7 @@ use App\Models\ProductTag;
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
+use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
@@ -73,11 +74,39 @@ class ImportController extends Controller
           )
         );
       case 'POST':
-        $import = new Import();
-        $user = User::find($request->getParam("user-id"));
-        $import->user_id = $user->id;
+        // start transaction
+        Database::getInstance()->beginTransaction();
 
-        dd($request->getParams());
+        $import = new Import();
+        $import->user_id = $auth->getUser()->id;
+        $import->total_price = 0;
+        $import->save();
+
+        $products = [];
+        for ($i = 0; $i < count($request->getParam('product-id')); $i++) {
+          $products[] = [
+            'product-id' => $request->getParam('product-id')[$i],
+            'quantity' => $request->getParam('quantity')[$i],
+            'price' => $request->getParam('price')[$i],
+          ];
+        }
+
+        foreach ($products as $product) {
+          $import->addProduct(
+            Product::find($product['product-id']),
+            $product['quantity'],
+            $product['price'],
+          );
+        }
+
+        Database::getInstance()->commitTransaction();
+
+        return $response->redirect(BASE_URI . "/dashboard/import", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Import successfully.",
+          ],
+        ]);
     }
   }
 
