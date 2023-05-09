@@ -11,26 +11,26 @@
               Current password
             </label>
             <input id="current-password" name="current-password" type="password" required
-              class="w-full p-5 border border-gray-300 border-solid rounded-md shadow h-9" />
+              class="w-full p-5 border border-gray-300 border-solid rounded-md shadow h-9 focus:ring-2 focus:ring-primary-400 transition-all" />
             <i id="hide-icon" class="fa fa-eye-slash absolute top-[23%] right-4 cursor-pointer" aria-hidden="true"></i>
             <i id="show-icon" class="fa fa-eye absolute hidden top-[23%] right-4 cursor-pointer" aria-hidden="true"></i>
             <label for="new-password">New password</label>
             <input id="new-password" name="new-password" type="password" required
-              class="w-full p-5 border border-gray-300 border-solid rounded-md shadow h-9" />
+              class="w-full p-5 border border-gray-300 border-solid rounded-md shadow h-9 focus:ring-2 focus:ring-primary-400 transition-all" />
             <i id="hide-icon-new" class="fa fa-eye-slash absolute top-[53%] right-4 cursor-pointer"
               aria-hidden="true"></i>
             <i id="show-icon-new" class="fa fa-eye absolute hidden top-[53%] right-4 cursor-pointer"
               aria-hidden="true"></i>
             <label for="confirm-new-password">Confirm new password</label>
             <input id="confirm-new-password" name="confirm-new-password" type="password" required
-              class="w-full p-5 border border-gray-300 border-solid rounded-md h-9" />
+              class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 focus:ring-2 focus:ring-primary-400 transition-all" />
             <i id="hide-icon-confirm-new" class="fa fa-eye-slash absolute top-[82%] right-4 cursor-pointer"
               aria-hidden="true"></i>
             <i id="show-icon-confirm-new" class="fa fa-eye absolute hidden top-[82%] right-4 cursor-pointer"
               aria-hidden="true"></i>
           </div>
           <input type="submit" value="Save changes"
-            class="w-3/6 p-2 mt-5 text-white transition-all bg-teal-800 border cursor-pointer sm:w-1/6 rounded-2xl" />
+            class="w-3/6 p-2 mt-5 text-white transition-all bg-primary-800 border cursor-pointer hover:bg-primary-600 sm:w-1/6 rounded-md" />
         </form>
       </div>
     </div>

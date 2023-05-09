@@ -10,8 +10,8 @@ $cartItems = $params["cartItems"];
       <div class="cart-list w-full mb-4 lg:mb-0 lg:w-[65%] h-fit overflow-y-scroll p-4 bg-white shadow-lg rounded-2xl" total="<?php echo count($cartItems) ?>">
         <?php if (count($cartItems) == 0) : ?>
           <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
-            <i class="fa-solid fa-basket-shopping-simple text-[85px] text-gray-400"></i>
-            <h1 class="text-5xl tracking-wider text-gray-400 uppercase">Cart is empty</h1>
+            <i class="fa-solid fa-basket-shopping-simple text-6xl md:text-[85px] text-gray-400"></i>
+            <h1 class="text-4xl md:text-5xl tracking-wider text-gray-400 uppercase">Cart is empty</h1>
           </div>
         <?php else : ?>
           <?php foreach ($cartItems as $cartItem) : ?>

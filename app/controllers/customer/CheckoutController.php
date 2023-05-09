@@ -67,10 +67,7 @@ class CheckoutController extends Controller
       $order->address = $request->getParam('address');
       $order->phone = $request->getParam('phone');
       $order->shipping_method_id = ShippingMethod::findOne(['id' => $request->getParam('shipping-method-id')])->id;
-
       $order->coupon_id = Coupon::findOne(["id" => $request->getParam("discount")])->id;
-
-
       $order->payment_method_type = $request->getParam('payment-method-type');
       $order->description = $request->getParam('description');
       $order->total_price = $sum;

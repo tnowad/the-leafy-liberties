@@ -8,8 +8,8 @@ $products = $params["products"]; ?>
     total="<?php echo count($products) ?>">
     <?php if (count($products) == 0): ?>
       <div class="flex flex-col items-center justify-center h-full my-8">
-        <i class="fa-solid fa-heart-pulse text-[100px] text-gray-400"></i>
-        <h1 class="text-6xl tracking-widest text-gray-400 uppercase">Wishlist is
+        <i class="fa-solid fa-heart-pulse text-6xl md:text-[100px] text-gray-400"></i>
+        <h1 class="text-4xl md:text-6xl tracking-widest text-gray-400 uppercase">Wishlist is
           empty</h1>
       </div>
     <?php else: ?>
@@ -17,7 +17,6 @@ $products = $params["products"]; ?>
         <thead class="sticky top-0 w-full m-3 text-gray-600 border-b border-gray-300 rounded-sm">
           <tr class="font-normal text-left uppercase">
             <th>
-
             </th>
             <th class="py-2 px-9">
               Product
@@ -132,23 +131,24 @@ $products = $params["products"]; ?>
 
   }
   document.removeFromWishlist = (id) => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/remove"; ?>', { id }, {
-      'Content-Type': 'application/json'
-    }).then(response => {
-      if (response.type === 'error') {
-        alert(response.message);
-      } else if (response.type === 'info') {
-        alert(response.message);
-      } else {
-        alert('Product deleted from wishlist');
-      }
-    }).catch(error => {
-      alert('Something went wrong');
-    });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-
+    if (confirm("Do you want to remove this product from wishlist")) {
+      FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/remove"; ?>', { id }, {
+        'Content-Type': 'application/json'
+      }).then(response => {
+        if (response.type === 'error') {
+          alert(response.message);
+        } else if (response.type === 'info') {
+          alert(response.message);
+        } else {
+          alert('Product deleted from wishlist');
+        }
+      }).catch(error => {
+        alert('Something went wrong');
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   }
 
   document.moveAllToCart = () => {
@@ -172,38 +172,21 @@ $products = $params["products"]; ?>
 
 
   document.removeAllFromWishlist = () => {
-    FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/empty"; ?>').then(response => {
-      if (response.type === 'error') {
-        alert(response.message);
-      } else if (response.type === 'info') {
-        alert(response.message);
-      } else {
-        alert('All products deleted from wishlist');
-      }
-    }).catch(error => {
-      alert('Something went wrong');
-    });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-
+    if (confirm("Do you want to remove all products from wishlist?")) {
+      FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/empty"; ?>').then(response => {
+        if (response.type === 'error') {
+          alert(response.message);
+        } else if (response.type === 'info') {
+          alert(response.message);
+        } else {
+          alert('All products deleted from wishlist');
+        }
+      }).catch(error => {
+        alert('Something went wrong');
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   }
-</script>
-<script>
-  let btnMoveAllToCart = document.querySelector(".move-all-to-cart");
-  let btnRemoveAll = document.querySelector(".remove-all");
-  let totals = document.querySelector(".wishlist-list");
-  const count = totals.getAttribute("total");
-  btnMoveAllToCart.addEventListener("click", (event) => {
-    if (count == 0) {
-      alert("There are nothing in wishlist");
-      event.preventDefault();
-    }
-  })
-  btnRemoveAll.addEventListener("click", (event) => {
-    if (count == 0) {
-      alert("There are nothing in wishlist");
-      event.preventDefault();
-    }
-  })
 </script>

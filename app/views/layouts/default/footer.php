@@ -19,7 +19,7 @@
           E-commerce Website Designed by Tuan, Phat, Chinh, Bao</p>
       </div>
       <div class="w-full h-12 pl-3 my-6">
-        <div class="flex justify-start gap-10">
+        <div class="flex lg:justify-start gap-10 items-center justify-center">
           <i class="text-2xl transition-all cursor-pointer fa-brands fa-facebook-f hover:text-blue-500"></i>
           <i class="text-2xl transition-all cursor-pointer fa-brands fa-youtube hover:text-red-500"></i>
           <i class="text-2xl transition-all cursor-pointer fa-brands fa-instagram hover:text-pink-500"></i>

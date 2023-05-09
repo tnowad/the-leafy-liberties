@@ -25,7 +25,7 @@
           <label>Gender</label>
           <div class="relative inline-block">
             <select name="gender" id="gender"
-              class="block w-full px-2 py-2 pr-8 leading-tight duration-300 bg-white border border-gray-300 rounded shadow appearance-none hover:shadow-sm focus:outline-none focus:shadow-outline">
+              class="block w-full px-2 py-2 pr-8 leading-tight duration-300 bg-white border border-gray-300 rounded shadow appearance-none hover:shadow-sm focus:ring-2 focus:ring-primary-400">
               <option value="male" <?php if ($user->gender == "1") {
                 echo "selected";
               } ?>>Male</option>
@@ -42,7 +42,8 @@
           </label>
           <div class="relative flex flex-col py-4 px-2 gap-1 border border-gray-300 border-solid rounded">
             <input name="current-password" type="password"
-              class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow" id="current-password" />
+              class="w-full p-5 border border-gray-300 border-solid rounded-md h-9 shadow focus:ring-2 focus:ring-primary-400"
+              id="current-password" />
             <i id="hide-icon" class="fa fa-eye-slash absolute top-[40%] right-4 cursor-pointer" aria-hidden="true"></i>
             <i id="show-icon" class="fa fa-eye absolute hidden top-[40%] right-4 cursor-pointer" aria-hidden="true"></i>
           </div>
