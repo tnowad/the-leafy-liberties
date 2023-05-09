@@ -1,6 +1,7 @@
 <?php
 use App\Controllers\Customer\CartController;
 use App\Controllers\Customer\WishlistController;
+use App\Controllers\Dashboard\ProductController;
 use Core\Application;
 
 $router = Application::getInstance()->getRouter();
@@ -15,3 +16,8 @@ $router->post("/api/cart/add", [CartController::class, "add"]);
 $router->post("/api/cart/remove", [CartController::class, "remove"]);
 $router->post("/api/cart/empty", [CartController::class, "empty"]);
 $router->post("/api/cart/update", [CartController::class, "update"]);
+
+
+// get all products
+$router->get("/api/products", [ProductController::class, "showAll"]);
+$router->get("/api/products/show", [ProductController::class, "showOne"]);

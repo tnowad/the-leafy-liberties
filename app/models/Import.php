@@ -15,6 +15,26 @@ class Import extends Model
   {
     return User::find($this->user_id);
   }
+
+  public function importProducts()
+  {
+    return ImportProduct::findAll(["import_id" => $this->id]);
+  }
+
+  public function addProduct($product, $quantity, $price)
+  {
+    $importProduct = ImportProduct::create([
+      "import_id" => $this->id,
+      "product_id" => $product->id,
+      "quantity" => $quantity,
+      "price" => $price,
+    ]);
+    $this->total_price += $price * $quantity;
+    $this->save();
+    return $importProduct;
+  }
+
+
   public static function filterAdvanced($filter)
   {
     $imports = Import::all();

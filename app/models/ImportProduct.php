@@ -11,10 +11,12 @@ class ImportProduct extends Model
   protected $table = "imports_products";
 
   protected $fillable = ["id", "import_id", "product_id", "quantity", "price"];
+
   public function product()
   {
     return Product::find($this->product_id);
   }
+
   public static function filterAdvanced($filter)
   {
     $imports = Import::all();

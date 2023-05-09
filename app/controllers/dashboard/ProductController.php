@@ -301,4 +301,35 @@ class ProductController extends Controller
       "message" => "Product removed from table",
     ]);
   }
+
+  public function showAll(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    $products = Product::all();
+
+    // each of them set value toJson()
+    $productsJson = [];
+    foreach ($products as $product) {
+      $productsJson[] = json_encode($product);
+    }
+
+    return $response->jsonResponse([
+      $productsJson
+    ]);
+  }
+
+  public function showOne(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+    $product = Product::find($request->getQuery("id"));
+    if (!$product) {
+      return $response->jsonResponse([
+        "type" => "error",
+        "message" => "Product not found",
+      ]);
+    }
+    return $response->jsonResponse(
+      $product->attributes
+    );
+  }
 }

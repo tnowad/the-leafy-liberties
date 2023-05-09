@@ -9,7 +9,7 @@ class Model
   protected $table;
   protected $primaryKey = "id";
   protected $fillable = [];
-  protected $attributes = [];
+  public $attributes = [];
   protected static $db;
 
   public function __construct($attributes = [])

@@ -74,22 +74,10 @@ class ImportController extends Controller
         );
       case 'POST':
         $import = new Import();
-        $user = User::find($request->getParam("user_id"));
-        if ($request->getParam("user_id") != 3) {
-          return $response->redirect(BASE_URI . "/dashboard/import/create", 200, [
-            "toast" => [
-              "type" => "error",
-              "message" => "This user don't have permission!",
-            ],
-          ]);
-        }
-        return $response->redirect(BASE_URI . "/dashboard/import", 200, [
-          "toast" => [
-            "type" => "success",
-            "message" => "Import successful",
-          ],
-        ]);
+        $user = User::find($request->getParam("user-id"));
+        $import->user_id = $user->id;
 
+        dd($request->getParams());
     }
   }
 
