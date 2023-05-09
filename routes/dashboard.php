@@ -142,4 +142,4 @@ $router->get("/dashboard/import/create", [ImportController::class, "create"]);
 $router->post("/dashboard/import/create", [ImportController::class, "create"]);
 $router->get("/dashboard/import/update", [ImportController::class, "update"]);
 $router->post("/dashboard/import/update", [ImportController::class, "update"]);
-$router->post("/dashboard/import/delete", [ImportController::class, "delete"]);
+$router->get("/dashboard/import/delete", [ImportController::class, "delete"]);

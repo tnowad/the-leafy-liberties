@@ -87,6 +87,16 @@ $products = Product::all();
     const quantity = Number(quantityInput.value);
     const price = Number(priceInput.value);
 
+    if (isNaN(quantity) || quantity <= 0) {
+      alert("Quantity must be a number and greater than 0");
+      return;
+    }
+
+    if (isNaN(price) || price <= 0) {
+      alert("Price must be a number and greater than 0");
+      return;
+    }
+
     let product = await getProductById(productId);
 
     if (products[productId]) {

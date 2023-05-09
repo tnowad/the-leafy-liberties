@@ -74,9 +74,7 @@ class ImportController extends Controller
           )
         );
       case 'POST':
-        // start transaction
         Database::getInstance()->beginTransaction();
-
         $import = new Import();
         $import->user_id = $auth->getUser()->id;
         $import->total_price = 0;
@@ -100,7 +98,6 @@ class ImportController extends Controller
         }
 
         Database::getInstance()->commitTransaction();
-
         return $response->redirect(BASE_URI . "/dashboard/import", 200, [
           "toast" => [
             "type" => "success",
@@ -121,9 +118,6 @@ class ImportController extends Controller
         ],
       ]);
     }
-    $product = new Product();
-    // get from request
-    $product->save();
     return $response->redirect(BASE_URI . "/dashboard/import");
   }
 
@@ -189,7 +183,6 @@ class ImportController extends Controller
         } else {
           //Viết hàm import trong này
 
-
           return $response->redirect(BASE_URI . "/dashboard/import", 200, [
             "toast" => [
               "type" => "success",
@@ -200,5 +193,38 @@ class ImportController extends Controller
       default:
         break;
     }
+  }
+
+  public function delete(Request $request, Response $response)
+  {
+    $auth = Application::getInstance()->getAuthentication();
+
+    if (!$auth->hasPermission('import.delete')) {
+      return $response->redirect(BASE_URI . '/dashboard', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'You do not have permission to access this page.'
+        ]
+      ]);
+    }
+
+    $import = Import::find($request->getQuery('id'));
+    if (!$import) {
+      return $response->redirect(BASE_URI . '/dashboard/import', 200, [
+        'toast' => [
+          'type' => 'error',
+          'message' => 'Import not found.'
+        ]
+      ]);
+    }
+
+    $import->delete();
+
+    return $response->redirect(BASE_URI . '/dashboard/import', 200, [
+      'toast' => [
+        'type' => 'success',
+        'message' => 'Import with Id ' . $import->id . ' has been deleted.'
+      ]
+    ]);
   }
 }
