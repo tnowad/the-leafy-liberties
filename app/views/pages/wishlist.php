@@ -149,42 +149,50 @@ $products = $params["products"]; ?>
   }
 
   document.moveAllToCart = () => {
-    if (confirm("Do you want to move all product to cart?")) {
-      FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/move-all-to-cart"; ?>').then(response => {
-        const data = response.data;
-        new Toast({
-          message: data.message,
-          type: data.type,
+    if (<?php echo count($products) ?> == 0) {
+      alert('Your wishlist is empty');
+    } else {
+      if (confirm("Do you want to move all product to cart?")) {
+        FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/move-all-to-cart"; ?>').then(response => {
+          const data = response.data;
+          new Toast({
+            message: data.message,
+            type: data.type,
+          });
+        }).catch(error => {
+          new Toast({
+            message: 'Something went wrong',
+            type: 'error',
+          });
         });
-      }).catch(error => {
-        new Toast({
-          message: 'Something went wrong',
-          type: 'error',
-        });
-      });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
     }
   }
 
 
   document.removeAllFromWishlist = () => {
-    if (confirm("Do you want to remove all products from wishlist?")) {
-      FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/empty"; ?>').then(response => {
-        if (response.type === 'error') {
-          alert(response.message);
-        } else if (response.type === 'info') {
-          alert(response.message);
-        } else {
-          alert('All products deleted from wishlist');
-        }
-      }).catch(error => {
-        alert('Something went wrong');
-      });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+    if (<?php echo count($products) ?> == 0) {
+      alert('Your wishlist is empty');
+    } else {
+      if (confirm("Do you want to remove all products from wishlist?")) {
+        FetchXHR.post('<?php echo BASE_URI . "/api/wishlist/empty"; ?>').then(response => {
+          if (response.type === 'error') {
+            alert(response.message);
+          } else if (response.type === 'info') {
+            alert(response.message);
+          } else {
+            alert('All products deleted from wishlist');
+          }
+        }).catch(error => {
+          alert('Something went wrong');
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
     }
   }
 </script>
