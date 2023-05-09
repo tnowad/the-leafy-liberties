@@ -28,7 +28,7 @@ class Order extends Model
     "total_price",
     "status",
     "created_at",
-    "updated_at",
+    "deleted_at",
   ];
 
   public function user()

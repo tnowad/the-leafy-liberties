@@ -29,7 +29,7 @@ class OrderController extends Controller
     if (isset($filter)) {
       $orders = Order::filterAdvanced($filter);
     } else {
-      $orders = Order::all();
+      $orders = Order::findAll(["deleted_at" => "null"]);
     }
     return $response->setBody(
       View::renderWithDashboardLayout(new View("pages/dashboard/order/index"), [

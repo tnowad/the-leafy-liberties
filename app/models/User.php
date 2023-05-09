@@ -78,7 +78,7 @@ class User extends Model
   public function orders(): array
   {
     return Order::findAll([
-      "user_id" => $this->id,
+      "user_id" => $this->id,"deleted_at" => "null"
     ]);
   }
   public static function filterAdvanced($filter)

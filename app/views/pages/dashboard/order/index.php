@@ -23,7 +23,7 @@ use App\Models\Pagination;
         </form>
       </div>
     </div>
-    <?php if (count(Order::all()) == 0): ?>
+    <?php if (count(Order::findAll(["deleted_at" => "null"])) == 0): ?>
       <div class="flex flex-col justify-center items-center h-[70vh]">
         <i class="mb-4 text-5xl text-gray-400 fa-solid fa-cart-circle-plus"></i>
         <h1 class="text-5xl font-medium tracking-widest text-gray-400 uppercase">Don't have any orders yet</h1>

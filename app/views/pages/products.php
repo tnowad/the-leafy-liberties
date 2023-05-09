@@ -28,7 +28,7 @@ $products = $pagination['products'];
               </div>
               <input type="number" name="limit" value="<?php echo $pagination['limit'] ?>"
                 class="w-full px-3 py-1 border border-gray-300 rounded-sm"
-                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
             </div>
           </div>
           <div class="border-b border-gray-200">
@@ -93,11 +93,11 @@ $products = $pagination['products'];
               <div class="flex items-center justify-start gap-2 py-3">
                 <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
                   class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
                 <span class="text-lg"> - </span>
                 <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
                   class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ $products = $pagination['products'];
               <?php if ($auth->hasPermission("dashboard.access")): ?>
                 <div
                   class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                  <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
+                  <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
                     onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
                     Update Product
                   </p>
@@ -146,7 +146,7 @@ $products = $pagination['products'];
               <?php else: ?>
                 <div
                   class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                  <p class="font-semibold select-option-text hover:color-red-400 uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
+                  <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
                     onclick="addToCart(`<?php echo $product->id; ?>`)">
                     <?php
                     if (isset($cartCheck))
