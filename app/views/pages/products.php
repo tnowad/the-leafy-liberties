@@ -78,7 +78,7 @@ $products = $pagination['products'];
               <h1 class="mt-2 mb-2 text-xl font-medium">Author</h1>
               <select name="author" id="" class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
                 <option value="">All</option>
-                <?php foreach (Author::all() as $author) : ?>
+                <?php foreach (Author::findAll(["deleted_at" => "null"]) as $author) : ?>
                   <option value="<?php echo $author->id ?>" <?php echo $filter['author'] == $author->id ? 'selected' : '' ?>>
                     <?php echo $author->name ?>
                   </option>
@@ -100,77 +100,89 @@ $products = $pagination['products'];
         </form>
       </div>
     </div>
-    <div id="products-content">
-      <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        <?php foreach ($products as $product) : ?>
-          <div class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
-            <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
-              <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
-                <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
-              </a>
-            </div>
-            <div class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
-              <div class="product-name">
+
+    <?php
+    if (count($products) == 0) :
+    ?>
+      <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
+        <i class="fa-solid fa-book text-6xl md:text-[85px] text-gray-400"></i>
+        <h1 class="text-4xl md:text-5xl tracking-wider text-gray-400 uppercase">Dont't have products</h1>
+      </div>
+    <?php else : ?>
+      <div id="products-content">
+
+        <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+
+          <?php foreach ($products as $product) : ?>
+            <div class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
+              <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
                 <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
-                  <?php echo $product->name; ?>
+                  <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
                 </a>
               </div>
-              <div class="text-sm text-gray-500 product-author">
-                <?php echo $product->author()->name; ?>
-              </div>
-              <div class="p-0 font-semibold product-price text-primary-900">
-                <?php echo $product->price; ?>$
-              </div>
-              <?php
-              if ($user != null) {
-                $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-                $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
-              }
-              ?>
-              <?php if ($auth->hasPermission("dashboard.access")) : ?>
-                <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                  <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all" onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
-                    Update Product
-                  </p>
+              <div class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+                <div class="product-name">
+                  <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
+                    <?php echo $product->name; ?>
+                  </a>
                 </div>
-              <?php else : ?>
-                <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                  <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all" onclick="addToCart(`<?php echo $product->id; ?>`)">
-                    <?php
-                    if (isset($cartCheck))
-                      echo "Added to cart";
-                    else
-                      echo "Add to cart";
-                    ?>
-                  </p>
-                  <i class="p-2 transition-all rounded-full cursor-pointer wishlist-icon fa-regular fa-heart hover:bg-red-400 hover:text-white" onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+                <div class="text-sm text-gray-500 product-author">
+                  <?php echo $product->author()->name; ?>
                 </div>
-              <?php endif ?>
+                <div class="p-0 font-semibold product-price text-primary-900">
+                  <?php echo $product->price; ?>$
+                </div>
+                <?php
+                if ($user != null) {
+                  $cartCheck = Cart::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+                  $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
+                }
+                ?>
+                <?php if ($auth->hasPermission("dashboard.access")) : ?>
+                  <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                    <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all" onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
+                      Update Product
+                    </p>
+                  </div>
+                <?php else : ?>
+                  <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                    <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all" onclick="addToCart(`<?php echo $product->id; ?>`)">
+                      <?php
+                      if (isset($cartCheck))
+                        echo "Added to cart";
+                      else
+                        echo "Add to cart";
+                      ?>
+                    </p>
+                    <i class="p-2 transition-all rounded-full cursor-pointer wishlist-icon fa-regular fa-heart hover:bg-red-400 hover:text-white" onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+                  </div>
+                <?php endif ?>
+              </div>
             </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      <div class="my-5">
-        <div id="pagination" class="flex items-center justify-center gap-5 text-center pagination">
-          <?php if ($pagination['page'] > 1) : ?>
-            <a onclick="openPage(<?php echo $pagination['page'] - 1 ?>)" class="cursor-pointer pagination-items p-2 shadow-md border border-gray-300 text-[#52938d] font-semibold hover:text-white hover:bg-primary-700 transition-all">
-              Previous
-            </a>
-          <?php endif; ?>
+          <?php endforeach; ?>
+        </div>
+        <div class="my-5">
+          <div id="pagination" class="flex items-center justify-center gap-5 text-center pagination">
+            <?php if ($pagination['page'] > 1) : ?>
+              <a onclick="openPage(<?php echo $pagination['page'] - 1 ?>)" class="cursor-pointer pagination-items p-2 shadow-md border border-gray-300 text-[#52938d] font-semibold hover:text-white hover:bg-primary-700 transition-all">
+                Previous
+              </a>
+            <?php endif; ?>
 
-          <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
-            <a onclick="openPage(<?php echo $i ?>)" class="p-2 <?php echo $i == $pagination['page'] ? 'bg-[#52938d] text-white font-semibold' : ' shadow-md border border-gray-300 text-primary font-semibold hover:text-white hover:bg-primary-700 transition-all'; ?> w-10 h-10 cursor-pointer">
-              <?php echo $i; ?>
-            </a>
-          <?php endfor; ?>
-          <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
-            <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)" class="p-2 font-semibold transition-all border border-gray-300 shadow-md cursor-pointer pagination-items text-primary hover:text-white hover:bg-primary-700">
-              Next
-            </a>
-          <?php endif; ?>
+            <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
+              <a onclick="openPage(<?php echo $i ?>)" class="p-2 <?php echo $i == $pagination['page'] ? 'bg-[#52938d] text-white font-semibold' : ' shadow-md border border-gray-300 text-primary font-semibold hover:text-white hover:bg-primary-700 transition-all'; ?> w-10 h-10 cursor-pointer">
+                <?php echo $i; ?>
+              </a>
+            <?php endfor; ?>
+            <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
+              <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)" class="p-2 font-semibold transition-all border border-gray-300 shadow-md cursor-pointer pagination-items text-primary hover:text-white hover:bg-primary-700">
+                Next
+              </a>
+            <?php endif; ?>
+          </div>
         </div>
       </div>
-    </div>
+    <?php endif ?>
   </div>
 </div>
 <script type="module">
