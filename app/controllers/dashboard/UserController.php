@@ -264,25 +264,31 @@ class UserController extends Controller
       ]);
     }
     $user = User::find($request->getBody()["id"]);
+
     if (!$user) {
       $response->jsonResponse([
         "type" => "success",
         "message" => "Failed to remove user removed from table",
       ]);
     }
-    // dd($user);
-    $orders = Order::findAll(["user_id" => $user->id]);
-    foreach ($orders as $order) {
-      $ordProducts = OrderProduct::findAll(["order_id" => $order->id]);
-      foreach ($ordProducts as $ordProduct) {
-        $ordProduct->delete();
+    if ($user->email == $auth->getUser()->email) {
+      $response->redirect(BASE_URI . '/dashboard/user', 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You can't delete the current login User!!"
+        ]
+      ]);
+    } else {
+      $orders = Order::findAll(["user_id" => $user->id]);
+      foreach ($orders as $order) {
+        $ordProducts = OrderProduct::findAll(["order_id" => $order->id]);
+        foreach ($ordProducts as $ordProduct) {
+          $ordProduct->delete();
+        }
+        $order->delete();
       }
-      $order->delete();
+      $user->delete();
     }
-    $user->delete();
-    $response->jsonResponse([
-      "type" => "success",
-      "message" => "user has been removed from table",
-    ]);
+    // dd($user);
   }
 }

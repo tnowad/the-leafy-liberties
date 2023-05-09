@@ -116,15 +116,15 @@ $users = $params['users'];
     if (result) {
       FetchXHR.post('<?php echo BASE_URI . "/dashboard/user/delete" ?>', { id }, { 'Content-Type': 'application/json' })
         .then(response => {
-          if (response.type === 'error') {
+          if (response.type === "error") {
             alert(response.message);
-          } else if (response.type === 'info') {
+          } else if (response.type === "info") {
             alert(response.message);
           } else {
             alert('This user has been removed');
           }
         }).catch(error => {
-          alert('Something went wrong');
+          alert('This user is current Login.You cant delete');
         });
       setTimeout(() => {
         window.location.reload();
