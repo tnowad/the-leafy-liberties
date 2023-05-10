@@ -60,7 +60,6 @@
                       </td>
                       <td class="w-32 h-24 p-3">
                         <img src="<?php echo BASE_URI .
-                          "/" .
                           $orderProduct->product()->image; ?>" alt="" />
                       </td>
                       <td class="px-5 py-3">

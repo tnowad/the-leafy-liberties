@@ -60,13 +60,14 @@ if ($user != null) {
       <img class="h-full w=h-full object-contain" src="<?php echo BASE_URI . $product->image; ?>" alt="Book info" />
     </div>
     <div class="box-border w-auto h-auto p-4 mt-5 border border-gray-400 border-solid lg:p-10 lg:mt-0 rounded-3xl">
-      <p class="<?php echo ($product->quantity != 0) ? 'text-primary-700' : 'text-red-700' ?> p-1 mb-2 md:mb-6 text-[11px] sm:text-sm font-medium inline-block uppercase">
+      <p
+        class="<?php echo ($product->quantity != 0) ? 'text-primary-700' : 'text-red-700' ?> p-1 mb-2 md:mb-6 text-[11px] sm:text-sm font-medium inline-block uppercase">
         <?php
-          if($product->quantity == 0){
-            echo "Out of stock";
-          }else{
-            echo "in stock";
-          }
+        if ($product->quantity == 0) {
+          echo "Out of stock";
+        } else {
+          echo "in stock";
+        }
         ?>
       </p>
       <br />
@@ -198,7 +199,7 @@ if ($user != null) {
         ?>
         <form method="POST" action="<?php echo BASE_URI . "/product/review_status" . "?id=" . $product->id ?>"
           class="flex justify-end">
-          <button class="px-4 py-2 font-bold text-white bg-primary rounded hover:bg-primary-600 transition-all">
+          <button class="px-4 py-2 font-bold text-white transition-all rounded bg-primary hover:bg-primary-600">
             <?php
             echo $review_status->status == 0 ? 'Turn on comment' : 'Turn off comment'
               ?>
@@ -349,19 +350,20 @@ if ($user != null) {
             <?php
           endif ?>
           <div class="mt-20 ">
-
             <form id="comment-form" action="<?php echo BASE_URI . "/product/comment" . "?id=" . $product->id ?>"
               method="POST"
-              class=" <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?> flex-row border-t-2 border-gray-300 pt-14">
+              class=" <?php echo (!isset($checkReviewContent) || $user->role_id == 3) ? 'flex' : 'hidden' ?> flex justify-between items-center border-t-2 border-gray-300 pt-14 w-full">
+
               <img
                 src="<?php echo $user ? (($user && $user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image) : BASE_URI . '/resources/images/user/placeholder.png' ?> "
-                alt="Avatar" class="object-contain w-32 h-full rounded-full cursor-pointer">
-              <div class="ml-5">
+                alt="Avatar" class="object-contain h-24 rounded-full cursor-pointer">
+
+              <div class="w-full mx-5">
                 <h1 class="mb-2 font-bold">
                   <?php echo $user ? $user->name : 'User'; ?>
                 </h1>
                 <input id="new-comment-input" type="text" name="new-comment" placeholder="Add a comment..." required
-                  class="border-b-2 border-gray-300 w-96" oninvalid="this.setCustomValidity('Please enter a comment')"
+                  class="w-full border-b-2 border-gray-300" oninvalid="this.setCustomValidity('Please enter a comment')"
                   oninput="setCustomValidity('')">
                 <?php
                 if ($user && $user->role_id != 3):
@@ -385,10 +387,8 @@ if ($user != null) {
                 endif;
                 ?>
               </div>
-              <div class="box-border">
-                <button type="submit"
-                  class="px-4 py-2 ml-2 font-bold text-white transition-all rounded-md mt-9 bg-primary hover:bg-primary-600">Comment</button>
-              </div>
+              <button type="submit"
+                class="px-4 py-2 font-bold text-white transition-all rounded-md bg-primary hover:bg-primary-600">Comment</button>
             </form>
 
             <?php

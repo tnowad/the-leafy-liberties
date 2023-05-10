@@ -102,14 +102,14 @@ foreach ($successfulOrder as $order) {
       </div>
       <div class="flex flex-wrap items-start justify-between w-full my-8 body-wrap">
         <div class="chart-layout xl:w-[65.5%] px-6 py-7 bg-white rounded-2xl shadow-lg sm:w-full h-full">
-          <div class="flex items-center justify-between top-content mb-3">
+          <div class="flex items-center justify-between mb-3 top-content">
             <div class="total-revuenes">
               <p class="text-2xl font-semibold">Top 5 most selling products</p>
             </div>
-            <div class="chart-type p-2 bg-primary-300 rounded-md">
+            <div class="p-2 rounded-md chart-type hover:bg-slate-50">
               <label for="chart-type" class="font-medium text-black">Choose a type:</label>
               <select name="chart-ttype" id="c-type"
-                class="appearance-none px-4 py-1 focus:ring-2 focus:ring-primary-600 bg-gray-50 rounded-md"
+                class="px-4 py-1 rounded-md appearance-none focus:ring-2 focus:ring-primary-600 bg-gray-50"
                 onchange="ChangeChart(this)">
                 <option value="bar">Bar Chart</option>
                 <option value="line">Line Chart</option>
@@ -142,7 +142,7 @@ foreach ($successfulOrder as $order) {
       </div>
       <div class="my-8 overflow-hidden bg-white shadow-lg cursor-pointer table-statistics rounded-2xl">
         <div class="relative">
-          <table class="w-full overflow-x-scroll text-sm text-center text-gray-500 rounded-2xl table-auto">
+          <table class="w-full overflow-x-scroll text-sm text-center text-gray-500 table-auto rounded-2xl">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <?php
