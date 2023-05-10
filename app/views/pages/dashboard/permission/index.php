@@ -1,3 +1,6 @@
+<?php
+$users = $params["users"];
+?>
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
     <div class="flex justify-between">
@@ -45,7 +48,6 @@
           </thead>
           <tbody>
             <?php
-            $users = User::all();
             if (count($users) > 0): ?>
               <?php foreach ($users as $user): ?>
                 <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">

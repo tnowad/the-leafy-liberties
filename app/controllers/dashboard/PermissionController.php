@@ -4,6 +4,7 @@ namespace App\Controllers\Dashboard;
 
 use App\Models\Permission;
 use App\Models\User;
+use App\Models\UserPermission;
 use Core\Application;
 use Core\Controller;
 use Core\Database;
@@ -15,13 +16,30 @@ class PermissionController extends Controller
 {
   public function index(Request $request, Response $response)
   {
-    $permissions = Permission::all();
+    $auth = Application::getInstance()->getAuthentication();
+    if (!$auth->hasPermission('permission.access')) {
+      return $response->redirect(BASE_URI . "/dashboard", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "You do not have permission to access this page.",
+        ],
+      ]);
+    }
+
+    $users = [];
+    foreach (UserPermission::all() as $userPermission) {
+      $user = User::findOne(["id" => $userPermission->user_id]);
+      $users[] = $user;
+    }
+
+    $users = array_unique($users, SORT_REGULAR);
+
     $response->setBody(
       View::renderWithDashboardLayout(
         new View("pages/dashboard/permission/index"),
         [
           "title" => "Permissions",
-          "permissions" => $permissions,
+          "users" => $users,
         ]
       )
     );
