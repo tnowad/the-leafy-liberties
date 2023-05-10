@@ -38,7 +38,17 @@ class LoginController extends Controller
     }
 
     $user = User::findOne(["email" => $email]);
-    if ($user->status == 0 && $user) {
+
+    if (!$user) {
+      return $response->redirect(BASE_URI . "/login", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "Email not found",
+        ],
+      ]);
+    }
+
+    if ($user->status == 0) {
       return $response->redirect(BASE_URI . "/login", 200, [
         "toast" => [
           "type" => "error",
@@ -46,7 +56,7 @@ class LoginController extends Controller
         ],
       ]);
     } else {
-      if ($user && password_verify($password, $user->password)) {
+      if (password_verify($password, $user->password)) {
         Application::getInstance()
           ->getAuthentication()
           ->setUser($user);
@@ -56,15 +66,15 @@ class LoginController extends Controller
             "message" => "Login success",
           ],
         ]);
+      } else {
+        return $response->redirect(BASE_URI . "/login", 200, [
+          "toast" => [
+            "type" => "error",
+            "message" => "Password incorrect",
+          ],
+        ]);
       }
     }
-    $response->redirect(BASE_URI . "/login", 200, [
-      "toast" => [
-        "type" => "error",
-        "message" => "Login failed",
-      ],
-    ]);
-
   }
 
   public function logout(Request $request, Response $response)
