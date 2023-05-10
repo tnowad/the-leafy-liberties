@@ -4,9 +4,11 @@ namespace App\Models;
 use App\Models\Permission;
 use Core\Database;
 use Core\Model;
+use Core\Traits\SoftDeletes;
 
 class Role extends Model
 {
+  use SoftDeletes;
   protected $table = "roles";
   protected $fillable = ["name", "deleted_at"];
 

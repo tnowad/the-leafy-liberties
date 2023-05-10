@@ -1,5 +1,15 @@
 <?php
+use App\Models\Role;
+
 $role = $params["role"];
+
+$roles = Role::all();
+foreach ($roles as $key => $value) {
+  if ($value->id == $role->id) {
+    unset($roles[$key]);
+  }
+}
+
 $permissions = $params["permissions"];
 $rolePermissions = $params["rolePermissions"];
 $allPermissions = [];
@@ -42,9 +52,20 @@ foreach ($allPermissions as $key => $permission) {
       Name
     </label>
     <input
-      class="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-primary p-2"
-      type="text" name="name" id="name" value="<?php echo $role->name; ?>">
+      class="block w-full p-2 mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-primary"
+      type="text" name="name" id="name" disabled value="<?php echo $role->name; ?>">
+
+    <div class="flex items-center justify-between mt-4">
+      New Role
+      <select name="new-id" id="new-id"
+        class="w-full p-2 mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-primary">
+        <?php foreach ($roles as $role): ?>
+          <option value="<?php echo $role->id; ?>"><?php echo $role->name; ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
   </div>
+
 
   <input type="hidden" name="id" value="<?php echo $role->id; ?>">
 

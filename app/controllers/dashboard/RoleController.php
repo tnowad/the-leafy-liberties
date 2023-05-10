@@ -5,6 +5,7 @@ use App\Models\Permission;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\RolePermission;
+use App\Models\User;
 use Core\Application;
 use Core\Controller;
 use Core\Database;
@@ -256,25 +257,31 @@ class RoleController extends Controller
           )
         );
       case "POST":
+
+        Database::getInstance()->beginTransaction();
         $role = Role::find($request->getParam("id"));
-        $rolepermissions = RolePermission::all();
-        $roless = $request->getParam("permissions") ?? [];
-        if (!empty($roless)) {
-          $updateRoles = [];
-          foreach ($roless as $roles) {
-            if (!in_array($roles, $rolepermissions)) {
-              $updateRoles[] = $roles;
-            }
-          }
-          $rolepermissions = $updateRoles;
+        $newRole = Role::find($request->getParam("new-id"));
+
+        $users = User::findAll(["role_id" => $role->id]);
+        foreach ($users as $user) {
+          $user->role_id = $newRole->id;
+          $user->save();
         }
-        dd($rolepermissions);
+
+        $role->delete();
+        Database::getInstance()->commitTransaction();
         return $response->redirect(BASE_URI . "/dashboard/role", 200, [
           "toast" => [
             "type" => "success",
             "message" => "Delete role successfull",
           ],
         ]);
+      // return $response->redirect(BASE_URI . "/dashboard/role", 200, [
+      //   "toast" => [
+      //     "type" => "success",
+      //     "message" => "Delete role successfull",
+      //   ],
+      // ]);
     }
   }
 }
