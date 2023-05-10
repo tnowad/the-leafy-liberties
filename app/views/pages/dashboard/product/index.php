@@ -71,11 +71,11 @@ $filter = $params['filter'];
             <div class="flex items-center justify-start gap-2 py-3">
               <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
                 class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
               <span class="text-lg"> - </span>
               <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
                 class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
             </div>
           </div>
         </div>

@@ -41,18 +41,20 @@ $products = Product::all();
         <label class="mb-2 text-lg font-bold text-gray-900" for="name">Choose Product</label>
         <div class="flex flex-row">
           <select
-            class="w-full px-3 py-2 mr-4 leading-tight text-gray-700 border border-gray-400 rounded focus:outline-none focus:shadow-outline"
+            class="w-full px-3 py-2 mr-4 leading-tight text-gray-700 border border-gray-400 rounded focus:ring-2 focus:ring-primary-400 appearance-none"
             name="product-id" id="product-id">
             <?php foreach ($products as $product): ?>
               <option value="<?php echo $product->id ?>"><?php echo $product->name ?></option>
             <?php endforeach; ?>
           </select>
           <input
-            class="w-full px-3 py-2 mr-4 leading-tight text-gray-700 border border-gray-400 rounded focus:outline-none focus:shadow-outline"
-            type="number" name="quantity" id="quantity" placeholder="Quantity">
+            class="w-full px-3 py-2 mr-4 leading-tight text-gray-700 border border-gray-400 rounded focus:ring-2 focus:ring-primary-400"
+            type="number" name="quantity" id="quantity" placeholder="Quantity"
+            onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;" />
           <input
-            class="w-full px-3 py-2 mr-4 leading-tight text-gray-700 border border-gray-400 rounded focus:outline-none focus:shadow-outline"
-            type="number" name="price" id="price" placeholder="Price">
+            class="w-full px-3 py-2 mr-4 leading-tight text-gray-700 border border-gray-400 rounded focus:ring-2 focus:ring-primary-400"
+            type="number" name="price" id="price" placeholder="Price"
+            onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110) return false;" />
           <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
             type="button" id="add-product">
             Add
@@ -123,21 +125,27 @@ $products = Product::all();
     Object.keys(products).forEach((productId) => {
       const product = products[productId];
       const row = document.createElement("tr");
+      row.classList.add("even:bg-gray-100")
       const nameCell = document.createElement("td");
+      nameCell.classList.add("px-5", "py-3")
       nameCell.textContent = product.name;
       row.appendChild(nameCell);
       const quantityCell = document.createElement("td");
+      quantityCell.classList.add("px-5", "py-3")
       quantityCell.textContent = product.quantity;
       row.appendChild(quantityCell);
       const priceCell = document.createElement("td");
+      priceCell.classList.add("px-5", "py-3")
       priceCell.textContent = product.price;
       row.appendChild(priceCell);
       const totalCell = document.createElement("td");
+      totalCell.classList.add("px-5", "py-3")
       const total = product.quantity * product.price;
       totalCell.textContent = total.toFixed(2);
       row.appendChild(totalCell);
       const actionCell = document.createElement("td");
       const removeButton = document.createElement("button");
+      removeButton.classList.add("px-4", "py-2", "bg-red-400", "text-white", "rounded-md", "shadow");
       removeButton.textContent = "Remove";
       removeButton.addEventListener("click", () => {
         delete products[productId];

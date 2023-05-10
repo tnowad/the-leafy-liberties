@@ -252,7 +252,7 @@ CREATE TABLE
     import (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         user_id INT NOT NULL,
-        total_price INT NOT NULL,
+        total_price decimal(10, 2) NOT NULL,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         deleted_at DATETIME DEFAULT NULL,
         FOREIGN KEY (user_id) REFERENCES users (id)
@@ -264,7 +264,7 @@ CREATE TABLE
         import_id INT NOT NULL,
         product_id INT NOT NULL,
         quantity INT NOT NULL,
-        price INT NOT NULL,
+        price decimal(10, 2) NOT NULL,
         FOREIGN KEY (import_id) REFERENCES import (id),
         FOREIGN KEY (product_id) REFERENCES products (id)
     );

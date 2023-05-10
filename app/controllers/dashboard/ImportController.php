@@ -4,6 +4,7 @@ namespace App\Controllers\Dashboard;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Import;
+use App\Models\ImportProduct;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTag;
@@ -96,7 +97,6 @@ class ImportController extends Controller
             $product['price'],
           );
         }
-
         Database::getInstance()->commitTransaction();
         return $response->redirect(BASE_URI . "/dashboard/import", 200, [
           "toast" => [
@@ -172,7 +172,7 @@ class ImportController extends Controller
           )
         );
       case "POST":
-        $import = Import::find($request->getParam("id"));
+        $import = Import::find($request->getParam("import-id"));
         if (!$import) {
           return $response->redirect(BASE_URI . "/dashboard/import", 200, [
             "toast" => [
@@ -182,7 +182,29 @@ class ImportController extends Controller
           ]);
         } else {
           //Viết hàm import trong này
-
+          $products = [];
+          for ($i = 0; $i < count($request->getParam('product-id')); $i++) {
+            $products[] = [
+              'product-id' => $request->getParam('product-id')[$i],
+              'quantity' => $request->getParam('quantity')[$i],
+              'price' => $request->getParam('price')[$i],
+            ];
+          }
+          $total = 0;
+          foreach ($products as $product) {
+            $importProduct = ImportProduct::findOne(["import_id" => $import->id, "product_id" => $product["product-id"]]);
+            $old_quantity = $importProduct->quantity;
+            $importProduct->quantity = $product["quantity"];
+            $importProduct->price = $product["price"];
+            $total += $product["quantity"] * $product["price"];
+            $importProduct->save();
+            $updateProduct = Product::findOne(["id" => $product["product-id"]]);
+            $updateProduct->price = $importProduct->price;
+            $updateProduct->quantity = ($updateProduct->quantity + $importProduct->quantity - $old_quantity);
+            $updateProduct->save();
+          }
+          $import->total_price = $total;
+          $import->save();
           return $response->redirect(BASE_URI . "/dashboard/import", 200, [
             "toast" => [
               "type" => "success",
@@ -219,7 +241,6 @@ class ImportController extends Controller
     }
 
     $import->delete();
-
     return $response->redirect(BASE_URI . '/dashboard/import', 200, [
       'toast' => [
         'type' => 'success',

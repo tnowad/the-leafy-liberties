@@ -35,8 +35,6 @@ class Import extends Model
     $this->save();
     return $importProduct;
   }
-
-
   public static function filterAdvanced($filter)
   {
     $imports = Import::all();

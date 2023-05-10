@@ -33,28 +33,32 @@ $filter = $params['filter'];
     </div>
     <div class="my-8 bg-white shadow-lg cursor-pointer table-product-statistics rounded-2xl">
       <div class="relative">
-        <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-              <?php
-              $namess = [
-                "ID",
-                "User",
-                "Total Price",
-                "Created At",
-                "Action",
-              ];
-              for ($i = 1; $i <= count($namess); $i++) { ?>
-                <th scope="col" class="px-6 py-3">
-                  <?php echo $namess[$i - 1]; ?>
-                </th>
-              <?php }
-              ?>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            if (count($imports) > 0): ?>
+        <?php if (count($imports) == 0): ?>
+          <div class="flex flex-col justify-center items-center h-[70vh]">
+            <i class="mb-4 text-5xl text-gray-400 fa-solid fa-file-import"></i>
+            <h1 class="text-5xl font-medium tracking-widest text-gray-400 uppercase">Don't have any import yet</h1>
+          </div>
+        <?php else: ?>
+          <table class="w-full text-sm text-center text-gray-500 rounded-2xl">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <?php
+                $namess = [
+                  "ID",
+                  "User",
+                  "Total Price",
+                  "Created At",
+                  "Action",
+                ];
+                for ($i = 1; $i <= count($namess); $i++) { ?>
+                  <th scope="col" class="px-6 py-3">
+                    <?php echo $namess[$i - 1]; ?>
+                  </th>
+                <?php }
+                ?>
+              </tr>
+            </thead>
+            <tbody>
               <?php foreach ($imports as $import): ?>
                 <tr class="text-center transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-3">
@@ -86,10 +90,9 @@ $filter = $params['filter'];
                   </td>
                 </tr>
               <?php endforeach; ?>
-            <?php endif;
-            ?>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        <?php endif ?>
       </div>
     </div>
   </div>
@@ -99,7 +102,21 @@ $filter = $params['filter'];
   document.removeImport = (id) => {
     const result = confirm("Delete this import bill?");
     if (result) {
-      window.location.href = `<?php echo BASE_URI . "/dashboard/import/delete" ?>?id=${id}`;
+      FetchXHR.post('<?php echo BASE_URI . "/dashboard/import/delete" ?>', { id }, { 'Content-Type': 'application/json' })
+        .then(response => {
+          if (response.type === 'error') {
+            alert(response.message);
+          } else if (response.type === 'info') {
+            alert(response.message);
+          } else {
+            alert('This import bill has been removed');
+          }
+        }).catch(error => {
+          alert('Something went wrong');
+        });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
   }
 </script>
