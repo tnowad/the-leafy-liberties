@@ -126,6 +126,7 @@ $router->post("/dashboard/author/delete", [AuthorController::class, "delete"]);
 
 $router->get("/dashboard/permission", [PermissionController::class, "index"]);
 $router->post("/dashboard/permission", [PermissionController::class, "create"]);
+$router->get("/dashboard/permission/update", [PermissionController::class, "update"]);
 $router->post("/dashboard/permission/update", [PermissionController::class, "update"]);
 $router->post("/dashboard/permission/delete", [PermissionController::class, "delete"]);
 
