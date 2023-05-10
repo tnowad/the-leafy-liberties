@@ -222,7 +222,7 @@ class UserController extends Controller
           } else {
             $user->image = $request->getParam("image");
           }
-          $user->email = $request->getParam("email");
+          $user->email = ($request->getParam("email") != null && $request->getParam("email") != "") ? Validation::validateEmail($request->getParam("email")) : $user->email;
           $user->name = Validation::validateName($request->getParam("name"));
           $user->phone = Validation::validatePhone($request->getParam("phone"));
           $user->status = $request->getParam("status");
