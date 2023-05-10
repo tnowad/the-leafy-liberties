@@ -24,7 +24,7 @@ $allPermissions = array_values($allPermissions);
       Name
     </label>
     <input
-      class="block w-full p-2 mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
+      class="block w-full p-2 mt-1 bg-white bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:ring-0"
       type="text" required name="name" id="name" placeholder="Role name">
   </div>
 
