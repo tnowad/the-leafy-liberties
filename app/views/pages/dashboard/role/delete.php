@@ -51,10 +51,10 @@ foreach ($allPermissions as $key => $permission) {
     <label class="block font-bold text-gray-700" for="name">
       Name
     </label>
+    <input type="hidden" name="id" value="<?php echo $role->id; ?>" />
     <input
       class="block w-full p-2 mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-primary"
-      type="text" name="name" id="name" disabled value="<?php echo $role->name; ?>">
-
+      type="text" name="name" id="name" disabled value="<?php echo $role->name; ?>" />
     <div class="flex items-center justify-between mt-4">
       New Role
       <select name="new-id" id="new-id"
@@ -65,9 +65,6 @@ foreach ($allPermissions as $key => $permission) {
       </select>
     </div>
   </div>
-
-
-  <input type="hidden" name="id" value="<?php echo $role->id; ?>">
 
   <!-- submit -->
   <button type="submit"

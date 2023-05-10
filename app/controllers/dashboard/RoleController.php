@@ -260,6 +260,7 @@ class RoleController extends Controller
 
         Database::getInstance()->beginTransaction();
         $role = Role::find($request->getParam("id"));
+        dd($role);
         $newRole = Role::find($request->getParam("new-id"));
 
         $users = User::findAll(["role_id" => $role->id]);
@@ -268,20 +269,32 @@ class RoleController extends Controller
           $user->save();
         }
 
+        $rolePermissions = RolePermission::findAll(["role_id" => $role->id]);
+        foreach ($rolePermissions as $rolePermission) {
+          $rolePermission->delete();
+        }
+
         $role->delete();
+
+        // check if role is deleted
+        $role = Role::find($request->getParam("id"));
+        if ($role) {
+          Database::getInstance()->rollbackTransaction();
+          return $response->redirect(BASE_URI . "/dashboard/role", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "Delete role failed",
+            ],
+          ]);
+        }
+
         Database::getInstance()->commitTransaction();
         return $response->redirect(BASE_URI . "/dashboard/role", 200, [
           "toast" => [
             "type" => "success",
-            "message" => "Delete role successfull",
+            "message" => "Delete role ",
           ],
         ]);
-      // return $response->redirect(BASE_URI . "/dashboard/role", 200, [
-      //   "toast" => [
-      //     "type" => "success",
-      //     "message" => "Delete role successfull",
-      //   ],
-      // ]);
     }
   }
 }

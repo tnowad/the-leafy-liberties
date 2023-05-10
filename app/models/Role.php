@@ -8,7 +8,6 @@ use Core\Traits\SoftDeletes;
 
 class Role extends Model
 {
-  use SoftDeletes;
   protected $table = "roles";
   protected $fillable = ["name", "deleted_at"];
 
