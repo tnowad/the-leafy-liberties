@@ -181,31 +181,22 @@ class RoleController extends Controller
           )
         );
       case "POST":
+        Database::getInstance()->beginTransaction();
         $role = Role::find($request->getParam("id"));
-        dd($role);
-        $rolepermissions = RolePermission::all();
-        $roless = $request->getParam("permissions") ?? [];
-        dd($roless);
-        if (!empty($roless)) {
-          $updateRoles = [];
-          foreach ($roless as $roles) {
-            if (!in_array($roles, $rolepermissions)) {
-              $updateRoles[] = $roles;
-            }
-          }
-          $rolepermissions = $updateRoles;
+        $permissions = $request->getParam("permissions") ?? [];
+        dd($permissions);
+
+        foreach ($role->permissions() as $rolePermission) {
+          $rolePermission->delete();
         }
-        dd($rolepermissions);
-        foreach ($rolepermissions as $item) {
-          if ($item == "") {
-            continue;
-          } else {
-            $userPermission = new RolePermission();
-            $userPermission->role_id = $role->id;
-            $userPermission->permission_id = (int) $item;
-            $userPermission->save();
-          }
+
+        foreach ($permissions as $permission) {
+          $permission = Permission::findOne(["id" => $permission]);
+          if ($permission)
+            $role->addPermission($permission);
         }
+        Database::getInstance()->commitTransaction();
+
         return $response->redirect(BASE_URI . "/dashboard/role", 200, [
           "toast" => [
             "type" => "success",

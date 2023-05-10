@@ -11,7 +11,6 @@ foreach ($permissions as $permission) {
     "status" => "0",
   ];
 }
-
 foreach ($rolePermissions as $rolePermission) {
   $allPermissions[$rolePermission->name] = [
     "id" => $rolePermission->permission_id,
@@ -21,11 +20,18 @@ foreach ($rolePermissions as $rolePermission) {
 }
 
 if ($allPermissions["dashboard.access"]["status"] == 0) {
-  foreach ($allPermissions as $key => $permission) {
-    if ($key != "dashboard.access") {
-      unset($allPermissions[$key]);
-    }
-  }
+  $allPermissions = [];
+  $allPermissions["dashboard.access"] = [
+    "id" => 1,
+    "name" => "Dashboard Access",
+    "status" => "0",
+  ];
+} else {
+  $allPermissions["dashboard.access"] = [
+    "id" => 1,
+    "name" => "Dashboard Access",
+    "status" => "1",
+  ];
 }
 
 $groupPermissions = [];
@@ -42,7 +48,7 @@ foreach ($allPermissions as $key => $permission) {
       Name
     </label>
     <input
-      class="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-primary p-2"
+      class="block w-full p-2 mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-2 focus:ring-primary"
       type="text" name="name" id="name" value="<?php echo $role->name; ?>">
   </div>
 
@@ -75,13 +81,8 @@ foreach ($allPermissions as $key => $permission) {
             <td>
               <input
                 class="w-4 h-4 mr-3 text-indigo-600 border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                type="checkbox" name="permissions[]" id="<?php echo $permission[
-                  "name"
-                ]; ?>" value="<?php echo $permission["id"]; ?>" <?php echo $permission[
-                      "status"
-                    ] == 1
-                      ? "checked"
-                      : ""; ?>>
+                type="checkbox" name="permissions[]" id="<?php echo $permission["name"]; ?>"
+                value="<?php echo $permission["id"]; ?>" <?php echo $permission["status"] == 1 ? "checked" : ""; ?> />
             </td>
           <?php endforeach; ?>
         </tr>
