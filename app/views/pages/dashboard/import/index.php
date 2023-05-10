@@ -102,21 +102,7 @@ $filter = $params['filter'];
   document.removeImport = (id) => {
     const result = confirm("Delete this import bill?");
     if (result) {
-      FetchXHR.post('<?php echo BASE_URI . "/dashboard/import/delete" ?>', { id }, { 'Content-Type': 'application/json' })
-        .then(response => {
-          if (response.type === 'error') {
-            alert(response.message);
-          } else if (response.type === 'info') {
-            alert(response.message);
-          } else {
-            alert('This import bill has been removed');
-          }
-        }).catch(error => {
-          alert('Something went wrong');
-        });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      window.location.href = `<?php echo BASE_URI . '/dashboard/import/delete' ?>?id=${id}`;
     }
   }
 </script>

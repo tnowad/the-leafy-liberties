@@ -230,7 +230,7 @@ class ImportController extends Controller
       ]);
     }
 
-    $import = Import::find($request->getQuery('id'));
+    $import = Import::find($request->getBody()["id"]);
     if (!$import) {
       return $response->redirect(BASE_URI . '/dashboard/import', 200, [
         'toast' => [
@@ -239,13 +239,17 @@ class ImportController extends Controller
         ]
       ]);
     }
-
+    $importProducts = ImportProduct::findAll(["import_id" => $import->id]);
+    foreach ($importProducts as $importProduct) {
+      $updateProduct = Product::findOne(["id" => $importProduct->product_id]);
+      $updateProduct->quantity -= $importProduct->quantity;
+      $updateProduct->save();
+      $importProduct->delete();
+    }
     $import->delete();
-    return $response->redirect(BASE_URI . '/dashboard/import', 200, [
-      'toast' => [
-        'type' => 'success',
-        'message' => 'Import with Id ' . $import->id . ' has been deleted.'
-      ]
+    $response->jsonResponse([
+      "type" => "success",
+      "message" => "Import bill removed from table",
     ]);
   }
 }
