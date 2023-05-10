@@ -26,7 +26,7 @@ class Validation
 
   public static function validateName($name)
   {
-    if (preg_match(' /^[\p{L}\s]{2,30}$/u', $name)) {
+    if (preg_match('/^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$/', $name)) {
       return $name;
     }
     throw new Exception('Invalid name');
