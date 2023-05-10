@@ -233,11 +233,9 @@ class ImportController extends Controller
 
     $import = Import::find($request->getQueries()["id"]);
     if (!$import) {
-      return $response->redirect(BASE_URI . '/dashboard/import', 200, [
-        'toast' => [
-          'type' => 'error',
-          'message' => 'Import not found.'
-        ]
+      return $response->jsonResponse([
+        "type" => "error",
+        "message" => "Import bill not found",
       ]);
     }
     $importProducts = ImportProduct::findAll(["import_id" => $import->id]);
