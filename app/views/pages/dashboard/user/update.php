@@ -73,6 +73,12 @@ use App\Models\User;
         <option value="1">Active</option>
         <option value="0">Banned</option>
       </select>
+
+      <a class="px-4 py-2 my-1 font-bold text-center text-white bg-gray-500 rounded cancel-edit-button hover:bg-gray-700"
+        href="<?php echo BASE_URI . "/dashboard/user/permission/update?id=" . $user->id; ?>">
+        Permission
+      </a>
+
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
