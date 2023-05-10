@@ -11,7 +11,9 @@ use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
+use Exception;
 use Utils\FileUploader;
+use Utils\Validation;
 
 class RoleController extends Controller
 {
@@ -98,12 +100,23 @@ class RoleController extends Controller
         Database::getInstance()->beginTransaction();
 
         $role = new Role();
-        $role->name = $request->getParam("name");
+        try {
+          $role->name = Validation::validateName($request->getParam("name"));
+        } catch (Exception $e) {
+          Database::getInstance()->rollbackTransaction();
+          return $response->redirect("/dashboard/role/create", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => $e->getMessage(),
+            ],
+          ]);
+        }
         $role->save();
 
         $permissions = $request->getParam("permissions") ?? [];
         if (is_array($permissions)) {
           foreach ($permissions as $permission) {
+            $permission = Permission::find($permission);
             $role->addPermission($permission);
           }
         }
