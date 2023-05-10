@@ -230,7 +230,8 @@ class ImportController extends Controller
       ]);
     }
 
-    $import = Import::find($request->getBody()["id"]);
+
+    $import = Import::find($request->getQueries()["id"]);
     if (!$import) {
       return $response->redirect(BASE_URI . '/dashboard/import', 200, [
         'toast' => [
