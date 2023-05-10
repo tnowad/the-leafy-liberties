@@ -154,11 +154,11 @@ $filter = $params['filter'];
                         "/dashboard/product/update" .
                         "?id=" .
                         $product->id; ?>"
-                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:bg-blue-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                       <button onclick="removeProductConfirm(<?php echo $product->id ?>)"
-                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
+                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:bg-red-500">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>

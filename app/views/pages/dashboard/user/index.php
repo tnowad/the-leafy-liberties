@@ -89,11 +89,11 @@ $users = $params['users'];
                         "/dashboard/user/update" .
                         "?id=" .
                         $user->id; ?>"
-                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:bg-blue-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                       <button
-                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500"
+                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:bg-red-500"
                         onclick="removeUser(<?php echo $user->id ?>)">
                         <i class="fa-solid fa-trash"></i>
                       </button>

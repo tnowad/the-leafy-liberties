@@ -25,6 +25,7 @@
               <?php
               use App\Models\Role;
               use App\Models\User;
+
               $name = [
                 "ID",
                 "Image",
@@ -51,7 +52,7 @@
                   <td class="px-5 py-3">
                     <?php echo $user->id; ?>
                   </td>
-                  <td class="w-28 px-5 py-3">
+                  <td class="px-5 py-3 w-28">
                     <img
                       src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>"
                       alt="" class="object-cover w-full h-full rounded-full">
@@ -80,15 +81,12 @@
                   </td>
                   <td class="px-5 py-3 w-44">
                     <div class="flex items-center justify-center gap-4 button">
-                      <a href="<?php echo BASE_URI .
-                        "/dashboard/user/update" .
-                        "?id=" .
-                        $user->id; ?>"
-                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
+                      <a href="<?php echo BASE_URI . "/dashboard/user/update" . "?id=" . $user->id; ?>"
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:bg-blue-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                       <button
-                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500"
+                        class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:bg-red-500"
                         onclick="removeUser(<?php echo $user->id ?>)">
                         <i class="fa-solid fa-trash"></i>
                       </button>

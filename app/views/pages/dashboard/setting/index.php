@@ -58,7 +58,7 @@
                         "/dashboard/setting/update" .
                         "?id=" .
                         $setting->id; ?>"
-                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
+                        class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:bg-blue-500">
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
                     </div>

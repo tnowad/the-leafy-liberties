@@ -35,14 +35,14 @@ $roles = $params["roles"]; ?>
                 "/dashboard/role/update" .
                 "?id=" .
                 $role->id; ?>"
-                class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:text-pink-500">
+                class="px-3 py-2 text-white transition-all bg-blue-400 edit-button rounded-xl hover:bg-blue-500">
                 <i class="fa-solid fa-pen-to-square"></i>
               </a>
               <a href="<?php echo BASE_URI .
                 "/dashboard/role/delete" .
                 "?id=" .
                 $role->id; ?>"
-                class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:text-blue-500">
+                class="px-3 py-2 text-white transition-all bg-red-400 delete-button rounded-xl hover:bg-red-500">
                 <i class="fa-solid fa-trash"></i>
               </a>
             </div>
