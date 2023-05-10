@@ -161,9 +161,9 @@ class RoleController extends Controller
         $rolePermissions = (function () use ($role) {
           $permissions = [];
           foreach ($role->permissions() as $rolePermission) {
-            if ($rolePermission->status == "1") {
-              $permissions[] = $rolePermission->permission();
-            }
+            // if ($rolePermission->status == "1") {
+            $permissions[] = $rolePermission->permission();
+            // }
           }
           return $permissions;
         })();
@@ -184,7 +184,6 @@ class RoleController extends Controller
         Database::getInstance()->beginTransaction();
         $role = Role::find($request->getParam("id"));
         $permissions = $request->getParam("permissions") ?? [];
-        dd($permissions);
 
         foreach ($role->permissions() as $rolePermission) {
           $rolePermission->delete();

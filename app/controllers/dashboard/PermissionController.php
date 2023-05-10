@@ -3,8 +3,10 @@
 namespace App\Controllers\Dashboard;
 
 use App\Models\Permission;
+use App\Models\User;
 use Core\Application;
 use Core\Controller;
+use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
@@ -39,6 +41,25 @@ class PermissionController extends Controller
     switch ($request->getMethod()) {
       case 'GET':
         $user = User::findOne(["id" => $request->getQuery("id")]);
+
+        if (!$user || !$user instanceof User) {
+          return $response->redirect(BASE_URI . "/dashboard/permission", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "User not found.",
+            ],
+          ]);
+        }
+
+        $userPermissions = (function () use ($user) {
+          $permissions = [];
+          foreach ($user->permissions() as $userPermission) {
+            $permissions[] = $userPermission->permission();
+          }
+          return $permissions;
+        })();
+
+        $permissions = Permission::all();
         $response->setStatusCode(200);
         return $response->setBody(
           View::renderWithDashboardLayout(
@@ -46,21 +67,42 @@ class PermissionController extends Controller
             [
               "title" => "Update Permission",
               "user" => $user,
+              "permissions" => $permissions,
+              "userPermissions" => $userPermissions,
             ]
           )
         );
       case 'POST':
-        $permission = Permission::find($request->getBody()["id"]);
-        $permission->name = $request->getBody()["name"];
-        $permission->description = $request->getBody()["description"];
-        $permission->save();
+        Database::getInstance()->beginTransaction();
+        $user = User::findOne(["id" => $request->getBody()["id"]]);
+
+        if (!$user || !$user instanceof User) {
+          return $response->redirect(BASE_URI . "/dashboard/permission", 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "User not found.",
+            ],
+          ]);
+        }
+
+        foreach ($user->permissions() as $userPermission) {
+          $userPermission->delete();
+        }
+
+        foreach ($request->getBody()["permissions"] as $permissionId) {
+          $permission = Permission::findOne(["id" => $permissionId]);
+          if ($permission && $permission instanceof Permission) {
+            $user->addPermission($permission);
+          }
+        }
+        Database::getInstance()->commitTransaction();
+
         return $response->redirect(BASE_URI . "/dashboard/permission", 200, [
           "toast" => [
             "type" => "success",
-            "message" => "Permission updated successfully.",
+            "message" => "Permission updated.",
           ],
         ]);
-        break;
       default:
         # code...
         break;

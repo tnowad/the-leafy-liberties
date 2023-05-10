@@ -75,7 +75,7 @@ use App\Models\User;
       </select>
 
       <a class="px-4 py-2 my-1 font-bold text-center text-white bg-gray-500 rounded cancel-edit-button hover:bg-gray-700"
-        href="<?php echo BASE_URI . "/dashboard/user/permission/update?id=" . $user->id; ?>">
+        href="<?php echo BASE_URI . "/dashboard/permission/update?id=" . $user->id; ?>">
         Permission
       </a>
 
