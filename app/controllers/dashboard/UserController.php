@@ -222,20 +222,11 @@ class UserController extends Controller
           } else {
             $user->image = $request->getParam("image");
           }
-          if (User::findOne(["email" => $request->getParam("email")])) {
-            $response->setStatusCode(200);
-            return $response->redirect(BASE_URI . "/dashboard/user/update?id=" . $user->id, 200, [
-              "toast" => [
-                "type" => "error",
-                "message" => "Email already exists",
-              ],
-            ]);
-          }
           $user->email = $request->getParam("email");
           $user->name = Validation::validateName($request->getParam("name"));
           $user->phone = Validation::validatePhone($request->getParam("phone"));
           $user->status = $request->getParam("status");
-          if ($request->getParam("password") != null) {
+          if ($request->getParam("password") != null && $request->getParam("password") != "") {
             $user->password = password_hash(Validation::validatePassword($request->getParam("password")), PASSWORD_DEFAULT);
           }
           $user->role_id = $request->getParam("role");

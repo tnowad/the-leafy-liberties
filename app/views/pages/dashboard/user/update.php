@@ -30,13 +30,14 @@ use App\Models\User;
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
 
       <label for="expired" class="my-2">Password:</label>
-      <input type="password" name="password"
-        class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required />
-      <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[72%] right-20 cursor-pointer"
-        aria-hidden="true"></i>
-      <i id="show-icon-password" class="fa fa-eye absolute hidden top-[72%] right-20 cursor-pointer"
-        aria-hidden="true"></i>
-
+      <div class="relative">
+        <input type="password" name="password"
+          class="w-full p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
+        <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[35%] right-3 cursor-pointer"
+          aria-hidden="true"></i>
+        <i id="show-icon-password" class="fa fa-eye absolute hidden top-[35%] right-3 cursor-pointer"
+          aria-hidden="true"></i>
+      </div>
       <label for="expired" class="my-2">Phone:</label>
       <input type="tel" value="<?php echo $user->phone; ?>" name="phone"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
