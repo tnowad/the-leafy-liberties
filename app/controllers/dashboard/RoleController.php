@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\RolePermission;
 use Core\Application;
 use Core\Controller;
+use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
@@ -94,6 +95,8 @@ class RoleController extends Controller
 
     switch ($request->getMethod()) {
       case "POST":
+        Database::getInstance()->beginTransaction();
+
         $role = new Role();
         $role->name = $request->getParam("name");
         $role->save();
@@ -104,7 +107,9 @@ class RoleController extends Controller
             $role->addPermission($permission);
           }
         }
-        return $response->redirect("/dashboard/roles");
+
+        Database::getInstance()->commitTransaction();
+        return $response->redirect("/dashboard/role");
       case "GET":
         $permissions = Permission::all();
         return $response->setBody(
