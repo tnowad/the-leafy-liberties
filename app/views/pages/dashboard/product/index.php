@@ -14,12 +14,17 @@ $filter = $params['filter'];
 
 <div class="w-full mx-auto my-0">
   <div class="box-border w-full min-h-screen px-10 mt-10 sm:px-5">
-    <div class="w-full border border-gray-200 shadow-lg mb-5">
+    <div class="w-full mb-5 border border-gray-200 rounded-lg shadow-lg">
       <form class="w-full" id="filter-form" method="GET" action="<?php echo BASE_URI . '/dashboard/product' ?>">
-        <div class="border-b border-gray-200 ">
-          <div class="relative px-4 py-2 flex flex-col">
+        <div class="pb-2 border-b border-gray-200">
+          <div class="relative flex flex-col px-4 py-2">
             <div class="flex items-center justify-between cursor-pointer">
               <h1 class="mt-2 mb-2 text-xl font-medium">Search</h1>
+              <div class="px-3 py-1 border border-gray-300 rounded-md toggle-btn">
+                <span class="toggle-simple">Simple</span>
+                <span class="hidden toggle-advanced">Advanced</span>
+              </div>
+
             </div>
             <div class="flex border border-gray-300">
               <input type="text" name="keywords" class="w-full h-10 px-3 py-2 " placeholder="Anything you want.... "
@@ -29,58 +34,59 @@ $filter = $params['filter'];
               </button>
             </div>
           </div>
-
         </div>
-        <div class="border-b border-gray-200">
-          <div class="relative px-4 py-2">
-            <div class="dropdown-category flex items-center justify-between cursor-pointer">
-              <h1 class="mt-2 mb-2 text-xl font-medium">Categories</h1>
-              <i class="cursor-pointer open-category fa-solid fa-plus"></i>
-            </div>
-            <ul class="h-0 ml-2 overflow-hidden category-list">
-              <li>
-                <?php foreach (Category::all() as $category): ?>
+        <div class="hidden advanced-search">
+          <div class="border-b border-gray-200">
+            <div class="relative px-4 py-2">
+              <div class="flex items-center justify-between cursor-pointer dropdown-category">
+                <h1 class="mt-2 mb-2 text-xl font-medium">Categories</h1>
+                <i class="cursor-pointer open-category fa-solid fa-plus"></i>
+              </div>
+              <ul class="h-0 ml-2 overflow-hidden category-list">
                 <li>
-                  <label>
-                    <input type="checkbox" name="categories[]" value="<?php echo $category->id ?>" <?php echo in_array($category->id, $filter['categories']) ? 'checked' : '' ?>>
-                    <span class="ml-2">
-                      <?php echo $category->name ?>
-                    </span>
-                  </label>
-                </li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        </div>
-        <div class="border-b border-gray-200">
-          <div class="px-4 py-2">
-            <h1 class="mt-2 mb-2 text-xl font-medium">Author</h1>
-            <select name="author" id="" class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
-              <option value="">All</option>
-              <?php foreach (Author::all() as $author): ?>
-                <option value="<?php echo $author->id ?>" <?php echo $filter['author'] == $author->id ? 'selected' : '' ?>>
-                  <?php echo $author->name ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-        </div>
-        <div class="border-b border-gray-200">
-          <div class="px-4 py-2">
-            <h1 class="text-xl font-medium">Price range</h1>
-            <div class="flex items-center justify-start gap-2 py-3">
-              <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
-                class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
-              <span class="text-lg"> - </span>
-              <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
-                class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
-                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
+                  <?php foreach (Category::all() as $category): ?>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="categories[]" value="<?php echo $category->id ?>" <?php echo in_array($category->id, $filter['categories']) ? 'checked' : '' ?>>
+                      <span class="ml-2">
+                        <?php echo $category->name ?>
+                      </span>
+                    </label>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
             </div>
           </div>
+          <div class="border-b border-gray-200">
+            <div class="px-4 py-2">
+              <h1 class="mt-2 mb-2 text-xl font-medium">Author</h1>
+              <select name="author" id="" class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
+                <option value="">All</option>
+                <?php foreach (Author::all() as $author): ?>
+                  <option value="<?php echo $author->id ?>" <?php echo $filter['author'] == $author->id ? 'selected' : '' ?>>
+                    <?php echo $author->name ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </div>
+          <div class="border-b border-gray-200">
+            <div class="px-4 py-2">
+              <h1 class="text-xl font-medium">Price range</h1>
+              <div class="flex items-center justify-start gap-2 py-3">
+                <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
+                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+                <span class="text-lg"> - </span>
+                <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
+                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+              </div>
+            </div>
+          </div>
+          <input type="submit" value="Filter"
+            class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-md my-5 mx-4 hover:bg-primary-600 transition-all cursor-pointer" />
         </div>
-        <input type="submit" value="Filter"
-          class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-md my-5 mx-4 hover:bg-primary-600 transition-all cursor-pointer" />
       </form>
     </div>
     <div class="flex justify-between">
@@ -173,6 +179,21 @@ $filter = $params['filter'];
     </div>
   </div>
 </div>
+
+<script>
+  const toggleBtn = document.querySelector('.toggle-btn');
+  const toggleSimple = document.querySelector('.toggle-simple');
+  const toggleAdvanced = document.querySelector('.toggle-advanced');
+  const advancedSearch = document.querySelector('.advanced-search');
+  const simpleSearch = document.querySelector('.simple-search');
+  toggleBtn.addEventListener('click', () => {
+    toggleSimple.classList.toggle('hidden');
+    toggleAdvanced.classList.toggle('hidden');
+    advancedSearch.classList.toggle('hidden');
+    simpleSearch.classList.toggle('hidden');
+  })
+</script>
+
 <script type="module">
   import FetchXHR from '<?php echo BASE_URI . "/resources/js/fetch-xhr.js"; ?>';
   document.removeProductConfirm = (id) => {
