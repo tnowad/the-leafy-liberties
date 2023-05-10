@@ -15,7 +15,9 @@ use App\Models\User;
         onchange="loadFile(event)" />
       <div class="">
         <p>Preview Image:</p>
-        <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $user->image ?>" alt="null" />
+        <img id="output" class="object-contain h-56 w-80"
+          src="<?php echo ($user->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $user->image ?>"
+          alt="null" />
       </div>
       <input type="text" value="<?php echo $user->image; ?>" name="old_img" class="opacity-100" />
 
