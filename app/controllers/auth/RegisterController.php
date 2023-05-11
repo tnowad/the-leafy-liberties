@@ -49,7 +49,6 @@ class RegisterController extends Controller
         ],
       ]);
     }
-
     Database::getInstance()->beginTransaction();
 
     $user = new User();

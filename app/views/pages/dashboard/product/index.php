@@ -20,7 +20,7 @@ $filter = $params['filter'];
           <div class="relative flex flex-col px-4 py-2">
             <div class="flex items-center justify-between cursor-pointer">
               <h1 class="mt-2 mb-2 text-xl font-medium">Search</h1>
-              <div class="px-3 py-1 border border-gray-300 rounded-md toggle-btn">
+              <div class="px-3 py-1 border border-primary-300 rounded-md toggle-btn">
                 <span class="toggle-simple">Simple</span>
                 <span class="hidden toggle-advanced">Advanced</span>
               </div>
@@ -136,23 +136,7 @@ $filter = $params['filter'];
                     <?php echo $product->price; ?>
                   </td>
                   <td class="p-2">
-                    <?php
-                    $sum = 0;
-                    $orders = Order::findAll(["status" => "5"]);
-                    foreach ($orders as $order) {
-                      $ordProducts = OrderProduct::findAll(["order_id" => $order->id]);
-                      foreach ($ordProducts as $ordProduct) {
-                        if ($ordProduct->product_id == $product->id) {
-                          $sum = $product->quantity - $ordProduct->quantity;
-                          break;
-                        } else {
-                          continue;
-                        }
-                      }
-                    }
-                    echo ($sum) ? $sum : $product->quantity;
-                    ?>
-
+                    <?php echo $product->quantity ?>
                   </td>
                   <td class="px-5 py-3">
                     <div class="flex items-center justify-center gap-4 button">

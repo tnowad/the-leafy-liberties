@@ -41,7 +41,6 @@ class ProductController extends Controller
       $products = Product::filterAdvanced($filter);
     } else {
       $products = Product::all();
-
     }
     return $response->setBody(
       View::renderWithDashboardLayout(
@@ -115,7 +114,7 @@ class ProductController extends Controller
         $product->image = $request->getParam("image");
         $product->price = $request->getParam("price");
         $product->description = $request->getParam("description");
-        $product->quantity = $request->getParam("quantity");
+        $product->quantity = 0;
         if ($request->getParam("author") != null) {
           $product->author_id = $request->getParam("author");
         }
@@ -134,7 +133,6 @@ class ProductController extends Controller
             "message" => "Add product successful",
           ],
         ]);
-
     }
   }
 

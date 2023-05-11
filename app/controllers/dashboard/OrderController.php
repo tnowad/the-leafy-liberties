@@ -3,6 +3,8 @@
 namespace App\Controllers\Dashboard;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Models\Product;
 use App\Models\User;
 use Core\Application;
 use Core\Controller;
@@ -86,6 +88,14 @@ class OrderController extends Controller
         } else {
           $order->status = $request->getParam("status");
           $order->save();
+          if ($request->getParam("status") == 5) {
+            $ordPrds = OrderProduct::findAll(["order_id" => $order->id]);
+            foreach ($ordPrds as $ordPrd) {
+              $product = Product::find($ordPrd->product_id);
+              $product->quantity -= $ordPrd->quantity;
+              $product->save();
+            }
+          }
           return $response->redirect(BASE_URI . "/dashboard/order", 200, [
             "toast" => [
               "type" => "success",

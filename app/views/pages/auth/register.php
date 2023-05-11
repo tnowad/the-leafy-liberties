@@ -40,7 +40,8 @@
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
             Password
           </label>
-          <input type="password" name="password" placeholder="••••••••" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+          <input type="password" name="password" placeholder="••••••••"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
             required />
           <i id="hide-icon-password" class="fa fa-eye-slash absolute top-[60%] right-4 cursor-pointer"

@@ -164,7 +164,7 @@ foreach ($successfulOrder as $order) {
             <tbody>
               <?php
               $orders = Order::all();
-              foreach (array_slice($orders, 0, 4) as $order):
+              foreach (array_slice($orders, 0, 5) as $order):
                 ?>
                 <tr class="transition-opacity bg-white border-b hover:bg-gray-200 even:bg-gray-100">
                   <td class="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">

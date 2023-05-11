@@ -136,7 +136,7 @@
               </table>
             </div>
           </div>
-          <?php if ($order->status == 0 || $order->status == 4) {
+          <?php if ($order->status == 0 || $order->status == 4 || $order->status == 1) {
             ?>
             <form class="flex flex-col" action="<?php echo BASE_URI .
               "/dashboard/order/order_review" .

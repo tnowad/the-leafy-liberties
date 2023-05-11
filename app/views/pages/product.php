@@ -14,18 +14,6 @@ foreach ($reviews as $review) {
     $reviewsActive[] = $review;
   }
 }
-
-
-// foreach ($reviewsActive as $review) {
-//   if ($user) {
-//     if ($user->id == $review->user_id) {
-//       $checkReviewContent = Review::find($review->user_id);
-//       break;
-//     }
-//   } else $checkReviewContent  = null;
-// }
-
-
 // $checkReviewContent = null;
 foreach ($reviewsActive as $review) {
   if ($user && $user->id == $review->user_id) {
@@ -33,9 +21,6 @@ foreach ($reviewsActive as $review) {
     break;
   }
 }
-
-
-
 
 // !Important: About the $user variable, you must check if the user is authenticated or not before using it
 // And code about working on user must be in the if block below to avoid error
