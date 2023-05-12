@@ -9,6 +9,7 @@ use App\Models\ProductTag;
 use App\Models\Tag;
 use Core\Application;
 use Core\Controller;
+use Core\Database;
 use Core\Request;
 use Core\Response;
 use Core\View;
@@ -80,6 +81,7 @@ class ProductController extends Controller
           )
         );
       case 'POST':
+        Database::getInstance()->beginTransaction();
         $uploader = new FileUploader([
           "allowedExtensions" => ["jpeg", "jpg", "png"],
           "maxFileSize" => 2097152,
@@ -130,6 +132,20 @@ class ProductController extends Controller
         }
         $product->publisher_id = $request->getParam("publisher");
         $product->save();
+
+        $categories = $request->getParam('categories');
+        $product->removeAllCategories();
+        foreach ($categories as $category_id) {
+          $product->addCategory(Category::findOne(["id" => $category_id]));
+        }
+
+        $tags = $request->getParam('tags');
+        $product->removeAllTags();
+        foreach ($tags as $tag_id) {
+          $product->addTag(Tag::findOne(["id" => $tag_id]));
+        }
+
+        Database::getInstance()->commitTransaction();
         return $response->redirect(BASE_URI . "/dashboard/product", 200, [
           "toast" => [
             "type" => "success",

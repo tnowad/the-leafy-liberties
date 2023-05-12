@@ -35,9 +35,7 @@ use App\Models\Tag; ?>
         onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
       <?php
       $categories = Category::all();
-
       $categoriesOfProduct = $product->categories();
-
       ?>
       <label for="category" class="my-2">Category:</label>
 
@@ -58,14 +56,11 @@ use App\Models\Tag; ?>
           </div>
         <?php endforeach ?>
       </div>
-
       <?php
       $tags = Tag::all();
       $tagsOfProduct = $product->tags();
       ?>
-
       <label for="tag" class="my-2">Tag:</label>
-
       <div class="flex flex-wrap">
         <?php foreach ($tags as $tag): ?>
           <div class="w-1/2">
