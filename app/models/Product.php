@@ -85,6 +85,22 @@ class Product extends Model
     return $categories;
   }
 
+  public function removeAllCategories()
+  {
+    $productCategories = ProductCategory::findAll(["product_id" => $this->id]);
+    foreach ($productCategories as $productCategory) {
+      $productCategory->delete();
+    }
+  }
+
+  public function removeAllTags()
+  {
+    $productTags = ProductTag::findAll(["product_id" => $this->id]);
+    foreach ($productTags as $productTag) {
+      $productTag->delete();
+    }
+  }
+
   public function addCategory($category)
   {
     ProductCategory::create([

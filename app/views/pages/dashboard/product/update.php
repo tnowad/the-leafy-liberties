@@ -1,6 +1,8 @@
 <?php $product = $params["product"];
 use App\Models\Author;
-use App\Models\Publisher; ?>
+use App\Models\Publisher;
+use App\Models\Category;
+use App\Models\Tag; ?>
 <div class="w-full min-h-screen">
   <div class="w-full h-full p-5 m-5 bg-white rounded-md shadow-lg">
     <form class="flex flex-col" action="<?php echo BASE_URI . "/dashboard/product/update"; ?>" method="POST"
@@ -29,6 +31,57 @@ use App\Models\Publisher; ?>
       <input type="number" value="<?php echo $product->price; ?>" name="price"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
         onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
+
+      <?php
+      $categories = Category::all();
+
+      $categoriesOfProduct = $product->categories();
+
+      ?>
+      <label for="category" class="my-2">Category:</label>
+
+      <div class="flex flex-wrap">
+        <?php foreach ($categories as $category): ?>
+          <div class="w-1/2">
+            <input type="checkbox" name="categories[]" id="category-<?php echo $category->id ?>"
+              value="<?php echo $category->id ?>"
+              class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" <?php foreach ($categoriesOfProduct as $categoryOfProduct) {
+                if ($categoryOfProduct->id == $category->id) {
+                  echo "checked";
+                }
+              }
+              ?> />
+            <label for="category-<?php echo $category->id ?>" class="my-2">
+              <?php echo $category->name ?>
+            </label>
+          </div>
+        <?php endforeach ?>
+      </div>
+
+      <?php
+      $tags = Tag::all();
+      $tagsOfProduct = $product->tags();
+      ?>
+
+      <label for="tag" class="my-2">Tag:</label>
+
+      <div class="flex flex-wrap">
+        <?php foreach ($tags as $tag): ?>
+          <div class="w-1/2">
+            <input type="checkbox" name="tags[]" id="tag-<?php echo $tag->id ?>" value="<?php echo $tag->id ?>"
+              class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" <?php foreach ($tagsOfProduct as $tagOfProduct) {
+                if ($tagOfProduct->id == $tag->id) {
+                  echo "checked";
+                }
+              }
+              ?> />
+            <label for="tag-<?php echo $tag->id ?>" class="my-2">
+              <?php echo $tag->name ?>
+            </label>
+          </div>
+        <?php endforeach ?>
+      </div>
+
       <label for="author" class="my-2">Author:</label>
       <select value="" name="author"
         class="p-3 bg-gray-100 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary-400"
