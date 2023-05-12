@@ -75,12 +75,19 @@ class ImportController extends Controller
           )
         );
       case 'POST':
+        if ($request->getParam('product-id') == null) {
+          return $response->redirect(BASE_URI . '/dashboard/import/create', 200, [
+            "toast" => [
+              "type" => "error",
+              "message" => "Please insert products!!"
+            ]
+          ]);
+        }
         Database::getInstance()->beginTransaction();
         $import = new Import();
         $import->user_id = $auth->getUser()->id;
         $import->total_price = 0;
         $import->save();
-
         $products = [];
         for ($i = 0; $i < count($request->getParam('product-id')); $i++) {
           $products[] = [

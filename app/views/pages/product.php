@@ -85,7 +85,6 @@ if ($user != null) {
             onclick="addToCart(<?php echo $product->id; ?>)">
             <i
               class="p-2 transition-all rounded-full fa-brands fa-opencart group-hover:text-white group-hover:bg-primary-400 <?php echo ($cartCheck) ? 'bg-primary-700 text-white' : 'bg-gray-50 text-black' ?>"></i>
-
             <?php if ($auth->hasPermission("product.access") && $auth->hasPermission("dashboard.access")): ?>
               <button class="text-sm font-medium sm:text-base md:text-lg"
                 onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
