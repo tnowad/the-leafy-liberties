@@ -65,7 +65,17 @@ class RegisterController extends Controller
     $user->name = $name;
     $user->phone = $phone;
     $user->password = password_hash($password, PASSWORD_DEFAULT);
-    $user->setRole(Role::findAll(["name" => "customer"])[0]);
+    $role = Role::findAll(["name" => "customer"])[0];
+    if ($role == null) {
+      Database::getInstance()->rollbackTransaction();
+      return $response->redirect(BASE_URI . "/register", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "Something went wrong!",
+        ],
+      ]);
+    }
+    $user->setRole($role);
     $user->save();
 
     if (!$user->id) {
