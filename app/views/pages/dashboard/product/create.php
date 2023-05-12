@@ -1,6 +1,8 @@
 <?php
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Publisher;
+use App\Models\Tag;
 
 ?>
 <div class="add-form min-h-screen w-full justify-center items-center bg-opacity-75 z-[500] my-5">
@@ -28,6 +30,40 @@ use App\Models\Publisher;
       <input type="number" value="" step="0.01" name="price"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
         onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
+
+      <?php
+      $categories = Category::all();
+      ?>
+      <label for="category" class="my-2">Category:</label>
+
+      <div class="flex flex-wrap">
+        <?php foreach ($categories as $category): ?>
+          <div class="w-1/2">
+            <input type="checkbox" name="categories[]" id="category-<?php echo $category->id ?>"
+              value="<?php echo $category->id ?>"
+              class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
+            <label for="category-<?php echo $category->id ?>" class="my-2">
+              <?php echo $category->name ?>
+            </label>
+          </div>
+        <?php endforeach ?>
+      </div>
+      <?php
+      $tags = Tag::all();
+      ?>
+      <label for="tag" class="my-2">Tag:</label>
+      <div class="flex flex-wrap">
+        <?php foreach ($tags as $tag): ?>
+          <div class="w-1/2">
+            <input type="checkbox" name="tags[]" id="tag-<?php echo $tag->id ?>" value="<?php echo $tag->id ?>"
+              class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" />
+            <label for="tag-<?php echo $tag->id ?>" class="my-2">
+              <?php echo $tag->name ?>
+            </label>
+          </div>
+        <?php endforeach ?>
+      </div>
+
       <label for="gender" class="my-2">Author:</label>
       <div class="flex items-center justify-between gap-4">
         <select value="" name="author"
@@ -68,7 +104,7 @@ use App\Models\Publisher;
       <label for="quantity" class="my-2">Quantity:</label>
       <input type="number" value="0" name="quantity"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
-        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;" disabled/>
+        onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107) return false;" disabled />
       <button class="my-2 bg-[#2e524e] hover:bg-[#52938d] transition-colors text-white font-bold py-2 px-4 rounded"
         type="submit">
         Submit
