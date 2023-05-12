@@ -138,6 +138,25 @@ class Product extends Model
   public static function filterAdvanced($filter)
   {
     $products = Product::all();
+    if (!empty($filter['order-by'])) {
+      $orderBy = $filter['order-by'];
+      $orderDirection = $filter['order-direction'] ?? 'asc';
+      usort($products, function ($a, $b) use ($orderBy, $orderDirection) {
+        if ($orderDirection == 'asc') {
+          if ($orderBy == 'price') {
+            return floatval($a->$orderBy) - floatval($b->$orderBy);
+          } else {
+            return strcmp($a->$orderBy, $b->$orderBy);
+          }
+        } else {
+          if ($orderBy == 'price') {
+            return floatval($b->$orderBy) - floatval($a->$orderBy);
+          } else {
+            return strcmp($b->$orderBy, $a->$orderBy);
+          }
+        }
+      });
+    }
 
     // Filter by keywords
     if (!empty($filter['keywords'])) {

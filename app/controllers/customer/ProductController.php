@@ -29,6 +29,8 @@ class ProductController extends Controller
         "max" => $request->getQuery("max-price"),
       ],
       "keywords" => $request->getQuery("keywords"),
+      "order-by" => $request->getQuery("order-by") ?? "name",
+      "order-direction" => $request->getQuery("order-direction") ?? "asc",
     ];
 
     $pagination = [

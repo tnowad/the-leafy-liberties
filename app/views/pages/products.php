@@ -27,39 +27,41 @@ $products = $pagination['products'];
               <div class="flex items-center justify-between">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Show products Per Page</h1>
               </div>
-              <input type="number" name="limit" required value="<?php echo $pagination['limit'] ?>" class="w-full px-3 py-1 border border-gray-300 rounded-sm" onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
+              <input type="number" name="limit" required value="<?php echo $pagination['limit'] ?>"
+                class="w-full px-3 py-1 border border-gray-300 rounded-sm"
+                onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
             </div>
           </div>
           <div class="border-b border-gray-200">
             <div class="relative px-4 py-2">
-              <div class="dropdown-category flex items-center justify-between cursor-pointer">
+              <div class="flex items-center justify-between cursor-pointer dropdown-category">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Categories</h1>
                 <i class="cursor-pointer open-category fa-solid fa-plus"></i>
               </div>
               <ul class="h-0 ml-2 overflow-hidden category-list">
                 <li>
-                  <?php foreach (Category::findAll(["deleted_at" => "null"]) as $category) : ?>
-                <li>
-                  <label>
-                    <input type="checkbox" name="categories[]" value="<?php echo $category->id ?>" <?php echo in_array($category->id, $filter['categories']) ? 'checked' : '' ?>>
-                    <span class="ml-2">
-                      <?php echo $category->name ?>
-                    </span>
-                  </label>
-                </li>
-              <?php endforeach; ?>
+                  <?php foreach (Category::findAll(["deleted_at" => "null"]) as $category): ?>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="categories[]" value="<?php echo $category->id ?>" <?php echo in_array($category->id, $filter['categories']) ? 'checked' : '' ?>>
+                      <span class="ml-2">
+                        <?php echo $category->name ?>
+                      </span>
+                    </label>
+                  </li>
+                <?php endforeach; ?>
               </ul>
             </div>
           </div>
 
           <div class="border-b border-gray-200">
             <div class="px-4 py-2">
-              <div class="dropdown-tag flex items-center justify-between cursor-pointer">
+              <div class="flex items-center justify-between cursor-pointer dropdown-tag">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Tags</h1>
                 <i class="cursor-pointer open-tags fa-solid fa-plus"></i>
               </div>
               <ul class="h-0 ml-2 overflow-hidden tags-list">
-                <?php foreach (Tag::findAll(["deleted_at" => "null"]) as $tag) : ?>
+                <?php foreach (Tag::findAll(["deleted_at" => "null"]) as $tag): ?>
                   <li>
                     <label>
                       <input type="checkbox" name="tags[]" value="<?php echo $tag->id ?>" <?php echo in_array($tag->id, $filter['tags']) ? 'checked' : '' ?>>
@@ -73,12 +75,11 @@ $products = $pagination['products'];
             </div>
           </div>
           <div class="border-b border-gray-200">
-
             <div class="px-4 py-2">
               <h1 class="mt-2 mb-2 text-xl font-medium">Author</h1>
               <select name="author" id="" class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
                 <option value="">All</option>
-                <?php foreach (Author::findAll(["deleted_at" => "null"]) as $author) : ?>
+                <?php foreach (Author::findAll(["deleted_at" => "null"]) as $author): ?>
                   <option value="<?php echo $author->id ?>" <?php echo $filter['author'] == $author->id ? 'selected' : '' ?>>
                     <?php echo $author->name ?>
                   </option>
@@ -90,37 +91,65 @@ $products = $pagination['products'];
             <div class="px-4 py-2">
               <h1 class="text-xl font-medium">Price range</h1>
               <div class="flex items-center justify-start gap-2 py-3">
-                <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>" class="w-20 px-3 py-1 border border-gray-300 rounded-sm" onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
+                <input type="number" name="min-price" value="<?php echo $filter['price']['min'] ?>"
+                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
                 <span class="text-lg"> - </span>
-                <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>" class="w-20 px-3 py-1 border border-gray-300 rounded-sm" onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
+                <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
+                  class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
+                  onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109 || event.keyCode == 190) return false;">
               </div>
             </div>
           </div>
-          <input type="submit" value="Filter" class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 mx-4 hover:bg-primary-700 transition-all cursor-pointer" />
+          <!-- order and order-direction  -->
+          <div class="border-b border-gray-200">
+            <div class="px-4 py-2">
+              <h1 class="text-xl font-medium">Order by</h1>
+              <div class="flex items-center justify-start gap-2 py-3">
+                <select name="order-by" id=""
+                  class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
+                  <option value="name" <?php echo $filter['order-by'] == 'name' ? 'selected' : '' ?>>Name</option>
+                  <option value="price" <?php echo $filter['order-by'] == 'price' ? 'selected' : '' ?>>Price</option>
+                </select>
+                <select name="order-direction" id=""
+                  class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
+                  <option value="asc" <?php echo $filter['order-direction'] == 'asc' ? 'selected' : '' ?>>Ascending
+                  </option>
+                  <option value="desc" <?php echo $filter['order-direction'] == 'desc' ? 'selected' : '' ?>>Descending
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <input type="submit" value="Filter"
+            class="py-2 px-5 bg-[#315854] font-semibold text-white rounded-lg my-5 mx-4 hover:bg-primary-700 transition-all cursor-pointer" />
         </form>
       </div>
     </div>
 
     <?php
-    if (count($products) == 0) :
-    ?>
+    if (count($products) == 0):
+      ?>
       <div class="flex flex-col items-center justify-center h-full gap-2 my-[6px]">
         <i class="fa-solid fa-book text-6xl md:text-[85px] text-gray-400"></i>
-        <h1 class="text-4xl md:text-5xl tracking-wider text-gray-400 uppercase">Dont't have products</h1>
+        <h1 class="text-4xl tracking-wider text-gray-400 uppercase md:text-5xl">Dont't have products</h1>
       </div>
-    <?php else : ?>
+    <?php else: ?>
       <div id="products-content">
 
         <div id="product-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
 
-          <?php foreach ($products as $product) : ?>
-            <div class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
+          <?php foreach ($products as $product): ?>
+            <div
+              class="box-border flex flex-col items-center w-full pt-5 transition-all border border-solid product-info group hover:border-gray-500 hover:shadow-xl">
               <div class="object-cover h-[330px] overflow-hidden p-2 px-[22px] w-60">
                 <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
                   <img src="<?php echo BASE_URI . $product->image; ?>" alt="" class="object-cover w-full h-full" />
                 </a>
               </div>
-              <div class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
+              <div
+                class="flex flex-col items-start justify-center w-full box-border px-[20px] text-lg font-medium transition-all bg-white product-body group-hover:-translate-y-16">
                 <div class="product-name">
                   <a href="<?php echo BASE_URI . "/product?id=" . $product->id; ?>">
                     <?php echo $product->name; ?>
@@ -138,15 +167,19 @@ $products = $pagination['products'];
                   $wishlistCheck = Wishlist::findOne(["user_id" => $user->id, "product_id" => $product->id]);
                 }
                 ?>
-                <?php if ($auth->hasPermission("dashboard.access")) : ?>
-                  <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                    <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all" onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
+                <?php if ($auth->hasPermission("dashboard.access")): ?>
+                  <div
+                    class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                    <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
+                      onclick="location.href='<?php echo BASE_URI . '/dashboard/product/update' . '?id=' . $product->id ?>'; event.stopPropagation();">
                       Update Product
                     </p>
                   </div>
-                <?php else : ?>
-                  <div class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
-                    <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all" onclick="addToCart(`<?php echo $product->id; ?>`)">
+                <?php else: ?>
+                  <div
+                    class="flex items-center justify-between w-full transition-all translate-y-0 opacity-0 heart-option group-hover:opacity-100">
+                    <p class="font-semibold select-option-text uppercase cursor-pointer relative before:w-0 before:h-[1px] before:bg-black before:content-[''] before:absolute before:bottom-0 before:hover:w-full before:transition-all"
+                      onclick="addToCart(`<?php echo $product->id; ?>`)">
                       <?php
                       if (isset($cartCheck))
                         echo "Added to cart";
@@ -154,7 +187,8 @@ $products = $pagination['products'];
                         echo "Add to cart";
                       ?>
                     </p>
-                    <i class="p-2 transition-all rounded-full cursor-pointer wishlist-icon fa-regular fa-heart hover:bg-red-400 hover:text-white" onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
+                    <i class="p-2 transition-all rounded-full cursor-pointer wishlist-icon fa-regular fa-heart hover:bg-red-400 hover:text-white"
+                      onclick="addToWishList(`<?php echo $product->id; ?>`)"></i>
                   </div>
                 <?php endif ?>
               </div>
@@ -163,19 +197,22 @@ $products = $pagination['products'];
         </div>
         <div class="my-5">
           <div id="pagination" class="flex items-center justify-center gap-5 text-center pagination">
-            <?php if ($pagination['page'] > 1) : ?>
-              <a onclick="openPage(<?php echo $pagination['page'] - 1 ?>)" class="cursor-pointer pagination-items p-2 shadow-md border border-gray-300 text-[#52938d] font-semibold hover:text-white hover:bg-primary-700 transition-all">
+            <?php if ($pagination['page'] > 1): ?>
+              <a onclick="openPage(<?php echo $pagination['page'] - 1 ?>)"
+                class="cursor-pointer pagination-items p-2 shadow-md border border-gray-300 text-[#52938d] font-semibold hover:text-white hover:bg-primary-700 transition-all">
                 Previous
               </a>
             <?php endif; ?>
 
-            <?php for ($i = 1; $i <= $pagination['totalPages']; $i++) : ?>
-              <a onclick="openPage(<?php echo $i ?>)" class="p-2 <?php echo $i == $pagination['page'] ? 'bg-[#52938d] text-white font-semibold' : ' shadow-md border border-gray-300 text-primary font-semibold hover:text-white hover:bg-primary-700 transition-all'; ?> w-10 h-10 cursor-pointer">
+            <?php for ($i = 1; $i <= $pagination['totalPages']; $i++): ?>
+              <a onclick="openPage(<?php echo $i ?>)"
+                class="p-2 <?php echo $i == $pagination['page'] ? 'bg-[#52938d] text-white font-semibold' : ' shadow-md border border-gray-300 text-primary font-semibold hover:text-white hover:bg-primary-700 transition-all'; ?> w-10 h-10 cursor-pointer">
                 <?php echo $i; ?>
               </a>
             <?php endfor; ?>
-            <?php if ($pagination['page'] < $pagination['totalPages']) : ?>
-              <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)" class="p-2 font-semibold transition-all border border-gray-300 shadow-md cursor-pointer pagination-items text-primary hover:text-white hover:bg-primary-700">
+            <?php if ($pagination['page'] < $pagination['totalPages']): ?>
+              <a onclick="openPage(<?php echo $pagination['page'] + 1 ?>)"
+                class="p-2 font-semibold transition-all border border-gray-300 shadow-md cursor-pointer pagination-items text-primary hover:text-white hover:bg-primary-700">
                 Next
               </a>
             <?php endif; ?>
