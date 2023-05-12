@@ -43,7 +43,7 @@ use App\Models\Tag; ?>
       <div class="flex flex-wrap">
         <?php foreach ($categories as $category): ?>
           <div class="w-1/2">
-            <input type="checkbox" name="category[]" id="category-<?php echo $category->id ?>"
+            <input type="checkbox" name="categories[]" id="category-<?php echo $category->id ?>"
               value="<?php echo $category->id ?>"
               class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" <?php foreach ($categoriesOfProduct as $categoryOfProduct) {
                 if ($categoryOfProduct->id == $category->id) {
@@ -68,7 +68,7 @@ use App\Models\Tag; ?>
       <div class="flex flex-wrap">
         <?php foreach ($tags as $tag): ?>
           <div class="w-1/2">
-            <input type="checkbox" name="tag[]" id="tag-<?php echo $tag->id ?>" value="<?php echo $tag->id ?>"
+            <input type="checkbox" name="tags[]" id="tag-<?php echo $tag->id ?>" value="<?php echo $tag->id ?>"
               class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" <?php foreach ($tagsOfProduct as $tagOfProduct) {
                 if ($tagOfProduct->id == $tag->id) {
                   echo "checked";
