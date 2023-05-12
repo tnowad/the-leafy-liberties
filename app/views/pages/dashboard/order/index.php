@@ -77,7 +77,7 @@ use App\Models\Pagination;
                     <?php elseif ($order->status == 4): ?>
                       <p class="font-medium text-blue-400">Shipping</p>
                     <?php else: ?>
-                      <p class="font-medium text-primary-400">Successfull</p>
+                      <p class="font-medium text-primary-400">Successfully</p>
                     <?php endif; ?>
                   </td>
                   <td class="px-5 py-3">
