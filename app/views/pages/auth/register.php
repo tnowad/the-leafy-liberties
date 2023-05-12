@@ -31,7 +31,6 @@
             Phone
           </label>
           <input type="tel" name="phone" pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" required
-            oninvalid="this.setCustomValidity('Please enter a valid phone number')" onvalid="this.setCustomValidity('')"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#52938d] focus:border-[#52938d] block w-full p-2.5"
             placeholder="Enter your phone here" />
         </div>

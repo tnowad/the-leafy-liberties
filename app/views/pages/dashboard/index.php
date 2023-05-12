@@ -30,7 +30,7 @@ JOIN orders o ON o.id = op.order_id
 WHERE o.status = 5
 GROUP BY c.id
 ORDER BY num_orders DESC
-LIMIT 5;", []);
+LIMIT 6;", []);
 
 $successfulOrder = Order::findAll(["status" => "5"]);
 $pendingOrders = Order::findAll(["status" => "0"]);
@@ -124,7 +124,7 @@ foreach ($successfulOrder as $order) {
           <p class="mb-5 text-2xl font-bold">Most Sold By Category</p>
           <div class="flex flex-col gap-4">
             <?php
-            $colors = ["red", "blue", "green", "yellow", "pink", "orange", "purple"];
+            $colors = ["red", "blue", "green", "yellow", "pink", "orange", "white", "gray", "brown"];
             ?>
             <?php foreach ($categorySold as $item):
               $name = Category::findOne(["id" => $item["category_id"]]);
@@ -133,7 +133,12 @@ foreach ($successfulOrder as $order) {
                 <?php echo $name->name ?>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                <div class="bg-<?php echo $colors[$name->id] ?>-600 h-2.5 rounded-full"
+                <div
+                  class="bg-<?php if (isset($colors[$name->id])) {
+                    echo $colors[$name->id];
+                  } else {
+                    echo "gray";
+                  } ?>-600 h-2.5 rounded-full"
                   style="width: <?php echo (($item["num_orders"]) ? $item["num_orders"] : 0) * 10 ?>%"></div>
               </div>
             <?php endforeach ?>
