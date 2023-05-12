@@ -17,21 +17,22 @@ use App\Models\Tag; ?>
       <label for="img" class="my-2">Image:</label>
       <input type="file" name="image" id="imgInp" onchange="loadFile(event)" />
       <p>Preview Image:</p>
-      <img id="output" class="object-contain h-56 w-80" src="<?php echo BASE_URI . $product->image ?>"
-        accept="image/*" />
+      <img id="output" class="object-contain h-56 w-80" src="<?php if ($product)
+        echo BASE_URI . $product->image;
+      else
+        echo BASE_URI . "/resources/images/product-placeholder.png" ?>" accept="image/*" />
+        <button type="button" class="px-4 py-2 my-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
+          onclick="removeImage()">Remove Image</button>
 
-      <input type="text" value="<?php echo $product->image; ?>" name="old_img" class="opacity-0" />
-
+        <input type="text" value="<?php echo $product->image; ?>" id="old-image" name="old_img" class="opacity-0" />
       <label for="entered" class="my-2">ISBN:</label>
       <input type="number" value="<?php echo $product->isbn; ?>" name="isbn"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
         onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
-
       <label for="price" class="my-2">Price:</label>
       <input type="number" value="<?php echo $product->price; ?>" name="price"
         class="p-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400" required
         onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;" />
-
       <?php
       $categories = Category::all();
 
@@ -193,4 +194,8 @@ use App\Models\Tag; ?>
       return;
     }
   });
+  document.removeImage = () => {
+    document.getElementById('output').src = "<?php echo BASE_URI . "/resources/images/product-placeholder.png" ?>";
+    document.getElementById('old-image').value = "<?php echo BASE_URI . "/resources/images/product-placeholder.png" ?>";
+  }
 </script>
