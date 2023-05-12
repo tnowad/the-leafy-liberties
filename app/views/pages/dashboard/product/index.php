@@ -20,7 +20,7 @@ $filter = $params['filter'];
           <div class="relative flex flex-col px-4 py-2">
             <div class="flex items-center justify-between cursor-pointer">
               <h1 class="mt-2 mb-2 text-xl font-medium">Search</h1>
-              <div class="px-3 py-1 border border-primary-300 rounded-md toggle-btn">
+              <div class="px-3 py-1 border rounded-md border-primary-300 toggle-btn">
                 <span class="toggle-simple">Simple</span>
                 <span class="hidden toggle-advanced">Advanced</span>
               </div>
@@ -81,6 +81,27 @@ $filter = $params['filter'];
                 <input type="number" name="max-price" value="<?php echo $filter['price']['max'] ?>"
                   class="w-20 px-3 py-1 border border-gray-300 rounded-sm"
                   onkeydown="if (event.keyCode === 69 || event.keyCode === 189 || event.keyCode == 107 || event.keyCode == 110 || event.keyCode == 109) return false;">
+              </div>
+            </div>
+          </div>
+          <div class="border-b border-gray-200">
+            <div class="px-4 py-2">
+              <h1 class="text-xl font-medium">Order by</h1>
+              <div class="flex items-center justify-start gap-2 py-3">
+                <select name="order-by" id=""
+                  class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
+                  <option value="name" <?php echo $filter['order-by'] == 'name' ? 'selected' : '' ?>>Name</option>
+                  <option value="price" <?php echo $filter['order-by'] == 'price' ? 'selected' : '' ?>>Price</option>
+                  <option value="id" <?php echo $filter['order-by'] == 'id' ? 'selected' : '' ?>>ID</option>
+                  <option value="quantity" <?php echo $filter['order-by'] == 'quantity' ? 'selected' : '' ?>>Quantity
+                </select>
+                <select name="order-direction" id=""
+                  class="w-full px-3 py-1 border border-gray-300 rounded-sm appearance-none">
+                  <option value="asc" <?php echo $filter['order-direction'] == 'asc' ? 'selected' : '' ?>>Ascending
+                  </option>
+                  <option value="desc" <?php echo $filter['order-direction'] == 'desc' ? 'selected' : '' ?>>Descending
+                  </option>
+                </select>
               </div>
             </div>
           </div>
@@ -205,7 +226,8 @@ $filter = $params['filter'];
   let icon = document.querySelector(".open-category");
   let list = document.querySelector(".category-list");
   let categories = document.querySelector(".dropdown-category")
-  categories.addEventListener("click", () => {
+  categories.addEventListener("click", toggleAdvancedFilter)
+  const toggleAdvancedFilter = () => {
     if (icon.classList.contains("fa-plus")) {
       icon.classList.remove("fa-plus")
       icon.classList.add("fa-minus")
@@ -214,6 +236,6 @@ $filter = $params['filter'];
       icon.classList.remove("fa-minus")
     }
     list.classList.toggle("h-0");
-  })
+  }
 
 </script>

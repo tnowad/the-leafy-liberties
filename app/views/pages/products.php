@@ -22,7 +22,7 @@ $products = $pagination['products'];
           <input type="hidden" name="page" value="1">
           <!-- <input type="hidden" name="limit" value="<?php echo $pagination['limit'] ?>"> -->
           <input type="hidden" name="keywords" value="<?php echo $filter['keywords'] ?>">
-          <div class="border-b border-gray-200">
+          <div class="hidden border-b border-gray-200">
             <div class="relative px-4 py-2">
               <div class="flex items-center justify-between">
                 <h1 class="mt-2 mb-2 text-xl font-medium">Show products Per Page</h1>

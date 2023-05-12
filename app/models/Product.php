@@ -143,13 +143,13 @@ class Product extends Model
       $orderDirection = $filter['order-direction'] ?? 'asc';
       usort($products, function ($a, $b) use ($orderBy, $orderDirection) {
         if ($orderDirection == 'asc') {
-          if ($orderBy == 'price') {
+          if ($orderBy == 'price' || $orderBy == 'quantity' || $orderBy == 'id') {
             return floatval($a->$orderBy) - floatval($b->$orderBy);
           } else {
             return strcmp($a->$orderBy, $b->$orderBy);
           }
         } else {
-          if ($orderBy == 'price') {
+          if ($orderBy == 'price' || $orderBy == 'quantity' || $orderBy == 'id') {
             return floatval($b->$orderBy) - floatval($a->$orderBy);
           } else {
             return strcmp($b->$orderBy, $a->$orderBy);
