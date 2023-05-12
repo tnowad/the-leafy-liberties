@@ -118,32 +118,39 @@ if ($user != null) {
           </div>
         </div>
       </div>
-
-      <p class="inline-block mt-5 text-gray-400">Category: </p>
-      <p class="inline-block ml-1">
-        <?php
-        $categories = $product->categories();
-        $count = count($categories);
-        $categoryNames = [];
-        foreach ($categories as $category) {
-          $categoryNames[] = '<a href="' . BASE_URI . '/" class="font-medium hover:underline text-primary">' . $category->name . '</a>';
-        }
-        echo implode(', ', $categoryNames);
-        ?>
-      </p>
-      <br />
-      <p class="inline-block text-gray-400">Tags :</p>
-      <p class="inline-block ml-1">
-        <?php
-        $tags = $product->tags();
-        $count = count($tags);
-        $tagNames = [];
-        foreach ($tags as $tag) {
-          $tagNames[] = '<a href="' . BASE_URI . '/" class="font-medium hover:underline text-primary">' . $tag->name . '</a>';
-        }
-        echo implode(', ', $tagNames);
-        ?>
-      </p>
+      <?php if (count($product->categories()) <= 0): ?>
+        <p class="text-gray-400">No category</p>
+      <?php else: ?>
+        <p class="inline-block mt-5 text-gray-400">Category: </p>
+        <p class="inline-block ml-1">
+          <?php
+          $categories = $product->categories();
+          $count = count($categories);
+          $categoryNames = [];
+          foreach ($categories as $category) {
+            $categoryNames[] = '<a href="' . BASE_URI . '/" class="font-medium hover:underline text-primary">' . $category->name . '</a>';
+          }
+          echo implode(', ', $categoryNames);
+          ?>
+        </p>
+        <br />
+      <?php endif ?>
+      <?php if (count($product->tags()) <= 0): ?>
+        <p class="text-gray-400">No tag</p>
+      <?php else: ?>
+        <p class="inline-block text-gray-400">Tags :</p>
+        <p class="inline-block ml-1">
+          <?php
+          $tags = $product->tags();
+          $count = count($tags);
+          $tagNames = [];
+          foreach ($tags as $tag) {
+            $tagNames[] = '<a href="' . BASE_URI . '/" class="font-medium hover:underline text-primary">' . $tag->name . '</a>';
+          }
+          echo implode(', ', $tagNames);
+          ?>
+        </p>
+      <?php endif ?>
 
       <div class="flex items-center justify-start gap-4 mt-10">
         <a href="https://www.facebook.com/jack.willam2003/">
