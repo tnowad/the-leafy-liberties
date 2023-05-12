@@ -41,35 +41,45 @@ class CartController extends Controller
       return;
     }
     $user = $auth->getUser();
+    try {
 
-    $product = Product::find($request->getBody()["id"]);
-    if (!$product) {
-      $response->jsonResponse([
-        "type" => "error",
-        "message" => "Product not found",
+      $product = Product::find($request->getBody()["id"]);
+      if (!$product) {
+        $response->jsonResponse([
+          "type" => "error",
+          "message" => "Product not found",
+        ]);
+        return;
+      }
+
+      $cart = Cart::findOne([
+        "product_id" => $product->id,
+        "user_id" => $user->id,
       ]);
-      return;
-    }
 
-    $cart = Cart::findOne([
-      "product_id" => $product->id,
-      "user_id" => $user->id,
-    ]);
+      if ($cart) {
+        $response->jsonResponse([
+          "type" => "info",
+          "message" => "Product is already in cart",
+        ]);
+        return;
+      }
+      Database::getInstance()->beginTransaction();
 
-    if ($cart) {
-      $response->jsonResponse([
-        "type" => "info",
-        "message" => "Product is already in cart",
+      $cart = new Cart();
+      $cart->user_id = $user->id;
+      $cart->product_id = $product->id;
+      $cart->quantity = 1;
+      $cart->save();
+    } catch (\Exception $e) {
+      Database::getInstance()->rollbackTransaction();
+      return $response->redirect(BASE_URI . "/cart", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => $e->getMessage(),
+        ],
       ]);
-      return;
     }
-    Database::getInstance()->beginTransaction();
-
-    $cart = new Cart();
-    $cart->user_id = $user->id;
-    $cart->product_id = $product->id;
-    $cart->quantity = 1;
-    $cart->save();
 
     if (!$cart->id) {
       Database::getInstance()->rollbackTransaction();

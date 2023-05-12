@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTag;
+use App\Models\Tag;
 use Core\Application;
 use Core\Controller;
 use Core\Request;
@@ -205,7 +206,7 @@ class ProductController extends Controller
         );
       case "POST":
         $product = Product::find($request->getParam("id"));
-        if (!$product) {
+        if (!$product || !($product instanceof Product)) {
           return $response->redirect(BASE_URI . "/dashboard/product", 200, [
             "toast" => [
               "type" => "error",
@@ -239,7 +240,7 @@ class ProductController extends Controller
           } else {
             $product->image = $request->getParam("image");
           }
-          if (Product::findOne(["isbn" => $request->getParam("isbn")])) {
+          if (Product::findOne(["isbn" => $request->getParam("isbn")]) != null && Product::findOne(["isbn" => $request->getParam("isbn")])->isbn != $product->isbn) {
             return $response->redirect(BASE_URI . "/dashboard/product/update?id=" . $product->id, 200, [
               "toast" => [
                 "type" => "error",
@@ -253,6 +254,18 @@ class ProductController extends Controller
           $product->quantity = $request->getParam("quantity");
           $product->author_id = $request->getParam("author");
           $product->publisher_id = $request->getParam("publisher");
+
+          $categories = $request->getParam('categories');
+          $product->removeAllCategories();
+          foreach ($categories as $category_id) {
+            $product->addCategory(Category::findOne(["id" => $category_id]));
+          }
+
+          $tags = $request->getParam('tags');
+          $product->removeAllTags();
+          foreach ($tags as $tag_id) {
+            $product->addTag(Tag::findOne(["id" => $tag_id]));
+          }
           $product->save();
           return $response->redirect(BASE_URI . "/dashboard/product", 200, [
             "toast" => [

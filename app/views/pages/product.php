@@ -214,8 +214,7 @@ if ($user != null) {
               foreach ($reviewsActive as $review):
                 $userReview = User::find($review->user_id);
                 ?>
-                <div
-                  class="review flex flex-row <?php echo $user ? ($userReview->id != $user->id ? "justify-start" : "justify-end") : "justify-start"; ?>">
+                <div class="flex flex-row justify-start review ">
                   <div class="review-header">
                     <img
                       src="<?php echo ($userReview->image == NULL) ? BASE_URI . '/resources/images/user/placeholder.png' : BASE_URI . $userReview->image ?>"
@@ -268,6 +267,7 @@ if ($user != null) {
                       </ul>
                     </div>
                   <?php endif; ?>
+                  <!-- end of -->
                   <div class="">
                     <i id="comment-edit" onclick="openEditForm(<?php echo $review->id ?>);"
                       class="<?php echo $user ? ($userReview->id != $user->id ? "hidden" : "flex") : "hidden"; ?> comment-edit fa-solid fa-pen-to-square cursor-pointer mt-2 py-3 px-3 bg-blue-400 text-white rounded-xl hover:text-pink-500 transition-all"></i>
