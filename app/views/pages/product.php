@@ -120,10 +120,17 @@ if ($user != null) {
       </div>
 
       <p class="inline-block mt-5 text-gray-400">Category: </p>
-      <a href="<?php echo BASE_URI . "/products?category=" . $category->id; ?>"
-        class="font-medium hover:underline text-primary">
-        <?php echo $category->name; ?>
-      </a>
+      <p class="inline-block ml-1">
+        <?php
+        $categories = $product->categories();
+        $count = count($categories);
+        $categoryNames = [];
+        foreach ($categories as $category) {
+          $categoryNames[] = '<a href="' . BASE_URI . '/" class="font-medium hover:underline text-primary">' . $category->name . '</a>';
+        }
+        echo implode(', ', $categoryNames);
+        ?>
+      </p>
       <br />
       <p class="inline-block text-gray-400">Tags :</p>
       <p class="inline-block ml-1">

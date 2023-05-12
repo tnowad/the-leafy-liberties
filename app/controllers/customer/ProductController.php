@@ -70,7 +70,7 @@ class ProductController extends Controller
         "product_id" => $product->id,
       ]);
       $review_status = ReviewStatus::find($product->id);
-      $category = Category::find($product_category->category_id);
+
     } catch (\Exception $e) {
       dd($e->getMessage());
     }
@@ -79,7 +79,6 @@ class ProductController extends Controller
       View::renderWithLayout(new View("pages/product"), [
         "product" => $product,
         "author" => $author,
-        "category" => $category,
         "reviews" => $reviews,
         "review_status" => $review_status,
       ])
