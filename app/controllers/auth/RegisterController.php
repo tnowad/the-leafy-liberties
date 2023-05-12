@@ -49,6 +49,15 @@ class RegisterController extends Controller
         ],
       ]);
     }
+    if (User::findOne(["phone" => $phone])) {
+      $response->setStatusCode(200);
+      return $response->redirect(BASE_URI . "/register", 200, [
+        "toast" => [
+          "type" => "error",
+          "message" => "Phone already exists",
+        ],
+      ]);
+    }
     Database::getInstance()->beginTransaction();
 
     $user = new User();
