@@ -137,7 +137,7 @@ foreach ($successfulOrder as $order) {
                   class="bg-<?php if (isset($colors[$name->id])) {
                     echo $colors[$name->id];
                   } else {
-                    echo "gray";
+                    echo "teal";
                   } ?>-600 h-2.5 rounded-full"
                   style="width: <?php echo (($item["num_orders"]) ? $item["num_orders"] : 0) * 10 ?>%"></div>
               </div>

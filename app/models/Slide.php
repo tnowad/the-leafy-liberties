@@ -7,7 +7,7 @@ use Core\Traits\SoftDeletes;
 class Slide extends Model
 {
   protected $table = "slides";
-  use SoftDeletes;
+  // use SoftDeletes;
   protected $fillable = ["name", "image", "status", "deleted_at"];
   public static function filterAdvanced($filter)
   {

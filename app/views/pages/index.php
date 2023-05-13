@@ -19,7 +19,7 @@ $user = $auth->getUser();
     <div id="default-carousel" class="relative" data-carousel="slide">
       <div class="relative hidden overflow-hidden carousel sm:h-64 xl:h-80 2xl:h-[420px] -z-10 md:block">
 
-        <?php foreach (Slide::findAll(["status" => "1"]) as $slide): ?>
+        <?php foreach (Slide::findAll(["status" => "1","deleted_at" =>"null"]) as $slide): ?>
           <div class="hidden duration-700 ease-in-out h-[430px]" data-carousel-item>
             <img src="<?php echo BASE_URI . $slide->image; ?>"
               class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"

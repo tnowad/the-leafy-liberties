@@ -123,7 +123,12 @@ class RoleController extends Controller
         }
 
         Database::getInstance()->commitTransaction();
-        return $response->redirect("/dashboard/role");
+        return $response->redirect(BASE_URI . "/dashboard/role", 200, [
+          "toast" => [
+            "type" => "success",
+            "message" => "Add role successfull!!"
+          ]
+        ]);
       case "GET":
         $permissions = Permission::all();
         return $response->setBody(
